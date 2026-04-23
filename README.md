@@ -29,6 +29,10 @@ npm test           # vitest
 npm run build
 ```
 
+## Standalone HTML (no server needed)
+
+`npm run build` produces a single self-contained `dist/index.html` (~190 KB) with all JS and CSS inlined via `vite-plugin-singlefile`. You can double-click it, email it, or host it anywhere — no Node, no npm, no server.
+
 ## Keyboard
 
 - **Enter** — submit / next question
