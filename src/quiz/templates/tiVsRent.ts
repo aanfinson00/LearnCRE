@@ -42,6 +42,7 @@ export const tiVsRentTemplate: QuestionTemplate<'tiVsRent'> = {
   label: 'TI vs Rent Tradeoff',
   description: 'Compare two lease offers in $/SF/yr effective cost.',
   category: 'valuation',
+  pattern: '(A − B/n) − (C − D/n)   [compare effective rents /yr]',
   tips: [
     'Annualize the TI, subtract from face rent → effective rent. Compare side-by-side.',
     '$30 TI over a 5-yr lease = $6/SF/yr. So $20 face + $30 TI ≈ $14 effective. $18 face + $0 TI = $18 effective. Option A wins by $4.',

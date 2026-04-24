@@ -24,6 +24,7 @@ export const tiPaybackTemplate: QuestionTemplate<'tiPayback'> = {
   label: 'TI Payback Rent Premium',
   description: 'What rent premium /SF/yr pays back the TI in N years?',
   category: 'valuation',
+  pattern: 'A / B   where A = TI, B = payback years',
   tips: [
     'Premium = TI / payback years. $25 TI / 3-year payback = $8.33/SF/yr extra rent required.',
     'Use a shorter payback horizon (2–3 yrs) for speculative capex; a longer one (5 yrs) for high-credit tenants.',

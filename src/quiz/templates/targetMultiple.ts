@@ -24,6 +24,7 @@ export const targetMultipleTemplate: QuestionTemplate<'targetMultiple'> = {
   label: 'Target Equity Multiple',
   description: 'Target IRR + years → required EM.',
   category: 'returns',
+  pattern: '(1 + A)^B   [compound growth]',
   tips: [
     'Rule of 72 in reverse: if hold = 72/IRR%, you need EM = 2.0x. 15% over ~5y ≈ 2x; 12% over 6y ≈ 2x; 8% over 9y ≈ 2x.',
     'Required EM anchors (memorize): 10% IRR × 10y → 2.59x; 15% × 5y → 2.01x; 20% × 5y → 2.49x; 15% × 7y → 2.66x.',

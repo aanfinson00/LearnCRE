@@ -37,6 +37,7 @@ export const capCompressionTemplate: QuestionTemplate<'capCompression'> = {
   label: 'Cap Rate Compression',
   description: 'How does value change when cap rate tightens or widens?',
   category: 'valuation',
+  pattern: '(A / B) − 1   where A = old cap, B = new cap',
   tips: [
     'Cap → value multiple: 4% = 25x, 4.5% = 22.2x, 5% = 20x, 5.5% = 18.2x, 6% = 16.7x, 6.5% = 15.4x, 7% = 14.3x, 8% = 12.5x, 10% = 10x.',
     'Small moves: %Δ value ≈ Δbps / new cap (bps). 25 bps compression from 5.00% → 4.75%: 25 / 475 ≈ 5.3% uplift. True = 5.26%.',

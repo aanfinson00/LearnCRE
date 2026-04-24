@@ -29,6 +29,7 @@ export const otherIncomeImpactTemplate: QuestionTemplate<'otherIncomeImpact'> = 
   label: 'Other Income Impact',
   description: 'Adding other income → value uplift at given cap.',
   category: 'valuation',
+  pattern: 'A × (1 − B) / C   where A = income, B = vacancy, C = cap',
   tips: [
     '$100k of other income at common caps: 5% → $2.0M, 6% → $1.67M, 7% → $1.43M, 8% → $1.25M.',
     'If vacancy > 0, trim the uplift by (1 − vacancy). 5% vacancy trims the answer ~5%.',

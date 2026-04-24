@@ -76,6 +76,7 @@ export interface QuestionTemplate<K extends QuestionKind = QuestionKind> {
   label: string;
   description: string;
   category: 'valuation' | 'returns';
+  pattern: string;
   tips: string[];
   generate(rng: Rng, difficulty?: Difficulty): Question;
 }

@@ -13,8 +13,14 @@ export function SolutionDetails({ question, defaultOpen = true, showTipsByDefaul
   const [showTips, setShowTips] = useState(showTipsByDefault);
   const tips = templates[question.kind].tips;
 
+  const template = templates[question.kind];
   return (
     <div className="space-y-3">
+      <div className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 font-mono text-xs text-slate-700 num">
+        <span className="mr-2 text-slate-400">pattern</span>
+        {template.pattern}
+      </div>
+
       <div className="flex flex-wrap gap-4 text-sm">
         <button
           type="button"

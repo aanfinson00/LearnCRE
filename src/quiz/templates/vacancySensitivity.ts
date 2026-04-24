@@ -42,6 +42,7 @@ export const vacancySensitivityTemplate: QuestionTemplate<'vacancySensitivity'> 
   label: 'Vacancy Sensitivity',
   description: 'Change in vacancy → value impact at given cap.',
   category: 'valuation',
+  pattern: 'gross × (A − B) / C   where A, B = old/new vacancy, C = cap',
   tips: [
     'Each 1% of vacancy on (GPR + Other) hits NOI by 1% × gross → value by gross/cap × 0.01.',
     'Quick formula: ΔValue per 1% vacancy = gross × (1/cap) / 100. At 5% cap that\'s gross × 0.20.',
