@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { shuffle } from '../quiz/speedDrill';
-import { variants } from '../quiz/speedDrillVariants';
+import { formatCellExpected, variants } from '../quiz/speedDrillVariants';
 import type { CellOrder, DrillVariantId, SpeedDrillConfig } from '../types/speedDrill';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
@@ -123,7 +123,7 @@ export function SpeedDrillSetup({ onStart, onBack }: Props) {
               {PURE_MATH_VARIANTS.map((id) => renderVariantButton(id))}
             </div>
           </div>
-          <div className="mt-2 font-mono text-xs text-warm-stone num">
+          <div className="mt-3 font-mono text-xs text-warm-stone num">
             {variant.rowAxis.label}: {previewAxes.rowVals.map(variant.rowAxis.format).join(' · ')}
           </div>
           <div className="font-mono text-xs text-warm-stone num">
@@ -131,6 +131,61 @@ export function SpeedDrillSetup({ onStart, onBack }: Props) {
           </div>
           <div className="mt-1 text-xs text-warm-stone">
             {nonDiagonalCells} cells · ±{(variant.toleranceBand * 100).toFixed(0)}% tolerance
+          </div>
+
+          <div className="mt-3 rounded-lg border border-warm-line bg-warm-paper/30 p-3">
+            <div className="mb-2 flex items-baseline justify-between">
+              <div className="text-[10px] font-medium uppercase tracking-widest text-warm-mute">
+                Preview — {Math.min(3, variant.rowAxis.values.length)}×
+                {Math.min(3, variant.colAxis.values.length)} sample
+              </div>
+              <div className="text-[10px] text-warm-mute">
+                (unshuffled — what each cell computes)
+              </div>
+            </div>
+            <table className="min-w-full border-collapse font-mono text-[11px] num">
+              <thead>
+                <tr>
+                  <th className="px-1 py-1 text-left text-[9px] font-normal text-warm-mute">
+                    {variant.rowAxis.label} ↓ / {variant.colAxis.label} →
+                  </th>
+                  {variant.colAxis.values.slice(0, 3).map((c, i) => (
+                    <th
+                      key={i}
+                      className="border-b border-warm-line px-2 py-1 text-warm-ink font-medium"
+                    >
+                      {variant.colAxis.format(c)}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {variant.rowAxis.values.slice(0, 3).map((rv, r) => (
+                  <tr key={r}>
+                    <th className="border-r border-warm-line px-2 py-1 text-left text-warm-ink font-medium">
+                      {variant.rowAxis.format(rv)}
+                    </th>
+                    {variant.colAxis.values.slice(0, 3).map((cv, c) => {
+                      const isDiag =
+                        variant.isDiagonalZero && Math.abs(rv - cv) < 1e-9;
+                      const val = isDiag ? 0 : variant.computeCell(rv, cv);
+                      return (
+                        <td
+                          key={c}
+                          className={`border border-warm-line px-2 py-1 text-center ${
+                            isDiag
+                              ? 'bg-warm-paper/60 text-warm-mute'
+                              : 'bg-warm-white/70 text-warm-ink'
+                          }`}
+                        >
+                          {isDiag ? '—' : formatCellExpected(variant, val)}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
 
