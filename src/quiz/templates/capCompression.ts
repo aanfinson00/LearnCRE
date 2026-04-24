@@ -2,7 +2,7 @@ import { value } from '../../math/core';
 import { capCompressionPctChange } from '../../math/sensitivity';
 import { formatPct, formatPctChange, formatUsd } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
-import { bands, clampToBand, discreteMoves, pickBand } from '../bands';
+import { applyMove, bands, discreteMoves, pickBand } from '../bands';
 import { nextId } from '../random';
 
 function buildSolution(noi: number, oldCap: number, newCap: number): Solution {
@@ -48,7 +48,7 @@ export const capCompressionTemplate: QuestionTemplate<'capCompression'> = {
     const noi = pickBand(rng, bands.noi, difficulty);
     const oldCap = pickBand(rng, bands.capRate, difficulty);
     const capMove = rng.pickFromSet(discreteMoves.capMoves);
-    const newCap = clampToBand(oldCap + capMove, bands.capRate, difficulty);
+    const newCap = applyMove(oldCap, capMove, bands.capRate, difficulty);
     const expected = capCompressionPctChange(oldCap, newCap);
 
     return {

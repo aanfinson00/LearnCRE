@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { templates, allKinds } from '../quiz/templates';
 import type { QuestionKind, AnswerMode } from '../types/question';
-import type { Difficulty, SessionConfig, TolerancePreset, LifetimeStats } from '../types/session';
+import type { DifficultyMode, SessionConfig, TolerancePreset, LifetimeStats } from '../types/session';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
 import { loadConfig, loadLifetime, saveConfig } from '../storage/localStorage';
@@ -28,10 +28,15 @@ const TOLERANCES: { label: string; value: TolerancePreset; hint: string }[] = [
   { label: 'Loose', value: 'loose', hint: '~±10%' },
 ];
 
-const DIFFICULTIES: { label: string; value: Difficulty; hint: string }[] = [
-  { label: 'Beginner', value: 'beginner', hint: 'Round numbers, half-point caps, clean holds.' },
+const DIFFICULTIES: { label: string; value: DifficultyMode; hint: string }[] = [
+  { label: 'Beginner', value: 'beginner', hint: 'Round numbers, 1% caps, clean holds.' },
   { label: 'Intermediate', value: 'intermediate', hint: '25 bps caps, $25k NOI, realistic deals.' },
   { label: 'Advanced', value: 'advanced', hint: 'Ugly numbers, 5 bps caps, any hold period.' },
+  {
+    label: 'Dynamic',
+    value: 'dynamic',
+    hint: 'Adapts to your last 10 answers. First 10 calibrate.',
+  },
 ];
 
 export function SetupScreen({ onStart }: Props) {
@@ -44,7 +49,7 @@ export function SetupScreen({ onStart }: Props) {
     stored?.plannedCount ?? 10,
   );
   const [tolerance, setTolerance] = useState<TolerancePreset>(stored?.tolerancePreset ?? 'normal');
-  const [difficulty, setDifficulty] = useState<Difficulty>(stored?.difficulty ?? 'intermediate');
+  const [difficulty, setDifficulty] = useState<DifficultyMode>(stored?.difficulty ?? 'intermediate');
   const [lifetime, setLifetime] = useState<LifetimeStats | null>(null);
 
   useEffect(() => {
@@ -149,7 +154,7 @@ export function SetupScreen({ onStart }: Props) {
 
         <div>
           <h2 className="mb-2 font-medium text-slate-900">Difficulty</h2>
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4">
             {DIFFICULTIES.map((d) => (
               <button
                 key={d.value}

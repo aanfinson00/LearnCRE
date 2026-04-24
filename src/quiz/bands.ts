@@ -37,6 +37,22 @@ export function clampToBand(
   return clamped;
 }
 
+export function applyMove(
+  start: number,
+  move: number,
+  band: Band,
+  difficulty: Difficulty = 'intermediate',
+): number {
+  const candidate = clampToBand(start + move, band, difficulty);
+  if (Math.abs(candidate - start) > 1e-12) return candidate;
+  const flipped = clampToBand(start - move, band, difficulty);
+  if (Math.abs(flipped - start) > 1e-12) return flipped;
+  const step = effectiveStep(band, difficulty) ?? (band.max - band.min) / 100;
+  const mid = (band.min + band.max) / 2;
+  const dir = start >= mid ? -1 : 1;
+  return clampToBand(start + dir * step, band, difficulty);
+}
+
 export const bands = {
   capRate: { min: 0.035, max: 0.1, step: 0.0025 },
   noi: { min: 250_000, max: 15_000_000, step: 25_000 },

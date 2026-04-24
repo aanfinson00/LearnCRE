@@ -42,6 +42,7 @@ export interface Question {
   expected: number;
   unit: UnitFormat;
   tolerance: Tolerance;
+  appliedDifficulty?: Difficulty;
   choices?: number[];
   solution: Solution;
 }

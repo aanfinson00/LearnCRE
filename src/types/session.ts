@@ -3,13 +3,14 @@ export type { Question };
 
 export type TolerancePreset = 'strict' | 'normal' | 'loose';
 export type Difficulty = 'beginner' | 'intermediate' | 'advanced';
+export type DifficultyMode = Difficulty | 'dynamic';
 
 export interface SessionConfig {
   mode: AnswerMode;
   categories: QuestionKind[];
   plannedCount: number | null;
   tolerancePreset: TolerancePreset;
-  difficulty: Difficulty;
+  difficulty: DifficultyMode;
   seed?: number;
 }
 
