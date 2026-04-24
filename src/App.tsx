@@ -8,32 +8,71 @@ import { SpeedDrillScreen } from './components/SpeedDrillScreen';
 import { SpeedDrillResults } from './components/SpeedDrillResults';
 import { StudyScreen } from './components/StudyScreen';
 import { TopNav } from './components/TopNav';
+import { WalkthroughSetup } from './components/WalkthroughSetup';
+import { WalkthroughScreen } from './components/WalkthroughScreen';
+import { WalkthroughResults } from './components/WalkthroughResults';
 import { useQuizSession } from './hooks/useQuizSession';
 import { useSpeedDrill } from './hooks/useSpeedDrill';
+import { useWalkthrough } from './hooks/useWalkthrough';
 
-type Mode = 'quiz' | 'speedDrill' | 'study';
+type Mode = 'quiz' | 'speedDrill' | 'study' | 'walkthrough';
 
 export default function App() {
   const [mode, setMode] = useState<Mode>('quiz');
   const { session, stats, start, submit, next, reset, endSession, enterReview, exitReview } =
     useQuizSession();
   const drill = useSpeedDrill();
+  const walk = useWalkthrough();
 
   const handleSwitch = (m: Mode) => {
-    // Switching away from an in-progress drill or quiz would lose state; guard lightly
     if (m === mode) return;
     setMode(m);
   };
 
-  // Modes that show the TopNav chrome
   const showTopNav =
     (mode === 'quiz' && session.status === 'setup') ||
     (mode === 'speedDrill' && drill.state.cells.length === 0) ||
+    (mode === 'walkthrough' && walk.state === null) ||
     mode === 'study';
 
   const innerContent = (() => {
     if (mode === 'study') {
       return <StudyScreen onBack={() => setMode('quiz')} />;
+    }
+
+    if (mode === 'walkthrough') {
+      if (walk.state === null) {
+        return (
+          <WalkthroughSetup
+            onStart={(def) => walk.start(def)}
+            onBack={() => setMode('quiz')}
+          />
+        );
+      }
+      if (walk.state.status === 'finished') {
+        return (
+          <WalkthroughResults
+            state={walk.state}
+            onRestart={() => {
+              const def = walk.state!.def;
+              walk.reset();
+              walk.start(def);
+            }}
+            onNewSetup={walk.reset}
+          />
+        );
+      }
+      return (
+        <WalkthroughScreen
+          state={walk.state}
+          onSubmit={walk.submit}
+          onAdvance={walk.advance}
+          onQuit={() => {
+            walk.reset();
+            setMode('quiz');
+          }}
+        />
+      );
     }
 
     if (mode === 'speedDrill') {
