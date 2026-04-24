@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { SetupScreen } from './components/SetupScreen';
 import { QuizScreen } from './components/QuizScreen';
 import { ResultsScreen } from './components/ResultsScreen';
@@ -6,11 +5,8 @@ import { ReviewScreen } from './components/ReviewScreen';
 import { useQuizSession } from './hooks/useQuizSession';
 
 export default function App() {
-  const { session, stats, start, submit, next, reset, enterReview, exitReview } = useQuizSession();
-
-  const onQuit = useCallback(() => {
-    reset();
-  }, [reset]);
+  const { session, stats, start, submit, next, reset, endSession, enterReview, exitReview } =
+    useQuizSession();
 
   if (session.status === 'setup') {
     return <SetupScreen onStart={start} />;
@@ -39,7 +35,8 @@ export default function App() {
       stats={stats}
       onSubmit={submit}
       onNext={next}
-      onQuit={onQuit}
+      onEnd={endSession}
+      onQuit={reset}
     />
   );
 }

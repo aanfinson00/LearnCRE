@@ -15,10 +15,11 @@ interface Props {
   stats: SessionStats;
   onSubmit: (userInput: number | null, skipped: boolean) => void;
   onNext: () => void;
+  onEnd: () => void;
   onQuit: () => void;
 }
 
-export function QuizScreen({ session, stats, onSubmit, onNext, onQuit }: Props) {
+export function QuizScreen({ session, stats, onSubmit, onNext, onEnd, onQuit }: Props) {
   const q = session.currentQuestion;
   const [raw, setRaw] = useState('');
   const [mcPick, setMcPick] = useState<number | null>(null);
@@ -97,9 +98,19 @@ export function QuizScreen({ session, stats, onSubmit, onNext, onQuit }: Props) 
           plannedCount={total}
           level={session.config.difficulty === 'dynamic' ? q.appliedDifficulty : undefined}
         />
-        <Button variant="ghost" onClick={onQuit} className="text-xs">
-          Quit
-        </Button>
+        <div className="flex items-center gap-1">
+          <Button
+            variant="ghost"
+            onClick={onEnd}
+            className="text-xs"
+            disabled={session.attempts.length === 0}
+          >
+            End & review
+          </Button>
+          <Button variant="ghost" onClick={onQuit} className="text-xs">
+            Quit
+          </Button>
+        </div>
       </div>
 
       <Card className="space-y-5">
