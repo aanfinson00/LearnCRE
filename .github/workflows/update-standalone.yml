@@ -1,0 +1,42 @@
+name: Update standalone HTML
+
+on:
+  push:
+    branches: ['**']
+    paths-ignore:
+      - 'standalone/**'
+      - 'README.md'
+      - '.github/workflows/update-standalone.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Copy built HTML
+        run: |
+          mkdir -p standalone
+          cp dist/index.html standalone/LearnCRE.html
+      - name: Commit if changed
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          if git diff --quiet standalone/; then
+            echo "No changes to standalone/"
+          else
+            git add standalone/
+            git commit -m "chore: rebuild standalone HTML"
+            git push
+          fi

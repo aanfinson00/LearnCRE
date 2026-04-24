@@ -33,6 +33,8 @@ npm run build
 
 `npm run build` produces a single self-contained `dist/index.html` (~190 KB) with all JS and CSS inlined via `vite-plugin-singlefile`. You can double-click it, email it, or host it anywhere — no Node, no npm, no server.
 
+**Download the latest standalone build:** [`standalone/LearnCRE.html`](./standalone/LearnCRE.html) — kept in sync automatically by `.github/workflows/update-standalone.yml` on every push. On GitHub, click the file, then click the **Download raw file** button. Open the downloaded `.html` in any modern browser.
+
 ## Keyboard
 
 - **Enter** — submit / next question
