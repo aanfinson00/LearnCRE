@@ -27,6 +27,8 @@ function placeholderFor(unit: UnitFormat): string {
       return 'e.g. 525';
     case 'multiple':
       return 'e.g. 2.3';
+    case 'usdPerSf':
+      return 'e.g. 245';
   }
 }
 
@@ -42,6 +44,8 @@ function adornmentFor(unit: UnitFormat): { prefix?: string; suffix?: string } {
       return { suffix: 'bps' };
     case 'multiple':
       return { suffix: 'x' };
+    case 'usdPerSf':
+      return { prefix: '$', suffix: '/SF' };
   }
 }
 

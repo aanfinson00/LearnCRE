@@ -1,7 +1,11 @@
 import type { UnitFormat } from '../types/question';
 
 export function parseInput(raw: string, unit: UnitFormat): number | null {
-  const cleaned = raw.replace(/[$,\s]/g, '').replace(/%$/, '').replace(/x$/i, '');
+  const cleaned = raw
+    .replace(/\/SF$/i, '')
+    .replace(/[$,\s]/g, '')
+    .replace(/%$/, '')
+    .replace(/x$/i, '');
   if (cleaned === '' || cleaned === '-' || cleaned === '+' || cleaned === '.') return null;
   const num = Number(cleaned);
   if (!Number.isFinite(num)) return null;

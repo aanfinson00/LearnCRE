@@ -70,6 +70,12 @@ export const bands = {
   irrExitMultiple: { min: 1.2, max: 3.5, step: 0.1 },
   otherIncomeDelta: { min: 25_000, max: 500_000, step: 25_000 },
   rentLevel: { min: 500_000, max: 8_000_000, step: 100_000 },
+  purchasePrice: { min: 5_000_000, max: 250_000_000, step: 500_000 },
+  capex: { min: 250_000, max: 15_000_000, step: 250_000 },
+  closingCostRate: { min: 0.01, max: 0.03, step: 0.0025 },
+  projectCost: { min: 10_000_000, max: 300_000_000, step: 1_000_000 },
+  replacementCostPerSf: { min: 150, max: 500, step: 5 },
+  yocDelta: { min: 0.015, max: 0.05, step: 0.0025 },
 } as const;
 
 export const discreteMoves = {

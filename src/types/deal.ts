@@ -18,4 +18,11 @@ export interface DealInputs {
   equityOut?: number;
   holdYears?: number;
   targetIrr?: number;
+  buildingSf?: number;
+  capex?: number;
+  closingCostRate?: number;
+  totalProjectCost?: number;
+  replacementCostPerSf?: number;
+  marketCapRate?: number;
+  stabilizedNoi?: number;
 }

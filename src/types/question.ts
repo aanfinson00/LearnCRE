@@ -11,9 +11,14 @@ export type QuestionKind =
   | 'combinedScenario'
   | 'equityMultiple'
   | 'irrSimple'
-  | 'targetMultiple';
+  | 'targetMultiple'
+  | 'pricePerSf'
+  | 'allInBasis'
+  | 'yieldOnCost'
+  | 'devSpread'
+  | 'replacementCost';
 
-export type UnitFormat = 'usd' | 'pct' | 'bps' | 'pctChange' | 'usdChange' | 'multiple';
+export type UnitFormat = 'usd' | 'pct' | 'bps' | 'pctChange' | 'usdChange' | 'multiple' | 'usdPerSf';
 
 export type AnswerMode = 'free' | 'mc';
 

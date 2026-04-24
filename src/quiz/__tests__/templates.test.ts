@@ -11,6 +11,13 @@ import {
   valueDeltaFromNoiDelta,
 } from '../../math/sensitivity';
 import { equityMultiple, irrSingle, requiredMultiple } from '../../math/returns';
+import {
+  allInBasis,
+  developmentSpread,
+  pricePerSf,
+  replacementCost,
+  yieldOnCost,
+} from '../../math/basis';
 
 describe('quiz/templates', () => {
   it('every kind has a template', () => {
@@ -110,6 +117,40 @@ describe('quiz/templates', () => {
             expect(q.expected).toBeCloseTo(
               requiredMultiple(ctx.targetIrr!, ctx.holdYears!),
               10,
+            );
+            break;
+          }
+          case 'pricePerSf': {
+            expect(q.expected).toBeCloseTo(pricePerSf(ctx.purchasePrice!, ctx.buildingSf!), 6);
+            break;
+          }
+          case 'allInBasis': {
+            expect(q.expected).toBeCloseTo(
+              allInBasis({
+                purchasePrice: ctx.purchasePrice!,
+                capex: ctx.capex!,
+                closingCostRate: ctx.closingCostRate!,
+                buildingSf: ctx.buildingSf!,
+              }),
+              6,
+            );
+            break;
+          }
+          case 'yieldOnCost': {
+            const bps = Math.round(yieldOnCost(ctx.stabilizedNoi ?? ctx.noi!, ctx.totalProjectCost!) * 10_000);
+            expect(q.expected).toBe(bps);
+            break;
+          }
+          case 'devSpread': {
+            const yoc = yieldOnCost(ctx.stabilizedNoi ?? ctx.noi!, ctx.totalProjectCost!);
+            const bps = Math.round(developmentSpread(yoc, ctx.marketCapRate!) * 10_000);
+            expect(q.expected).toBe(bps);
+            break;
+          }
+          case 'replacementCost': {
+            expect(q.expected).toBeCloseTo(
+              replacementCost(ctx.replacementCostPerSf!, ctx.buildingSf!),
+              6,
             );
             break;
           }
