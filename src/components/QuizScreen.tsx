@@ -104,6 +104,11 @@ export function QuizScreen({ session, stats, onSubmit, onNext, onEnd, onQuit }: 
             onClick={onEnd}
             className="text-xs"
             disabled={session.attempts.length === 0}
+            title={
+              session.attempts.length === 0
+                ? 'Answer at least one question first'
+                : 'Stop here and jump to your results / review'
+            }
           >
             End & review
           </Button>

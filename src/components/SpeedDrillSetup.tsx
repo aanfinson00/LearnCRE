@@ -1,9 +1,18 @@
 import { useMemo, useState } from 'react';
 import { shuffle } from '../quiz/speedDrill';
-import { variantOrder, variants } from '../quiz/speedDrillVariants';
+import { variants } from '../quiz/speedDrillVariants';
 import type { CellOrder, DrillVariantId, SpeedDrillConfig } from '../types/speedDrill';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
+
+const CRE_VARIANTS: DrillVariantId[] = ['capCompression', 'irrToEm', 'loanConstant', 'noiCapToValue'];
+const PURE_MATH_VARIANTS: DrillVariantId[] = [
+  'percentOf',
+  'divideBy',
+  'combinedDiscount',
+  'nthRoot',
+  'reciprocalTable',
+];
 
 interface Props {
   onStart: (config: SpeedDrillConfig) => void;
@@ -51,6 +60,30 @@ export function SpeedDrillSetup({ onStart, onBack }: Props) {
     return r * c - diagCount;
   }, [variant]);
 
+  const renderVariantButton = (id: DrillVariantId) => {
+    const v = variants[id];
+    const on = variantId === id;
+    return (
+      <button
+        key={id}
+        type="button"
+        onClick={() => setVariantId(id)}
+        className={`rounded-lg border p-3 text-left transition-all duration-aa ease-aa ${
+          on
+            ? 'border-warm-black bg-warm-black text-warm-white'
+            : 'border-warm-line bg-warm-white/70 text-warm-ink hover:border-copper hover:text-copper-deep'
+        }`}
+      >
+        <div className="text-sm font-medium">{v.name}</div>
+        <div
+          className={`mt-0.5 text-xs ${on ? 'text-warm-paper/70' : 'text-warm-stone'}`}
+        >
+          {v.description}
+        </div>
+      </button>
+    );
+  };
+
   const start = () => {
     onStart({
       variantId,
@@ -74,31 +107,21 @@ export function SpeedDrillSetup({ onStart, onBack }: Props) {
       </header>
 
       <Card className="space-y-5">
-        <div>
-          <h2 className="mb-2 font-medium text-warm-black">Drill</h2>
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-            {variantOrder.map((id) => {
-              const v = variants[id];
-              return (
-                <button
-                  key={id}
-                  type="button"
-                  onClick={() => setVariantId(id)}
-                  className={`rounded-lg border p-3 text-left ${
-                    variantId === id
-                      ? 'border-warm-black bg-warm-black text-white'
-                      : 'border-warm-line bg-warm-white text-warm-ink hover:border-warm-stone'
-                  }`}
-                >
-                  <div className="text-sm font-medium">{v.name}</div>
-                  <div
-                    className={`mt-0.5 text-xs ${variantId === id ? 'text-warm-line' : 'text-warm-stone'}`}
-                  >
-                    {v.description}
-                  </div>
-                </button>
-              );
-            })}
+        <div className="space-y-4">
+          <h2 className="text-sm font-medium uppercase tracking-widest text-warm-stone">Drill</h2>
+
+          <div>
+            <div className="mb-2 text-xs font-medium text-copper-ink">CRE-flavored</div>
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+              {CRE_VARIANTS.map((id) => renderVariantButton(id))}
+            </div>
+          </div>
+
+          <div>
+            <div className="mb-2 text-xs font-medium text-warm-stone">Pure math</div>
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+              {PURE_MATH_VARIANTS.map((id) => renderVariantButton(id))}
+            </div>
           </div>
           <div className="mt-2 font-mono text-xs text-warm-stone num">
             {variant.rowAxis.label}: {previewAxes.rowVals.map(variant.rowAxis.format).join(' · ')}

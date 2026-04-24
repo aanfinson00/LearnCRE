@@ -7,6 +7,7 @@ import { SpeedDrillSetup } from './components/SpeedDrillSetup';
 import { SpeedDrillScreen } from './components/SpeedDrillScreen';
 import { SpeedDrillResults } from './components/SpeedDrillResults';
 import { StudyScreen } from './components/StudyScreen';
+import { TopNav } from './components/TopNav';
 import { useQuizSession } from './hooks/useQuizSession';
 import { useSpeedDrill } from './hooks/useSpeedDrill';
 
@@ -18,93 +19,108 @@ export default function App() {
     useQuizSession();
   const drill = useSpeedDrill();
 
-  if (mode === 'study') {
-    return <StudyScreen onBack={() => setMode('quiz')} />;
-  }
+  const handleSwitch = (m: Mode) => {
+    // Switching away from an in-progress drill or quiz would lose state; guard lightly
+    if (m === mode) return;
+    setMode(m);
+  };
 
-  if (mode === 'speedDrill') {
-    if (drill.state.cells.length === 0) {
+  // Modes that show the TopNav chrome
+  const showTopNav =
+    (mode === 'quiz' && session.status === 'setup') ||
+    (mode === 'speedDrill' && drill.state.cells.length === 0) ||
+    mode === 'study';
+
+  const innerContent = (() => {
+    if (mode === 'study') {
+      return <StudyScreen onBack={() => setMode('quiz')} />;
+    }
+
+    if (mode === 'speedDrill') {
+      if (drill.state.cells.length === 0) {
+        return (
+          <SpeedDrillSetup
+            onStart={drill.start}
+            onBack={() => {
+              drill.reset();
+              setMode('quiz');
+            }}
+          />
+        );
+      }
+      if (drill.state.status === 'finished') {
+        return (
+          <SpeedDrillResults
+            state={drill.state}
+            onRestart={() => {
+              const prior = drill.state.config;
+              drill.reset();
+              drill.start(prior);
+            }}
+            onNewSetup={drill.reset}
+          />
+        );
+      }
       return (
-        <SpeedDrillSetup
-          onStart={drill.start}
-          onBack={() => {
+        <SpeedDrillScreen
+          state={drill.state}
+          currentCell={drill.currentCell}
+          onSelect={drill.selectCell}
+          onSubmit={drill.submit}
+          onFinish={drill.finish}
+          onQuit={() => {
             drill.reset();
             setMode('quiz');
           }}
         />
       );
     }
-    if (drill.state.status === 'finished') {
+
+    if (session.status === 'setup') {
+      return <SetupScreen onStart={start} />;
+    }
+
+    if (session.status === 'reviewing') {
+      return <ReviewScreen attempts={session.attempts} onBack={exitReview} />;
+    }
+
+    if (session.status === 'finished') {
+      const mistakeKinds = Array.from(
+        new Set(session.attempts.filter((a) => !a.correct).map((a) => a.kind)),
+      );
       return (
-        <SpeedDrillResults
-          state={drill.state}
-          onRestart={() => {
-            const prior = drill.state.config;
-            drill.reset();
-            drill.start(prior);
+        <ResultsScreen
+          stats={stats}
+          config={session.config}
+          attemptCount={session.attempts.length}
+          mistakeKinds={mistakeKinds}
+          onRestart={() => start(session.config)}
+          onNewSetup={reset}
+          onReview={enterReview}
+          onRetryMistakes={(kinds) => {
+            if (kinds.length === 0) return;
+            start({ ...session.config, categories: kinds });
           }}
-          onNewSetup={drill.reset}
         />
       );
     }
-    return (
-      <SpeedDrillScreen
-        state={drill.state}
-        currentCell={drill.currentCell}
-        onSelect={drill.selectCell}
-        onSubmit={drill.submit}
-        onFinish={drill.finish}
-        onQuit={() => {
-          drill.reset();
-          setMode('quiz');
-        }}
-      />
-    );
-  }
 
-  if (session.status === 'setup') {
     return (
-      <SetupScreen
-        onStart={start}
-        onSwitchToSpeedDrill={() => setMode('speedDrill')}
-        onSwitchToStudy={() => setMode('study')}
-      />
-    );
-  }
-
-  if (session.status === 'reviewing') {
-    return <ReviewScreen attempts={session.attempts} onBack={exitReview} />;
-  }
-
-  if (session.status === 'finished') {
-    const mistakeKinds = Array.from(
-      new Set(session.attempts.filter((a) => !a.correct).map((a) => a.kind)),
-    );
-    return (
-      <ResultsScreen
+      <QuizScreen
+        session={session}
         stats={stats}
-        config={session.config}
-        attemptCount={session.attempts.length}
-        mistakeKinds={mistakeKinds}
-        onRestart={() => start(session.config)}
-        onNewSetup={reset}
-        onReview={enterReview}
-        onRetryMistakes={(kinds) => {
-          if (kinds.length === 0) return;
-          start({ ...session.config, categories: kinds });
-        }}
+        onSubmit={submit}
+        onNext={next}
+        onEnd={endSession}
+        onQuit={reset}
       />
     );
-  }
+  })();
 
   return (
-    <QuizScreen
-      session={session}
-      stats={stats}
-      onSubmit={submit}
-      onNext={next}
-      onEnd={endSession}
-      onQuit={reset}
-    />
+    <>
+      {showTopNav && <TopNav active={mode} onSwitch={handleSwitch} />}
+      {innerContent}
+    </>
   );
 }

@@ -10,8 +10,6 @@ import { loadConfig, loadLifetime, saveConfig } from '../storage/localStorage';
 
 interface Props {
   onStart: (config: SessionConfig) => void;
-  onSwitchToSpeedDrill?: () => void;
-  onSwitchToStudy?: () => void;
 }
 
 const LENGTHS: { label: string; value: number | null }[] = [
@@ -19,6 +17,17 @@ const LENGTHS: { label: string; value: number | null }[] = [
   { label: '20', value: 20 },
   { label: '50', value: 50 },
   { label: 'Endless', value: null },
+];
+
+const FOUNDATIONS: QuestionKind[] = [
+  'capCompression',
+  'goingInCap',
+  'vacancySensitivity',
+  'otherIncomeImpact',
+  'rentChange',
+  'combinedScenario',
+  'equityMultiple',
+  'irrSimple',
 ];
 
 const MODES: { label: string; value: AnswerMode; hint: string }[] = [
@@ -59,10 +68,10 @@ function ParcelMark({ accent = 4 }: { accent?: number }) {
   );
 }
 
-export function SetupScreen({ onStart, onSwitchToSpeedDrill, onSwitchToStudy }: Props) {
+export function SetupScreen({ onStart }: Props) {
   const stored = useMemo(() => loadConfig(), []);
   const [categories, setCategories] = useState<Set<QuestionKind>>(
-    new Set(stored?.categories ?? allKinds),
+    new Set(stored?.categories ?? FOUNDATIONS),
   );
   const [mode, setMode] = useState<AnswerMode>(stored?.mode ?? 'free');
   const [plannedCount, setPlannedCount] = useState<number | null>(
@@ -105,6 +114,8 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill, onSwitchToStudy }: 
     setCategories(new Set(visibleKinds.filter((k) => templates[k].category === 'valuation')));
   const selectReturns = () =>
     setCategories(new Set(visibleKinds.filter((k) => templates[k].category === 'returns')));
+  const selectFoundations = () =>
+    setCategories(new Set(visibleKinds.filter((k) => FOUNDATIONS.includes(k))));
 
   const canStart = categories.size > 0;
 
@@ -122,7 +133,7 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill, onSwitchToStudy }: 
   };
 
   return (
-    <div className="mx-auto max-w-3xl space-y-8 py-12">
+    <div className="mx-auto max-w-3xl space-y-8 py-12 pb-32 sm:pb-12">
       <header className="flex items-start justify-between gap-6">
         <div className="space-y-3">
           <h1 className="display text-5xl text-warm-black">
@@ -135,32 +146,6 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill, onSwitchToStudy }: 
         </div>
         <ParcelMark />
       </header>
-
-      {(onSwitchToSpeedDrill || onSwitchToStudy) && (
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="rounded-md bg-warm-black px-3 py-1.5 text-xs font-medium text-warm-white">
-            Quiz
-          </span>
-          {onSwitchToSpeedDrill && (
-            <button
-              type="button"
-              onClick={onSwitchToSpeedDrill}
-              className="rounded-md border border-warm-line bg-warm-white/70 px-3 py-1.5 text-xs font-medium text-warm-ink transition-all duration-aa ease-aa hover:border-copper hover:text-copper-deep"
-            >
-              Times-table speed drill →
-            </button>
-          )}
-          {onSwitchToStudy && (
-            <button
-              type="button"
-              onClick={onSwitchToStudy}
-              className="rounded-md border border-warm-line bg-warm-white/70 px-3 py-1.5 text-xs font-medium text-warm-ink transition-all duration-aa ease-aa hover:border-copper hover:text-copper-deep"
-            >
-              Study tables →
-            </button>
-          )}
-        </div>
-      )}
 
       <Card className="space-y-6">
         <div>
@@ -197,9 +182,9 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill, onSwitchToStudy }: 
             <h2 className="text-sm font-medium uppercase tracking-widest text-warm-stone">
               Categories
             </h2>
-            <div className="flex gap-1 text-xs">
-              <button className="text-warm-mute transition-colors duration-aa-fast ease-aa hover:text-copper" onClick={selectAll}>
-                All
+            <div className="flex flex-wrap gap-1 text-xs">
+              <button className="text-copper-deep font-medium transition-colors duration-aa-fast ease-aa hover:text-copper" onClick={selectFoundations}>
+                Foundations
               </button>
               <span className="text-warm-line">·</span>
               <button className="text-warm-mute transition-colors duration-aa-fast ease-aa hover:text-copper" onClick={selectValuation}>
@@ -208,6 +193,10 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill, onSwitchToStudy }: 
               <span className="text-warm-line">·</span>
               <button className="text-warm-mute transition-colors duration-aa-fast ease-aa hover:text-copper" onClick={selectReturns}>
                 Returns
+              </button>
+              <span className="text-warm-line">·</span>
+              <button className="text-warm-mute transition-colors duration-aa-fast ease-aa hover:text-copper" onClick={selectAll}>
+                All
               </button>
               <span className="text-warm-line">·</span>
               <button className="text-warm-mute transition-colors duration-aa-fast ease-aa hover:text-copper" onClick={selectNone}>
@@ -359,6 +348,18 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill, onSwitchToStudy }: 
       <footer className="text-center text-xs text-warm-mute">
         Enter submits. S skips. 1–4 picks MC choices.
       </footer>
+
+      {/* Sticky floating Start pill, visible on smaller viewports / once the user scrolls */}
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-warm-line bg-warm-white/90 backdrop-blur-md sm:hidden">
+        <div className="mx-auto flex max-w-3xl items-center justify-between gap-3 px-4 py-3">
+          <div className="font-mono text-xs text-warm-mute num">
+            {categories.size} cat · {plannedCount ?? '∞'} Q · {difficulty}
+          </div>
+          <Button disabled={!canStart} onClick={start} className="px-6">
+            Start <span className="ml-2 text-warm-paper/60">↵</span>
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }
