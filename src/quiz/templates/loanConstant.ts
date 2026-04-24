@@ -31,7 +31,7 @@ export const loanConstantTemplate: QuestionTemplate<'loanConstant'> = {
     'Rule of thumb: each +100 bps of rate adds ~60–80 bps to the constant on 30yr amort.',
     'Longer amort → lower constant (but diminishing returns: 30y vs 25y only saves ~40 bps).',
   ],
-  generate(rng, difficulty = 'intermediate') {
+  generate(rng, difficulty = 'intermediate', _assetClass = 'mixed') {
     const rate = pickBand(rng, bands.interestRate, difficulty);
     const years =
       difficulty === 'beginner'

@@ -47,7 +47,7 @@ export const dscrLoanSizingTemplate: QuestionTemplate<'dscrLoanSizing'> = {
     'At 1.25x DSCR, every $1 of NOI supports $0.80 of debt service. Then divide by constant to get loan amount.',
     'IO shortcut: for interest-only loans, constant = rate. $500k NOI / (1.25 × 0.06) = $6.67M.',
   ],
-  generate(rng, difficulty = 'intermediate') {
+  generate(rng, difficulty = 'intermediate', _assetClass = 'mixed') {
     const noi = pickBand(rng, bands.noi, difficulty);
     const dscrTarget =
       difficulty === 'beginner'

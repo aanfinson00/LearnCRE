@@ -3,6 +3,7 @@ import { capCompressionPctChange } from '../../math/sensitivity';
 import { formatPct, formatPctChange, formatUsd } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
 import { applyMove, bands, discreteMoves, pickBand } from '../bands';
+import { classBand } from '../assetClasses';
 import { nextId } from '../random';
 
 function buildSolution(noi: number, oldCap: number, newCap: number): Solution {
@@ -45,11 +46,11 @@ export const capCompressionTemplate: QuestionTemplate<'capCompression'> = {
     'Sandwich technique: if the cap is ugly (e.g. 5.35%), compute the answer at the two nearest clean caps (5.25% and 5.5%), then split the difference. Great for mental math.',
     'Expansion uses the same formula, just negative. Cap widening hurts a bit less than compression helps (convexity).',
   ],
-  generate(rng, difficulty = 'intermediate') {
+  generate(rng, difficulty = 'intermediate', assetClass = 'mixed') {
     const noi = pickBand(rng, bands.noi, difficulty);
-    const oldCap = pickBand(rng, bands.capRate, difficulty);
+    const oldCap = pickBand(rng, classBand('capRate', assetClass), difficulty);
     const capMove = rng.pickFromSet(discreteMoves.capMoves);
-    const newCap = applyMove(oldCap, capMove, bands.capRate, difficulty);
+    const newCap = applyMove(oldCap, capMove, classBand('capRate', assetClass), difficulty);
     const expected = capCompressionPctChange(oldCap, newCap);
 
     return {

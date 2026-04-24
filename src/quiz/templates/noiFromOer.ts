@@ -2,6 +2,7 @@ import { noiFromOer } from '../../math/growth';
 import { formatPct, formatUsd } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
 import { bands, pickBand } from '../bands';
+import { classOpexRatios } from '../assetClasses';
 import { nextId } from '../random';
 
 function buildSolution(egi: number, ratio: number): Solution {
@@ -37,9 +38,9 @@ export const noiFromOerTemplate: QuestionTemplate<'noiFromOer'> = {
     'Combine with cap math: Value = EGI × (1 − opex) / cap. $1M × 60% / 6% = $10M in one shot.',
     'Back out: if comps show $10M at 6% cap, implied NOI is $600k, implied EGI is $1M at 40% opex.',
   ],
-  generate(rng, difficulty = 'intermediate') {
+  generate(rng, difficulty = 'intermediate', assetClass = 'mixed') {
     const egi = pickBand(rng, bands.egi, difficulty);
-    const ratio = rng.pickFromSet([0.25, 0.3, 0.35, 0.4, 0.45, 0.5] as const);
+    const ratio = rng.pickFromSet(classOpexRatios(assetClass));
     const expected = noiFromOer(egi, ratio);
 
     return {

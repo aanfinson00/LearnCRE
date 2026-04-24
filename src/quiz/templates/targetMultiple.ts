@@ -32,7 +32,7 @@ export const targetMultipleTemplate: QuestionTemplate<'targetMultiple'> = {
     'Linear floor: EM ≥ 1 + IRR × years. Actual is always higher due to compounding.',
     'Rule of 114: years to triple ≈ 114 / IRR%. 15% triples in ~7.6 years.',
   ],
-  generate(rng, difficulty = 'intermediate') {
+  generate(rng, difficulty = 'intermediate', _assetClass = 'mixed') {
     const beginnerIrrs = [0.1, 0.15, 0.2, 0.25] as const;
     const irr =
       difficulty === 'beginner'

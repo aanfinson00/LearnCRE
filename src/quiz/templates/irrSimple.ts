@@ -38,7 +38,7 @@ export const irrSimpleTemplate: QuestionTemplate<'irrSimple'> = {
     'Sandwich: if EM is 2.2x over 6 years, bracket it — 2.0x over 6y is ~12.2%, 2.5x over 6y is ~16.5%. Interpolate → ~13.6% (actual 14.0%).',
     'Floor approximation: EM ≥ 1 + (IRR × years). 10% × 10y → floor 2.0x; actual 2.59x. Gap is the compounding.',
   ],
-  generate(rng, difficulty = 'intermediate') {
+  generate(rng, difficulty = 'intermediate', _assetClass = 'mixed') {
     const equityIn = pickBand(rng, bands.equityIn, difficulty);
     const mult = pickBand(rng, bands.irrExitMultiple, difficulty);
     const outRound = difficulty === 'beginner' ? 1_000_000 : difficulty === 'advanced' ? 100_000 : 500_000;

@@ -1,7 +1,8 @@
 import { perUnit } from '../../math/growth';
 import { formatUsd } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
-import { bands, pickBand } from '../bands';
+import { pickBand } from '../bands';
+import { classBand } from '../assetClasses';
 import { nextId } from '../random';
 
 function buildSolution(opex: number, units: number): Solution {
@@ -31,9 +32,9 @@ export const opexPerUnitTemplate: QuestionTemplate<'opexPerUnit'> = {
     'Fixed + variable split: ~60% fixed (taxes, insurance, admin) / ~40% variable (utilities, repairs).',
     'Shortcut: $600k opex / 100 units = $6,000/unit. Scale linearly.',
   ],
-  generate(rng, difficulty = 'intermediate') {
-    const units = pickBand(rng, bands.units, difficulty);
-    const targetAnnual = pickBand(rng, bands.opexPerUnitYear, difficulty);
+  generate(rng, difficulty = 'intermediate', assetClass = 'mixed') {
+    const units = pickBand(rng, classBand('units', assetClass), difficulty);
+    const targetAnnual = pickBand(rng, classBand('opexPerUnitYear', assetClass), difficulty);
     const opexStep = difficulty === 'beginner' ? 50_000 : difficulty === 'advanced' ? 2_500 : 10_000;
     const opex = Math.round((units * targetAnnual) / opexStep) * opexStep;
     const expected = perUnit(opex, units);

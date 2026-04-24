@@ -2,6 +2,7 @@ import { otherIncomeValueDelta } from '../../math/sensitivity';
 import { formatPct, formatUsd, formatUsdSigned } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
 import { bands, discreteMoves, pickBand } from '../bands';
+import { classBand } from '../assetClasses';
 import { nextId } from '../random';
 
 function buildSolution(delta: number, vac: number, cap: number, valueDelta: number): Solution {
@@ -37,10 +38,10 @@ export const otherIncomeImpactTemplate: QuestionTemplate<'otherIncomeImpact'> = 
     'Sandwich technique: at an ugly cap like 5.35%, solve at 5% and 6% then average toward the closer cap. $100k: $2.0M (5%) and $1.67M (6%) → mid ≈ $1.83M at 5.5%; nudge to ~$1.87M for 5.35%.',
     'Other income is often reviewed skeptically by buyers — reversion/exit cap may treat it differently.',
   ],
-  generate(rng, difficulty = 'intermediate') {
+  generate(rng, difficulty = 'intermediate', assetClass = 'mixed') {
     const delta = pickBand(rng, bands.otherIncomeDelta, difficulty);
     const vac = rng.pickFromSet(discreteMoves.vacancySet);
-    const cap = pickBand(rng, bands.capRate, difficulty);
+    const cap = pickBand(rng, classBand('capRate', assetClass), difficulty);
     const valueDelta = otherIncomeValueDelta({
       otherIncomeDelta: delta,
       vacancyRate: vac,

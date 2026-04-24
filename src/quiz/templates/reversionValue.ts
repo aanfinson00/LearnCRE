@@ -2,6 +2,7 @@ import { reversionValue } from '../../math/growth';
 import { formatPct, formatUsd } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
 import { bands, pickBand } from '../bands';
+import { classBand } from '../assetClasses';
 import { nextId } from '../random';
 
 function buildSolution(noi: number, cap: number): Solution {
@@ -31,9 +32,9 @@ export const reversionValueTemplate: QuestionTemplate<'reversionValue'> = {
     'If your buy cap is 5% and exit cap is 5.5%, you lose (5/5.5 − 1) = −9.1% of value on that alone.',
     'Shortcut: $1M NOI at 6% exit cap = $16.67M. Scale linearly with NOI.',
   ],
-  generate(rng, difficulty = 'intermediate') {
+  generate(rng, difficulty = 'intermediate', assetClass = 'mixed') {
     const noi = pickBand(rng, bands.noi, difficulty);
-    const cap = pickBand(rng, bands.exitCapRate, difficulty);
+    const cap = pickBand(rng, classBand('exitCapRate', assetClass), difficulty);
     const years = rng.pickInt(5, 10);
     const expected = reversionValue(noi, cap);
 

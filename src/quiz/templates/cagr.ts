@@ -36,7 +36,7 @@ export const cagrTemplate: QuestionTemplate<'cagr'> = {
     'Anchor: 1.5× over 5y ≈ 8.45%; 2× over 10y ≈ 7.18%; 1.3× over 5y ≈ 5.39%.',
     'Shortcut for small ratios: ln(end/start) / n gives the continuously compounded rate — close to discrete CAGR for short horizons.',
   ],
-  generate(rng, difficulty = 'intermediate') {
+  generate(rng, difficulty = 'intermediate', _assetClass = 'mixed') {
     const start = pickBand(rng, bands.noi, difficulty);
     const rate = pickBand(rng, bands.growthRate, difficulty);
     const years = rng.pickInt(bands.projectionYears.min, bands.projectionYears.max);

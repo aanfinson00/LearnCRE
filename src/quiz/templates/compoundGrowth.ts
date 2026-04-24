@@ -37,7 +37,7 @@ export const compoundGrowthTemplate: QuestionTemplate<'compoundGrowth'> = {
     'Linear approx (floor): End ≥ Start × (1 + r × n). Actual is always higher due to compounding.',
     'Sandwich: bracket with the two nearest round rates and interpolate (e.g. 2.75% sits between 2.5% and 3%).',
   ],
-  generate(rng, difficulty = 'intermediate') {
+  generate(rng, difficulty = 'intermediate', _assetClass = 'mixed') {
     const start = pickBand(rng, bands.noi, difficulty);
     const rate = pickBand(rng, bands.growthRate, difficulty);
     const years = rng.pickInt(bands.projectionYears.min, bands.projectionYears.max);

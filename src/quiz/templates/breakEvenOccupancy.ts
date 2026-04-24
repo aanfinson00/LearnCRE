@@ -1,7 +1,8 @@
 import { breakEvenOccupancy } from '../../math/debt';
 import { formatPct, formatSf, formatUsd, formatUsdPerSf } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
-import { bands, pickBand } from '../bands';
+import { pickBand } from '../bands';
+import { classBand } from '../assetClasses';
 import { nextId } from '../random';
 
 function buildSolution(params: {
@@ -48,9 +49,9 @@ export const breakEvenOccupancyTemplate: QuestionTemplate<'breakEvenOccupancy'> 
     'Typical healthy range: 65–75%. Over 85% and the deal has thin margin of safety.',
     'Shortcut: if OpEx is 40% of PGI and debt service is 25% of PGI, BEO = 65%.',
   ],
-  generate(rng, difficulty = 'intermediate') {
-    const sf = pickBand(rng, bands.sf, difficulty);
-    const pgiPerSf = pickBand(rng, bands.pgiPerSf, difficulty);
+  generate(rng, difficulty = 'intermediate', assetClass = 'mixed') {
+    const sf = pickBand(rng, classBand('sf', assetClass), difficulty);
+    const pgiPerSf = pickBand(rng, classBand('pgiPerSf', assetClass), difficulty);
     const opexRatio = rng.pickFromSet([0.3, 0.35, 0.4, 0.45] as const);
     const pgi = sf * pgiPerSf;
     const dsRatio = rng.pickFromSet([0.15, 0.2, 0.25, 0.3] as const);

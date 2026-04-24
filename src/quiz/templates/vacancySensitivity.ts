@@ -2,6 +2,7 @@ import { vacancyNoiDelta, valueDeltaFromNoiDelta } from '../../math/sensitivity'
 import { formatPct, formatUsd, formatUsdSigned } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
 import { applyMove, bands, discreteMoves, pickBand } from '../bands';
+import { classBand } from '../assetClasses';
 import { nextId } from '../random';
 
 function buildSolution(
@@ -50,13 +51,13 @@ export const vacancySensitivityTemplate: QuestionTemplate<'vacancySensitivity'> 
     'Sandwich for ugly caps: compute at the clean caps above and below (e.g. 6% and 7%), then interpolate.',
     'Vacancy hits gross income (rent + other), not EGI — so sensitivity scales with the TOP line, not NOI.',
   ],
-  generate(rng, difficulty = 'intermediate') {
+  generate(rng, difficulty = 'intermediate', assetClass = 'mixed') {
     const gpr = pickBand(rng, bands.gpr, difficulty);
     const otherIncome = pickBand(rng, bands.otherIncome, difficulty);
     const oldVac = pickBand(rng, bands.vacancy, difficulty);
     const vacDelta = rng.pickFromSet(discreteMoves.vacancyMoves);
     const newVac = applyMove(oldVac, vacDelta, bands.vacancy, difficulty);
-    const cap = pickBand(rng, bands.capRate, difficulty);
+    const cap = pickBand(rng, classBand('capRate', assetClass), difficulty);
     const noiDelta = vacancyNoiDelta({ gpr, otherIncome, oldVacancy: oldVac, newVacancy: newVac });
     const valueDelta = valueDeltaFromNoiDelta(noiDelta, cap);
 

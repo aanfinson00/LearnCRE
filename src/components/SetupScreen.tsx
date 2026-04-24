@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { templates, allKinds } from '../quiz/templates';
 import type { QuestionKind, AnswerMode } from '../types/question';
-import type { DifficultyMode, SessionConfig, TolerancePreset, LifetimeStats } from '../types/session';
+import type { AssetClass, DifficultyMode, SessionConfig, TolerancePreset, LifetimeStats } from '../types/session';
+import { applicableKinds, assetClassOrder, assetClasses } from '../quiz/assetClasses';
 import { AnchorsCard } from './AnchorsCard';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
@@ -69,7 +70,21 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill, onSwitchToStudy }: 
   );
   const [tolerance, setTolerance] = useState<TolerancePreset>(stored?.tolerancePreset ?? 'normal');
   const [difficulty, setDifficulty] = useState<DifficultyMode>(stored?.difficulty ?? 'intermediate');
+  const [assetClass, setAssetClass] = useState<AssetClass>(stored?.assetClass ?? 'mixed');
   const [lifetime, setLifetime] = useState<LifetimeStats | null>(null);
+
+  const visibleKinds = useMemo(() => applicableKinds(assetClass, allKinds), [assetClass]);
+
+  // Drop any selected kinds that aren't applicable to the current asset class.
+  useEffect(() => {
+    setCategories((s) => {
+      const visibleSet = new Set(visibleKinds);
+      const next = new Set<QuestionKind>();
+      for (const k of s) if (visibleSet.has(k)) next.add(k);
+      if (next.size === s.size) return s;
+      return next;
+    });
+  }, [visibleKinds]);
 
   useEffect(() => {
     setLifetime(loadLifetime());
@@ -84,12 +99,12 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill, onSwitchToStudy }: 
     });
   };
 
-  const selectAll = () => setCategories(new Set(allKinds));
+  const selectAll = () => setCategories(new Set(visibleKinds));
   const selectNone = () => setCategories(new Set());
   const selectValuation = () =>
-    setCategories(new Set(allKinds.filter((k) => templates[k].category === 'valuation')));
+    setCategories(new Set(visibleKinds.filter((k) => templates[k].category === 'valuation')));
   const selectReturns = () =>
-    setCategories(new Set(allKinds.filter((k) => templates[k].category === 'returns')));
+    setCategories(new Set(visibleKinds.filter((k) => templates[k].category === 'returns')));
 
   const canStart = categories.size > 0;
 
@@ -100,6 +115,7 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill, onSwitchToStudy }: 
       plannedCount,
       tolerancePreset: tolerance,
       difficulty,
+      assetClass,
     };
     saveConfig(config);
     onStart(config);
@@ -148,6 +164,35 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill, onSwitchToStudy }: 
 
       <Card className="space-y-6">
         <div>
+          <h2 className="mb-3 text-sm font-medium uppercase tracking-widest text-warm-stone">
+            Asset class
+          </h2>
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">
+            {assetClassOrder.map((id) => {
+              const ac = assetClasses[id];
+              const on = assetClass === id;
+              return (
+                <button
+                  key={id}
+                  type="button"
+                  onClick={() => setAssetClass(id)}
+                  className={`rounded-lg border p-3 text-left transition-all duration-aa ease-aa ${
+                    on
+                      ? 'border-copper bg-copper/10 text-warm-black'
+                      : 'border-warm-line bg-warm-white/50 text-warm-ink hover:border-copper hover:text-copper-deep'
+                  }`}
+                >
+                  <div className="text-sm font-medium">{ac.label}</div>
+                  <div className={`mt-0.5 text-xs ${on ? 'text-copper-ink' : 'text-warm-mute'}`}>
+                    {ac.hint}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <div>
           <div className="mb-3 flex items-center justify-between">
             <h2 className="text-sm font-medium uppercase tracking-widest text-warm-stone">
               Categories
@@ -171,7 +216,7 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill, onSwitchToStudy }: 
             </div>
           </div>
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-            {allKinds.map((kind) => {
+            {visibleKinds.map((kind) => {
               const t = templates[kind];
               const on = categories.has(kind);
               const catStats = lifetime?.perCategory?.[kind];

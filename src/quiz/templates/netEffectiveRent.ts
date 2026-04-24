@@ -2,6 +2,7 @@ import { netEffectiveRent } from '../../math/lease';
 import { formatUsdPerSf, formatYears } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
 import { bands, pickBand } from '../bands';
+import { classBand } from '../assetClasses';
 import { nextId } from '../random';
 
 function buildSolution(params: {
@@ -53,8 +54,8 @@ export const netEffectiveRentTemplate: QuestionTemplate<'netEffectiveRent'> = {
     'NER drives cap-rate math — always underwrite to NER, not face rent.',
     'Quick check: $20 face, $15 TI over 5y, 3 free months → $20 − $3 − $1 = $16/SF NER.',
   ],
-  generate(rng, difficulty = 'intermediate') {
-    const grossRent = pickBand(rng, bands.rentPerSf, difficulty);
+  generate(rng, difficulty = 'intermediate', assetClass = 'mixed') {
+    const grossRent = pickBand(rng, classBand('rentPerSf', assetClass), difficulty);
     const years = rng.pickInt(bands.leaseTermYears.min, bands.leaseTermYears.max);
     const tiCap = Math.max(5, grossRent * 1.2);
     const tiPerSf = pickBand(rng, { min: 0, max: tiCap, step: 1 }, difficulty);

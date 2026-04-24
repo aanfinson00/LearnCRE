@@ -1,7 +1,8 @@
 import { perUnit } from '../../math/growth';
 import { formatUsd } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
-import { bands, pickBand } from '../bands';
+import { pickBand } from '../bands';
+import { classBand } from '../assetClasses';
 import { nextId } from '../random';
 
 function buildSolution(price: number, units: number): Solution {
@@ -31,9 +32,9 @@ export const pricePerUnitTemplate: QuestionTemplate<'pricePerUnit'> = {
     'Compare to replacement cost/unit to gauge if you\'re buying below new-build economics.',
     'Shortcut: round both to 2 sig figs. $45M / 180 units → $45M / $180 → $250k/unit.',
   ],
-  generate(rng, difficulty = 'intermediate') {
-    const units = pickBand(rng, bands.units, difficulty);
-    const target = pickBand(rng, bands.pricePerUnitValue, difficulty);
+  generate(rng, difficulty = 'intermediate', assetClass = 'mixed') {
+    const units = pickBand(rng, classBand('units', assetClass), difficulty);
+    const target = pickBand(rng, classBand('pricePerUnitValue', assetClass), difficulty);
     const priceStep = difficulty === 'beginner' ? 500_000 : difficulty === 'advanced' ? 25_000 : 100_000;
     const price = Math.round((units * target) / priceStep) * priceStep;
     const expected = perUnit(price, units);

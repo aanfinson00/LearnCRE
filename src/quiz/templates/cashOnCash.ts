@@ -2,6 +2,7 @@ import { annualDebtService, cashOnCash } from '../../math/debt';
 import { formatPct, formatUsd } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
 import { bands, pickBand } from '../bands';
+import { classBand } from '../assetClasses';
 import { nextId } from '../random';
 
 function buildSolution(params: {
@@ -61,8 +62,8 @@ export const cashOnCashTemplate: QuestionTemplate<'cashOnCash'> = {
     'When cap > borrow rate, leverage lifts CoC. When cap < borrow, leverage drags it down (even negative).',
     'Quick check: at 1.25× DSCR, Year-1 CoC is usually 200–400 bps above cap rate for value-add.',
   ],
-  generate(rng, difficulty = 'intermediate') {
-    const cap = pickBand(rng, bands.capRate, difficulty);
+  generate(rng, difficulty = 'intermediate', assetClass = 'mixed') {
+    const cap = pickBand(rng, classBand('capRate', assetClass), difficulty);
     const noi = pickBand(rng, bands.noi, difficulty);
     const priceStep = difficulty === 'beginner' ? 1_000_000 : difficulty === 'advanced' ? 50_000 : 250_000;
     const price = Math.round(noi / cap / priceStep) * priceStep;

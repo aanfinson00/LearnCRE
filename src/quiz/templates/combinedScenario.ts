@@ -2,6 +2,7 @@ import { egi, noi, value } from '../../math/core';
 import { formatPct, formatUsd } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
 import { bands, discreteMoves, pickBand } from '../bands';
+import { classBand,classOpexRatios,classNoun } from '../assetClasses';
 import { nextId } from '../random';
 
 function buildSolution(
@@ -50,20 +51,20 @@ export const combinedScenarioTemplate: QuestionTemplate<'combinedScenario'> = {
     'Sandwich: compute value at the two nearest clean caps (e.g. 5% and 6%) and interpolate to your actual cap. Handles ugly caps without a calculator.',
     'Sanity check: compare implied value-per-SF or $/unit to market comps before trusting the number.',
   ],
-  generate(rng, difficulty = 'intermediate') {
+  generate(rng, difficulty = 'intermediate', assetClass = 'mixed') {
     const gpr = pickBand(rng, bands.gpr, difficulty);
     const other = pickBand(rng, bands.otherIncome, difficulty);
     const vac = rng.pickFromSet(discreteMoves.vacancySetNonZero);
-    const opexRatio = rng.pickFromSet(discreteMoves.opexRatios);
+    const opexRatio = rng.pickFromSet(classOpexRatios(assetClass));
     const opexRound = difficulty === 'beginner' ? 100_000 : difficulty === 'advanced' ? 1_000 : 10_000;
     const opex = Math.round(((gpr + other) * opexRatio * (1 - vac)) / opexRound) * opexRound;
-    const cap = pickBand(rng, bands.capRate, difficulty);
+    const cap = pickBand(rng, classBand('capRate', assetClass), difficulty);
     const v = value(noi({ gpr, otherIncome: other, vacancyRate: vac, opex }), cap);
 
     return {
       id: nextId('combo'),
       kind: 'combinedScenario',
-      prompt: `GPR ${formatUsd(gpr)}, other income ${formatUsd(other)}, vacancy ${formatPct(vac)}, OpEx ${formatUsd(opex)}, cap ${formatPct(cap)}. What's the implied value?`,
+      prompt: `A ${classNoun(assetClass)} has GPR ${formatUsd(gpr)}, other income ${formatUsd(other)}, vacancy ${formatPct(vac)}, OpEx ${formatUsd(opex)}, cap ${formatPct(cap)}. What's the implied value?`,
       context: {
         gpr,
         otherIncome: other,

@@ -1,5 +1,7 @@
 import type { AnswerMode, Question, QuestionKind } from './question';
+import type { AssetClass } from '../quiz/assetClasses';
 export type { Question };
+export type { AssetClass };
 
 export type TolerancePreset = 'strict' | 'normal' | 'loose';
 export type Difficulty = 'beginner' | 'intermediate' | 'advanced';
@@ -11,6 +13,7 @@ export interface SessionConfig {
   plannedCount: number | null;
   tolerancePreset: TolerancePreset;
   difficulty: DifficultyMode;
+  assetClass: AssetClass;
   seed?: number;
 }
 

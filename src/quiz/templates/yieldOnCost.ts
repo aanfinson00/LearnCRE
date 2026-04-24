@@ -31,7 +31,7 @@ export const yieldOnCostTemplate: QuestionTemplate<'yieldOnCost'> = {
     'Quick inversion: at 7.5% YoC, total cost is 13.3× stabilized NOI.',
     'Sandwich: round cost to nearest $10M, NOI to nearest $500k, bracket the ratio against clean caps.',
   ],
-  generate(rng, difficulty = 'intermediate') {
+  generate(rng, difficulty = 'intermediate', _assetClass = 'mixed') {
     const cost = pickBand(rng, bands.projectCost, difficulty);
     const targetYoc = pickBand(rng, { min: 0.055, max: 0.095, step: 0.0025 }, difficulty);
     const noiStep = difficulty === 'beginner' ? 250_000 : difficulty === 'advanced' ? 25_000 : 100_000;

@@ -2,6 +2,7 @@ import { operatingExpenseRatio } from '../../math/growth';
 import { formatPct, formatUsd } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
 import { bands, pickBand } from '../bands';
+import { classOpexRatios } from '../assetClasses';
 import { nextId } from '../random';
 
 function buildSolution(opex: number, egi: number): Solution {
@@ -31,9 +32,9 @@ export const operatingExpenseRatioTemplate: QuestionTemplate<'operatingExpenseRa
     'Inverse: NOI margin = 1 − OpEx ratio. A 60% OpEx ratio means 40% of EGI drops to NOI.',
     'Shortcut: divide both to 2 sig figs first. $425k / $1.12M ≈ $430 / $1,120 ≈ 38%.',
   ],
-  generate(rng, difficulty = 'intermediate') {
+  generate(rng, difficulty = 'intermediate', assetClass = 'mixed') {
     const egi = pickBand(rng, bands.egi, difficulty);
-    const targetRatio = rng.pickFromSet([0.25, 0.3, 0.35, 0.4, 0.45, 0.5] as const);
+    const targetRatio = rng.pickFromSet(classOpexRatios(assetClass));
     const opexStep = difficulty === 'beginner' ? 50_000 : difficulty === 'advanced' ? 5_000 : 25_000;
     const opex = Math.round((egi * targetRatio) / opexStep) * opexStep;
     const expected = operatingExpenseRatio(opex, egi);

@@ -2,6 +2,7 @@ import { capRate } from '../../math/core';
 import { formatBps, formatPct, formatUsd } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
 import { bands, pickBand } from '../bands';
+import { classBand } from '../assetClasses';
 import { nextId } from '../random';
 
 function buildSolution(price: number, noi: number): Solution {
@@ -33,8 +34,8 @@ export const goingInCapTemplate: QuestionTemplate<'goingInCap'> = {
     'Sandwich: find the nearest clean multiples (e.g. 15× = 6.67%, 16× = 6.25%) and interpolate toward the actual ratio.',
     'Convert cap to bps: 5.25% = 525 bps. Just shift the decimal two places.',
   ],
-  generate(rng, difficulty = 'intermediate') {
-    const cap = pickBand(rng, bands.capRate, difficulty);
+  generate(rng, difficulty = 'intermediate', assetClass = 'mixed') {
+    const cap = pickBand(rng, classBand('capRate', assetClass), difficulty);
     const noi = pickBand(rng, bands.noi, difficulty);
     const priceStep = difficulty === 'beginner' ? 500_000 : difficulty === 'advanced' ? 25_000 : 100_000;
     const price = Math.round(noi / cap / priceStep) * priceStep;
