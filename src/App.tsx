@@ -46,6 +46,7 @@ export default function App() {
       <SpeedDrillScreen
         state={drill.state}
         currentCell={drill.currentCell}
+        onSelect={drill.selectCell}
         onSubmit={drill.submit}
         onFinish={drill.finish}
         onQuit={() => {
