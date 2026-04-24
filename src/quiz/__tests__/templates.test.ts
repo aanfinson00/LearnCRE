@@ -11,6 +11,29 @@ import {
   valueDeltaFromNoiDelta,
 } from '../../math/sensitivity';
 import { equityMultiple, irrSingle, requiredMultiple } from '../../math/returns';
+import {
+  allInBasis,
+  developmentSpread,
+  pricePerSf,
+  replacementCost,
+  yieldOnCost,
+} from '../../math/basis';
+import {
+  annualDebtService,
+  breakEvenOccupancy,
+  cashOnCash,
+  leveredIrrApprox,
+  loanConstant,
+  maxLoanByDebtYield,
+  maxLoanByDscr,
+} from '../../math/debt';
+import {
+  netEffectiveRent,
+  requiredRentPremiumPerSf,
+  rentRollValueChange,
+  taxReassessmentValueImpact,
+  tiVsRentDelta,
+} from '../../math/lease';
 
 describe('quiz/templates', () => {
   it('every kind has a template', () => {
@@ -111,6 +134,158 @@ describe('quiz/templates', () => {
               requiredMultiple(ctx.targetIrr!, ctx.holdYears!),
               10,
             );
+            break;
+          }
+          case 'pricePerSf': {
+            expect(q.expected).toBeCloseTo(pricePerSf(ctx.purchasePrice!, ctx.buildingSf!), 6);
+            break;
+          }
+          case 'allInBasis': {
+            expect(q.expected).toBeCloseTo(
+              allInBasis({
+                purchasePrice: ctx.purchasePrice!,
+                capex: ctx.capex!,
+                closingCostRate: ctx.closingCostRate!,
+                buildingSf: ctx.buildingSf!,
+              }),
+              6,
+            );
+            break;
+          }
+          case 'yieldOnCost': {
+            const bps = Math.round(yieldOnCost(ctx.stabilizedNoi ?? ctx.noi!, ctx.totalProjectCost!) * 10_000);
+            expect(q.expected).toBe(bps);
+            break;
+          }
+          case 'devSpread': {
+            const yoc = yieldOnCost(ctx.stabilizedNoi ?? ctx.noi!, ctx.totalProjectCost!);
+            const bps = Math.round(developmentSpread(yoc, ctx.marketCapRate!) * 10_000);
+            expect(q.expected).toBe(bps);
+            break;
+          }
+          case 'replacementCost': {
+            expect(q.expected).toBeCloseTo(
+              replacementCost(ctx.replacementCostPerSf!, ctx.buildingSf!),
+              6,
+            );
+            break;
+          }
+          case 'debtYield': {
+            expect(q.expected).toBeCloseTo(
+              maxLoanByDebtYield(ctx.noi!, ctx.debtYieldTarget!),
+              4,
+            );
+            break;
+          }
+          case 'dscrLoanSizing': {
+            expect(q.expected).toBeCloseTo(
+              maxLoanByDscr({
+                noi: ctx.noi!,
+                dscrTarget: ctx.dscrTarget!,
+                annualRate: ctx.interestRate!,
+                years: ctx.amortYears!,
+              }),
+              4,
+            );
+            break;
+          }
+          case 'cashOnCash': {
+            const ds = annualDebtService(ctx.loanAmount!, ctx.interestRate!, ctx.amortYears!);
+            expect(q.expected).toBeCloseTo(
+              cashOnCash({ noi: ctx.noi!, debtServiceAnnual: ds, equity: ctx.equityIn! }),
+              8,
+            );
+            break;
+          }
+          case 'breakEvenOccupancy': {
+            expect(q.expected).toBeCloseTo(
+              breakEvenOccupancy({
+                opex: ctx.opex!,
+                debtServiceAnnual: ctx.debtServiceAnnual!,
+                pgi: ctx.pgi!,
+              }),
+              10,
+            );
+            break;
+          }
+          case 'leveredIrr': {
+            expect(q.expected).toBeCloseTo(
+              leveredIrrApprox({
+                unleveredIrr: ctx.unleveredIrr!,
+                borrowRate: ctx.borrowRate!,
+                ltv: ctx.ltv!,
+              }),
+              10,
+            );
+            break;
+          }
+          case 'netEffectiveRent': {
+            expect(q.expected).toBeCloseTo(
+              netEffectiveRent({
+                grossRentPerSf: ctx.rentPerSf!,
+                leaseTermYears: ctx.leaseTermYears!,
+                tiPerSf: ctx.tiPerSf!,
+                freeMonths: ctx.freeMonths!,
+              }),
+              6,
+            );
+            break;
+          }
+          case 'tiVsRent': {
+            expect(q.expected).toBeCloseTo(
+              tiVsRentDelta({
+                rentA: ctx.altRentPerSf!,
+                tiA: ctx.altTiPerSf!,
+                rentB: ctx.rentPerSf!,
+                tiB: ctx.tiPerSf!,
+                leaseTermYears: ctx.leaseTermYears!,
+              }),
+              6,
+            );
+            break;
+          }
+          case 'tiPayback': {
+            expect(q.expected).toBeCloseTo(
+              requiredRentPremiumPerSf({
+                tiPerSf: ctx.tiPerSf!,
+                paybackYears: ctx.paybackYears!,
+              }),
+              6,
+            );
+            break;
+          }
+          case 'rentRollChange': {
+            expect(q.expected).toBeCloseTo(
+              rentRollValueChange({
+                oldRentPerSf: ctx.oldRentPerSf!,
+                newRentPerSf: ctx.newRentPerSf!,
+                subjectSf: ctx.buildingSf! * ctx.rolloverPct!,
+                vacancy: ctx.vacancyRate!,
+                capRate: ctx.capRate!,
+              }),
+              4,
+            );
+            break;
+          }
+          case 'taxReassessment': {
+            expect(q.expected).toBeCloseTo(
+              taxReassessmentValueImpact({
+                purchasePrice: ctx.purchasePrice!,
+                oldAnnualTax: ctx.oldAnnualTax!,
+                newTaxRate: ctx.newTaxRate!,
+                capRate: ctx.capRate!,
+              }),
+              4,
+            );
+            break;
+          }
+          case 'grossRentMultiplier': {
+            expect(q.expected).toBeCloseTo(ctx.purchasePrice! / ctx.pgi!, 8);
+            break;
+          }
+          case 'loanConstant': {
+            const bps = Math.round(loanConstant(ctx.interestRate!, ctx.amortYears!) * 10_000);
+            expect(q.expected).toBe(bps);
             break;
           }
         }

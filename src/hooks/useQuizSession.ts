@@ -10,6 +10,7 @@ type Action =
   | { type: 'start'; config: SessionConfig }
   | { type: 'submit'; attempt: Attempt }
   | { type: 'advance'; question: Question | null }
+  | { type: 'endSession' }
   | { type: 'enterReview' }
   | { type: 'exitReview' }
   | { type: 'reset' };
@@ -49,6 +50,8 @@ function reducer(state: QuizSession, action: Action): QuizSession {
         questionStartedAt: action.question ? Date.now() : null,
       };
     }
+    case 'endSession':
+      return { ...state, status: 'finished', currentQuestion: null };
     case 'enterReview':
       return { ...state, status: 'reviewing' };
     case 'exitReview':
@@ -140,12 +143,13 @@ export function useQuizSession() {
   }, [session.currentIndex, session.config, session.attempts]);
 
   const reset = useCallback(() => dispatch({ type: 'reset' }), []);
+  const endSession = useCallback(() => dispatch({ type: 'endSession' }), []);
   const enterReview = useCallback(() => dispatch({ type: 'enterReview' }), []);
   const exitReview = useCallback(() => dispatch({ type: 'exitReview' }), []);
 
   const stats = useMemo<SessionStats>(() => computeStats(session.attempts), [session.attempts]);
 
-  return { session, stats, start, submit, next, reset, enterReview, exitReview };
+  return { session, stats, start, submit, next, reset, endSession, enterReview, exitReview };
 }
 
 function computeStats(attempts: Attempt[]): SessionStats {

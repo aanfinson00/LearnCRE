@@ -49,3 +49,15 @@ export function formatMultiple(value: number, decimals = 2): string {
 export function formatYears(years: number): string {
   return `${years} ${years === 1 ? 'year' : 'years'}`;
 }
+
+export function formatUsdPerSf(value: number, decimals = 2): string {
+  const sign = value < 0 ? '-' : '';
+  return `${sign}$${Math.abs(value).toLocaleString('en-US', {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  })}/SF`;
+}
+
+export function formatSf(value: number): string {
+  return `${Math.round(value).toLocaleString('en-US')} SF`;
+}

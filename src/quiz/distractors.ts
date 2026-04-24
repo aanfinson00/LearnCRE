@@ -10,6 +10,8 @@ function dedupeRound(values: number[], unit: Question['unit']): number[] {
       case 'pct':
       case 'pctChange':
         return (Math.round(v * 10000) / 10000).toString();
+      case 'usdPerSf':
+        return v.toFixed(2);
       default:
         return Math.round(v).toString();
     }
@@ -51,6 +53,10 @@ export function buildChoices(q: Question, rng: Rng): number[] {
     case 'usdChange':
       candidates.push(e * 1.2, e * 0.83, -e);
       candidates.push(e + abs * 0.15);
+      break;
+    case 'usdPerSf':
+      candidates.push(+(e * 1.2).toFixed(2), +(e * 0.83).toFixed(2), +(e + 25).toFixed(2));
+      candidates.push(+(e - 25).toFixed(2));
       break;
   }
 

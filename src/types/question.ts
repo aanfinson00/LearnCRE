@@ -11,9 +11,26 @@ export type QuestionKind =
   | 'combinedScenario'
   | 'equityMultiple'
   | 'irrSimple'
-  | 'targetMultiple';
+  | 'targetMultiple'
+  | 'pricePerSf'
+  | 'allInBasis'
+  | 'yieldOnCost'
+  | 'devSpread'
+  | 'replacementCost'
+  | 'debtYield'
+  | 'dscrLoanSizing'
+  | 'cashOnCash'
+  | 'breakEvenOccupancy'
+  | 'leveredIrr'
+  | 'netEffectiveRent'
+  | 'tiVsRent'
+  | 'tiPayback'
+  | 'rentRollChange'
+  | 'taxReassessment'
+  | 'grossRentMultiplier'
+  | 'loanConstant';
 
-export type UnitFormat = 'usd' | 'pct' | 'bps' | 'pctChange' | 'usdChange' | 'multiple';
+export type UnitFormat = 'usd' | 'pct' | 'bps' | 'pctChange' | 'usdChange' | 'multiple' | 'usdPerSf';
 
 export type AnswerMode = 'free' | 'mc';
 

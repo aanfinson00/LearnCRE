@@ -5,6 +5,7 @@ import {
   formatPct,
   formatPctChange,
   formatUsd,
+  formatUsdPerSf,
   formatUsdSigned,
 } from '../math/rounding';
 
@@ -22,6 +23,8 @@ function fmt(value: number, unit: UnitFormat): string {
       return formatBps(value / 10_000);
     case 'multiple':
       return formatMultiple(value);
+    case 'usdPerSf':
+      return formatUsdPerSf(value);
   }
 }
 

@@ -2,12 +2,14 @@ import { useEffect, useMemo, useState } from 'react';
 import { templates, allKinds } from '../quiz/templates';
 import type { QuestionKind, AnswerMode } from '../types/question';
 import type { DifficultyMode, SessionConfig, TolerancePreset, LifetimeStats } from '../types/session';
+import { AnchorsCard } from './AnchorsCard';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
 import { loadConfig, loadLifetime, saveConfig } from '../storage/localStorage';
 
 interface Props {
   onStart: (config: SessionConfig) => void;
+  onSwitchToSpeedDrill?: () => void;
 }
 
 const LENGTHS: { label: string; value: number | null }[] = [
@@ -39,7 +41,7 @@ const DIFFICULTIES: { label: string; value: DifficultyMode; hint: string }[] = [
   },
 ];
 
-export function SetupScreen({ onStart }: Props) {
+export function SetupScreen({ onStart, onSwitchToSpeedDrill }: Props) {
   const stored = useMemo(() => loadConfig(), []);
   const [categories, setCategories] = useState<Set<QuestionKind>>(
     new Set(stored?.categories ?? allKinds),
@@ -94,6 +96,19 @@ export function SetupScreen({ onStart }: Props) {
           Drill your intuition on how CRE underwriting assumptions move valuations and returns.
         </p>
       </header>
+
+      {onSwitchToSpeedDrill && (
+        <div className="flex items-center gap-2">
+          <span className="rounded-md bg-slate-900 px-3 py-1.5 text-xs font-medium text-white">Quiz</span>
+          <button
+            type="button"
+            onClick={onSwitchToSpeedDrill}
+            className="rounded-md border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-slate-500"
+          >
+            Cap Rate Speed Drill →
+          </button>
+        </div>
+      )}
 
       <Card className="space-y-5">
         <div>
@@ -257,6 +272,8 @@ export function SetupScreen({ onStart }: Props) {
           </Button>
         </div>
       </Card>
+
+      <AnchorsCard />
 
       <footer className="text-center text-xs text-slate-400">
         Enter submits. S skips. 1–4 picks MC choices.
