@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import type { Attempt } from '../types/session';
 import { templates } from '../quiz/templates';
 import {
@@ -41,13 +41,20 @@ interface Props {
 }
 
 export function ReviewScreen({ attempts, onBack }: Props) {
+  const [mistakesOnly, setMistakesOnly] = useState(false);
   const [index, setIndex] = useState(0);
-  const current = attempts[index];
+
+  const filtered = useMemo(
+    () => (mistakesOnly ? attempts.filter((a) => !a.correct) : attempts),
+    [attempts, mistakesOnly],
+  );
+  const safeIndex = Math.min(index, Math.max(0, filtered.length - 1));
+  const current = filtered[safeIndex];
 
   const prev = useCallback(() => setIndex((i) => Math.max(0, i - 1)), []);
   const next = useCallback(
-    () => setIndex((i) => Math.min(attempts.length - 1, i + 1)),
-    [attempts.length],
+    () => setIndex((i) => Math.min(filtered.length - 1, i + 1)),
+    [filtered.length],
   );
 
   useKeyboard(
@@ -69,10 +76,21 @@ export function ReviewScreen({ attempts, onBack }: Props) {
     [prev, next, onBack],
   );
 
+  const mistakeCount = attempts.filter((a) => !a.correct).length;
+
   if (!current) {
     return (
       <div className="mx-auto max-w-3xl space-y-4 py-8">
-        <p className="text-slate-600">No attempts to review yet.</p>
+        <p className="text-slate-600">
+          {mistakesOnly && attempts.length > 0
+            ? 'No mistakes to review — every answer was correct.'
+            : 'No attempts to review yet.'}
+        </p>
+        {mistakesOnly && (
+          <Button variant="secondary" onClick={() => setMistakesOnly(false)}>
+            Show all answers
+          </Button>
+        )}
         <Button onClick={onBack}>Back</Button>
       </div>
     );
@@ -93,13 +111,35 @@ export function ReviewScreen({ attempts, onBack }: Props) {
 
   return (
     <div className="mx-auto max-w-3xl space-y-5 py-6">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-3">
         <div className="font-mono text-sm text-slate-600 num">
-          Review {index + 1} / {attempts.length}
+          Review {safeIndex + 1} / {filtered.length}
+          {mistakesOnly && (
+            <span className="ml-2 text-xs text-rose-700">(mistakes only)</span>
+          )}
         </div>
-        <Button variant="ghost" onClick={onBack} className="text-xs">
-          Back to results (Esc)
-        </Button>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => {
+              setMistakesOnly((v) => !v);
+              setIndex(0);
+            }}
+            disabled={mistakeCount === 0 && !mistakesOnly}
+            className={`rounded-md border px-2.5 py-1 text-xs ${
+              mistakesOnly
+                ? 'border-rose-500 bg-rose-50 text-rose-800'
+                : mistakeCount === 0
+                  ? 'cursor-not-allowed border-slate-200 bg-slate-50 text-slate-400'
+                  : 'border-slate-300 bg-white text-slate-700 hover:border-slate-500'
+            }`}
+          >
+            {mistakesOnly ? 'Show all' : `Mistakes only (${mistakeCount})`}
+          </button>
+          <Button variant="ghost" onClick={onBack} className="text-xs">
+            Back (Esc)
+          </Button>
+        </div>
       </div>
 
       <Card className="space-y-5">
@@ -151,17 +191,17 @@ export function ReviewScreen({ attempts, onBack }: Props) {
       </Card>
 
       <div className="flex items-center justify-between">
-        <Button variant="secondary" onClick={prev} disabled={index === 0}>
+        <Button variant="secondary" onClick={prev} disabled={safeIndex === 0}>
           ← Prev
         </Button>
-        <div className="flex gap-1">
-          {attempts.map((a, i) => (
+        <div className="flex flex-wrap gap-1 justify-center max-w-md">
+          {filtered.map((a, i) => (
             <button
               key={i}
               type="button"
               onClick={() => setIndex(i)}
               className={`h-2 w-6 rounded-full transition ${
-                i === index
+                i === safeIndex
                   ? 'bg-slate-900'
                   : a.skipped
                     ? 'bg-slate-300'
@@ -173,7 +213,7 @@ export function ReviewScreen({ attempts, onBack }: Props) {
             />
           ))}
         </div>
-        <Button onClick={next} disabled={index === attempts.length - 1}>
+        <Button onClick={next} disabled={safeIndex === filtered.length - 1}>
           Next →
         </Button>
       </div>

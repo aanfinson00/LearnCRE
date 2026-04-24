@@ -28,7 +28,15 @@ export type QuestionKind =
   | 'rentRollChange'
   | 'taxReassessment'
   | 'grossRentMultiplier'
-  | 'loanConstant';
+  | 'loanConstant'
+  | 'cagr'
+  | 'compoundGrowth'
+  | 'reversionValue'
+  | 'operatingExpenseRatio'
+  | 'noiFromOer'
+  | 'rentPerUnit'
+  | 'opexPerUnit'
+  | 'pricePerUnit';
 
 export type UnitFormat = 'usd' | 'pct' | 'bps' | 'pctChange' | 'usdChange' | 'multiple' | 'usdPerSf';
 

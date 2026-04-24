@@ -89,6 +89,14 @@ export const bands = {
   paybackYears: { min: 2, max: 5 },
   taxRate: { min: 0.008, max: 0.025, step: 0.00125 },
   rentPerSfDelta: { min: 0.5, max: 5, step: 0.25 },
+  units: { min: 25, max: 500, step: 5 },
+  growthRate: { min: 0.02, max: 0.06, step: 0.0025 },
+  projectionYears: { min: 3, max: 10 },
+  egi: { min: 500_000, max: 15_000_000, step: 100_000 },
+  rentPerUnitYear: { min: 12_000, max: 36_000, step: 500 },
+  opexPerUnitYear: { min: 4_000, max: 14_000, step: 250 },
+  pricePerUnitValue: { min: 150_000, max: 600_000, step: 5_000 },
+  exitCapRate: { min: 0.045, max: 0.095, step: 0.0025 },
 } as const;
 
 export const discreteMoves = {

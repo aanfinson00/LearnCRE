@@ -1,4 +1,5 @@
 import { templates } from '../quiz/templates';
+import type { QuestionKind } from '../types/question';
 import type { SessionConfig, SessionStats } from '../types/session';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
@@ -9,10 +10,21 @@ interface Props {
   onRestart: () => void;
   onNewSetup: () => void;
   onReview: () => void;
+  onRetryMistakes: (kinds: QuestionKind[]) => void;
   attemptCount: number;
+  mistakeKinds: QuestionKind[];
 }
 
-export function ResultsScreen({ stats, config, onRestart, onNewSetup, onReview, attemptCount }: Props) {
+export function ResultsScreen({
+  stats,
+  config,
+  onRestart,
+  onNewSetup,
+  onReview,
+  onRetryMistakes,
+  attemptCount,
+  mistakeKinds,
+}: Props) {
   const categories = config.categories;
 
   return (
@@ -20,7 +32,8 @@ export function ResultsScreen({ stats, config, onRestart, onNewSetup, onReview, 
       <header className="space-y-1">
         <h1 className="text-2xl font-semibold">Session complete</h1>
         <p className="text-sm text-slate-500">
-          {stats.total} answered · {config.mode === 'free' ? 'free-form' : 'multiple choice'} · {config.tolerancePreset} tolerance
+          {stats.total} answered · {config.mode === 'free' ? 'free-form' : 'multiple choice'} ·{' '}
+          {config.tolerancePreset} tolerance · {config.difficulty}
         </p>
       </header>
 
@@ -70,6 +83,18 @@ export function ResultsScreen({ stats, config, onRestart, onNewSetup, onReview, 
         </Button>
         <Button variant="secondary" onClick={onReview} disabled={attemptCount === 0}>
           Review answers
+        </Button>
+        <Button
+          variant="secondary"
+          onClick={() => onRetryMistakes(mistakeKinds)}
+          disabled={mistakeKinds.length === 0}
+          title={
+            mistakeKinds.length === 0
+              ? 'No mistakes — nothing to retry'
+              : `Retry using ${mistakeKinds.length} missed kind${mistakeKinds.length > 1 ? 's' : ''}`
+          }
+        >
+          Retry mistakes ({mistakeKinds.length})
         </Button>
         <Button onClick={onRestart}>Play again</Button>
       </div>

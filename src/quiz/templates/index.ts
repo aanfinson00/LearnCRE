@@ -1,9 +1,11 @@
 import type { QuestionKind, QuestionTemplate } from '../../types/question';
 import { allInBasisTemplate } from './allInBasis';
 import { breakEvenOccupancyTemplate } from './breakEvenOccupancy';
+import { cagrTemplate } from './cagr';
 import { capCompressionTemplate } from './capCompression';
 import { cashOnCashTemplate } from './cashOnCash';
 import { combinedScenarioTemplate } from './combinedScenario';
+import { compoundGrowthTemplate } from './compoundGrowth';
 import { debtYieldTemplate } from './debtYield';
 import { devSpreadTemplate } from './devSpread';
 import { dscrLoanSizingTemplate } from './dscrLoanSizing';
@@ -11,6 +13,12 @@ import { equityMultipleTemplate } from './equityMultiple';
 import { goingInCapTemplate } from './goingInCap';
 import { grossRentMultiplierTemplate } from './grossRentMultiplier';
 import { loanConstantTemplate } from './loanConstant';
+import { noiFromOerTemplate } from './noiFromOer';
+import { operatingExpenseRatioTemplate } from './operatingExpenseRatio';
+import { opexPerUnitTemplate } from './opexPerUnit';
+import { pricePerUnitTemplate } from './pricePerUnit';
+import { rentPerUnitTemplate } from './rentPerUnit';
+import { reversionValueTemplate } from './reversionValue';
 import { irrSimpleTemplate } from './irrSimple';
 import { leveredIrrTemplate } from './leveredIrr';
 import { netEffectiveRentTemplate } from './netEffectiveRent';
@@ -55,6 +63,14 @@ export const templates: Record<QuestionKind, QuestionTemplate> = {
   taxReassessment: taxReassessmentTemplate,
   grossRentMultiplier: grossRentMultiplierTemplate,
   loanConstant: loanConstantTemplate,
+  cagr: cagrTemplate,
+  compoundGrowth: compoundGrowthTemplate,
+  reversionValue: reversionValueTemplate,
+  operatingExpenseRatio: operatingExpenseRatioTemplate,
+  noiFromOer: noiFromOerTemplate,
+  rentPerUnit: rentPerUnitTemplate,
+  opexPerUnit: opexPerUnitTemplate,
+  pricePerUnit: pricePerUnitTemplate,
 };
 
 export const allKinds: QuestionKind[] = [
@@ -85,4 +101,12 @@ export const allKinds: QuestionKind[] = [
   'taxReassessment',
   'grossRentMultiplier',
   'loanConstant',
+  'cagr',
+  'compoundGrowth',
+  'reversionValue',
+  'operatingExpenseRatio',
+  'noiFromOer',
+  'rentPerUnit',
+  'opexPerUnit',
+  'pricePerUnit',
 ];

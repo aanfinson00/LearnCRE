@@ -49,4 +49,14 @@ export interface DealInputs {
   altRentPerSf?: number;
   oldAnnualTax?: number;
   newTaxRate?: number;
+  units?: number;
+  startValue?: number;
+  endValue?: number;
+  growthRate?: number;
+  projectionYears?: number;
+  egi?: number;
+  opexRatioValue?: number;
+  rentPerUnitValue?: number;
+  opexPerUnitValue?: number;
+  pricePerUnitValue?: number;
 }

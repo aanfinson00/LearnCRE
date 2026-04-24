@@ -66,14 +66,22 @@ export default function App() {
   }
 
   if (session.status === 'finished') {
+    const mistakeKinds = Array.from(
+      new Set(session.attempts.filter((a) => !a.correct).map((a) => a.kind)),
+    );
     return (
       <ResultsScreen
         stats={stats}
         config={session.config}
         attemptCount={session.attempts.length}
+        mistakeKinds={mistakeKinds}
         onRestart={() => start(session.config)}
         onNewSetup={reset}
         onReview={enterReview}
+        onRetryMistakes={(kinds) => {
+          if (kinds.length === 0) return;
+          start({ ...session.config, categories: kinds });
+        }}
       />
     );
   }
