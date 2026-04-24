@@ -11,12 +11,17 @@ import { equityMultipleTemplate } from './equityMultiple';
 import { goingInCapTemplate } from './goingInCap';
 import { irrSimpleTemplate } from './irrSimple';
 import { leveredIrrTemplate } from './leveredIrr';
+import { netEffectiveRentTemplate } from './netEffectiveRent';
 import { opexChangeTemplate } from './opexChange';
 import { otherIncomeImpactTemplate } from './otherIncomeImpact';
 import { pricePerSfTemplate } from './pricePerSf';
 import { rentChangeTemplate } from './rentChange';
+import { rentRollChangeTemplate } from './rentRollChange';
 import { replacementCostTemplate } from './replacementCost';
 import { targetMultipleTemplate } from './targetMultiple';
+import { taxReassessmentTemplate } from './taxReassessment';
+import { tiPaybackTemplate } from './tiPayback';
+import { tiVsRentTemplate } from './tiVsRent';
 import { vacancySensitivityTemplate } from './vacancySensitivity';
 import { yieldOnCostTemplate } from './yieldOnCost';
 
@@ -41,6 +46,11 @@ export const templates: Record<QuestionKind, QuestionTemplate> = {
   cashOnCash: cashOnCashTemplate,
   breakEvenOccupancy: breakEvenOccupancyTemplate,
   leveredIrr: leveredIrrTemplate,
+  netEffectiveRent: netEffectiveRentTemplate,
+  tiVsRent: tiVsRentTemplate,
+  tiPayback: tiPaybackTemplate,
+  rentRollChange: rentRollChangeTemplate,
+  taxReassessment: taxReassessmentTemplate,
 };
 
 export const allKinds: QuestionKind[] = [
@@ -64,4 +74,9 @@ export const allKinds: QuestionKind[] = [
   'cashOnCash',
   'breakEvenOccupancy',
   'leveredIrr',
+  'netEffectiveRent',
+  'tiVsRent',
+  'tiPayback',
+  'rentRollChange',
+  'taxReassessment',
 ];

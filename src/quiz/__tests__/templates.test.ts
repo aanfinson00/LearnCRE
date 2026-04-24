@@ -26,6 +26,13 @@ import {
   maxLoanByDebtYield,
   maxLoanByDscr,
 } from '../../math/debt';
+import {
+  netEffectiveRent,
+  requiredRentPremiumPerSf,
+  rentRollValueChange,
+  taxReassessmentValueImpact,
+  tiVsRentDelta,
+} from '../../math/lease';
 
 describe('quiz/templates', () => {
   it('every kind has a template', () => {
@@ -208,6 +215,66 @@ describe('quiz/templates', () => {
                 ltv: ctx.ltv!,
               }),
               10,
+            );
+            break;
+          }
+          case 'netEffectiveRent': {
+            expect(q.expected).toBeCloseTo(
+              netEffectiveRent({
+                grossRentPerSf: ctx.rentPerSf!,
+                leaseTermYears: ctx.leaseTermYears!,
+                tiPerSf: ctx.tiPerSf!,
+                freeMonths: ctx.freeMonths!,
+              }),
+              6,
+            );
+            break;
+          }
+          case 'tiVsRent': {
+            expect(q.expected).toBeCloseTo(
+              tiVsRentDelta({
+                rentA: ctx.altRentPerSf!,
+                tiA: ctx.altTiPerSf!,
+                rentB: ctx.rentPerSf!,
+                tiB: ctx.tiPerSf!,
+                leaseTermYears: ctx.leaseTermYears!,
+              }),
+              6,
+            );
+            break;
+          }
+          case 'tiPayback': {
+            expect(q.expected).toBeCloseTo(
+              requiredRentPremiumPerSf({
+                tiPerSf: ctx.tiPerSf!,
+                paybackYears: ctx.paybackYears!,
+              }),
+              6,
+            );
+            break;
+          }
+          case 'rentRollChange': {
+            expect(q.expected).toBeCloseTo(
+              rentRollValueChange({
+                oldRentPerSf: ctx.oldRentPerSf!,
+                newRentPerSf: ctx.newRentPerSf!,
+                subjectSf: ctx.buildingSf! * ctx.rolloverPct!,
+                vacancy: ctx.vacancyRate!,
+                capRate: ctx.capRate!,
+              }),
+              4,
+            );
+            break;
+          }
+          case 'taxReassessment': {
+            expect(q.expected).toBeCloseTo(
+              taxReassessmentValueImpact({
+                purchasePrice: ctx.purchasePrice!,
+                oldAnnualTax: ctx.oldAnnualTax!,
+                newTaxRate: ctx.newTaxRate!,
+                capRate: ctx.capRate!,
+              }),
+              4,
             );
             break;
           }

@@ -37,4 +37,16 @@ export interface DealInputs {
   pgiPerSf?: number;
   opexRatio?: number;
   pgi?: number;
+  rentPerSf?: number;
+  oldRentPerSf?: number;
+  newRentPerSf?: number;
+  tiPerSf?: number;
+  altTiPerSf?: number;
+  leaseTermYears?: number;
+  freeMonths?: number;
+  rolloverPct?: number;
+  paybackYears?: number;
+  altRentPerSf?: number;
+  oldAnnualTax?: number;
+  newTaxRate?: number;
 }

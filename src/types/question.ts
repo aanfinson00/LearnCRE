@@ -21,7 +21,12 @@ export type QuestionKind =
   | 'dscrLoanSizing'
   | 'cashOnCash'
   | 'breakEvenOccupancy'
-  | 'leveredIrr';
+  | 'leveredIrr'
+  | 'netEffectiveRent'
+  | 'tiVsRent'
+  | 'tiPayback'
+  | 'rentRollChange'
+  | 'taxReassessment';
 
 export type UnitFormat = 'usd' | 'pct' | 'bps' | 'pctChange' | 'usdChange' | 'multiple' | 'usdPerSf';
 

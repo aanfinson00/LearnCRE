@@ -84,6 +84,11 @@ export const bands = {
   ltv: { min: 0.4, max: 0.75, step: 0.05 },
   unleveredIrr: { min: 0.05, max: 0.12, step: 0.005 },
   pgiPerSf: { min: 15, max: 60, step: 0.5 },
+  leaseTermYears: { min: 3, max: 10 },
+  freeMonths: { min: 0, max: 6 },
+  paybackYears: { min: 2, max: 5 },
+  taxRate: { min: 0.008, max: 0.025, step: 0.00125 },
+  rentPerSfDelta: { min: 0.5, max: 5, step: 0.25 },
 } as const;
 
 export const discreteMoves = {
