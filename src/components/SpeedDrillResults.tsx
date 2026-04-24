@@ -36,8 +36,8 @@ export function SpeedDrillResults({ state, onRestart, onNewSetup }: Props) {
   return (
     <div className="mx-auto max-w-5xl space-y-5 py-8">
       <header className="space-y-1">
-        <h1 className="text-2xl font-semibold text-slate-900">Drill complete — {variant.name}</h1>
-        <p className="text-sm text-slate-500">
+        <h1 className="text-2xl font-semibold text-warm-black">Drill complete — {variant.name}</h1>
+        <p className="text-sm text-warm-stone">
           {attempted}/{totalCells} attempted · {skipped} skipped · Tolerance{' '}
           {formatPct(state.config.toleranceBand)}
         </p>
@@ -57,11 +57,11 @@ export function SpeedDrillResults({ state, onRestart, onNewSetup }: Props) {
         <table className="min-w-full table-fixed border-collapse font-mono text-xs num">
           <thead>
             <tr>
-              <th className="sticky left-0 z-10 bg-white px-2 py-1 text-left text-slate-500 text-[10px]">
+              <th className="sticky left-0 z-10 bg-warm-white px-2 py-1 text-left text-warm-stone text-[10px]">
                 {variant.rowAxis.label} ↓ / {variant.colAxis.label} →
               </th>
               {cols.map((c, i) => (
-                <th key={i} className="border-b px-2 py-1 text-slate-700">
+                <th key={i} className="border-b px-2 py-1 text-warm-ink">
                   {variant.colAxis.format(c)}
                 </th>
               ))}
@@ -70,7 +70,7 @@ export function SpeedDrillResults({ state, onRestart, onNewSetup }: Props) {
           <tbody>
             {rows.map((rowVal, r) => (
               <tr key={r}>
-                <th className="sticky left-0 z-10 border-r bg-white px-2 py-1 text-left text-slate-700">
+                <th className="sticky left-0 z-10 border-r bg-warm-white px-2 py-1 text-left text-warm-ink">
                   {variant.rowAxis.format(rowVal)}
                 </th>
                 {cols.map((colVal, c) => {
@@ -80,7 +80,7 @@ export function SpeedDrillResults({ state, onRestart, onNewSetup }: Props) {
                     return (
                       <td
                         key={c}
-                        className="h-12 border border-slate-200 px-2 text-center bg-slate-50 text-slate-400"
+                        className="h-12 border border-warm-line px-2 text-center bg-warm-paper/50 text-warm-mute"
                       >
                         —
                       </td>
@@ -88,14 +88,14 @@ export function SpeedDrillResults({ state, onRestart, onNewSetup }: Props) {
                   }
                   const result = state.results[cellKey(r, c)];
                   const trueVal = variant.computeCell(rowVal, colVal);
-                  let bg = 'bg-slate-50 text-slate-500';
+                  let bg = 'bg-warm-paper/50 text-warm-stone';
                   if (result) {
-                    if (result.skipped) bg = 'bg-slate-100 text-slate-400';
-                    else if (result.correct) bg = 'bg-emerald-100 text-emerald-800';
-                    else bg = 'bg-rose-100 text-rose-800';
+                    if (result.skipped) bg = 'bg-warm-paper text-warm-mute';
+                    else if (result.correct) bg = 'bg-signal-good/15 text-signal-good-ink';
+                    else bg = 'bg-signal-bad/15 text-signal-bad-ink';
                   }
                   return (
-                    <td key={c} className={`h-12 border border-slate-200 px-2 text-center ${bg}`}>
+                    <td key={c} className={`h-12 border border-warm-line px-2 text-center ${bg}`}>
                       <div className="leading-tight">
                         {result && !result.skipped && result.userInput !== null
                           ? formatCellUserInput(variant, result.userInput)
@@ -127,9 +127,9 @@ export function SpeedDrillResults({ state, onRestart, onNewSetup }: Props) {
 
 function Metric({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-lg bg-slate-50 p-3">
-      <div className="text-xs uppercase tracking-wide text-slate-500">{label}</div>
-      <div className="mt-1 font-mono text-xl num text-slate-900">{value}</div>
+    <div className="rounded-lg bg-warm-paper/50 p-3">
+      <div className="text-xs uppercase tracking-wide text-warm-stone">{label}</div>
+      <div className="mt-1 font-mono text-xl num text-warm-black">{value}</div>
     </div>
   );
 }

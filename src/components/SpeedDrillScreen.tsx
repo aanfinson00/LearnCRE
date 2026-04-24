@@ -22,13 +22,13 @@ function cellClass(
   currentCol: number | null,
   result: { correct: boolean; skipped: boolean } | undefined,
 ): string {
-  if (isDiagonal) return 'bg-slate-100 text-slate-400';
+  if (isDiagonal) return 'bg-warm-paper text-warm-mute';
   if (row === currentRow && col === currentCol)
-    return 'bg-amber-100 ring-2 ring-amber-500 text-slate-900 cursor-pointer';
-  if (!result) return 'bg-white text-slate-500 hover:bg-slate-50 cursor-pointer';
-  if (result.skipped) return 'bg-slate-50 text-slate-400 cursor-pointer';
-  if (result.correct) return 'bg-emerald-100 text-emerald-800 cursor-pointer';
-  return 'bg-rose-100 text-rose-800 cursor-pointer';
+    return 'bg-copper/20 ring-2 ring-copper text-warm-black cursor-pointer';
+  if (!result) return 'bg-warm-white text-warm-stone hover:bg-warm-paper/50 cursor-pointer';
+  if (result.skipped) return 'bg-warm-paper/50 text-warm-mute cursor-pointer';
+  if (result.correct) return 'bg-signal-good/15 text-signal-good-ink cursor-pointer';
+  return 'bg-signal-bad/15 text-signal-bad-ink cursor-pointer';
 }
 
 export function SpeedDrillScreen({ state, currentCell, onSelect, onSubmit, onFinish, onQuit }: Props) {
@@ -71,20 +71,20 @@ export function SpeedDrillScreen({ state, currentCell, onSelect, onSubmit, onFin
   return (
     <div className="mx-auto max-w-5xl space-y-5 py-6">
       <div className="flex items-center justify-between">
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-1 font-mono text-sm text-slate-600 num">
-          <span className="font-sans text-xs font-medium text-slate-900">{variant.name}</span>
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-1 font-mono text-sm text-warm-stone num">
+          <span className="font-sans text-xs font-medium text-warm-black">{variant.name}</span>
           <span>
-            <span className="text-slate-400">cell </span>
+            <span className="text-warm-mute">cell </span>
             {answered}/{totalCells}
           </span>
           <span>
-            <span className="text-slate-400">correct </span>
+            <span className="text-warm-mute">correct </span>
             {correct}
           </span>
           {remainingSec !== null && (
             <span
               className={`rounded px-2 py-0.5 ${
-                remainingSec <= 10 ? 'bg-rose-100 text-rose-800' : 'bg-slate-100 text-slate-700'
+                remainingSec <= 10 ? 'bg-signal-bad/15 text-signal-bad-ink' : 'bg-warm-paper text-warm-ink'
               }`}
             >
               {Math.floor(remainingSec / 60)}:{String(Math.floor(remainingSec % 60)).padStart(2, '0')}
@@ -105,11 +105,11 @@ export function SpeedDrillScreen({ state, currentCell, onSelect, onSubmit, onFin
         <table className="min-w-full table-fixed border-collapse font-mono text-xs num">
           <thead>
             <tr>
-              <th className="sticky left-0 z-10 bg-white px-2 py-1 text-left text-slate-500 text-[10px]">
+              <th className="sticky left-0 z-10 bg-warm-white px-2 py-1 text-left text-warm-stone text-[10px]">
                 {variant.rowAxis.label} ↓ / {variant.colAxis.label} →
               </th>
               {cols.map((c, i) => (
-                <th key={i} className="border-b px-2 py-1 text-slate-700">
+                <th key={i} className="border-b px-2 py-1 text-warm-ink">
                   {variant.colAxis.format(c)}
                 </th>
               ))}
@@ -118,7 +118,7 @@ export function SpeedDrillScreen({ state, currentCell, onSelect, onSubmit, onFin
           <tbody>
             {rows.map((rowVal, r) => (
               <tr key={r}>
-                <th className="sticky left-0 z-10 border-r bg-white px-2 py-1 text-left text-slate-700">
+                <th className="sticky left-0 z-10 border-r bg-warm-white px-2 py-1 text-left text-warm-ink">
                   {variant.rowAxis.format(rowVal)}
                 </th>
                 {cols.map((colVal, c) => {
@@ -151,7 +151,7 @@ export function SpeedDrillScreen({ state, currentCell, onSelect, onSubmit, onFin
                       onClick={() => {
                         if (!isDiagonal && state.status === 'active') onSelect(r, c);
                       }}
-                      className={`h-10 border border-slate-200 px-2 text-center ${classes}`}
+                      className={`h-10 border border-warm-line px-2 text-center ${classes}`}
                     >
                       {display}
                       {colVal === undefined ? null : null}
@@ -167,17 +167,17 @@ export function SpeedDrillScreen({ state, currentCell, onSelect, onSubmit, onFin
       {currentCell && state.status === 'active' && (
         <Card className="space-y-3">
           <div className="flex items-baseline justify-between">
-            <div className="text-slate-700">
+            <div className="text-warm-ink">
               <span className="font-mono num">{variant.rowAxis.format(currentCell.rowVal)}</span>
-              <span className="mx-2 text-slate-400">×</span>
+              <span className="mx-2 text-warm-mute">×</span>
               <span className="font-mono num">{variant.colAxis.format(currentCell.colVal)}</span>
-              <span className="ml-3 text-sm text-slate-500">{variant.formulaLabel}</span>
+              <span className="ml-3 text-sm text-warm-stone">{variant.formulaLabel}</span>
             </div>
-            <div className="font-mono text-xs text-slate-400 num">
+            <div className="font-mono text-xs text-warm-mute num">
               ±{(state.config.toleranceBand * 100).toFixed(0)}%
             </div>
           </div>
-          <div className="flex items-stretch rounded-lg border-2 border-slate-300 bg-white focus-within:border-slate-900">
+          <div className="flex items-stretch rounded-lg border-2 border-warm-line bg-warm-white focus-within:border-warm-black">
             <input
               ref={inputRef}
               type="text"
@@ -191,7 +191,7 @@ export function SpeedDrillScreen({ state, currentCell, onSelect, onSubmit, onFin
                 }
               }}
               placeholder={variant.inputHint ?? ''}
-              className="flex-1 bg-transparent px-3 py-2.5 font-mono outline-none num placeholder:text-slate-400"
+              className="flex-1 bg-transparent px-3 py-2.5 font-mono outline-none num placeholder:text-warm-mute"
             />
           </div>
           <div className="flex items-center justify-between">
@@ -199,7 +199,7 @@ export function SpeedDrillScreen({ state, currentCell, onSelect, onSubmit, onFin
               Skip (S)
             </Button>
             <Button onClick={submit} disabled={parseCellInput(variant, raw) === null}>
-              Submit <span className="ml-2 text-slate-400">↵</span>
+              Submit <span className="ml-2 text-warm-mute">↵</span>
             </Button>
           </div>
         </Card>

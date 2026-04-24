@@ -12,14 +12,14 @@ export function QuestionCard({ question }: Props) {
   return (
     <div className="space-y-3">
       <div className="flex flex-wrap items-center gap-2">
-        <span className="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-700">
+        <span className="inline-flex items-center rounded-full bg-warm-paper px-2.5 py-0.5 text-xs font-medium text-warm-ink">
           {template.label}
         </span>
         <span
           className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
             template.category === 'valuation'
-              ? 'bg-sky-100 text-sky-800'
-              : 'bg-violet-100 text-violet-800'
+              ? 'bg-copper-soft/30 text-copper-deep'
+              : 'bg-warm-paper text-warm-ink'
           }`}
         >
           {template.category}
@@ -27,13 +27,13 @@ export function QuestionCard({ question }: Props) {
         <button
           type="button"
           onClick={() => setShowPattern((v) => !v)}
-          className="inline-flex items-center rounded-full border border-slate-200 px-2.5 py-0.5 font-mono text-xs text-slate-600 hover:bg-slate-50"
+          className="inline-flex items-center rounded-full border border-warm-line px-2.5 py-0.5 font-mono text-xs text-warm-stone hover:bg-warm-paper/50"
           title="Toggle pattern hint"
         >
           {showPattern ? template.pattern : 'pattern ?'}
         </button>
       </div>
-      <p className="text-lg leading-relaxed text-slate-900">{question.prompt}</p>
+      <p className="text-lg leading-relaxed text-warm-black">{question.prompt}</p>
     </div>
   );
 }

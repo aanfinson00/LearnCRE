@@ -41,6 +41,22 @@ const DIFFICULTIES: { label: string; value: DifficultyMode; hint: string }[] = [
   },
 ];
 
+const chipBase =
+  'rounded-md border px-3 py-1.5 text-sm transition-all duration-aa ease-aa';
+const chipOn = 'border-warm-black bg-warm-black text-warm-white';
+const chipOff =
+  'border-warm-line bg-warm-white/70 text-warm-ink hover:border-copper hover:text-copper-deep';
+
+function ParcelMark({ accent = 4 }: { accent?: number }) {
+  return (
+    <div className="aa-parcel h-12 w-12">
+      {Array.from({ length: 9 }).map((_, i) => (
+        <div key={i} className={i === accent ? 'accent' : ''} />
+      ))}
+    </div>
+  );
+}
+
 export function SetupScreen({ onStart, onSwitchToSpeedDrill }: Props) {
   const stored = useMemo(() => loadConfig(), []);
   const [categories, setCategories] = useState<Set<QuestionKind>>(
@@ -89,45 +105,55 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill }: Props) {
   };
 
   return (
-    <div className="mx-auto max-w-3xl space-y-6 py-8">
-      <header className="space-y-2">
-        <h1 className="text-3xl font-semibold text-slate-900">LearnCRE</h1>
-        <p className="text-slate-600">
-          Drill your intuition on how CRE underwriting assumptions move valuations and returns.
-        </p>
+    <div className="mx-auto max-w-3xl space-y-8 py-12">
+      <header className="flex items-start justify-between gap-6">
+        <div className="space-y-3">
+          <h1 className="display text-5xl text-warm-black">
+            LearnCRE<span className="text-copper">.</span>
+          </h1>
+          <p className="editorial text-xl text-warm-stone">
+            Drill your intuition on how small changes in rent, cap rate, and capital
+            structure move valuations.
+          </p>
+        </div>
+        <ParcelMark />
       </header>
 
       {onSwitchToSpeedDrill && (
         <div className="flex items-center gap-2">
-          <span className="rounded-md bg-slate-900 px-3 py-1.5 text-xs font-medium text-white">Quiz</span>
+          <span className="rounded-md bg-warm-black px-3 py-1.5 text-xs font-medium text-warm-white">
+            Quiz
+          </span>
           <button
             type="button"
             onClick={onSwitchToSpeedDrill}
-            className="rounded-md border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-slate-500"
+            className="rounded-md border border-warm-line bg-warm-white/70 px-3 py-1.5 text-xs font-medium text-warm-ink transition-all duration-aa ease-aa hover:border-copper hover:text-copper-deep"
           >
-            Cap Rate Speed Drill →
+            Times-table speed drill →
           </button>
         </div>
       )}
 
-      <Card className="space-y-5">
+      <Card className="space-y-6">
         <div>
-          <div className="mb-2 flex items-center justify-between">
-            <h2 className="font-medium text-slate-900">Categories</h2>
+          <div className="mb-3 flex items-center justify-between">
+            <h2 className="text-sm font-medium uppercase tracking-widest text-warm-stone">
+              Categories
+            </h2>
             <div className="flex gap-1 text-xs">
-              <button className="text-slate-500 hover:text-slate-900 underline decoration-dotted" onClick={selectAll}>
+              <button className="text-warm-mute transition-colors duration-aa-fast ease-aa hover:text-copper" onClick={selectAll}>
                 All
               </button>
-              <span className="text-slate-300">·</span>
-              <button className="text-slate-500 hover:text-slate-900 underline decoration-dotted" onClick={selectValuation}>
+              <span className="text-warm-line">·</span>
+              <button className="text-warm-mute transition-colors duration-aa-fast ease-aa hover:text-copper" onClick={selectValuation}>
                 Valuation
               </button>
-              <span className="text-slate-300">·</span>
-              <button className="text-slate-500 hover:text-slate-900 underline decoration-dotted" onClick={selectReturns}>
+              <span className="text-warm-line">·</span>
+              <button className="text-warm-mute transition-colors duration-aa-fast ease-aa hover:text-copper" onClick={selectReturns}>
                 Returns
               </button>
-              <span className="text-slate-300">·</span>
-              <button className="text-slate-500 hover:text-slate-900 underline decoration-dotted" onClick={selectNone}>
+              <span className="text-warm-line">·</span>
+              <button className="text-warm-mute transition-colors duration-aa-fast ease-aa hover:text-copper" onClick={selectNone}>
                 None
               </button>
             </div>
@@ -144,22 +170,24 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill }: Props) {
               return (
                 <label
                   key={kind}
-                  className={`flex cursor-pointer items-start gap-3 rounded-lg border p-3 ${
-                    on ? 'border-slate-900 bg-slate-50' : 'border-slate-200 bg-white hover:border-slate-400'
+                  className={`flex cursor-pointer items-start gap-3 rounded-lg border p-3 transition-all duration-aa ease-aa ${
+                    on
+                      ? 'border-copper bg-copper/5'
+                      : 'border-warm-line bg-warm-white/50 hover:border-copper hover:bg-copper/5'
                   }`}
                 >
                   <input
                     type="checkbox"
                     checked={on}
                     onChange={() => toggle(kind)}
-                    className="mt-1 h-4 w-4 rounded border-slate-400 text-slate-900 focus:ring-slate-600"
+                    className="mt-1 h-4 w-4 rounded border-warm-line accent-copper"
                   />
                   <div className="flex-1 text-sm">
-                    <div className="font-medium text-slate-900">
+                    <div className="font-medium text-warm-black">
                       {t.label}
-                      <span className="text-xs font-normal text-slate-400">{accText}</span>
+                      <span className="text-xs font-normal text-warm-mute">{accText}</span>
                     </div>
-                    <div className="text-slate-500">{t.description}</div>
+                    <div className="text-warm-stone">{t.description}</div>
                   </div>
                 </label>
               );
@@ -168,22 +196,24 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill }: Props) {
         </div>
 
         <div>
-          <h2 className="mb-2 font-medium text-slate-900">Difficulty</h2>
+          <h2 className="mb-3 text-sm font-medium uppercase tracking-widest text-warm-stone">
+            Difficulty
+          </h2>
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4">
             {DIFFICULTIES.map((d) => (
               <button
                 key={d.value}
                 type="button"
                 onClick={() => setDifficulty(d.value)}
-                className={`rounded-lg border p-3 text-left ${
+                className={`rounded-lg border p-3 text-left transition-all duration-aa ease-aa ${
                   difficulty === d.value
-                    ? 'border-slate-900 bg-slate-900 text-white'
-                    : 'border-slate-300 bg-white text-slate-700 hover:border-slate-500'
+                    ? 'border-warm-black bg-warm-black text-warm-white'
+                    : 'border-warm-line bg-warm-white/50 text-warm-ink hover:border-copper hover:text-copper-deep'
                 }`}
               >
-                <div className="font-medium text-sm">{d.label}</div>
+                <div className="text-sm font-medium">{d.label}</div>
                 <div
-                  className={`mt-0.5 text-xs ${difficulty === d.value ? 'text-slate-300' : 'text-slate-500'}`}
+                  className={`mt-0.5 text-xs ${difficulty === d.value ? 'text-warm-paper/70' : 'text-warm-mute'}`}
                 >
                   {d.hint}
                 </div>
@@ -194,18 +224,16 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill }: Props) {
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
           <div>
-            <h2 className="mb-2 font-medium text-slate-900">Length</h2>
+            <h2 className="mb-2 text-sm font-medium uppercase tracking-widest text-warm-stone">
+              Length
+            </h2>
             <div className="flex flex-wrap gap-2">
               {LENGTHS.map((l) => (
                 <button
                   key={l.label}
                   type="button"
                   onClick={() => setPlannedCount(l.value)}
-                  className={`rounded-md border px-3 py-1.5 text-sm ${
-                    plannedCount === l.value
-                      ? 'border-slate-900 bg-slate-900 text-white'
-                      : 'border-slate-300 bg-white text-slate-700 hover:border-slate-500'
-                  }`}
+                  className={`${chipBase} ${plannedCount === l.value ? chipOn : chipOff}`}
                 >
                   {l.label}
                 </button>
@@ -214,68 +242,64 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill }: Props) {
           </div>
 
           <div>
-            <h2 className="mb-2 font-medium text-slate-900">Answer mode</h2>
+            <h2 className="mb-2 text-sm font-medium uppercase tracking-widest text-warm-stone">
+              Answer mode
+            </h2>
             <div className="flex flex-wrap gap-2">
               {MODES.map((m) => (
                 <button
                   key={m.value}
                   type="button"
                   onClick={() => setMode(m.value)}
-                  className={`rounded-md border px-3 py-1.5 text-sm ${
-                    mode === m.value
-                      ? 'border-slate-900 bg-slate-900 text-white'
-                      : 'border-slate-300 bg-white text-slate-700 hover:border-slate-500'
-                  }`}
+                  className={`${chipBase} ${mode === m.value ? chipOn : chipOff}`}
                 >
                   {m.label}
                 </button>
               ))}
             </div>
-            <div className="mt-1.5 text-xs text-slate-500">
+            <div className="mt-1.5 text-xs text-warm-mute">
               {MODES.find((m) => m.value === mode)?.hint}
             </div>
           </div>
 
           <div>
-            <h2 className="mb-2 font-medium text-slate-900">Tolerance</h2>
+            <h2 className="mb-2 text-sm font-medium uppercase tracking-widest text-warm-stone">
+              Tolerance
+            </h2>
             <div className="flex flex-wrap gap-2">
               {TOLERANCES.map((t) => (
                 <button
                   key={t.value}
                   type="button"
                   onClick={() => setTolerance(t.value)}
-                  className={`rounded-md border px-3 py-1.5 text-sm ${
-                    tolerance === t.value
-                      ? 'border-slate-900 bg-slate-900 text-white'
-                      : 'border-slate-300 bg-white text-slate-700 hover:border-slate-500'
-                  }`}
+                  className={`${chipBase} ${tolerance === t.value ? chipOn : chipOff}`}
                 >
                   {t.label}
                 </button>
               ))}
             </div>
-            <div className="mt-1.5 text-xs text-slate-500">
+            <div className="mt-1.5 text-xs text-warm-mute">
               {TOLERANCES.find((t) => t.value === tolerance)?.hint}
               {mode === 'mc' ? ' (disabled in MC mode)' : ''}
             </div>
           </div>
         </div>
 
-        <div className="flex items-center justify-between pt-2">
-          <div className="text-sm text-slate-500">
+        <div className="flex items-center justify-between border-t border-warm-line pt-5">
+          <div className="text-sm text-warm-stone">
             {lifetime && lifetime.attempts > 0
               ? `Lifetime: ${lifetime.correct}/${lifetime.attempts} (${Math.round((lifetime.correct / lifetime.attempts) * 100)}%)`
               : 'No history yet — start drilling.'}
           </div>
           <Button disabled={!canStart} onClick={start}>
-            Start <span className="ml-2 text-slate-400">↵</span>
+            Start <span className="ml-2 text-warm-paper/60">↵</span>
           </Button>
         </div>
       </Card>
 
       <AnchorsCard />
 
-      <footer className="text-center text-xs text-slate-400">
+      <footer className="text-center text-xs text-warm-mute">
         Enter submits. S skips. 1–4 picks MC choices.
       </footer>
     </div>

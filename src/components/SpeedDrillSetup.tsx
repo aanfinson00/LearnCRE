@@ -66,8 +66,8 @@ export function SpeedDrillSetup({ onStart, onBack }: Props) {
   return (
     <div className="mx-auto max-w-3xl space-y-6 py-8">
       <header className="space-y-1">
-        <h1 className="text-2xl font-semibold text-slate-900">Times Table Speed Drill</h1>
-        <p className="text-sm text-slate-600">
+        <h1 className="text-2xl font-semibold text-warm-black">Times Table Speed Drill</h1>
+        <p className="text-sm text-warm-stone">
           Pick a 2D metric. Shuffle the axes to defeat pattern-spotting. Click any cell to tackle it, or
           let the drill step through automatically.
         </p>
@@ -75,7 +75,7 @@ export function SpeedDrillSetup({ onStart, onBack }: Props) {
 
       <Card className="space-y-5">
         <div>
-          <h2 className="mb-2 font-medium text-slate-900">Drill</h2>
+          <h2 className="mb-2 font-medium text-warm-black">Drill</h2>
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
             {variantOrder.map((id) => {
               const v = variants[id];
@@ -86,13 +86,13 @@ export function SpeedDrillSetup({ onStart, onBack }: Props) {
                   onClick={() => setVariantId(id)}
                   className={`rounded-lg border p-3 text-left ${
                     variantId === id
-                      ? 'border-slate-900 bg-slate-900 text-white'
-                      : 'border-slate-300 bg-white text-slate-700 hover:border-slate-500'
+                      ? 'border-warm-black bg-warm-black text-white'
+                      : 'border-warm-line bg-warm-white text-warm-ink hover:border-warm-stone'
                   }`}
                 >
                   <div className="text-sm font-medium">{v.name}</div>
                   <div
-                    className={`mt-0.5 text-xs ${variantId === id ? 'text-slate-300' : 'text-slate-500'}`}
+                    className={`mt-0.5 text-xs ${variantId === id ? 'text-warm-line' : 'text-warm-stone'}`}
                   >
                     {v.description}
                   </div>
@@ -100,28 +100,28 @@ export function SpeedDrillSetup({ onStart, onBack }: Props) {
               );
             })}
           </div>
-          <div className="mt-2 font-mono text-xs text-slate-500 num">
+          <div className="mt-2 font-mono text-xs text-warm-stone num">
             {variant.rowAxis.label}: {previewAxes.rowVals.map(variant.rowAxis.format).join(' · ')}
           </div>
-          <div className="font-mono text-xs text-slate-500 num">
+          <div className="font-mono text-xs text-warm-stone num">
             {variant.colAxis.label}: {previewAxes.colVals.map(variant.colAxis.format).join(' · ')}
           </div>
-          <div className="mt-1 text-xs text-slate-500">
+          <div className="mt-1 text-xs text-warm-stone">
             {nonDiagonalCells} cells · ±{(variant.toleranceBand * 100).toFixed(0)}% tolerance
           </div>
         </div>
 
         <div>
-          <label className="flex cursor-pointer items-center gap-3 rounded-md border border-slate-200 bg-white p-3 text-sm">
+          <label className="flex cursor-pointer items-center gap-3 rounded-md border border-warm-line bg-warm-white p-3 text-sm">
             <input
               type="checkbox"
               checked={shuffleAxes}
               onChange={(e) => setShuffleAxes(e.target.checked)}
-              className="h-4 w-4 rounded border-slate-400"
+              className="h-4 w-4 rounded border-warm-line"
             />
             <div className="flex-1">
-              <div className="font-medium text-slate-900">Shuffle row & column order</div>
-              <div className="text-xs text-slate-500">
+              <div className="font-medium text-warm-black">Shuffle row & column order</div>
+              <div className="text-xs text-warm-stone">
                 Otherwise a sorted grid lets you derive the answers from the pattern.
               </div>
             </div>
@@ -129,16 +129,16 @@ export function SpeedDrillSetup({ onStart, onBack }: Props) {
         </div>
 
         <div>
-          <label className="flex cursor-pointer items-center gap-3 rounded-md border border-slate-200 bg-white p-3 text-sm">
+          <label className="flex cursor-pointer items-center gap-3 rounded-md border border-warm-line bg-warm-white p-3 text-sm">
             <input
               type="checkbox"
               checked={manualNav}
               onChange={(e) => setManualNav(e.target.checked)}
-              className="h-4 w-4 rounded border-slate-400"
+              className="h-4 w-4 rounded border-warm-line"
             />
             <div className="flex-1">
-              <div className="font-medium text-slate-900">Manual cell navigation</div>
-              <div className="text-xs text-slate-500">
+              <div className="font-medium text-warm-black">Manual cell navigation</div>
+              <div className="text-xs text-warm-stone">
                 Click any cell to answer it — no forced order. Disables Row/Col/Random stepping.
               </div>
             </div>
@@ -147,7 +147,7 @@ export function SpeedDrillSetup({ onStart, onBack }: Props) {
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <div>
-            <h2 className="mb-2 font-medium text-slate-900">Time budget</h2>
+            <h2 className="mb-2 font-medium text-warm-black">Time budget</h2>
             <div className="flex flex-wrap gap-2">
               {TIME_BUDGETS.map((t) => (
                 <button
@@ -156,8 +156,8 @@ export function SpeedDrillSetup({ onStart, onBack }: Props) {
                   onClick={() => setTime(t.value)}
                   className={`rounded-md border px-3 py-1.5 text-sm ${
                     time === t.value
-                      ? 'border-slate-900 bg-slate-900 text-white'
-                      : 'border-slate-300 bg-white text-slate-700 hover:border-slate-500'
+                      ? 'border-warm-black bg-warm-black text-white'
+                      : 'border-warm-line bg-warm-white text-warm-ink hover:border-warm-stone'
                   }`}
                 >
                   {t.label}
@@ -167,7 +167,7 @@ export function SpeedDrillSetup({ onStart, onBack }: Props) {
           </div>
 
           <div>
-            <h2 className="mb-2 font-medium text-slate-900">Auto-step order</h2>
+            <h2 className="mb-2 font-medium text-warm-black">Auto-step order</h2>
             <div className="flex flex-wrap gap-2">
               {ORDERS.map((o) => (
                 <button
@@ -177,17 +177,17 @@ export function SpeedDrillSetup({ onStart, onBack }: Props) {
                   onClick={() => setOrder(o.value)}
                   className={`rounded-md border px-3 py-1.5 text-sm transition ${
                     manualNav
-                      ? 'cursor-not-allowed border-slate-200 bg-slate-50 text-slate-400'
+                      ? 'cursor-not-allowed border-warm-line bg-warm-paper/50 text-warm-mute'
                       : order === o.value
-                        ? 'border-slate-900 bg-slate-900 text-white'
-                        : 'border-slate-300 bg-white text-slate-700 hover:border-slate-500'
+                        ? 'border-warm-black bg-warm-black text-white'
+                        : 'border-warm-line bg-warm-white text-warm-ink hover:border-warm-stone'
                   }`}
                 >
                   {o.label}
                 </button>
               ))}
             </div>
-            <div className="mt-1 text-xs text-slate-500">
+            <div className="mt-1 text-xs text-warm-stone">
               {manualNav
                 ? 'Disabled — manual nav on.'
                 : ORDERS.find((o) => o.value === order)?.hint}
@@ -200,12 +200,12 @@ export function SpeedDrillSetup({ onStart, onBack }: Props) {
             Back to quiz setup
           </Button>
           <Button onClick={start}>
-            Start drill <span className="ml-2 text-slate-400">↵</span>
+            Start drill <span className="ml-2 text-warm-mute">↵</span>
           </Button>
         </div>
       </Card>
 
-      <div className="text-center text-xs text-slate-400">
+      <div className="text-center text-xs text-warm-mute">
         Enter to submit · S to skip · click any cell to jump to it
       </div>
     </div>

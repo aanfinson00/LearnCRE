@@ -31,7 +31,7 @@ export function ResultsScreen({
     <div className="mx-auto max-w-3xl space-y-6 py-8">
       <header className="space-y-1">
         <h1 className="text-2xl font-semibold">Session complete</h1>
-        <p className="text-sm text-slate-500">
+        <p className="text-sm text-warm-stone">
           {stats.total} answered · {config.mode === 'free' ? 'free-form' : 'multiple choice'} ·{' '}
           {config.tolerancePreset} tolerance · {config.difficulty}
         </p>
@@ -60,14 +60,14 @@ export function ResultsScreen({
             return (
               <div key={kind} className="space-y-1">
                 <div className="flex items-baseline justify-between text-sm">
-                  <span className="text-slate-700">{templates[kind].label}</span>
-                  <span className="font-mono text-slate-500 num">
+                  <span className="text-warm-ink">{templates[kind].label}</span>
+                  <span className="font-mono text-warm-stone num">
                     {total === 0 ? '—' : `${correct}/${total} · ${Math.round(pct * 100)}%`}
                   </span>
                 </div>
-                <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100">
+                <div className="h-2 w-full overflow-hidden rounded-full bg-warm-paper">
                   <div
-                    className="h-full rounded-full bg-emerald-500 transition-all"
+                    className="h-full rounded-full bg-signal-good transition-all duration-aa ease-aa"
                     style={{ width: `${pct * 100}%` }}
                   />
                 </div>
@@ -104,9 +104,9 @@ export function ResultsScreen({
 
 function Metric({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-lg bg-slate-50 p-3">
-      <div className="text-xs uppercase tracking-wide text-slate-500">{label}</div>
-      <div className="mt-1 font-mono text-xl num text-slate-900">{value}</div>
+    <div className="rounded-lg bg-warm-paper/50 p-3">
+      <div className="text-xs uppercase tracking-wide text-warm-stone">{label}</div>
+      <div className="mt-1 font-mono text-xl num text-warm-black">{value}</div>
     </div>
   );
 }

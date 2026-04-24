@@ -66,9 +66,9 @@ export const AnswerInput = forwardRef<AnswerInputHandle, Props>(function AnswerI
   }, []);
 
   return (
-    <div className="flex items-stretch rounded-lg border-2 border-slate-300 bg-white focus-within:border-slate-900">
+    <div className="flex items-stretch rounded-lg border border-warm-line bg-warm-white/80 transition-colors duration-aa ease-aa focus-within:border-copper focus-within:shadow-aa-inset">
       {prefix && (
-        <div className="flex items-center px-3 text-slate-500 font-mono">{prefix}</div>
+        <div className="flex items-center px-3 text-warm-mute font-mono">{prefix}</div>
       )}
       <input
         ref={inputRef}
@@ -84,10 +84,10 @@ export const AnswerInput = forwardRef<AnswerInputHandle, Props>(function AnswerI
             onSubmit();
           }
         }}
-        className="flex-1 bg-transparent px-3 py-3 text-lg font-mono outline-none num placeholder:text-slate-400 disabled:text-slate-500"
+        className="flex-1 bg-transparent px-3 py-3 text-lg font-mono outline-none num placeholder:text-warm-mute/70 disabled:text-warm-mute"
       />
       {suffix && (
-        <div className="flex items-center px-3 text-slate-500 font-mono">{suffix}</div>
+        <div className="flex items-center px-3 text-warm-mute font-mono">{suffix}</div>
       )}
     </div>
   );
