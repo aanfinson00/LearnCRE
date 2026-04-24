@@ -10,6 +10,7 @@ import { loadConfig, loadLifetime, saveConfig } from '../storage/localStorage';
 interface Props {
   onStart: (config: SessionConfig) => void;
   onSwitchToSpeedDrill?: () => void;
+  onSwitchToStudy?: () => void;
 }
 
 const LENGTHS: { label: string; value: number | null }[] = [
@@ -57,7 +58,7 @@ function ParcelMark({ accent = 4 }: { accent?: number }) {
   );
 }
 
-export function SetupScreen({ onStart, onSwitchToSpeedDrill }: Props) {
+export function SetupScreen({ onStart, onSwitchToSpeedDrill, onSwitchToStudy }: Props) {
   const stored = useMemo(() => loadConfig(), []);
   const [categories, setCategories] = useState<Set<QuestionKind>>(
     new Set(stored?.categories ?? allKinds),
@@ -119,18 +120,29 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill }: Props) {
         <ParcelMark />
       </header>
 
-      {onSwitchToSpeedDrill && (
-        <div className="flex items-center gap-2">
+      {(onSwitchToSpeedDrill || onSwitchToStudy) && (
+        <div className="flex flex-wrap items-center gap-2">
           <span className="rounded-md bg-warm-black px-3 py-1.5 text-xs font-medium text-warm-white">
             Quiz
           </span>
-          <button
-            type="button"
-            onClick={onSwitchToSpeedDrill}
-            className="rounded-md border border-warm-line bg-warm-white/70 px-3 py-1.5 text-xs font-medium text-warm-ink transition-all duration-aa ease-aa hover:border-copper hover:text-copper-deep"
-          >
-            Times-table speed drill →
-          </button>
+          {onSwitchToSpeedDrill && (
+            <button
+              type="button"
+              onClick={onSwitchToSpeedDrill}
+              className="rounded-md border border-warm-line bg-warm-white/70 px-3 py-1.5 text-xs font-medium text-warm-ink transition-all duration-aa ease-aa hover:border-copper hover:text-copper-deep"
+            >
+              Times-table speed drill →
+            </button>
+          )}
+          {onSwitchToStudy && (
+            <button
+              type="button"
+              onClick={onSwitchToStudy}
+              className="rounded-md border border-warm-line bg-warm-white/70 px-3 py-1.5 text-xs font-medium text-warm-ink transition-all duration-aa ease-aa hover:border-copper hover:text-copper-deep"
+            >
+              Study tables →
+            </button>
+          )}
         </div>
       )}
 
