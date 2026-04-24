@@ -18,6 +18,14 @@ import {
   replacementCost,
   yieldOnCost,
 } from '../../math/basis';
+import {
+  annualDebtService,
+  breakEvenOccupancy,
+  cashOnCash,
+  leveredIrrApprox,
+  maxLoanByDebtYield,
+  maxLoanByDscr,
+} from '../../math/debt';
 
 describe('quiz/templates', () => {
   it('every kind has a template', () => {
@@ -151,6 +159,55 @@ describe('quiz/templates', () => {
             expect(q.expected).toBeCloseTo(
               replacementCost(ctx.replacementCostPerSf!, ctx.buildingSf!),
               6,
+            );
+            break;
+          }
+          case 'debtYield': {
+            expect(q.expected).toBeCloseTo(
+              maxLoanByDebtYield(ctx.noi!, ctx.debtYieldTarget!),
+              4,
+            );
+            break;
+          }
+          case 'dscrLoanSizing': {
+            expect(q.expected).toBeCloseTo(
+              maxLoanByDscr({
+                noi: ctx.noi!,
+                dscrTarget: ctx.dscrTarget!,
+                annualRate: ctx.interestRate!,
+                years: ctx.amortYears!,
+              }),
+              4,
+            );
+            break;
+          }
+          case 'cashOnCash': {
+            const ds = annualDebtService(ctx.loanAmount!, ctx.interestRate!, ctx.amortYears!);
+            expect(q.expected).toBeCloseTo(
+              cashOnCash({ noi: ctx.noi!, debtServiceAnnual: ds, equity: ctx.equityIn! }),
+              8,
+            );
+            break;
+          }
+          case 'breakEvenOccupancy': {
+            expect(q.expected).toBeCloseTo(
+              breakEvenOccupancy({
+                opex: ctx.opex!,
+                debtServiceAnnual: ctx.debtServiceAnnual!,
+                pgi: ctx.pgi!,
+              }),
+              10,
+            );
+            break;
+          }
+          case 'leveredIrr': {
+            expect(q.expected).toBeCloseTo(
+              leveredIrrApprox({
+                unleveredIrr: ctx.unleveredIrr!,
+                borrowRate: ctx.borrowRate!,
+                ltv: ctx.ltv!,
+              }),
+              10,
             );
             break;
           }

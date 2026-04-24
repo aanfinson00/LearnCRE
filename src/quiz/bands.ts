@@ -76,6 +76,14 @@ export const bands = {
   projectCost: { min: 10_000_000, max: 300_000_000, step: 1_000_000 },
   replacementCostPerSf: { min: 150, max: 500, step: 5 },
   yocDelta: { min: 0.015, max: 0.05, step: 0.0025 },
+  debtYieldTarget: { min: 0.08, max: 0.12, step: 0.0025 },
+  loanAmount: { min: 2_000_000, max: 100_000_000, step: 500_000 },
+  interestRate: { min: 0.04, max: 0.085, step: 0.0025 },
+  amortYears: { min: 20, max: 30 },
+  dscrTarget: { min: 1.15, max: 1.4, step: 0.05 },
+  ltv: { min: 0.4, max: 0.75, step: 0.05 },
+  unleveredIrr: { min: 0.05, max: 0.12, step: 0.005 },
+  pgiPerSf: { min: 15, max: 60, step: 0.5 },
 } as const;
 
 export const discreteMoves = {

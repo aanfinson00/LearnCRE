@@ -25,4 +25,16 @@ export interface DealInputs {
   replacementCostPerSf?: number;
   marketCapRate?: number;
   stabilizedNoi?: number;
+  loanAmount?: number;
+  debtYieldTarget?: number;
+  dscrTarget?: number;
+  interestRate?: number;
+  amortYears?: number;
+  debtServiceAnnual?: number;
+  ltv?: number;
+  unleveredIrr?: number;
+  borrowRate?: number;
+  pgiPerSf?: number;
+  opexRatio?: number;
+  pgi?: number;
 }

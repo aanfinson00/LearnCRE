@@ -16,7 +16,12 @@ export type QuestionKind =
   | 'allInBasis'
   | 'yieldOnCost'
   | 'devSpread'
-  | 'replacementCost';
+  | 'replacementCost'
+  | 'debtYield'
+  | 'dscrLoanSizing'
+  | 'cashOnCash'
+  | 'breakEvenOccupancy'
+  | 'leveredIrr';
 
 export type UnitFormat = 'usd' | 'pct' | 'bps' | 'pctChange' | 'usdChange' | 'multiple' | 'usdPerSf';
 
