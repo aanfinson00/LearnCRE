@@ -2,6 +2,7 @@ import { effectiveRentCostPerSf, tiVsRentDelta } from '../../math/lease';
 import { formatUsdPerSf, formatUsdSigned, formatYears } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
 import { bands, pickBand } from '../bands';
+import { classBand } from '../assetClasses';
 import { nextId } from '../random';
 
 function buildSolution(params: {
@@ -49,9 +50,9 @@ export const tiVsRentTemplate: QuestionTemplate<'tiVsRent'> = {
     'Positive answer = Option A is more expensive per SF/yr; negative = Option B is more expensive.',
     'Shortcut in negotiation: offer $1/SF more rent in exchange for $n × lease years of TI — tenant neutral.',
   ],
-  generate(rng, difficulty = 'intermediate') {
+  generate(rng, difficulty = 'intermediate', assetClass = 'mixed') {
     const years = rng.pickInt(bands.leaseTermYears.min, bands.leaseTermYears.max);
-    const rentA = pickBand(rng, bands.rentPerSf, difficulty);
+    const rentA = pickBand(rng, classBand('rentPerSf', assetClass), difficulty);
     const rentB =
       rentA -
       pickBand(rng, { min: 1, max: Math.min(5, rentA * 0.3), step: 0.25 }, difficulty);

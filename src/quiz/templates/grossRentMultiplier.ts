@@ -30,7 +30,7 @@ export const grossRentMultiplierTemplate: QuestionTemplate<'grossRentMultiplier'
     'GRM ignores OpEx, so it\'s most useful when opex structure is consistent across comps.',
     'Trap: high-OpEx assets look cheap by GRM but expensive by cap. Always cross-check.',
   ],
-  generate(rng, difficulty = 'intermediate') {
+  generate(rng, difficulty = 'intermediate', _assetClass = 'mixed') {
     const pgi = pickBand(rng, bands.gpr, difficulty);
     const targetGrm = pickBand(rng, { min: 7, max: 15, step: 0.5 }, difficulty);
     const priceStep = difficulty === 'beginner' ? 500_000 : difficulty === 'advanced' ? 25_000 : 100_000;

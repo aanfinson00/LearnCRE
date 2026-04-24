@@ -2,6 +2,7 @@ import { taxReassessmentValueImpact } from '../../math/lease';
 import { formatPct, formatUsd, formatUsdSigned } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
 import { bands, pickBand } from '../bands';
+import { classBand } from '../assetClasses';
 import { nextId } from '../random';
 
 function buildSolution(params: {
@@ -53,12 +54,12 @@ export const taxReassessmentTemplate: QuestionTemplate<'taxReassessment'> = {
     'High-tax states (CA, NY, NJ, TX) can reassess 5–15% of purchase price in effective tax — model carefully.',
     'Some jurisdictions reassess only on sale (Prop 13). Others reassess periodically regardless of sale.',
   ],
-  generate(rng, difficulty = 'intermediate') {
+  generate(rng, difficulty = 'intermediate', assetClass = 'mixed') {
     const price = pickBand(rng, bands.purchasePrice, difficulty);
     const oldTaxRate = pickBand(rng, { min: 0.004, max: 0.015, step: 0.0005 }, difficulty);
     const oldTax = Math.round((price * oldTaxRate) / 10_000) * 10_000;
     const newRate = pickBand(rng, bands.taxRate, difficulty);
-    const cap = pickBand(rng, bands.capRate, difficulty);
+    const cap = pickBand(rng, classBand('capRate', assetClass), difficulty);
     const expected = taxReassessmentValueImpact({
       purchasePrice: price,
       oldAnnualTax: oldTax,

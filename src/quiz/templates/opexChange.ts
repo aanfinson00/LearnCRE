@@ -1,7 +1,8 @@
 import { opexValueDelta } from '../../math/sensitivity';
 import { formatPct, formatUsd, formatUsdSigned } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
-import { bands, discreteMoves, pickBand } from '../bands';
+import { discreteMoves, pickBand } from '../bands';
+import { classBand } from '../assetClasses';
 import { nextId } from '../random';
 
 function buildSolution(opexDelta: number, cap: number, valueDelta: number): Solution {
@@ -36,11 +37,11 @@ export const opexChangeTemplate: QuestionTemplate<'opexChange'> = {
     'An OpEx cut is the cheapest "yield play" in a deal — a $1 cut is worth 1/cap dollars of value.',
     'Be careful with "one-time" OpEx: if it\'s truly one-off it shouldn\'t get capped at all.',
   ],
-  generate(rng, difficulty = 'intermediate') {
+  generate(rng, difficulty = 'intermediate', assetClass = 'mixed') {
     const magnitude = rng.pickFromSet(discreteMoves.opexMoves);
     const direction = rng.pickFromSet([-1, 1] as const);
     const signed = magnitude * direction;
-    const cap = pickBand(rng, bands.capRate, difficulty);
+    const cap = pickBand(rng, classBand('capRate', assetClass), difficulty);
     const valueDelta = opexValueDelta({ opexDelta: signed, capRate: cap });
 
     const verb = direction > 0 ? 'increases' : 'decreases';

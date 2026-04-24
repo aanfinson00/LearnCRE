@@ -2,6 +2,7 @@ import { replacementCost } from '../../math/basis';
 import { formatSf, formatUsd, formatUsdPerSf } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
 import { bands, pickBand } from '../bands';
+import { classBand } from '../assetClasses';
 import { nextId } from '../random';
 
 function buildSolution(perSf: number, sf: number): Solution {
@@ -31,9 +32,9 @@ export const replacementCostTemplate: QuestionTemplate<'replacementCost'> = {
     'If basis is above replacement cost, you need real rent growth or a story to make the math work.',
     'Quick math: at $250/SF × 200k SF = $50M. At $300/SF × 200k SF = $60M.',
   ],
-  generate(rng, difficulty = 'intermediate') {
+  generate(rng, difficulty = 'intermediate', assetClass = 'mixed') {
     const perSf = pickBand(rng, bands.replacementCostPerSf, difficulty);
-    const sf = pickBand(rng, bands.sf, difficulty);
+    const sf = pickBand(rng, classBand('sf', assetClass), difficulty);
     const expected = replacementCost(perSf, sf);
 
     return {

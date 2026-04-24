@@ -6,16 +6,21 @@ import { ReviewScreen } from './components/ReviewScreen';
 import { SpeedDrillSetup } from './components/SpeedDrillSetup';
 import { SpeedDrillScreen } from './components/SpeedDrillScreen';
 import { SpeedDrillResults } from './components/SpeedDrillResults';
+import { StudyScreen } from './components/StudyScreen';
 import { useQuizSession } from './hooks/useQuizSession';
 import { useSpeedDrill } from './hooks/useSpeedDrill';
 
-type Mode = 'quiz' | 'speedDrill';
+type Mode = 'quiz' | 'speedDrill' | 'study';
 
 export default function App() {
   const [mode, setMode] = useState<Mode>('quiz');
   const { session, stats, start, submit, next, reset, endSession, enterReview, exitReview } =
     useQuizSession();
   const drill = useSpeedDrill();
+
+  if (mode === 'study') {
+    return <StudyScreen onBack={() => setMode('quiz')} />;
+  }
 
   if (mode === 'speedDrill') {
     if (drill.state.cells.length === 0) {
@@ -58,7 +63,13 @@ export default function App() {
   }
 
   if (session.status === 'setup') {
-    return <SetupScreen onStart={start} onSwitchToSpeedDrill={() => setMode('speedDrill')} />;
+    return (
+      <SetupScreen
+        onStart={start}
+        onSwitchToSpeedDrill={() => setMode('speedDrill')}
+        onSwitchToStudy={() => setMode('study')}
+      />
+    );
   }
 
   if (session.status === 'reviewing') {

@@ -1,7 +1,8 @@
 import { perUnit } from '../../math/growth';
 import { formatUsd } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
-import { bands, pickBand } from '../bands';
+import { pickBand } from '../bands';
+import { classBand } from '../assetClasses';
 import { nextId } from '../random';
 
 function buildSolution(gpr: number, units: number): Solution {
@@ -36,9 +37,9 @@ export const rentPerUnitTemplate: QuestionTemplate<'rentPerUnit'> = {
     'If rent/unit looks way below comps, there\'s mark-to-market upside. Above comps, risk of tenant loss.',
     'Shortcut: round units to nearest 10 and GPR to nearest $100k first.',
   ],
-  generate(rng, difficulty = 'intermediate') {
-    const units = pickBand(rng, bands.units, difficulty);
-    const targetAnnual = pickBand(rng, bands.rentPerUnitYear, difficulty);
+  generate(rng, difficulty = 'intermediate', assetClass = 'mixed') {
+    const units = pickBand(rng, classBand('units', assetClass), difficulty);
+    const targetAnnual = pickBand(rng, classBand('rentPerUnitYear', assetClass), difficulty);
     const gprStep = difficulty === 'beginner' ? 100_000 : difficulty === 'advanced' ? 5_000 : 25_000;
     const gpr = Math.round((units * targetAnnual) / gprStep) * gprStep;
     const expected = perUnit(gpr, units);

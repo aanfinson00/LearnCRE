@@ -42,7 +42,7 @@ export const leveredIrrTemplate: QuestionTemplate<'leveredIrr'> = {
     'If unlevered IRR > borrow rate, leverage is accretive. If unlevered < borrow, leverage destroys returns.',
     'Example: unlev 8%, borrow 5%, 60% LTV → 8% + 3% × 1.5 = 12.5%. Actual levered is usually within 100 bps of this estimate.',
   ],
-  generate(rng, difficulty = 'intermediate') {
+  generate(rng, difficulty = 'intermediate', _assetClass = 'mixed') {
     const unlev = pickBand(rng, bands.unleveredIrr, difficulty);
     const borrow = pickBand(rng, bands.interestRate, difficulty);
     const ltv = pickBand(rng, bands.ltv, difficulty);

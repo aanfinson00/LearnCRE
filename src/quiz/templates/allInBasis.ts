@@ -2,6 +2,7 @@ import { allInBasis, totalProjectCost } from '../../math/basis';
 import { formatPct, formatSf, formatUsd, formatUsdPerSf } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
 import { bands, pickBand } from '../bands';
+import { classBand } from '../assetClasses';
 import { nextId } from '../random';
 
 function buildSolution(
@@ -48,8 +49,8 @@ export const allInBasisTemplate: QuestionTemplate<'allInBasis'> = {
     'Value-add capex flows 1-for-1 into basis; it\'s equity you put in on day one.',
     'Quick check: if closing is 2% of price, round basis by adding ~2% to price, then adding capex, then dividing by SF.',
   ],
-  generate(rng, difficulty = 'intermediate') {
-    const sf = pickBand(rng, bands.sf, difficulty);
+  generate(rng, difficulty = 'intermediate', assetClass = 'mixed') {
+    const sf = pickBand(rng, classBand('sf', assetClass), difficulty);
     const psfTarget = pickBand(rng, { min: 150, max: 400, step: 5 }, difficulty);
     const priceStep = difficulty === 'beginner' ? 1_000_000 : difficulty === 'advanced' ? 50_000 : 250_000;
     const price = Math.round((sf * psfTarget) / priceStep) * priceStep;

@@ -24,6 +24,18 @@ export function pickBand(rng: Rng, band: Band, difficulty: Difficulty = 'interme
   return rng.pickRange(band.min, band.max, opts);
 }
 
+/**
+ * Resolve a band for an asset class. Returns the class override if present,
+ * otherwise the default band.
+ */
+export function resolveBand<K extends keyof typeof bands>(
+  key: K,
+  overrides?: Partial<Record<keyof typeof bands, Band>>,
+): Band {
+  const override = overrides?.[key];
+  return (override ?? bands[key]) as Band;
+}
+
 export function clampToBand(
   value: number,
   band: Band,

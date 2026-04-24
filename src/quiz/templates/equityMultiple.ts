@@ -31,7 +31,7 @@ export const equityMultipleTemplate: QuestionTemplate<'equityMultiple'> = {
     'Rule of thumb: institutional value-add deals target 1.7x–2.0x; opportunistic 2.0x+; core ~1.4x–1.6x.',
     'Complement to IRR: EM shows absolute dollars back, IRR shows time-adjusted. Always look at both.',
   ],
-  generate(rng, difficulty = 'intermediate') {
+  generate(rng, difficulty = 'intermediate', _assetClass = 'mixed') {
     const equityIn = pickBand(rng, bands.equityIn, difficulty);
     const mult = pickBand(rng, bands.irrExitMultiple, difficulty);
     const outRound = difficulty === 'beginner' ? 1_000_000 : difficulty === 'advanced' ? 25_000 : 100_000;

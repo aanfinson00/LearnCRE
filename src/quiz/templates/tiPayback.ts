@@ -31,7 +31,7 @@ export const tiPaybackTemplate: QuestionTemplate<'tiPayback'> = {
     'If tenant won\'t pay that rent premium, TI doesn\'t pencil — walk or cut the TI.',
     'Equivalent: TI × payback multiple of 1.5×–2× to reflect risk — higher multiple = pickier landlord.',
   ],
-  generate(rng, difficulty = 'intermediate') {
+  generate(rng, difficulty = 'intermediate', _assetClass = 'mixed') {
     const ti = pickBand(rng, { min: 10, max: 50, step: 1 }, difficulty);
     const payback = rng.pickInt(bands.paybackYears.min, bands.paybackYears.max);
     const expected = requiredRentPremiumPerSf({ tiPerSf: ti, paybackYears: payback });

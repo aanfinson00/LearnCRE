@@ -71,6 +71,7 @@ function initialSession(): QuizSession {
       plannedCount: 10,
       tolerancePreset: 'normal',
       difficulty: 'intermediate',
+      assetClass: 'mixed',
     },
     attempts: [],
     currentIndex: 0,
@@ -90,6 +91,7 @@ export function useQuizSession() {
       mode: config.mode,
       tolerancePreset: config.tolerancePreset,
       difficulty: config.difficulty,
+      assetClass: config.assetClass,
       attempts: [],
     });
     dispatch({ type: 'start', config });
@@ -137,6 +139,7 @@ export function useQuizSession() {
       mode: session.config.mode,
       tolerancePreset: session.config.tolerancePreset,
       difficulty: session.config.difficulty,
+      assetClass: session.config.assetClass,
       attempts: session.attempts,
     });
     dispatch({ type: 'advance', question: q });

@@ -31,7 +31,7 @@ export const debtYieldTemplate: QuestionTemplate<'debtYield'> = {
     'Lender check: if debt yield < 8%, most CMBS lenders pass — so 8% is a hard floor for stabilized deals.',
     'Quick math: $800k NOI / 9% → think $800k × 11.11 = $8.89M. Or: $800 / 0.09 = ~$8,890 (shift decimals).',
   ],
-  generate(rng, difficulty = 'intermediate') {
+  generate(rng, difficulty = 'intermediate', _assetClass = 'mixed') {
     const noi = pickBand(rng, bands.noi, difficulty);
     const target = pickBand(rng, bands.debtYieldTarget, difficulty);
     const expected = maxLoanByDebtYield(noi, target);

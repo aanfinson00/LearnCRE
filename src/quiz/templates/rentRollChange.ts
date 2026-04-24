@@ -7,6 +7,7 @@ import {
 } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
 import { bands, pickBand } from '../bands';
+import { classBand } from '../assetClasses';
 import { nextId } from '../random';
 
 function buildSolution(params: {
@@ -66,14 +67,14 @@ export const rentRollChangeTemplate: QuestionTemplate<'rentRollChange'> = {
     'Rollover % matters — if only half the rent roll is rolling to market, apply the change to half the SF.',
     'Ignoring vacancy first and shaving later is a fine estimation shortcut (5% off your gross number).',
   ],
-  generate(rng, difficulty = 'intermediate') {
-    const totalSf = pickBand(rng, bands.sf, difficulty);
-    const oldRent = pickBand(rng, bands.rentPerSf, difficulty);
+  generate(rng, difficulty = 'intermediate', assetClass = 'mixed') {
+    const totalSf = pickBand(rng, classBand('sf', assetClass), difficulty);
+    const oldRent = pickBand(rng, classBand('rentPerSf', assetClass), difficulty);
     const rentLift = pickBand(rng, bands.rentPerSfDelta, difficulty);
     const newRent = oldRent + rentLift;
     const rolloverPct = pickBand(rng, bands.rolloverPct, difficulty);
     const vacancy = rng.pickFromSet([0, 0.03, 0.05, 0.07, 0.1] as const);
-    const cap = pickBand(rng, bands.capRate, difficulty);
+    const cap = pickBand(rng, classBand('capRate', assetClass), difficulty);
     const subjectSf = totalSf * rolloverPct;
     const expected = rentRollValueChange({
       oldRentPerSf: oldRent,

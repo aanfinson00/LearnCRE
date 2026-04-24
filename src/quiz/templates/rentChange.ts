@@ -2,6 +2,7 @@ import { rentNoiDelta, valueDeltaFromNoiDelta } from '../../math/sensitivity';
 import { formatPct, formatUsd, formatUsdSigned } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
 import { bands, discreteMoves, pickBand } from '../bands';
+import { classBand } from '../assetClasses';
 import { nextId } from '../random';
 
 function buildSolution(
@@ -42,12 +43,12 @@ export const rentChangeTemplate: QuestionTemplate<'rentChange'> = {
     'Sandwich technique: bracket your cap between the two nearest clean caps, solve both, average. 5.75% sits between 5.5% (18.2x) and 6% (16.7x).',
     'OpEx typically stays flat when rent changes, so rent deltas fall almost entirely to NOI (minus mgmt fees if % of EGI).',
   ],
-  generate(rng, difficulty = 'intermediate') {
+  generate(rng, difficulty = 'intermediate', assetClass = 'mixed') {
     const oldRent = pickBand(rng, bands.rentLevel, difficulty);
     const rentMove = rng.pickFromSet(discreteMoves.rentMoves);
     const newRent = oldRent + rentMove;
     const vac = rng.pickFromSet(discreteMoves.vacancySetNonZero);
-    const cap = pickBand(rng, bands.capRate, difficulty);
+    const cap = pickBand(rng, classBand('capRate', assetClass), difficulty);
     const noiDelta = rentNoiDelta({ oldRent, newRent, vacancyRate: vac });
     const valueDelta = valueDeltaFromNoiDelta(noiDelta, cap);
 

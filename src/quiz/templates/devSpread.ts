@@ -2,6 +2,7 @@ import { developmentSpread, yieldOnCost } from '../../math/basis';
 import { formatBps, formatPct, formatUsd } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
 import { bands, pickBand } from '../bands';
+import { classBand } from '../assetClasses';
 import { nextId } from '../random';
 
 function buildSolution(noi: number, cost: number, marketCap: number): Solution {
@@ -37,8 +38,8 @@ export const devSpreadTemplate: QuestionTemplate<'devSpread'> = {
     'Spread compensates for construction risk, lease-up risk, and time value of capital tied up during build.',
     'Mental math: compute YoC first, then subtract market cap. Answer in bps.',
   ],
-  generate(rng, difficulty = 'intermediate') {
-    const marketCap = pickBand(rng, bands.capRate, difficulty);
+  generate(rng, difficulty = 'intermediate', assetClass = 'mixed') {
+    const marketCap = pickBand(rng, classBand('capRate', assetClass), difficulty);
     const spreadTarget = pickBand(rng, bands.yocDelta, difficulty);
     const yocTarget = marketCap + spreadTarget;
     const cost = pickBand(rng, bands.projectCost, difficulty);
