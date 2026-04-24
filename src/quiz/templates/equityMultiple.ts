@@ -24,6 +24,7 @@ export const equityMultipleTemplate: QuestionTemplate<'equityMultiple'> = {
   label: 'Equity Multiple',
   description: 'Equity in + equity out → EM.',
   category: 'returns',
+  pattern: 'A / B   where A = out, B = in',
   tips: [
     'EM = Out / In. Doesn\'t care about time — 2x in 1 year and 2x in 10 years both = 2.0x.',
     'Divide by hundreds: $23M / $10M → 23/10 = 2.3x. $17.5M / $8M → 17.5/8 ≈ 2.19x.',

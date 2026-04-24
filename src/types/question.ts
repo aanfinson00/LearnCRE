@@ -28,7 +28,15 @@ export type QuestionKind =
   | 'rentRollChange'
   | 'taxReassessment'
   | 'grossRentMultiplier'
-  | 'loanConstant';
+  | 'loanConstant'
+  | 'cagr'
+  | 'compoundGrowth'
+  | 'reversionValue'
+  | 'operatingExpenseRatio'
+  | 'noiFromOer'
+  | 'rentPerUnit'
+  | 'opexPerUnit'
+  | 'pricePerUnit';
 
 export type UnitFormat = 'usd' | 'pct' | 'bps' | 'pctChange' | 'usdChange' | 'multiple' | 'usdPerSf';
 
@@ -76,6 +84,7 @@ export interface QuestionTemplate<K extends QuestionKind = QuestionKind> {
   label: string;
   description: string;
   category: 'valuation' | 'returns';
+  pattern: string;
   tips: string[];
   generate(rng: Rng, difficulty?: Difficulty): Question;
 }

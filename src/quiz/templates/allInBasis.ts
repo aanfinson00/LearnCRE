@@ -41,6 +41,7 @@ export const allInBasisTemplate: QuestionTemplate<'allInBasis'> = {
   label: 'All-In Basis',
   description: 'Total capital per SF after acquisition costs.',
   category: 'valuation',
+  pattern: '(A + B + A×C) / D   [price + capex + closing%, per SF]',
   tips: [
     'All-in basis = skin in the game. Use it (not price) when computing yield on cost.',
     'Closing costs typically run 1–3% of purchase price — transfer tax, title, legal, due diligence.',

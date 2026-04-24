@@ -1,18 +1,55 @@
+import type { UnitFormat } from './question';
+
 export type CellOrder = 'rowByRow' | 'colByCol' | 'random';
 
+export type DrillVariantId =
+  | 'capCompression'
+  | 'irrToEm'
+  | 'loanConstant'
+  | 'noiCapToValue'
+  | 'percentOf'
+  | 'divideBy'
+  | 'combinedDiscount'
+  | 'nthRoot'
+  | 'reciprocalTable';
+
+export interface DrillVariantAxis {
+  label: string;
+  values: number[];
+  format: (v: number) => string;
+}
+
+export interface DrillVariant {
+  id: DrillVariantId;
+  name: string;
+  description: string;
+  rowAxis: DrillVariantAxis;
+  colAxis: DrillVariantAxis;
+  computeCell(rowVal: number, colVal: number): number;
+  unit: UnitFormat;
+  toleranceBand: number;
+  isDiagonalZero: boolean;
+  inputHint?: string;
+  formulaLabel: string;
+}
+
 export interface SpeedDrillConfig {
-  caps: number[];
+  variantId: DrillVariantId;
+  rowValues: number[];
+  colValues: number[];
   order: CellOrder;
   timeBudgetSec: number | null;
   toleranceBand: number;
+  shuffleAxes: boolean;
 }
 
 export interface Cell {
   row: number;
   col: number;
-  oldCap: number;
-  newCap: number;
+  rowVal: number;
+  colVal: number;
   expected: number;
+  isDiagonal: boolean;
 }
 
 export interface CellResult {
@@ -25,9 +62,10 @@ export interface CellResult {
 
 export interface SpeedDrillState {
   config: SpeedDrillConfig;
+  variantId: DrillVariantId;
   cells: Cell[];
-  order: number[];
-  currentIndex: number;
+  currentRow: number | null;
+  currentCol: number | null;
   results: Record<string, CellResult>;
   startedAt: number;
   cellStartedAt: number;

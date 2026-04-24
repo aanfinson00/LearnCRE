@@ -49,13 +49,13 @@ export function ChoiceList({ question, selected, onSelect, disabled, correctValu
           'flex items-center gap-3 rounded-lg border-2 px-4 py-3 text-left font-mono text-base transition num';
         const state = disabled
           ? isCorrect
-            ? 'border-emerald-500 bg-emerald-50'
+            ? 'border-signal-good bg-signal-good/10'
             : isWrongPick
-              ? 'border-rose-500 bg-rose-50'
-              : 'border-slate-200 bg-white opacity-70'
+              ? 'border-signal-bad bg-signal-bad/10'
+              : 'border-warm-line bg-warm-white opacity-70'
           : isSelected
-            ? 'border-slate-900 bg-slate-50'
-            : 'border-slate-200 bg-white hover:border-slate-400';
+            ? 'border-warm-black bg-warm-paper/50'
+            : 'border-warm-line bg-warm-white hover:border-warm-line';
         return (
           <button
             key={i}
@@ -64,7 +64,7 @@ export function ChoiceList({ question, selected, onSelect, disabled, correctValu
             onClick={() => onSelect(choice)}
             className={`${base} ${state}`}
           >
-            <span className="font-mono text-xs text-slate-400 w-5">{i + 1}.</span>
+            <span className="font-mono text-xs text-warm-mute w-5">{i + 1}.</span>
             <span className="flex-1">{fmt(choice, question.unit)}</span>
           </button>
         );

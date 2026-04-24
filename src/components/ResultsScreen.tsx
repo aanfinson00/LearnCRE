@@ -1,4 +1,5 @@
 import { templates } from '../quiz/templates';
+import type { QuestionKind } from '../types/question';
 import type { SessionConfig, SessionStats } from '../types/session';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
@@ -9,18 +10,30 @@ interface Props {
   onRestart: () => void;
   onNewSetup: () => void;
   onReview: () => void;
+  onRetryMistakes: (kinds: QuestionKind[]) => void;
   attemptCount: number;
+  mistakeKinds: QuestionKind[];
 }
 
-export function ResultsScreen({ stats, config, onRestart, onNewSetup, onReview, attemptCount }: Props) {
+export function ResultsScreen({
+  stats,
+  config,
+  onRestart,
+  onNewSetup,
+  onReview,
+  onRetryMistakes,
+  attemptCount,
+  mistakeKinds,
+}: Props) {
   const categories = config.categories;
 
   return (
     <div className="mx-auto max-w-3xl space-y-6 py-8">
       <header className="space-y-1">
         <h1 className="text-2xl font-semibold">Session complete</h1>
-        <p className="text-sm text-slate-500">
-          {stats.total} answered · {config.mode === 'free' ? 'free-form' : 'multiple choice'} · {config.tolerancePreset} tolerance
+        <p className="text-sm text-warm-stone">
+          {stats.total} answered · {config.mode === 'free' ? 'free-form' : 'multiple choice'} ·{' '}
+          {config.tolerancePreset} tolerance · {config.difficulty}
         </p>
       </header>
 
@@ -47,14 +60,14 @@ export function ResultsScreen({ stats, config, onRestart, onNewSetup, onReview, 
             return (
               <div key={kind} className="space-y-1">
                 <div className="flex items-baseline justify-between text-sm">
-                  <span className="text-slate-700">{templates[kind].label}</span>
-                  <span className="font-mono text-slate-500 num">
+                  <span className="text-warm-ink">{templates[kind].label}</span>
+                  <span className="font-mono text-warm-stone num">
                     {total === 0 ? '—' : `${correct}/${total} · ${Math.round(pct * 100)}%`}
                   </span>
                 </div>
-                <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100">
+                <div className="h-2 w-full overflow-hidden rounded-full bg-warm-paper">
                   <div
-                    className="h-full rounded-full bg-emerald-500 transition-all"
+                    className="h-full rounded-full bg-signal-good transition-all duration-aa ease-aa"
                     style={{ width: `${pct * 100}%` }}
                   />
                 </div>
@@ -71,6 +84,18 @@ export function ResultsScreen({ stats, config, onRestart, onNewSetup, onReview, 
         <Button variant="secondary" onClick={onReview} disabled={attemptCount === 0}>
           Review answers
         </Button>
+        <Button
+          variant="secondary"
+          onClick={() => onRetryMistakes(mistakeKinds)}
+          disabled={mistakeKinds.length === 0}
+          title={
+            mistakeKinds.length === 0
+              ? 'No mistakes — nothing to retry'
+              : `Retry using ${mistakeKinds.length} missed kind${mistakeKinds.length > 1 ? 's' : ''}`
+          }
+        >
+          Retry mistakes ({mistakeKinds.length})
+        </Button>
         <Button onClick={onRestart}>Play again</Button>
       </div>
     </div>
@@ -79,9 +104,9 @@ export function ResultsScreen({ stats, config, onRestart, onNewSetup, onReview, 
 
 function Metric({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-lg bg-slate-50 p-3">
-      <div className="text-xs uppercase tracking-wide text-slate-500">{label}</div>
-      <div className="mt-1 font-mono text-xl num text-slate-900">{value}</div>
+    <div className="rounded-lg bg-warm-paper/50 p-3">
+      <div className="text-xs uppercase tracking-wide text-warm-stone">{label}</div>
+      <div className="mt-1 font-mono text-xl num text-warm-black">{value}</div>
     </div>
   );
 }

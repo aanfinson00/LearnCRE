@@ -1,5 +1,6 @@
 import { cellKey } from '../quiz/speedDrill';
-import { formatPct, formatPctChange } from '../math/rounding';
+import { formatCellExpected, formatCellUserInput, variants } from '../quiz/speedDrillVariants';
+import { formatPct } from '../math/rounding';
 import type { SpeedDrillState } from '../types/speedDrill';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
@@ -11,8 +12,11 @@ interface Props {
 }
 
 export function SpeedDrillResults({ state, onRestart, onNewSetup }: Props) {
-  const caps = state.config.caps;
-  const total = caps.length * caps.length - caps.length;
+  const variant = variants[state.variantId];
+  const rows = state.config.rowValues;
+  const cols = state.config.colValues;
+  const totalCells = state.cells.filter((c) => !c.isDiagonal).length;
+
   let correct = 0;
   let skipped = 0;
   let totalElapsed = 0;
@@ -30,11 +34,12 @@ export function SpeedDrillResults({ state, onRestart, onNewSetup }: Props) {
   const avgSec = attempted === 0 ? 0 : totalElapsed / attempted / 1000;
 
   return (
-    <div className="mx-auto max-w-4xl space-y-5 py-8">
+    <div className="mx-auto max-w-5xl space-y-5 py-8">
       <header className="space-y-1">
-        <h1 className="text-2xl font-semibold text-slate-900">Drill complete</h1>
-        <p className="text-sm text-slate-500">
-          {attempted}/{total} attempted · {skipped} skipped · Tolerance {formatPct(state.config.toleranceBand)}
+        <h1 className="text-2xl font-semibold text-warm-black">Drill complete — {variant.name}</h1>
+        <p className="text-sm text-warm-stone">
+          {attempted}/{totalCells} attempted · {skipped} skipped · Tolerance{' '}
+          {formatPct(state.config.toleranceBand)}
         </p>
       </header>
 
@@ -52,52 +57,54 @@ export function SpeedDrillResults({ state, onRestart, onNewSetup }: Props) {
         <table className="min-w-full table-fixed border-collapse font-mono text-xs num">
           <thead>
             <tr>
-              <th className="sticky left-0 z-10 bg-white px-2 py-1 text-left text-slate-500 text-[10px]">
-                from ↓ / to →
+              <th className="sticky left-0 z-10 bg-warm-white px-2 py-1 text-left text-warm-stone text-[10px]">
+                {variant.rowAxis.label} ↓ / {variant.colAxis.label} →
               </th>
-              {caps.map((c, i) => (
-                <th key={i} className="border-b px-2 py-1 text-slate-700">
-                  {formatPct(c, 2)}
+              {cols.map((c, i) => (
+                <th key={i} className="border-b px-2 py-1 text-warm-ink">
+                  {variant.colAxis.format(c)}
                 </th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {caps.map((rowCap, r) => (
+            {rows.map((rowVal, r) => (
               <tr key={r}>
-                <th className="sticky left-0 z-10 border-r bg-white px-2 py-1 text-left text-slate-700">
-                  {formatPct(rowCap, 2)}
+                <th className="sticky left-0 z-10 border-r bg-warm-white px-2 py-1 text-left text-warm-ink">
+                  {variant.rowAxis.format(rowVal)}
                 </th>
-                {caps.map((colCap, c) => {
-                  if (r === c) {
+                {cols.map((colVal, c) => {
+                  const cell = state.cells.find((x) => x.row === r && x.col === c);
+                  const isDiagonal = cell?.isDiagonal ?? false;
+                  if (isDiagonal) {
                     return (
                       <td
                         key={c}
-                        className="h-12 border border-slate-200 px-2 text-center bg-slate-50 text-slate-400"
+                        className="h-12 border border-warm-line px-2 text-center bg-warm-paper/50 text-warm-mute"
                       >
                         —
                       </td>
                     );
                   }
                   const result = state.results[cellKey(r, c)];
-                  const trueVal = rowCap / colCap - 1;
-                  let bg = 'bg-slate-50 text-slate-500';
+                  const trueVal = variant.computeCell(rowVal, colVal);
+                  let bg = 'bg-warm-paper/50 text-warm-stone';
                   if (result) {
-                    if (result.skipped) bg = 'bg-slate-100 text-slate-400';
-                    else if (result.correct) bg = 'bg-emerald-100 text-emerald-800';
-                    else bg = 'bg-rose-100 text-rose-800';
+                    if (result.skipped) bg = 'bg-warm-paper text-warm-mute';
+                    else if (result.correct) bg = 'bg-signal-good/15 text-signal-good-ink';
+                    else bg = 'bg-signal-bad/15 text-signal-bad-ink';
                   }
                   return (
-                    <td key={c} className={`h-12 border border-slate-200 px-2 text-center ${bg}`}>
+                    <td key={c} className={`h-12 border border-warm-line px-2 text-center ${bg}`}>
                       <div className="leading-tight">
                         {result && !result.skipped && result.userInput !== null
-                          ? formatPctChange(result.userInput, 1)
+                          ? formatCellUserInput(variant, result.userInput)
                           : result?.skipped
                             ? '·'
                             : '—'}
                       </div>
                       <div className="text-[10px] opacity-70 leading-tight">
-                        true {formatPctChange(trueVal, 1)}
+                        true {formatCellExpected(variant, trueVal)}
                       </div>
                     </td>
                   );
@@ -120,9 +127,9 @@ export function SpeedDrillResults({ state, onRestart, onNewSetup }: Props) {
 
 function Metric({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-lg bg-slate-50 p-3">
-      <div className="text-xs uppercase tracking-wide text-slate-500">{label}</div>
-      <div className="mt-1 font-mono text-xl num text-slate-900">{value}</div>
+    <div className="rounded-lg bg-warm-paper/50 p-3">
+      <div className="text-xs uppercase tracking-wide text-warm-stone">{label}</div>
+      <div className="mt-1 font-mono text-xl num text-warm-black">{value}</div>
     </div>
   );
 }

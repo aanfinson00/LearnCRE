@@ -46,6 +46,7 @@ export const taxReassessmentTemplate: QuestionTemplate<'taxReassessment'> = {
   label: 'Tax Reassessment Impact',
   description: 'Post-sale property tax reassessment → value change.',
   category: 'valuation',
+  pattern: '−(A × B − C) / D   [−(new tax − old tax) / cap]',
   tips: [
     'Reassessment hits NOI 1-for-1 like any other opex. Value impact = −ΔTax / cap.',
     'A $100k tax increase at a 6% cap lops ~$1.67M off value. At 5% cap it\'s $2M.',

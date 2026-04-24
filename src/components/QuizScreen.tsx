@@ -138,7 +138,7 @@ export function QuizScreen({ session, stats, onSubmit, onNext, onEnd, onQuit }: 
                   Skip (S)
                 </Button>
                 <Button onClick={submitFree} disabled={parseInput(raw, q.unit) === null}>
-                  Submit <span className="ml-2 text-slate-400">↵</span>
+                  Submit <span className="ml-2 text-warm-mute">↵</span>
                 </Button>
               </div>
             </div>

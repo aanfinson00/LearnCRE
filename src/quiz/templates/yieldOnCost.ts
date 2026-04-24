@@ -24,6 +24,7 @@ export const yieldOnCostTemplate: QuestionTemplate<'yieldOnCost'> = {
   label: 'Yield on Cost',
   description: 'Stabilized NOI over total project cost.',
   category: 'valuation',
+  pattern: 'A / B   where A = NOI, B = total cost',
   tips: [
     'YoC is the going-in cap rate replacement for development or value-add deals — it uses all-in cost, not price.',
     'Compare YoC to market cap to see development spread. 200–300 bps of spread is a typical target.',

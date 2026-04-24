@@ -43,15 +43,15 @@ export function FeedbackPanel({ question, attempt, onNext, isLast }: Props) {
   const skipped = attempt.skipped;
 
   const banner = skipped
-    ? { label: 'Skipped', tone: 'bg-slate-100 border-slate-300 text-slate-700' }
+    ? { label: 'Skipped', tone: 'bg-warm-paper border-warm-line text-warm-ink' }
     : correct
       ? {
           label: `Correct  (off by ${formatPctChange(attempt.deltaPct)})`,
-          tone: 'bg-emerald-50 border-emerald-300 text-emerald-800',
+          tone: 'bg-signal-good/10 border-signal-good/60 text-signal-good-ink',
         }
       : {
           label: `Off by ${formatPctChange(attempt.deltaPct)}`,
-          tone: 'bg-rose-50 border-rose-300 text-rose-800',
+          tone: 'bg-signal-bad/10 border-signal-bad/60 text-signal-bad-ink',
         };
 
   return (
@@ -61,14 +61,14 @@ export function FeedbackPanel({ question, attempt, onNext, isLast }: Props) {
       </div>
 
       <div className="grid grid-cols-2 gap-3 text-sm">
-        <div className="rounded-md bg-slate-50 p-3">
-          <div className="text-xs uppercase tracking-wide text-slate-500">Your answer</div>
+        <div className="rounded-md bg-warm-paper/50 p-3">
+          <div className="text-xs uppercase tracking-wide text-warm-stone">Your answer</div>
           <div className="mt-1 font-mono text-lg num">
             {attempt.userInput === null ? '—' : fmt(attempt.userInput, question.unit)}
           </div>
         </div>
-        <div className="rounded-md bg-slate-50 p-3">
-          <div className="text-xs uppercase tracking-wide text-slate-500">Correct</div>
+        <div className="rounded-md bg-warm-paper/50 p-3">
+          <div className="text-xs uppercase tracking-wide text-warm-stone">Correct</div>
           <div className="mt-1 font-mono text-lg num">{question.solution.answerDisplay}</div>
         </div>
       </div>
@@ -77,7 +77,7 @@ export function FeedbackPanel({ question, attempt, onNext, isLast }: Props) {
 
       <div className="flex justify-end">
         <Button onClick={onNext}>
-          {isLast ? 'See results' : 'Next question'} <span className="ml-2 text-slate-400">↵</span>
+          {isLast ? 'See results' : 'Next question'} <span className="ml-2 text-warm-mute">↵</span>
         </Button>
       </div>
     </div>

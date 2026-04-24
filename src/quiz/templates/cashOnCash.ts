@@ -54,6 +54,7 @@ export const cashOnCashTemplate: QuestionTemplate<'cashOnCash'> = {
   label: 'Cash-on-Cash Return',
   description: 'Year-1 cash yield on equity invested.',
   category: 'returns',
+  pattern: '(A − B) / C   where A = NOI, B = debt service, C = equity',
   tips: [
     'CoC = (NOI − Debt Service) / Equity. Unlevered = cap rate; levered adds or subtracts the spread on debt.',
     'IO shortcut: CoC = (cap − rate × LTV) / (1 − LTV). At 6% cap, 60% LTV, 5% rate → (6 − 3) / 40 = 7.5%.',

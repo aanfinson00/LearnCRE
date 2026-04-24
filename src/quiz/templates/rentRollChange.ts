@@ -59,6 +59,7 @@ export const rentRollChangeTemplate: QuestionTemplate<'rentRollChange'> = {
   label: 'Rent Roll $/SF Change',
   description: 'Rate change on a portion of the rent roll → value impact.',
   category: 'valuation',
+  pattern: '(A − B) × C × (1 − D) / E   [rent delta × subject SF × (1−vac) / cap]',
   tips: [
     'ΔValue = (ΔRent/SF × subject SF × (1 − vacancy)) / cap. Each dollar of rent/SF flows through to value at 1/cap multiplier.',
     'Example: $1/SF lift on 100k SF at 5% vacancy and 6% cap → $95k × 16.67 ≈ $1.58M value.',

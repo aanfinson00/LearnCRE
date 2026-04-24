@@ -74,28 +74,28 @@ export function AnchorsCard() {
         className="flex w-full items-center justify-between text-left"
       >
         <div>
-          <div className="font-medium text-slate-900">Mental-math anchors</div>
-          <div className="text-xs text-slate-500">
+          <div className="font-medium text-warm-black">Mental-math anchors</div>
+          <div className="text-xs text-warm-stone">
             Cap multipliers, loan constants, IRR → EM, rules of thumb.
           </div>
         </div>
-        <span className="text-slate-400">{open ? '▾' : '▸'}</span>
+        <span className="text-warm-mute">{open ? '▾' : '▸'}</span>
       </button>
       {open && (
         <div className="grid grid-cols-1 gap-5 pt-2 sm:grid-cols-2">
           {SECTIONS.map((s) => (
             <div key={s.title}>
-              <div className="mb-1 text-xs font-medium uppercase tracking-wide text-slate-500">
+              <div className="mb-1 text-xs font-medium uppercase tracking-wide text-warm-stone">
                 {s.title}
               </div>
               <dl className="font-mono text-sm num">
                 {s.rows.map((r) => (
                   <div
                     key={r.label}
-                    className="flex items-baseline justify-between border-b border-dotted border-slate-200 py-1"
+                    className="flex items-baseline justify-between border-b border-dotted border-warm-line py-1"
                   >
-                    <dt className="text-slate-600">{r.label}</dt>
-                    <dd className="text-slate-900">{r.value}</dd>
+                    <dt className="text-warm-stone">{r.label}</dt>
+                    <dd className="text-warm-black">{r.value}</dd>
                   </div>
                 ))}
               </dl>

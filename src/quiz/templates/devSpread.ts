@@ -30,6 +30,7 @@ export const devSpreadTemplate: QuestionTemplate<'devSpread'> = {
   label: 'Development Spread',
   description: 'YoC minus market cap — the risk premium for developing vs buying.',
   category: 'valuation',
+  pattern: '(A / B) − C   [YoC minus market cap]',
   tips: [
     '100–150 bps is thin, 200–300 bps is typical, 500+ bps is a "layup" development.',
     'If YoC ≈ market cap, you\'re taking development risk for no extra return — walk away.',

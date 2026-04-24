@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useReducer, useRef } from 'react';
-import { buildCells, buildOrder, cellKey, scoreCell } from '../quiz/speedDrill';
+import { buildCells, cellKey, scoreCell } from '../quiz/speedDrill';
 import type { Cell, CellResult, SpeedDrillConfig, SpeedDrillState } from '../types/speedDrill';
 
 type Action =
   | { type: 'start'; config: SpeedDrillConfig }
+  | { type: 'select'; row: number; col: number }
   | { type: 'submit'; input: number | null; skipped: boolean }
   | { type: 'tick'; now: number }
   | { type: 'finish' }
@@ -12,14 +13,18 @@ type Action =
 function initial(): SpeedDrillState {
   return {
     config: {
-      caps: [],
+      variantId: 'capCompression',
+      rowValues: [],
+      colValues: [],
       order: 'rowByRow',
       timeBudgetSec: 60,
       toleranceBand: 0.05,
+      shuffleAxes: false,
     },
+    variantId: 'capCompression',
     cells: [],
-    order: [],
-    currentIndex: 0,
+    currentRow: null,
+    currentCol: null,
     results: {},
     startedAt: 0,
     cellStartedAt: 0,
@@ -28,28 +33,59 @@ function initial(): SpeedDrillState {
   };
 }
 
+function findFirstUnanswered(
+  cells: Cell[],
+  results: Record<string, CellResult>,
+  order: SpeedDrillConfig['order'],
+): { row: number; col: number } | null {
+  const candidates = cells.filter((c) => !c.isDiagonal && !results[cellKey(c.row, c.col)]);
+  if (candidates.length === 0) return null;
+  if (order === 'colByCol') {
+    candidates.sort((a, b) => (a.col !== b.col ? a.col - b.col : a.row - b.row));
+  } else if (order === 'random') {
+    const idx = Math.floor(Math.random() * candidates.length);
+    const c = candidates[idx];
+    return { row: c.row, col: c.col };
+  }
+  return { row: candidates[0].row, col: candidates[0].col };
+}
+
 function reducer(state: SpeedDrillState, action: Action): SpeedDrillState {
   switch (action.type) {
     case 'start': {
-      const cells = buildCells(action.config.caps);
-      const order = buildOrder(cells, action.config.order, action.config.caps.length);
+      const cells = buildCells({
+        variantId: action.config.variantId,
+        rowValues: action.config.rowValues,
+        colValues: action.config.colValues,
+      });
+      const first = findFirstUnanswered(cells, {}, action.config.order);
       const now = Date.now();
       return {
         config: action.config,
+        variantId: action.config.variantId,
         cells,
-        order,
-        currentIndex: 0,
+        currentRow: first?.row ?? null,
+        currentCol: first?.col ?? null,
         results: {},
         startedAt: now,
         cellStartedAt: now,
-        remainingMs: action.config.timeBudgetSec !== null ? action.config.timeBudgetSec * 1000 : null,
+        remainingMs:
+          action.config.timeBudgetSec !== null ? action.config.timeBudgetSec * 1000 : null,
         status: 'active',
       };
     }
+    case 'select': {
+      if (state.status !== 'active') return state;
+      const cell = state.cells.find((c) => c.row === action.row && c.col === action.col);
+      if (!cell || cell.isDiagonal) return state;
+      return { ...state, currentRow: action.row, currentCol: action.col, cellStartedAt: Date.now() };
+    }
     case 'submit': {
-      if (state.status !== 'active' || state.order.length === 0) return state;
-      const cellIdx = state.order[state.currentIndex];
-      const cell = state.cells[cellIdx];
+      if (state.status !== 'active' || state.currentRow === null || state.currentCol === null) return state;
+      const cell = state.cells.find(
+        (c) => c.row === state.currentRow && c.col === state.currentCol,
+      );
+      if (!cell) return state;
       const now = Date.now();
       const elapsedMs = now - state.cellStartedAt;
       const result: CellResult = action.skipped
@@ -62,12 +98,14 @@ function reducer(state: SpeedDrillState, action: Action): SpeedDrillState {
             skipped: false,
             elapsedMs,
           };
-      const nextIndex = state.currentIndex + 1;
-      const finished = nextIndex >= state.order.length;
+      const newResults = { ...state.results, [cellKey(cell.row, cell.col)]: result };
+      const next = findFirstUnanswered(state.cells, newResults, state.config.order);
+      const finished = next === null;
       return {
         ...state,
-        results: { ...state.results, [cellKey(cell.row, cell.col)]: result },
-        currentIndex: finished ? state.currentIndex : nextIndex,
+        results: newResults,
+        currentRow: next?.row ?? null,
+        currentCol: next?.col ?? null,
         cellStartedAt: now,
         status: finished ? 'finished' : 'active',
       };
@@ -96,6 +134,10 @@ export function useSpeedDrill() {
     dispatch({ type: 'start', config });
   }, []);
 
+  const selectCell = useCallback((row: number, col: number) => {
+    dispatch({ type: 'select', row, col });
+  }, []);
+
   const submit = useCallback((input: number | null, skipped: boolean) => {
     dispatch({ type: 'submit', input, skipped });
   }, []);
@@ -115,9 +157,11 @@ export function useSpeedDrill() {
   }, [state.status, state.remainingMs !== null]);
 
   const currentCell: Cell | null =
-    state.status === 'active' && state.order.length > 0
-      ? state.cells[state.order[state.currentIndex]]
+    state.status === 'active' && state.currentRow !== null && state.currentCol !== null
+      ? state.cells.find(
+          (c) => c.row === state.currentRow && c.col === state.currentCol,
+        ) ?? null
       : null;
 
-  return { state, currentCell, start, submit, finish, reset };
+  return { state, currentCell, start, selectCell, submit, finish, reset };
 }

@@ -34,6 +34,14 @@ import {
   taxReassessmentValueImpact,
   tiVsRentDelta,
 } from '../../math/lease';
+import {
+  cagr,
+  compoundGrowth,
+  noiFromOer,
+  operatingExpenseRatio,
+  perUnit,
+  reversionValue,
+} from '../../math/growth';
 
 describe('quiz/templates', () => {
   it('every kind has a template', () => {
@@ -286,6 +294,44 @@ describe('quiz/templates', () => {
           case 'loanConstant': {
             const bps = Math.round(loanConstant(ctx.interestRate!, ctx.amortYears!) * 10_000);
             expect(q.expected).toBe(bps);
+            break;
+          }
+          case 'cagr': {
+            expect(q.expected).toBeCloseTo(
+              cagr(ctx.startValue!, ctx.endValue!, ctx.projectionYears!),
+              8,
+            );
+            break;
+          }
+          case 'compoundGrowth': {
+            expect(q.expected).toBeCloseTo(
+              compoundGrowth(ctx.startValue!, ctx.growthRate!, ctx.projectionYears!),
+              4,
+            );
+            break;
+          }
+          case 'reversionValue': {
+            expect(q.expected).toBeCloseTo(reversionValue(ctx.noi!, ctx.exitCap!), 4);
+            break;
+          }
+          case 'operatingExpenseRatio': {
+            expect(q.expected).toBeCloseTo(operatingExpenseRatio(ctx.opex!, ctx.egi!), 8);
+            break;
+          }
+          case 'noiFromOer': {
+            expect(q.expected).toBeCloseTo(noiFromOer(ctx.egi!, ctx.opexRatioValue!), 6);
+            break;
+          }
+          case 'rentPerUnit': {
+            expect(q.expected).toBeCloseTo(perUnit(ctx.gpr!, ctx.units!), 6);
+            break;
+          }
+          case 'opexPerUnit': {
+            expect(q.expected).toBeCloseTo(perUnit(ctx.opex!, ctx.units!), 6);
+            break;
+          }
+          case 'pricePerUnit': {
+            expect(q.expected).toBeCloseTo(perUnit(ctx.purchasePrice!, ctx.units!), 6);
             break;
           }
         }

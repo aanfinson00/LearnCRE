@@ -24,6 +24,7 @@ export const replacementCostTemplate: QuestionTemplate<'replacementCost'> = {
   label: 'Replacement Cost',
   description: 'Cost/SF × SF — the value sanity floor.',
   category: 'valuation',
+  pattern: 'A × B   where A = $/SF, B = SF',
   tips: [
     'Typical replacement costs: multifamily $200–325/SF, office $300–500/SF, industrial $125–225/SF, retail $200–400/SF.',
     'If acquisition basis is well below replacement cost, new supply can\'t undercut you on rent.',
