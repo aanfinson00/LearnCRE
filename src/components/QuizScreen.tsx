@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { QuizSession, SessionStats } from '../types/session';
 import { AnswerInput, type AnswerInputHandle } from './AnswerInput';
+import { CalculatorPanel } from './CalculatorPanel';
 import { ChoiceList } from './ChoiceList';
 import { FeedbackPanel } from './FeedbackPanel';
 import { QuestionCard } from './QuestionCard';
@@ -9,6 +10,22 @@ import { Button } from './ui/Button';
 import { Card } from './ui/Card';
 import { useKeyboard } from '../hooks/useKeyboard';
 import { parseInput } from '../quiz/parseInput';
+
+const CALC_PREF_KEY = 'learncre.calcEnabled.v1';
+function loadCalcPref(): boolean {
+  try {
+    return localStorage.getItem(CALC_PREF_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+function saveCalcPref(on: boolean): void {
+  try {
+    localStorage.setItem(CALC_PREF_KEY, on ? '1' : '0');
+  } catch {
+    /* ignore */
+  }
+}
 
 interface Props {
   session: QuizSession;
@@ -23,7 +40,15 @@ export function QuizScreen({ session, stats, onSubmit, onNext, onEnd, onQuit }: 
   const q = session.currentQuestion;
   const [raw, setRaw] = useState('');
   const [mcPick, setMcPick] = useState<number | null>(null);
+  const [calcOn, setCalcOn] = useState<boolean>(loadCalcPref);
   const inputRef = useRef<AnswerInputHandle>(null);
+
+  const toggleCalc = () => {
+    setCalcOn((v) => {
+      saveCalcPref(!v);
+      return !v;
+    });
+  };
 
   useEffect(() => {
     setRaw('');
@@ -101,6 +126,14 @@ export function QuizScreen({ session, stats, onSubmit, onNext, onEnd, onQuit }: 
         <div className="flex items-center gap-1">
           <Button
             variant="ghost"
+            onClick={toggleCalc}
+            className={`text-xs ${calcOn ? 'text-copper-deep' : ''}`}
+            title={calcOn ? 'Hide calculator' : 'Show calculator panel'}
+          >
+            {calcOn ? 'Calc on' : 'Calc'}
+          </Button>
+          <Button
+            variant="ghost"
             onClick={onEnd}
             className="text-xs"
             disabled={session.attempts.length === 0}
@@ -120,6 +153,8 @@ export function QuizScreen({ session, stats, onSubmit, onNext, onEnd, onQuit }: 
 
       <Card className="space-y-5">
         <QuestionCard question={q} />
+
+        {calcOn && <CalculatorPanel />}
 
         {!isAnswered &&
           (q.choices ? (
