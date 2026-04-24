@@ -34,12 +34,19 @@ export const rentChangeTemplate: QuestionTemplate<'rentChange'> = {
   label: 'Rent Change Impact',
   description: 'Rent $ change at given cap/vacancy → value impact.',
   category: 'valuation',
-  generate(rng) {
-    const oldRent = pickBand(rng, bands.rentLevel);
+  tips: [
+    'ΔNOI = ΔRent × (1 − vacancy). ΔValue = ΔNOI / cap.',
+    'Shortcut ignoring vacancy: ΔValue ≈ ΔRent × (1/cap). $100k rent lift @ 6% ≈ $100k × 16.67 ≈ $1.67M.',
+    'Vacancy haircut of 5% just trims the answer by ~5%, so mentally do it unvacancied first then shave.',
+    'Sandwich technique: bracket your cap between the two nearest clean caps, solve both, average. 5.75% sits between 5.5% (18.2x) and 6% (16.7x).',
+    'OpEx typically stays flat when rent changes, so rent deltas fall almost entirely to NOI (minus mgmt fees if % of EGI).',
+  ],
+  generate(rng, difficulty = 'intermediate') {
+    const oldRent = pickBand(rng, bands.rentLevel, difficulty);
     const rentMove = rng.pickFromSet(discreteMoves.rentMoves);
     const newRent = oldRent + rentMove;
     const vac = rng.pickFromSet(discreteMoves.vacancySetNonZero);
-    const cap = pickBand(rng, bands.capRate);
+    const cap = pickBand(rng, bands.capRate, difficulty);
     const noiDelta = rentNoiDelta({ oldRent, newRent, vacancyRate: vac });
     const valueDelta = valueDeltaFromNoiDelta(noiDelta, cap);
 

@@ -1,5 +1,5 @@
 import type { AnswerMode, Question, QuestionKind, Rng } from '../types/question';
-import type { TolerancePreset } from '../types/session';
+import type { Difficulty, TolerancePreset } from '../types/session';
 import { buildChoices } from './distractors';
 import { createRng } from './random';
 import { templates } from './templates';
@@ -9,6 +9,7 @@ export function generateQuestion(params: {
   categories: QuestionKind[];
   mode: AnswerMode;
   tolerancePreset: TolerancePreset;
+  difficulty: Difficulty;
   rng?: Rng;
 }): Question {
   const rng = params.rng ?? createRng();
@@ -17,7 +18,7 @@ export function generateQuestion(params: {
   }
   const kind = params.categories[Math.floor(rng.next() * params.categories.length)];
   const template = templates[kind];
-  const question = template.generate(rng);
+  const question = template.generate(rng, params.difficulty);
 
   const withTolerance: Question = {
     ...question,

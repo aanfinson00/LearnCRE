@@ -42,13 +42,21 @@ export const combinedScenarioTemplate: QuestionTemplate<'combinedScenario'> = {
   label: 'Combined Scenario',
   description: 'Full proforma → implied value.',
   category: 'valuation',
-  generate(rng) {
-    const gpr = pickBand(rng, bands.gpr);
-    const other = pickBand(rng, bands.otherIncome);
+  tips: [
+    'Order of operations: (GPR + Other) × (1 − vacancy) = EGI. EGI − OpEx = NOI. NOI / cap = Value.',
+    'Back-of-envelope: if OpEx is ~40% of EGI and vacancy is ~5%, NOI ≈ gross × 0.95 × 0.6 ≈ gross × 0.57.',
+    'Then × (1/cap). At 6% cap: gross × 0.57 × 16.67 ≈ gross × 9.5. Ballparks a full proforma in one step.',
+    'Sandwich: compute value at the two nearest clean caps (e.g. 5% and 6%) and interpolate to your actual cap. Handles ugly caps without a calculator.',
+    'Sanity check: compare implied value-per-SF or $/unit to market comps before trusting the number.',
+  ],
+  generate(rng, difficulty = 'intermediate') {
+    const gpr = pickBand(rng, bands.gpr, difficulty);
+    const other = pickBand(rng, bands.otherIncome, difficulty);
     const vac = rng.pickFromSet(discreteMoves.vacancySetNonZero);
     const opexRatio = rng.pickFromSet(discreteMoves.opexRatios);
-    const opex = Math.round(((gpr + other) * opexRatio * (1 - vac)) / 10_000) * 10_000;
-    const cap = pickBand(rng, bands.capRate);
+    const opexRound = difficulty === 'beginner' ? 100_000 : difficulty === 'advanced' ? 1_000 : 10_000;
+    const opex = Math.round(((gpr + other) * opexRatio * (1 - vac)) / opexRound) * opexRound;
+    const cap = pickBand(rng, bands.capRate, difficulty);
     const v = value(noi({ gpr, otherIncome: other, vacancyRate: vac, opex }), cap);
 
     return {

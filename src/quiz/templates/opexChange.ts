@@ -28,11 +28,18 @@ export const opexChangeTemplate: QuestionTemplate<'opexChange'> = {
   label: 'OpEx Change Impact',
   description: 'OpEx $ change → NOI and value impact at given cap.',
   category: 'valuation',
-  generate(rng) {
+  tips: [
+    'OpEx moves NOI 1-for-1 (with a flipped sign): $50k more OpEx = $50k less NOI.',
+    'ΔValue = −ΔOpEx / cap. $50k OpEx lift @ 6% cap = −$50k × 16.67 ≈ −$833k value.',
+    'Sandwich at ugly caps: at 5.75% cap, the $1 of OpEx is worth between 16.7x (6%) and 18.2x (5.5%) — pick the midpoint for a fast gut estimate.',
+    'An OpEx cut is the cheapest "yield play" in a deal — a $1 cut is worth 1/cap dollars of value.',
+    'Be careful with "one-time" OpEx: if it\'s truly one-off it shouldn\'t get capped at all.',
+  ],
+  generate(rng, difficulty = 'intermediate') {
     const magnitude = rng.pickFromSet(discreteMoves.opexMoves);
     const direction = rng.pickFromSet([-1, 1] as const);
     const signed = magnitude * direction;
-    const cap = pickBand(rng, bands.capRate);
+    const cap = pickBand(rng, bands.capRate, difficulty);
     const valueDelta = opexValueDelta({ opexDelta: signed, capRate: cap });
 
     const verb = direction > 0 ? 'increases' : 'decreases';

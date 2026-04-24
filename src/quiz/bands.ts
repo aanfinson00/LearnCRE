@@ -1,4 +1,5 @@
 import type { Rng } from '../types/question';
+import type { Difficulty } from '../types/session';
 
 export interface Band {
   min: number;
@@ -6,15 +7,32 @@ export interface Band {
   step?: number;
 }
 
-export function pickBand(rng: Rng, band: Band): number {
-  const opts = band.step !== undefined ? { step: band.step } : undefined;
+const DIFFICULTY_STEP_MULT: Record<Difficulty, number> = {
+  beginner: 4,
+  intermediate: 1,
+  advanced: 0.2,
+};
+
+export function effectiveStep(band: Band, difficulty: Difficulty): number | undefined {
+  if (band.step === undefined) return undefined;
+  return band.step * DIFFICULTY_STEP_MULT[difficulty];
+}
+
+export function pickBand(rng: Rng, band: Band, difficulty: Difficulty = 'intermediate'): number {
+  const step = effectiveStep(band, difficulty);
+  const opts = step !== undefined ? { step } : undefined;
   return rng.pickRange(band.min, band.max, opts);
 }
 
-export function clampToBand(value: number, band: Band): number {
+export function clampToBand(
+  value: number,
+  band: Band,
+  difficulty: Difficulty = 'intermediate',
+): number {
   const clamped = Math.max(band.min, Math.min(band.max, value));
-  if (band.step !== undefined) {
-    return Math.round(clamped / band.step) * band.step;
+  const step = effectiveStep(band, difficulty);
+  if (step !== undefined) {
+    return Math.round(clamped / step) * step;
   }
   return clamped;
 }

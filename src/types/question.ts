@@ -1,4 +1,5 @@
 import type { DealInputs } from './deal';
+import type { Difficulty } from './session';
 
 export type QuestionKind =
   | 'capCompression'
@@ -57,5 +58,6 @@ export interface QuestionTemplate<K extends QuestionKind = QuestionKind> {
   label: string;
   description: string;
   category: 'valuation' | 'returns';
-  generate(rng: Rng): Question;
+  tips: string[];
+  generate(rng: Rng, difficulty?: Difficulty): Question;
 }

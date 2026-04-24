@@ -8,9 +8,11 @@ interface Props {
   config: SessionConfig;
   onRestart: () => void;
   onNewSetup: () => void;
+  onReview: () => void;
+  attemptCount: number;
 }
 
-export function ResultsScreen({ stats, config, onRestart, onNewSetup }: Props) {
+export function ResultsScreen({ stats, config, onRestart, onNewSetup, onReview, attemptCount }: Props) {
   const categories = config.categories;
 
   return (
@@ -62,9 +64,12 @@ export function ResultsScreen({ stats, config, onRestart, onNewSetup }: Props) {
         </div>
       </Card>
 
-      <div className="flex justify-center gap-3">
+      <div className="flex flex-wrap justify-center gap-3">
         <Button variant="secondary" onClick={onNewSetup}>
           Change setup
+        </Button>
+        <Button variant="secondary" onClick={onReview} disabled={attemptCount === 0}>
+          Review answers
         </Button>
         <Button onClick={onRestart}>Play again</Button>
       </div>

@@ -30,11 +30,22 @@ export const irrSimpleTemplate: QuestionTemplate<'irrSimple'> = {
   label: 'IRR — Simple',
   description: 'Single-period IRR: equity in, equity out, hold years.',
   category: 'returns',
-  generate(rng) {
-    const equityIn = pickBand(rng, bands.equityIn);
-    const mult = pickBand(rng, bands.irrExitMultiple);
-    const equityOut = Math.round((equityIn * mult) / 500_000) * 500_000;
-    const years = rng.pickInt(bands.holdYears.min, bands.holdYears.max);
+  tips: [
+    'Rule of 72: years-to-double ≈ 72 / IRR%. 2x in 7 yrs ≈ 10.3% IRR. 2x in 5 yrs ≈ 14.4%. 2x in 10 yrs ≈ 7.2%.',
+    'Key anchors: 2.0x over 5y ≈ 14.9%; 2.0x over 7y ≈ 10.4%; 2.0x over 10y ≈ 7.2%; 2.5x over 5y ≈ 20.1%.',
+    'Anchor for 10y holds: IRR% × 10 years → EM roughly: 10% → 2.59x, 12% → 3.11x, 15% → 4.05x, 8% → 2.16x.',
+    'Sandwich: if EM is 2.2x over 6 years, bracket it — 2.0x over 6y is ~12.2%, 2.5x over 6y is ~16.5%. Interpolate → ~13.6% (actual 14.0%).',
+    'Floor approximation: EM ≥ 1 + (IRR × years). 10% × 10y → floor 2.0x; actual 2.59x. Gap is the compounding.',
+  ],
+  generate(rng, difficulty = 'intermediate') {
+    const equityIn = pickBand(rng, bands.equityIn, difficulty);
+    const mult = pickBand(rng, bands.irrExitMultiple, difficulty);
+    const outRound = difficulty === 'beginner' ? 1_000_000 : difficulty === 'advanced' ? 100_000 : 500_000;
+    const equityOut = Math.round((equityIn * mult) / outRound) * outRound;
+    const years =
+      difficulty === 'beginner'
+        ? rng.pickFromSet([5, 7, 10] as const)
+        : rng.pickInt(bands.holdYears.min, bands.holdYears.max);
     const expected = irrSingle(equityIn, equityOut, years);
 
     return {

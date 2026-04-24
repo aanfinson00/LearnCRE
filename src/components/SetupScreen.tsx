@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { templates, allKinds } from '../quiz/templates';
 import type { QuestionKind, AnswerMode } from '../types/question';
-import type { SessionConfig, TolerancePreset, LifetimeStats } from '../types/session';
+import type { Difficulty, SessionConfig, TolerancePreset, LifetimeStats } from '../types/session';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
 import { loadConfig, loadLifetime, saveConfig } from '../storage/localStorage';
@@ -28,6 +28,12 @@ const TOLERANCES: { label: string; value: TolerancePreset; hint: string }[] = [
   { label: 'Loose', value: 'loose', hint: '~±10%' },
 ];
 
+const DIFFICULTIES: { label: string; value: Difficulty; hint: string }[] = [
+  { label: 'Beginner', value: 'beginner', hint: 'Round numbers, half-point caps, clean holds.' },
+  { label: 'Intermediate', value: 'intermediate', hint: '25 bps caps, $25k NOI, realistic deals.' },
+  { label: 'Advanced', value: 'advanced', hint: 'Ugly numbers, 5 bps caps, any hold period.' },
+];
+
 export function SetupScreen({ onStart }: Props) {
   const stored = useMemo(() => loadConfig(), []);
   const [categories, setCategories] = useState<Set<QuestionKind>>(
@@ -38,6 +44,7 @@ export function SetupScreen({ onStart }: Props) {
     stored?.plannedCount ?? 10,
   );
   const [tolerance, setTolerance] = useState<TolerancePreset>(stored?.tolerancePreset ?? 'normal');
+  const [difficulty, setDifficulty] = useState<Difficulty>(stored?.difficulty ?? 'intermediate');
   const [lifetime, setLifetime] = useState<LifetimeStats | null>(null);
 
   useEffect(() => {
@@ -68,6 +75,7 @@ export function SetupScreen({ onStart }: Props) {
       categories: [...categories],
       plannedCount,
       tolerancePreset: tolerance,
+      difficulty,
     };
     saveConfig(config);
     onStart(config);
@@ -136,6 +144,31 @@ export function SetupScreen({ onStart }: Props) {
                 </label>
               );
             })}
+          </div>
+        </div>
+
+        <div>
+          <h2 className="mb-2 font-medium text-slate-900">Difficulty</h2>
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+            {DIFFICULTIES.map((d) => (
+              <button
+                key={d.value}
+                type="button"
+                onClick={() => setDifficulty(d.value)}
+                className={`rounded-lg border p-3 text-left ${
+                  difficulty === d.value
+                    ? 'border-slate-900 bg-slate-900 text-white'
+                    : 'border-slate-300 bg-white text-slate-700 hover:border-slate-500'
+                }`}
+              >
+                <div className="font-medium text-sm">{d.label}</div>
+                <div
+                  className={`mt-0.5 text-xs ${difficulty === d.value ? 'text-slate-300' : 'text-slate-500'}`}
+                >
+                  {d.hint}
+                </div>
+              </button>
+            ))}
           </div>
         </div>
 

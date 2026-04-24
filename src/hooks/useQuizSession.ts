@@ -10,6 +10,8 @@ type Action =
   | { type: 'start'; config: SessionConfig }
   | { type: 'submit'; attempt: Attempt }
   | { type: 'advance'; question: Question | null }
+  | { type: 'enterReview' }
+  | { type: 'exitReview' }
   | { type: 'reset' };
 
 function reducer(state: QuizSession, action: Action): QuizSession {
@@ -47,6 +49,10 @@ function reducer(state: QuizSession, action: Action): QuizSession {
         questionStartedAt: action.question ? Date.now() : null,
       };
     }
+    case 'enterReview':
+      return { ...state, status: 'reviewing' };
+    case 'exitReview':
+      return { ...state, status: 'finished' };
     case 'reset':
       return initialSession();
   }
@@ -61,6 +67,7 @@ function initialSession(): QuizSession {
       categories: [],
       plannedCount: 10,
       tolerancePreset: 'normal',
+      difficulty: 'intermediate',
     },
     attempts: [],
     currentIndex: 0,
@@ -79,6 +86,7 @@ export function useQuizSession() {
       categories: config.categories,
       mode: config.mode,
       tolerancePreset: config.tolerancePreset,
+      difficulty: config.difficulty,
     });
     dispatch({ type: 'start', config });
     dispatch({ type: 'advance', question: first });
@@ -99,6 +107,7 @@ export function useQuizSession() {
       const attempt: Attempt = {
         questionId: q.id,
         kind: q.kind,
+        question: q,
         userInput,
         expected: q.expected,
         correct,
@@ -123,15 +132,18 @@ export function useQuizSession() {
       categories: session.config.categories,
       mode: session.config.mode,
       tolerancePreset: session.config.tolerancePreset,
+      difficulty: session.config.difficulty,
     });
     dispatch({ type: 'advance', question: q });
   }, [session.currentIndex, session.config]);
 
   const reset = useCallback(() => dispatch({ type: 'reset' }), []);
+  const enterReview = useCallback(() => dispatch({ type: 'enterReview' }), []);
+  const exitReview = useCallback(() => dispatch({ type: 'exitReview' }), []);
 
   const stats = useMemo<SessionStats>(() => computeStats(session.attempts), [session.attempts]);
 
-  return { session, stats, start, submit, next, reset };
+  return { session, stats, start, submit, next, reset, enterReview, exitReview };
 }
 
 function computeStats(attempts: Attempt[]): SessionStats {

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import type { Question, UnitFormat } from '../types/question';
 import type { Attempt } from '../types/session';
 import {
@@ -10,6 +9,7 @@ import {
   formatUsdSigned,
 } from '../math/rounding';
 import { Button } from './ui/Button';
+import { SolutionDetails } from './SolutionDetails';
 
 function fmt(value: number, unit: UnitFormat): string {
   switch (unit) {
@@ -38,7 +38,6 @@ interface Props {
 export function FeedbackPanel({ question, attempt, onNext, isLast }: Props) {
   const correct = attempt.correct;
   const skipped = attempt.skipped;
-  const [expanded, setExpanded] = useState(!correct || skipped);
 
   const banner = skipped
     ? { label: 'Skipped', tone: 'bg-slate-100 border-slate-300 text-slate-700' }
@@ -71,32 +70,7 @@ export function FeedbackPanel({ question, attempt, onNext, isLast }: Props) {
         </div>
       </div>
 
-      <button
-        type="button"
-        onClick={() => setExpanded((v) => !v)}
-        className="text-sm text-slate-600 underline decoration-dotted hover:text-slate-900"
-      >
-        {expanded ? 'Hide math' : 'Show math'}
-      </button>
-
-      {expanded && (
-        <div className="space-y-3 rounded-lg border border-slate-200 bg-slate-50 p-4">
-          <div className="text-xs uppercase tracking-wide text-slate-500">Formula</div>
-          <div className="font-mono text-sm text-slate-800">{question.solution.formula}</div>
-          <div className="mt-3 space-y-2">
-            {question.solution.steps.map((step, i) => (
-              <div key={i} className="flex items-baseline justify-between gap-4 text-sm">
-                <div className="text-slate-500">{step.label}</div>
-                <div className="flex items-baseline gap-2 font-mono num">
-                  <span className="text-slate-500">{step.expression}</span>
-                  <span className="text-slate-400">=</span>
-                  <span className="font-medium text-slate-900">{step.result}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+      <SolutionDetails question={question} defaultOpen={!correct || skipped} />
 
       <div className="flex justify-end">
         <Button onClick={onNext}>

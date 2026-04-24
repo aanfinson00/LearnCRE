@@ -1,18 +1,22 @@
 import type { AnswerMode, Question, QuestionKind } from './question';
+export type { Question };
 
 export type TolerancePreset = 'strict' | 'normal' | 'loose';
+export type Difficulty = 'beginner' | 'intermediate' | 'advanced';
 
 export interface SessionConfig {
   mode: AnswerMode;
   categories: QuestionKind[];
   plannedCount: number | null;
   tolerancePreset: TolerancePreset;
+  difficulty: Difficulty;
   seed?: number;
 }
 
 export interface Attempt {
   questionId: string;
   kind: QuestionKind;
+  question: Question;
   userInput: number | null;
   expected: number;
   correct: boolean;
@@ -21,7 +25,7 @@ export interface Attempt {
   skipped: boolean;
 }
 
-export type SessionStatus = 'setup' | 'active' | 'answered' | 'finished';
+export type SessionStatus = 'setup' | 'active' | 'answered' | 'finished' | 'reviewing';
 
 export interface QuizSession {
   id: string;

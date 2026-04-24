@@ -42,13 +42,20 @@ export const vacancySensitivityTemplate: QuestionTemplate<'vacancySensitivity'> 
   label: 'Vacancy Sensitivity',
   description: 'Change in vacancy → value impact at given cap.',
   category: 'valuation',
-  generate(rng) {
-    const gpr = pickBand(rng, bands.gpr);
-    const otherIncome = pickBand(rng, bands.otherIncome);
-    const oldVac = pickBand(rng, bands.vacancy);
+  tips: [
+    'Each 1% of vacancy on (GPR + Other) hits NOI by 1% × gross → value by gross/cap × 0.01.',
+    'Quick formula: ΔValue per 1% vacancy = gross × (1/cap) / 100. At 5% cap that\'s gross × 0.20.',
+    '$5M gross × 2% vacancy increase at 6% cap: $100k NOI drop → $100k × 16.67 ≈ $1.67M value loss.',
+    'Sandwich for ugly caps: compute at the clean caps above and below (e.g. 6% and 7%), then interpolate.',
+    'Vacancy hits gross income (rent + other), not EGI — so sensitivity scales with the TOP line, not NOI.',
+  ],
+  generate(rng, difficulty = 'intermediate') {
+    const gpr = pickBand(rng, bands.gpr, difficulty);
+    const otherIncome = pickBand(rng, bands.otherIncome, difficulty);
+    const oldVac = pickBand(rng, bands.vacancy, difficulty);
     const vacDelta = rng.pickFromSet(discreteMoves.vacancyMoves);
-    const newVac = clampToBand(oldVac + vacDelta, bands.vacancy);
-    const cap = pickBand(rng, bands.capRate);
+    const newVac = clampToBand(oldVac + vacDelta, bands.vacancy, difficulty);
+    const cap = pickBand(rng, bands.capRate, difficulty);
     const noiDelta = vacancyNoiDelta({ gpr, otherIncome, oldVacancy: oldVac, newVacancy: newVac });
     const valueDelta = valueDeltaFromNoiDelta(noiDelta, cap);
 
