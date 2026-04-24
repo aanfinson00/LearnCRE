@@ -1,8 +1,16 @@
 import type { AnswerMode, Question, QuestionKind, Rng } from '../types/question';
-import type { AssetClass, Attempt, Difficulty, DifficultyMode, TolerancePreset } from '../types/session';
+import type {
+  AssetClass,
+  Attempt,
+  Difficulty,
+  DifficultyMode,
+  LifetimeStats,
+  TolerancePreset,
+} from '../types/session';
 import { buildChoices } from './distractors';
 import { computeDynamicDifficulty } from './dynamic';
 import { createRng } from './random';
+import { pickKindWeighted } from './spacedRepetition';
 import { templates } from './templates';
 import { applyPreset } from './tolerance';
 
@@ -22,12 +30,16 @@ export function generateQuestion(params: {
   assetClass?: AssetClass;
   attempts?: Attempt[];
   rng?: Rng;
+  spacedRepetition?: boolean;
+  lifetimeStats?: LifetimeStats | null;
 }): Question {
   const rng = params.rng ?? createRng();
   if (params.categories.length === 0) {
     throw new Error('At least one category required');
   }
-  const kind = params.categories[Math.floor(rng.next() * params.categories.length)];
+  const kind = params.spacedRepetition
+    ? pickKindWeighted(params.categories, params.lifetimeStats ?? null, rng)
+    : params.categories[Math.floor(rng.next() * params.categories.length)];
   const template = templates[kind];
   const appliedDifficulty = resolveDifficulty(params.difficulty, params.attempts);
   const question = template.generate(rng, appliedDifficulty, params.assetClass ?? 'mixed');
