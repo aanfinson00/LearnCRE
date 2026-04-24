@@ -9,6 +9,8 @@ import { devSpreadTemplate } from './devSpread';
 import { dscrLoanSizingTemplate } from './dscrLoanSizing';
 import { equityMultipleTemplate } from './equityMultiple';
 import { goingInCapTemplate } from './goingInCap';
+import { grossRentMultiplierTemplate } from './grossRentMultiplier';
+import { loanConstantTemplate } from './loanConstant';
 import { irrSimpleTemplate } from './irrSimple';
 import { leveredIrrTemplate } from './leveredIrr';
 import { netEffectiveRentTemplate } from './netEffectiveRent';
@@ -51,6 +53,8 @@ export const templates: Record<QuestionKind, QuestionTemplate> = {
   tiPayback: tiPaybackTemplate,
   rentRollChange: rentRollChangeTemplate,
   taxReassessment: taxReassessmentTemplate,
+  grossRentMultiplier: grossRentMultiplierTemplate,
+  loanConstant: loanConstantTemplate,
 };
 
 export const allKinds: QuestionKind[] = [
@@ -79,4 +83,6 @@ export const allKinds: QuestionKind[] = [
   'tiPayback',
   'rentRollChange',
   'taxReassessment',
+  'grossRentMultiplier',
+  'loanConstant',
 ];

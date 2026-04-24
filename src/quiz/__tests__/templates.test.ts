@@ -23,6 +23,7 @@ import {
   breakEvenOccupancy,
   cashOnCash,
   leveredIrrApprox,
+  loanConstant,
   maxLoanByDebtYield,
   maxLoanByDscr,
 } from '../../math/debt';
@@ -276,6 +277,15 @@ describe('quiz/templates', () => {
               }),
               4,
             );
+            break;
+          }
+          case 'grossRentMultiplier': {
+            expect(q.expected).toBeCloseTo(ctx.purchasePrice! / ctx.pgi!, 8);
+            break;
+          }
+          case 'loanConstant': {
+            const bps = Math.round(loanConstant(ctx.interestRate!, ctx.amortYears!) * 10_000);
+            expect(q.expected).toBe(bps);
             break;
           }
         }

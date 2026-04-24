@@ -26,7 +26,9 @@ export type QuestionKind =
   | 'tiVsRent'
   | 'tiPayback'
   | 'rentRollChange'
-  | 'taxReassessment';
+  | 'taxReassessment'
+  | 'grossRentMultiplier'
+  | 'loanConstant';
 
 export type UnitFormat = 'usd' | 'pct' | 'bps' | 'pctChange' | 'usdChange' | 'multiple' | 'usdPerSf';
 

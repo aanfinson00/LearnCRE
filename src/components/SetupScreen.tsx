@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { templates, allKinds } from '../quiz/templates';
 import type { QuestionKind, AnswerMode } from '../types/question';
 import type { DifficultyMode, SessionConfig, TolerancePreset, LifetimeStats } from '../types/session';
+import { AnchorsCard } from './AnchorsCard';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
 import { loadConfig, loadLifetime, saveConfig } from '../storage/localStorage';
@@ -271,6 +272,8 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill }: Props) {
           </Button>
         </div>
       </Card>
+
+      <AnchorsCard />
 
       <footer className="text-center text-xs text-slate-400">
         Enter submits. S skips. 1–4 picks MC choices.
