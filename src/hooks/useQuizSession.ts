@@ -87,6 +87,7 @@ export function useQuizSession() {
       mode: config.mode,
       tolerancePreset: config.tolerancePreset,
       difficulty: config.difficulty,
+      attempts: [],
     });
     dispatch({ type: 'start', config });
     dispatch({ type: 'advance', question: first });
@@ -133,9 +134,10 @@ export function useQuizSession() {
       mode: session.config.mode,
       tolerancePreset: session.config.tolerancePreset,
       difficulty: session.config.difficulty,
+      attempts: session.attempts,
     });
     dispatch({ type: 'advance', question: q });
-  }, [session.currentIndex, session.config]);
+  }, [session.currentIndex, session.config, session.attempts]);
 
   const reset = useCallback(() => dispatch({ type: 'reset' }), []);
   const enterReview = useCallback(() => dispatch({ type: 'enterReview' }), []);

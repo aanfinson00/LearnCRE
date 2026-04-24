@@ -1,7 +1,7 @@
 import { vacancyNoiDelta, valueDeltaFromNoiDelta } from '../../math/sensitivity';
 import { formatPct, formatUsd, formatUsdSigned } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
-import { bands, clampToBand, discreteMoves, pickBand } from '../bands';
+import { applyMove, bands, discreteMoves, pickBand } from '../bands';
 import { nextId } from '../random';
 
 function buildSolution(
@@ -54,7 +54,7 @@ export const vacancySensitivityTemplate: QuestionTemplate<'vacancySensitivity'> 
     const otherIncome = pickBand(rng, bands.otherIncome, difficulty);
     const oldVac = pickBand(rng, bands.vacancy, difficulty);
     const vacDelta = rng.pickFromSet(discreteMoves.vacancyMoves);
-    const newVac = clampToBand(oldVac + vacDelta, bands.vacancy, difficulty);
+    const newVac = applyMove(oldVac, vacDelta, bands.vacancy, difficulty);
     const cap = pickBand(rng, bands.capRate, difficulty);
     const noiDelta = vacancyNoiDelta({ gpr, otherIncome, oldVacancy: oldVac, newVacancy: newVac });
     const valueDelta = valueDeltaFromNoiDelta(noiDelta, cap);

@@ -118,6 +118,27 @@ describe('quiz/templates', () => {
     }
   });
 
+  it('capCompression never produces equal old/new caps (even at band edges)', () => {
+    for (const difficulty of ['beginner', 'intermediate', 'advanced'] as const) {
+      const rng = createRng(42);
+      for (let i = 0; i < 5_000; i++) {
+        const q = templates.capCompression.generate(rng, difficulty);
+        expect(q.context.capRate).not.toBe(q.context.newCapRate);
+        expect(q.expected).not.toBe(0);
+      }
+    }
+  });
+
+  it('vacancySensitivity never produces equal old/new vacancy', () => {
+    for (const difficulty of ['beginner', 'intermediate', 'advanced'] as const) {
+      const rng = createRng(55);
+      for (let i = 0; i < 2_000; i++) {
+        const q = templates.vacancySensitivity.generate(rng, difficulty);
+        expect(q.context.oldVacancy).not.toBe(q.context.newVacancy);
+      }
+    }
+  });
+
   it('every question has a solution with matching answerDisplay', () => {
     for (const kind of allKinds) {
       const template = templates[kind];

@@ -113,6 +113,11 @@ export function ReviewScreen({ attempts, onBack }: Props) {
           >
             {template.category}
           </span>
+          {current.question.appliedDifficulty && (
+            <span className="inline-flex items-center rounded-full bg-slate-50 px-2.5 py-0.5 text-xs text-slate-600 border border-slate-200">
+              {current.question.appliedDifficulty}
+            </span>
+          )}
           <span className="ml-auto font-mono text-xs text-slate-400 num">
             {(current.elapsedMs / 1000).toFixed(1)}s
           </span>

@@ -91,7 +91,12 @@ export function QuizScreen({ session, stats, onSubmit, onNext, onQuit }: Props) 
   return (
     <div className="mx-auto max-w-3xl space-y-5 py-6">
       <div className="flex items-center justify-between">
-        <StatsBar stats={stats} currentIndex={session.currentIndex} plannedCount={total} />
+        <StatsBar
+          stats={stats}
+          currentIndex={session.currentIndex}
+          plannedCount={total}
+          level={session.config.difficulty === 'dynamic' ? q.appliedDifficulty : undefined}
+        />
         <Button variant="ghost" onClick={onQuit} className="text-xs">
           Quit
         </Button>
