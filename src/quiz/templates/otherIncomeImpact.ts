@@ -1,6 +1,7 @@
 import { otherIncomeValueDelta } from '../../math/sensitivity';
 import { formatPct, formatUsd, formatUsdSigned } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
+import { bands, discreteMoves, pickBand } from '../bands';
 import { nextId } from '../random';
 
 function buildSolution(delta: number, vac: number, cap: number, valueDelta: number): Solution {
@@ -29,9 +30,9 @@ export const otherIncomeImpactTemplate: QuestionTemplate<'otherIncomeImpact'> = 
   description: 'Adding other income → value uplift at given cap.',
   category: 'valuation',
   generate(rng) {
-    const delta = rng.pickRange(25_000, 500_000, { step: 25_000 });
-    const vac = rng.pickFromSet([0, 0.03, 0.05, 0.07] as const);
-    const cap = rng.pickRange(0.045, 0.075, { step: 0.0025 });
+    const delta = pickBand(rng, bands.otherIncomeDelta);
+    const vac = rng.pickFromSet(discreteMoves.vacancySet);
+    const cap = pickBand(rng, bands.capRate);
     const valueDelta = otherIncomeValueDelta({
       otherIncomeDelta: delta,
       vacancyRate: vac,

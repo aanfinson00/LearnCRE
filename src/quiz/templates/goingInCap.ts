@@ -1,6 +1,7 @@
 import { capRate } from '../../math/core';
 import { formatBps, formatPct, formatUsd } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
+import { bands, pickBand } from '../bands';
 import { nextId } from '../random';
 
 function buildSolution(price: number, noi: number): Solution {
@@ -24,9 +25,10 @@ export const goingInCapTemplate: QuestionTemplate<'goingInCap'> = {
   description: 'Price + NOI → cap rate in bps.',
   category: 'valuation',
   generate(rng) {
-    const cap = rng.pickRange(0.045, 0.08, { step: 0.0025 });
-    const noi = rng.pickRange(500_000, 8_000_000, { step: 25_000 });
-    const price = Math.round(noi / cap / 50_000) * 50_000;
+    const cap = pickBand(rng, bands.capRate);
+    const noi = pickBand(rng, bands.noi);
+    const priceStep = 100_000;
+    const price = Math.round(noi / cap / priceStep) * priceStep;
     const actualCap = capRate(price, noi);
     const expectedBps = Math.round(actualCap * 10_000);
 

@@ -1,6 +1,7 @@
 import { egi, noi, value } from '../../math/core';
 import { formatPct, formatUsd } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
+import { bands, discreteMoves, pickBand } from '../bands';
 import { nextId } from '../random';
 
 function buildSolution(
@@ -42,12 +43,12 @@ export const combinedScenarioTemplate: QuestionTemplate<'combinedScenario'> = {
   description: 'Full proforma → implied value.',
   category: 'valuation',
   generate(rng) {
-    const gpr = rng.pickRange(1_000_000, 6_000_000, { step: 100_000 });
-    const other = rng.pickRange(0, 400_000, { step: 25_000 });
-    const vac = rng.pickFromSet([0.03, 0.05, 0.07] as const);
-    const opexRatio = rng.pickFromSet([0.35, 0.4, 0.45] as const);
-    const opex = Math.round((gpr + other) * opexRatio * (1 - vac) / 10_000) * 10_000;
-    const cap = rng.pickRange(0.05, 0.075, { step: 0.0025 });
+    const gpr = pickBand(rng, bands.gpr);
+    const other = pickBand(rng, bands.otherIncome);
+    const vac = rng.pickFromSet(discreteMoves.vacancySetNonZero);
+    const opexRatio = rng.pickFromSet(discreteMoves.opexRatios);
+    const opex = Math.round(((gpr + other) * opexRatio * (1 - vac)) / 10_000) * 10_000;
+    const cap = pickBand(rng, bands.capRate);
     const v = value(noi({ gpr, otherIncome: other, vacancyRate: vac, opex }), cap);
 
     return {

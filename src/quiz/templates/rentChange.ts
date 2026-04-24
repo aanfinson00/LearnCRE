@@ -1,6 +1,7 @@
 import { rentNoiDelta, valueDeltaFromNoiDelta } from '../../math/sensitivity';
 import { formatPct, formatUsd, formatUsdSigned } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
+import { bands, discreteMoves, pickBand } from '../bands';
 import { nextId } from '../random';
 
 function buildSolution(
@@ -34,11 +35,11 @@ export const rentChangeTemplate: QuestionTemplate<'rentChange'> = {
   description: 'Rent $ change at given cap/vacancy → value impact.',
   category: 'valuation',
   generate(rng) {
-    const oldRent = rng.pickRange(1_000_000, 6_000_000, { step: 100_000 });
-    const rentMove = rng.pickFromSet([-100_000, -50_000, 50_000, 100_000, 150_000, 250_000] as const);
+    const oldRent = pickBand(rng, bands.rentLevel);
+    const rentMove = rng.pickFromSet(discreteMoves.rentMoves);
     const newRent = oldRent + rentMove;
-    const vac = rng.pickFromSet([0.03, 0.05, 0.07] as const);
-    const cap = rng.pickRange(0.045, 0.07, { step: 0.0025 });
+    const vac = rng.pickFromSet(discreteMoves.vacancySetNonZero);
+    const cap = pickBand(rng, bands.capRate);
     const noiDelta = rentNoiDelta({ oldRent, newRent, vacancyRate: vac });
     const valueDelta = valueDeltaFromNoiDelta(noiDelta, cap);
 

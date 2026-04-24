@@ -1,6 +1,7 @@
 import { requiredMultiple } from '../../math/returns';
 import { formatMultiple, formatPct, formatYears } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
+import { bands, discreteMoves } from '../bands';
 import { nextId } from '../random';
 
 function buildSolution(irr: number, years: number): Solution {
@@ -24,10 +25,8 @@ export const targetMultipleTemplate: QuestionTemplate<'targetMultiple'> = {
   description: 'Target IRR + years → required EM.',
   category: 'returns',
   generate(rng) {
-    const irr = rng.pickFromSet([
-      0.1, 0.12, 0.125, 0.14, 0.15, 0.17, 0.18, 0.2, 0.22, 0.25,
-    ] as const);
-    const years = rng.pickInt(3, 8);
+    const irr = rng.pickFromSet(discreteMoves.targetIrrs);
+    const years = rng.pickInt(bands.holdYears.min, bands.holdYears.max);
     const expected = requiredMultiple(irr, years);
 
     return {

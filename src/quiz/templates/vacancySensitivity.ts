@@ -1,6 +1,7 @@
 import { vacancyNoiDelta, valueDeltaFromNoiDelta } from '../../math/sensitivity';
 import { formatPct, formatUsd, formatUsdSigned } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
+import { bands, clampToBand, discreteMoves, pickBand } from '../bands';
 import { nextId } from '../random';
 
 function buildSolution(
@@ -42,12 +43,12 @@ export const vacancySensitivityTemplate: QuestionTemplate<'vacancySensitivity'> 
   description: 'Change in vacancy → value impact at given cap.',
   category: 'valuation',
   generate(rng) {
-    const gpr = rng.pickRange(1_000_000, 8_000_000, { step: 100_000 });
-    const otherIncome = rng.pickRange(0, 500_000, { step: 25_000 });
-    const oldVac = rng.pickRange(0.03, 0.1, { step: 0.005 });
-    const vacDelta = rng.pickFromSet([-0.03, -0.02, -0.01, 0.01, 0.02, 0.03] as const);
-    const newVac = Math.max(0.01, Math.min(0.15, Math.round((oldVac + vacDelta) * 1000) / 1000));
-    const cap = rng.pickRange(0.05, 0.07, { step: 0.0025 });
+    const gpr = pickBand(rng, bands.gpr);
+    const otherIncome = pickBand(rng, bands.otherIncome);
+    const oldVac = pickBand(rng, bands.vacancy);
+    const vacDelta = rng.pickFromSet(discreteMoves.vacancyMoves);
+    const newVac = clampToBand(oldVac + vacDelta, bands.vacancy);
+    const cap = pickBand(rng, bands.capRate);
     const noiDelta = vacancyNoiDelta({ gpr, otherIncome, oldVacancy: oldVac, newVacancy: newVac });
     const valueDelta = valueDeltaFromNoiDelta(noiDelta, cap);
 

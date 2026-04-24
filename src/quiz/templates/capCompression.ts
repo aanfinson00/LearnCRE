@@ -2,6 +2,7 @@ import { value } from '../../math/core';
 import { capCompressionPctChange } from '../../math/sensitivity';
 import { formatPct, formatPctChange, formatUsd } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
+import { bands, clampToBand, discreteMoves, pickBand } from '../bands';
 import { nextId } from '../random';
 
 function buildSolution(noi: number, oldCap: number, newCap: number): Solution {
@@ -37,11 +38,10 @@ export const capCompressionTemplate: QuestionTemplate<'capCompression'> = {
   description: 'How does value change when cap rate tightens or widens?',
   category: 'valuation',
   generate(rng) {
-    const noi = rng.pickRange(500_000, 10_000_000, { step: 50_000 });
-    const oldCap = rng.pickRange(0.045, 0.075, { step: 0.0005 });
-    const capMove = rng.pickFromSet([-0.0075, -0.005, -0.0025, 0.0025, 0.005, 0.0075] as const);
-    let newCap = oldCap + capMove;
-    newCap = Math.round(newCap * 10_000) / 10_000;
+    const noi = pickBand(rng, bands.noi);
+    const oldCap = pickBand(rng, bands.capRate);
+    const capMove = rng.pickFromSet(discreteMoves.capMoves);
+    const newCap = clampToBand(oldCap + capMove, bands.capRate);
     const expected = capCompressionPctChange(oldCap, newCap);
 
     return {
