@@ -7,7 +7,7 @@ import type { Question } from '../types/question';
 import { nextId } from '../quiz/random';
 
 type Action =
-  | { type: 'start'; config: SessionConfig }
+  | { type: 'start'; config: SessionConfig; question: Question }
   | { type: 'submit'; attempt: Attempt }
   | { type: 'advance'; question: Question | null }
   | { type: 'endSession' }
@@ -24,8 +24,8 @@ function reducer(state: QuizSession, action: Action): QuizSession {
         config: action.config,
         attempts: [],
         currentIndex: 0,
-        currentQuestion: null,
-        questionStartedAt: null,
+        currentQuestion: action.question,
+        questionStartedAt: Date.now(),
         status: 'active',
         lastAttempt: null,
       };
@@ -94,8 +94,7 @@ export function useQuizSession() {
       assetClass: config.assetClass,
       attempts: [],
     });
-    dispatch({ type: 'start', config });
-    dispatch({ type: 'advance', question: first });
+    dispatch({ type: 'start', config, question: first });
   }, []);
 
   const submit = useCallback(

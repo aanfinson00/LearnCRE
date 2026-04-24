@@ -46,11 +46,11 @@ export function FeedbackPanel({ question, attempt, onNext, isLast }: Props) {
     ? { label: 'Skipped', tone: 'bg-warm-paper border-warm-line text-warm-ink' }
     : correct
       ? {
-          label: `Correct  (off by ${formatPctChange(attempt.deltaPct)})`,
+          label: `Correct  (within ${formatPctChange(Math.abs(attempt.deltaPct))})`,
           tone: 'bg-signal-good/10 border-signal-good/60 text-signal-good-ink',
         }
       : {
-          label: `Off by ${formatPctChange(attempt.deltaPct)}`,
+          label: `Missed — off by ${formatPctChange(attempt.deltaPct)}`,
           tone: 'bg-signal-bad/10 border-signal-bad/60 text-signal-bad-ink',
         };
 

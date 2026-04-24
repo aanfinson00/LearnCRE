@@ -10,7 +10,7 @@ interface Props {
 
 export function SolutionDetails({ question, defaultOpen = true, showTipsByDefault = false }: Props) {
   const [showMath, setShowMath] = useState(defaultOpen);
-  const [showTips, setShowTips] = useState(showTipsByDefault);
+  const [showTips, setShowTips] = useState(showTipsByDefault || defaultOpen);
   const tips = templates[question.kind].tips;
 
   const template = templates[question.kind];
