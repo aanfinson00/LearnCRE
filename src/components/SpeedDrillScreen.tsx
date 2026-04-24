@@ -80,6 +80,15 @@ export function SpeedDrillScreen({ state, currentCell, onSelect, onSubmit, onFin
         e.key === 'ArrowRight'
       ) {
         if (currentCell === null) return;
+        // Let the input handle arrow keys when the user is actively typing,
+        // so caret movement inside the cell input still works normally.
+        const target = e.target as HTMLElement | null;
+        if (
+          target?.tagName === 'INPUT' &&
+          (target as HTMLInputElement).value.length > 0
+        ) {
+          return;
+        }
         const dr = e.key === 'ArrowUp' ? -1 : e.key === 'ArrowDown' ? 1 : 0;
         const dc = e.key === 'ArrowLeft' ? -1 : e.key === 'ArrowRight' ? 1 : 0;
         const next = firstNonDiagonalInDir(currentCell.row, currentCell.col, dr, dc);
