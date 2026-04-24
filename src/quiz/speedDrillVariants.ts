@@ -98,11 +98,126 @@ const noiCapToValueVariant: DrillVariant = {
   inputHint: 'e.g. 20000000',
 };
 
+const percentOfVariant: DrillVariant = {
+  id: 'percentOf',
+  name: 'A × B%  (percent of a number)',
+  description: 'Rows = dollar amount, columns = percent. Cell = A × B%.',
+  rowAxis: {
+    label: '$ amount',
+    values: [100_000, 500_000, 1_000_000, 2_500_000, 5_000_000, 10_000_000],
+    format: formatUsd,
+  },
+  colAxis: {
+    label: 'Percent',
+    values: [0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.1],
+    format: (v) => formatPct(v, 0),
+  },
+  computeCell: (a, b) => a * b,
+  unit: 'usd',
+  toleranceBand: 0.03,
+  isDiagonalZero: false,
+  formulaLabel: 'answer = A × B',
+  inputHint: 'e.g. 300000',
+};
+
+const divideByVariant: DrillVariant = {
+  id: 'divideBy',
+  name: 'A / B%  (dollars over a rate)',
+  description: 'Rows = dollar amount, columns = percent. Cell = A / B%.',
+  rowAxis: {
+    label: '$ amount',
+    values: [50_000, 100_000, 250_000, 500_000, 1_000_000, 2_500_000],
+    format: formatUsd,
+  },
+  colAxis: {
+    label: 'Percent',
+    values: [0.04, 0.05, 0.06, 0.07, 0.08, 0.1],
+    format: (v) => formatPct(v, 0),
+  },
+  computeCell: (a, b) => a / b,
+  unit: 'usd',
+  toleranceBand: 0.03,
+  isDiagonalZero: false,
+  formulaLabel: 'answer = A / B',
+  inputHint: 'e.g. 8330000',
+};
+
+const combinedDiscountVariant: DrillVariant = {
+  id: 'combinedDiscount',
+  name: '(1−A) × (1−B)  (stacked haircuts)',
+  description: 'Rows = A%, columns = B%. Cell = (1 − A) × (1 − B).',
+  rowAxis: {
+    label: 'A',
+    values: [0.02, 0.03, 0.05, 0.07, 0.1, 0.15],
+    format: (v) => formatPct(v, 0),
+  },
+  colAxis: {
+    label: 'B',
+    values: [0.3, 0.35, 0.4, 0.45, 0.5],
+    format: (v) => formatPct(v, 0),
+  },
+  computeCell: (a, b) => (1 - a) * (1 - b),
+  unit: 'pct',
+  toleranceBand: 0.02,
+  isDiagonalZero: false,
+  formulaLabel: 'answer = (1 − A) × (1 − B)',
+  inputHint: 'e.g. 57 for 57%',
+};
+
+const nthRootVariant: DrillVariant = {
+  id: 'nthRoot',
+  name: 'A^(1/B) − 1  (rate from multiple + periods)',
+  description: 'Rows = multiple, columns = periods. Cell = A^(1/B) − 1.',
+  rowAxis: {
+    label: 'Multiple',
+    values: [1.25, 1.5, 1.75, 2.0, 2.5, 3.0],
+    format: (v) => formatMultiple(v, 2),
+  },
+  colAxis: {
+    label: 'Periods',
+    values: [3, 5, 7, 10],
+    format: formatYears,
+  },
+  computeCell: (mult, n) => Math.pow(mult, 1 / n) - 1,
+  unit: 'pct',
+  toleranceBand: 0.05,
+  isDiagonalZero: false,
+  formulaLabel: 'answer = A^(1/B) − 1',
+  inputHint: 'e.g. 14.9 for 14.9%',
+};
+
+const reciprocalVariant: DrillVariant = {
+  id: 'reciprocalTable',
+  name: '1 / N  (integer reciprocals as %)',
+  description: 'Rows = integer group, columns = offset. Cell = 1 / (row+col).',
+  rowAxis: {
+    label: 'Base',
+    values: [2, 8, 16],
+    format: (v) => `${v}`,
+  },
+  colAxis: {
+    label: '+offset',
+    values: [0, 1, 2, 3, 4, 5],
+    format: (v) => `+${v}`,
+  },
+  computeCell: (base, offset) => 1 / (base + offset),
+  unit: 'pct',
+  toleranceBand: 0.02,
+  isDiagonalZero: false,
+  formulaLabel: 'answer = 1 / (row + col)',
+  inputHint: 'e.g. 12.5 for 1/8',
+};
+
 export const variants: Record<DrillVariantId, DrillVariant> = {
   capCompression: capCompressionVariant,
   irrToEm: irrToEmVariant,
   loanConstant: loanConstantVariant,
   noiCapToValue: noiCapToValueVariant,
+  percentOf: percentOfVariant,
+  divideBy: divideByVariant,
+  combinedDiscount: combinedDiscountVariant,
+  nthRoot: nthRootVariant,
+  reciprocalTable: reciprocalVariant,
 };
 
 export const variantOrder: DrillVariantId[] = [
@@ -110,6 +225,11 @@ export const variantOrder: DrillVariantId[] = [
   'irrToEm',
   'loanConstant',
   'noiCapToValue',
+  'percentOf',
+  'divideBy',
+  'combinedDiscount',
+  'nthRoot',
+  'reciprocalTable',
 ];
 
 export const CAP_PRESETS = {

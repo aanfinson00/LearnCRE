@@ -6,7 +6,12 @@ export type DrillVariantId =
   | 'capCompression'
   | 'irrToEm'
   | 'loanConstant'
-  | 'noiCapToValue';
+  | 'noiCapToValue'
+  | 'percentOf'
+  | 'divideBy'
+  | 'combinedDiscount'
+  | 'nthRoot'
+  | 'reciprocalTable';
 
 export interface DrillVariantAxis {
   label: string;
