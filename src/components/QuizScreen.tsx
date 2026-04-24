@@ -203,6 +203,24 @@ export function QuizScreen({ session, stats, onSubmit, onNext, onEnd, onQuit }: 
           />
         )}
       </Card>
+
+      <div className="text-center font-mono text-[11px] text-warm-mute num">
+        {isAnswered ? (
+          <>
+            <span className="text-warm-stone">↵</span> {isLast ? 'see results' : 'next question'}
+          </>
+        ) : q.choices ? (
+          <>
+            <span className="text-warm-stone">1–4</span> pick answer ·{' '}
+            <span className="text-warm-stone">S</span> skip
+          </>
+        ) : (
+          <>
+            <span className="text-warm-stone">↵</span> submit ·{' '}
+            <span className="text-warm-stone">S</span> skip
+          </>
+        )}
+      </div>
     </div>
   );
 }
