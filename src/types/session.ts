@@ -14,6 +14,7 @@ export interface SessionConfig {
   tolerancePreset: TolerancePreset;
   difficulty: DifficultyMode;
   assetClass: AssetClass;
+  spacedRepetition?: boolean;
   seed?: number;
 }
 

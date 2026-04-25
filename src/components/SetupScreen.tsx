@@ -3,6 +3,7 @@ import { templates, allKinds } from '../quiz/templates';
 import type { QuestionKind, AnswerMode } from '../types/question';
 import type { AssetClass, DifficultyMode, SessionConfig, TolerancePreset, LifetimeStats } from '../types/session';
 import { applicableKinds, assetClassOrder, assetClasses } from '../quiz/assetClasses';
+import { mistakeCounts, recentMissKinds } from '../storage/mistakeBank';
 import { AnchorsCard } from './AnchorsCard';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
@@ -10,8 +11,6 @@ import { loadConfig, loadLifetime, saveConfig } from '../storage/localStorage';
 
 interface Props {
   onStart: (config: SessionConfig) => void;
-  onSwitchToSpeedDrill?: () => void;
-  onSwitchToStudy?: () => void;
 }
 
 const LENGTHS: { label: string; value: number | null }[] = [
@@ -19,6 +18,17 @@ const LENGTHS: { label: string; value: number | null }[] = [
   { label: '20', value: 20 },
   { label: '50', value: 50 },
   { label: 'Endless', value: null },
+];
+
+const FOUNDATIONS: QuestionKind[] = [
+  'capCompression',
+  'goingInCap',
+  'vacancySensitivity',
+  'otherIncomeImpact',
+  'rentChange',
+  'combinedScenario',
+  'equityMultiple',
+  'irrSimple',
 ];
 
 const MODES: { label: string; value: AnswerMode; hint: string }[] = [
@@ -59,10 +69,10 @@ function ParcelMark({ accent = 4 }: { accent?: number }) {
   );
 }
 
-export function SetupScreen({ onStart, onSwitchToSpeedDrill, onSwitchToStudy }: Props) {
+export function SetupScreen({ onStart }: Props) {
   const stored = useMemo(() => loadConfig(), []);
   const [categories, setCategories] = useState<Set<QuestionKind>>(
-    new Set(stored?.categories ?? allKinds),
+    new Set(stored?.categories ?? FOUNDATIONS),
   );
   const [mode, setMode] = useState<AnswerMode>(stored?.mode ?? 'free');
   const [plannedCount, setPlannedCount] = useState<number | null>(
@@ -71,7 +81,10 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill, onSwitchToStudy }: 
   const [tolerance, setTolerance] = useState<TolerancePreset>(stored?.tolerancePreset ?? 'normal');
   const [difficulty, setDifficulty] = useState<DifficultyMode>(stored?.difficulty ?? 'intermediate');
   const [assetClass, setAssetClass] = useState<AssetClass>(stored?.assetClass ?? 'mixed');
+  const [spacedRepetition, setSpacedRepetition] = useState<boolean>(stored?.spacedRepetition ?? false);
   const [lifetime, setLifetime] = useState<LifetimeStats | null>(null);
+  const [missKinds, setMissKinds] = useState<QuestionKind[]>([]);
+  const [missByKind, setMissByKind] = useState<Record<string, number>>({});
 
   const visibleKinds = useMemo(() => applicableKinds(assetClass, allKinds), [assetClass]);
 
@@ -88,6 +101,8 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill, onSwitchToStudy }: 
 
   useEffect(() => {
     setLifetime(loadLifetime());
+    setMissKinds(recentMissKinds());
+    setMissByKind(mistakeCounts());
   }, []);
 
   const toggle = (kind: QuestionKind) => {
@@ -105,8 +120,15 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill, onSwitchToStudy }: 
     setCategories(new Set(visibleKinds.filter((k) => templates[k].category === 'valuation')));
   const selectReturns = () =>
     setCategories(new Set(visibleKinds.filter((k) => templates[k].category === 'returns')));
+  const selectFoundations = () =>
+    setCategories(new Set(visibleKinds.filter((k) => FOUNDATIONS.includes(k))));
+  const selectMisses = () => {
+    const visibleSet = new Set(visibleKinds);
+    setCategories(new Set(missKinds.filter((k) => visibleSet.has(k))));
+  };
 
   const canStart = categories.size > 0;
+  const visibleMissCount = missKinds.filter((k) => visibleKinds.includes(k)).length;
 
   const start = () => {
     const config: SessionConfig = {
@@ -116,13 +138,14 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill, onSwitchToStudy }: 
       tolerancePreset: tolerance,
       difficulty,
       assetClass,
+      spacedRepetition,
     };
     saveConfig(config);
     onStart(config);
   };
 
   return (
-    <div className="mx-auto max-w-3xl space-y-8 py-12">
+    <div className="mx-auto max-w-3xl space-y-8 py-12 pb-32 sm:pb-12">
       <header className="flex items-start justify-between gap-6">
         <div className="space-y-3">
           <h1 className="display text-5xl text-warm-black">
@@ -135,32 +158,6 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill, onSwitchToStudy }: 
         </div>
         <ParcelMark />
       </header>
-
-      {(onSwitchToSpeedDrill || onSwitchToStudy) && (
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="rounded-md bg-warm-black px-3 py-1.5 text-xs font-medium text-warm-white">
-            Quiz
-          </span>
-          {onSwitchToSpeedDrill && (
-            <button
-              type="button"
-              onClick={onSwitchToSpeedDrill}
-              className="rounded-md border border-warm-line bg-warm-white/70 px-3 py-1.5 text-xs font-medium text-warm-ink transition-all duration-aa ease-aa hover:border-copper hover:text-copper-deep"
-            >
-              Times-table speed drill →
-            </button>
-          )}
-          {onSwitchToStudy && (
-            <button
-              type="button"
-              onClick={onSwitchToStudy}
-              className="rounded-md border border-warm-line bg-warm-white/70 px-3 py-1.5 text-xs font-medium text-warm-ink transition-all duration-aa ease-aa hover:border-copper hover:text-copper-deep"
-            >
-              Study tables →
-            </button>
-          )}
-        </div>
-      )}
 
       <Card className="space-y-6">
         <div>
@@ -197,9 +194,9 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill, onSwitchToStudy }: 
             <h2 className="text-sm font-medium uppercase tracking-widest text-warm-stone">
               Categories
             </h2>
-            <div className="flex gap-1 text-xs">
-              <button className="text-warm-mute transition-colors duration-aa-fast ease-aa hover:text-copper" onClick={selectAll}>
-                All
+            <div className="flex flex-wrap gap-1 text-xs">
+              <button className="text-copper-deep font-medium transition-colors duration-aa-fast ease-aa hover:text-copper" onClick={selectFoundations}>
+                Foundations
               </button>
               <span className="text-warm-line">·</span>
               <button className="text-warm-mute transition-colors duration-aa-fast ease-aa hover:text-copper" onClick={selectValuation}>
@@ -210,9 +207,25 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill, onSwitchToStudy }: 
                 Returns
               </button>
               <span className="text-warm-line">·</span>
+              <button className="text-warm-mute transition-colors duration-aa-fast ease-aa hover:text-copper" onClick={selectAll}>
+                All
+              </button>
+              <span className="text-warm-line">·</span>
               <button className="text-warm-mute transition-colors duration-aa-fast ease-aa hover:text-copper" onClick={selectNone}>
                 None
               </button>
+              {visibleMissCount > 0 && (
+                <>
+                  <span className="text-warm-line">·</span>
+                  <button
+                    className="font-medium text-signal-bad-ink transition-colors duration-aa-fast ease-aa hover:text-copper"
+                    onClick={selectMisses}
+                    title="Pick only the kinds you've missed recently"
+                  >
+                    Review missed ({visibleMissCount})
+                  </button>
+                </>
+              )}
             </div>
           </div>
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
@@ -224,6 +237,7 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill, onSwitchToStudy }: 
                 catStats && catStats.total > 0
                   ? `  ·  lifetime ${Math.round((catStats.correct / catStats.total) * 100)}%`
                   : '';
+              const misses = missByKind[kind] ?? 0;
               return (
                 <label
                   key={kind}
@@ -243,6 +257,14 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill, onSwitchToStudy }: 
                     <div className="font-medium text-warm-black">
                       {t.label}
                       <span className="text-xs font-normal text-warm-mute">{accText}</span>
+                      {misses > 0 && (
+                        <span
+                          className="ml-2 inline-flex items-center rounded-full bg-signal-bad/15 px-1.5 py-0.5 text-[10px] font-medium text-signal-bad-ink"
+                          title={`You've missed ${misses} ${misses === 1 ? 'time' : 'times'}`}
+                        >
+                          ⚑ {misses}
+                        </span>
+                      )}
                     </div>
                     <div className="text-warm-stone">{t.description}</div>
                   </div>
@@ -277,6 +299,24 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill, onSwitchToStudy }: 
               </button>
             ))}
           </div>
+        </div>
+
+        <div>
+          <label className="flex cursor-pointer items-center gap-3 rounded-md border border-warm-line bg-warm-white/50 p-3 text-sm">
+            <input
+              type="checkbox"
+              checked={spacedRepetition}
+              onChange={(e) => setSpacedRepetition(e.target.checked)}
+              className="h-4 w-4 rounded border-warm-line accent-copper"
+            />
+            <div className="flex-1">
+              <div className="font-medium text-warm-black">Spaced repetition</div>
+              <div className="text-xs text-warm-stone">
+                Sample more from kinds where your lifetime accuracy is lower. Once a kind has 3+
+                attempts, weight scales between 0.5× (you nail it) and 4× (you miss often).
+              </div>
+            </div>
+          </label>
         </div>
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
@@ -359,6 +399,18 @@ export function SetupScreen({ onStart, onSwitchToSpeedDrill, onSwitchToStudy }: 
       <footer className="text-center text-xs text-warm-mute">
         Enter submits. S skips. 1–4 picks MC choices.
       </footer>
+
+      {/* Sticky floating Start pill, visible on smaller viewports / once the user scrolls */}
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-warm-line bg-warm-white/90 backdrop-blur-md sm:hidden">
+        <div className="mx-auto flex max-w-3xl items-center justify-between gap-3 px-4 py-3">
+          <div className="font-mono text-xs text-warm-mute num">
+            {categories.size} cat · {plannedCount ?? '∞'} Q · {difficulty}
+          </div>
+          <Button disabled={!canStart} onClick={start} className="px-6">
+            Start <span className="ml-2 text-warm-paper/60">↵</span>
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }

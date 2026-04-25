@@ -109,8 +109,8 @@ const INDUSTRIAL: AssetClassProfile = {
 
 const MIXED: AssetClassProfile = {
   id: 'mixed',
-  label: 'Mixed',
-  hint: 'Default. All asset classes in the pool.',
+  label: 'All asset classes',
+  hint: 'No class filter — all ranges in the pool.',
   noun: 'property',
   nounPlural: 'property',
   leaseType: 'gross',

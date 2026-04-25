@@ -194,24 +194,48 @@ export function ReviewScreen({ attempts, onBack }: Props) {
         <Button variant="secondary" onClick={prev} disabled={safeIndex === 0}>
           ← Prev
         </Button>
-        <div className="flex flex-wrap gap-1 justify-center max-w-md">
-          {filtered.map((a, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => setIndex(i)}
-              className={`h-2 w-6 rounded-full transition ${
-                i === safeIndex
-                  ? 'bg-warm-black'
-                  : a.skipped
-                    ? 'bg-warm-line'
-                    : a.correct
-                      ? 'bg-signal-good'
-                      : 'bg-signal-bad'
-              }`}
-              aria-label={`Go to attempt ${i + 1}`}
-            />
-          ))}
+        <div className="flex flex-col gap-2 max-w-lg">
+          {(() => {
+            const groupSize = 10;
+            const groups: { start: number; items: typeof filtered }[] = [];
+            for (let i = 0; i < filtered.length; i += groupSize) {
+              groups.push({ start: i, items: filtered.slice(i, i + groupSize) });
+            }
+            return groups.map((g) => (
+              <div key={g.start} className="flex items-center gap-2">
+                <span className="font-mono text-[10px] text-warm-mute w-12 num">
+                  {g.start + 1}–{g.start + g.items.length}
+                </span>
+                <div className="flex flex-1 gap-1">
+                  {g.items.map((a, j) => {
+                    const i = g.start + j;
+                    return (
+                      <button
+                        key={i}
+                        type="button"
+                        onClick={() => setIndex(i)}
+                        className={`h-2 flex-1 rounded-full transition ${
+                          i === safeIndex
+                            ? 'bg-warm-black'
+                            : a.skipped
+                              ? 'bg-warm-line'
+                              : a.correct
+                                ? 'bg-signal-good'
+                                : 'bg-signal-bad'
+                        }`}
+                        aria-label={`Go to attempt ${i + 1}`}
+                      />
+                    );
+                  })}
+                  {/* pad the last row so pips stay same width across groups */}
+                  {g.items.length < groupSize &&
+                    Array.from({ length: groupSize - g.items.length }).map((_, k) => (
+                      <div key={`pad-${k}`} className="h-2 flex-1" />
+                    ))}
+                </div>
+              </div>
+            ));
+          })()}
         </div>
         <Button onClick={next} disabled={safeIndex === filtered.length - 1}>
           Next →

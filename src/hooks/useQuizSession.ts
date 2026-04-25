@@ -1,13 +1,14 @@
 import { useCallback, useMemo, useReducer } from 'react';
 import { generateQuestion } from '../quiz/engine';
 import { scoreAnswer } from '../quiz/tolerance';
-import { recordAttempt } from '../storage/localStorage';
+import { loadLifetime, recordAttempt } from '../storage/localStorage';
+import { recordMistake } from '../storage/mistakeBank';
 import type { Attempt, QuizSession, SessionConfig, SessionStats } from '../types/session';
 import type { Question } from '../types/question';
 import { nextId } from '../quiz/random';
 
 type Action =
-  | { type: 'start'; config: SessionConfig }
+  | { type: 'start'; config: SessionConfig; question: Question }
   | { type: 'submit'; attempt: Attempt }
   | { type: 'advance'; question: Question | null }
   | { type: 'endSession' }
@@ -24,8 +25,8 @@ function reducer(state: QuizSession, action: Action): QuizSession {
         config: action.config,
         attempts: [],
         currentIndex: 0,
-        currentQuestion: null,
-        questionStartedAt: null,
+        currentQuestion: action.question,
+        questionStartedAt: Date.now(),
         status: 'active',
         lastAttempt: null,
       };
@@ -93,9 +94,10 @@ export function useQuizSession() {
       difficulty: config.difficulty,
       assetClass: config.assetClass,
       attempts: [],
+      spacedRepetition: config.spacedRepetition,
+      lifetimeStats: loadLifetime(),
     });
-    dispatch({ type: 'start', config });
-    dispatch({ type: 'advance', question: first });
+    dispatch({ type: 'start', config, question: first });
   }, []);
 
   const submit = useCallback(
@@ -122,6 +124,9 @@ export function useQuizSession() {
         skipped,
       };
       recordAttempt(q.kind, correct, skipped);
+      if (!skipped && !correct) {
+        recordMistake(attempt);
+      }
       dispatch({ type: 'submit', attempt });
     },
     [session.currentQuestion, session.questionStartedAt],
@@ -141,6 +146,8 @@ export function useQuizSession() {
       difficulty: session.config.difficulty,
       assetClass: session.config.assetClass,
       attempts: session.attempts,
+      spacedRepetition: session.config.spacedRepetition,
+      lifetimeStats: loadLifetime(),
     });
     dispatch({ type: 'advance', question: q });
   }, [session.currentIndex, session.config, session.attempts]);

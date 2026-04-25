@@ -42,18 +42,65 @@ export function SpeedDrillScreen({ state, currentCell, onSelect, onSubmit, onFin
   }, [currentCell?.row, currentCell?.col, state.status]);
 
   useEffect(() => {
+    const rowCount = state.config.rowValues.length;
+    const colCount = state.config.colValues.length;
+
+    const firstNonDiagonalInDir = (
+      startRow: number,
+      startCol: number,
+      dRow: number,
+      dCol: number,
+    ): { row: number; col: number } | null => {
+      let r = startRow + dRow;
+      let c = startCol + dCol;
+      while (r >= 0 && r < rowCount && c >= 0 && c < colCount) {
+        const cell = state.cells.find((x) => x.row === r && x.col === c);
+        if (cell && !cell.isDiagonal) return { row: r, col: c };
+        r += dRow;
+        c += dCol;
+      }
+      return null;
+    };
+
     const onKey = (e: KeyboardEvent) => {
       if (state.status !== 'active') return;
-      if ((e.key === 's' || e.key === 'S')) {
+
+      if (e.key === 's' || e.key === 'S') {
         const target = e.target as HTMLElement | null;
         if (target?.tagName === 'INPUT') return;
         e.preventDefault();
         onSubmit(null, true);
+        return;
+      }
+
+      if (
+        e.key === 'ArrowUp' ||
+        e.key === 'ArrowDown' ||
+        e.key === 'ArrowLeft' ||
+        e.key === 'ArrowRight'
+      ) {
+        if (currentCell === null) return;
+        // Let the input handle arrow keys when the user is actively typing,
+        // so caret movement inside the cell input still works normally.
+        const target = e.target as HTMLElement | null;
+        if (
+          target?.tagName === 'INPUT' &&
+          (target as HTMLInputElement).value.length > 0
+        ) {
+          return;
+        }
+        const dr = e.key === 'ArrowUp' ? -1 : e.key === 'ArrowDown' ? 1 : 0;
+        const dc = e.key === 'ArrowLeft' ? -1 : e.key === 'ArrowRight' ? 1 : 0;
+        const next = firstNonDiagonalInDir(currentCell.row, currentCell.col, dr, dc);
+        if (next) {
+          e.preventDefault();
+          onSelect(next.row, next.col);
+        }
       }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [state.status, onSubmit]);
+  }, [state.status, state.config.rowValues.length, state.config.colValues.length, state.cells, currentCell, onSubmit, onSelect]);
 
   const rows = state.config.rowValues;
   const cols = state.config.colValues;

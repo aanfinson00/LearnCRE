@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Question } from '../types/question';
 import { templates } from '../quiz/templates';
+import { SolutionViz } from './viz/SolutionViz';
 
 interface Props {
   question: Question;
@@ -8,18 +9,42 @@ interface Props {
   showTipsByDefault?: boolean;
 }
 
+const VIZ_PREF_KEY = 'learncre.vizEnabled.v1';
+function loadVizPref(): boolean {
+  try {
+    const v = localStorage.getItem(VIZ_PREF_KEY);
+    return v === null ? true : v === '1';
+  } catch {
+    return true;
+  }
+}
+function saveVizPref(on: boolean): void {
+  try {
+    localStorage.setItem(VIZ_PREF_KEY, on ? '1' : '0');
+  } catch {
+    /* ignore */
+  }
+}
+
 export function SolutionDetails({ question, defaultOpen = true, showTipsByDefault = false }: Props) {
   const [showMath, setShowMath] = useState(defaultOpen);
-  const [showTips, setShowTips] = useState(showTipsByDefault);
+  const [showTips, setShowTips] = useState(showTipsByDefault || defaultOpen);
+  const [showViz, setShowViz] = useState<boolean>(loadVizPref);
   const tips = templates[question.kind].tips;
-
   const template = templates[question.kind];
+
+  useEffect(() => {
+    saveVizPref(showViz);
+  }, [showViz]);
+
   return (
     <div className="space-y-3">
       <div className="rounded-lg border border-warm-line bg-warm-paper/50 px-3 py-2 font-mono text-xs text-warm-ink num">
         <span className="mr-2 text-warm-mute">pattern</span>
         {template.pattern}
       </div>
+
+      {showViz && <SolutionViz question={question} />}
 
       <div className="flex flex-wrap gap-4 text-sm">
         <button
@@ -38,6 +63,13 @@ export function SolutionDetails({ question, defaultOpen = true, showTipsByDefaul
             {showTips ? 'Hide tips' : 'Show mental-math tips'}
           </button>
         )}
+        <button
+          type="button"
+          onClick={() => setShowViz((v) => !v)}
+          className="text-warm-stone underline decoration-dotted hover:text-warm-black"
+        >
+          {showViz ? 'Hide viz' : 'Show viz'}
+        </button>
       </div>
 
       {showMath && (
