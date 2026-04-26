@@ -6,6 +6,7 @@ import { ReviewScreen } from './components/ReviewScreen';
 import { SpeedDrillSetup } from './components/SpeedDrillSetup';
 import { SpeedDrillScreen } from './components/SpeedDrillScreen';
 import { SpeedDrillResults } from './components/SpeedDrillResults';
+import { ProfileScreen } from './components/ProfileScreen';
 import { StudyScreen } from './components/StudyScreen';
 import { TopNav } from './components/TopNav';
 import { AchievementToastHost } from './components/AchievementToast';
@@ -43,17 +44,7 @@ export default function App() {
     }
 
     if (mode === 'profile') {
-      return (
-        <div className="mx-auto max-w-3xl space-y-4 py-12 text-center">
-          <h1 className="display text-3xl text-warm-black">
-            Profile<span className="text-copper">.</span>
-          </h1>
-          <p className="editorial text-base text-warm-stone">
-            Your dashboard is coming online — XP, tiers, achievements, and trends ship next.
-            Profiles, namespaced storage, and session history are already live behind the scenes.
-          </p>
-        </div>
-      );
+      return <ProfileScreen onBack={() => setMode('quiz')} />;
     }
 
     if (mode === 'walkthrough') {
