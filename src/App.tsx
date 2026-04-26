@@ -8,6 +8,7 @@ import { SpeedDrillScreen } from './components/SpeedDrillScreen';
 import { SpeedDrillResults } from './components/SpeedDrillResults';
 import { StudyScreen } from './components/StudyScreen';
 import { TopNav } from './components/TopNav';
+import { AchievementToastHost } from './components/AchievementToast';
 import { WalkthroughSetup } from './components/WalkthroughSetup';
 import { WalkthroughScreen } from './components/WalkthroughScreen';
 import { WalkthroughResults } from './components/WalkthroughResults';
@@ -175,6 +176,7 @@ export default function App() {
     <>
       {showTopNav && <TopNav active={mode} onSwitch={handleSwitch} />}
       {innerContent}
+      <AchievementToastHost />
     </>
   );
 }

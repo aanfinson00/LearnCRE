@@ -2,6 +2,9 @@ import { useCallback, useEffect, useReducer, useRef } from 'react';
 import { buildCells, cellKey, scoreCell } from '../quiz/speedDrill';
 import { recordSession } from '../storage/localStorage';
 import { applyXpDelta, xpForSpeedDrillCell } from '../quiz/xp';
+import { evaluateAchievements } from '../quiz/achievements';
+import { buildContext } from '../quiz/achievementContext';
+import { showAchievementToast } from '../components/AchievementToast';
 import type { Cell, CellResult, SpeedDrillConfig, SpeedDrillState } from '../types/speedDrill';
 
 type Action =
@@ -196,18 +199,21 @@ export function useSpeedDrill() {
       if (r.correct) correct += 1;
     }
     if (attempted === 0) return;
-    recordSession({
+    const record = {
       id: `drill_${state.startedAt}`,
       finishedAt: Date.now(),
-      kind: 'speedDrill',
+      kind: 'speedDrill' as const,
       config: { ...state.config } as Record<string, unknown>,
       attempts: attempted,
       correct,
       accuracyPct: correct / attempted,
       durationMs: totalElapsed,
       xpEarned: 0,
-    });
+    };
+    recordSession(record);
     recordedRef.current = state.startedAt;
+    const ctx = buildContext({ latestSession: record });
+    for (const id of evaluateAchievements(ctx)) showAchievementToast(id);
   }, [state.status, state.startedAt, state.results, state.config]);
 
   return { state, currentCell, start, selectCell, submit, finish, reset };

@@ -4,6 +4,9 @@ import { scoreAnswer } from '../quiz/tolerance';
 import { loadLifetime, recordAttempt, recordSession } from '../storage/localStorage';
 import { recordMistake } from '../storage/mistakeBank';
 import { applyXpDelta, noteStreak, xpForAttempt } from '../quiz/xp';
+import { evaluateAchievements } from '../quiz/achievements';
+import { buildContext } from '../quiz/achievementContext';
+import { showAchievementToast } from '../components/AchievementToast';
 import type { Attempt, QuizSession, SessionConfig, SessionStats } from '../types/session';
 import type { Question } from '../types/question';
 import { nextId } from '../quiz/random';
@@ -197,10 +200,10 @@ export function useQuizSession() {
       const cat = perCategory[a.kind] ?? { total: 0, correct: 0 };
       perCategory[a.kind] = { total: cat.total + 1, correct: cat.correct + (a.correct ? 1 : 0) };
     }
-    recordSession({
+    const record = {
       id: session.id,
       finishedAt: Date.now(),
-      kind: 'quiz',
+      kind: 'quiz' as const,
       config: { ...session.config } as Record<string, unknown>,
       attempts: total,
       correct,
@@ -208,9 +211,14 @@ export function useQuizSession() {
       durationMs: Date.now() - session.startedAt,
       xpEarned: 0,
       perCategory,
-    });
+    };
+    recordSession(record);
     recordedRef.current = session.id;
-  }, [session.status, session.id, session.attempts, session.config, session.startedAt]);
+    // Evaluate achievements with the just-finished session in context
+    const ctx = buildContext({ latestSession: record, latestSessionStats: stats });
+    const newlyUnlocked = evaluateAchievements(ctx);
+    for (const id of newlyUnlocked) showAchievementToast(id);
+  }, [session.status, session.id, session.attempts, session.config, session.startedAt, stats]);
 
   return { session, stats, start, submit, next, reset, endSession, enterReview, exitReview };
 }

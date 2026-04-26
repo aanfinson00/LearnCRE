@@ -1,6 +1,9 @@
 import { useCallback, useEffect, useReducer, useRef } from 'react';
 import { recordSession } from '../storage/localStorage';
 import { applyXpDelta, xpForWalkthroughStep } from '../quiz/xp';
+import { evaluateAchievements } from '../quiz/achievements';
+import { buildContext } from '../quiz/achievementContext';
+import { showAchievementToast } from '../components/AchievementToast';
 import type {
   WalkthroughAttempt,
   WalkthroughDef,
@@ -90,18 +93,21 @@ export function useWalkthrough() {
     if (state.attempts.length === 0) return;
     const counted = state.attempts.filter((a) => !a.skipped);
     const correct = counted.filter((a) => a.correct).length;
-    recordSession({
+    const record = {
       id: `walk_${state.startedAt}`,
       finishedAt: Date.now(),
-      kind: 'walkthrough',
+      kind: 'walkthrough' as const,
       config: { defId: state.def.id, kind: state.def.kind },
       attempts: counted.length,
       correct,
       accuracyPct: counted.length === 0 ? 0 : correct / counted.length,
       durationMs: Date.now() - state.startedAt,
       xpEarned: 0,
-    });
+    };
+    recordSession(record);
     recordedRef.current = state.startedAt;
+    const ctx = buildContext({ latestSession: record });
+    for (const id of evaluateAchievements(ctx)) showAchievementToast(id);
   }, [state]);
 
   return { state, start, submit, advance, reset };
