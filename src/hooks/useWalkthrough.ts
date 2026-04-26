@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useReducer, useRef } from 'react';
 import { recordSession } from '../storage/localStorage';
+import { applyXpDelta, xpForWalkthroughStep } from '../quiz/xp';
 import type {
   WalkthroughAttempt,
   WalkthroughDef,
@@ -69,6 +70,8 @@ export function useWalkthrough() {
       const step = state.def.steps[state.currentStep];
       const elapsedMs = Date.now() - state.stepStartedAt;
       const { correct, deltaPct } = scoreStep(userInput, step.expected, step.tolerance, skipped);
+      const xp = xpForWalkthroughStep(correct, skipped);
+      if (xp > 0) applyXpDelta(xp);
       dispatch({
         type: 'submit',
         attempt: { stepId: step.id, userInput, correct, deltaPct, elapsedMs, skipped },

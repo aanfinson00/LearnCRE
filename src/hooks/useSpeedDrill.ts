@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useReducer, useRef } from 'react';
 import { buildCells, cellKey, scoreCell } from '../quiz/speedDrill';
 import { recordSession } from '../storage/localStorage';
+import { applyXpDelta, xpForSpeedDrillCell } from '../quiz/xp';
 import type { Cell, CellResult, SpeedDrillConfig, SpeedDrillState } from '../types/speedDrill';
 
 type Action =
@@ -142,6 +143,22 @@ export function useSpeedDrill() {
   const submit = useCallback((input: number | null, skipped: boolean) => {
     dispatch({ type: 'submit', input, skipped });
   }, []);
+
+  // Award XP at the moment a cell result lands.
+  const lastCellResultRef = useRef<number>(0);
+  useEffect(() => {
+    const total = Object.keys(state.results).length;
+    if (total === lastCellResultRef.current) return;
+    // Only the most-recent result is new
+    const newKeys = Object.keys(state.results).slice(lastCellResultRef.current);
+    let earned = 0;
+    for (const k of newKeys) {
+      const r = state.results[k];
+      earned += xpForSpeedDrillCell(r.correct, r.skipped);
+    }
+    if (earned > 0) applyXpDelta(earned);
+    lastCellResultRef.current = total;
+  }, [state.results]);
 
   const finish = useCallback(() => dispatch({ type: 'finish' }), []);
   const reset = useCallback(() => dispatch({ type: 'reset' }), []);

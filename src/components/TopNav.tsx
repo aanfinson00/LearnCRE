@@ -1,4 +1,5 @@
 import { ProfilePicker } from './ProfilePicker';
+import { TierBadge } from './TierBadge';
 
 type Mode = 'quiz' | 'speedDrill' | 'study' | 'walkthrough' | 'profile';
 
@@ -39,7 +40,11 @@ export function TopNav({ active, onSwitch }: Props) {
             );
           })}
         </div>
-        <div className="py-2">
+        <div className="hidden py-2 sm:flex sm:items-center sm:gap-3">
+          <TierBadge />
+          <ProfilePicker />
+        </div>
+        <div className="py-2 sm:hidden">
           <ProfilePicker />
         </div>
       </div>

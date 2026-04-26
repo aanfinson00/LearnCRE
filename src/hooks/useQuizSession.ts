@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useMemo, useReducer, useRef } from 'react';
-import { generateQuestion } from '../quiz/engine';
+import { generateQuestion, resolveDifficulty } from '../quiz/engine';
 import { scoreAnswer } from '../quiz/tolerance';
 import { loadLifetime, recordAttempt, recordSession } from '../storage/localStorage';
 import { recordMistake } from '../storage/mistakeBank';
+import { applyXpDelta, noteStreak, xpForAttempt } from '../quiz/xp';
 import type { Attempt, QuizSession, SessionConfig, SessionStats } from '../types/session';
 import type { Question } from '../types/question';
 import { nextId } from '../quiz/random';
@@ -127,9 +128,32 @@ export function useQuizSession() {
       if (!skipped && !correct) {
         recordMistake(attempt);
       }
+      // XP + streak: streak BEFORE this attempt is the count of trailing correct attempts
+      const trailingCorrect = (() => {
+        let n = 0;
+        for (let i = session.attempts.length - 1; i >= 0; i--) {
+          const a = session.attempts[i];
+          if (a.skipped) continue;
+          if (a.correct) n += 1;
+          else break;
+        }
+        return n;
+      })();
+      const appliedDifficulty =
+        q.appliedDifficulty ?? resolveDifficulty(session.config.difficulty, session.attempts);
+      const xp = xpForAttempt({
+        correct,
+        skipped,
+        difficulty: appliedDifficulty,
+        elapsedMs,
+        streak: trailingCorrect,
+      });
+      if (xp > 0) applyXpDelta(xp);
+      const newStreak = correct && !skipped ? trailingCorrect + 1 : 0;
+      noteStreak(newStreak);
       dispatch({ type: 'submit', attempt });
     },
-    [session.currentQuestion, session.questionStartedAt],
+    [session.currentQuestion, session.questionStartedAt, session.attempts, session.config.difficulty],
   );
 
   const next = useCallback(() => {
