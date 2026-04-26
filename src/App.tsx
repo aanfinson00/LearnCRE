@@ -15,7 +15,7 @@ import { useQuizSession } from './hooks/useQuizSession';
 import { useSpeedDrill } from './hooks/useSpeedDrill';
 import { useWalkthrough } from './hooks/useWalkthrough';
 
-type Mode = 'quiz' | 'speedDrill' | 'study' | 'walkthrough';
+type Mode = 'quiz' | 'speedDrill' | 'study' | 'walkthrough' | 'profile';
 
 export default function App() {
   const [mode, setMode] = useState<Mode>('quiz');
@@ -33,11 +33,26 @@ export default function App() {
     (mode === 'quiz' && session.status === 'setup') ||
     (mode === 'speedDrill' && drill.state.cells.length === 0) ||
     (mode === 'walkthrough' && walk.state === null) ||
-    mode === 'study';
+    mode === 'study' ||
+    mode === 'profile';
 
   const innerContent = (() => {
     if (mode === 'study') {
       return <StudyScreen onBack={() => setMode('quiz')} />;
+    }
+
+    if (mode === 'profile') {
+      return (
+        <div className="mx-auto max-w-3xl space-y-4 py-12 text-center">
+          <h1 className="display text-3xl text-warm-black">
+            Profile<span className="text-copper">.</span>
+          </h1>
+          <p className="editorial text-base text-warm-stone">
+            Your dashboard is coming online — XP, tiers, achievements, and trends ship next.
+            Profiles, namespaced storage, and session history are already live behind the scenes.
+          </p>
+        </div>
+      );
     }
 
     if (mode === 'walkthrough') {

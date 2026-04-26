@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useReducer, useRef } from 'react';
 import { buildCells, cellKey, scoreCell } from '../quiz/speedDrill';
+import { recordSession } from '../storage/localStorage';
 import type { Cell, CellResult, SpeedDrillConfig, SpeedDrillState } from '../types/speedDrill';
 
 type Action =
@@ -162,6 +163,35 @@ export function useSpeedDrill() {
           (c) => c.row === state.currentRow && c.col === state.currentCol,
         ) ?? null
       : null;
+
+  const recordedRef = useRef<number | null>(null);
+  useEffect(() => {
+    if (state.status !== 'finished') return;
+    if (recordedRef.current === state.startedAt) return;
+    if (state.startedAt === 0) return;
+    let correct = 0;
+    let attempted = 0;
+    let totalElapsed = 0;
+    for (const r of Object.values(state.results)) {
+      if (r.skipped) continue;
+      attempted += 1;
+      totalElapsed += r.elapsedMs;
+      if (r.correct) correct += 1;
+    }
+    if (attempted === 0) return;
+    recordSession({
+      id: `drill_${state.startedAt}`,
+      finishedAt: Date.now(),
+      kind: 'speedDrill',
+      config: { ...state.config } as Record<string, unknown>,
+      attempts: attempted,
+      correct,
+      accuracyPct: correct / attempted,
+      durationMs: totalElapsed,
+      xpEarned: 0,
+    });
+    recordedRef.current = state.startedAt;
+  }, [state.status, state.startedAt, state.results, state.config]);
 
   return { state, currentCell, start, selectCell, submit, finish, reset };
 }

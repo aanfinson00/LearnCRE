@@ -1,4 +1,5 @@
-import { useCallback, useReducer } from 'react';
+import { useCallback, useEffect, useReducer, useRef } from 'react';
+import { recordSession } from '../storage/localStorage';
 import type {
   WalkthroughAttempt,
   WalkthroughDef,
@@ -78,6 +79,27 @@ export function useWalkthrough() {
 
   const advance = useCallback(() => dispatch({ type: 'advance' }), []);
   const reset = useCallback(() => dispatch({ type: 'reset' }), []);
+
+  const recordedRef = useRef<number | null>(null);
+  useEffect(() => {
+    if (!state || state.status !== 'finished') return;
+    if (recordedRef.current === state.startedAt) return;
+    if (state.attempts.length === 0) return;
+    const counted = state.attempts.filter((a) => !a.skipped);
+    const correct = counted.filter((a) => a.correct).length;
+    recordSession({
+      id: `walk_${state.startedAt}`,
+      finishedAt: Date.now(),
+      kind: 'walkthrough',
+      config: { defId: state.def.id, kind: state.def.kind },
+      attempts: counted.length,
+      correct,
+      accuracyPct: counted.length === 0 ? 0 : correct / counted.length,
+      durationMs: Date.now() - state.startedAt,
+      xpEarned: 0,
+    });
+    recordedRef.current = state.startedAt;
+  }, [state]);
 
   return { state, start, submit, advance, reset };
 }

@@ -1,7 +1,7 @@
-import { useCallback, useMemo, useReducer } from 'react';
+import { useCallback, useEffect, useMemo, useReducer, useRef } from 'react';
 import { generateQuestion } from '../quiz/engine';
 import { scoreAnswer } from '../quiz/tolerance';
-import { loadLifetime, recordAttempt } from '../storage/localStorage';
+import { loadLifetime, recordAttempt, recordSession } from '../storage/localStorage';
 import { recordMistake } from '../storage/mistakeBank';
 import type { Attempt, QuizSession, SessionConfig, SessionStats } from '../types/session';
 import type { Question } from '../types/question';
@@ -158,6 +158,35 @@ export function useQuizSession() {
   const exitReview = useCallback(() => dispatch({ type: 'exitReview' }), []);
 
   const stats = useMemo<SessionStats>(() => computeStats(session.attempts), [session.attempts]);
+
+  // Persist session to history when it transitions to 'finished'
+  const recordedRef = useRef<string | null>(null);
+  useEffect(() => {
+    if (session.status !== 'finished') return;
+    if (!session.id || recordedRef.current === session.id) return;
+    if (session.attempts.length === 0) return;
+    const counted = session.attempts.filter((a) => !a.skipped);
+    const correct = counted.filter((a) => a.correct).length;
+    const total = counted.length;
+    const perCategory: SessionStats['perCategory'] = {};
+    for (const a of counted) {
+      const cat = perCategory[a.kind] ?? { total: 0, correct: 0 };
+      perCategory[a.kind] = { total: cat.total + 1, correct: cat.correct + (a.correct ? 1 : 0) };
+    }
+    recordSession({
+      id: session.id,
+      finishedAt: Date.now(),
+      kind: 'quiz',
+      config: { ...session.config } as Record<string, unknown>,
+      attempts: total,
+      correct,
+      accuracyPct: total === 0 ? 0 : correct / total,
+      durationMs: Date.now() - session.startedAt,
+      xpEarned: 0,
+      perCategory,
+    });
+    recordedRef.current = session.id;
+  }, [session.status, session.id, session.attempts, session.config, session.startedAt]);
 
   return { session, stats, start, submit, next, reset, endSession, enterReview, exitReview };
 }
