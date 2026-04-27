@@ -1,4 +1,7 @@
-type Mode = 'quiz' | 'speedDrill' | 'study' | 'walkthrough';
+import { ProfilePicker } from './ProfilePicker';
+import { TierBadge } from './TierBadge';
+
+type Mode = 'quiz' | 'speedDrill' | 'study' | 'walkthrough' | 'profile';
 
 interface Props {
   active: Mode;
@@ -10,32 +13,40 @@ const TABS: { id: Mode; label: string; hint: string }[] = [
   { id: 'speedDrill', label: 'Speed drill', hint: 'Times-table style against the clock.' },
   { id: 'walkthrough', label: 'Walkthroughs', hint: 'Chained-step deal decompositions.' },
   { id: 'study', label: 'Study tables', hint: 'Reference cheat sheets.' },
+  { id: 'profile', label: 'Profile', hint: 'Your stats, tier, and achievements.' },
 ];
 
 export function TopNav({ active, onSwitch }: Props) {
   return (
     <nav className="border-b border-warm-line">
-      <div className="mx-auto flex max-w-5xl items-end gap-1 px-4">
-        {TABS.map((t) => {
-          const on = active === t.id;
-          return (
-            <button
-              key={t.id}
-              type="button"
-              onClick={() => onSwitch(t.id)}
-              className={`relative px-4 py-3 text-sm font-medium transition-colors duration-aa ease-aa ${
-                on
-                  ? 'text-warm-black'
-                  : 'text-warm-mute hover:text-warm-ink'
-              }`}
-            >
-              {t.label}
-              {on && (
-                <span className="absolute inset-x-4 -bottom-px h-0.5 rounded-full bg-copper" />
-              )}
-            </button>
-          );
-        })}
+      <div className="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4">
+        <div className="flex items-end gap-1">
+          {TABS.map((t) => {
+            const on = active === t.id;
+            return (
+              <button
+                key={t.id}
+                type="button"
+                onClick={() => onSwitch(t.id)}
+                className={`relative px-3 py-3 text-sm font-medium transition-colors duration-aa ease-aa sm:px-4 ${
+                  on ? 'text-warm-black' : 'text-warm-mute hover:text-warm-ink'
+                }`}
+              >
+                {t.label}
+                {on && (
+                  <span className="absolute inset-x-3 -bottom-px h-0.5 rounded-full bg-copper sm:inset-x-4" />
+                )}
+              </button>
+            );
+          })}
+        </div>
+        <div className="hidden py-2 sm:flex sm:items-center sm:gap-3">
+          <TierBadge />
+          <ProfilePicker />
+        </div>
+        <div className="py-2 sm:hidden">
+          <ProfilePicker />
+        </div>
       </div>
     </nav>
   );

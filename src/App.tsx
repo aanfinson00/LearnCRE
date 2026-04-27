@@ -6,8 +6,10 @@ import { ReviewScreen } from './components/ReviewScreen';
 import { SpeedDrillSetup } from './components/SpeedDrillSetup';
 import { SpeedDrillScreen } from './components/SpeedDrillScreen';
 import { SpeedDrillResults } from './components/SpeedDrillResults';
+import { ProfileScreen } from './components/ProfileScreen';
 import { StudyScreen } from './components/StudyScreen';
 import { TopNav } from './components/TopNav';
+import { AchievementToastHost } from './components/AchievementToast';
 import { WalkthroughSetup } from './components/WalkthroughSetup';
 import { WalkthroughScreen } from './components/WalkthroughScreen';
 import { WalkthroughResults } from './components/WalkthroughResults';
@@ -15,7 +17,7 @@ import { useQuizSession } from './hooks/useQuizSession';
 import { useSpeedDrill } from './hooks/useSpeedDrill';
 import { useWalkthrough } from './hooks/useWalkthrough';
 
-type Mode = 'quiz' | 'speedDrill' | 'study' | 'walkthrough';
+type Mode = 'quiz' | 'speedDrill' | 'study' | 'walkthrough' | 'profile';
 
 export default function App() {
   const [mode, setMode] = useState<Mode>('quiz');
@@ -33,11 +35,16 @@ export default function App() {
     (mode === 'quiz' && session.status === 'setup') ||
     (mode === 'speedDrill' && drill.state.cells.length === 0) ||
     (mode === 'walkthrough' && walk.state === null) ||
-    mode === 'study';
+    mode === 'study' ||
+    mode === 'profile';
 
   const innerContent = (() => {
     if (mode === 'study') {
       return <StudyScreen onBack={() => setMode('quiz')} />;
+    }
+
+    if (mode === 'profile') {
+      return <ProfileScreen onBack={() => setMode('quiz')} />;
     }
 
     if (mode === 'walkthrough') {
@@ -160,6 +167,7 @@ export default function App() {
     <>
       {showTopNav && <TopNav active={mode} onSwitch={handleSwitch} />}
       {innerContent}
+      <AchievementToastHost />
     </>
   );
 }

@@ -1,8 +1,12 @@
-import { useCallback, useMemo, useReducer } from 'react';
-import { generateQuestion } from '../quiz/engine';
+import { useCallback, useEffect, useMemo, useReducer, useRef } from 'react';
+import { generateQuestion, resolveDifficulty } from '../quiz/engine';
 import { scoreAnswer } from '../quiz/tolerance';
-import { loadLifetime, recordAttempt } from '../storage/localStorage';
+import { loadLifetime, recordAttempt, recordSession } from '../storage/localStorage';
 import { recordMistake } from '../storage/mistakeBank';
+import { applyXpDelta, noteStreak, xpForAttempt } from '../quiz/xp';
+import { evaluateAchievements } from '../quiz/achievements';
+import { buildContext } from '../quiz/achievementContext';
+import { showAchievementToast } from '../components/AchievementToast';
 import type { Attempt, QuizSession, SessionConfig, SessionStats } from '../types/session';
 import type { Question } from '../types/question';
 import { nextId } from '../quiz/random';
@@ -127,9 +131,32 @@ export function useQuizSession() {
       if (!skipped && !correct) {
         recordMistake(attempt);
       }
+      // XP + streak: streak BEFORE this attempt is the count of trailing correct attempts
+      const trailingCorrect = (() => {
+        let n = 0;
+        for (let i = session.attempts.length - 1; i >= 0; i--) {
+          const a = session.attempts[i];
+          if (a.skipped) continue;
+          if (a.correct) n += 1;
+          else break;
+        }
+        return n;
+      })();
+      const appliedDifficulty =
+        q.appliedDifficulty ?? resolveDifficulty(session.config.difficulty, session.attempts);
+      const xp = xpForAttempt({
+        correct,
+        skipped,
+        difficulty: appliedDifficulty,
+        elapsedMs,
+        streak: trailingCorrect,
+      });
+      if (xp > 0) applyXpDelta(xp);
+      const newStreak = correct && !skipped ? trailingCorrect + 1 : 0;
+      noteStreak(newStreak);
       dispatch({ type: 'submit', attempt });
     },
-    [session.currentQuestion, session.questionStartedAt],
+    [session.currentQuestion, session.questionStartedAt, session.attempts, session.config.difficulty],
   );
 
   const next = useCallback(() => {
@@ -158,6 +185,40 @@ export function useQuizSession() {
   const exitReview = useCallback(() => dispatch({ type: 'exitReview' }), []);
 
   const stats = useMemo<SessionStats>(() => computeStats(session.attempts), [session.attempts]);
+
+  // Persist session to history when it transitions to 'finished'
+  const recordedRef = useRef<string | null>(null);
+  useEffect(() => {
+    if (session.status !== 'finished') return;
+    if (!session.id || recordedRef.current === session.id) return;
+    if (session.attempts.length === 0) return;
+    const counted = session.attempts.filter((a) => !a.skipped);
+    const correct = counted.filter((a) => a.correct).length;
+    const total = counted.length;
+    const perCategory: SessionStats['perCategory'] = {};
+    for (const a of counted) {
+      const cat = perCategory[a.kind] ?? { total: 0, correct: 0 };
+      perCategory[a.kind] = { total: cat.total + 1, correct: cat.correct + (a.correct ? 1 : 0) };
+    }
+    const record = {
+      id: session.id,
+      finishedAt: Date.now(),
+      kind: 'quiz' as const,
+      config: { ...session.config } as Record<string, unknown>,
+      attempts: total,
+      correct,
+      accuracyPct: total === 0 ? 0 : correct / total,
+      durationMs: Date.now() - session.startedAt,
+      xpEarned: 0,
+      perCategory,
+    };
+    recordSession(record);
+    recordedRef.current = session.id;
+    // Evaluate achievements with the just-finished session in context
+    const ctx = buildContext({ latestSession: record, latestSessionStats: stats });
+    const newlyUnlocked = evaluateAchievements(ctx);
+    for (const id of newlyUnlocked) showAchievementToast(id);
+  }, [session.status, session.id, session.attempts, session.config, session.startedAt, stats]);
 
   return { session, stats, start, submit, next, reset, endSession, enterReview, exitReview };
 }

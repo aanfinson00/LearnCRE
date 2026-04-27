@@ -1,5 +1,10 @@
 import { useCallback, useEffect, useReducer, useRef } from 'react';
 import { buildCells, cellKey, scoreCell } from '../quiz/speedDrill';
+import { recordSession } from '../storage/localStorage';
+import { applyXpDelta, xpForSpeedDrillCell } from '../quiz/xp';
+import { evaluateAchievements } from '../quiz/achievements';
+import { buildContext } from '../quiz/achievementContext';
+import { showAchievementToast } from '../components/AchievementToast';
 import type { Cell, CellResult, SpeedDrillConfig, SpeedDrillState } from '../types/speedDrill';
 
 type Action =
@@ -142,6 +147,22 @@ export function useSpeedDrill() {
     dispatch({ type: 'submit', input, skipped });
   }, []);
 
+  // Award XP at the moment a cell result lands.
+  const lastCellResultRef = useRef<number>(0);
+  useEffect(() => {
+    const total = Object.keys(state.results).length;
+    if (total === lastCellResultRef.current) return;
+    // Only the most-recent result is new
+    const newKeys = Object.keys(state.results).slice(lastCellResultRef.current);
+    let earned = 0;
+    for (const k of newKeys) {
+      const r = state.results[k];
+      earned += xpForSpeedDrillCell(r.correct, r.skipped);
+    }
+    if (earned > 0) applyXpDelta(earned);
+    lastCellResultRef.current = total;
+  }, [state.results]);
+
   const finish = useCallback(() => dispatch({ type: 'finish' }), []);
   const reset = useCallback(() => dispatch({ type: 'reset' }), []);
 
@@ -162,6 +183,38 @@ export function useSpeedDrill() {
           (c) => c.row === state.currentRow && c.col === state.currentCol,
         ) ?? null
       : null;
+
+  const recordedRef = useRef<number | null>(null);
+  useEffect(() => {
+    if (state.status !== 'finished') return;
+    if (recordedRef.current === state.startedAt) return;
+    if (state.startedAt === 0) return;
+    let correct = 0;
+    let attempted = 0;
+    let totalElapsed = 0;
+    for (const r of Object.values(state.results)) {
+      if (r.skipped) continue;
+      attempted += 1;
+      totalElapsed += r.elapsedMs;
+      if (r.correct) correct += 1;
+    }
+    if (attempted === 0) return;
+    const record = {
+      id: `drill_${state.startedAt}`,
+      finishedAt: Date.now(),
+      kind: 'speedDrill' as const,
+      config: { ...state.config } as Record<string, unknown>,
+      attempts: attempted,
+      correct,
+      accuracyPct: correct / attempted,
+      durationMs: totalElapsed,
+      xpEarned: 0,
+    };
+    recordSession(record);
+    recordedRef.current = state.startedAt;
+    const ctx = buildContext({ latestSession: record });
+    for (const id of evaluateAchievements(ctx)) showAchievementToast(id);
+  }, [state.status, state.startedAt, state.results, state.config]);
 
   return { state, currentCell, start, selectCell, submit, finish, reset };
 }

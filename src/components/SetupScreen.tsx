@@ -3,6 +3,9 @@ import { templates, allKinds } from '../quiz/templates';
 import type { QuestionKind, AnswerMode } from '../types/question';
 import type { AssetClass, DifficultyMode, SessionConfig, TolerancePreset, LifetimeStats } from '../types/session';
 import { applicableKinds, assetClassOrder, assetClasses } from '../quiz/assetClasses';
+import { gateLabel, isUnlocked, loadTierState, saveTierState } from '../quiz/gates';
+import { loadXp } from '../quiz/xp';
+import { nextTier, tierForXp } from '../quiz/tiers';
 import { mistakeCounts, recentMissKinds } from '../storage/mistakeBank';
 import { AnchorsCard } from './AnchorsCard';
 import { Button } from './ui/Button';
@@ -85,6 +88,8 @@ export function SetupScreen({ onStart }: Props) {
   const [lifetime, setLifetime] = useState<LifetimeStats | null>(null);
   const [missKinds, setMissKinds] = useState<QuestionKind[]>([]);
   const [missByKind, setMissByKind] = useState<Record<string, number>>({});
+  const [bypassGates, setBypassGates] = useState<boolean>(() => loadTierState().bypassGates);
+  const [totalXp, setTotalXp] = useState<number>(() => loadXp().totalXp);
 
   const visibleKinds = useMemo(() => applicableKinds(assetClass, allKinds), [assetClass]);
 
@@ -103,7 +108,20 @@ export function SetupScreen({ onStart }: Props) {
     setLifetime(loadLifetime());
     setMissKinds(recentMissKinds());
     setMissByKind(mistakeCounts());
+    setBypassGates(loadTierState().bypassGates);
+    setTotalXp(loadXp().totalXp);
   }, []);
+
+  const lifetimeAttempts = lifetime?.attempts ?? 0;
+  const gateCtx = { totalXp, lifetimeAttempts, bypassGates };
+  const advancedUnlocked = isUnlocked('difficulty.advanced', gateCtx);
+  const dynamicUnlocked = isUnlocked('difficulty.dynamic', gateCtx);
+
+  const toggleBypass = () => {
+    const next = !bypassGates;
+    setBypassGates(next);
+    saveTierState({ bypassGates: next });
+  };
 
   const toggle = (kind: QuestionKind) => {
     setCategories((s) => {
@@ -275,30 +293,77 @@ export function SetupScreen({ onStart }: Props) {
         </div>
 
         <div>
-          <h2 className="mb-3 text-sm font-medium uppercase tracking-widest text-warm-stone">
-            Difficulty
-          </h2>
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4">
-            {DIFFICULTIES.map((d) => (
-              <button
-                key={d.value}
-                type="button"
-                onClick={() => setDifficulty(d.value)}
-                className={`rounded-lg border p-3 text-left transition-all duration-aa ease-aa ${
-                  difficulty === d.value
-                    ? 'border-warm-black bg-warm-black text-warm-white'
-                    : 'border-warm-line bg-warm-white/50 text-warm-ink hover:border-copper hover:text-copper-deep'
-                }`}
-              >
-                <div className="text-sm font-medium">{d.label}</div>
-                <div
-                  className={`mt-0.5 text-xs ${difficulty === d.value ? 'text-warm-paper/70' : 'text-warm-mute'}`}
-                >
-                  {d.hint}
-                </div>
-              </button>
-            ))}
+          <div className="mb-3 flex items-center justify-between">
+            <h2 className="text-sm font-medium uppercase tracking-widest text-warm-stone">
+              Difficulty
+            </h2>
+            <label className="flex cursor-pointer items-center gap-2 text-[11px] text-warm-mute">
+              <input
+                type="checkbox"
+                checked={bypassGates}
+                onChange={toggleBypass}
+                className="h-3.5 w-3.5 rounded border-warm-line accent-copper"
+              />
+              <span>Show me everything</span>
+            </label>
           </div>
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4">
+            {DIFFICULTIES.map((d) => {
+              const locked =
+                (d.value === 'advanced' && !advancedUnlocked) ||
+                (d.value === 'dynamic' && !dynamicUnlocked);
+              const gateText =
+                d.value === 'advanced'
+                  ? gateLabel('difficulty.advanced')
+                  : d.value === 'dynamic'
+                    ? gateLabel('difficulty.dynamic')
+                    : '';
+              const on = difficulty === d.value;
+              return (
+                <button
+                  key={d.value}
+                  type="button"
+                  onClick={() => setDifficulty(d.value)}
+                  className={`relative rounded-lg border p-3 text-left transition-all duration-aa ease-aa ${
+                    on
+                      ? 'border-warm-black bg-warm-black text-warm-white'
+                      : 'border-warm-line bg-warm-white/50 text-warm-ink hover:border-copper hover:text-copper-deep'
+                  }`}
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium">{d.label}</span>
+                    {locked && (
+                      <span
+                        className={`inline-flex items-center rounded-full border px-1.5 py-0.5 text-[9px] uppercase tracking-widest ${
+                          on
+                            ? 'border-warm-paper/40 text-warm-paper/80'
+                            : 'border-warm-line text-warm-mute'
+                        }`}
+                        title={gateText}
+                      >
+                        🔒 {gateText}
+                      </span>
+                    )}
+                  </div>
+                  <div
+                    className={`mt-0.5 text-xs ${on ? 'text-warm-paper/70' : 'text-warm-mute'}`}
+                  >
+                    {d.hint}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+          {(() => {
+            const next = nextTier(totalXp);
+            const tier = tierForXp(totalXp);
+            if (!next.tier) return null;
+            return (
+              <div className="mt-2 font-mono text-[11px] text-warm-mute num">
+                {tier.label} · {totalXp.toLocaleString()} XP — {next.xpToGo.toLocaleString()} to {next.tier.label}
+              </div>
+            );
+          })()}
         </div>
 
         <div>
