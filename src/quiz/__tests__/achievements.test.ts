@@ -26,6 +26,7 @@ const ctx = (over: Partial<AchievementContext>): AchievementContext => ({
   bestDailyStreak: 0,
   situationalCorrectIds: new Set(),
   situationalCategoryAccuracy: {},
+  excelCorrectIds: new Set(),
   ...over,
 });
 

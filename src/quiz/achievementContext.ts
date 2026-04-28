@@ -119,6 +119,17 @@ function situationalCorrectIds(sessions: SessionRecord[]): Set<string> {
   return set;
 }
 
+function excelCorrectIds(sessions: SessionRecord[]): Set<string> {
+  const set = new Set<string>();
+  for (const s of sessions) {
+    if (s.kind !== 'excel') continue;
+    const cfg = s.config as Record<string, unknown> | undefined;
+    const ids = cfg?.correctTemplateIds as string[] | undefined;
+    if (Array.isArray(ids)) for (const id of ids) set.add(id);
+  }
+  return set;
+}
+
 function situationalCategoryAccuracy(
   sessions: SessionRecord[],
 ): Record<string, { total: number; correct: number }> {
@@ -168,5 +179,6 @@ export function buildContext(opts?: {
     bestDailyStreak: bestDailyStreak(sessions),
     situationalCorrectIds: situationalCorrectIds(sessions),
     situationalCategoryAccuracy: situationalCategoryAccuracy(sessions),
+    excelCorrectIds: excelCorrectIds(sessions),
   };
 }

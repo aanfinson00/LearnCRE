@@ -4,6 +4,11 @@ import { capRateFromComps } from './capRateFromComps';
 import { equityMultipleTemplate } from './equityMultiple';
 import { irrFromCashflows } from './irrFromCashflows';
 import { reversionValueTemplate } from './reversionValue';
+import { amortizationPrincipal } from './amortizationPrincipal';
+import { loanSizingDscr } from './loanSizingDscr';
+import { perUnitNormalization } from './perUnitNormalization';
+import { markToMarketLift } from './markToMarketLift';
+import { rentBumpsWithSteps } from './rentBumpsWithSteps';
 
 export const EXCEL_TEMPLATES: ExcelTemplate[] = [
   noiRollForward,
@@ -11,6 +16,11 @@ export const EXCEL_TEMPLATES: ExcelTemplate[] = [
   equityMultipleTemplate,
   irrFromCashflows,
   reversionValueTemplate,
+  amortizationPrincipal,
+  loanSizingDscr,
+  perUnitNormalization,
+  markToMarketLift,
+  rentBumpsWithSteps,
 ];
 
 export function templateById(id: string): ExcelTemplate | undefined {

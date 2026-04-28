@@ -100,7 +100,7 @@ export function ExcelSetup({ onStart, onBack }: Props) {
         </div>
         <p className="mt-2 font-mono text-xs text-warm-ink num">
           + − × ÷ ^ parens · cell refs (A1, $A$1) · ranges (A1:A5) · SUM · AVERAGE · MIN ·
-          MAX · ROUND · ABS · IF · PMT · NPV · IRR
+          MAX · ROUND · ABS · IF · PMT · PV · IPMT · PPMT · NPV · IRR
         </p>
         <p className="mt-2 text-xs text-warm-stone">
           Type formulas with or without a leading =. Click any data cell on the grid to insert
