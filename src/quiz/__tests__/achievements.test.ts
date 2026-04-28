@@ -24,6 +24,7 @@ const ctx = (over: Partial<AchievementContext>): AchievementContext => ({
   daysSinceLastSession: Number.POSITIVE_INFINITY,
   distinctActiveDays: 0,
   bestDailyStreak: 0,
+  situationalCorrectIds: new Set(),
   ...over,
 });
 

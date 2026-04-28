@@ -39,6 +39,8 @@ export interface AchievementContext {
   distinctActiveDays: number;
   /** Best login-streak in days */
   bestDailyStreak: number;
+  /** Distinct situational case ids the user has answered correctly */
+  situationalCorrectIds: Set<string>;
 }
 
 export interface AchievementDef {
@@ -157,6 +159,13 @@ export const ACHIEVEMENTS: AchievementDef[] = [
     description: 'Clear your mistake bank — answer every kind in it correctly.',
     icon: '⚒️',
     evaluate: (c) => allKinds.length > 0 && c.outstandingMissKinds.size === 0 && c.lifetime.attempts >= 50,
+  },
+  {
+    id: 'reasoning-apprentice',
+    label: 'Reasoning Apprentice',
+    description: 'Pick the most-defensible answer in 5 distinct situational cases.',
+    icon: '🧭',
+    evaluate: (c) => c.situationalCorrectIds.size >= 5,
   },
 ];
 

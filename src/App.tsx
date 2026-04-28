@@ -13,11 +13,15 @@ import { AchievementToastHost } from './components/AchievementToast';
 import { WalkthroughSetup } from './components/WalkthroughSetup';
 import { WalkthroughScreen } from './components/WalkthroughScreen';
 import { WalkthroughResults } from './components/WalkthroughResults';
+import { SituationalSetup } from './components/SituationalSetup';
+import { SituationalScreen } from './components/SituationalScreen';
+import { SituationalResults } from './components/SituationalResults';
 import { useQuizSession } from './hooks/useQuizSession';
 import { useSpeedDrill } from './hooks/useSpeedDrill';
 import { useWalkthrough } from './hooks/useWalkthrough';
+import { useSituational } from './hooks/useSituational';
 
-type Mode = 'quiz' | 'speedDrill' | 'study' | 'walkthrough' | 'profile';
+type Mode = 'quiz' | 'speedDrill' | 'study' | 'walkthrough' | 'situational' | 'profile';
 
 export default function App() {
   const [mode, setMode] = useState<Mode>('quiz');
@@ -25,6 +29,7 @@ export default function App() {
     useQuizSession();
   const drill = useSpeedDrill();
   const walk = useWalkthrough();
+  const sit = useSituational();
 
   const handleSwitch = (m: Mode) => {
     if (m === mode) return;
@@ -35,6 +40,7 @@ export default function App() {
     (mode === 'quiz' && session.status === 'setup') ||
     (mode === 'speedDrill' && drill.state.cells.length === 0) ||
     (mode === 'walkthrough' && walk.state === null) ||
+    (mode === 'situational' && sit.state === null) ||
     mode === 'study' ||
     mode === 'profile';
 
@@ -76,6 +82,41 @@ export default function App() {
           onAdvance={walk.advance}
           onQuit={() => {
             walk.reset();
+            setMode('quiz');
+          }}
+        />
+      );
+    }
+
+    if (mode === 'situational') {
+      if (sit.state === null) {
+        return (
+          <SituationalSetup
+            onStart={(config) => sit.start(config)}
+            onBack={() => setMode('quiz')}
+          />
+        );
+      }
+      if (sit.state.status === 'finished') {
+        return (
+          <SituationalResults
+            state={sit.state}
+            onRestart={() => {
+              const cfg = sit.state!.config;
+              sit.reset();
+              sit.start(cfg);
+            }}
+            onNewSetup={sit.reset}
+          />
+        );
+      }
+      return (
+        <SituationalScreen
+          state={sit.state}
+          onSubmit={sit.submit}
+          onAdvance={sit.advance}
+          onQuit={() => {
+            sit.reset();
             setMode('quiz');
           }}
         />

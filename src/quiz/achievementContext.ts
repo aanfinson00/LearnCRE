@@ -107,6 +107,17 @@ function outstandingMissKinds(): Set<string> {
   return out;
 }
 
+function situationalCorrectIds(sessions: SessionRecord[]): Set<string> {
+  const set = new Set<string>();
+  for (const s of sessions) {
+    if (s.kind !== 'situational') continue;
+    const cfg = s.config as Record<string, unknown> | undefined;
+    const ids = cfg?.correctCaseIds as string[] | undefined;
+    if (Array.isArray(ids)) for (const id of ids) set.add(id);
+  }
+  return set;
+}
+
 export function buildContext(opts?: {
   latestSession?: SessionRecord;
   latestSessionStats?: SessionStats;
@@ -128,5 +139,6 @@ export function buildContext(opts?: {
     daysSinceLastSession: daysSinceLastSessionBefore(sessions, opts?.latestSession),
     distinctActiveDays: distinctActiveDays(sessions),
     bestDailyStreak: bestDailyStreak(sessions),
+    situationalCorrectIds: situationalCorrectIds(sessions),
   };
 }
