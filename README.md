@@ -70,11 +70,13 @@ npm run build
 
 `.github/workflows/deploy.yml` builds and publishes to GitHub Pages on push to `main`. `vite-plugin-singlefile` + relative base (`./`) means the same artifact works via `file://` and under `/LearnCRE/` on Pages.
 
-## Planned (v3)
+## Planned
 
-- Multi-period IRR with interim cash flows (Newton's method).
-- 1-tier promote / preferred return / catch-up waterfalls.
-- Refinance proceeds and cash-out math.
-- Spaced-repetition weighting toward weak categories.
-- Mistake-review mode.
-- Shareable seeds (URL-encoded RNG seed + categories).
+The full backlog — shipped features, in-design work, deferred ideas, design specs — lives in [`ROADMAP.md`](./ROADMAP.md). Highlights of what's next:
+
+- **Situational case studies** — short scenarios + multiple-choice reasoning (e.g. "why is this trading at 8 cap when comps are 6?")
+- **Excel formula mode** — write the formula a junior analyst would actually type, against a mini-grid
+- **Visualization backfill** for the remaining ~30 question kinds
+- **Cloud sync, public profiles, leaderboards, daily / weekly / head-to-head challenges** (deferred track)
+
+See [`ROADMAP.md`](./ROADMAP.md) for the full design specs and sequencing.
