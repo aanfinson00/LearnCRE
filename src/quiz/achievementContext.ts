@@ -1,5 +1,6 @@
 import { loadLifetime, loadSessions } from '../storage/localStorage';
 import { loadMistakes } from '../storage/mistakeBank';
+import { caseById } from './situational';
 import type { SessionRecord } from '../types/profile';
 import type { LifetimeStats, SessionStats } from '../types/session';
 import type { AchievementContext } from './achievements';
@@ -107,6 +108,43 @@ function outstandingMissKinds(): Set<string> {
   return out;
 }
 
+function situationalCorrectIds(sessions: SessionRecord[]): Set<string> {
+  const set = new Set<string>();
+  for (const s of sessions) {
+    if (s.kind !== 'situational') continue;
+    const cfg = s.config as Record<string, unknown> | undefined;
+    const ids = cfg?.correctCaseIds as string[] | undefined;
+    if (Array.isArray(ids)) for (const id of ids) set.add(id);
+  }
+  return set;
+}
+
+function situationalCategoryAccuracy(
+  sessions: SessionRecord[],
+): Record<string, { total: number; correct: number }> {
+  const out: Record<string, { total: number; correct: number }> = {};
+  for (const s of sessions) {
+    if (s.kind !== 'situational') continue;
+    const cfg = s.config as Record<string, unknown> | undefined;
+    const attemptedRaw = cfg?.attemptedCaseIds as string[] | undefined;
+    // PR W sessions had no attemptedCaseIds — fall back to caseIds
+    const attempted = Array.isArray(attemptedRaw)
+      ? attemptedRaw
+      : (cfg?.caseIds as string[] | undefined) ?? [];
+    const correctSet = new Set<string>(cfg?.correctCaseIds as string[] | undefined);
+    for (const id of attempted) {
+      const c = caseById(id);
+      if (!c) continue;
+      const cur = out[c.category] ?? { total: 0, correct: 0 };
+      out[c.category] = {
+        total: cur.total + 1,
+        correct: cur.correct + (correctSet.has(id) ? 1 : 0),
+      };
+    }
+  }
+  return out;
+}
+
 export function buildContext(opts?: {
   latestSession?: SessionRecord;
   latestSessionStats?: SessionStats;
@@ -128,5 +166,7 @@ export function buildContext(opts?: {
     daysSinceLastSession: daysSinceLastSessionBefore(sessions, opts?.latestSession),
     distinctActiveDays: distinctActiveDays(sessions),
     bestDailyStreak: bestDailyStreak(sessions),
+    situationalCorrectIds: situationalCorrectIds(sessions),
+    situationalCategoryAccuracy: situationalCategoryAccuracy(sessions),
   };
 }

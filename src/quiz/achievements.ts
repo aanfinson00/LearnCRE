@@ -39,6 +39,10 @@ export interface AchievementContext {
   distinctActiveDays: number;
   /** Best login-streak in days */
   bestDailyStreak: number;
+  /** Distinct situational case ids the user has answered correctly */
+  situationalCorrectIds: Set<string>;
+  /** Per-situational-category accuracy across session history */
+  situationalCategoryAccuracy: Record<string, { total: number; correct: number }>;
 }
 
 export interface AchievementDef {
@@ -157,6 +161,24 @@ export const ACHIEVEMENTS: AchievementDef[] = [
     description: 'Clear your mistake bank — answer every kind in it correctly.',
     icon: '⚒️',
     evaluate: (c) => allKinds.length > 0 && c.outstandingMissKinds.size === 0 && c.lifetime.attempts >= 50,
+  },
+  {
+    id: 'reasoning-apprentice',
+    label: 'Reasoning Apprentice',
+    description: 'Pick the most-defensible answer in 5 distinct situational cases.',
+    icon: '🧭',
+    evaluate: (c) => c.situationalCorrectIds.size >= 5,
+  },
+  {
+    id: 'diagnostic-eye',
+    label: 'Diagnostic Eye',
+    description: '90%+ accuracy on diagnostic situational cases (5+ attempts).',
+    icon: '🔍',
+    evaluate: (c) => {
+      const acc = c.situationalCategoryAccuracy['diagnostic'];
+      if (!acc || acc.total < 5) return false;
+      return acc.correct / acc.total >= 0.9;
+    },
   },
 ];
 
