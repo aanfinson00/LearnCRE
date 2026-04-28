@@ -1,9 +1,12 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { ExcelState } from '../excel/types';
 import { evaluatePreview } from '../hooks/useExcel';
+import { extractReferencedAddresses } from '../excel/parser';
 import { ExcelGrid } from './ExcelGrid';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
+
+const CELL_REF_AT_END_RE = /(\$?[A-Z]+\$?\d+)$/i;
 
 interface Props {
   state: ExcelState;
@@ -20,13 +23,46 @@ export function ExcelScreen({ state, onSubmit, onAdvance, onQuit }: Props) {
 
   const [raw, setRaw] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
+  /** Where to put the cursor *after* the next state update + render. */
+  const pendingCursorRef = useRef<number | null>(null);
 
   useEffect(() => {
     setRaw('');
+    pendingCursorRef.current = null;
     if (!answered) inputRef.current?.focus();
   }, [t.id, answered]);
 
+  // After any setRaw triggered by a cell click, restore focus + selection.
+  useEffect(() => {
+    const pos = pendingCursorRef.current;
+    if (pos === null) return;
+    const input = inputRef.current;
+    if (!input) return;
+    input.focus();
+    input.setSelectionRange(pos, pos);
+    pendingCursorRef.current = null;
+  }, [raw]);
+
   const preview = useMemo(() => evaluatePreview(raw, t), [raw, t]);
+  const highlightedAddresses = useMemo(() => extractReferencedAddresses(raw), [raw]);
+
+  const handleCellClick = useCallback(
+    (address: string, shiftKey: boolean) => {
+      const input = inputRef.current;
+      const start = input?.selectionStart ?? raw.length;
+      const end = input?.selectionEnd ?? start;
+      const before = raw.slice(0, start);
+      const after = raw.slice(end);
+
+      // shift-click extends a trailing cell ref into a range
+      const trailingMatch = before.match(CELL_REF_AT_END_RE);
+      const insert = shiftKey && trailingMatch ? `:${address}` : address;
+      const next = before + insert + after;
+      pendingCursorRef.current = before.length + insert.length;
+      setRaw(next);
+    },
+    [raw],
+  );
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -111,6 +147,8 @@ export function ExcelScreen({ state, onSubmit, onAdvance, onQuit }: Props) {
         livePreview={preview.value}
         livePreviewError={preview.error !== null}
         reveal={reveal}
+        highlightedAddresses={highlightedAddresses}
+        onCellClick={!answered ? handleCellClick : undefined}
       />
 
       {!answered && (
@@ -148,7 +186,7 @@ export function ExcelScreen({ state, onSubmit, onAdvance, onQuit }: Props) {
                   Live: <span className="text-warm-black">{Number.isFinite(preview.value) ? preview.value.toLocaleString('en-US', { maximumFractionDigits: 4 }) : '—'}</span>
                 </span>
               ) : (
-                <span>start typing — preview updates live</span>
+                <span>type a formula or click cells to insert · shift-click to range</span>
               )}
             </div>
             <div className="flex items-center gap-3">

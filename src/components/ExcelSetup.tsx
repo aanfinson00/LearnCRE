@@ -103,8 +103,9 @@ export function ExcelSetup({ onStart, onBack }: Props) {
           MAX · ROUND · ABS · IF · PMT · NPV · IRR
         </p>
         <p className="mt-2 text-xs text-warm-stone">
-          Type formulas with or without a leading =. Live preview updates as you type — invalid
-          formulas show ⚠ in the target cell.
+          Type formulas with or without a leading =. Click any data cell on the grid to insert
+          its address; shift-click another to extend into a range. Live preview updates as you
+          type — invalid formulas show ⚠ in the target cell.
         </p>
       </Card>
     </div>

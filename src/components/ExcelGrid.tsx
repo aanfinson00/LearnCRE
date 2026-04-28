@@ -1,3 +1,4 @@
+import type { MouseEvent } from 'react';
 import type { SheetCell, SheetLayout } from '../excel/types';
 import { indexToColLetters } from '../excel/parser';
 
@@ -9,6 +10,17 @@ interface Props {
   livePreviewError?: boolean;
   /** Whether to also reveal the correct expected value on the target */
   reveal?: { expected: number; submitted: number | null; correct: boolean } | null;
+  /**
+   * Set of cell addresses currently referenced in the formula being typed —
+   * cells in this set get a copper outline ring.
+   */
+  highlightedAddresses?: Set<string>;
+  /**
+   * If provided, cells become clickable. Address is the A1-style cell key,
+   * shiftKey indicates modifier state (used to extend a previous click into
+   * a range).
+   */
+  onCellClick?: (address: string, shiftKey: boolean) => void;
 }
 
 function formatValue(c: SheetCell, v?: number | null): string {
@@ -38,7 +50,14 @@ function formatValue(c: SheetCell, v?: number | null): string {
   }
 }
 
-export function ExcelGrid({ layout, livePreview, livePreviewError, reveal }: Props) {
+export function ExcelGrid({
+  layout,
+  livePreview,
+  livePreviewError,
+  reveal,
+  highlightedAddresses,
+  onCellClick,
+}: Props) {
   // Build a lookup keyed by address for O(1) access
   const byAddr = new Map(layout.cells.map((c) => [c.address, c]));
   const colHeaders: string[] = [];
@@ -84,6 +103,8 @@ export function ExcelGrid({ layout, livePreview, livePreviewError, reveal }: Pro
                     livePreview={cell.role === 'target' ? livePreview ?? null : null}
                     livePreviewError={cell.role === 'target' ? !!livePreviewError : false}
                     reveal={cell.role === 'target' ? reveal ?? null : null}
+                    highlighted={highlightedAddresses?.has(cell.address) ?? false}
+                    onCellClick={onCellClick}
                   />
                 );
               })}
@@ -100,15 +121,20 @@ function CellTd({
   livePreview,
   livePreviewError,
   reveal,
+  highlighted,
+  onCellClick,
 }: {
   cell: SheetCell;
   livePreview: number | null;
   livePreviewError: boolean;
   reveal: { expected: number; submitted: number | null; correct: boolean } | null;
+  highlighted: boolean;
+  onCellClick?: (address: string, shiftKey: boolean) => void;
 }) {
   const baseTd =
-    'border-r border-warm-line px-2 py-1.5 last:border-r-0 align-middle whitespace-nowrap';
+    'border-r border-warm-line px-2 py-1.5 last:border-r-0 align-middle whitespace-nowrap relative';
 
+  // Spacers and headers never participate in click-to-insert
   if (cell.role === 'spacer') {
     return <td className={`${baseTd} bg-warm-paper/20`} />;
   }
@@ -119,14 +145,33 @@ function CellTd({
       </td>
     );
   }
+
+  const handleMouseDown = (e: MouseEvent<HTMLTableCellElement>) => {
+    if (!onCellClick) return;
+    // Prevent the input from losing focus before we route the click
+    e.preventDefault();
+    onCellClick(cell.address, e.shiftKey);
+  };
+
+  const interactive = !!onCellClick;
+  const interactiveCls = interactive
+    ? 'cursor-pointer hover:ring-2 hover:ring-copper/40 hover:ring-inset'
+    : '';
+  const highlightCls = highlighted ? 'ring-2 ring-copper ring-inset' : '';
+
   if (cell.role === 'assumption' || cell.role === 'computed') {
     const v = cell.role === 'assumption' ? cell.value : cell.computed;
     return (
-      <td className={`${baseTd} bg-warm-white text-right text-warm-black`}>
+      <td
+        onMouseDown={interactive ? handleMouseDown : undefined}
+        title={interactive ? `Click to insert ${cell.address}` : cell.address}
+        className={`${baseTd} bg-warm-white text-right text-warm-black ${interactiveCls} ${highlightCls}`}
+      >
         {formatValue(cell, v)}
       </td>
     );
   }
+
   // target cell
   const tone = reveal
     ? reveal.correct
@@ -148,7 +193,7 @@ function CellTd({
         : '?';
   return (
     <td
-      className={`${baseTd} border-2 text-right font-medium ${tone}`}
+      className={`${baseTd} border-2 text-right font-medium ${tone} ${highlightCls}`}
       title={`Target cell ${cell.address}`}
     >
       {display}
