@@ -1,7 +1,14 @@
 import { ProfilePicker } from './ProfilePicker';
 import { TierBadge } from './TierBadge';
 
-type Mode = 'quiz' | 'speedDrill' | 'study' | 'walkthrough' | 'situational' | 'profile';
+type Mode =
+  | 'quiz'
+  | 'speedDrill'
+  | 'study'
+  | 'walkthrough'
+  | 'situational'
+  | 'excel'
+  | 'profile';
 
 interface Props {
   active: Mode;
@@ -13,6 +20,7 @@ const TABS: { id: Mode; label: string; hint: string }[] = [
   { id: 'speedDrill', label: 'Speed drill', hint: 'Times-table style against the clock.' },
   { id: 'walkthrough', label: 'Walkthroughs', hint: 'Chained-step deal decompositions.' },
   { id: 'situational', label: 'Situational', hint: 'Mini case studies and reasoning.' },
+  { id: 'excel', label: 'Excel', hint: 'Write spreadsheet formulas against a mini-grid.' },
   { id: 'study', label: 'Study tables', hint: 'Reference cheat sheets.' },
   { id: 'profile', label: 'Profile', hint: 'Your stats, tier, and achievements.' },
 ];

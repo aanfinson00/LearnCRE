@@ -16,12 +16,23 @@ import { WalkthroughResults } from './components/WalkthroughResults';
 import { SituationalSetup } from './components/SituationalSetup';
 import { SituationalScreen } from './components/SituationalScreen';
 import { SituationalResults } from './components/SituationalResults';
+import { ExcelSetup } from './components/ExcelSetup';
+import { ExcelScreen } from './components/ExcelScreen';
+import { ExcelResults } from './components/ExcelResults';
 import { useQuizSession } from './hooks/useQuizSession';
 import { useSpeedDrill } from './hooks/useSpeedDrill';
 import { useWalkthrough } from './hooks/useWalkthrough';
 import { useSituational } from './hooks/useSituational';
+import { useExcel } from './hooks/useExcel';
 
-type Mode = 'quiz' | 'speedDrill' | 'study' | 'walkthrough' | 'situational' | 'profile';
+type Mode =
+  | 'quiz'
+  | 'speedDrill'
+  | 'study'
+  | 'walkthrough'
+  | 'situational'
+  | 'excel'
+  | 'profile';
 
 export default function App() {
   const [mode, setMode] = useState<Mode>('quiz');
@@ -30,6 +41,7 @@ export default function App() {
   const drill = useSpeedDrill();
   const walk = useWalkthrough();
   const sit = useSituational();
+  const excel = useExcel();
 
   const handleSwitch = (m: Mode) => {
     if (m === mode) return;
@@ -41,6 +53,7 @@ export default function App() {
     (mode === 'speedDrill' && drill.state.cells.length === 0) ||
     (mode === 'walkthrough' && walk.state === null) ||
     (mode === 'situational' && sit.state === null) ||
+    (mode === 'excel' && excel.state === null) ||
     mode === 'study' ||
     mode === 'profile';
 
@@ -117,6 +130,41 @@ export default function App() {
           onAdvance={sit.advance}
           onQuit={() => {
             sit.reset();
+            setMode('quiz');
+          }}
+        />
+      );
+    }
+
+    if (mode === 'excel') {
+      if (excel.state === null) {
+        return (
+          <ExcelSetup
+            onStart={(config) => excel.start(config)}
+            onBack={() => setMode('quiz')}
+          />
+        );
+      }
+      if (excel.state.status === 'finished') {
+        return (
+          <ExcelResults
+            state={excel.state}
+            onRestart={() => {
+              const cfg = excel.state!.config;
+              excel.reset();
+              excel.start(cfg);
+            }}
+            onNewSetup={excel.reset}
+          />
+        );
+      }
+      return (
+        <ExcelScreen
+          state={excel.state}
+          onSubmit={excel.submit}
+          onAdvance={excel.advance}
+          onQuit={() => {
+            excel.reset();
             setMode('quiz');
           }}
         />
