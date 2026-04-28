@@ -10,6 +10,12 @@ import { markToMarketUpside } from './markToMarketUpside';
 import { noiGrowthSmellTest } from './noiGrowthSmellTest';
 import { compSetVetting } from './compSetVetting';
 import { taxReassessmentSurprise } from './taxReassessmentSurprise';
+import { rentRollUndervalued } from './rentRollUndervalued';
+import { tiVsRentGiveBack } from './tiVsRentGiveBack';
+import { refiVsSell } from './refiVsSell';
+import { capSpread } from './capSpread';
+import { vacancySpike } from './vacancySpike';
+import { tenantCreditPricing } from './tenantCreditPricing';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -18,6 +24,12 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   noiGrowthSmellTest,
   compSetVetting,
   taxReassessmentSurprise,
+  rentRollUndervalued,
+  tiVsRentGiveBack,
+  refiVsSell,
+  capSpread,
+  vacancySpike,
+  tenantCreditPricing,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {

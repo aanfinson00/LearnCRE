@@ -103,6 +103,7 @@ export function useSituational() {
         assetClass: state.config.assetClass,
         length: state.config.length,
         caseIds: state.cases.map((c) => c.id),
+        attemptedCaseIds: counted.map((a) => a.caseId),
         correctCaseIds: counted.filter((a) => a.correct).map((a) => a.caseId),
       },
       attempts: counted.length,
