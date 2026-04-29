@@ -9,3 +9,13 @@ dist-ssr
 *.log
 coverage
 *.tsbuildinfo
+
+# scripts/jobs pipeline output — keep raw API responses + intermediate CSVs
+# out of the repo. The final report (docs/role-skill-evidence.md) is committed.
+data/jobs/*.json
+data/jobs/*.csv
+__pycache__/
+
+# Local env (Adzuna keys, etc.)
+.env
+.env.local
