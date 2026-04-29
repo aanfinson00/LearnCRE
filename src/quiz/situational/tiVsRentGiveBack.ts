@@ -5,6 +5,7 @@ export const tiVsRentGiveBack: SituationalCase = {
   title: 'Should you give the TI or the rent break?',
   category: 'lease-econ',
   difficulty: 'intermediate',
+  roles: ['assetManagement', 'acquisitions'],
   assetClass: 'office',
   scenario:
     'A prospective tenant wants to sign a 5-year lease at $20/SF face rent. Comparable space in the building has been signing at the same face rent with $20/SF in TIs. The new prospect is asking for $30/SF in TIs instead. They\'ve indicated they\'d also consider a rent reduction in lieu of the extra TI dollars.',

@@ -30,6 +30,7 @@ export const rentPerUnitTemplate: QuestionTemplate<'rentPerUnit'> = {
   label: 'Rent per Unit (annual)',
   description: 'Gross potential rent per unit per year.',
   category: 'valuation',
+  roles: ['acquisitions'],
   pattern: 'A / B   where A = GPR, B = units',
   tips: [
     'Divide by 12 for monthly. $24k/yr = $2,000/mo. $18k/yr = $1,500/mo.',

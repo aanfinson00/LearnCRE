@@ -35,6 +35,7 @@ export const rentChangeTemplate: QuestionTemplate<'rentChange'> = {
   label: 'Rent Change Impact',
   description: 'Rent $ change at given cap/vacancy → value impact.',
   category: 'valuation',
+  roles: ['acquisitions'],
   pattern: 'ΔA × (1 − B) / C   where ΔA = rent change, B = vacancy, C = cap',
   tips: [
     'ΔNOI = ΔRent × (1 − vacancy). ΔValue = ΔNOI / cap.',

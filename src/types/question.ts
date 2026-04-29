@@ -87,5 +87,7 @@ export interface QuestionTemplate<K extends QuestionKind = QuestionKind> {
   category: 'valuation' | 'returns';
   pattern: string;
   tips: string[];
+  /** Position roles this template is most relevant for. Untagged = all roles. */
+  roles?: import('./role').Role[];
   generate(rng: Rng, difficulty?: Difficulty, assetClass?: AssetClass): Question;
 }

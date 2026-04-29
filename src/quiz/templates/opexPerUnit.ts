@@ -25,6 +25,7 @@ export const opexPerUnitTemplate: QuestionTemplate<'opexPerUnit'> = {
   label: 'OpEx per Unit (annual)',
   description: 'Operating expense per unit per year.',
   category: 'valuation',
+  roles: ['acquisitions'],
   pattern: 'A / B   where A = opex, B = units',
   tips: [
     'Typical multifamily range: $4,500–$8,500/unit/yr. Hotels 3–5× higher.',

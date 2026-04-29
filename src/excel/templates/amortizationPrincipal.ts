@@ -10,6 +10,7 @@ export const amortizationPrincipal: ExcelTemplate = {
   title: 'Year-3 principal payment on a 30-year loan',
   category: 'finance',
   difficulty: 'intermediate',
+  roles: ['mortgageUw'],
   scenario:
     'A $10M loan at 6% annual interest amortizes over 30 years with annual payments. You\'re building an amortization schedule and need to know how much of year 3\'s payment goes to principal (vs. interest).',
   instruction:

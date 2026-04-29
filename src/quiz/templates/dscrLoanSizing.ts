@@ -40,6 +40,7 @@ export const dscrLoanSizingTemplate: QuestionTemplate<'dscrLoanSizing'> = {
   label: 'DSCR Loan Sizing',
   description: 'Max loan given NOI, DSCR target, rate, and amort.',
   category: 'returns',
+  roles: ['acquisitions', 'mortgageUw'],
   pattern: 'A / (B × C)   where A = NOI, B = DSCR, C = loan constant',
   tips: [
     'Loan constants to memorize — 30yr @ 6% ≈ 0.072; 25yr @ 6% ≈ 0.077; 30yr @ 5% ≈ 0.0644; 30yr @ 7% ≈ 0.0799.',

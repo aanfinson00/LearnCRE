@@ -42,6 +42,7 @@ export const breakEvenOccupancyTemplate: QuestionTemplate<'breakEvenOccupancy'> 
   label: 'Break-Even Occupancy',
   description: 'Minimum occupancy to cover OpEx + debt service.',
   category: 'returns',
+  roles: ['acquisitions', 'mortgageUw'],
   pattern: '(A + B) / C   where A = opex, B = debt service, C = PGI',
   tips: [
     'BEO = (OpEx + Debt Service) / PGI. Lender stress test: how low can occupancy drop before cash flow goes negative?',

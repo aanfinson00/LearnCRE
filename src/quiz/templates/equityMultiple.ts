@@ -24,6 +24,7 @@ export const equityMultipleTemplate: QuestionTemplate<'equityMultiple'> = {
   label: 'Equity Multiple',
   description: 'Equity in + equity out → EM.',
   category: 'returns',
+  roles: ['acquisitions', 'portfolioMgmt'],
   pattern: 'A / B   where A = out, B = in',
   tips: [
     'EM = Out / In. Doesn\'t care about time — 2x in 1 year and 2x in 10 years both = 2.0x.',

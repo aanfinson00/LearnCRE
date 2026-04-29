@@ -6,6 +6,7 @@ import {
   type ExcelTemplateCategory,
 } from '../excel/types';
 import { filterTemplates } from '../excel/templates';
+import { ROLES, type Role } from '../types/role';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
 
@@ -25,11 +26,12 @@ const DIFFICULTIES: { id: ExcelTemplate['difficulty'] | 'all'; label: string }[]
 export function ExcelSetup({ onStart, onBack }: Props) {
   const [category, setCategory] = useState<ExcelTemplateCategory | 'all'>('all');
   const [difficulty, setDifficulty] = useState<ExcelTemplate['difficulty'] | 'all'>('all');
+  const [role, setRole] = useState<Role | 'all'>('all');
   const [length, setLength] = useState<ExcelRunConfig['length']>(3);
 
   const matched = useMemo(
-    () => filterTemplates({ category, difficulty }),
-    [category, difficulty],
+    () => filterTemplates({ category, difficulty, role }),
+    [category, difficulty, role],
   );
   const canStart = matched.length > 0;
 
@@ -52,6 +54,17 @@ export function ExcelSetup({ onStart, onBack }: Props) {
       </header>
 
       <Card className="space-y-5">
+        <Section label="Position focus">
+          <Pill active={role === 'all'} onClick={() => setRole('all')}>
+            All
+          </Pill>
+          {ROLES.map((r) => (
+            <Pill key={r.id} active={role === r.id} onClick={() => setRole(r.id)}>
+              {r.label}
+            </Pill>
+          ))}
+        </Section>
+
         <Section label="Category">
           <Pill active={category === 'all'} onClick={() => setCategory('all')}>
             All
@@ -88,7 +101,7 @@ export function ExcelSetup({ onStart, onBack }: Props) {
             {matched.length} template{matched.length === 1 ? '' : 's'} match
             {canStart ? '' : ' — try widening filters'}
           </div>
-          <Button onClick={() => canStart && onStart({ category, difficulty, length })} disabled={!canStart}>
+          <Button onClick={() => canStart && onStart({ category, difficulty, length, role })} disabled={!canStart}>
             Start →
           </Button>
         </div>

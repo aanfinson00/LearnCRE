@@ -17,6 +17,7 @@ export const noiRollForward: ExcelTemplate = {
   title: 'NOI roll-forward',
   category: 'arithmetic',
   difficulty: 'beginner',
+  roles: ['acquisitions', 'assetManagement'],
   scenario:
     'A 200-unit multifamily asset has gross potential rent of $1.2M, vacancy at 5%, $50k of other income (parking + laundry), and $380k of operating expenses.',
   instruction:

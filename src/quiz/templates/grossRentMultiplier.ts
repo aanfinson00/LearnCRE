@@ -23,6 +23,7 @@ export const grossRentMultiplierTemplate: QuestionTemplate<'grossRentMultiplier'
   label: 'Gross Rent Multiplier',
   description: 'Price / PGI — quick multifamily/retail benchmark.',
   category: 'valuation',
+  roles: ['acquisitions'],
   pattern: 'A / B   where A = price, B = gross potential rent',
   tips: [
     'GRM = Price / PGI. Multifamily typically trades 8–14× GRM; lower is cheaper.',

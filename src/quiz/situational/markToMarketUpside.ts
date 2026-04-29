@@ -5,6 +5,7 @@ export const markToMarketUpside: SituationalCase = {
   title: 'How much upside is in the rent roll?',
   category: 'pricing',
   difficulty: 'beginner',
+  roles: ['acquisitions', 'assetManagement'],
   assetClass: 'office',
   scenario:
     'You\'re underwriting an office acquisition. In-place rent is $24/SF on the major tenant; recent leasing in the building and submarket is signing at $32/SF. The major tenant\'s lease expires in 12 months and is widely expected to vacate (the broker has already begun marketing the space).',

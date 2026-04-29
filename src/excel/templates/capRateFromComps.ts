@@ -15,6 +15,7 @@ export const capRateFromComps: ExcelTemplate = {
   title: 'Average cap rate from a comp set',
   category: 'aggregation',
   difficulty: 'beginner',
+  roles: ['acquisitions'],
   scenario:
     'Five recent industrial sale comps have been provided. Compute the average cap rate to anchor your pricing recommendation.',
   instruction:

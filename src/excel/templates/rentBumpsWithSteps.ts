@@ -12,6 +12,7 @@ export const rentBumpsWithSteps: ExcelTemplate = {
   title: 'Year-5 rent with mixed bump structure',
   category: 'arithmetic',
   difficulty: 'intermediate',
+  roles: ['assetManagement', 'acquisitions'],
   scenario:
     'A 5-year office lease starts at $25/SF. The lease has 3% annual bumps in years 2, 3, and 4, then a $0.50/SF flat step in year 5. Compute the year-5 rent.',
   instruction:

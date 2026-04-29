@@ -5,6 +5,7 @@ export const noiGrowthSmellTest: SituationalCase = {
   title: 'Does this NOI growth assumption hold up?',
   category: 'diagnostic',
   difficulty: 'intermediate',
+  roles: ['assetManagement', 'mortgageUw'],
   assetClass: 'multifamily',
   scenario:
     'A broker\'s offering memorandum on a stabilized garden-style multifamily asset shows 8.0% annual NOI growth in years 1–5 of the proforma. The submarket has averaged 2.5–3.0% rent growth historically, with a recent peak of ~5% during the 2021 spike. Property is 95% occupied, leased to market, no value-add story, no upcoming reassessment.',

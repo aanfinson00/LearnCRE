@@ -5,6 +5,7 @@ export const rentRollUndervalued: SituationalCase = {
   title: 'Why does this rent roll look like a bargain?',
   category: 'pricing',
   difficulty: 'intermediate',
+  roles: ['acquisitions', 'assetManagement'],
   assetClass: 'multifamily',
   scenario:
     'A multifamily portfolio has a weighted average remaining lease term of 7 years on its anchor leases (commercial ground-floor) with annual bumps of 1.0%. The submarket has been growing rents at ~4% per year for the past 5 years. Residential units (95% of NRSF) are on standard 12-month leases at market. The deal is being marketed at a 5.75% cap, in line with comps.',

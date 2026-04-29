@@ -25,6 +25,7 @@ export const operatingExpenseRatioTemplate: QuestionTemplate<'operatingExpenseRa
   label: 'OpEx Ratio',
   description: 'OpEx / EGI — what % of income goes to operating expenses.',
   category: 'valuation',
+  roles: ['acquisitions'],
   pattern: 'A / B   where A = opex, B = EGI',
   tips: [
     'Typical ranges — multifamily 30–40%, office 35–45%, retail 25–35%, industrial 15–25%, hotels 60%+.',

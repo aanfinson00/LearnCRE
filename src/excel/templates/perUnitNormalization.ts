@@ -12,6 +12,7 @@ export const perUnitNormalization: ExcelTemplate = {
   title: 'Portfolio-weighted NOI per unit',
   category: 'normalization',
   difficulty: 'beginner',
+  roles: ['portfolioMgmt', 'acquisitions'],
   scenario:
     'You\'re comparing four multifamily properties of different sizes. To compare them on a like-for-like basis, compute the *portfolio-weighted* NOI per unit — total NOI across the four divided by total units.',
   instruction:

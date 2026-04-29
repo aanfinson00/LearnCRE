@@ -55,6 +55,7 @@ export const cashOnCashTemplate: QuestionTemplate<'cashOnCash'> = {
   label: 'Cash-on-Cash Return',
   description: 'Year-1 cash yield on equity invested.',
   category: 'returns',
+  roles: ['acquisitions', 'mortgageUw'],
   pattern: '(A − B) / C   where A = NOI, B = debt service, C = equity',
   tips: [
     'CoC = (NOI − Debt Service) / Equity. Unlevered = cap rate; levered adds or subtracts the spread on debt.',

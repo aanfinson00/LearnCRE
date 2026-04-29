@@ -5,6 +5,7 @@ export const compSetVetting: SituationalCase = {
   title: 'Which comps belong in this set?',
   category: 'comp-selection',
   difficulty: 'beginner',
+  roles: ['acquisitions'],
   assetClass: 'industrial',
   scenario:
     'You\'re pricing a 200,000 SF Class-B industrial asset in a major distribution submarket. The broker provides 5 trade comps to support pricing. You need to vet each before averaging the cap rates.',

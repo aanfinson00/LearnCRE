@@ -3,6 +3,7 @@ import type {
   SituationalDifficulty,
   SituationalRunConfig,
 } from '../../types/situational';
+import { matchesRole } from '../../types/role';
 import type { AssetClass } from '../assetClasses';
 import { capRateDivergence } from './capRateDivergence';
 import { absorptionTiming } from './absorptionTiming';
@@ -50,12 +51,13 @@ function matchesDifficulty(
 }
 
 export function filterCases(
-  config: Pick<SituationalRunConfig, 'category' | 'difficulty' | 'assetClass'>,
+  config: Pick<SituationalRunConfig, 'category' | 'difficulty' | 'assetClass' | 'role'>,
 ): SituationalCase[] {
   return SITUATIONAL_CASES.filter((c) => {
     if (config.category !== 'all' && c.category !== config.category) return false;
     if (!matchesDifficulty(c, config.difficulty)) return false;
     if (!matchesAssetClass(c, config.assetClass)) return false;
+    if (!matchesRole(c.roles, config.role)) return false;
     return true;
   });
 }

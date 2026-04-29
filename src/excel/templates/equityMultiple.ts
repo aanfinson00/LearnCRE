@@ -19,6 +19,7 @@ export const equityMultipleTemplate: ExcelTemplate = {
   title: 'Equity multiple from distributions',
   category: 'aggregation',
   difficulty: 'beginner',
+  roles: ['acquisitions', 'portfolioMgmt'],
   scenario:
     'You contributed $5M in equity. Over a 4-year hold the deal returned the distributions below, with the sale proceeds in year 4. Compute the equity multiple.',
   instruction:

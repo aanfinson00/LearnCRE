@@ -5,6 +5,7 @@ export const vacancySpike: SituationalCase = {
   title: 'A 15-point vacancy spike — what now?',
   category: 'diagnostic',
   difficulty: 'intermediate',
+  roles: ['assetManagement'],
   assetClass: 'office',
   scenario:
     'A 200,000 SF Class-A office building has run at 95%+ occupancy for the past four years. In the most recent quarter, occupancy dropped from 95% to 80% — a 15-point swing. The seller\'s broker is marketing this as a "temporary leasing opportunity" at the same pricing as a year ago. You\'re being asked to bid this week.',

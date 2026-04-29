@@ -29,6 +29,7 @@ export const cagrTemplate: QuestionTemplate<'cagr'> = {
   label: 'CAGR',
   description: 'Growth rate from start, end, and periods.',
   category: 'returns',
+  roles: ['acquisitions', 'portfolioMgmt'],
   pattern: '(A / B)^(1/n) − 1   [nth root of a ratio]',
   tips: [
     'Same math as IRR from an equity multiple — just generic for any starting/ending value.',

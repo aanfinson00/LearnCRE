@@ -24,6 +24,7 @@ export const tiPaybackTemplate: QuestionTemplate<'tiPayback'> = {
   label: 'TI Payback Rent Premium',
   description: 'What rent premium /SF/yr pays back the TI in N years?',
   category: 'valuation',
+  roles: ['acquisitions', 'assetManagement'],
   pattern: 'A / B   where A = TI, B = payback years',
   tips: [
     'Premium = TI / payback years. $25 TI / 3-year payback = $8.33/SF/yr extra rent required.',

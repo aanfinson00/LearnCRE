@@ -47,6 +47,7 @@ export const netEffectiveRentTemplate: QuestionTemplate<'netEffectiveRent'> = {
   label: 'Net Effective Rent',
   description: 'Rent after spreading TI + free rent across the lease term.',
   category: 'valuation',
+  roles: ['acquisitions', 'assetManagement'],
   pattern: 'A − B/n − (f × A / 12) / n   [face − TI/yr − freeRent/yr]',
   tips: [
     'Annualize every concession. $15/SF TI over 5 years = $3/SF/yr. 3 months free on a $20 rent = $5/SF total = $1/SF/yr over 5y.',

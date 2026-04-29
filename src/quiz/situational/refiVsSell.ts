@@ -5,6 +5,7 @@ export const refiVsSell = {
   title: 'Refinance or sell?',
   category: 'investment-thesis',
   difficulty: 'advanced',
+  roles: ['assetManagement', 'portfolioMgmt'],
   assetClass: 'mixed',
   scenario:
     'You\'re three years into a five-year hold on a stabilized industrial asset. You\'ve modeled two paths to year-5 close-out: (a) hold + refi at year 3 to a 60% LTV loan, distribute proceeds, and sell at year 5; (b) sell now and redeploy into a similar deal at current pricing. The IRR on both paths is materially identical (~14.5%) on the model.',

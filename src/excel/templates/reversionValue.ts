@@ -18,6 +18,7 @@ export const reversionValueTemplate: ExcelTemplate = {
   title: 'Reversion value net of sale costs',
   category: 'arithmetic',
   difficulty: 'beginner',
+  roles: ['acquisitions'],
   scenario:
     'You\'re modeling exit value at year 5. Stabilized NOI is $950k, you\'re using a 6.0% exit cap, and you assume 1.5% sale costs (broker commission + closing).',
   instruction:

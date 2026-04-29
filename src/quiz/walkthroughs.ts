@@ -73,6 +73,7 @@ function combinedScenarioWalk(): WalkthroughDef {
     ],
     takeaway:
       'Each line of a proforma is a single arithmetic step. Chaining them is the whole valuation. Master each step in isolation and the full proforma collapses to one expression: ((GPR + Other) × (1 − vac) − OpEx) / cap.',
+    roles: ['acquisitions'],
   };
 }
 
@@ -133,6 +134,7 @@ function dscrLoanSizingWalk(): WalkthroughDef {
     ],
     takeaway:
       'DSCR sizing is just three divisions. NOI / DSCR gives you the DS allowance; DS / constant gives you the loan. Memorize the loan constants for 4–8% / 25–30y and you can size any deal in your head.',
+    roles: ['mortgageUw', 'acquisitions'],
   };
 }
 

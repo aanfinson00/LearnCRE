@@ -57,6 +57,8 @@ export interface ExcelTemplate {
   title: string;
   category: ExcelTemplateCategory;
   difficulty: 'beginner' | 'intermediate' | 'advanced';
+  /** Position roles this template is most relevant for. Untagged = all roles. */
+  roles?: import('../types/role').Role[];
   /** 1–2 sentence prompt setting the scenario */
   scenario: string;
   /** Concrete instruction for the user (which cell, what to compute) */
@@ -94,6 +96,7 @@ export interface ExcelRunConfig {
   category: ExcelTemplateCategory | 'all';
   difficulty: ExcelTemplate['difficulty'] | 'all';
   length: 3 | 5 | 10;
+  role?: import('../types/role').Role | 'all';
 }
 
 export interface ExcelState {

@@ -24,6 +24,7 @@ export const debtYieldTemplate: QuestionTemplate<'debtYield'> = {
   label: 'Debt Yield Loan Sizing',
   description: 'Max loan given NOI and required debt yield.',
   category: 'returns',
+  roles: ['acquisitions', 'mortgageUw'],
   pattern: 'A / B   where A = NOI, B = required yield %',
   tips: [
     'Debt yield is the lender-side cap rate: NOI / Loan. 9% DY = 11.1x NOI max loan; 10% DY = 10x NOI.',

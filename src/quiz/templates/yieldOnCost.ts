@@ -24,6 +24,7 @@ export const yieldOnCostTemplate: QuestionTemplate<'yieldOnCost'> = {
   label: 'Yield on Cost',
   description: 'Stabilized NOI over total project cost.',
   category: 'valuation',
+  roles: ['acquisitions', 'development'],
   pattern: 'A / B   where A = NOI, B = total cost',
   tips: [
     'YoC is the going-in cap rate replacement for development or value-add deals — it uses all-in cost, not price.',

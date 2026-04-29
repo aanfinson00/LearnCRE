@@ -10,6 +10,7 @@ export const markToMarketLift: ExcelTemplate = {
   title: 'Mark-to-market rent lift on rollover',
   category: 'arithmetic',
   difficulty: 'beginner',
+  roles: ['acquisitions', 'assetManagement'],
   scenario:
     'A tenant\'s in-place rent is $24/SF; recent leases in the building have signed at $32/SF. Compute the percentage rent lift available on rollover.',
   instruction:

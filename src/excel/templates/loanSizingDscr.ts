@@ -10,6 +10,7 @@ export const loanSizingDscr: ExcelTemplate = {
   title: 'Maximum loan from a DSCR constraint',
   category: 'finance',
   difficulty: 'intermediate',
+  roles: ['mortgageUw', 'acquisitions'],
   scenario:
     'A stabilized asset generates $1M of NOI. The lender requires a 1.30x DSCR with the rate at 6% on a 30-year amortization. Compute the maximum supportable loan.',
   instruction:

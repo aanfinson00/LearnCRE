@@ -1,5 +1,7 @@
+import { useMemo, useState } from 'react';
 import { walkthroughs } from '../quiz/walkthroughs';
 import type { WalkthroughDef } from '../types/walkthrough';
+import { ROLES, matchesRole, type Role } from '../types/role';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
 
@@ -9,6 +11,12 @@ interface Props {
 }
 
 export function WalkthroughSetup({ onStart, onBack }: Props) {
+  const [role, setRole] = useState<Role | 'all'>('all');
+  const visible = useMemo(
+    () => walkthroughs.filter((w) => matchesRole(w.roles, role)),
+    [role],
+  );
+
   return (
     <div className="mx-auto max-w-3xl space-y-6 py-10">
       <header className="flex items-start justify-between gap-6">
@@ -26,8 +34,29 @@ export function WalkthroughSetup({ onStart, onBack }: Props) {
         </Button>
       </header>
 
+      <div className="space-y-2">
+        <div className="text-xs font-medium uppercase tracking-widest text-warm-stone">
+          Position focus
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <RolePill active={role === 'all'} onClick={() => setRole('all')}>
+            All
+          </RolePill>
+          {ROLES.map((r) => (
+            <RolePill key={r.id} active={role === r.id} onClick={() => setRole(r.id)}>
+              {r.label}
+            </RolePill>
+          ))}
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 gap-3">
-        {walkthroughs.map((w) => (
+        {visible.length === 0 && (
+          <div className="rounded-lg border border-warm-line bg-warm-paper/40 p-4 text-sm text-warm-stone">
+            No walkthroughs match this role yet — try All.
+          </div>
+        )}
+        {visible.map((w) => (
           <button
             key={w.id}
             type="button"
@@ -56,5 +85,29 @@ export function WalkthroughSetup({ onStart, onBack }: Props) {
         </p>
       </Card>
     </div>
+  );
+}
+
+function RolePill({
+  active,
+  onClick,
+  children,
+}: {
+  active: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`rounded-full border px-3 py-1.5 text-xs transition-colors duration-aa ease-aa ${
+        active
+          ? 'border-copper bg-copper/10 text-copper-deep'
+          : 'border-warm-line bg-warm-white/70 text-warm-ink hover:border-copper/60 hover:text-copper-deep'
+      }`}
+    >
+      {children}
+    </button>
   );
 }

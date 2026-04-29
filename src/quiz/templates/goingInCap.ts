@@ -25,6 +25,7 @@ export const goingInCapTemplate: QuestionTemplate<'goingInCap'> = {
   label: 'Going-in Cap Rate',
   description: 'Price + NOI → cap rate in bps.',
   category: 'valuation',
+  roles: ['acquisitions'],
   pattern: 'A / B   where A = NOI, B = price',
   tips: [
     'Cap = NOI / Price. Inverse is the NOI multiple: 5% = 20x, 6% = 16.67x, 7% = 14.29x.',
