@@ -1,5 +1,7 @@
 import { egi, noi as computeNoi, value as computeValue } from '../math/core';
 import { loanConstant, maxLoanByDscr } from '../math/debt';
+import { irrMulti } from '../math/returns';
+import { afterTaxSaleProceeds, depreciationStraightLine } from '../math/tax';
 import { formatPct, formatUsd, formatYears } from '../math/rounding';
 import type { WalkthroughDef } from '../types/walkthrough';
 
@@ -545,12 +547,142 @@ function developmentFeasibilityWalk(): WalkthroughDef {
   };
 }
 
+function holdSellWalk(): WalkthroughDef {
+  // Year-3 of a 5-year hold; LP IC asks: hold or sell now?
+  const purchase = 40_000_000;
+  const noiToday = 2_400_000;
+  const noiGrowth = 0.03;
+  const sellNowCap = 0.06;
+  const sellNowValue = noiToday / sellNowCap;
+  const yearsHeld = 3;
+  const remainingYears = 2;
+  const totalHold = yearsHeld + remainingYears;
+  const futureExitCap = 0.0625;     // +25 bps cap drift over 2 more years
+  const yearNNoi = noiToday * Math.pow(1 + noiGrowth, remainingYears);
+  const futureExitValue = yearNNoi / futureExitCap;
+
+  // Sell-now realized IRR (Year 0 to Year 3, with NOI distributions)
+  const cfSellNow: number[] = [-purchase];
+  for (let y = 1; y <= yearsHeld; y++) {
+    const noiY = noiToday * Math.pow(1 + noiGrowth, y - yearsHeld);
+    cfSellNow.push(y === yearsHeld ? noiY + sellNowValue : noiY);
+  }
+  const sellNowIrr = irrMulti(cfSellNow);
+
+  // Hold-through-Year-5 IRR
+  const cfHold: number[] = [-purchase];
+  for (let y = 1; y <= totalHold; y++) {
+    const noiY = noiToday * Math.pow(1 + noiGrowth, y - yearsHeld);
+    cfHold.push(y === totalHold ? noiY + futureExitValue : noiY);
+  }
+  const holdIrr = irrMulti(cfHold);
+
+  // After-tax: assume 80% depreciable basis, 27.5-yr life
+  const accumulatedDep = depreciationStraightLine(purchase * 0.8, yearsHeld);
+  const afterTaxSellNow = afterTaxSaleProceeds({
+    purchasePrice: purchase,
+    saleProceeds: sellNowValue,
+    accumulatedDepreciation: accumulatedDep,
+  });
+
+  return {
+    id: 'walk-am-holdsell-1',
+    kind: 'holdSellWalk',
+    label: 'Hold or Sell — chained',
+    description: 'Compare sell-now vs hold-2-more-years on a value-add asset.',
+    context: {
+      purchasePrice: purchase,
+      noi: noiToday,
+      capRate: sellNowCap,
+      exitCap: futureExitCap,
+      holdYears: totalHold,
+    },
+    setupNarrative: `Year 3 of a 5-year hold. Bought for ${formatUsd(purchase)}; current NOI ${formatUsd(noiToday)}; today's value ${formatUsd(sellNowValue)} at a ${formatPct(sellNowCap)} cap. NOI growing ${formatPct(noiGrowth)}/yr. If you hold 2 more years, expect a ${formatPct(futureExitCap)} exit cap (${((futureExitCap - sellNowCap) * 10_000).toFixed(0)} bps drift). Walk the sell-now vs hold-through math.`,
+    steps: [
+      {
+        id: 'sellnow-irr',
+        label: 'Step 1 — Sell-now realized IRR',
+        prompt: `Cash flows are: −${formatUsd(purchase)} at Y0; ${formatUsd(noiToday * Math.pow(1+noiGrowth, -2))}, ${formatUsd(noiToday * Math.pow(1+noiGrowth, -1))}, ${formatUsd(noiToday)} for Y1-Y3 NOI; plus ${formatUsd(sellNowValue)} at Y3 sale. What's the IRR if you sell now?`,
+        expected: sellNowIrr,
+        unit: 'pct',
+        tolerance: { type: 'abs', band: 0.005 },
+        hint: 'Multi-period IRR — solve for r where NPV = 0.',
+        resultDescription: `IRR(cash flows) ≈ ${formatPct(sellNowIrr)}. This is your "in the bag" return if you stop here.`,
+      },
+      {
+        id: 'noi-yr5',
+        label: 'Step 2 — Year-5 NOI',
+        prompt: `Apply ${formatPct(noiGrowth)}/yr growth for ${formatYears(remainingYears)} more. What's Year-5 NOI?`,
+        expected: yearNNoi,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'NOI_today × (1 + g)^N.',
+        resultDescription: `${formatUsd(noiToday)} × (1 + ${formatPct(noiGrowth)})^${remainingYears} = ${formatUsd(yearNNoi)}.`,
+      },
+      {
+        id: 'future-exit',
+        label: 'Step 3 — Future exit value',
+        prompt: `At a ${formatPct(futureExitCap)} exit cap, what's the future exit value?`,
+        expected: futureExitValue,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'Year-5 NOI / future cap.',
+        resultDescription: `${formatUsd(yearNNoi)} / ${formatPct(futureExitCap)} = ${formatUsd(futureExitValue)}. Note: ${formatPct(futureExitCap)} is wider than today\'s ${formatPct(sellNowCap)} — the cap drift compounds against you.`,
+      },
+      {
+        id: 'hold-irr',
+        label: 'Step 4 — Hold-through IRR',
+        prompt: 'IRR with the same Y0 entry, Y1-Y4 NOI, and Y5 NOI + future exit. What\'s the hold-through IRR?',
+        expected: holdIrr,
+        unit: 'pct',
+        tolerance: { type: 'abs', band: 0.005 },
+        hint: 'Same IRR machinery; longer cash-flow series.',
+        resultDescription: `IRR(cash flows) ≈ ${formatPct(holdIrr)}. Compare to sell-now IRR above.`,
+      },
+      {
+        id: 'irr-delta',
+        label: 'Step 5 — Pre-tax IRR delta',
+        prompt: 'Hold IRR − sell-now IRR. Positive = holding wins on pre-tax.',
+        expected: holdIrr - sellNowIrr,
+        unit: 'pct',
+        tolerance: { type: 'abs', band: 0.005 },
+        hint: 'Subtract.',
+        resultDescription: `${formatPct(holdIrr)} − ${formatPct(sellNowIrr)} = ${formatPct(holdIrr - sellNowIrr)}. ${holdIrr > sellNowIrr ? 'Holding pencils on pre-tax' : 'Selling pencils on pre-tax'}.`,
+      },
+      {
+        id: 'accum-dep',
+        label: 'Step 6 — Accumulated depreciation',
+        prompt: `${formatYears(yearsHeld)} of depreciation at 80% depreciable basis (27.5-yr MF life). What's accumulated?`,
+        expected: accumulatedDep,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: '(80% × purchase) / 27.5 × yearsHeld.',
+        resultDescription: `(${formatUsd(purchase * 0.8)}) / 27.5 × ${yearsHeld} = ${formatUsd(accumulatedDep)}.`,
+      },
+      {
+        id: 'after-tax-sell',
+        label: 'Step 7 — After-tax sell-now proceeds',
+        prompt: 'Sale costs 1.5%, recapture 25%, cap gains 20%. What\'s after-tax cash?',
+        expected: afterTaxSellNow.afterTaxProceeds,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'Net sale − recapture tax − cap-gains tax.',
+        resultDescription: `Net ${formatUsd(afterTaxSellNow.netSale)} − recap ${formatUsd(afterTaxSellNow.recaptureTax)} − cap gains ${formatUsd(afterTaxSellNow.capGainsTax)} = ${formatUsd(afterTaxSellNow.afterTaxProceeds)}. Sell-now real cash ≈ ${formatPct(afterTaxSellNow.afterTaxProceeds / sellNowValue - 1)} below the gross — and the hold path defers this entirely.`,
+      },
+    ],
+    takeaway:
+      'Hold-vs-sell decisions live in three layers: pre-tax IRR (Steps 1–5), after-tax cash (Steps 6–7), and the LP-tax-position lens (deferral matters more for tax-sensitive LPs). When pre-tax IRR is similar, deferral usually tips toward holding — but the cap-rate drift on the hold side often offsets the deferral benefit. Always run all three layers; never decide on pre-tax alone.',
+    roles: ['assetManagement', 'portfolioMgmt'],
+  };
+}
+
 export const walkthroughs: WalkthroughDef[] = [
   combinedScenarioWalk(),
   dscrLoanSizingWalk(),
   mockAcquisitionWalk(),
   valueAddWalk(),
   developmentFeasibilityWalk(),
+  holdSellWalk(),
 ];
 
 export function getWalkthroughById(id: string): WalkthroughDef | undefined {

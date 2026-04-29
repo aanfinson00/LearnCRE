@@ -12,6 +12,9 @@ import { dscrFromNoiAndDsTemplate } from './dscrFromNoiAndDs';
 import { dscrLoanSizingTemplate } from './dscrLoanSizing';
 import { dscrSensitivityRateTemplate } from './dscrSensitivityRate';
 import { dscrTestPassesTemplate } from './dscrTestPasses';
+import { extensionDragTemplate } from './extensionDrag';
+import { holdVsSellIrrTemplate } from './holdVsSellIrr';
+import { taxAdjustedExitTemplate } from './taxAdjustedExit';
 import { equityMultipleTemplate } from './equityMultiple';
 import { goingInCapTemplate } from './goingInCap';
 import { grossRentMultiplierTemplate } from './grossRentMultiplier';
@@ -77,6 +80,9 @@ export const templates: Record<QuestionKind, QuestionTemplate> = {
   dscrFromNoiAndDs: dscrFromNoiAndDsTemplate,
   dscrSensitivityRate: dscrSensitivityRateTemplate,
   dscrTestPasses: dscrTestPassesTemplate,
+  holdVsSellIrr: holdVsSellIrrTemplate,
+  taxAdjustedExit: taxAdjustedExitTemplate,
+  extensionDrag: extensionDragTemplate,
 };
 
 export const allKinds: QuestionKind[] = [
@@ -118,4 +124,7 @@ export const allKinds: QuestionKind[] = [
   'dscrFromNoiAndDs',
   'dscrSensitivityRate',
   'dscrTestPasses',
+  'holdVsSellIrr',
+  'taxAdjustedExit',
+  'extensionDrag',
 ];

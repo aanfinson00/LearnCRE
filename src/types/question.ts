@@ -40,7 +40,10 @@ export type QuestionKind =
   | 'pricePerUnit'
   | 'dscrFromNoiAndDs'
   | 'dscrSensitivityRate'
-  | 'dscrTestPasses';
+  | 'dscrTestPasses'
+  | 'holdVsSellIrr'
+  | 'taxAdjustedExit'
+  | 'extensionDrag';
 
 export type UnitFormat = 'usd' | 'pct' | 'bps' | 'pctChange' | 'usdChange' | 'multiple' | 'usdPerSf';
 

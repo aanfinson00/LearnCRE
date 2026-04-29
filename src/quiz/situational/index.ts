@@ -26,6 +26,8 @@ import { rolloverConcentration } from './rolloverConcentration';
 import { sponsorProformaAggressive } from './sponsorProformaAggressive';
 import { debtYieldVsDscr } from './debtYieldVsDscr';
 import { overWeightOffice } from './overWeightOffice';
+import { holdExtensionDiscipline } from './holdExtensionDiscipline';
+import { taxVsIrrTradeoff } from './taxVsIrrTradeoff';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -49,6 +51,8 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   sponsorProformaAggressive,
   debtYieldVsDscr,
   overWeightOffice,
+  holdExtensionDiscipline,
+  taxVsIrrTradeoff,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {
