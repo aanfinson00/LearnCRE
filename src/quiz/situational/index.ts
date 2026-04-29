@@ -17,6 +17,7 @@ import { refiVsSell } from './refiVsSell';
 import { capSpread } from './capSpread';
 import { vacancySpike } from './vacancySpike';
 import { tenantCreditPricing } from './tenantCreditPricing';
+import { dscrRefiFailing } from './dscrRefiFailing';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -31,6 +32,7 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   capSpread,
   vacancySpike,
   tenantCreditPricing,
+  dscrRefiFailing,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {

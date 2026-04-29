@@ -8,7 +8,10 @@ import { combinedScenarioTemplate } from './combinedScenario';
 import { compoundGrowthTemplate } from './compoundGrowth';
 import { debtYieldTemplate } from './debtYield';
 import { devSpreadTemplate } from './devSpread';
+import { dscrFromNoiAndDsTemplate } from './dscrFromNoiAndDs';
 import { dscrLoanSizingTemplate } from './dscrLoanSizing';
+import { dscrSensitivityRateTemplate } from './dscrSensitivityRate';
+import { dscrTestPassesTemplate } from './dscrTestPasses';
 import { equityMultipleTemplate } from './equityMultiple';
 import { goingInCapTemplate } from './goingInCap';
 import { grossRentMultiplierTemplate } from './grossRentMultiplier';
@@ -71,6 +74,9 @@ export const templates: Record<QuestionKind, QuestionTemplate> = {
   rentPerUnit: rentPerUnitTemplate,
   opexPerUnit: opexPerUnitTemplate,
   pricePerUnit: pricePerUnitTemplate,
+  dscrFromNoiAndDs: dscrFromNoiAndDsTemplate,
+  dscrSensitivityRate: dscrSensitivityRateTemplate,
+  dscrTestPasses: dscrTestPassesTemplate,
 };
 
 export const allKinds: QuestionKind[] = [
@@ -109,4 +115,7 @@ export const allKinds: QuestionKind[] = [
   'rentPerUnit',
   'opexPerUnit',
   'pricePerUnit',
+  'dscrFromNoiAndDs',
+  'dscrSensitivityRate',
+  'dscrTestPasses',
 ];

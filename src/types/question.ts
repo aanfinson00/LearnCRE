@@ -37,7 +37,10 @@ export type QuestionKind =
   | 'noiFromOer'
   | 'rentPerUnit'
   | 'opexPerUnit'
-  | 'pricePerUnit';
+  | 'pricePerUnit'
+  | 'dscrFromNoiAndDs'
+  | 'dscrSensitivityRate'
+  | 'dscrTestPasses';
 
 export type UnitFormat = 'usd' | 'pct' | 'bps' | 'pctChange' | 'usdChange' | 'multiple' | 'usdPerSf';
 
