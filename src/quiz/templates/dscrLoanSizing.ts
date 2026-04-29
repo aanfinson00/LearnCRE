@@ -50,10 +50,7 @@ export const dscrLoanSizingTemplate: QuestionTemplate<'dscrLoanSizing'> = {
   ],
   generate(rng, difficulty = 'intermediate', _assetClass = 'mixed') {
     const noi = pickBand(rng, bands.noi, difficulty);
-    const dscrTarget =
-      difficulty === 'beginner'
-        ? rng.pickFromSet([1.2, 1.25, 1.3] as const)
-        : pickBand(rng, bands.dscrTarget, difficulty);
+    const dscrTarget = pickBand(rng, bands.dscrTarget, difficulty);
     const rate = pickBand(rng, bands.interestRate, difficulty);
     const years = difficulty === 'beginner' ? 30 : rng.pickInt(bands.amortYears.min, bands.amortYears.max);
     const expected = maxLoanByDscr({ noi, dscrTarget, annualRate: rate, years });

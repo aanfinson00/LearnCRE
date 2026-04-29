@@ -68,10 +68,7 @@ export const cashOnCashTemplate: QuestionTemplate<'cashOnCash'> = {
     const noi = pickBand(rng, bands.noi, difficulty);
     const priceStep = difficulty === 'beginner' ? 1_000_000 : difficulty === 'advanced' ? 50_000 : 250_000;
     const price = Math.round(noi / cap / priceStep) * priceStep;
-    const ltv =
-      difficulty === 'beginner'
-        ? rng.pickFromSet([0.5, 0.6, 0.7] as const)
-        : pickBand(rng, bands.ltv, difficulty);
+    const ltv = pickBand(rng, bands.ltv, difficulty);
     const rate = pickBand(rng, bands.interestRate, difficulty);
     const years = difficulty === 'beginner' ? 30 : rng.pickInt(bands.amortYears.min, bands.amortYears.max);
     const loan = price * ltv;

@@ -8,11 +8,13 @@ function isMultipleOf(value: number, step: number, eps = 1e-6): boolean {
 }
 
 describe('quiz/difficulty', () => {
-  it('beginner cap rates land on 1% round caps (0.01 step)', () => {
+  it('beginner cap rates land on 0.5% round caps (0.005 step)', () => {
+    // Beginner step multiplier was tightened from 4× to 2× to expand the
+    // sample space; cap step is now 0.005 (50 bps) instead of 0.01.
     const rng = createRng(101);
     for (let i = 0; i < 300; i++) {
       const q = templates.capCompression.generate(rng, 'beginner');
-      expect(isMultipleOf(q.context.capRate!, 0.01, 1e-4)).toBe(true);
+      expect(isMultipleOf(q.context.capRate!, 0.005, 1e-4)).toBe(true);
     }
   });
 
@@ -35,15 +37,18 @@ describe('quiz/difficulty', () => {
     expect(sawNon25bps).toBe(true);
   });
 
-  it('beginner NOI lands on $100k round numbers', () => {
+  it('beginner NOI lands on $50k round numbers (2× the base 25k step)', () => {
     const rng = createRng(104);
     for (let i = 0; i < 300; i++) {
       const q = templates.capCompression.generate(rng, 'beginner');
-      expect(isMultipleOf(q.context.noi!, 100_000, 1e-6)).toBe(true);
+      expect(isMultipleOf(q.context.noi!, 50_000, 1e-6)).toBe(true);
     }
   });
 
-  it('beginner IRR hold years are clean (5, 7, or 10)', () => {
+  it('beginner IRR hold years stay within the holdYears band (2-10)', () => {
+    // We dropped the [5, 7, 10] pickFromSet in favor of pickInt(2, 10) so the
+    // user sees a wider variety of hold periods even on beginner. Just check
+    // values stay inside the band.
     const rng = createRng(105);
     const seen = new Set<number>();
     for (let i = 0; i < 100; i++) {
@@ -51,7 +56,10 @@ describe('quiz/difficulty', () => {
       seen.add(q.context.holdYears!);
     }
     for (const y of seen) {
-      expect([5, 7, 10]).toContain(y);
+      expect(y).toBeGreaterThanOrEqual(2);
+      expect(y).toBeLessThanOrEqual(10);
     }
+    // And confirm we actually got variety — otherwise the variety bump is wasted.
+    expect(seen.size).toBeGreaterThanOrEqual(5);
   });
 });

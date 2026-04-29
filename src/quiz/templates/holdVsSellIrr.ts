@@ -55,13 +55,8 @@ export const holdVsSellIrrTemplate: QuestionTemplate<'holdVsSellIrr'> = {
     const noi = pickBand(rng, bands.noi, difficulty);
     const exitCap = pickBand(rng, bands.capRate, difficulty);
     const todayValue = noi / exitCap;
-    const noiGrowth =
-      difficulty === 'beginner'
-        ? rng.pickFromSet([0.02, 0.025, 0.03] as const)
-        : difficulty === 'intermediate'
-          ? rng.pickFromSet([0.015, 0.025, 0.035, 0.04] as const)
-          : rng.pickFromSet([0.01, 0.02, 0.035, 0.045, 0.05] as const);
-    const extensionYears = rng.pickFromSet([2, 3, 5] as const);
+    const noiGrowth = pickBand(rng, bands.growthRate, difficulty);
+    const extensionYears = rng.pickInt(2, 5);
 
     // Build cash flows: t=0 entry at todayValue, NOI distributions t=1..N-1, then NOI + exit at t=N
     const cashflows: number[] = [-todayValue];

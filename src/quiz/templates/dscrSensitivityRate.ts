@@ -65,10 +65,10 @@ export const dscrSensitivityRateTemplate: QuestionTemplate<'dscrSensitivityRate'
     const direction = rng.pickFromSet([-1, 1] as const);
     const moveBps =
       difficulty === 'beginner'
-        ? 100
+        ? rng.pickRange(75, 150, { step: 25 })
         : difficulty === 'intermediate'
-          ? rng.pickFromSet([50, 100, 150] as const)
-          : rng.pickFromSet([25, 75, 125, 200] as const);
+          ? rng.pickRange(25, 200, { step: 25 })
+          : rng.pickRange(25, 250, { step: 25 });
     const newRate = Math.max(0.02, Math.min(0.12, oldRate + (direction * moveBps) / 10_000));
 
     const newDs = annualDebtService(loan, newRate, amortYears);

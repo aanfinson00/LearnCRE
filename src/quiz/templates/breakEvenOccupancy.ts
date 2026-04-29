@@ -1,7 +1,7 @@
 import { breakEvenOccupancy } from '../../math/debt';
 import { formatPct, formatSf, formatUsd, formatUsdPerSf } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
-import { pickBand } from '../bands';
+import { bands, pickBand } from '../bands';
 import { classBand } from '../assetClasses';
 import { nextId } from '../random';
 
@@ -53,9 +53,9 @@ export const breakEvenOccupancyTemplate: QuestionTemplate<'breakEvenOccupancy'> 
   generate(rng, difficulty = 'intermediate', assetClass = 'mixed') {
     const sf = pickBand(rng, classBand('sf', assetClass), difficulty);
     const pgiPerSf = pickBand(rng, classBand('pgiPerSf', assetClass), difficulty);
-    const opexRatio = rng.pickFromSet([0.3, 0.35, 0.4, 0.45] as const);
+    const opexRatio = pickBand(rng, bands.opexRatio, difficulty);
     const pgi = sf * pgiPerSf;
-    const dsRatio = rng.pickFromSet([0.15, 0.2, 0.25, 0.3] as const);
+    const dsRatio = rng.pickRange(0.12, 0.32, { step: 0.01 });
     const debtStep = difficulty === 'beginner' ? 50_000 : difficulty === 'advanced' ? 5_000 : 25_000;
     const debtService = Math.round((pgi * dsRatio) / debtStep) * debtStep;
     const opex = pgi * opexRatio;
