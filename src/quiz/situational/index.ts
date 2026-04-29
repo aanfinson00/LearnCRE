@@ -18,6 +18,14 @@ import { capSpread } from './capSpread';
 import { vacancySpike } from './vacancySpike';
 import { tenantCreditPricing } from './tenantCreditPricing';
 import { dscrRefiFailing } from './dscrRefiFailing';
+import { compVintageAdjustment } from './compVintageAdjustment';
+import { exitCapConservatism } from './exitCapConservatism';
+import { trendedVsInplaceLeaseup } from './trendedVsInplaceLeaseup';
+import { noiGrowthMissing } from './noiGrowthMissing';
+import { rolloverConcentration } from './rolloverConcentration';
+import { sponsorProformaAggressive } from './sponsorProformaAggressive';
+import { debtYieldVsDscr } from './debtYieldVsDscr';
+import { overWeightOffice } from './overWeightOffice';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -33,6 +41,14 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   vacancySpike,
   tenantCreditPricing,
   dscrRefiFailing,
+  compVintageAdjustment,
+  exitCapConservatism,
+  trendedVsInplaceLeaseup,
+  noiGrowthMissing,
+  rolloverConcentration,
+  sponsorProformaAggressive,
+  debtYieldVsDscr,
+  overWeightOffice,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {

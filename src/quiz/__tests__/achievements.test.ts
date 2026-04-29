@@ -104,11 +104,14 @@ describe('quiz/achievements', () => {
     expect(def.evaluate(ctx({ pureMathAccuracy: passing }))).toBe(true);
   });
 
-  it('walkthrough-apprentice requires every walkthrough id', () => {
+  it('walkthrough-apprentice requires every walkthrough id', async () => {
+    const { walkthroughs } = await import('../walkthroughs');
     const def = ACHIEVEMENTS.find((a) => a.id === 'walkthrough-apprentice')!;
     expect(def.evaluate(ctx({}))).toBe(false);
     expect(
-      def.evaluate(ctx({ walkthroughIdsCompleted: new Set(['walk-combined-1', 'walk-dscr-1']) })),
+      def.evaluate(
+        ctx({ walkthroughIdsCompleted: new Set(walkthroughs.map((w) => w.id)) }),
+      ),
     ).toBe(true);
   });
 
