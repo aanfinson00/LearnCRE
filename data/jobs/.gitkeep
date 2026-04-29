@@ -1,0 +1,2 @@
+Pipeline output lands here. Generated files (*.json, *.csv) are gitignored.
+See scripts/jobs/README.md for the full pipeline walk-through.

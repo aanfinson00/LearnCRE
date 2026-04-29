@@ -5,6 +5,7 @@ export const capSpread: SituationalCase = {
   title: 'Is your exit cap conservative enough?',
   category: 'sensitivity',
   difficulty: 'intermediate',
+  roles: ['acquisitions'],
   assetClass: 'mixed',
   scenario:
     'You\'re underwriting a 5-year hold at a 5.0% going-in cap rate. Your model uses a 6.0% exit cap — 100 bps of cap expansion. The deal otherwise pencils to a 14% IRR. A senior reviewer pushes back: "Why 100 bps? Why not 75 or 125?" The submarket has seen cap rates trade in a tight band over the past 10 years (4.75–5.50%) outside of brief stress periods.',

@@ -5,6 +5,7 @@ export const tenantCreditPricing: SituationalCase = {
   title: 'How much should credit compress the cap?',
   category: 'pricing',
   difficulty: 'advanced',
+  roles: ['acquisitions', 'mortgageUw'],
   assetClass: 'industrial',
   scenario:
     'You\'re bidding on a single-tenant industrial distribution asset. The tenant is investment-grade rated (BBB+ from S&P), occupies 100% of the building, and has a 15-year remaining lease term with 2.5% annual escalations. Comparable trades for spec-grade or short-term-leased product are pricing at 6.0% caps in this submarket.',

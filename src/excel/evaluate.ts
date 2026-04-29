@@ -59,6 +59,41 @@ function npv(rate: number, cashflows: number[]): number {
   return acc;
 }
 
+/**
+ * PV: present value (Excel signature). Returns the negative of the loan amount
+ * for a given periodic payment.
+ *   rate = 0:  PV = -(pmt * nper + fv)
+ *   rate ≠ 0:  PV = -(pmt * ((1+rate)^nper - 1)/rate + fv) / (1+rate)^nper
+ */
+function pv(rate: number, nper: number, pmtVal: number, fv = 0): number {
+  if (rate === 0) return -(pmtVal * nper + fv);
+  const f = Math.pow(1 + rate, nper);
+  return -(pmtVal * ((f - 1) / rate) + fv) / f;
+}
+
+/**
+ * Outstanding loan balance after k payments. With balance(0) = pv,
+ * balance(k) = balance(k-1) * (1 + rate) + pmtVal where pmtVal is the (negative)
+ * periodic payment.
+ */
+function loanBalance(rate: number, k: number, pvAmt: number, pmtVal: number, fv = 0): number {
+  if (rate === 0) return pvAmt + pmtVal * k + fv;
+  const f = Math.pow(1 + rate, k);
+  return pvAmt * f + pmtVal * ((f - 1) / rate);
+}
+
+/** IPMT: interest portion of payment number `per` (1-indexed). Excel sign convention (negative). */
+function ipmt(rate: number, per: number, nper: number, pvAmt: number, fv = 0): number {
+  const pmtVal = pmt(rate, nper, pvAmt, fv);
+  const balanceAtStart = loanBalance(rate, per - 1, pvAmt, pmtVal, fv);
+  return -balanceAtStart * rate;
+}
+
+/** PPMT: principal portion of payment `per`. PMT − IPMT. */
+function ppmt(rate: number, per: number, nper: number, pvAmt: number, fv = 0): number {
+  return pmt(rate, nper, pvAmt, fv) - ipmt(rate, per, nper, pvAmt, fv);
+}
+
 /** IRR via Newton's method with bisection fallback. Returns NaN if no root. */
 function irr(cashflows: number[], guess = 0.1): number {
   if (cashflows.length < 2) return NaN;
@@ -159,9 +194,41 @@ const FUNCTIONS: Record<string, FnHandler> = {
     }
     const rate = coerceScalar(args[0], 'PMT rate');
     const nper = coerceScalar(args[1], 'PMT nper');
-    const pv = coerceScalar(args[2], 'PMT pv');
+    const pvAmt = coerceScalar(args[2], 'PMT pv');
     const fv = args.length === 4 ? coerceScalar(args[3], 'PMT fv') : 0;
-    return pmt(rate, nper, pv, fv);
+    return pmt(rate, nper, pvAmt, fv);
+  },
+  PV: (args) => {
+    if (args.length < 3 || args.length > 4) {
+      throw new FormulaError('PV: expected 3 or 4 arguments (rate, nper, pmt, [fv])');
+    }
+    const rate = coerceScalar(args[0], 'PV rate');
+    const nper = coerceScalar(args[1], 'PV nper');
+    const pmtVal = coerceScalar(args[2], 'PV pmt');
+    const fv = args.length === 4 ? coerceScalar(args[3], 'PV fv') : 0;
+    return pv(rate, nper, pmtVal, fv);
+  },
+  IPMT: (args) => {
+    if (args.length < 4 || args.length > 5) {
+      throw new FormulaError('IPMT: expected 4 or 5 arguments (rate, per, nper, pv, [fv])');
+    }
+    const rate = coerceScalar(args[0], 'IPMT rate');
+    const per = coerceScalar(args[1], 'IPMT per');
+    const nper = coerceScalar(args[2], 'IPMT nper');
+    const pvAmt = coerceScalar(args[3], 'IPMT pv');
+    const fv = args.length === 5 ? coerceScalar(args[4], 'IPMT fv') : 0;
+    return ipmt(rate, per, nper, pvAmt, fv);
+  },
+  PPMT: (args) => {
+    if (args.length < 4 || args.length > 5) {
+      throw new FormulaError('PPMT: expected 4 or 5 arguments (rate, per, nper, pv, [fv])');
+    }
+    const rate = coerceScalar(args[0], 'PPMT rate');
+    const per = coerceScalar(args[1], 'PPMT per');
+    const nper = coerceScalar(args[2], 'PPMT nper');
+    const pvAmt = coerceScalar(args[3], 'PPMT pv');
+    const fv = args.length === 5 ? coerceScalar(args[4], 'PPMT fv') : 0;
+    return ppmt(rate, per, nper, pvAmt, fv);
   },
   NPV: (args) => {
     if (args.length < 2) throw new FormulaError('NPV: expected at least 2 arguments');

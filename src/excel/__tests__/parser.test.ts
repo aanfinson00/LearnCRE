@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { FormulaError, a1ToCellRef, cellRefToA1, parseFormula } from '../parser';
+import {
+  FormulaError,
+  a1ToCellRef,
+  cellRefToA1,
+  extractReferencedAddresses,
+  parseFormula,
+} from '../parser';
 
 describe('excel/parser — cell address helpers', () => {
   it('round-trips A1', () => {
@@ -89,5 +95,36 @@ describe('excel/parser — formula parsing', () => {
   it('uppercases function names', () => {
     const expr = parseFormula('=sum(A1:A2)') as { kind: 'call'; name: string };
     expect(expr.name).toBe('SUM');
+  });
+});
+
+describe('excel/parser — extractReferencedAddresses', () => {
+  it('finds standalone cell refs', () => {
+    expect(extractReferencedAddresses('=A1+B2')).toEqual(new Set(['A1', 'B2']));
+  });
+
+  it('expands ranges into every cell', () => {
+    expect(extractReferencedAddresses('=SUM(A1:A3)')).toEqual(new Set(['A1', 'A2', 'A3']));
+  });
+
+  it('handles 2D ranges', () => {
+    expect(extractReferencedAddresses('=SUM(A1:B2)')).toEqual(
+      new Set(['A1', 'A2', 'B1', 'B2']),
+    );
+  });
+
+  it('strips absolute markers when canonicalizing', () => {
+    expect(extractReferencedAddresses('=$A$1+B$2')).toEqual(new Set(['A1', 'B2']));
+  });
+
+  it('returns empty for malformed / partial input', () => {
+    expect(extractReferencedAddresses('=SUM(')).toEqual(new Set());
+    expect(extractReferencedAddresses('')).toEqual(new Set());
+    expect(extractReferencedAddresses('=')).toEqual(new Set());
+  });
+
+  it('still extracts what it can from invalid input', () => {
+    // Trailing garbage after a valid ref should still surface the ref
+    expect(extractReferencedAddresses('=A1+')).toEqual(new Set(['A1']));
   });
 });

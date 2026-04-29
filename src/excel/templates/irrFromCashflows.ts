@@ -27,6 +27,7 @@ export const irrFromCashflows: ExcelTemplate = {
   title: 'IRR from a cash flow series',
   category: 'finance',
   difficulty: 'intermediate',
+  roles: ['acquisitions', 'portfolioMgmt'],
   scenario:
     'A 4-year hold on a value-add multifamily deal. $5M of equity in at Year 0; modest interim distributions; sale + final operating year combined into Year 4.',
   instruction:

@@ -25,6 +25,7 @@ export const pricePerUnitTemplate: QuestionTemplate<'pricePerUnit'> = {
   label: 'Price per Unit ($/door)',
   description: 'Purchase price per unit (for multifamily, hotels).',
   category: 'valuation',
+  roles: ['acquisitions'],
   pattern: 'A / B   where A = price, B = units',
   tips: [
     'Primary multifamily benchmark metric alongside cap rate. Typical B-class ranges $150k–$350k/unit.',

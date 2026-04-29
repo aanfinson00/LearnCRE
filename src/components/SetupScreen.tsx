@@ -3,6 +3,7 @@ import { templates, allKinds } from '../quiz/templates';
 import type { QuestionKind, AnswerMode } from '../types/question';
 import type { AssetClass, DifficultyMode, SessionConfig, TolerancePreset, LifetimeStats } from '../types/session';
 import { applicableKinds, assetClassOrder, assetClasses } from '../quiz/assetClasses';
+import { ROLES, matchesRole, type Role } from '../types/role';
 import { gateLabel, isUnlocked, loadTierState, saveTierState } from '../quiz/gates';
 import { loadXp } from '../quiz/xp';
 import { nextTier, tierForXp } from '../quiz/tiers';
@@ -84,6 +85,7 @@ export function SetupScreen({ onStart }: Props) {
   const [tolerance, setTolerance] = useState<TolerancePreset>(stored?.tolerancePreset ?? 'normal');
   const [difficulty, setDifficulty] = useState<DifficultyMode>(stored?.difficulty ?? 'intermediate');
   const [assetClass, setAssetClass] = useState<AssetClass>(stored?.assetClass ?? 'mixed');
+  const [role, setRole] = useState<Role | 'all'>(stored?.role ?? 'all');
   const [spacedRepetition, setSpacedRepetition] = useState<boolean>(stored?.spacedRepetition ?? false);
   const [lifetime, setLifetime] = useState<LifetimeStats | null>(null);
   const [missKinds, setMissKinds] = useState<QuestionKind[]>([]);
@@ -91,7 +93,13 @@ export function SetupScreen({ onStart }: Props) {
   const [bypassGates, setBypassGates] = useState<boolean>(() => loadTierState().bypassGates);
   const [totalXp, setTotalXp] = useState<number>(() => loadXp().totalXp);
 
-  const visibleKinds = useMemo(() => applicableKinds(assetClass, allKinds), [assetClass]);
+  const visibleKinds = useMemo(
+    () =>
+      applicableKinds(assetClass, allKinds).filter((k) =>
+        matchesRole(templates[k].roles, role),
+      ),
+    [assetClass, role],
+  );
 
   // Drop any selected kinds that aren't applicable to the current asset class.
   useEffect(() => {
@@ -156,6 +164,7 @@ export function SetupScreen({ onStart }: Props) {
       tolerancePreset: tolerance,
       difficulty,
       assetClass,
+      role,
       spacedRepetition,
     };
     saveConfig(config);
@@ -178,6 +187,48 @@ export function SetupScreen({ onStart }: Props) {
       </header>
 
       <Card className="space-y-6">
+        <div>
+          <h2 className="mb-3 text-sm font-medium uppercase tracking-widest text-warm-stone">
+            Position focus
+          </h2>
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
+            <button
+              type="button"
+              onClick={() => setRole('all')}
+              className={`rounded-lg border p-2.5 text-left transition-all duration-aa ease-aa ${
+                role === 'all'
+                  ? 'border-copper bg-copper/10 text-warm-black'
+                  : 'border-warm-line bg-warm-white/50 text-warm-ink hover:border-copper hover:text-copper-deep'
+              }`}
+            >
+              <div className="text-sm font-medium">All</div>
+              <div className={`mt-0.5 text-xs ${role === 'all' ? 'text-copper-ink' : 'text-warm-mute'}`}>
+                Every kind, no role filter.
+              </div>
+            </button>
+            {ROLES.map((r) => {
+              const on = role === r.id;
+              return (
+                <button
+                  key={r.id}
+                  type="button"
+                  onClick={() => setRole(r.id)}
+                  className={`rounded-lg border p-2.5 text-left transition-all duration-aa ease-aa ${
+                    on
+                      ? 'border-copper bg-copper/10 text-warm-black'
+                      : 'border-warm-line bg-warm-white/50 text-warm-ink hover:border-copper hover:text-copper-deep'
+                  }`}
+                >
+                  <div className="text-sm font-medium">{r.label}</div>
+                  <div className={`mt-0.5 text-xs ${on ? 'text-copper-ink' : 'text-warm-mute'}`}>
+                    {r.hint}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
         <div>
           <h2 className="mb-3 text-sm font-medium uppercase tracking-widest text-warm-stone">
             Asset class

@@ -1,9 +1,15 @@
 import type { ExcelTemplate, ExcelRunConfig, Sheet, SheetLayout } from '../types';
+import { matchesRole } from '../../types/role';
 import { noiRollForward } from './noiRollForward';
 import { capRateFromComps } from './capRateFromComps';
 import { equityMultipleTemplate } from './equityMultiple';
 import { irrFromCashflows } from './irrFromCashflows';
 import { reversionValueTemplate } from './reversionValue';
+import { amortizationPrincipal } from './amortizationPrincipal';
+import { loanSizingDscr } from './loanSizingDscr';
+import { perUnitNormalization } from './perUnitNormalization';
+import { markToMarketLift } from './markToMarketLift';
+import { rentBumpsWithSteps } from './rentBumpsWithSteps';
 
 export const EXCEL_TEMPLATES: ExcelTemplate[] = [
   noiRollForward,
@@ -11,6 +17,11 @@ export const EXCEL_TEMPLATES: ExcelTemplate[] = [
   equityMultipleTemplate,
   irrFromCashflows,
   reversionValueTemplate,
+  amortizationPrincipal,
+  loanSizingDscr,
+  perUnitNormalization,
+  markToMarketLift,
+  rentBumpsWithSteps,
 ];
 
 export function templateById(id: string): ExcelTemplate | undefined {
@@ -18,11 +29,12 @@ export function templateById(id: string): ExcelTemplate | undefined {
 }
 
 export function filterTemplates(
-  config: Pick<ExcelRunConfig, 'category' | 'difficulty'>,
+  config: Pick<ExcelRunConfig, 'category' | 'difficulty' | 'role'>,
 ): ExcelTemplate[] {
   return EXCEL_TEMPLATES.filter((t) => {
     if (config.category !== 'all' && t.category !== config.category) return false;
     if (config.difficulty !== 'all' && t.difficulty !== config.difficulty) return false;
+    if (!matchesRole(t.roles, config.role)) return false;
     return true;
   });
 }

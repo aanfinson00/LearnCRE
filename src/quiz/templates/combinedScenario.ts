@@ -43,6 +43,7 @@ export const combinedScenarioTemplate: QuestionTemplate<'combinedScenario'> = {
   label: 'Combined Scenario',
   description: 'Full proforma → implied value.',
   category: 'valuation',
+  roles: ['acquisitions'],
   pattern: '((A + B)(1 − C) − D) / E   [gross × (1−vac) − opex, /cap]',
   tips: [
     'Order of operations: (GPR + Other) × (1 − vacancy) = EGI. EGI − OpEx = NOI. NOI / cap = Value.',

@@ -1,7 +1,14 @@
 import type { DealInputs } from './deal';
 import type { Tolerance, UnitFormat } from './question';
+import type { Role } from './role';
 
-export type WalkthroughKind = 'combinedScenarioWalk' | 'dscrLoanSizingWalk';
+export type WalkthroughKind =
+  | 'combinedScenarioWalk'
+  | 'dscrLoanSizingWalk'
+  | 'mockAcquisitionWalk'
+  | 'valueAddWalk'
+  | 'developmentFeasibilityWalk'
+  | 'holdSellWalk';
 
 export interface WalkthroughStep {
   /** Stable id used as key + used in stats */
@@ -31,6 +38,8 @@ export interface WalkthroughDef {
   steps: WalkthroughStep[];
   /** What the user should ultimately understand from chaining the steps */
   takeaway: string;
+  /** Position roles this walkthrough is most relevant for. Untagged = all roles. */
+  roles?: Role[];
 }
 
 export interface WalkthroughAttempt {

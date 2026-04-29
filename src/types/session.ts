@@ -1,5 +1,6 @@
 import type { AnswerMode, Question, QuestionKind } from './question';
 import type { AssetClass } from '../quiz/assetClasses';
+import type { Role } from './role';
 export type { Question };
 export type { AssetClass };
 
@@ -16,6 +17,7 @@ export interface SessionConfig {
   assetClass: AssetClass;
   spacedRepetition?: boolean;
   seed?: number;
+  role?: Role | 'all';
 }
 
 export interface Attempt {

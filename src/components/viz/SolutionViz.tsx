@@ -1,9 +1,19 @@
 import type { Question } from '../../types/question';
 import { irrSingle, requiredEquityOut } from '../../math/returns';
+import { AllInBasisViz } from './AllInBasisViz';
 import { CapCompressionViz } from './CapCompressionViz';
+import { CashOnCashViz } from './CashOnCashViz';
 import { CompoundGrowthViz } from './CompoundGrowthViz';
+import { DebtYieldViz } from './DebtYieldViz';
+import { DevSpreadViz } from './DevSpreadViz';
+import { DscrLoanSizingViz } from './DscrLoanSizingViz';
+import { EquityMultipleViz } from './EquityMultipleViz';
 import { IrrHoldViz } from './IrrHoldViz';
 import { NoiWaterfallViz } from './NoiWaterfallViz';
+import { RentChangeViz } from './RentChangeViz';
+import { RentRollChangeViz } from './RentRollChangeViz';
+import { ReplacementCostViz } from './ReplacementCostViz';
+import { TiVsRentViz } from './TiVsRentViz';
 import { VacancyViz } from './VacancyViz';
 
 interface Props {
@@ -107,6 +117,161 @@ export function SolutionViz({ question }: Props) {
             oldVacancy={ctx.oldVacancy}
             newVacancy={ctx.newVacancy}
             cap={ctx.capRate}
+          />
+        );
+      }
+      return null;
+
+    case 'rentChange':
+      if (
+        ctx.oldRent !== undefined &&
+        ctx.newRent !== undefined &&
+        ctx.vacancyRate !== undefined &&
+        ctx.capRate !== undefined
+      ) {
+        return (
+          <RentChangeViz
+            oldRent={ctx.oldRent}
+            newRent={ctx.newRent}
+            vacancy={ctx.vacancyRate}
+            cap={ctx.capRate}
+          />
+        );
+      }
+      return null;
+
+    case 'rentRollChange':
+      if (
+        ctx.buildingSf !== undefined &&
+        ctx.oldRentPerSf !== undefined &&
+        ctx.newRentPerSf !== undefined &&
+        ctx.rolloverPct !== undefined &&
+        ctx.vacancyRate !== undefined &&
+        ctx.capRate !== undefined
+      ) {
+        return (
+          <RentRollChangeViz
+            buildingSf={ctx.buildingSf}
+            oldRentPerSf={ctx.oldRentPerSf}
+            newRentPerSf={ctx.newRentPerSf}
+            rolloverPct={ctx.rolloverPct}
+            vacancyRate={ctx.vacancyRate}
+            capRate={ctx.capRate}
+          />
+        );
+      }
+      return null;
+
+    case 'tiVsRent':
+      if (
+        ctx.altRentPerSf !== undefined &&
+        ctx.altTiPerSf !== undefined &&
+        ctx.rentPerSf !== undefined &&
+        ctx.tiPerSf !== undefined &&
+        ctx.leaseTermYears !== undefined
+      ) {
+        return (
+          <TiVsRentViz
+            altRentPerSf={ctx.altRentPerSf}
+            altTiPerSf={ctx.altTiPerSf}
+            rentPerSf={ctx.rentPerSf}
+            tiPerSf={ctx.tiPerSf}
+            leaseTermYears={ctx.leaseTermYears}
+          />
+        );
+      }
+      return null;
+
+    case 'replacementCost':
+      if (ctx.replacementCostPerSf !== undefined && ctx.buildingSf !== undefined) {
+        return (
+          <ReplacementCostViz
+            replacementCostPerSf={ctx.replacementCostPerSf}
+            buildingSf={ctx.buildingSf}
+          />
+        );
+      }
+      return null;
+
+    case 'devSpread':
+      if (
+        ctx.stabilizedNoi !== undefined &&
+        ctx.totalProjectCost !== undefined &&
+        ctx.marketCapRate !== undefined
+      ) {
+        return (
+          <DevSpreadViz
+            stabilizedNoi={ctx.stabilizedNoi}
+            totalProjectCost={ctx.totalProjectCost}
+            marketCapRate={ctx.marketCapRate}
+          />
+        );
+      }
+      return null;
+
+    case 'debtYield':
+      if (ctx.noi !== undefined && ctx.debtYieldTarget !== undefined) {
+        return <DebtYieldViz noi={ctx.noi} debtYieldTarget={ctx.debtYieldTarget} />;
+      }
+      return null;
+
+    case 'dscrLoanSizing':
+      if (
+        ctx.noi !== undefined &&
+        ctx.dscrTarget !== undefined &&
+        ctx.interestRate !== undefined &&
+        ctx.amortYears !== undefined
+      ) {
+        return (
+          <DscrLoanSizingViz
+            noi={ctx.noi}
+            dscrTarget={ctx.dscrTarget}
+            interestRate={ctx.interestRate}
+            amortYears={ctx.amortYears}
+          />
+        );
+      }
+      return null;
+
+    case 'cashOnCash':
+      if (
+        ctx.noi !== undefined &&
+        ctx.debtServiceAnnual !== undefined &&
+        ctx.equityIn !== undefined &&
+        ctx.loanAmount !== undefined &&
+        ctx.purchasePrice !== undefined
+      ) {
+        return (
+          <CashOnCashViz
+            noi={ctx.noi}
+            debtServiceAnnual={ctx.debtServiceAnnual}
+            equityIn={ctx.equityIn}
+            loanAmount={ctx.loanAmount}
+            purchasePrice={ctx.purchasePrice}
+          />
+        );
+      }
+      return null;
+
+    case 'equityMultiple':
+      if (ctx.equityIn !== undefined && ctx.equityOut !== undefined) {
+        return <EquityMultipleViz equityIn={ctx.equityIn} equityOut={ctx.equityOut} />;
+      }
+      return null;
+
+    case 'allInBasis':
+      if (
+        ctx.purchasePrice !== undefined &&
+        ctx.capex !== undefined &&
+        ctx.closingCostRate !== undefined &&
+        ctx.buildingSf !== undefined
+      ) {
+        return (
+          <AllInBasisViz
+            purchasePrice={ctx.purchasePrice}
+            capex={ctx.capex}
+            closingCostRate={ctx.closingCostRate}
+            buildingSf={ctx.buildingSf}
           />
         );
       }

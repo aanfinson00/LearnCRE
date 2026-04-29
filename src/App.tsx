@@ -10,6 +10,8 @@ import { ProfileScreen } from './components/ProfileScreen';
 import { StudyScreen } from './components/StudyScreen';
 import { TopNav } from './components/TopNav';
 import { AchievementToastHost } from './components/AchievementToast';
+import { ScratchSheet } from './components/ScratchSheet';
+import { ScratchSheetProvider } from './hooks/useScratchSheet';
 import { WalkthroughSetup } from './components/WalkthroughSetup';
 import { WalkthroughScreen } from './components/WalkthroughScreen';
 import { WalkthroughResults } from './components/WalkthroughResults';
@@ -253,10 +255,11 @@ export default function App() {
   })();
 
   return (
-    <>
+    <ScratchSheetProvider>
       {showTopNav && <TopNav active={mode} onSwitch={handleSwitch} />}
       {innerContent}
       <AchievementToastHost />
-    </>
+      <ScratchSheet />
+    </ScratchSheetProvider>
   );
 }

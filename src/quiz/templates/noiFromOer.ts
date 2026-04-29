@@ -31,6 +31,7 @@ export const noiFromOerTemplate: QuestionTemplate<'noiFromOer'> = {
   label: 'NOI from OpEx Ratio',
   description: 'Solve NOI given EGI and an OpEx ratio.',
   category: 'valuation',
+  roles: ['acquisitions'],
   pattern: 'A × (1 − B)   where A = EGI, B = opex ratio',
   tips: [
     'NOI = EGI × (1 − opex ratio). 40% opex ratio → NOI = 60% of EGI.',

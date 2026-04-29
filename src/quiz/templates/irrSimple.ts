@@ -30,6 +30,7 @@ export const irrSimpleTemplate: QuestionTemplate<'irrSimple'> = {
   label: 'IRR — Simple',
   description: 'Single-period IRR: equity in, equity out, hold years.',
   category: 'returns',
+  roles: ['acquisitions', 'portfolioMgmt'],
   pattern: '(A / B)^(1/n) − 1   [nth root of multiple]',
   tips: [
     'Rule of 72: years-to-double ≈ 72 / IRR%. 2x in 7 yrs ≈ 10.3% IRR. 2x in 5 yrs ≈ 14.4%. 2x in 10 yrs ≈ 7.2%.',

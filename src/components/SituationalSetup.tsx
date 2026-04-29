@@ -7,6 +7,7 @@ import {
 } from '../types/situational';
 import { filterCases } from '../quiz/situational';
 import { assetClassOrder, assetClasses, type AssetClass } from '../quiz/assetClasses';
+import { ROLES, type Role } from '../types/role';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
 
@@ -27,17 +28,18 @@ export function SituationalSetup({ onStart, onBack }: Props) {
   const [category, setCategory] = useState<SituationalCategory | 'all'>('all');
   const [difficulty, setDifficulty] = useState<SituationalDifficulty | 'all'>('all');
   const [assetClass, setAssetClass] = useState<AssetClass>('mixed');
+  const [role, setRole] = useState<Role | 'all'>('all');
   const [length, setLength] = useState<SituationalRunConfig['length']>(5);
 
   const matchedPool = useMemo(
-    () => filterCases({ category, difficulty, assetClass }),
-    [category, difficulty, assetClass],
+    () => filterCases({ category, difficulty, assetClass, role }),
+    [category, difficulty, assetClass, role],
   );
   const canStart = matchedPool.length > 0;
 
   const handleStart = () => {
     if (!canStart) return;
-    onStart({ category, difficulty, assetClass, length });
+    onStart({ category, difficulty, assetClass, length, role });
   };
 
   return (
@@ -58,6 +60,17 @@ export function SituationalSetup({ onStart, onBack }: Props) {
       </header>
 
       <Card className="space-y-5">
+        <Section label="Position focus">
+          <Pill active={role === 'all'} onClick={() => setRole('all')}>
+            All
+          </Pill>
+          {ROLES.map((r) => (
+            <Pill key={r.id} active={role === r.id} onClick={() => setRole(r.id)}>
+              {r.label}
+            </Pill>
+          ))}
+        </Section>
+
         <Section label="Category">
           <Pill
             active={category === 'all'}

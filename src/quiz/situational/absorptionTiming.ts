@@ -5,6 +5,7 @@ export const absorptionTiming: SituationalCase = {
   title: 'How long until the market hits 95%?',
   category: 'absorption',
   difficulty: 'intermediate',
+  roles: ['acquisitions', 'development'],
   assetClass: 'multifamily',
   scenario:
     'A multifamily submarket has 4,000 units in inventory and is currently 85% leased. Two new deliveries are coming online this quarter, adding 300 units to the inventory. Quarterly absorption has been running at 150 units, or roughly 50 units per month. Rents are stable; you\'re evaluating a deal that needs the submarket to reach 95% occupancy before stabilization.',

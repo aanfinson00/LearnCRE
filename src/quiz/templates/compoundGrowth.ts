@@ -30,6 +30,7 @@ export const compoundGrowthTemplate: QuestionTemplate<'compoundGrowth'> = {
   label: 'Compound Growth (forward)',
   description: 'Project a value forward at a fixed growth rate.',
   category: 'returns',
+  roles: ['acquisitions', 'portfolioMgmt'],
   pattern: 'A × (1 + B)^n   [start × growth factor]',
   tips: [
     'Rule of 72: a value roughly doubles every 72/r% years. At 3% → 24 years; at 4% → 18; at 6% → 12.',

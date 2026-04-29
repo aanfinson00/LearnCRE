@@ -29,6 +29,7 @@ export const opexChangeTemplate: QuestionTemplate<'opexChange'> = {
   label: 'OpEx Change Impact',
   description: 'OpEx $ change → NOI and value impact at given cap.',
   category: 'valuation',
+  roles: ['acquisitions'],
   pattern: '− A / B   where A = opex change, B = cap',
   tips: [
     'OpEx moves NOI 1-for-1 (with a flipped sign): $50k more OpEx = $50k less NOI.',

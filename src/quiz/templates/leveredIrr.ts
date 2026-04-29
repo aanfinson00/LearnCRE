@@ -35,6 +35,7 @@ export const leveredIrrTemplate: QuestionTemplate<'leveredIrr'> = {
   label: 'Levered IRR (Approx)',
   description: 'Approximate levered IRR from unlevered IRR, LTV, and borrow rate.',
   category: 'returns',
+  roles: ['acquisitions', 'portfolioMgmt'],
   pattern: 'A + (B × (A − C)) / (1 − B)   [unlev + leverage × spread]',
   tips: [
     'Formula: Levered IRR ≈ Unlevered + LTV × (Unlev − Borrow) / (1 − LTV). Assumes parallel cash flows.',

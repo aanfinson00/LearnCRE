@@ -25,6 +25,7 @@ export const pricePerSfTemplate: QuestionTemplate<'pricePerSf'> = {
   label: 'Price per SF',
   description: 'Back-of-envelope comp sanity check.',
   category: 'valuation',
+  roles: ['acquisitions'],
   pattern: 'A / B   where A = price, B = SF',
   tips: [
     'Comp ranges: multifamily $150–350/SF, office $200–500/SF, industrial $100–200/SF, retail $200–500/SF.',

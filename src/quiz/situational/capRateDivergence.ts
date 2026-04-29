@@ -5,6 +5,7 @@ export const capRateDivergence: SituationalCase = {
   title: 'Why is this trading off-market?',
   category: 'pricing',
   difficulty: 'intermediate',
+  roles: ['acquisitions'],
   assetClass: 'office',
   scenario:
     'A suburban office asset is being marketed at an 8.0% going-in cap rate. Recent trades in the submarket for similar vintage and quality have printed at 5.75–6.25%. Tenancy is single-tenant, investment-grade credit, but the lease has 14 months of remaining term. In-place rent is $24/SF; market rent for the submarket is $32–34/SF.',

@@ -1,4 +1,5 @@
 import type { AssetClass } from '../quiz/assetClasses';
+import type { Role } from './role';
 
 export type SituationalCategory =
   | 'pricing'
@@ -35,6 +36,8 @@ export interface SituationalCase {
   tips: string[];
   difficulty: SituationalDifficulty;
   assetClass?: AssetClass;
+  /** Position roles this case is most relevant for. Untagged = all roles. */
+  roles?: Role[];
 }
 
 export interface SituationalAttempt {
@@ -52,6 +55,7 @@ export interface SituationalRunConfig {
   difficulty: SituationalDifficulty | 'all';
   assetClass: AssetClass;
   length: 5 | 10 | 20;
+  role?: Role | 'all';
 }
 
 export interface SituationalState {

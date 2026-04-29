@@ -111,6 +111,41 @@ describe('excel/evaluate — finance', () => {
   });
 });
 
+describe('excel/evaluate — PV / IPMT / PPMT', () => {
+  it('PV is the inverse of PMT (round-trip)', () => {
+    // Loan: $1M, 6%/yr / 12 mo, 30 yrs. PMT returns negative; PV(... neg pmt) returns the
+    // positive principal — Excel sign convention.
+    const pmtVal = evaluateFormula('=PMT(0.06/12,360,1000000)', {});
+    const recoveredPv = evaluateFormula(`=PV(0.06/12,360,${pmtVal})`, {});
+    expect(recoveredPv).toBeCloseTo(1_000_000, 0);
+  });
+
+  it('PV with rate=0 reduces to -(pmt*nper + fv)', () => {
+    expect(evaluateFormula('=PV(0,12,-100)', {})).toBe(1200);
+    expect(evaluateFormula('=PV(0,12,-100,0)', {})).toBe(1200);
+  });
+
+  it('IPMT(1) equals -pv * rate', () => {
+    // First payment\'s interest is exactly the rate × outstanding balance
+    expect(evaluateFormula('=IPMT(0.01,1,12,1000)', {})).toBeCloseTo(-10, 5);
+  });
+
+  it('IPMT + PPMT === PMT for any period in the schedule', () => {
+    const expectedPmt = evaluateFormula('=PMT(0.01,12,1000)', {});
+    for (const per of [1, 3, 6, 12]) {
+      const sum =
+        evaluateFormula(`=IPMT(0.01,${per},12,1000)`, {}) +
+        evaluateFormula(`=PPMT(0.01,${per},12,1000)`, {});
+      expect(sum).toBeCloseTo(expectedPmt, 5);
+    }
+  });
+
+  it('PPMT — hand-checked third-period principal on a $1000 / 12-period / 1% loan', () => {
+    // Excel: PPMT(0.01, 3, 12, 1000) ≈ -80.43
+    expect(evaluateFormula('=PPMT(0.01,3,12,1000)', {})).toBeCloseTo(-80.43, 1);
+  });
+});
+
 describe('excel/evaluate — IF and ROUND', () => {
   it('IF picks the then branch on truthy', () => {
     expect(evaluateFormula('=IF(1,10,20)', {})).toBe(10);

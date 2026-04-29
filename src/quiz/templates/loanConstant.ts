@@ -24,6 +24,7 @@ export const loanConstantTemplate: QuestionTemplate<'loanConstant'> = {
   label: 'Loan Constant',
   description: 'Annualized payment as % of loan for monthly-amortizing debt.',
   category: 'returns',
+  roles: ['acquisitions', 'mortgageUw'],
   pattern: 'PMT(r/12, n×12, −1) × 12   [amortization formula]',
   tips: [
     'Memorize: 30yr @ 5% ≈ 644 bps; 30yr @ 6% ≈ 720 bps; 30yr @ 7% ≈ 799 bps; 25yr @ 6% ≈ 773 bps.',

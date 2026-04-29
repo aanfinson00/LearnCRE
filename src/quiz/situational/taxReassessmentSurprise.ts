@@ -5,6 +5,7 @@ export const taxReassessmentSurprise: SituationalCase = {
   title: 'What does the reassessment do to your bid?',
   category: 'risk',
   difficulty: 'advanced',
+  roles: ['acquisitions', 'mortgageUw'],
   assetClass: 'multifamily',
   scenario:
     'You\'re bidding $50M for a stabilized multifamily asset in a jurisdiction that reassesses property tax on sale. The seller has owned for 12 years; current annual property tax is $200,000 (effectively ~0.4% of your bid price). The jurisdiction\'s post-sale assessment rate is 1.25% of sale price.',

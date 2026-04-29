@@ -47,6 +47,7 @@ export const taxReassessmentTemplate: QuestionTemplate<'taxReassessment'> = {
   label: 'Tax Reassessment Impact',
   description: 'Post-sale property tax reassessment → value change.',
   category: 'valuation',
+  roles: ['acquisitions'],
   pattern: '−(A × B − C) / D   [−(new tax − old tax) / cap]',
   tips: [
     'Reassessment hits NOI 1-for-1 like any other opex. Value impact = −ΔTax / cap.',

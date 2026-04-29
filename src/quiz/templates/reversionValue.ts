@@ -25,6 +25,7 @@ export const reversionValueTemplate: QuestionTemplate<'reversionValue'> = {
   label: 'Reversion / Exit Value',
   description: 'Sale price at exit given year-N NOI and exit cap.',
   category: 'valuation',
+  roles: ['acquisitions'],
   pattern: 'A / B   where A = exit NOI, B = exit cap',
   tips: [
     'Same math as going-in cap, just for the exit. Use the cap → multiple table.',

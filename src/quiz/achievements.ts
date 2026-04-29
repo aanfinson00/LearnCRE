@@ -43,6 +43,8 @@ export interface AchievementContext {
   situationalCorrectIds: Set<string>;
   /** Per-situational-category accuracy across session history */
   situationalCategoryAccuracy: Record<string, { total: number; correct: number }>;
+  /** Distinct excel template ids the user has answered correctly */
+  excelCorrectIds: Set<string>;
 }
 
 export interface AchievementDef {
@@ -179,6 +181,13 @@ export const ACHIEVEMENTS: AchievementDef[] = [
       if (!acc || acc.total < 5) return false;
       return acc.correct / acc.total >= 0.9;
     },
+  },
+  {
+    id: 'spreadsheet-apprentice',
+    label: 'Spreadsheet Apprentice',
+    description: 'Write 5 distinct Excel formulas that compute the right value.',
+    icon: '📊',
+    evaluate: (c) => c.excelCorrectIds.size >= 5,
   },
 ];
 
