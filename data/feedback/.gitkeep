@@ -1,0 +1,10 @@
+Compiled feedback exports land here. The content agent reads `latest.md`.
+
+Workflow:
+1. In the app, open the floating 💬 → Log tab → Copy compiled markdown
+2. Paste contents into `data/feedback/latest.md`
+3. Commit + push
+4. Trigger the content agent (Actions → Content agent → Run workflow)
+5. Review the resulting draft PR
+
+See scripts/agent/README.md for full setup.
