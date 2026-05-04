@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import type { QuizSession, SessionStats } from '../types/session';
+import { useRegisterFeedbackContext } from '../hooks/useFeedbackContext';
 import { AnswerInput, type AnswerInputHandle } from './AnswerInput';
 import { CalculatorPanel } from './CalculatorPanel';
 import { ChoiceList } from './ChoiceList';
@@ -57,6 +58,21 @@ export function QuizScreen({ session, stats, onSubmit, onNext, onEnd, onQuit }: 
       inputRef.current?.focus();
     }
   }, [session.currentQuestion?.id, session.status]);
+
+  // Register the active question with the feedback-context provider so the
+  // floating feedback button can attach the right item to any new entry.
+  useRegisterFeedbackContext(
+    q && session.status === 'active'
+      ? {
+          mode: 'quiz',
+          itemId: q.id,
+          kind: q.kind,
+          label: q.kind,
+          prompt: q.prompt,
+          difficulty: q.appliedDifficulty,
+        }
+      : null,
+  );
 
   const isAnswered = session.status === 'answered';
   const lastAttempt = session.lastAttempt;

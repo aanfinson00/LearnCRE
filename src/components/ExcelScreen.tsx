@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { ExcelState } from '../excel/types';
 import { evaluatePreview } from '../hooks/useExcel';
+import { useRegisterFeedbackContext } from '../hooks/useFeedbackContext';
 import { extractReferencedAddresses } from '../excel/parser';
 import { ExcelGrid } from './ExcelGrid';
 import { Button } from './ui/Button';
@@ -31,6 +32,15 @@ export function ExcelScreen({ state, onSubmit, onAdvance, onQuit }: Props) {
     pendingCursorRef.current = null;
     if (!answered) inputRef.current?.focus();
   }, [t.id, answered]);
+
+  useRegisterFeedbackContext({
+    mode: 'excel',
+    itemId: t.id,
+    kind: t.category,
+    label: t.title,
+    prompt: t.scenario,
+    difficulty: t.difficulty,
+  });
 
   // After any setRaw triggered by a cell click, restore focus + selection.
   useEffect(() => {

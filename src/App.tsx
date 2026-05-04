@@ -11,6 +11,7 @@ import { StudyScreen } from './components/StudyScreen';
 import { TopNav } from './components/TopNav';
 import { AchievementToastHost } from './components/AchievementToast';
 import { FeedbackButton } from './components/FeedbackButton';
+import { FeedbackContextProvider } from './hooks/useFeedbackContext';
 import { ScratchSheet } from './components/ScratchSheet';
 import { ScratchSheetProvider } from './hooks/useScratchSheet';
 import { WalkthroughSetup } from './components/WalkthroughSetup';
@@ -256,12 +257,14 @@ export default function App() {
   })();
 
   return (
-    <ScratchSheetProvider>
-      {showTopNav && <TopNav active={mode} onSwitch={handleSwitch} />}
-      {innerContent}
-      <AchievementToastHost />
-      <ScratchSheet />
-      <FeedbackButton />
-    </ScratchSheetProvider>
+    <FeedbackContextProvider>
+      <ScratchSheetProvider>
+        {showTopNav && <TopNav active={mode} onSwitch={handleSwitch} />}
+        {innerContent}
+        <AchievementToastHost />
+        <ScratchSheet />
+        <FeedbackButton />
+      </ScratchSheetProvider>
+    </FeedbackContextProvider>
   );
 }

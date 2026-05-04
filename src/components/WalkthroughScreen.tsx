@@ -6,6 +6,7 @@ import {
   formatUsd,
 } from '../math/rounding';
 import { parseInput } from '../quiz/parseInput';
+import { useRegisterFeedbackContext } from '../hooks/useFeedbackContext';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
 
@@ -32,6 +33,15 @@ export function WalkthroughScreen({ state, onSubmit, onAdvance, onQuit }: Props)
     setShowHint(false);
     if (!stepAnswered) inputRef.current?.focus();
   }, [step.id, stepAnswered]);
+
+  // Register the active step in the feedback context.
+  useRegisterFeedbackContext({
+    mode: 'walkthrough',
+    itemId: `${state.def.id}#${step.id}`,
+    kind: state.def.kind,
+    label: `${state.def.label} — ${step.label}`,
+    prompt: step.prompt,
+  });
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
