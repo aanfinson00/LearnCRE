@@ -9,7 +9,8 @@ export type SituationalCategory =
   | 'diagnostic'
   | 'lease-econ'
   | 'comp-selection'
-  | 'sensitivity';
+  | 'sensitivity'
+  | 'deal-process';
 
 export type SituationalDifficulty = 'beginner' | 'intermediate' | 'advanced';
 
@@ -77,4 +78,5 @@ export const SITUATIONAL_CATEGORIES: { id: SituationalCategory; label: string }[
   { id: 'lease-econ', label: 'Lease economics' },
   { id: 'comp-selection', label: 'Comp selection' },
   { id: 'sensitivity', label: 'Sensitivity' },
+  { id: 'deal-process', label: 'Deal process' },
 ];
