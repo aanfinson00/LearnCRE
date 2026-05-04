@@ -28,6 +28,14 @@ import { debtYieldVsDscr } from './debtYieldVsDscr';
 import { overWeightOffice } from './overWeightOffice';
 import { holdExtensionDiscipline } from './holdExtensionDiscipline';
 import { taxVsIrrTradeoff } from './taxVsIrrTradeoff';
+import { capexReserveDiscipline } from './capexReserveDiscipline';
+import { refiCapStress } from './refiCapStress';
+import { fundVsDealIrrGap } from './fundVsDealIrrGap';
+import { devLtcVsLtv } from './devLtcVsLtv';
+import { distressedLoanWorkout } from './distressedLoanWorkout';
+import { leaseStructureNnnVsGross } from './leaseStructureNnnVsGross';
+import { sponsorRecourseVsCovenants } from './sponsorRecourseVsCovenants';
+import { groundLeaseVsFee } from './groundLeaseVsFee';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -53,6 +61,14 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   overWeightOffice,
   holdExtensionDiscipline,
   taxVsIrrTradeoff,
+  capexReserveDiscipline,
+  refiCapStress,
+  fundVsDealIrrGap,
+  devLtcVsLtv,
+  distressedLoanWorkout,
+  leaseStructureNnnVsGross,
+  sponsorRecourseVsCovenants,
+  groundLeaseVsFee,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {
