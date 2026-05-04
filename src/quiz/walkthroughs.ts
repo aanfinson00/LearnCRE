@@ -675,6 +675,158 @@ function holdSellWalk(): WalkthroughDef {
     roles: ['assetManagement', 'portfolioMgmt'],
   };
 }
+function distressedLoanWorkoutWalk(): WalkthroughDef {
+  // Buying a non-performing $40M senior loan on a Class-B office. Asset value
+  // ~$30M; bank asks $24M. The walkthrough shows the dual-path math: own at
+  // foreclosure vs collect at workout.
+  const loanFace = 40_000_000;
+  const askingPrice = 24_000_000;
+  const assetValue = 30_000_000;
+  const yearsToResolve = 2;       // foreclosure timeline assumption
+  const foreclosureCostRate = 0.08; // legal + holding costs as % of asset value
+  const workoutRate = 0.07;        // modified interest rate during collect path
+  const workoutTermYears = 5;      // remaining loan term post-modification
+
+  // Path A — foreclosure: pay $24M, take title at year 2, sell at then-market
+  // (assume flat asset value); IRR is roughly the implicit yield on basis vs
+  // recovery, less timeline costs.
+  const recoverable = assetValue * (1 - foreclosureCostRate);
+  const ownPathIrr = Math.pow(recoverable / askingPrice, 1 / yearsToResolve) - 1;
+
+  // Path B — collect: borrower modifies; you receive a stream of interest
+  // payments at the modified rate on the original face. Then a balloon (or
+  // payoff at re-sale).
+  const annualInterest = loanFace * workoutRate;
+  const collectPayoff = loanFace; // assume par recovery at modified maturity
+  // Approx IRR on the collect path: -basis at t=0, annual interest yrs 1..N-1,
+  // payoff + last interest at year N. Use a simple geometric approximation.
+  const totalCollectCash = annualInterest * workoutTermYears + collectPayoff;
+  const collectEm = totalCollectCash / askingPrice;
+  const collectIrrApprox = Math.pow(collectEm, 1 / workoutTermYears) - 1;
+
+  // Buy decision: take the WORSE of the two paths and check vs hurdle.
+  const worsePathIrr = Math.min(ownPathIrr, collectIrrApprox);
+  const hurdle = 0.15;
+
+  return {
+    id: 'walk-distressed-1',
+    kind: 'distressedLoanWorkoutWalk',
+    label: 'Distressed Loan Workout — chained',
+    description: 'Buy at $24M, own-or-collect, dual-path IRR check against hurdle.',
+    context: {
+      noi: annualInterest,
+      capRate: workoutRate,
+      purchasePrice: askingPrice,
+      holdYears: workoutTermYears,
+    },
+    setupNarrative: `A regional bank is selling a non-performing $40M senior loan on a Class-B office building (asset value ~$30M). They're asking $24M (60¢ on the dollar). Two paths to resolution: (a) borrower defaults, you foreclose, take title in ~${yearsToResolve} yrs at recoverable value (asset less ~${formatPct(foreclosureCostRate)} legal + holding); (b) borrower modifies at ${formatPct(workoutRate)}, pays interest for ${formatYears(workoutTermYears)}, payoff at par. The buy works only if BOTH paths clear your hurdle. Walk both.`,
+    steps: [
+      {
+        id: 'basis',
+        label: 'Step 1 — Your basis vs asset value',
+        prompt: `Basis is ${formatUsd(askingPrice)}; asset is worth ${formatUsd(assetValue)}. What's basis as % of asset value?`,
+        expected: askingPrice / assetValue,
+        unit: 'pct',
+        tolerance: { type: 'abs', band: 0.01 },
+        hint: 'Basis / asset value.',
+        resultDescription: `${formatUsd(askingPrice)} / ${formatUsd(assetValue)} = ${formatPct(askingPrice / assetValue)}. ~80% basis on a senior loan is the entry point — gives a real cushion for the foreclosure path.`,
+      },
+      {
+        id: 'foreclosure-cost',
+        label: 'Step 2 — Foreclosure cost drag',
+        prompt: `Asset value ${formatUsd(assetValue)} × ${formatPct(foreclosureCostRate)} legal/holding cost. What's the cost to take?`,
+        expected: assetValue * foreclosureCostRate,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.05 },
+        hint: 'Asset × cost rate.',
+        resultDescription: `${formatUsd(assetValue)} × ${formatPct(foreclosureCostRate)} = ${formatUsd(assetValue * foreclosureCostRate)}. Foreclosure is rarely free — legal fees, broker commissions if you sell, taxes during the process, asset deterioration during the lawsuit.`,
+      },
+      {
+        id: 'recoverable',
+        label: 'Step 3 — Recoverable value (own path)',
+        prompt: 'Asset value less foreclosure costs. What\'s your effective recovery if you take and sell?',
+        expected: recoverable,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.05 },
+        hint: 'Asset × (1 − cost rate).',
+        resultDescription: `${formatUsd(assetValue)} × (1 − ${formatPct(foreclosureCostRate)}) = ${formatUsd(recoverable)}. That's the cash you'd see at sale; deduct your basis for profit.`,
+      },
+      {
+        id: 'own-irr',
+        label: 'Step 4 — Foreclosure-path IRR',
+        prompt: `Year-2 recovery of ${formatUsd(recoverable)} on ${formatUsd(askingPrice)} basis. Approximate IRR?`,
+        expected: ownPathIrr,
+        unit: 'pct',
+        tolerance: { type: 'abs', band: 0.01 },
+        hint: '(recovery / basis)^(1/N) − 1.',
+        resultDescription: `(${formatUsd(recoverable)} / ${formatUsd(askingPrice)})^(1/${yearsToResolve}) − 1 ≈ ${formatPct(ownPathIrr)}. The foreclosure path gives you a thin but real return even before any workout upside.`,
+      },
+      {
+        id: 'collect-interest',
+        label: 'Step 5 — Annual interest if borrower modifies',
+        prompt: `Loan face ${formatUsd(loanFace)} × ${formatPct(workoutRate)} modified rate. Annual interest?`,
+        expected: annualInterest,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'Face × rate.',
+        resultDescription: `${formatUsd(loanFace)} × ${formatPct(workoutRate)} = ${formatUsd(annualInterest)}. Note: interest is on the FACE, not your basis. That's the buy thesis — you bought at 60¢ but collect on a $1.00.`,
+      },
+      {
+        id: 'collect-total',
+        label: 'Step 6 — Total cash on collect path',
+        prompt: `${formatYears(workoutTermYears)} of interest + par payoff at maturity. Total cash to you?`,
+        expected: totalCollectCash,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: '(annual interest × N) + payoff.',
+        resultDescription: `(${formatUsd(annualInterest)} × ${workoutTermYears}) + ${formatUsd(collectPayoff)} = ${formatUsd(totalCollectCash)}.`,
+      },
+      {
+        id: 'collect-em',
+        label: 'Step 7 — Collect-path equity multiple',
+        prompt: 'Total collect-path cash / your basis. EM?',
+        expected: collectEm,
+        unit: 'multiple',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'Total / basis.',
+        resultDescription: `${formatUsd(totalCollectCash)} / ${formatUsd(askingPrice)} = ${collectEm.toFixed(2)}x. The high EM reflects collecting interest on face while having paid only 60% of face.`,
+      },
+      {
+        id: 'collect-irr',
+        label: 'Step 8 — Collect-path approximate IRR',
+        prompt: `EM^(1/${workoutTermYears}) − 1. Approximate IRR over the workout term?`,
+        expected: collectIrrApprox,
+        unit: 'pct',
+        tolerance: { type: 'abs', band: 0.01 },
+        hint: 'Geometric approximation.',
+        resultDescription: `${collectEm.toFixed(2)}^(1/${workoutTermYears}) − 1 ≈ ${formatPct(collectIrrApprox)}. Real IRR is slightly higher (~50-100 bps) because of the interim interest payments.`,
+      },
+      {
+        id: 'worse-path',
+        label: 'Step 9 — Worse-path IRR',
+        prompt: 'For the buy thesis to work, the WORSE path must clear your hurdle. Which IRR is worse, and what is it?',
+        expected: worsePathIrr,
+        unit: 'pct',
+        tolerance: { type: 'abs', band: 0.01 },
+        hint: 'Min of the two paths.',
+        resultDescription: `Worse path = ${formatPct(worsePathIrr)} (the ${ownPathIrr < collectIrrApprox ? 'foreclosure' : 'collect'} path). This is the floor on your return; everything above is upside.`,
+      },
+      {
+        id: 'go-no-go',
+        label: 'Step 10 — Go / no-go vs hurdle',
+        prompt: `Hurdle is ${formatPct(hurdle)}. By how much does the worse path beat (or miss) the hurdle?`,
+        expected: worsePathIrr - hurdle,
+        unit: 'pct',
+        tolerance: { type: 'abs', band: 0.01 },
+        hint: 'Worse-path IRR − hurdle.',
+        resultDescription: `${formatPct(worsePathIrr)} − ${formatPct(hurdle)} = ${formatPct(worsePathIrr - hurdle)}. ${worsePathIrr > hurdle ? 'Both paths clear; this is a buy.' : 'Worse path misses hurdle; renegotiate basis or pass.'}`,
+      },
+    ],
+    takeaway:
+      'Distressed loan investing is dual-path math. Compute IRR assuming foreclosure (asset becomes yours at basis) and IRR assuming workout (collect modified interest + payoff). Buy when the WORSE of the two paths clears your hurdle. Buying based on the better path alone leaves you exposed when the world delivers the worse one.',
+    roles: ['acquisitions', 'portfolioMgmt'],
+  };
+}
 
 export const walkthroughs: WalkthroughDef[] = [
   combinedScenarioWalk(),
@@ -683,6 +835,7 @@ export const walkthroughs: WalkthroughDef[] = [
   valueAddWalk(),
   developmentFeasibilityWalk(),
   holdSellWalk(),
+  distressedLoanWorkoutWalk(),
 ];
 
 export function getWalkthroughById(id: string): WalkthroughDef | undefined {

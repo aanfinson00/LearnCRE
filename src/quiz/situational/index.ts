@@ -44,6 +44,11 @@ import { bankAccountStructure } from './bankAccountStructure';
 import { balanceSheetRefiImpact } from './balanceSheetRefiImpact';
 import { budgetVsActualVariance } from './budgetVsActualVariance';
 import { distributionWaterfall } from './distributionWaterfall';
+import { closingChecklistSequence } from './closingChecklistSequence';
+import { covenantTestingCadence } from './covenantTestingCadence';
+import { costSegregationBasics } from './costSegregationBasics';
+import { omRedFlags } from './omRedFlags';
+import { tenantImprovementApproval } from './tenantImprovementApproval';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -85,6 +90,11 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   balanceSheetRefiImpact,
   budgetVsActualVariance,
   distributionWaterfall,
+  closingChecklistSequence,
+  covenantTestingCadence,
+  costSegregationBasics,
+  omRedFlags,
+  tenantImprovementApproval,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {
