@@ -23,11 +23,15 @@ import { SituationalResults } from './components/SituationalResults';
 import { ExcelSetup } from './components/ExcelSetup';
 import { ExcelScreen } from './components/ExcelScreen';
 import { ExcelResults } from './components/ExcelResults';
+import { LongformSetup } from './components/LongformSetup';
+import { LongformScreen } from './components/LongformScreen';
+import { LongformResults } from './components/LongformResults';
 import { useQuizSession } from './hooks/useQuizSession';
 import { useSpeedDrill } from './hooks/useSpeedDrill';
 import { useWalkthrough } from './hooks/useWalkthrough';
 import { useSituational } from './hooks/useSituational';
 import { useExcel } from './hooks/useExcel';
+import { useLongform } from './hooks/useLongform';
 
 type Mode =
   | 'quiz'
@@ -36,6 +40,7 @@ type Mode =
   | 'walkthrough'
   | 'situational'
   | 'excel'
+  | 'longform'
   | 'profile';
 
 export default function App() {
@@ -46,6 +51,7 @@ export default function App() {
   const walk = useWalkthrough();
   const sit = useSituational();
   const excel = useExcel();
+  const longform = useLongform();
 
   const handleSwitch = (m: Mode) => {
     if (m === mode) return;
@@ -58,6 +64,7 @@ export default function App() {
     (mode === 'walkthrough' && walk.state === null) ||
     (mode === 'situational' && sit.state === null) ||
     (mode === 'excel' && excel.state === null) ||
+    (mode === 'longform' && longform.state === null) ||
     mode === 'study' ||
     mode === 'profile';
 
@@ -169,6 +176,41 @@ export default function App() {
           onAdvance={excel.advance}
           onQuit={() => {
             excel.reset();
+            setMode('quiz');
+          }}
+        />
+      );
+    }
+
+    if (mode === 'longform') {
+      if (longform.state === null) {
+        return (
+          <LongformSetup
+            onStart={(config) => longform.start(config)}
+            onBack={() => setMode('quiz')}
+          />
+        );
+      }
+      if (longform.state.status === 'finished') {
+        return (
+          <LongformResults
+            state={longform.state}
+            onRestart={() => {
+              const cfg = longform.state!.config;
+              longform.reset();
+              longform.start(cfg);
+            }}
+            onNewSetup={longform.reset}
+          />
+        );
+      }
+      return (
+        <LongformScreen
+          state={longform.state}
+          onSubmit={longform.submit}
+          onAdvance={longform.advance}
+          onQuit={() => {
+            longform.reset();
             setMode('quiz');
           }}
         />
