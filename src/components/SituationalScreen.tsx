@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { SituationalState } from '../types/situational';
+import { useRegisterFeedbackContext } from '../hooks/useFeedbackContext';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
 
@@ -21,6 +22,17 @@ export function SituationalScreen({ state, onSubmit, onAdvance, onQuit }: Props)
   useEffect(() => {
     setHovered(null);
   }, [c.id]);
+
+  // Push the active case into feedback context so the floating feedback
+  // button auto-attaches the right item.
+  useRegisterFeedbackContext({
+    mode: 'situational',
+    itemId: c.id,
+    kind: c.category,
+    label: c.title,
+    prompt: c.scenario,
+    difficulty: c.difficulty,
+  });
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
