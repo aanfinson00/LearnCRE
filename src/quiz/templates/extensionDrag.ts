@@ -51,12 +51,14 @@ export const extensionDragTemplate: QuestionTemplate<'extensionDrag'> = {
     const noi = pickBand(rng, bands.noi, difficulty);
     const cap = pickBand(rng, bands.capRate, difficulty);
     const equity = noi / cap;
-    const originalHold = rng.pickFromSet([5, 7, 10] as const);
-    const extension = rng.pickFromSet([1, 2, 3] as const);
+    const originalHold = rng.pickInt(5, 10);
+    const extension = rng.pickInt(1, 3);
 
     // Both paths have the SAME exit value (flat, no growth captured during the
-    // extension). We compare IRR of original-hold vs extended-hold.
-    const exitValue = equity * 1.25; // ~25% appreciation over original hold (built-in)
+    // extension). We compare IRR of original-hold vs extended-hold. Vary the
+    // appreciation multiplier so the underlying numbers aren't always identical.
+    const apprec = rng.pickRange(1.15, 1.45, { step: 0.025 });
+    const exitValue = equity * apprec;
 
     const cashflowsOriginal: number[] = [-equity];
     for (let y = 1; y <= originalHold; y++) {

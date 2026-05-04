@@ -59,9 +59,9 @@ export const dscrTestPassesTemplate: QuestionTemplate<'dscrTestPasses'> = {
   generate(rng, difficulty = 'intermediate', _assetClass = 'mixed') {
     const noi = pickBand(rng, bands.noi, difficulty);
     const loan = pickBand(rng, bands.loanAmount, difficulty);
-    const years = rng.pickFromSet([25, 30] as const);
+    const years = rng.pickFromSet([25, 30] as const); // only 2 standard amort conventions
     const rate = pickBand(rng, bands.interestRate, difficulty);
-    const threshold = rng.pickFromSet([1.2, 1.25, 1.3] as const);
+    const threshold = pickBand(rng, bands.dscrTarget, difficulty);
 
     const ds = annualDebtService(loan, rate, years);
     const ratio = dscr(noi, ds);

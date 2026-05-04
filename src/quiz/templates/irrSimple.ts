@@ -44,10 +44,7 @@ export const irrSimpleTemplate: QuestionTemplate<'irrSimple'> = {
     const mult = pickBand(rng, bands.irrExitMultiple, difficulty);
     const outRound = difficulty === 'beginner' ? 1_000_000 : difficulty === 'advanced' ? 100_000 : 500_000;
     const equityOut = Math.round((equityIn * mult) / outRound) * outRound;
-    const years =
-      difficulty === 'beginner'
-        ? rng.pickFromSet([5, 7, 10] as const)
-        : rng.pickInt(bands.holdYears.min, bands.holdYears.max);
+    const years = rng.pickInt(bands.holdYears.min, bands.holdYears.max);
     const expected = irrSingle(equityIn, equityOut, years);
 
     return {

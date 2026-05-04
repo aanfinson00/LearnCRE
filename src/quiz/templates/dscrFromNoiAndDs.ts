@@ -34,13 +34,14 @@ export const dscrFromNoiAndDsTemplate: QuestionTemplate<'dscrFromNoiAndDs'> = {
   ],
   generate(rng, difficulty = 'intermediate', _assetClass = 'mixed') {
     const noi = pickBand(rng, bands.noi, difficulty);
-    // Pick a plausible DS that produces a DSCR roughly in 0.95–2.0 range
+    // Pick a plausible DSCR; widen the range on harder difficulties so users
+    // see failing-test cases (sub-1.0x) and outsized cushions (above 1.55x).
     const targetDscr =
       difficulty === 'beginner'
-        ? rng.pickFromSet([1.2, 1.25, 1.3, 1.4, 1.5] as const)
+        ? rng.pickRange(1.15, 1.55, { step: 0.025 })
         : difficulty === 'intermediate'
-          ? rng.pickFromSet([1.05, 1.15, 1.25, 1.35, 1.45] as const)
-          : rng.pickFromSet([0.95, 1.08, 1.18, 1.28, 1.42, 1.55] as const);
+          ? rng.pickRange(1.05, 1.55, { step: 0.025 })
+          : rng.pickRange(0.9, 1.7, { step: 0.025 });
     const ds = noi / targetDscr;
     const expected = dscr(noi, ds);
 

@@ -65,13 +65,13 @@ export const taxAdjustedExitTemplate: QuestionTemplate<'taxAdjustedExit'> = {
   ],
   generate(rng, difficulty = 'intermediate', _assetClass = 'mixed') {
     const purchase = pickBand(rng, bands.loanAmount, difficulty);
-    const holdYears = rng.pickFromSet([3, 5, 7, 10] as const);
+    const holdYears = rng.pickInt(3, 10);
     const appreciationRate =
       difficulty === 'beginner'
-        ? 0.04
+        ? rng.pickRange(0.03, 0.05, { step: 0.005 })
         : difficulty === 'intermediate'
-          ? rng.pickFromSet([0.03, 0.035, 0.045] as const)
-          : rng.pickFromSet([0.02, 0.04, 0.05, 0.06, -0.01] as const);
+          ? rng.pickRange(0.02, 0.05, { step: 0.0025 })
+          : rng.pickRange(-0.01, 0.06, { step: 0.0025 });
     const saleProceeds = purchase * Math.pow(1 + appreciationRate, holdYears);
     // Depreciable basis: ~80% of purchase (land = 20%); 27.5-yr MF life
     const depreciableBasis = purchase * 0.8;

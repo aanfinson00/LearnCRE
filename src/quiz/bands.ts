@@ -8,7 +8,11 @@ export interface Band {
 }
 
 const DIFFICULTY_STEP_MULT: Record<Difficulty, number> = {
-  beginner: 4,
+  // Beginner used to be 4×; on Multifamily that compressed cap-rate variety to
+  // ~3 distinct values, so problems felt repetitive by Q4. 2× still produces
+  // clean rounded numbers (cap rates land on 4.5% / 5.0% / 5.5% / 6.0%) but
+  // doubles the sample space.
+  beginner: 2,
   intermediate: 1,
   advanced: 0.2,
 };
@@ -90,10 +94,13 @@ export const bands = {
   yocDelta: { min: 0.015, max: 0.05, step: 0.0025 },
   debtYieldTarget: { min: 0.08, max: 0.12, step: 0.0025 },
   loanAmount: { min: 2_000_000, max: 100_000_000, step: 500_000 },
-  interestRate: { min: 0.04, max: 0.085, step: 0.0025 },
+  // 12.5 bps step matches how lenders quote indications.
+  interestRate: { min: 0.04, max: 0.085, step: 0.00125 },
   amortYears: { min: 20, max: 30 },
-  dscrTarget: { min: 1.15, max: 1.4, step: 0.05 },
-  ltv: { min: 0.4, max: 0.75, step: 0.05 },
+  // 0.025 step doubles the variety: 1.15, 1.175, …, 1.40 (11 values).
+  dscrTarget: { min: 1.15, max: 1.4, step: 0.025 },
+  // 250 bps LTV increments match lender quote conventions.
+  ltv: { min: 0.4, max: 0.75, step: 0.025 },
   unleveredIrr: { min: 0.05, max: 0.12, step: 0.005 },
   pgiPerSf: { min: 15, max: 60, step: 0.5 },
   leaseTermYears: { min: 3, max: 10 },
@@ -102,7 +109,8 @@ export const bands = {
   taxRate: { min: 0.008, max: 0.025, step: 0.00125 },
   rentPerSfDelta: { min: 0.5, max: 5, step: 0.25 },
   units: { min: 25, max: 500, step: 5 },
-  growthRate: { min: 0.02, max: 0.06, step: 0.0025 },
+  // 10 bps step matches submarket rent-growth comp granularity.
+  growthRate: { min: 0.02, max: 0.06, step: 0.001 },
   projectionYears: { min: 3, max: 10 },
   egi: { min: 500_000, max: 15_000_000, step: 100_000 },
   rentPerUnitYear: { min: 12_000, max: 36_000, step: 500 },
@@ -112,8 +120,13 @@ export const bands = {
 } as const;
 
 export const discreteMoves = {
-  capMoves: [-0.0075, -0.005, -0.0025, 0.0025, 0.005, 0.0075] as const,
-  vacancyMoves: [-0.03, -0.02, -0.01, 0.01, 0.02, 0.03] as const,
+  // 10 values, ±100 bps spread (was 6 values ±75 bps).
+  capMoves: [
+    -0.01, -0.0075, -0.005, -0.0025, -0.00125,
+    0.00125, 0.0025, 0.005, 0.0075, 0.01,
+  ] as const,
+  // 9 values, ±5 points (was 6 values ±3 points).
+  vacancyMoves: [-0.05, -0.03, -0.02, -0.01, 0.01, 0.02, 0.03, 0.04, 0.05] as const,
   rentMoves: [-100_000, -50_000, 50_000, 100_000, 150_000, 250_000] as const,
   opexMoves: [25_000, 50_000, 75_000, 100_000, 150_000, 250_000] as const,
   vacancySet: [0, 0.03, 0.05, 0.07, 0.1] as const,

@@ -10,6 +10,7 @@ import { ProfileScreen } from './components/ProfileScreen';
 import { StudyScreen } from './components/StudyScreen';
 import { TopNav } from './components/TopNav';
 import { AchievementToastHost } from './components/AchievementToast';
+import { FeedbackButton } from './components/FeedbackButton';
 import { ScratchSheet } from './components/ScratchSheet';
 import { ScratchSheetProvider } from './hooks/useScratchSheet';
 import { WalkthroughSetup } from './components/WalkthroughSetup';
@@ -260,6 +261,7 @@ export default function App() {
       {innerContent}
       <AchievementToastHost />
       <ScratchSheet />
+      <FeedbackButton />
     </ScratchSheetProvider>
   );
 }
