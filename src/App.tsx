@@ -32,6 +32,9 @@ import { VocabResults } from './components/VocabResults';
 import { MockSetup } from './components/MockSetup';
 import { MockScreen } from './components/MockScreen';
 import { MockResults } from './components/MockResults';
+import { ModelingTestSetup } from './components/ModelingTestSetup';
+import { ModelingTestScreen } from './components/ModelingTestScreen';
+import { ModelingTestResults } from './components/ModelingTestResults';
 import { CertListScreen } from './components/CertListScreen';
 import { CertDetailScreen, type CertMode } from './components/CertDetailScreen';
 import { FinalExamScreen } from './components/FinalExamScreen';
@@ -43,6 +46,7 @@ import { useExcel } from './hooks/useExcel';
 import { useLongform } from './hooks/useLongform';
 import { useVocab } from './hooks/useVocab';
 import { useMockInterview } from './hooks/useMockInterview';
+import { useModelingTest } from './hooks/useModelingTest';
 
 type Mode =
   | 'quiz'
@@ -54,6 +58,7 @@ type Mode =
   | 'longform'
   | 'vocab'
   | 'mockInterview'
+  | 'modelingTest'
   | 'certify'
   | 'profile';
 
@@ -74,6 +79,7 @@ export default function App() {
   const longform = useLongform();
   const vocab = useVocab();
   const mock = useMockInterview();
+  const modelingTest = useModelingTest();
 
   const handleSwitch = (m: Mode) => {
     if (m === mode) return;
@@ -297,6 +303,35 @@ export default function App() {
             vocab.reset();
             setMode('quiz');
           }}
+        />
+      );
+    }
+
+    if (mode === 'modelingTest') {
+      if (modelingTest.state === null) {
+        return (
+          <ModelingTestSetup
+            onOpen={(t) => modelingTest.open(t)}
+            onBack={() => setMode('quiz')}
+          />
+        );
+      }
+      if (modelingTest.state.status === 'graded') {
+        return (
+          <ModelingTestResults
+            state={modelingTest.state}
+            onTryAgain={modelingTest.tryAgain}
+            onPickAnother={modelingTest.reset}
+          />
+        );
+      }
+      return (
+        <ModelingTestScreen
+          state={modelingTest.state}
+          onSetFormula={modelingTest.setFormula}
+          onFocus={modelingTest.focus}
+          onSubmit={modelingTest.submit}
+          onSaveAndExit={modelingTest.reset}
         />
       );
     }

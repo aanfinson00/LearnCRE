@@ -12,6 +12,7 @@ type Mode =
   | 'longform'
   | 'vocab'
   | 'mockInterview'
+  | 'modelingTest'
   | 'certify'
   | 'profile';
 
@@ -47,6 +48,7 @@ const SECTIONS: Section[] = [
       { id: 'situational', label: 'Situational', hint: 'Mini case studies and reasoning.' },
       { id: 'longform', label: 'Case study', hint: 'Long-form prose answers, graded against a rubric.' },
       { id: 'excel', label: 'Excel', hint: 'Write spreadsheet formulas against a mini-grid.' },
+      { id: 'modelingTest', label: 'Modeling test', hint: 'Take-home-style multi-cell models, graded on output cells.' },
       { id: 'mockInterview', label: 'Mock interview', hint: 'Firm-archetype mocks: mixed-mode, self-graded.' },
     ],
   },
