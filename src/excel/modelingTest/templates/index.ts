@@ -2,11 +2,13 @@ import type { ModelingTestTemplate, ModelingTestDifficulty } from '../../../type
 import { dcfFiveYrSuburbanOffice } from './dcfFiveYrSuburbanOffice';
 import { loanSizingThreeConstraint } from './loanSizingThreeConstraint';
 import { acqProformaMultifamily } from './acqProformaMultifamily';
+import { refiVsSellY5 } from './refiVsSellY5';
 
 export const MODELING_TEST_TEMPLATES: ModelingTestTemplate[] = [
   dcfFiveYrSuburbanOffice,
   loanSizingThreeConstraint,
   acqProformaMultifamily,
+  refiVsSellY5,
 ];
 
 export interface PlannedTemplate {

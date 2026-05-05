@@ -3,6 +3,7 @@ import { gradeSubmission, withinTolerance, buildSheet } from '../grade';
 import { dcfFiveYrSuburbanOffice } from '../templates/dcfFiveYrSuburbanOffice';
 import { loanSizingThreeConstraint } from '../templates/loanSizingThreeConstraint';
 import { acqProformaMultifamily } from '../templates/acqProformaMultifamily';
+import { refiVsSellY5 } from '../templates/refiVsSellY5';
 
 describe('withinTolerance', () => {
   it('passes within absolute tolerance', () => {
@@ -325,6 +326,123 @@ describe('gradeSubmission — Multifamily, wrong loan-balance cascade', () => {
     expect(byRef.get('B26')?.grade).toBe('pass');
     expect(byRef.get('F26')?.grade).toBe('pass');
     expect(byRef.get('B32')?.grade).toBe('pass');
+  });
+});
+
+// Canonical correct formulas for the refi-vs-sell template.
+const correctRefiSellFormulas: Record<string, string> = {
+  // Y1-Y5 NOI roll
+  B21: '=B7',
+  C21: '=B21*(1+B8)',
+  D21: '=C21*(1+B8)',
+  E21: '=D21*(1+B8)',
+  F21: '=E21*(1+B8)',
+  // Original DS (constant)
+  B22: '=-PMT(B5,B6,B4)',
+  C22: '=B22',
+  D22: '=B22',
+  E22: '=B22',
+  F22: '=B22',
+  // Y1-Y5 levered CF
+  B23: '=B21-B22',
+  C23: '=C21-C22',
+  D23: '=D21-D22',
+  E23: '=E21-E22',
+  F23: '=F21-F22',
+  // Y5 sale math
+  B26: '=F21/B10',
+  B27: '=B26*B11',
+  B28: '=B4*(1+B5)^5+PMT(B5,B6,B4)*((1+B5)^5-1)/B5',
+  // Path A
+  B31: '=B26-B27-B28',
+  // Path B refi
+  B34: '=B26*B12',
+  B35: '=B34*B15',
+  B36: '=B34-B28-B35',
+  // Y6-Y10 NOI roll
+  B40: '=F21*(1+B9)',
+  C40: '=B40*(1+B9)',
+  D40: '=C40*(1+B9)',
+  E40: '=D40*(1+B9)',
+  F40: '=E40*(1+B9)',
+  // New DS (constant)
+  B41: '=-PMT(B13,B14,B34)',
+  // Y6-Y10 levered CF
+  B42: '=B40-B41',
+  C42: '=C40-B41',
+  D42: '=D40-B41',
+  E42: '=E40-B41',
+  F42: '=F40-B41',
+  // Y10 exit
+  B45: '=F40/B16',
+  B46: '=B45*B17',
+  B47: '=B34*(1+B13)^5+PMT(B13,B14,B34)*((1+B13)^5-1)/B13',
+  B48: '=B45-B46-B47',
+  // Incremental CF series
+  B52: '=B36-B31',
+  C52: '=B42',
+  D52: '=C42',
+  E52: '=D42',
+  F52: '=E42',
+  G52: '=F42+B48',
+  // Returns
+  B55: '=(SUM(B23:F23)+B36+SUM(B42:F42)+B48)/B3',
+  B56: '=IRR(B52:G52)',
+};
+
+describe('gradeSubmission — Refi vs Sell template, canonical correct formulas', () => {
+  const result = gradeSubmission(refiVsSellY5, correctRefiSellFormulas);
+
+  it('passes all outputs and checkpoints', () => {
+    expect(result.passed).toBe(true);
+    for (const o of result.outputs) {
+      expect(o.grade, `${o.ref} ${o.label}`).toBe('pass');
+    }
+    for (const cp of result.checkpoints) {
+      expect(cp.grade, `${cp.ref} ${cp.label}`).toBe('pass');
+    }
+  });
+
+  it('Path A net sale > Refi cash-out (canonical refi-vs-sell relationship)', () => {
+    const { sheet } = buildSheet(refiVsSellY5, correctRefiSellFormulas);
+    expect(sheet['B31']).toBeGreaterThan(sheet['B36']!);
+  });
+
+  it('Marginal IRR lands in 7-10% range — sensible for stabilized continue-to-hold', () => {
+    const { sheet } = buildSheet(refiVsSellY5, correctRefiSellFormulas);
+    expect(sheet['B56']).toBeGreaterThan(0.07);
+    expect(sheet['B56']).toBeLessThan(0.10);
+  });
+});
+
+describe('gradeSubmission — Refi vs Sell, wrong Y6-Y10 growth rate cascade', () => {
+  // Common error: continue using B8 (Y1-Y5 growth) for Y6-Y10 instead of B9.
+  const wrong: Record<string, string> = {
+    ...correctRefiSellFormulas,
+    B40: '=F21*(1+B8)',
+    C40: '=B40*(1+B8)',
+    D40: '=C40*(1+B8)',
+    E40: '=D40*(1+B8)',
+    F40: '=E40*(1+B8)',
+  };
+  const result = gradeSubmission(refiVsSellY5, wrong);
+
+  it('Y10 NOI checkpoint flags as wrong', () => {
+    const cp = result.checkpoints.find((c) => c.ref === 'F40');
+    expect(cp?.grade).toBe('fail');
+  });
+
+  it('Y10 net sale + Path B EM + Marginal IRR all fail', () => {
+    const byRef = new Map(result.outputs.map((o) => [o.ref, o]));
+    expect(byRef.get('B48')?.grade).toBe('fail');
+    expect(byRef.get('B55')?.grade).toBe('fail');
+    expect(byRef.get('B56')?.grade).toBe('fail');
+  });
+
+  it('Y5 outputs (Path A + Refi cash-out) still pass — Y6-Y10 doesn\'t feed them', () => {
+    const byRef = new Map(result.outputs.map((o) => [o.ref, o]));
+    expect(byRef.get('B31')?.grade).toBe('pass');
+    expect(byRef.get('B36')?.grade).toBe('pass');
   });
 });
 
