@@ -61,6 +61,7 @@ Sequenced by readiness, not priority. Specs live in the design-spec section at t
 - **PR X — Situational expansion** — 6 more cases, per-asset-class filtering, achievements ("Reasoning Apprentice", "Diagnostic Eye").
 - **PR Y — Excel formula mode foundation** — formula parser + evaluator + 5 starter templates (amortization, NOI roll-forward, IRR/XIRR mapping, growth-rate fill, per-unit normalization). See [Design spec — Excel formula mode](#design-spec--excel-formula-mode).
 - **PR Y+ — Excel mode expansion** — 5 more templates, formula-error coaching, tolerance for rounding differences, mini-grid styling polish.
+- **PR Z — Modeling test mode** — multi-cell take-home-style templates graded on designated output cells (3-6 outputs + 2-3 diagnostic checkpoints per template); auto-save / resume; 3 starter templates (5-yr DCF, loan sizing, acq pro-forma + sensitivity). See [Design spec — Modeling test mode](#design-spec--modeling-test-mode).
 - **Visualization coverage** — 6 of 35 question kinds have viz today. Backfill the highest-impact 10 (rent roll change, mark-to-market, TI vs rent, replacement cost, dev spread, debt yield, DSCR, cash-on-cash, equity multiple, all-in basis).
 
 ---
@@ -159,6 +160,163 @@ Existing kinds test "can the user compute". Excel mode tests "can the user write
 - "Find the bug" mode — pre-filled formula has one error; user fixes it
 - "Refactor" mode — working formula is verbose; user shortens to a target character count
 - Formula-vs-formula head-to-head — both players solve the same template, faster correct wins
+
+---
+
+## Design spec — Modeling test mode
+
+### Why
+Existing Excel mode is a recall drill: write one formula, get judged on that formula. Real interview take-homes and on-the-job modeling tests are different — you're handed a partial template, you fill in many cells, and you're judged on whether the bottom-line outputs (IRR, exit value, max loan) come out right. This mode closes the gap between "I can write `=IRR(B2:B7)`" and "I can build a model an MD will trust."
+
+Sits alongside one-shot Excel mode in the sidebar; doesn't replace it. Different cadence: drill is 60–90 s per question, modeling test is 15–25 min per template.
+
+### Mode shape
+- User opens a template. Assumption cells are pre-filled and locked. Target cells are empty and editable.
+- User fills cells in any order (no per-cell submission, no required sequence).
+- "Save & exit" + "Submit" buttons. Auto-save on every formula edit (debounced ~500 ms).
+- On submit: run user formulas through the existing parser/evaluator, compare designated outputs against the answer key, surface diagnostics from checkpoint cells.
+- No formula-structure grading — too prescriptive past one-shot scope. Two analysts can model the same thing with different valid sheets; we grade outputs.
+
+### Grading model
+- Each template defines:
+  - **3-6 designated output cells** — the bottom-line numbers an interviewer would care about (year-5 NOI, exit value, levered IRR, equity multiple, max loan, etc.).
+  - **2-3 checkpoint cells** — diagnostic-only intermediates (annual debt service, year-3 NOI, loan constant). They don't count toward pass/fail; they exist to tell a user *why* an output is wrong.
+- **Pass = every designated output within tolerance.** No partial credit on outputs — modeling tests in the real world are pass/fail.
+- **Score** displayed alongside pass/fail = `outputsCorrect / outputsTotal` for ranking attempts and showing improvement over time.
+- Tolerance per output: relative for IRRs/multiples (`rel: 0.005` = ±50 bps on a 12% IRR), absolute for $ amounts (`abs: 1000`).
+- On a failed submission: every wrong output renders a `whenWrongTry` hint *plus* surfaces any checkpoints that are also wrong, with their `diagnostic` text. ("Levered IRR is off → year-3 NOI checkpoint is also off → recheck OpEx growth in row 8.")
+
+### Data model
+
+```ts
+interface ModelingTestTemplate {
+  id: string;
+  title: string;                 // "5-Year DCF — Suburban Office"
+  scenario: string;              // 2-4 sentence narrative
+  brief?: { paragraphs: string[]; bullets?: string[] };
+  estimatedMinutes: number;
+  difficulty: 'beginner' | 'intermediate' | 'advanced';
+  assetClass?: AssetClass;
+  sheet: SheetSetup;
+  outputs: OutputCell[];         // 3-6
+  checkpoints: CheckpointCell[]; // 2-3
+  rubric: string;                // post-grading narrative explaining what good looks like
+}
+
+interface SheetSetup {
+  rows: number;
+  cols: number;
+  cells: {
+    ref: string;                 // "B4"
+    value: string | number;      // assumption value or section label
+    locked?: boolean;            // locked cells render filled but uneditable
+    label?: string;              // adjacent column header / row label for clarity
+  }[];
+}
+
+interface OutputCell {
+  ref: string;                   // "B27"
+  label: string;                 // "Levered IRR"
+  expected: number;
+  tolerance: { abs?: number; rel?: number };
+  whenWrongTry: string;          // hint shown post-grading if this output is wrong
+}
+
+interface CheckpointCell {
+  ref: string;                   // "D14"
+  label: string;                 // "Annual debt service"
+  expected: number;
+  tolerance: { abs?: number; rel?: number };
+  diagnostic: string;            // "If this is off, your CFADS and IRR will both diverge"
+}
+```
+
+### Persistence
+- `learncre.profile.<id>.modelingTest.<templateId>.draft.v1` — `{ formulas: Record<ref, string>, lastEdited: ts }`. Written on every formula edit, debounced.
+- `learncre.profile.<id>.modelingTest.history.v1` — rolling array of last 50 submitted attempts: `{ templateId, formulas, score, outputResults, checkpointResults, durationMs, completedAt }`.
+- Setup screen reads draft existence to show "Resume" vs "Start" per template.
+
+### UI
+
+**ModelingTestSetup**
+- List of templates: title · est. minutes · difficulty pill · status badge (`Not started` / `In progress` / `Passed` / best-attempt score).
+- Click a template → show scenario + brief in a confirm panel → Start (or Resume).
+
+**ModelingTestScreen**
+- Top: title + collapsible scenario/brief panel (default open on first visit, collapsed thereafter).
+- Center: editable spreadsheet grid reusing `ExcelGrid`. Locked cells render with a paper-tinted background; editable cells use the existing formula bar pattern from one-shot Excel.
+- Right rail (or bottom on mobile): focused-cell context — label, what it represents, no answer hints. A "designated output" badge marks the high-stakes cells so the user knows what's being graded.
+- Bottom-right: persistent timer (count-up, untimed v1 — just shows elapsed). Save & exit / Submit buttons.
+
+**ModelingTestResults**
+- Headline: pass/fail badge + score % + duration.
+- **Outputs panel**: each output cell with expected vs actual, ✓/✗, `whenWrongTry` hint if wrong.
+- **Checkpoint diagnostics**: only shown when at least one output is wrong. Each wrong checkpoint displays its `diagnostic` text. Visually links checkpoint → which output(s) it explains.
+- **Rubric reveal**: narrative paragraph explaining what a good model looked like.
+- Buttons: "Try again" (clears formulas, resets draft) · "View my formulas" (read-only sheet) · "Pick another template".
+
+### Three starter templates
+
+#### Template 1 — `dcf-5yr-suburban-office` (intermediate, ~20 min)
+**Scenario:** $50M suburban office acquisition, 5-year hold. Underwrite NOI growth, exit, and capital structure; report unlevered + levered IRR.
+**Sheet:** assumption block (purchase price, going-in cap, year-1 NOI, NOI growth schedule, exit cap, sale costs %, LTV, rate, amort) + year-by-year roll (NOI, debt service, unlevered CF, levered CF, exit value yr 5, net sale proceeds yr 5).
+**Outputs (5):** year-5 NOI · exit value · net sale proceeds · unlevered IRR · levered IRR.
+**Checkpoints (2):** annual debt service · total levered cash returned over hold.
+
+#### Template 2 — `loan-sizing-three-constraint` (intermediate, ~15 min)
+**Scenario:** Permanent loan on stabilized industrial. NOI $5M, value $80M. Lender uses 1.25× DSCR / 75% LTV / 8% debt yield. Solve max loan that passes all three; identify the binding constraint.
+**Sheet:** assumption block (NOI, value, rate, amort, three thresholds) + calculation block (max loan from each constraint, binding-constraint label, final max loan = MIN of three).
+**Outputs (5):** max loan (DSCR) · max loan (LTV) · max loan (debt yield) · binding constraint name · final max loan.
+**Checkpoints (1):** loan constant.
+
+#### Template 3 — `acq-proforma-sensitivity` (advanced, ~25 min)
+**Scenario:** $40M multifamily acquisition. Build trended NOI yr 1-5, build a 5×5 sensitivity matrix (going-in cap × exit cap → levered IRR), and report base-case equity multiple.
+**Sheet:** assumption block + NOI roll (5 yrs) + 5×5 sensitivity grid with axis cells pre-labeled.
+**Outputs (5):** year-5 NOI · base-case levered IRR · base-case equity multiple · sensitivity corner [5.0% in / 5.0% out] · sensitivity corner [6.0% in / 7.0% out].
+**Checkpoints (1):** any one mid-cell of the sensitivity matrix.
+
+### Architecture
+- `src/types/modelingTest.ts` — interfaces above.
+- `src/excel/modelingTest/templates/<id>.ts` — one file per template.
+- `src/excel/modelingTest/grade.ts` — pure function: `(template, userFormulas) → GradingResult`.
+- `src/components/ModelingTestSetup.tsx`, `ModelingTestScreen.tsx`, `ModelingTestResults.tsx`.
+- `src/hooks/useModelingTest.ts` — reducer + debounced auto-save.
+- `'modelingTest'` mode in `App.tsx` and `SideNav.tsx` (Apply section, sibling to Excel).
+- Reuses `src/excel/parser.ts`, `src/excel/evaluate.ts`, and `src/components/ExcelGrid.tsx` — no new evaluation code.
+- Session record `kind: 'modelingTest'` so attempts appear in profile history and feed XP.
+
+### XP / progression
+- Pass = +XP scaled by template difficulty: beginner 75 · intermediate 150 · advanced 250.
+- Failed attempt with score ≥ 60% = consolation 25 / 50 / 75 (don't reward random guesses; reward "almost right").
+- First-time pass per template fires an achievement-eligible event.
+
+### Achievements (proposed)
+- **Modeling Apprentice** — pass any 1 template.
+- **Modeling Pro** — pass all 3 starter templates.
+- **Clean Sheet** — pass a template with 100% on outputs *and* checkpoints.
+
+### Validation
+Per template, ship three unit tests:
+1. Fill with the canonical correct formulas → grading returns pass with all outputs ✓ and all checkpoints ✓.
+2. Fill with deliberately-wrong formulas in known cells → grading flags the right outputs as ✗ and the corresponding checkpoint diagnostic surfaces.
+3. Empty sheet → grading returns fail and all outputs flag as missing.
+
+This catches answer-key drift any time the parser/evaluator or template changes.
+
+### Out of scope (v1)
+- Timer / time-pressure mode (v2 — opt-in; show elapsed only in v1).
+- Multi-tab templates (single sheet only).
+- Charts inside the grid.
+- Companion text-question accompanying the model (e.g., "in 2 sentences, why did you pick this exit cap?").
+- AI-graded narrative rubrics.
+- Sharing your submitted model as a URL.
+
+### Adjacent ideas to bundle later
+- **Auditor mode** — given a model with 1-3 injected errors, find and fix them.
+- **Speed mode** — opt-in clock with a per-template leaderboard once cloud lands.
+- **Per-template study guide** link → Study tables.
+- **Model export** to actual `.xlsx` for users to keep / share with mentors.
+- **Template authoring tool** — internal-only screen to draft + verify new templates without hand-editing TS.
 
 ---
 
@@ -322,8 +480,9 @@ Local-first works for a single user, but doesn't survive device switches or enab
 3. PR X — Situational expansion
 4. PR Y — Excel mode foundation
 5. PR Y+ — Excel mode expansion
-6. Visualization backfill (10 highest-impact kinds)
-7. PR L → PR U — cloud track, in order
+6. PR Z — Modeling test mode (3 starter templates)
+7. Visualization backfill (10 highest-impact kinds)
+8. PR L → PR U — cloud track, in order
 
 Re-sequence freely as priorities shift. Update the "In design" section when a PR lands and move the entry up to "What's shipped today".
 
