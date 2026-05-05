@@ -11,9 +11,19 @@ import { caseById as situationalCaseById } from '../situational';
 import { generateQuestion } from '../engine';
 import { createRng } from '../random';
 import { MEGA_FUND_ACQ } from './archetypes/megaFundAcq';
+import { OPPORTUNISTIC_PE } from './archetypes/opportunisticPe';
+import { REIT_AM } from './archetypes/reitAm';
+import { REGIONAL_SPONSOR } from './archetypes/regionalSponsor';
+import { MORTGAGE_DEBT } from './archetypes/mortgageDebt';
 import { prosePromptById } from './prompts';
 
-export const MOCK_ARCHETYPES: MockArchetypeSpec[] = [MEGA_FUND_ACQ];
+export const MOCK_ARCHETYPES: MockArchetypeSpec[] = [
+  MEGA_FUND_ACQ,
+  OPPORTUNISTIC_PE,
+  REIT_AM,
+  REGIONAL_SPONSOR,
+  MORTGAGE_DEBT,
+];
 
 export function archetypeById(id: MockArchetypeId): MockArchetypeSpec | undefined {
   return MOCK_ARCHETYPES.find((a) => a.id === id);

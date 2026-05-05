@@ -50,6 +50,27 @@ export const MARKET_VIEW_PROMPTS: MockProsePrompt[] = [
     ],
   },
   {
+    id: 'mv-lender-spread-direction',
+    kind: 'marketView',
+    prompt:
+      'Where do you see CRE debt spreads moving over the next 12 months — for senior bank debt, agency, and CMBS? Pick a stance and defend it.',
+    expectedDurationSec: 120,
+    roles: ['mortgageUw'],
+    rubric: [
+      { id: 'position', dimension: 'Differentiated stance across the three lender categories', weight: 2 },
+      { id: 'fundamentals', dimension: 'Anchors view in capital flows / underwriting trends / credit losses', weight: 1.5 },
+      { id: 'sector-nuance', dimension: 'Acknowledges spreads vary by asset class within each category' },
+      { id: 'walk-threshold', dimension: 'Names what would shift your view' },
+    ],
+    modelAnswer:
+      'I expect senior bank spreads to tighten 25-50 bps over the next 12 months as deposit costs stabilize and bank balance sheets digest the 2023-24 CRE writedowns. Agency spreads should be roughly flat — Fannie/Freddie pricing is policy-driven and the rate-driven spread compression is mostly priced in. CMBS I\'d expect to widen 10-25 bps, especially on office and lower-tier multifamily, as the maturity wall puts pressure on issuance and AAA tranche buyers stay defensive. The differentiation matters: bank debt is supply-constrained (banks pulled back); agency is regulated; CMBS is capital-markets-priced. The strongest counter to my bank-spread-tightening call is a Texas-bank-style stress test resurfacing — that resets risk premia. The signal I\'d look for: 30-day deposit-flight-to-quality data in the regional bank tape — if that re-spikes, my bank-tightening view fails.',
+    tips: [
+      'Senior bank / agency / CMBS each price differently — sophisticated lenders distinguish.',
+      'Anchor in capital-flow data: deposits, issuance volumes, AAA tranche bid.',
+      'Always include a falsification: "what would change my mind on this trade?"',
+    ],
+  },
+  {
     id: 'mv-debt-equity-mix',
     kind: 'marketView',
     prompt:

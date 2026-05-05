@@ -107,4 +107,48 @@ export const BEHAVIORAL_PROMPTS: MockProsePrompt[] = [
       'The closer is "and I delivered." Be specific about what landed and what didn\'t.',
     ],
   },
+  {
+    id: 'beh-tenant-negotiation',
+    kind: 'behavioral',
+    prompt:
+      'Tell me about a tenant negotiation you led where the stakes were high. What did you ask for, what did you concede, and what was the outcome?',
+    expectedDurationSec: 110,
+    roles: ['assetManagement', 'acquisitions'],
+    rubric: [
+      { id: 'situation', dimension: 'Specific tenant + lease + leverage on each side', weight: 1 },
+      { id: 'strategy', dimension: 'Articulates the trade-offs you walked into the negotiation with', weight: 1.5 },
+      { id: 'concession', dimension: 'Honest about what you gave up + why it was the right give-up', weight: 1.5 },
+      { id: 'outcome', dimension: 'Quantitative outcome: rent / term / cost / value impact', weight: 1 },
+      { id: 'relationship', dimension: 'Frames the negotiation as preserving the long-term relationship, not zero-sum', weight: 0.5 },
+    ],
+    modelAnswer:
+      'Last winter I led a renewal negotiation on a 32k-SF anchor tenant rolling on a 2-year-old Class-A office. They were paying $36/SF; market had moved to $42/SF. They opened by asking for a 5-year extension at $30/SF — anchored low. We had real leverage: their build-out was specific to them and re-tenanting would require $80/SF of new TI. I countered at $40/SF flat for 7 years with $20/SF refresh TI. They came back at $36/SF + 5-year + $25 TI. We landed at $38/SF + 6-year + $20 TI + 3% annual escalators. NER was ~$33/SF after TI amortization vs comp NER of $34 — slight discount but with a quality long-term tenant on lease. The give-up I had to make: a co-tenancy clause they wanted that protected them if our other anchor left. I conceded because I had a 95% confidence the other anchor was renewing and the optics value (preserved their commitment) outweighed the contingent risk. Tenant signed; we held the building 92% leased through the soft 2024 office market.',
+    tips: [
+      'Show both leverage analyses — *what they had, what you had*. Bilateral framing reads more sophisticated.',
+      'Quantify the outcome: NER vs comp, length of term, capex avoided.',
+      'Always include a give-up. Negotiations without concessions read as fictitious.',
+    ],
+  },
+  {
+    id: 'beh-credit-decision',
+    kind: 'behavioral',
+    prompt:
+      'Tell me about a close credit-call you made on a deal — one where you had to weigh borrower strength against deal economics. What did you decide, and how did it play out?',
+    expectedDurationSec: 100,
+    roles: ['mortgageUw'],
+    rubric: [
+      { id: 'situation', dimension: 'Specific deal: asset, size, sponsor profile', weight: 1 },
+      { id: 'analysis', dimension: 'Articulates the tension — strong borrower / weak deal or vice versa', weight: 1.5 },
+      { id: 'decision', dimension: 'States the call and the reasoning, not "we approved with conditions"', weight: 1.5 },
+      { id: 'outcome', dimension: 'How the deal performed; honest if call was wrong' },
+      { id: 'lesson', dimension: 'Names what you would weigh more (or less) heavily next time' },
+    ],
+    modelAnswer:
+      'Last Q3 I was on the credit team for a $40M MF construction loan to a first-time GP — solid track record on stabilized acquisitions but no ground-up deals. Underwriting was tight: 75% LTC, 1.40× DSCR at stabilization, but the YoC was only 6.0% on a 5.0% market cap rate (100 bps of dev spread, thin for ground-up). My call: the borrower\'s strength compensated for the deal\'s thin spread *because* (1) sponsor had personal liquidity covering 18 months of debt service, (2) the project was in a market we knew and underwriting was conservative on rents, (3) they brought us all their refinance work historically. I recommended approval with a 12-month interest reserve and a sponsor-funded completion guaranty. The deal stabilized 2 months ahead of schedule at $0.10/SF higher rents than we underwrote — YoC closed at 6.4%, well within the dev-spread band. The lesson: relationship-quality borrowers can carry slightly thinner deals if the structure adds protection. Pure transactional underwriting on the same numbers I might have declined.',
+    tips: [
+      'Frame the *tension*. Credit calls are interesting when there\'s a real trade-off, not when the answer is obvious.',
+      'Specify the structure you added (reserves, guaranties, covenants). That\'s the lever credit gets to use.',
+      'Honest outcome reporting separates strong candidates. "Worked out fine" reads as luck; "they outperformed underwriting on these specific lines" reads as judgment.',
+    ],
+  },
 ];

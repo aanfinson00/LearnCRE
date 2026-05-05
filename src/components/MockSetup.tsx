@@ -5,6 +5,7 @@ import { useProfile } from '../hooks/useProfile';
 import type { MockArchetypeId } from '../types/mockInterview';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
+import { MockHistory } from './MockHistory';
 
 interface Props {
   onStart: (archetypeId: MockArchetypeId) => void;
@@ -108,6 +109,8 @@ export function MockSetup({ onStart, onBack }: Props) {
           );
         })}
       </div>
+
+      <MockHistory records={records} />
 
       <Card className="space-y-2 border-warm-mute/40 bg-warm-paper/40">
         <div className="text-xs font-medium uppercase tracking-widest text-warm-stone">
