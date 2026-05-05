@@ -3,6 +3,7 @@ import type { LifetimeStats, SessionStats } from '../types/session';
 import { profileKey } from '../storage/profiles';
 import { allKinds } from './templates';
 import { walkthroughs } from './walkthroughs';
+import { MODELING_TEST_TEMPLATES } from '../excel/modelingTest/templates';
 
 const KEY_SUFFIX = 'achievements.v1';
 
@@ -45,6 +46,10 @@ export interface AchievementContext {
   situationalCategoryAccuracy: Record<string, { total: number; correct: number }>;
   /** Distinct excel template ids the user has answered correctly */
   excelCorrectIds: Set<string>;
+  /** Distinct modeling-test template ids the user has passed */
+  modelingTestPassedIds: Set<string>;
+  /** Distinct modeling-test template ids the user has passed with all checkpoints clean */
+  modelingTestCleanSheetIds: Set<string>;
 }
 
 export interface AchievementDef {
@@ -188,6 +193,29 @@ export const ACHIEVEMENTS: AchievementDef[] = [
     description: 'Write 5 distinct Excel formulas that compute the right value.',
     icon: '📊',
     evaluate: (c) => c.excelCorrectIds.size >= 5,
+  },
+  {
+    id: 'modeling-apprentice',
+    label: 'Modeling Apprentice',
+    description: 'Pass any modeling-test template.',
+    icon: '🧰',
+    evaluate: (c) => c.modelingTestPassedIds.size >= 1,
+  },
+  {
+    id: 'modeling-pro',
+    label: 'Modeling Pro',
+    description: 'Pass every shipped modeling-test template.',
+    icon: '🏗️',
+    evaluate: (c) =>
+      MODELING_TEST_TEMPLATES.length > 0 &&
+      MODELING_TEST_TEMPLATES.every((t) => c.modelingTestPassedIds.has(t.id)),
+  },
+  {
+    id: 'clean-sheet',
+    label: 'Clean Sheet',
+    description: 'Pass a modeling-test template with every checkpoint also correct.',
+    icon: '✨',
+    evaluate: (c) => c.modelingTestCleanSheetIds.size >= 1,
   },
 ];
 

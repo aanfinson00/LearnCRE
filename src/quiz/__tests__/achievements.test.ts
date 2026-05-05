@@ -27,6 +27,8 @@ const ctx = (over: Partial<AchievementContext>): AchievementContext => ({
   situationalCorrectIds: new Set(),
   situationalCategoryAccuracy: {},
   excelCorrectIds: new Set(),
+  modelingTestPassedIds: new Set(),
+  modelingTestCleanSheetIds: new Set(),
   ...over,
 });
 
