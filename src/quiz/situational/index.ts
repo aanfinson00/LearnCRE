@@ -44,6 +44,33 @@ import { bankAccountStructure } from './bankAccountStructure';
 import { balanceSheetRefiImpact } from './balanceSheetRefiImpact';
 import { budgetVsActualVariance } from './budgetVsActualVariance';
 import { distributionWaterfall } from './distributionWaterfall';
+import { closingChecklistSequence } from './closingChecklistSequence';
+import { covenantTestingCadence } from './covenantTestingCadence';
+import { costSegregationBasics } from './costSegregationBasics';
+import { omRedFlags } from './omRedFlags';
+import { tenantImprovementApproval } from './tenantImprovementApproval';
+import { waterfallEuropeanVsAmerican } from './waterfallEuropeanVsAmerican';
+import { waterfallCatchupMechanics } from './waterfallCatchupMechanics';
+import { waterfallIrrVsMoicHurdle } from './waterfallIrrVsMoicHurdle';
+import { waterfallClawbackMechanics } from './waterfallClawbackMechanics';
+import { waterfallPrefCompoundVsSimple } from './waterfallPrefCompoundVsSimple';
+import { waterfallKeyPersonEvent } from './waterfallKeyPersonEvent';
+import { dscrTestTimingMechanics } from './dscrTestTimingMechanics';
+import { dscrCashTrapTrigger } from './dscrCashTrapTrigger';
+import { dscrCureRights } from './dscrCureRights';
+import { dscrSpringingRecourse } from './dscrSpringingRecourse';
+import { lpaInitialVsAdditionalCapital } from './lpaInitialVsAdditionalCapital';
+import { lpaCapitalCallDefault } from './lpaCapitalCallDefault';
+import { lpaCostOverrunSharing } from './lpaCostOverrunSharing';
+import { lpaContributionRatios } from './lpaContributionRatios';
+import { leaseBillbackAllowance } from './leaseBillbackAllowance';
+import { leaseBaseYearVsStop } from './leaseBaseYearVsStop';
+import { leaseCamReconciliation } from './leaseCamReconciliation';
+import { constructionLiquidatedDamages } from './constructionLiquidatedDamages';
+import { psaEarnestMoneyDefault } from './psaEarnestMoneyDefault';
+import { constructionEquityFirstVsParipassu } from './constructionEquityFirstVsParipassu';
+import { constructionChangeOrderPricing } from './constructionChangeOrderPricing';
+import { constructionRetainageRelease } from './constructionRetainageRelease';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -85,6 +112,33 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   balanceSheetRefiImpact,
   budgetVsActualVariance,
   distributionWaterfall,
+  closingChecklistSequence,
+  covenantTestingCadence,
+  costSegregationBasics,
+  omRedFlags,
+  tenantImprovementApproval,
+  waterfallEuropeanVsAmerican,
+  waterfallCatchupMechanics,
+  waterfallIrrVsMoicHurdle,
+  waterfallClawbackMechanics,
+  waterfallPrefCompoundVsSimple,
+  waterfallKeyPersonEvent,
+  dscrTestTimingMechanics,
+  dscrCashTrapTrigger,
+  dscrCureRights,
+  dscrSpringingRecourse,
+  lpaInitialVsAdditionalCapital,
+  lpaCapitalCallDefault,
+  lpaCostOverrunSharing,
+  lpaContributionRatios,
+  leaseBillbackAllowance,
+  leaseBaseYearVsStop,
+  leaseCamReconciliation,
+  constructionLiquidatedDamages,
+  psaEarnestMoneyDefault,
+  constructionEquityFirstVsParipassu,
+  constructionChangeOrderPricing,
+  constructionRetainageRelease,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {

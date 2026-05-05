@@ -59,4 +59,50 @@ export interface DealInputs {
   rentPerUnitValue?: number;
   opexPerUnitValue?: number;
   pricePerUnitValue?: number;
+  // Capital-stack waterfall fields
+  lpCapital?: number;
+  gpCapital?: number;
+  prefRate?: number;
+  catchUpTargetGpPct?: number;
+  totalDistributable?: number;
+  prefPaid?: number;
+  residual?: number;
+  gpSplitPct?: number;
+  lpSplitPct?: number;
+  gpTake?: number;
+  irrBeforePromote?: number;
+  promotePctOfProfit?: number;
+  // Construction draw fields
+  totalBudget?: number;
+  incurred?: number;
+  retainagePct?: number;
+  contingency?: number;
+  hardCostBudget?: number;
+  overrunsToDate?: number;
+  equityCommitted?: number;
+  equityDrawnSoFar?: number;
+  lenderCommitted?: number;
+  drawAmount?: number;
+  drawCount?: number;
+  cumulativeDraws?: number;
+  // Asset-class-specific fields (Phase E)
+  adr?: number;
+  roomsAvailable?: number;
+  roomsSold?: number;
+  totalRevenue?: number;
+  ffeReserveRate?: number;
+  walt?: number;
+  leases?: { rent: number; remainingTerm: number }[];
+  marketRent?: number;
+  inPlaceRent?: number;
+  renewalProbability?: number;
+  tenantSales?: number;
+  tenantSalesPerSf?: number;
+  occupancyCostRatio?: number;
+  percentageRate?: number;
+  baseRent?: number;
+  clearHeight?: number;
+  baselineRent?: number;
+  premiumPerFt?: number;
+  truckCount?: number;
 }

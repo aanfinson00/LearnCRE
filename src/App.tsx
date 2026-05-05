@@ -23,11 +23,26 @@ import { SituationalResults } from './components/SituationalResults';
 import { ExcelSetup } from './components/ExcelSetup';
 import { ExcelScreen } from './components/ExcelScreen';
 import { ExcelResults } from './components/ExcelResults';
+import { LongformSetup } from './components/LongformSetup';
+import { LongformScreen } from './components/LongformScreen';
+import { LongformResults } from './components/LongformResults';
+import { VocabSetup } from './components/VocabSetup';
+import { VocabScreen } from './components/VocabScreen';
+import { VocabResults } from './components/VocabResults';
+import { MockSetup } from './components/MockSetup';
+import { MockScreen } from './components/MockScreen';
+import { MockResults } from './components/MockResults';
+import { CertListScreen } from './components/CertListScreen';
+import { CertDetailScreen, type CertMode } from './components/CertDetailScreen';
+import { FinalExamScreen } from './components/FinalExamScreen';
 import { useQuizSession } from './hooks/useQuizSession';
 import { useSpeedDrill } from './hooks/useSpeedDrill';
 import { useWalkthrough } from './hooks/useWalkthrough';
 import { useSituational } from './hooks/useSituational';
 import { useExcel } from './hooks/useExcel';
+import { useLongform } from './hooks/useLongform';
+import { useVocab } from './hooks/useVocab';
+import { useMockInterview } from './hooks/useMockInterview';
 
 type Mode =
   | 'quiz'
@@ -36,19 +51,37 @@ type Mode =
   | 'walkthrough'
   | 'situational'
   | 'excel'
+  | 'longform'
+  | 'vocab'
+  | 'mockInterview'
+  | 'certify'
   | 'profile';
+
+type CertView =
+  | { kind: 'list' }
+  | { kind: 'detail'; certId: string }
+  | { kind: 'exam'; certId: string };
 
 export default function App() {
   const [mode, setMode] = useState<Mode>('quiz');
+  const [certView, setCertView] = useState<CertView>({ kind: 'list' });
   const { session, stats, start, submit, next, reset, endSession, enterReview, exitReview } =
     useQuizSession();
   const drill = useSpeedDrill();
   const walk = useWalkthrough();
   const sit = useSituational();
   const excel = useExcel();
+  const longform = useLongform();
+  const vocab = useVocab();
+  const mock = useMockInterview();
 
   const handleSwitch = (m: Mode) => {
     if (m === mode) return;
+    setMode(m);
+    if (m === 'certify') setCertView({ kind: 'list' });
+  };
+
+  const handleCertDeepLink = (m: CertMode) => {
     setMode(m);
   };
 
@@ -58,7 +91,11 @@ export default function App() {
     (mode === 'walkthrough' && walk.state === null) ||
     (mode === 'situational' && sit.state === null) ||
     (mode === 'excel' && excel.state === null) ||
+    (mode === 'longform' && longform.state === null) ||
+    (mode === 'vocab' && vocab.state === null) ||
+    (mode === 'mockInterview' && mock.state === null) ||
     mode === 'study' ||
+    (mode === 'certify' && certView.kind !== 'exam') ||
     mode === 'profile';
 
   const innerContent = (() => {
@@ -68,6 +105,37 @@ export default function App() {
 
     if (mode === 'profile') {
       return <ProfileScreen onBack={() => setMode('quiz')} />;
+    }
+
+    if (mode === 'certify') {
+      if (certView.kind === 'exam') {
+        return (
+          <FinalExamScreen
+            certId={certView.certId}
+            onExit={() =>
+              setCertView({ kind: 'detail', certId: certView.certId })
+            }
+          />
+        );
+      }
+      if (certView.kind === 'detail') {
+        return (
+          <CertDetailScreen
+            certId={certView.certId}
+            onBack={() => setCertView({ kind: 'list' })}
+            onDeepLink={handleCertDeepLink}
+            onStartFinalExam={(id) =>
+              setCertView({ kind: 'exam', certId: id })
+            }
+          />
+        );
+      }
+      return (
+        <CertListScreen
+          onOpenCert={(id) => setCertView({ kind: 'detail', certId: id })}
+          onBack={() => setMode('quiz')}
+        />
+      );
     }
 
     if (mode === 'walkthrough') {
@@ -169,6 +237,112 @@ export default function App() {
           onAdvance={excel.advance}
           onQuit={() => {
             excel.reset();
+            setMode('quiz');
+          }}
+        />
+      );
+    }
+
+    if (mode === 'longform') {
+      if (longform.state === null) {
+        return (
+          <LongformSetup
+            onStart={(config) => longform.start(config)}
+            onBack={() => setMode('quiz')}
+          />
+        );
+      }
+      if (longform.state.status === 'finished') {
+        return (
+          <LongformResults
+            state={longform.state}
+            onRestart={() => {
+              const cfg = longform.state!.config;
+              longform.reset();
+              longform.start(cfg);
+            }}
+            onNewSetup={longform.reset}
+          />
+        );
+      }
+      return (
+        <LongformScreen
+          state={longform.state}
+          onSubmit={longform.submit}
+          onAdvance={longform.advance}
+          onQuit={() => {
+            longform.reset();
+            setMode('quiz');
+          }}
+        />
+      );
+    }
+
+    if (mode === 'vocab') {
+      if (vocab.state === null) {
+        return (
+          <VocabSetup
+            onStart={(config) => vocab.start(config)}
+            onBack={() => setMode('quiz')}
+          />
+        );
+      }
+      if (vocab.state.status === 'finished') {
+        return (
+          <VocabResults
+            state={vocab.state}
+            onRestart={() => {
+              const cfg = vocab.state!.config;
+              vocab.reset();
+              vocab.start(cfg);
+            }}
+            onNewSetup={vocab.reset}
+          />
+        );
+      }
+      return (
+        <VocabScreen
+          state={vocab.state}
+          onSubmit={vocab.submit}
+          onAdvance={vocab.advance}
+          onFinish={vocab.finish}
+          onQuit={() => {
+            vocab.reset();
+            setMode('quiz');
+          }}
+        />
+      );
+    }
+
+    if (mode === 'mockInterview') {
+      if (mock.state === null) {
+        return (
+          <MockSetup
+            onStart={(archetypeId) => mock.start(archetypeId)}
+            onBack={() => setMode('quiz')}
+          />
+        );
+      }
+      if (mock.state.status === 'finished') {
+        return (
+          <MockResults
+            state={mock.state}
+            onRestart={() => {
+              const id = mock.state!.spec.id;
+              mock.reset();
+              mock.start(id);
+            }}
+            onNewSetup={mock.reset}
+          />
+        );
+      }
+      return (
+        <MockScreen
+          state={mock.state}
+          onSubmit={mock.submit}
+          onAdvance={mock.advance}
+          onQuit={() => {
+            mock.reset();
             setMode('quiz');
           }}
         />

@@ -43,7 +43,29 @@ export type QuestionKind =
   | 'dscrTestPasses'
   | 'holdVsSellIrr'
   | 'taxAdjustedExit'
-  | 'extensionDrag';
+  | 'extensionDrag'
+  | 'prefAccrual'
+  | 'waterfallSimpleSplit'
+  | 'gpCatchUp'
+  | 'gpEffectivePromote'
+  | 'irrAfterPromote'
+  | 'costToComplete'
+  | 'drawAllocation'
+  | 'retainageRunning'
+  | 'contingencyDrawDown'
+  | 'revparFromAdrOcc'
+  | 'gopMargin'
+  | 'ffeReserveDollars'
+  | 'revporVsRevpar'
+  | 'walt'
+  | 'tiPerSfPerYearOfTerm'
+  | 'renewalProbabilityWeightedRent'
+  | 'salesPerSf'
+  | 'occupancyCostRatio'
+  | 'percentageRentBreakpoint'
+  | 'clearHeightPremium'
+  | 'truckCountPerSf'
+  | 'lossToLease';
 
 export type UnitFormat = 'usd' | 'pct' | 'bps' | 'pctChange' | 'usdChange' | 'multiple' | 'usdPerSf';
 

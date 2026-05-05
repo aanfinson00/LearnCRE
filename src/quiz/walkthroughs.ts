@@ -675,6 +675,569 @@ function holdSellWalk(): WalkthroughDef {
     roles: ['assetManagement', 'portfolioMgmt'],
   };
 }
+function distressedLoanWorkoutWalk(): WalkthroughDef {
+  // Buying a non-performing $40M senior loan on a Class-B office. Asset value
+  // ~$30M; bank asks $24M. The walkthrough shows the dual-path math: own at
+  // foreclosure vs collect at workout.
+  const loanFace = 40_000_000;
+  const askingPrice = 24_000_000;
+  const assetValue = 30_000_000;
+  const yearsToResolve = 2;       // foreclosure timeline assumption
+  const foreclosureCostRate = 0.08; // legal + holding costs as % of asset value
+  const workoutRate = 0.07;        // modified interest rate during collect path
+  const workoutTermYears = 5;      // remaining loan term post-modification
+
+  // Path A — foreclosure: pay $24M, take title at year 2, sell at then-market
+  // (assume flat asset value); IRR is roughly the implicit yield on basis vs
+  // recovery, less timeline costs.
+  const recoverable = assetValue * (1 - foreclosureCostRate);
+  const ownPathIrr = Math.pow(recoverable / askingPrice, 1 / yearsToResolve) - 1;
+
+  // Path B — collect: borrower modifies; you receive a stream of interest
+  // payments at the modified rate on the original face. Then a balloon (or
+  // payoff at re-sale).
+  const annualInterest = loanFace * workoutRate;
+  const collectPayoff = loanFace; // assume par recovery at modified maturity
+  // Approx IRR on the collect path: -basis at t=0, annual interest yrs 1..N-1,
+  // payoff + last interest at year N. Use a simple geometric approximation.
+  const totalCollectCash = annualInterest * workoutTermYears + collectPayoff;
+  const collectEm = totalCollectCash / askingPrice;
+  const collectIrrApprox = Math.pow(collectEm, 1 / workoutTermYears) - 1;
+
+  // Buy decision: take the WORSE of the two paths and check vs hurdle.
+  const worsePathIrr = Math.min(ownPathIrr, collectIrrApprox);
+  const hurdle = 0.15;
+
+  return {
+    id: 'walk-distressed-1',
+    kind: 'distressedLoanWorkoutWalk',
+    label: 'Distressed Loan Workout — chained',
+    description: 'Buy at $24M, own-or-collect, dual-path IRR check against hurdle.',
+    context: {
+      noi: annualInterest,
+      capRate: workoutRate,
+      purchasePrice: askingPrice,
+      holdYears: workoutTermYears,
+    },
+    setupNarrative: `A regional bank is selling a non-performing $40M senior loan on a Class-B office building (asset value ~$30M). They're asking $24M (60¢ on the dollar). Two paths to resolution: (a) borrower defaults, you foreclose, take title in ~${yearsToResolve} yrs at recoverable value (asset less ~${formatPct(foreclosureCostRate)} legal + holding); (b) borrower modifies at ${formatPct(workoutRate)}, pays interest for ${formatYears(workoutTermYears)}, payoff at par. The buy works only if BOTH paths clear your hurdle. Walk both.`,
+    steps: [
+      {
+        id: 'basis',
+        label: 'Step 1 — Your basis vs asset value',
+        prompt: `Basis is ${formatUsd(askingPrice)}; asset is worth ${formatUsd(assetValue)}. What's basis as % of asset value?`,
+        expected: askingPrice / assetValue,
+        unit: 'pct',
+        tolerance: { type: 'abs', band: 0.01 },
+        hint: 'Basis / asset value.',
+        resultDescription: `${formatUsd(askingPrice)} / ${formatUsd(assetValue)} = ${formatPct(askingPrice / assetValue)}. ~80% basis on a senior loan is the entry point — gives a real cushion for the foreclosure path.`,
+      },
+      {
+        id: 'foreclosure-cost',
+        label: 'Step 2 — Foreclosure cost drag',
+        prompt: `Asset value ${formatUsd(assetValue)} × ${formatPct(foreclosureCostRate)} legal/holding cost. What's the cost to take?`,
+        expected: assetValue * foreclosureCostRate,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.05 },
+        hint: 'Asset × cost rate.',
+        resultDescription: `${formatUsd(assetValue)} × ${formatPct(foreclosureCostRate)} = ${formatUsd(assetValue * foreclosureCostRate)}. Foreclosure is rarely free — legal fees, broker commissions if you sell, taxes during the process, asset deterioration during the lawsuit.`,
+      },
+      {
+        id: 'recoverable',
+        label: 'Step 3 — Recoverable value (own path)',
+        prompt: 'Asset value less foreclosure costs. What\'s your effective recovery if you take and sell?',
+        expected: recoverable,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.05 },
+        hint: 'Asset × (1 − cost rate).',
+        resultDescription: `${formatUsd(assetValue)} × (1 − ${formatPct(foreclosureCostRate)}) = ${formatUsd(recoverable)}. That's the cash you'd see at sale; deduct your basis for profit.`,
+      },
+      {
+        id: 'own-irr',
+        label: 'Step 4 — Foreclosure-path IRR',
+        prompt: `Year-2 recovery of ${formatUsd(recoverable)} on ${formatUsd(askingPrice)} basis. Approximate IRR?`,
+        expected: ownPathIrr,
+        unit: 'pct',
+        tolerance: { type: 'abs', band: 0.01 },
+        hint: '(recovery / basis)^(1/N) − 1.',
+        resultDescription: `(${formatUsd(recoverable)} / ${formatUsd(askingPrice)})^(1/${yearsToResolve}) − 1 ≈ ${formatPct(ownPathIrr)}. The foreclosure path gives you a thin but real return even before any workout upside.`,
+      },
+      {
+        id: 'collect-interest',
+        label: 'Step 5 — Annual interest if borrower modifies',
+        prompt: `Loan face ${formatUsd(loanFace)} × ${formatPct(workoutRate)} modified rate. Annual interest?`,
+        expected: annualInterest,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'Face × rate.',
+        resultDescription: `${formatUsd(loanFace)} × ${formatPct(workoutRate)} = ${formatUsd(annualInterest)}. Note: interest is on the FACE, not your basis. That's the buy thesis — you bought at 60¢ but collect on a $1.00.`,
+      },
+      {
+        id: 'collect-total',
+        label: 'Step 6 — Total cash on collect path',
+        prompt: `${formatYears(workoutTermYears)} of interest + par payoff at maturity. Total cash to you?`,
+        expected: totalCollectCash,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: '(annual interest × N) + payoff.',
+        resultDescription: `(${formatUsd(annualInterest)} × ${workoutTermYears}) + ${formatUsd(collectPayoff)} = ${formatUsd(totalCollectCash)}.`,
+      },
+      {
+        id: 'collect-em',
+        label: 'Step 7 — Collect-path equity multiple',
+        prompt: 'Total collect-path cash / your basis. EM?',
+        expected: collectEm,
+        unit: 'multiple',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'Total / basis.',
+        resultDescription: `${formatUsd(totalCollectCash)} / ${formatUsd(askingPrice)} = ${collectEm.toFixed(2)}x. The high EM reflects collecting interest on face while having paid only 60% of face.`,
+      },
+      {
+        id: 'collect-irr',
+        label: 'Step 8 — Collect-path approximate IRR',
+        prompt: `EM^(1/${workoutTermYears}) − 1. Approximate IRR over the workout term?`,
+        expected: collectIrrApprox,
+        unit: 'pct',
+        tolerance: { type: 'abs', band: 0.01 },
+        hint: 'Geometric approximation.',
+        resultDescription: `${collectEm.toFixed(2)}^(1/${workoutTermYears}) − 1 ≈ ${formatPct(collectIrrApprox)}. Real IRR is slightly higher (~50-100 bps) because of the interim interest payments.`,
+      },
+      {
+        id: 'worse-path',
+        label: 'Step 9 — Worse-path IRR',
+        prompt: 'For the buy thesis to work, the WORSE path must clear your hurdle. Which IRR is worse, and what is it?',
+        expected: worsePathIrr,
+        unit: 'pct',
+        tolerance: { type: 'abs', band: 0.01 },
+        hint: 'Min of the two paths.',
+        resultDescription: `Worse path = ${formatPct(worsePathIrr)} (the ${ownPathIrr < collectIrrApprox ? 'foreclosure' : 'collect'} path). This is the floor on your return; everything above is upside.`,
+      },
+      {
+        id: 'go-no-go',
+        label: 'Step 10 — Go / no-go vs hurdle',
+        prompt: `Hurdle is ${formatPct(hurdle)}. By how much does the worse path beat (or miss) the hurdle?`,
+        expected: worsePathIrr - hurdle,
+        unit: 'pct',
+        tolerance: { type: 'abs', band: 0.01 },
+        hint: 'Worse-path IRR − hurdle.',
+        resultDescription: `${formatPct(worsePathIrr)} − ${formatPct(hurdle)} = ${formatPct(worsePathIrr - hurdle)}. ${worsePathIrr > hurdle ? 'Both paths clear; this is a buy.' : 'Worse path misses hurdle; renegotiate basis or pass.'}`,
+      },
+    ],
+    takeaway:
+      'Distressed loan investing is dual-path math. Compute IRR assuming foreclosure (asset becomes yours at basis) and IRR assuming workout (collect modified interest + payoff). Buy when the WORSE of the two paths clears your hurdle. Buying based on the better path alone leaves you exposed when the world delivers the worse one.',
+    roles: ['acquisitions', 'portfolioMgmt'],
+  };
+}
+
+function waterfallWalk(): WalkthroughDef {
+  // 3-tier American waterfall, hand-tuned realistic numbers.
+  const lpCapital = 20_000_000;
+  const gpCapital = 2_200_000;
+  const totalCap = lpCapital + gpCapital;
+  const prefRate = 0.08;
+  const holdYears = 5;
+  const totalDistributable = 40_000_000;
+  const catchUpTarget = 0.20;
+
+  const prefDue = lpCapital * (Math.pow(1 + prefRate, holdYears) - 1);
+  const afterPref = totalDistributable - prefDue;
+  const afterRoc = afterPref - totalCap;
+  const catchUp = (prefDue * catchUpTarget) / (1 - catchUpTarget);
+  const aboveResidual = afterRoc - catchUp;
+  const lpAbove = aboveResidual * 0.8;
+  const gpAbove = aboveResidual * 0.2;
+  const gpTotal = gpCapital + catchUp + gpAbove;
+  const totalProfit = totalDistributable - totalCap;
+  const gpProRataProfit = (gpCapital / totalCap) * totalProfit;
+  const gpPromote = gpTotal - gpCapital - gpProRataProfit;
+
+  return {
+    id: 'walk-waterfall-1',
+    kind: 'waterfallWalk',
+    label: 'Capital-Stack Waterfall — 3-tier American',
+    description:
+      'Walk a JV waterfall step by step: pref → ROC → catch-up → above-split. End with LP/GP totals and the GP\'s effective promote.',
+    context: {
+      lpCapital,
+      gpCapital,
+      prefRate,
+      holdYears,
+      totalDistributable,
+      catchUpTargetGpPct: catchUpTarget,
+    },
+    setupNarrative: `Joint venture: LP contributed ${formatUsd(lpCapital)} (90%), GP contributed ${formatUsd(gpCapital)} (10%). Hold is ${formatYears(holdYears)}. Total cash to distribute at exit is ${formatUsd(totalDistributable)}. Waterfall: ${formatPct(prefRate)} compound pref to LP, then return of capital pro-rata, then 100% catch-up to GP until GP has ${formatPct(catchUpTarget, 0)} of (pref + cat-up), then 80/20 above. Walk it tier by tier.`,
+    steps: [
+      {
+        id: 'pref',
+        label: 'Step 1 — Pref due to LP',
+        prompt: `What's the cumulative compound pref due to LP after ${formatYears(holdYears)} at ${formatPct(prefRate)}?`,
+        expected: prefDue,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'LP × ((1 + r)^n − 1). 8% over 5y compounds to ~46.9%.',
+        resultDescription: `${formatUsd(lpCapital)} × ((1.08)^5 − 1) ≈ ${formatUsd(prefDue)}.`,
+      },
+      {
+        id: 'after-pref',
+        label: 'Step 2 — Cash remaining after pref',
+        prompt: `After paying LP the pref, how much cash is left to distribute?`,
+        expected: afterPref,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: `${formatUsd(totalDistributable)} − pref.`,
+        resultDescription: `${formatUsd(totalDistributable)} − ${formatUsd(prefDue)} = ${formatUsd(afterPref)}.`,
+      },
+      {
+        id: 'after-roc',
+        label: 'Step 3 — Cash remaining after return of capital',
+        prompt: `Return of capital is pro-rata to LP and GP (total ${formatUsd(totalCap)}). What's left after ROC?`,
+        expected: afterRoc,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'Subtract LP capital + GP capital from cash remaining.',
+        resultDescription: `${formatUsd(afterPref)} − ${formatUsd(totalCap)} = ${formatUsd(afterRoc)}.`,
+      },
+      {
+        id: 'catch-up',
+        label: 'Step 4 — GP catch-up',
+        prompt: `100% catch-up runs until GP has ${formatPct(catchUpTarget, 0)} of (pref + cat-up). What's the catch-up amount?`,
+        expected: catchUp,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.03 },
+        hint: 'Catch-up = pref × target / (1 − target). 20% target → 0.20/0.80 = 0.25 of pref.',
+        resultDescription: `${formatUsd(prefDue)} × (0.20 / 0.80) ≈ ${formatUsd(catchUp)}.`,
+      },
+      {
+        id: 'above-split-lp',
+        label: 'Step 5 — LP take from above-split residual',
+        prompt: `Above-split residual after pref + ROC + catch-up gets split 80/20 (LP/GP). What does LP get at this tier?`,
+        expected: lpAbove,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.03 },
+        hint: 'Residual × 80%.',
+        resultDescription: `(${formatUsd(afterRoc)} − ${formatUsd(catchUp)}) × 80% = ${formatUsd(lpAbove)}.`,
+      },
+      {
+        id: 'gp-promote',
+        label: 'Step 6 — GP effective promote',
+        prompt: `What\'s the GP\'s effective promote (dollars beyond pure pro-rata)?`,
+        expected: gpPromote,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.05 },
+        hint: 'GP profit dollars (GP take − GP cap) − GP cap% × total profit.',
+        resultDescription: `GP took ${formatUsd(gpTotal)}; pro-rata share would be ${formatUsd(gpProRataProfit + gpCapital)}. Promote ≈ ${formatUsd(gpPromote)}.`,
+      },
+    ],
+    takeaway:
+      'A 3-tier American waterfall is just four arithmetic steps stacked: pref → ROC → catch-up → above-split. The GP\'s real economics are in the catch-up + above-split tiers — pro-rata-of-capital alone would have given them ~10% of profits; the waterfall gets them ~30%. That delta is the promote.',
+    roles: ['portfolioMgmt', 'acquisitions'],
+  };
+}
+
+function constructionDrawWalk(): WalkthroughDef {
+  // $50M project, 60/40 D/E, equity-first, 10% retainage, 5% contingency.
+  const totalBudget = 50_000_000;
+  const hardCostBudget = 40_000_000;
+  const softCostBudget = 7_500_000;
+  const contingencyPct = 0.05;
+  const contingency = hardCostBudget * contingencyPct; // $2.0M
+  const equityCommitted = totalBudget * 0.40; // $20M
+  const lenderCommitted = totalBudget * 0.60; // $30M
+  const retainagePct = 0.10;
+
+  // Mid-project state: 60% complete by dollars
+  const incurred = totalBudget * 0.60; // $30M
+  // Equity is exhausted at this point (60% complete on equity-first basis).
+  const cumulativeHardCostDraws = hardCostBudget * 0.60; // $24M
+  const overrunsToDate = 1_200_000;
+  const contingencyRemainingPct = (contingency - overrunsToDate) / contingency; // 0.40
+
+  // Next draw: $5M
+  const nextDraw = 5_000_000;
+  const nextDrawFromLender = nextDraw; // equity exhausted, all from lender
+  const newRetainage = cumulativeHardCostDraws * retainagePct; // $2.4M
+
+  return {
+    id: 'walk-construction-draw-1',
+    kind: 'constructionDrawWalk',
+    label: 'Construction Draw Cycle — chained',
+    description: 'Walk through a draw cycle on a development deal: cost-to-complete, equity-first allocation, retainage held, contingency burn.',
+    context: {
+      totalBudget,
+      hardCostBudget,
+      contingency,
+      equityCommitted,
+      lenderCommitted,
+      retainagePct,
+      incurred,
+    },
+    setupNarrative: `Ground-up project, ${formatUsd(totalBudget)} total budget (${formatUsd(hardCostBudget)} hard / ${formatUsd(softCostBudget)} soft / ${formatUsd(contingency)} contingency). Capital stack: ${formatUsd(equityCommitted)} equity (40%) and ${formatUsd(lenderCommitted)} lender (60%), equity-first basis. Retainage on hard costs is ${formatPct(retainagePct, 0)}. Mid-project: ${formatUsd(incurred)} of total budget incurred. ${formatUsd(overrunsToDate)} of approved overruns has hit contingency. Walk through the next draw.`,
+    steps: [
+      {
+        id: 'pct-complete',
+        label: 'Step 1 — % complete by dollars',
+        prompt: `Total budget is ${formatUsd(totalBudget)}; ${formatUsd(incurred)} incurred. % complete?`,
+        expected: 0.60,
+        unit: 'pct',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'Incurred / Total Budget.',
+        resultDescription: `${formatUsd(incurred)} / ${formatUsd(totalBudget)} = 60% complete by dollars.`,
+      },
+      {
+        id: 'next-draw-lender',
+        label: 'Step 2 — Next draw funded from lender',
+        prompt: `On equity-first basis, equity ($20M) is fully drawn. The next draw is ${formatUsd(nextDraw)}. How much funds from the lender?`,
+        expected: nextDrawFromLender,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'Equity exhausted → 100% from lender.',
+        resultDescription: `Equity is exhausted, so the full ${formatUsd(nextDraw)} comes from the lender.`,
+      },
+      {
+        id: 'retainage-current',
+        label: 'Step 3 — Cumulative retainage held',
+        prompt: `Cumulative hard-cost draws to date are ${formatUsd(cumulativeHardCostDraws)}. At ${formatPct(retainagePct, 0)} retainage, how much is the lender holding back?`,
+        expected: newRetainage,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'Cumulative draws × retainage rate.',
+        resultDescription: `${formatUsd(cumulativeHardCostDraws)} × 10% = ${formatUsd(newRetainage)}.`,
+      },
+      {
+        id: 'contingency-remaining',
+        label: 'Step 4 — Contingency remaining',
+        prompt: `Contingency reserve was ${formatUsd(contingency)}; ${formatUsd(overrunsToDate)} of overruns has been approved. What % of contingency is remaining?`,
+        expected: contingencyRemainingPct,
+        unit: 'pct',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: '(Contingency − Used) / Contingency.',
+        resultDescription: `(${formatUsd(contingency)} − ${formatUsd(overrunsToDate)}) / ${formatUsd(contingency)} = 40% remaining.`,
+      },
+      {
+        id: 'cost-to-complete',
+        label: 'Step 5 — Cost-to-complete dollars',
+        prompt: `What\'s the remaining budget (cost-to-complete in dollars)?`,
+        expected: totalBudget - incurred,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'Total Budget − Incurred.',
+        resultDescription: `${formatUsd(totalBudget)} − ${formatUsd(incurred)} = ${formatUsd(totalBudget - incurred)} cost-to-complete.`,
+      },
+      {
+        id: 'overrun-warning',
+        label: 'Step 6 — Overrun stress test',
+        prompt: `If physical completion is only 50% but dollars-incurred is 60%, the project is over-spent vs progress. What\'s the additional capital needed beyond original budget if final cost runs to $55M?`,
+        expected: 5_000_000,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.05 },
+        hint: 'Final cost − original budget.',
+        resultDescription: `$55M − ${formatUsd(totalBudget)} = $5M of additional capital — funded from contingency (only $0.8M left) + cost-overrun tier (sponsor + LP per LPA).`,
+      },
+    ],
+    takeaway:
+      'A construction draw cycle is four arithmetic checks: % complete, equity-vs-lender allocation, retainage held, and contingency burn. When dollars-incurred > physical-completion, project is over-spent vs progress — the lender starts paying close attention. Tracking *contingency-remaining vs time-remaining* is the early-warning signal that a project will need additional capital before substantial completion.',
+    roles: ['development', 'mortgageUw'],
+  };
+}
+
+function hotelRevparWalk(): WalkthroughDef {
+  // 240-key limited-service hotel.
+  const totalRooms = 240;
+  const adr = 195;
+  const occupancy = 0.72;
+  const days = 365;
+  const roomsSold = totalRooms * occupancy * days; // 63,072
+  const roomRevenue = roomsSold * adr; // 12,299,040
+  const otherRevPctOfRoom = 0.18; // F&B, parking, ancillary
+  const otherRevenue = roomRevenue * otherRevPctOfRoom;
+  const totalRevenue = roomRevenue + otherRevenue;
+  const gopMarginPct = 0.36;
+  const gop = totalRevenue * gopMarginPct;
+  const fixedCosts = 1_200_000; // taxes, insurance, mgmt fee
+  const ffeReserveRate = 0.04;
+  const ffeReserve = totalRevenue * ffeReserveRate;
+  const noi = gop - fixedCosts - ffeReserve;
+  const capRate = 0.075;
+  const value = noi / capRate;
+
+  return {
+    id: 'walk-hotel-revpar-1',
+    kind: 'hotelRevparWalk',
+    label: 'Hotel — RevPAR to Value',
+    description:
+      'Walk a hotel from operating drivers (ADR + occupancy) all the way to enterprise value via RevPAR → Total Revenue → GOP → NOI → Cap.',
+    context: {
+      adr,
+      roomsAvailable: totalRooms,
+      capRate,
+    },
+    setupNarrative: `${totalRooms}-room limited-service hotel running at ${formatUsd(adr)} ADR and ${formatPct(occupancy, 0)} occupancy. Other-revenue (F&B, parking, ancillary) is ~${formatPct(otherRevPctOfRoom, 0)} of room revenue. GOP margin is ${formatPct(gopMarginPct, 0)}; fixed costs (taxes/ins/mgmt) total ${formatUsd(fixedCosts)}; FF&E reserve is ${formatPct(ffeReserveRate, 0)} of total revenue. Market cap rate is ${formatPct(capRate, 1)}. Compute the property value.`,
+    steps: [
+      {
+        id: 'revpar',
+        label: 'Step 1 — RevPAR',
+        prompt: `Compute RevPAR from ADR and occupancy.`,
+        expected: adr * occupancy,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'RevPAR = ADR × Occupancy.',
+        resultDescription: `${formatUsd(adr)} × ${formatPct(occupancy, 0)} = ${formatUsd(adr * occupancy)} RevPAR.`,
+      },
+      {
+        id: 'room-rev',
+        label: 'Step 2 — Annual room revenue',
+        prompt: `Total annual room revenue (rooms × occ × 365 × ADR)?`,
+        expected: roomRevenue,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'RevPAR × rooms × 365 — or rooms-sold × ADR.',
+        resultDescription: `${totalRooms} × ${formatPct(occupancy, 0)} × 365 × ${formatUsd(adr)} ≈ ${formatUsd(roomRevenue)}.`,
+      },
+      {
+        id: 'total-rev',
+        label: 'Step 3 — Total revenue (incl. ancillary)',
+        prompt: `Add other-revenue at 18% of room revenue. What\'s total revenue?`,
+        expected: totalRevenue,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'Room rev × (1 + ancillary %).',
+        resultDescription: `${formatUsd(roomRevenue)} × 1.18 ≈ ${formatUsd(totalRevenue)}.`,
+      },
+      {
+        id: 'gop',
+        label: 'Step 4 — GOP at 36% margin',
+        prompt: `GOP at ${formatPct(gopMarginPct, 0)} margin?`,
+        expected: gop,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'Total revenue × GOP margin.',
+        resultDescription: `${formatUsd(totalRevenue)} × ${formatPct(gopMarginPct, 0)} ≈ ${formatUsd(gop)}.`,
+      },
+      {
+        id: 'noi',
+        label: 'Step 5 — NOI (after fixed costs + FF&E reserve)',
+        prompt: `Subtract fixed costs (${formatUsd(fixedCosts)}) and FF&E reserve (${formatPct(ffeReserveRate, 0)} of total rev). What\'s NOI?`,
+        expected: noi,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'GOP − fixed − FF&E reserve.',
+        resultDescription: `${formatUsd(gop)} − ${formatUsd(fixedCosts)} − ${formatUsd(ffeReserve)} ≈ ${formatUsd(noi)}.`,
+      },
+      {
+        id: 'value',
+        label: 'Step 6 — Value at market cap',
+        prompt: `Cap NOI at ${formatPct(capRate, 1)}. What\'s the property value?`,
+        expected: value,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.03 },
+        hint: 'NOI / Cap.',
+        resultDescription: `${formatUsd(noi)} / ${formatPct(capRate, 1)} ≈ ${formatUsd(value)}.`,
+      },
+    ],
+    takeaway:
+      'Hotel valuation chains down from ADR + occupancy: RevPAR → room revenue → total revenue → GOP → NOI → cap. The two hospitality-only adjustments are FF&E reserve (4% of revenue) and the GOP margin (function of service tier). Buyers who skip FF&E reserve overstate NOI by 4% of revenue — material to value.',
+    roles: ['acquisitions', 'assetManagement'],
+  };
+}
+
+function officeWaltWalk(): WalkthroughDef {
+  // 5-tenant office building, computing rent-weighted WALT + roll impact.
+  const leases = [
+    { rent: 1_200_000, remainingTerm: 7, suite: 'Floor 12' },
+    { rent: 850_000, remainingTerm: 3, suite: 'Floor 8-9' },
+    { rent: 620_000, remainingTerm: 5, suite: 'Floor 5' },
+    { rent: 450_000, remainingTerm: 2, suite: 'Floor 3' },
+    { rent: 380_000, remainingTerm: 9, suite: 'Floor 2 retail' },
+  ];
+  const totalRent = leases.reduce((s, l) => s + l.rent, 0);
+  const weightedSum = leases.reduce((s, l) => s + l.rent * l.remainingTerm, 0);
+  const walt = weightedSum / totalRent;
+
+  // Tenant 4 (Floor 3) is rolling in 2 years
+  const rollingTenant = leases[3];
+  const inPlaceRent = rollingTenant.rent;
+  // Suite is 18,000 SF; in-place is $25/SF, market is $32/SF
+  const sf = 18_000;
+  const inPlacePerSf = inPlaceRent / sf;
+  const marketPerSf = 32;
+  const renewalProb = 0.65;
+  const expectedRentPerSf = renewalProb * inPlacePerSf + (1 - renewalProb) * marketPerSf;
+  const expectedAnnualRent = expectedRentPerSf * sf;
+  // TI on rollover: $45/SF × 18,000 SF, amortized over 7-year new lease
+  const newLeaseTermYears = 7;
+  const tiPerSf = 45;
+  const tiTotal = tiPerSf * sf;
+  const amortizedTiPerYear = tiTotal / newLeaseTermYears;
+  // Net effective rent annual on the rolling tenant
+  const netEffectiveAnnual = expectedAnnualRent - amortizedTiPerYear;
+
+  return {
+    id: 'walk-office-walt-1',
+    kind: 'officeWaltWalk',
+    label: 'Office — WALT, Rollover, and Net-Effective Rent',
+    description:
+      'Walk a multi-tenant office stack: WALT, identify rollover risk, weight in-place vs market on rollover, then bridge to net-effective via amortized TI.',
+    context: {
+      leases: leases.map(({ rent, remainingTerm }) => ({ rent, remainingTerm })),
+      walt,
+    },
+    setupNarrative: `Multi-tenant Class-A office, 5 tenants on stacked floors. Rent roll: ${leases.map((l) => `${l.suite} ${formatUsd(l.rent)}/yr / ${l.remainingTerm}y left`).join('; ')}. Tenant on Floor 3 (18,000 SF) is rolling in 2 years; in-place rent is ${formatUsd(inPlacePerSf)}/SF; market is ${formatUsd(marketPerSf)}/SF. Renewal probability is ${formatPct(renewalProb, 0)}. New-lease TI on rollover is $${tiPerSf}/SF over a ${newLeaseTermYears}-year term.`,
+    steps: [
+      {
+        id: 'walt',
+        label: 'Step 1 — Rent-weighted WALT',
+        prompt: `Compute the rent-weighted WALT across all 5 leases.`,
+        expected: walt,
+        unit: 'multiple',
+        tolerance: { type: 'pct', band: 0.03 },
+        hint: 'Σ(rent × term) / Σ(rent).',
+        resultDescription: `Σ(rent × term) ${weightedSum.toLocaleString()} / Σ(rent) ${totalRent.toLocaleString()} ≈ ${walt.toFixed(2)} years.`,
+      },
+      {
+        id: 'expected-rent',
+        label: 'Step 2 — Expected rent on Floor 3 rollover',
+        prompt: `Renewal-probability-weighted rent on rollover (in-place $${inPlacePerSf}/SF; market $${marketPerSf}/SF; renewal prob ${formatPct(renewalProb, 0)})?`,
+        expected: expectedRentPerSf,
+        unit: 'usdPerSf',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'P × in-place + (1−P) × market.',
+        resultDescription: `${formatPct(renewalProb, 0)} × $${inPlacePerSf}/SF + ${formatPct(1 - renewalProb, 0)} × $${marketPerSf}/SF ≈ $${expectedRentPerSf.toFixed(2)}/SF.`,
+      },
+      {
+        id: 'expected-annual',
+        label: 'Step 3 — Expected annual rent (Floor 3)',
+        prompt: `On 18,000 SF, what\'s the expected annual rent post-rollover?`,
+        expected: expectedAnnualRent,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'Expected rent/SF × SF.',
+        resultDescription: `$${expectedRentPerSf.toFixed(2)}/SF × 18,000 SF ≈ ${formatUsd(expectedAnnualRent)}.`,
+      },
+      {
+        id: 'amortized-ti',
+        label: 'Step 4 — Amortized TI/yr',
+        prompt: `TI cost is $${tiPerSf}/SF over a ${newLeaseTermYears}-year lease. What\'s the annual amortized cost across the suite?`,
+        expected: amortizedTiPerYear,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: '(TI/SF × SF) / lease term years.',
+        resultDescription: `($${tiPerSf} × 18,000) / ${newLeaseTermYears} years ≈ ${formatUsd(amortizedTiPerYear)}/yr.`,
+      },
+      {
+        id: 'net-effective',
+        label: 'Step 5 — Net-effective annual rent',
+        prompt: `Subtract amortized TI from expected annual rent. What\'s the NER on the suite?`,
+        expected: netEffectiveAnnual,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.03 },
+        hint: 'Expected annual rent − amortized TI/yr.',
+        resultDescription: `${formatUsd(expectedAnnualRent)} − ${formatUsd(amortizedTiPerYear)} ≈ ${formatUsd(netEffectiveAnnual)}.`,
+      },
+    ],
+    takeaway:
+      'Office WALT tells you when income is at risk; renewal-weighted rent + amortized TI tell you what income will be after rollover. NER on rollovers is materially below face rent (often 70-85%) once TI + LC are amortized — sponsor pro-formas that show face-rent NER on rollovers are over-stating economics.',
+    roles: ['acquisitions', 'assetManagement'],
+  };
+}
 
 export const walkthroughs: WalkthroughDef[] = [
   combinedScenarioWalk(),
@@ -683,6 +1246,11 @@ export const walkthroughs: WalkthroughDef[] = [
   valueAddWalk(),
   developmentFeasibilityWalk(),
   holdSellWalk(),
+  distressedLoanWorkoutWalk(),
+  waterfallWalk(),
+  constructionDrawWalk(),
+  hotelRevparWalk(),
+  officeWaltWalk(),
 ];
 
 export function getWalkthroughById(id: string): WalkthroughDef | undefined {

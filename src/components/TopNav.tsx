@@ -8,6 +8,10 @@ type Mode =
   | 'walkthrough'
   | 'situational'
   | 'excel'
+  | 'longform'
+  | 'vocab'
+  | 'mockInterview'
+  | 'certify'
   | 'profile';
 
 interface Props {
@@ -20,8 +24,12 @@ const TABS: { id: Mode; label: string; hint: string }[] = [
   { id: 'speedDrill', label: 'Speed drill', hint: 'Times-table style against the clock.' },
   { id: 'walkthrough', label: 'Walkthroughs', hint: 'Chained-step deal decompositions.' },
   { id: 'situational', label: 'Situational', hint: 'Mini case studies and reasoning.' },
+  { id: 'longform', label: 'Case study', hint: 'Long-form prose answers, graded against a rubric.' },
+  { id: 'mockInterview', label: 'Mock interview', hint: 'Firm-archetype mocks: mixed-mode, self-graded.' },
   { id: 'excel', label: 'Excel', hint: 'Write spreadsheet formulas against a mini-grid.' },
+  { id: 'vocab', label: 'Vocab', hint: 'Flashcard drill on industry terminology.' },
   { id: 'study', label: 'Study tables', hint: 'Reference cheat sheets.' },
+  { id: 'certify', label: 'Certify', hint: 'Benchmark-gated certifications.' },
   { id: 'profile', label: 'Profile', hint: 'Your stats, tier, and achievements.' },
 ];
 

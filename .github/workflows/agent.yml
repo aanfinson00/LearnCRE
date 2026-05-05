@@ -1,0 +1,73 @@
+name: Content agent (auto-generation from feedback)
+
+# When does this run?
+#   - Manual trigger via the "Run workflow" button (always available)
+#   - Nightly cron at 06:00 UTC (commented out by default; uncomment when ready)
+on:
+  workflow_dispatch:
+    inputs:
+      max_turns:
+        description: "Cap on Claude tool-use turns (default 50)"
+        required: false
+        default: "50"
+  # schedule:
+  #   - cron: "0 6 * * *"  # 06:00 UTC daily
+
+# We need write permissions to push branches + open PRs
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          # Full history so the agent can branch from main + open PRs cleanly
+          fetch-depth: 0
+          # GH-provided token works for branch push + PR creation in same repo
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure git identity
+        run: |
+          git config user.name "learncre-agent"
+          git config user.email "learncre-agent@users.noreply.github.com"
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install npm deps
+        run: npm ci
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Claude Code CLI
+        # Pinned to the latest stable channel; bump as needed.
+        # If your install fails here, swap in the alternate install method
+        # from https://docs.claude.com/en/docs/claude-code/quickstart.
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Verify Claude Code installed
+        run: claude --version || (echo "Claude Code CLI not on PATH" && exit 1)
+
+      - name: Run the content agent
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AGENT_MAX_TURNS: ${{ inputs.max_turns || '50' }}
+        run: python scripts/agent/run.py
+
+      - name: Surface results
+        if: always()
+        run: |
+          echo "Latest commits on this run:"
+          git log --oneline -5

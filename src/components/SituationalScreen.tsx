@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { SituationalState } from '../types/situational';
+import { DOC_TYPE_LABELS, type SituationalState } from '../types/situational';
 import { useRegisterFeedbackContext } from '../hooks/useFeedbackContext';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
@@ -103,6 +103,21 @@ export function SituationalScreen({ state, onSubmit, onAdvance, onQuit }: Props)
       </div>
 
       <Card className="space-y-4">
+        {c.documentExcerpt && (
+          <div className="overflow-hidden rounded-lg border border-warm-line bg-warm-paper/60">
+            <div className="flex items-baseline justify-between border-b border-warm-line px-3 py-1.5 text-[10px] font-medium uppercase tracking-widest text-warm-mute">
+              <span>{DOC_TYPE_LABELS[c.documentExcerpt.docType]}</span>
+              {c.documentExcerpt.label && (
+                <span className="text-warm-stone normal-case tracking-normal">
+                  {c.documentExcerpt.label}
+                </span>
+              )}
+            </div>
+            <pre className="whitespace-pre-wrap p-3 font-mono text-xs leading-relaxed text-warm-ink">
+              {c.documentExcerpt.text}
+            </pre>
+          </div>
+        )}
         <p className="editorial text-base leading-relaxed text-warm-ink">{c.scenario}</p>
         {c.data && c.data.length > 0 && (
           <div className="grid grid-cols-1 gap-x-6 gap-y-1 rounded-lg border border-warm-line bg-warm-paper/40 p-3 sm:grid-cols-2">

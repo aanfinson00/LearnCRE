@@ -8,7 +8,12 @@ export type WalkthroughKind =
   | 'mockAcquisitionWalk'
   | 'valueAddWalk'
   | 'developmentFeasibilityWalk'
-  | 'holdSellWalk';
+  | 'holdSellWalk'
+  | 'distressedLoanWorkoutWalk'
+  | 'waterfallWalk'
+  | 'constructionDrawWalk'
+  | 'hotelRevparWalk'
+  | 'officeWaltWalk';
 
 export interface WalkthroughStep {
   /** Stable id used as key + used in stats */
