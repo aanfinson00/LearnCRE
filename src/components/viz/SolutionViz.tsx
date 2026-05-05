@@ -29,6 +29,9 @@ import { OtherIncomeImpactViz } from './OtherIncomeImpactViz';
 import { LossToLeaseViz } from './LossToLeaseViz';
 import { OccupancyCostRatioViz } from './OccupancyCostRatioViz';
 import { OperatingExpenseRatioViz } from './OperatingExpenseRatioViz';
+import { YieldOnCostViz } from './YieldOnCostViz';
+import { ReversionValueViz } from './ReversionValueViz';
+import { BreakEvenOccupancyViz } from './BreakEvenOccupancyViz';
 
 interface Props {
   question: Question;
@@ -434,6 +437,48 @@ export function SolutionViz({ question }: Props) {
     case 'operatingExpenseRatio':
       if (ctx.egi !== undefined && ctx.opex !== undefined) {
         return <OperatingExpenseRatioViz egi={ctx.egi} opex={ctx.opex} />;
+      }
+      return null;
+
+    case 'yieldOnCost':
+      if (
+        ctx.totalProjectCost !== undefined &&
+        ctx.stabilizedNoi !== undefined
+      ) {
+        return (
+          <YieldOnCostViz
+            totalProjectCost={ctx.totalProjectCost}
+            stabilizedNoi={ctx.stabilizedNoi}
+          />
+        );
+      }
+      return null;
+
+    case 'reversionValue':
+      if (ctx.stabilizedNoi !== undefined && ctx.exitCap !== undefined) {
+        return (
+          <ReversionValueViz
+            stabilizedNoi={ctx.stabilizedNoi}
+            exitCap={ctx.exitCap}
+            holdYears={ctx.holdYears}
+          />
+        );
+      }
+      return null;
+
+    case 'breakEvenOccupancy':
+      if (
+        ctx.pgi !== undefined &&
+        ctx.opex !== undefined &&
+        ctx.debtServiceAnnual !== undefined
+      ) {
+        return (
+          <BreakEvenOccupancyViz
+            pgi={ctx.pgi}
+            opex={ctx.opex}
+            debtServiceAnnual={ctx.debtServiceAnnual}
+          />
+        );
       }
       return null;
 
