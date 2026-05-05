@@ -107,9 +107,9 @@ export const acqAnalyst: Cert = {
     },
     {
       id: 'acq-m4-mock',
-      title: 'Mock acquisition',
+      title: 'Mock acquisition + JV terms',
       description:
-        'Run an acquisition end-to-end: chained underwrite, IRR target, and IC-style defense.',
+        'Run an acquisition end-to-end: chained underwrite, IRR target, IC-style defense, and JV-structure negotiation.',
       benchmarks: [
         {
           id: 'acq-m4-walk',
@@ -123,6 +123,13 @@ export const acqAnalyst: Cert = {
           kind: 'longformScore',
           label: '"Defend the deal to IC" long-form',
           caseIds: ['defend-deal-to-ic'],
+          minAvgScorePct: 0.7,
+        },
+        {
+          id: 'acq-m4-waterfall-longform',
+          kind: 'longformScore',
+          label: '"Defend the waterfall terms" long-form',
+          caseIds: ['defend-waterfall-terms'],
           minAvgScorePct: 0.7,
         },
       ],
@@ -163,7 +170,7 @@ export const acqAnalyst: Cert = {
       ],
       excelIds: ['mark-to-market-lift', 'cap-rate-from-comps'],
       walkIds: ['walk-acq-mock-1'],
-      longformIds: ['walk-me-through-bid', 'defend-deal-to-ic'],
+      longformIds: ['walk-me-through-bid', 'defend-deal-to-ic', 'defend-waterfall-terms'],
     },
   },
 };

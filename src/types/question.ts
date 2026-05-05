@@ -43,7 +43,12 @@ export type QuestionKind =
   | 'dscrTestPasses'
   | 'holdVsSellIrr'
   | 'taxAdjustedExit'
-  | 'extensionDrag';
+  | 'extensionDrag'
+  | 'prefAccrual'
+  | 'waterfallSimpleSplit'
+  | 'gpCatchUp'
+  | 'gpEffectivePromote'
+  | 'irrAfterPromote';
 
 export type UnitFormat = 'usd' | 'pct' | 'bps' | 'pctChange' | 'usdChange' | 'multiple' | 'usdPerSf';
 

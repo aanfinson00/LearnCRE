@@ -49,6 +49,12 @@ import { covenantTestingCadence } from './covenantTestingCadence';
 import { costSegregationBasics } from './costSegregationBasics';
 import { omRedFlags } from './omRedFlags';
 import { tenantImprovementApproval } from './tenantImprovementApproval';
+import { waterfallEuropeanVsAmerican } from './waterfallEuropeanVsAmerican';
+import { waterfallCatchupMechanics } from './waterfallCatchupMechanics';
+import { waterfallIrrVsMoicHurdle } from './waterfallIrrVsMoicHurdle';
+import { waterfallClawbackMechanics } from './waterfallClawbackMechanics';
+import { waterfallPrefCompoundVsSimple } from './waterfallPrefCompoundVsSimple';
+import { waterfallKeyPersonEvent } from './waterfallKeyPersonEvent';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -95,6 +101,12 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   costSegregationBasics,
   omRedFlags,
   tenantImprovementApproval,
+  waterfallEuropeanVsAmerican,
+  waterfallCatchupMechanics,
+  waterfallIrrVsMoicHurdle,
+  waterfallClawbackMechanics,
+  waterfallPrefCompoundVsSimple,
+  waterfallKeyPersonEvent,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {

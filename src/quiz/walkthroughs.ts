@@ -828,6 +828,111 @@ function distressedLoanWorkoutWalk(): WalkthroughDef {
   };
 }
 
+function waterfallWalk(): WalkthroughDef {
+  // 3-tier American waterfall, hand-tuned realistic numbers.
+  const lpCapital = 20_000_000;
+  const gpCapital = 2_200_000;
+  const totalCap = lpCapital + gpCapital;
+  const prefRate = 0.08;
+  const holdYears = 5;
+  const totalDistributable = 40_000_000;
+  const catchUpTarget = 0.20;
+
+  const prefDue = lpCapital * (Math.pow(1 + prefRate, holdYears) - 1);
+  const afterPref = totalDistributable - prefDue;
+  const afterRoc = afterPref - totalCap;
+  const catchUp = (prefDue * catchUpTarget) / (1 - catchUpTarget);
+  const aboveResidual = afterRoc - catchUp;
+  const lpAbove = aboveResidual * 0.8;
+  const gpAbove = aboveResidual * 0.2;
+  const gpTotal = gpCapital + catchUp + gpAbove;
+  const totalProfit = totalDistributable - totalCap;
+  const gpProRataProfit = (gpCapital / totalCap) * totalProfit;
+  const gpPromote = gpTotal - gpCapital - gpProRataProfit;
+
+  return {
+    id: 'walk-waterfall-1',
+    kind: 'waterfallWalk',
+    label: 'Capital-Stack Waterfall — 3-tier American',
+    description:
+      'Walk a JV waterfall step by step: pref → ROC → catch-up → above-split. End with LP/GP totals and the GP\'s effective promote.',
+    context: {
+      lpCapital,
+      gpCapital,
+      prefRate,
+      holdYears,
+      totalDistributable,
+      catchUpTargetGpPct: catchUpTarget,
+    },
+    setupNarrative: `Joint venture: LP contributed ${formatUsd(lpCapital)} (90%), GP contributed ${formatUsd(gpCapital)} (10%). Hold is ${formatYears(holdYears)}. Total cash to distribute at exit is ${formatUsd(totalDistributable)}. Waterfall: ${formatPct(prefRate)} compound pref to LP, then return of capital pro-rata, then 100% catch-up to GP until GP has ${formatPct(catchUpTarget, 0)} of (pref + cat-up), then 80/20 above. Walk it tier by tier.`,
+    steps: [
+      {
+        id: 'pref',
+        label: 'Step 1 — Pref due to LP',
+        prompt: `What's the cumulative compound pref due to LP after ${formatYears(holdYears)} at ${formatPct(prefRate)}?`,
+        expected: prefDue,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'LP × ((1 + r)^n − 1). 8% over 5y compounds to ~46.9%.',
+        resultDescription: `${formatUsd(lpCapital)} × ((1.08)^5 − 1) ≈ ${formatUsd(prefDue)}.`,
+      },
+      {
+        id: 'after-pref',
+        label: 'Step 2 — Cash remaining after pref',
+        prompt: `After paying LP the pref, how much cash is left to distribute?`,
+        expected: afterPref,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: `${formatUsd(totalDistributable)} − pref.`,
+        resultDescription: `${formatUsd(totalDistributable)} − ${formatUsd(prefDue)} = ${formatUsd(afterPref)}.`,
+      },
+      {
+        id: 'after-roc',
+        label: 'Step 3 — Cash remaining after return of capital',
+        prompt: `Return of capital is pro-rata to LP and GP (total ${formatUsd(totalCap)}). What's left after ROC?`,
+        expected: afterRoc,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'Subtract LP capital + GP capital from cash remaining.',
+        resultDescription: `${formatUsd(afterPref)} − ${formatUsd(totalCap)} = ${formatUsd(afterRoc)}.`,
+      },
+      {
+        id: 'catch-up',
+        label: 'Step 4 — GP catch-up',
+        prompt: `100% catch-up runs until GP has ${formatPct(catchUpTarget, 0)} of (pref + cat-up). What's the catch-up amount?`,
+        expected: catchUp,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.03 },
+        hint: 'Catch-up = pref × target / (1 − target). 20% target → 0.20/0.80 = 0.25 of pref.',
+        resultDescription: `${formatUsd(prefDue)} × (0.20 / 0.80) ≈ ${formatUsd(catchUp)}.`,
+      },
+      {
+        id: 'above-split-lp',
+        label: 'Step 5 — LP take from above-split residual',
+        prompt: `Above-split residual after pref + ROC + catch-up gets split 80/20 (LP/GP). What does LP get at this tier?`,
+        expected: lpAbove,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.03 },
+        hint: 'Residual × 80%.',
+        resultDescription: `(${formatUsd(afterRoc)} − ${formatUsd(catchUp)}) × 80% = ${formatUsd(lpAbove)}.`,
+      },
+      {
+        id: 'gp-promote',
+        label: 'Step 6 — GP effective promote',
+        prompt: `What\'s the GP\'s effective promote (dollars beyond pure pro-rata)?`,
+        expected: gpPromote,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.05 },
+        hint: 'GP profit dollars (GP take − GP cap) − GP cap% × total profit.',
+        resultDescription: `GP took ${formatUsd(gpTotal)}; pro-rata share would be ${formatUsd(gpProRataProfit + gpCapital)}. Promote ≈ ${formatUsd(gpPromote)}.`,
+      },
+    ],
+    takeaway:
+      'A 3-tier American waterfall is just four arithmetic steps stacked: pref → ROC → catch-up → above-split. The GP\'s real economics are in the catch-up + above-split tiers — pro-rata-of-capital alone would have given them ~10% of profits; the waterfall gets them ~30%. That delta is the promote.',
+    roles: ['portfolioMgmt', 'acquisitions'],
+  };
+}
+
 export const walkthroughs: WalkthroughDef[] = [
   combinedScenarioWalk(),
   dscrLoanSizingWalk(),
@@ -836,6 +941,7 @@ export const walkthroughs: WalkthroughDef[] = [
   developmentFeasibilityWalk(),
   holdSellWalk(),
   distressedLoanWorkoutWalk(),
+  waterfallWalk(),
 ];
 
 export function getWalkthroughById(id: string): WalkthroughDef | undefined {

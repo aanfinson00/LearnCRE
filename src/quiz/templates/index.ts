@@ -40,6 +40,11 @@ import { tiPaybackTemplate } from './tiPayback';
 import { tiVsRentTemplate } from './tiVsRent';
 import { vacancySensitivityTemplate } from './vacancySensitivity';
 import { yieldOnCostTemplate } from './yieldOnCost';
+import { prefAccrualTemplate } from './prefAccrual';
+import { waterfallSimpleSplitTemplate } from './waterfallSimpleSplit';
+import { gpCatchUpTemplate } from './gpCatchUp';
+import { gpEffectivePromoteTemplate } from './gpEffectivePromote';
+import { irrAfterPromoteTemplate } from './irrAfterPromote';
 
 export const templates: Record<QuestionKind, QuestionTemplate> = {
   capCompression: capCompressionTemplate,
@@ -83,6 +88,11 @@ export const templates: Record<QuestionKind, QuestionTemplate> = {
   holdVsSellIrr: holdVsSellIrrTemplate,
   taxAdjustedExit: taxAdjustedExitTemplate,
   extensionDrag: extensionDragTemplate,
+  prefAccrual: prefAccrualTemplate,
+  waterfallSimpleSplit: waterfallSimpleSplitTemplate,
+  gpCatchUp: gpCatchUpTemplate,
+  gpEffectivePromote: gpEffectivePromoteTemplate,
+  irrAfterPromote: irrAfterPromoteTemplate,
 };
 
 export const allKinds: QuestionKind[] = [
@@ -127,4 +137,9 @@ export const allKinds: QuestionKind[] = [
   'holdVsSellIrr',
   'taxAdjustedExit',
   'extensionDrag',
+  'prefAccrual',
+  'waterfallSimpleSplit',
+  'gpCatchUp',
+  'gpEffectivePromote',
+  'irrAfterPromote',
 ];

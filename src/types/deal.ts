@@ -59,4 +59,17 @@ export interface DealInputs {
   rentPerUnitValue?: number;
   opexPerUnitValue?: number;
   pricePerUnitValue?: number;
+  // Capital-stack waterfall fields
+  lpCapital?: number;
+  gpCapital?: number;
+  prefRate?: number;
+  catchUpTargetGpPct?: number;
+  totalDistributable?: number;
+  prefPaid?: number;
+  residual?: number;
+  gpSplitPct?: number;
+  lpSplitPct?: number;
+  gpTake?: number;
+  irrBeforePromote?: number;
+  promotePctOfProfit?: number;
 }
