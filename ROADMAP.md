@@ -16,11 +16,18 @@ The durable home for shipped features, in-design work, and the deferred ideas pi
 - Distractor generation with band-aware near-misses; seedable RNG (`mulberry32`)
 - Per-question cards: prompt + assumptions + step-by-step solution + mental-math anchors
 
-### Modes
-- **Quiz** — pick categories, length (10/20/50/endless), difficulty, tolerance, answer mode
+### Modes (11 + Profile)
+- **Quiz** — pick categories, length (10/20/50/endless), difficulty, tolerance, answer mode, role filter, asset class
 - **Speed Drill** — cap-rate times-tables grid (5×5/7×7/9×9) with timer, heatmap, per-row/col accuracy. 9 variants (cap compression, IRR↔EM, loan constant, NOI×cap→value, percent-of, divide-by, combined discount, nth root, reciprocal table)
-- **Walkthroughs** — multi-step guided problems (combined-scenario value, DSCR loan sizing); each step gates on the previous
-- **Study** — reference tables for cap rates, multiples, growth, debt, lease econ
+- **Vocab** — flashcard drill on industry terminology, role-filtered, multiple format choices (definition / acronym / opposite-of)
+- **Walkthroughs** — multi-step guided problems (combined-scenario value, DSCR loan sizing, mock acquisition); each step gates on the previous
+- **Situational** — 69 hand-crafted reasoning cases across 8 categories (pricing, absorption, risk, investment thesis, diagnostic, lease econ, comp selection, sensitivity)
+- **Case study** (long-form) — prose answers graded against a rubric; trains the 4-6 sentence interview answer
+- **Mock interview** — 8 firm-archetype mocks (megafund acquisitions, regional asset mgr, debt shop, etc.) with mixed-mode question sets and self-graded rubrics, full run history
+- **Excel formula** — one-formula-at-a-time drill with live preview, parser, and tolerance + structure check; 11+ templates spanning amortization, NOI roll-forward, IRR/XIRR, debt sizing, sensitivity
+- **Modeling test** — 6 take-home-style multi-cell templates (5-yr DCF · 3-constraint loan sizing · construction loan sizing · MF acquisition pro-forma · refi-vs-sell · distressed basis-play). Grading on designated output cells with tolerance + diagnostic checkpoints; auto-save / resume
+- **Study tables** — reference cheat sheets for cap rates, multiples, growth, debt, lease econ
+- **Certify** — 5 role certifications (Acquisitions, Asset Mgmt, Mortgage UW, Development, Portfolio Mgmt) with benchmark exam, downloadable artifact
 - **Profile** — XP / tier / accuracy trend / by-difficulty bars / achievements gallery / recent sessions
 
 ### Persistence & profiles
@@ -35,14 +42,21 @@ The durable home for shipped features, in-design work, and the deferred ideas pi
 - Soft gates: Advanced needs Analyst I or 50 Q · Dynamic needs Analyst II or 200 Q · Speed Drill needs Analyst I or 30 Q · Walkthroughs need Analyst I or 25 Q
 - Per-profile "show me everything" bypass toggle
 
-### Achievements (12)
-First Steps · Foundations · Hot Streak · Week One · Hundred Club · Five-Hundred Club · Marathoner · Time Traveler · All Tracks · Pure Math Master · Walkthrough Apprentice · Mistake Crusher. Idempotent evaluator runs on session-finish across all three game modes; toast host renders unlocks.
+### Achievements (19)
+First Steps · Foundations · Hot Streak · Week One · Hundred Club · Five-Hundred Club · Marathoner · Time Traveler · All Tracks · Pure Math Master · Walkthrough Apprentice · Mistake Crusher · Reasoning Apprentice · Diagnostic Eye · Spreadsheet Apprentice · Modeling Apprentice · Modeling Pro · Clean Sheet · Tour Guide. Idempotent evaluator runs on session-finish across every mode; toast host renders unlocks.
 
 ### UI / brand
 - Austin Anfinson tokens: warm-black/copper/warm-white palette, Outfit + Instrument Serif, motion `cubic-bezier(0.22, 1, 0.36, 1)` at 150/250/400ms
-- TopNav with 5 tabs + ProfilePicker dropdown + TierBadge
-- 6 inline-SVG visualizations (cap compression, NOI waterfall, vacancy, IRR/hold, compound growth, generic solution viz)
-- Calculator panel, anchors card, review screen, results screens for all three modes
+- Persistent left **SideNav** (4 sections — Drill / Apply / Reference / Progress) with hamburger drawer below `lg`. Replaces the legacy 11-tab top nav
+- TierBadge in sidebar header, ProfilePicker docked at sidebar footer (drop-up to avoid viewport clipping)
+- Inline-SVG visualizations covering 6 of 35 question kinds (cap compression, NOI waterfall, vacancy, IRR/hold, compound growth, generic solution viz)
+- Calculator panel, anchors card, review screen, results screens for every game mode
+- Scratch sheet (open across any drill mode), feedback button (in-app log), achievement toasts
+
+### Onboarding
+- **Welcome modal** — 3 slides on first profile launch (what LearnCRE is · role pick · ready-to-quiz CTA), dismissible at any slide via X / Skip / Esc / backdrop click. Persists once-seen flag per profile.
+- **Per-mode primers** — first-visit Card on every mode's setup screen with blurb / when-to-use / expected time. Dismissible per-mode-per-profile.
+- Welcome modal's role pick flows into `loadPreferredRole()` which pre-fills SetupScreen on the user's first session.
 
 ### Build / deploy
 - Vite + React 18 + TypeScript + Tailwind + Vitest
@@ -57,12 +71,12 @@ First Steps · Foundations · Hot Streak · Week One · Hundred Club · Five-Hun
 
 Sequenced by readiness, not priority. Specs live in the design-spec section at the bottom.
 
-- **PR W — Situational case mode foundation** — types, hook, setup/play/results screens, 6 hand-crafted cases. See [Design spec — Situational case studies](#design-spec--situational-case-studies).
-- **PR X — Situational expansion** — 6 more cases, per-asset-class filtering, achievements ("Reasoning Apprentice", "Diagnostic Eye").
-- **PR Y — Excel formula mode foundation** — formula parser + evaluator + 5 starter templates (amortization, NOI roll-forward, IRR/XIRR mapping, growth-rate fill, per-unit normalization). See [Design spec — Excel formula mode](#design-spec--excel-formula-mode).
-- **PR Y+ — Excel mode expansion** — 5 more templates, formula-error coaching, tolerance for rounding differences, mini-grid styling polish.
-- **PR Z — Modeling test mode** — multi-cell take-home-style templates graded on designated output cells (3-6 outputs + 2-3 diagnostic checkpoints per template); auto-save / resume; 3 starter templates (5-yr DCF, loan sizing, acq pro-forma + sensitivity). See [Design spec — Modeling test mode](#design-spec--modeling-test-mode).
 - **Visualization coverage** — 6 of 35 question kinds have viz today. Backfill the highest-impact 10 (rent roll change, mark-to-market, TI vs rent, replacement cost, dev spread, debt yield, DSCR, cash-on-cash, equity multiple, all-in basis).
+- **Modeling test UX polish** — Tab-to-next-empty-target, "fill across" formula-chain helper for repetitive horizontal rows, copy-paste support, mobile horizontal-scroll polish on the wider 7-column grids.
+- **`refiStressTest` quiz template** — matches the shipped `refi-cap-stress` situational. Random-generates a permanent loan today + a refi-stress scenario; user picks the stressed cap that defends the take-out. Mortgage-UW track GAP per [`docs/interview-questions.md`](./docs/interview-questions.md).
+- **`feeDragOnIrr` quiz template** — matches the shipped `fund-vs-deal-irr-gap` situational. Random LP-vs-deal IRR scenarios with management fee + carry waterfall layered on top. Portfolio-mgmt track GAP.
+- **`leaseUpReserve` quiz template** — sizes a lease-up reserve for ground-up MF stabilizing in year 2-3. Development track GAP.
+- **`walk-distressed-1` walkthrough** — multi-step distressed-deal underwrite (basis math → lease-up plan → exit). Cross-cutting GAP. The shipped Modeling Test template `distressed-office-basis-play` covers the spreadsheet surface; the walkthrough covers the chained-question oral framing.
 
 ---
 
@@ -120,6 +134,8 @@ Explicitly not pursuing. Listed so future contributors don't burn cycles relitig
 
 ## Design spec — Excel formula mode
 
+> ✅ **Shipped.** Foundation + expansion both delivered. 11+ templates across `src/excel/templates/`. Kept here as historical reference for the architecture call.
+
 ### Why
 Existing kinds test "can the user compute". Excel mode tests "can the user write the formula a junior analyst would actually type". Closes the gap between mental math and real-world deliverables.
 
@@ -164,6 +180,8 @@ Existing kinds test "can the user compute". Excel mode tests "can the user write
 ---
 
 ## Design spec — Modeling test mode
+
+> ✅ **Shipped.** All architecture in this spec landed. Templates 1-3 from the original spec shipped + three additional (construction loan sizing, refi-vs-sell Y5 decision, distressed-office basis-play) for 6 total. Achievements (Modeling Apprentice / Pro / Clean Sheet) wired. Auto-save / resume working. Modeling Pro now requires passing all 6.
 
 ### Why
 Existing Excel mode is a recall drill: write one formula, get judged on that formula. Real interview take-homes and on-the-job modeling tests are different — you're handed a partial template, you fill in many cells, and you're judged on whether the bottom-line outputs (IRR, exit value, max loan) come out right. This mode closes the gap between "I can write `=IRR(B2:B7)`" and "I can build a model an MD will trust."
@@ -322,6 +340,8 @@ This catches answer-key drift any time the parser/evaluator or template changes.
 
 ## Design spec — Situational case studies
 
+> ✅ **Shipped.** Foundation + expansion both delivered. Catalog grew from the spec's 12-case starter set to 69 cases across 8 categories (pricing, absorption, risk, investment thesis, diagnostic, lease econ, comp selection, sensitivity). Achievements (Reasoning Apprentice, Diagnostic Eye) wired.
+
 ### Why
 Every existing kind tests *can the user compute*. Situational tests *can the user reason about why a deal looks the way it does*. Closes the analytical gap between mechanics and judgment. Hand-crafted, never random-generated.
 
@@ -475,14 +495,18 @@ Local-first works for a single user, but doesn't survive device switches or enab
 
 ## Implementation order (current)
 
-1. ✅ This `ROADMAP.md` lands. README links to it.
-2. PR W — Situational foundation
-3. PR X — Situational expansion
-4. PR Y — Excel mode foundation
-5. PR Y+ — Excel mode expansion
-6. PR Z — Modeling test mode (3 starter templates)
-7. Visualization backfill (10 highest-impact kinds)
-8. PR L → PR U — cloud track, in order
+1. ✅ Situational foundation + expansion (now 69 cases across 8 categories)
+2. ✅ Excel formula mode foundation + 11+ templates
+3. ✅ Mock interview mode + 8 firm archetypes + run history
+4. ✅ Theme 2 — capital-stack waterfalls, document literacy, vocab speed-drill, construction draws + cost overrun, asset-class-native math
+5. ✅ Certifications — 5 role certs + benchmark exam + downloadable artifact
+6. ✅ Sidebar navigation refactor (TopNav → SideNav, 4-section grouping)
+7. ✅ PR Z — Modeling test mode + 6 templates (DCF, loan sizing, construction loan, MF pro-forma, refi-vs-sell, distressed basis-play)
+8. ✅ Onboarding — welcome modal + per-mode primers + Tour Guide achievement
+9. Visualization backfill (10 highest-impact kinds)
+10. Modeling test UX polish (Tab-to-next, fill-across, copy-paste)
+11. Quiz / situational / walkthrough GAPs from `docs/interview-questions.md` (refi stress test, fee drag, lease-up reserve, distressed walkthrough)
+12. PR L → PR U — cloud track, in order
 
 Re-sequence freely as priorities shift. Update the "In design" section when a PR lands and move the entry up to "What's shipped today".
 
