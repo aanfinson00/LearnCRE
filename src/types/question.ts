@@ -48,7 +48,11 @@ export type QuestionKind =
   | 'waterfallSimpleSplit'
   | 'gpCatchUp'
   | 'gpEffectivePromote'
-  | 'irrAfterPromote';
+  | 'irrAfterPromote'
+  | 'costToComplete'
+  | 'drawAllocation'
+  | 'retainageRunning'
+  | 'contingencyDrawDown';
 
 export type UnitFormat = 'usd' | 'pct' | 'bps' | 'pctChange' | 'usdChange' | 'multiple' | 'usdPerSf';
 

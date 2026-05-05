@@ -933,6 +933,112 @@ function waterfallWalk(): WalkthroughDef {
   };
 }
 
+function constructionDrawWalk(): WalkthroughDef {
+  // $50M project, 60/40 D/E, equity-first, 10% retainage, 5% contingency.
+  const totalBudget = 50_000_000;
+  const hardCostBudget = 40_000_000;
+  const softCostBudget = 7_500_000;
+  const contingencyPct = 0.05;
+  const contingency = hardCostBudget * contingencyPct; // $2.0M
+  const equityCommitted = totalBudget * 0.40; // $20M
+  const lenderCommitted = totalBudget * 0.60; // $30M
+  const retainagePct = 0.10;
+
+  // Mid-project state: 60% complete by dollars
+  const incurred = totalBudget * 0.60; // $30M
+  // Equity is exhausted at this point (60% complete on equity-first basis).
+  const cumulativeHardCostDraws = hardCostBudget * 0.60; // $24M
+  const overrunsToDate = 1_200_000;
+  const contingencyRemainingPct = (contingency - overrunsToDate) / contingency; // 0.40
+
+  // Next draw: $5M
+  const nextDraw = 5_000_000;
+  const nextDrawFromLender = nextDraw; // equity exhausted, all from lender
+  const newRetainage = cumulativeHardCostDraws * retainagePct; // $2.4M
+
+  return {
+    id: 'walk-construction-draw-1',
+    kind: 'constructionDrawWalk',
+    label: 'Construction Draw Cycle — chained',
+    description: 'Walk through a draw cycle on a development deal: cost-to-complete, equity-first allocation, retainage held, contingency burn.',
+    context: {
+      totalBudget,
+      hardCostBudget,
+      contingency,
+      equityCommitted,
+      lenderCommitted,
+      retainagePct,
+      incurred,
+    },
+    setupNarrative: `Ground-up project, ${formatUsd(totalBudget)} total budget (${formatUsd(hardCostBudget)} hard / ${formatUsd(softCostBudget)} soft / ${formatUsd(contingency)} contingency). Capital stack: ${formatUsd(equityCommitted)} equity (40%) and ${formatUsd(lenderCommitted)} lender (60%), equity-first basis. Retainage on hard costs is ${formatPct(retainagePct, 0)}. Mid-project: ${formatUsd(incurred)} of total budget incurred. ${formatUsd(overrunsToDate)} of approved overruns has hit contingency. Walk through the next draw.`,
+    steps: [
+      {
+        id: 'pct-complete',
+        label: 'Step 1 — % complete by dollars',
+        prompt: `Total budget is ${formatUsd(totalBudget)}; ${formatUsd(incurred)} incurred. % complete?`,
+        expected: 0.60,
+        unit: 'pct',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'Incurred / Total Budget.',
+        resultDescription: `${formatUsd(incurred)} / ${formatUsd(totalBudget)} = 60% complete by dollars.`,
+      },
+      {
+        id: 'next-draw-lender',
+        label: 'Step 2 — Next draw funded from lender',
+        prompt: `On equity-first basis, equity ($20M) is fully drawn. The next draw is ${formatUsd(nextDraw)}. How much funds from the lender?`,
+        expected: nextDrawFromLender,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'Equity exhausted → 100% from lender.',
+        resultDescription: `Equity is exhausted, so the full ${formatUsd(nextDraw)} comes from the lender.`,
+      },
+      {
+        id: 'retainage-current',
+        label: 'Step 3 — Cumulative retainage held',
+        prompt: `Cumulative hard-cost draws to date are ${formatUsd(cumulativeHardCostDraws)}. At ${formatPct(retainagePct, 0)} retainage, how much is the lender holding back?`,
+        expected: newRetainage,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'Cumulative draws × retainage rate.',
+        resultDescription: `${formatUsd(cumulativeHardCostDraws)} × 10% = ${formatUsd(newRetainage)}.`,
+      },
+      {
+        id: 'contingency-remaining',
+        label: 'Step 4 — Contingency remaining',
+        prompt: `Contingency reserve was ${formatUsd(contingency)}; ${formatUsd(overrunsToDate)} of overruns has been approved. What % of contingency is remaining?`,
+        expected: contingencyRemainingPct,
+        unit: 'pct',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: '(Contingency − Used) / Contingency.',
+        resultDescription: `(${formatUsd(contingency)} − ${formatUsd(overrunsToDate)}) / ${formatUsd(contingency)} = 40% remaining.`,
+      },
+      {
+        id: 'cost-to-complete',
+        label: 'Step 5 — Cost-to-complete dollars',
+        prompt: `What\'s the remaining budget (cost-to-complete in dollars)?`,
+        expected: totalBudget - incurred,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'Total Budget − Incurred.',
+        resultDescription: `${formatUsd(totalBudget)} − ${formatUsd(incurred)} = ${formatUsd(totalBudget - incurred)} cost-to-complete.`,
+      },
+      {
+        id: 'overrun-warning',
+        label: 'Step 6 — Overrun stress test',
+        prompt: `If physical completion is only 50% but dollars-incurred is 60%, the project is over-spent vs progress. What\'s the additional capital needed beyond original budget if final cost runs to $55M?`,
+        expected: 5_000_000,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.05 },
+        hint: 'Final cost − original budget.',
+        resultDescription: `$55M − ${formatUsd(totalBudget)} = $5M of additional capital — funded from contingency (only $0.8M left) + cost-overrun tier (sponsor + LP per LPA).`,
+      },
+    ],
+    takeaway:
+      'A construction draw cycle is four arithmetic checks: % complete, equity-vs-lender allocation, retainage held, and contingency burn. When dollars-incurred > physical-completion, project is over-spent vs progress — the lender starts paying close attention. Tracking *contingency-remaining vs time-remaining* is the early-warning signal that a project will need additional capital before substantial completion.',
+    roles: ['development', 'mortgageUw'],
+  };
+}
+
 export const walkthroughs: WalkthroughDef[] = [
   combinedScenarioWalk(),
   dscrLoanSizingWalk(),
@@ -942,6 +1048,7 @@ export const walkthroughs: WalkthroughDef[] = [
   holdSellWalk(),
   distressedLoanWorkoutWalk(),
   waterfallWalk(),
+  constructionDrawWalk(),
 ];
 
 export function getWalkthroughById(id: string): WalkthroughDef | undefined {

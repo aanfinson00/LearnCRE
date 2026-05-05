@@ -68,6 +68,9 @@ import { leaseBaseYearVsStop } from './leaseBaseYearVsStop';
 import { leaseCamReconciliation } from './leaseCamReconciliation';
 import { constructionLiquidatedDamages } from './constructionLiquidatedDamages';
 import { psaEarnestMoneyDefault } from './psaEarnestMoneyDefault';
+import { constructionEquityFirstVsParipassu } from './constructionEquityFirstVsParipassu';
+import { constructionChangeOrderPricing } from './constructionChangeOrderPricing';
+import { constructionRetainageRelease } from './constructionRetainageRelease';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -133,6 +136,9 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   leaseCamReconciliation,
   constructionLiquidatedDamages,
   psaEarnestMoneyDefault,
+  constructionEquityFirstVsParipassu,
+  constructionChangeOrderPricing,
+  constructionRetainageRelease,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {

@@ -45,6 +45,10 @@ import { waterfallSimpleSplitTemplate } from './waterfallSimpleSplit';
 import { gpCatchUpTemplate } from './gpCatchUp';
 import { gpEffectivePromoteTemplate } from './gpEffectivePromote';
 import { irrAfterPromoteTemplate } from './irrAfterPromote';
+import { costToCompleteTemplate } from './costToComplete';
+import { drawAllocationTemplate } from './drawAllocation';
+import { retainageRunningTemplate } from './retainageRunning';
+import { contingencyDrawDownTemplate } from './contingencyDrawDown';
 
 export const templates: Record<QuestionKind, QuestionTemplate> = {
   capCompression: capCompressionTemplate,
@@ -93,6 +97,10 @@ export const templates: Record<QuestionKind, QuestionTemplate> = {
   gpCatchUp: gpCatchUpTemplate,
   gpEffectivePromote: gpEffectivePromoteTemplate,
   irrAfterPromote: irrAfterPromoteTemplate,
+  costToComplete: costToCompleteTemplate,
+  drawAllocation: drawAllocationTemplate,
+  retainageRunning: retainageRunningTemplate,
+  contingencyDrawDown: contingencyDrawDownTemplate,
 };
 
 export const allKinds: QuestionKind[] = [
@@ -142,4 +150,8 @@ export const allKinds: QuestionKind[] = [
   'gpCatchUp',
   'gpEffectivePromote',
   'irrAfterPromote',
+  'costToComplete',
+  'drawAllocation',
+  'retainageRunning',
+  'contingencyDrawDown',
 ];

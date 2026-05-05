@@ -72,4 +72,17 @@ export interface DealInputs {
   gpTake?: number;
   irrBeforePromote?: number;
   promotePctOfProfit?: number;
+  // Construction draw fields
+  totalBudget?: number;
+  incurred?: number;
+  retainagePct?: number;
+  contingency?: number;
+  hardCostBudget?: number;
+  overrunsToDate?: number;
+  equityCommitted?: number;
+  equityDrawnSoFar?: number;
+  lenderCommitted?: number;
+  drawAmount?: number;
+  drawCount?: number;
+  cumulativeDraws?: number;
 }

@@ -183,8 +183,8 @@ export const mortgageUw: Cert = {
         'dscr-cure-rights',
         'dscr-springing-recourse',
       ],
-      excelIds: ['loan-sizing-dscr', 'amortization-principal'],
-      walkIds: ['walk-dscr-1', 'walk-distressed-1', 'walk-combined-1'],
+      excelIds: ['loan-sizing-dscr', 'amortization-principal', 'cost-to-complete'],
+      walkIds: ['walk-dscr-1', 'walk-distressed-1', 'walk-combined-1', 'walk-construction-draw-1'],
     },
   },
 };

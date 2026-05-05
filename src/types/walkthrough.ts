@@ -10,7 +10,8 @@ export type WalkthroughKind =
   | 'developmentFeasibilityWalk'
   | 'holdSellWalk'
   | 'distressedLoanWorkoutWalk'
-  | 'waterfallWalk';
+  | 'waterfallWalk'
+  | 'constructionDrawWalk';
 
 export interface WalkthroughStep {
   /** Stable id used as key + used in stats */

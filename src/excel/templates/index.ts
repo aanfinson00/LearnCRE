@@ -11,6 +11,8 @@ import { perUnitNormalization } from './perUnitNormalization';
 import { markToMarketLift } from './markToMarketLift';
 import { rentBumpsWithSteps } from './rentBumpsWithSteps';
 import { waterfall3Tier } from './waterfall3Tier';
+import { costToCompleteExcel } from './costToComplete';
+import { drawScheduleExcel } from './drawSchedule';
 
 export const EXCEL_TEMPLATES: ExcelTemplate[] = [
   noiRollForward,
@@ -24,6 +26,8 @@ export const EXCEL_TEMPLATES: ExcelTemplate[] = [
   markToMarketLift,
   rentBumpsWithSteps,
   waterfall3Tier,
+  costToCompleteExcel,
+  drawScheduleExcel,
 ];
 
 export function templateById(id: string): ExcelTemplate | undefined {
