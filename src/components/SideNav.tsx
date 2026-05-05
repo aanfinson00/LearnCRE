@@ -87,29 +87,31 @@ export function SideNav({ active, onSwitch }: Props) {
 
   return (
     <>
-      <header className="sticky top-0 z-20 flex items-center justify-between border-b border-warm-line bg-warm-white/90 px-3 py-2 backdrop-blur lg:hidden">
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => setDrawerOpen(true)}
-            aria-label="Open navigation"
-            className="rounded-md p-2 text-warm-stone transition-colors duration-aa ease-aa hover:bg-warm-paper/60 hover:text-warm-ink"
-          >
-            <Hamburger />
-          </button>
+      <header className="sticky top-0 z-20 flex items-center gap-2 border-b border-warm-line bg-warm-white/90 px-3 py-2 backdrop-blur lg:hidden">
+        <button
+          type="button"
+          onClick={() => setDrawerOpen(true)}
+          aria-label="Open navigation"
+          className="shrink-0 rounded-md p-2 text-warm-stone transition-colors duration-aa ease-aa hover:bg-warm-paper/60 hover:text-warm-ink"
+        >
+          <Hamburger />
+        </button>
+        <div className="flex min-w-0 flex-1 items-center gap-2">
           <Brand />
           {activeItem && (
             <>
               <span className="text-warm-mute" aria-hidden>
                 /
               </span>
-              <span className="text-sm font-medium text-warm-ink">
+              <span className="truncate text-sm font-medium text-warm-ink">
                 {activeItem.label}
               </span>
             </>
           )}
         </div>
-        <ProfilePicker />
+        <div className="shrink-0">
+          <ProfilePicker />
+        </div>
       </header>
 
       {drawerOpen && (
@@ -119,8 +121,8 @@ export function SideNav({ active, onSwitch }: Props) {
             onClick={() => setDrawerOpen(false)}
             aria-hidden
           />
-          <aside className="absolute inset-y-0 left-0 flex w-64 max-w-[85%] flex-col overflow-y-auto bg-warm-white shadow-aa">
-            <SidebarBody active={active} onSwitch={handleSwitch} />
+          <aside className="absolute inset-y-0 left-0 flex w-64 max-w-[85%] flex-col bg-warm-white shadow-aa">
+            <SidebarBody active={active} onSwitch={handleSwitch} mobile />
           </aside>
         </div>
       )}
@@ -135,9 +137,11 @@ export function SideNav({ active, onSwitch }: Props) {
 function SidebarBody({
   active,
   onSwitch,
+  mobile = false,
 }: {
   active: Mode;
   onSwitch: (m: Mode) => void;
+  mobile?: boolean;
 }) {
   return (
     <div className="flex h-full flex-col">
@@ -183,9 +187,11 @@ function SidebarBody({
           </div>
         ))}
       </nav>
-      <div className="hidden border-t border-warm-line px-3 py-3 lg:block">
-        <ProfilePicker />
-      </div>
+      {!mobile && (
+        <div className="hidden border-t border-warm-line px-3 py-3 lg:block">
+          <ProfilePicker dropUp align="left" />
+        </div>
+      )}
     </div>
   );
 }
