@@ -4,6 +4,7 @@ import { dcfFiveYrSuburbanOffice } from '../templates/dcfFiveYrSuburbanOffice';
 import { loanSizingThreeConstraint } from '../templates/loanSizingThreeConstraint';
 import { acqProformaMultifamily } from '../templates/acqProformaMultifamily';
 import { refiVsSellY5 } from '../templates/refiVsSellY5';
+import { constructionLoanSizing } from '../templates/constructionLoanSizing';
 
 describe('withinTolerance', () => {
   it('passes within absolute tolerance', () => {
@@ -443,6 +444,95 @@ describe('gradeSubmission — Refi vs Sell, wrong Y6-Y10 growth rate cascade', (
     const byRef = new Map(result.outputs.map((o) => [o.ref, o]));
     expect(byRef.get('B31')?.grade).toBe('pass');
     expect(byRef.get('B36')?.grade).toBe('pass');
+  });
+});
+
+// Canonical correct formulas for the construction-loan-sizing template.
+const correctConstructionFormulas: Record<string, string> = {
+  B12: '=B3*B4',
+  B13: '=(B3+B12)*B5',
+  B14: '=B2+B3+B12+B13',
+  B17: '=B6/B7',
+  B18: '=B6/B14',
+  B21: '=B14*B8',
+  B22: '=B17*B9',
+  B23: '=MIN(B21:B22)',
+  B26: '=B14-B23',
+  B27: '=(B17-B14)/B14',
+};
+
+describe('gradeSubmission — Construction loan sizing, canonical correct formulas', () => {
+  const result = gradeSubmission(constructionLoanSizing, correctConstructionFormulas);
+
+  it('passes all outputs and checkpoints', () => {
+    expect(result.passed).toBe(true);
+    for (const o of result.outputs) {
+      expect(o.grade, `${o.ref} ${o.label}`).toBe('pass');
+    }
+    for (const cp of result.checkpoints) {
+      expect(cp.grade, `${cp.ref} ${cp.label}`).toBe('pass');
+    }
+  });
+
+  it('LTC is the binding constraint in this market', () => {
+    const { sheet } = buildSheet(constructionLoanSizing, correctConstructionFormulas);
+    expect(sheet['B21']).toBeLessThan(sheet['B22']!);
+    expect(sheet['B23']).toBeCloseTo(sheet['B21']!, 0);
+  });
+
+  it('Yield on cost lands at ~7.08% — healthy spread vs 5.25% market cap', () => {
+    const { sheet } = buildSheet(constructionLoanSizing, correctConstructionFormulas);
+    expect(sheet['B18']).toBeGreaterThan(0.06);
+    expect(sheet['B18']).toBeLessThan(0.08);
+  });
+});
+
+describe('gradeSubmission — Construction sizing, contingency forgotten entirely', () => {
+  // Common error: forget the contingency line altogether (a 4% TPC understatement
+  // that flows through to every downstream metric).
+  const wrong: Record<string, string> = {
+    ...correctConstructionFormulas,
+    B13: '=0',
+  };
+  const result = gradeSubmission(constructionLoanSizing, wrong);
+
+  it('fails the contingency checkpoint', () => {
+    const cp = result.checkpoints.find((c) => c.ref === 'B13');
+    expect(cp?.grade).toBe('fail');
+  });
+
+  it('cascades to TPC and yield on cost', () => {
+    const byRef = new Map(result.outputs.map((o) => [o.ref, o]));
+    expect(byRef.get('B14')?.grade).toBe('fail');
+    expect(byRef.get('B18')?.grade).toBe('fail');
+  });
+
+  it('Stabilized value still passes — does not depend on cost build-up', () => {
+    const cp = result.checkpoints.find((c) => c.ref === 'B17');
+    expect(cp?.grade).toBe('pass');
+  });
+});
+
+describe('gradeSubmission — Construction sizing, picks LTV instead of MIN', () => {
+  // Common error: forget the MIN, just use LTV (because it's higher and feels
+  // like the "max loan possible" intuitively).
+  const wrong: Record<string, string> = {
+    ...correctConstructionFormulas,
+    B23: '=B22',
+  };
+  const result = gradeSubmission(constructionLoanSizing, wrong);
+
+  it('fails the loan + equity check', () => {
+    const byRef = new Map(result.outputs.map((o) => [o.ref, o]));
+    expect(byRef.get('B23')?.grade).toBe('fail');
+    expect(byRef.get('B26')?.grade).toBe('fail');
+  });
+
+  it('TPC + yield on cost + profit on cost still pass — they do not depend on the loan', () => {
+    const byRef = new Map(result.outputs.map((o) => [o.ref, o]));
+    expect(byRef.get('B14')?.grade).toBe('pass');
+    expect(byRef.get('B18')?.grade).toBe('pass');
+    expect(byRef.get('B27')?.grade).toBe('pass');
   });
 });
 

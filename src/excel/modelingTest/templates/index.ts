@@ -3,12 +3,14 @@ import { dcfFiveYrSuburbanOffice } from './dcfFiveYrSuburbanOffice';
 import { loanSizingThreeConstraint } from './loanSizingThreeConstraint';
 import { acqProformaMultifamily } from './acqProformaMultifamily';
 import { refiVsSellY5 } from './refiVsSellY5';
+import { constructionLoanSizing } from './constructionLoanSizing';
 
 export const MODELING_TEST_TEMPLATES: ModelingTestTemplate[] = [
   dcfFiveYrSuburbanOffice,
   loanSizingThreeConstraint,
   acqProformaMultifamily,
   refiVsSellY5,
+  constructionLoanSizing,
 ];
 
 export interface PlannedTemplate {
