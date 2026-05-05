@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { gradeSubmission, withinTolerance, buildSheet } from '../grade';
 import { dcfFiveYrSuburbanOffice } from '../templates/dcfFiveYrSuburbanOffice';
 import { loanSizingThreeConstraint } from '../templates/loanSizingThreeConstraint';
+import { acqProformaMultifamily } from '../templates/acqProformaMultifamily';
 
 describe('withinTolerance', () => {
   it('passes within absolute tolerance', () => {
@@ -182,6 +183,148 @@ describe('gradeSubmission — Loan sizing, wrong loan constant', () => {
     const byRef = new Map(result.outputs.map((o) => [o.ref, o]));
     expect(byRef.get('B15')?.grade).toBe('pass');
     expect(byRef.get('B16')?.grade).toBe('pass');
+  });
+});
+
+// Canonical correct formulas for the multifamily pro-forma template.
+const correctMfFormulas: Record<string, string> = {
+  // GPR row — base from B3*B4, then chain at B5 growth
+  B21: '=B3*B4',
+  C21: '=B21*(1+B5)',
+  D21: '=C21*(1+B5)',
+  E21: '=D21*(1+B5)',
+  F21: '=E21*(1+B5)',
+  // Vacancy $ — vacancy% × GPR same column
+  B22: '=B6*B21',
+  C22: '=B6*C21',
+  D22: '=B6*D21',
+  E22: '=B6*E21',
+  F22: '=B6*F21',
+  // Other income — base from B3*B7, chain at B8 growth
+  B23: '=B3*B7',
+  C23: '=B23*(1+B8)',
+  D23: '=C23*(1+B8)',
+  E23: '=D23*(1+B8)',
+  F23: '=E23*(1+B8)',
+  // EGI = GPR − Vacancy + Other
+  B24: '=B21-B22+B23',
+  C24: '=C21-C22+C23',
+  D24: '=D21-D22+D23',
+  E24: '=E21-E22+E23',
+  F24: '=F21-F22+F23',
+  // OpEx — base B3*B9, chain at B10 growth
+  B25: '=B3*B9',
+  C25: '=B25*(1+B10)',
+  D25: '=C25*(1+B10)',
+  E25: '=D25*(1+B10)',
+  F25: '=E25*(1+B10)',
+  // NOI = EGI − OpEx
+  B26: '=B24-B25',
+  C26: '=C24-C25',
+  D26: '=D24-D25',
+  E26: '=E24-E25',
+  F26: '=F24-F25',
+  // Capex reserve — base B3*B11, chain at B12 growth
+  B27: '=B3*B11',
+  C27: '=B27*(1+B12)',
+  D27: '=C27*(1+B12)',
+  E27: '=D27*(1+B12)',
+  F27: '=E27*(1+B12)',
+  // Debt sizing
+  B30: '=B14/(1-(1+B14)^-B15)',
+  B31: '=B26/B13',
+  B32: '=B31/B30',
+  B33: '=B32*B30',
+  // Exit
+  B36: '=F26/B16',
+  B37: '=B36*B17',
+  B38: '=B32*(1+B14)^5+PMT(B14,B15,B32)*((1+B14)^5-1)/B14',
+  B39: '=B36-B37-B38',
+  // Levered CF series
+  B43: '=B32-B2',
+  C43: '=B26-B33-B27',
+  D43: '=C26-B33-C27',
+  E43: '=D26-B33-D27',
+  F43: '=E26-B33-E27',
+  G43: '=F26-B33-F27+B39',
+  // Returns
+  B46: '=IRR(B43:G43)',
+  B47: '=SUM(C43:G43)/(B2-B32)',
+};
+
+describe('gradeSubmission — Multifamily pro-forma, canonical correct formulas', () => {
+  const result = gradeSubmission(acqProformaMultifamily, correctMfFormulas);
+
+  it('passes all outputs and checkpoints', () => {
+    expect(result.passed).toBe(true);
+    for (const o of result.outputs) {
+      expect(o.grade, `${o.ref} ${o.label}`).toBe('pass');
+    }
+    for (const cp of result.checkpoints) {
+      expect(cp.grade, `${cp.ref} ${cp.label}`).toBe('pass');
+    }
+  });
+
+  it('Y1 NOI lands at the expected $2.195M', () => {
+    const { sheet } = buildSheet(acqProformaMultifamily, correctMfFormulas);
+    expect(sheet['B26']).toBeCloseTo(2_195_000, 0);
+  });
+
+  it('Levered IRR is between 9% and 12% — sanity range for stabilized MF with 4% rent bumps', () => {
+    const { sheet } = buildSheet(acqProformaMultifamily, correctMfFormulas);
+    expect(sheet['B46']).toBeGreaterThan(0.09);
+    expect(sheet['B46']).toBeLessThan(0.12);
+  });
+});
+
+describe('gradeSubmission — Multifamily pro-forma, wrong EGI cascade', () => {
+  // Common error: forget to add other income, treat EGI as just GPR − Vacancy.
+  const wrong: Record<string, string> = {
+    ...correctMfFormulas,
+    B24: '=B21-B22',
+    C24: '=C21-C22',
+    D24: '=D21-D22',
+    E24: '=E21-E22',
+    F24: '=F21-F22',
+  };
+  const result = gradeSubmission(acqProformaMultifamily, wrong);
+
+  it('fails Y1 NOI, Y5 NOI, IRR, and equity multiple — all downstream of EGI', () => {
+    const byRef = new Map(result.outputs.map((o) => [o.ref, o]));
+    expect(byRef.get('B26')?.grade).toBe('fail');
+    expect(byRef.get('F26')?.grade).toBe('fail');
+    expect(byRef.get('B46')?.grade).toBe('fail');
+    expect(byRef.get('B47')?.grade).toBe('fail');
+  });
+
+  it('flags the EGI checkpoint as wrong with a diagnostic explaining downstream impact', () => {
+    const cp = result.checkpoints.find((c) => c.ref === 'B24');
+    expect(cp?.grade).toBe('fail');
+    expect(cp?.explains).toContain('B26');
+  });
+});
+
+describe('gradeSubmission — Multifamily, wrong loan-balance cascade', () => {
+  // Treat loan-balance as loan minus cumulative DS — the classic interview error.
+  const wrong: Record<string, string> = {
+    ...correctMfFormulas,
+    B38: '=B32-B33*5',
+  };
+  const result = gradeSubmission(acqProformaMultifamily, wrong);
+
+  it('fails Net sale proceeds (checkpoint), Levered IRR, and Equity multiple', () => {
+    const cp = result.checkpoints.find((c) => c.ref === 'B39');
+    expect(cp?.grade).toBe('fail');
+    const byRef = new Map(result.outputs.map((o) => [o.ref, o]));
+    expect(byRef.get('B46')?.grade).toBe('fail');
+    expect(byRef.get('B47')?.grade).toBe('fail');
+  });
+
+  it('Y1 NOI, Y5 NOI, and Loan amount still pass — loan-balance doesn\'t feed them', () => {
+    const byRef = new Map(result.outputs.map((o) => [o.ref, o]));
+    expect(byRef.get('B26')?.grade).toBe('pass');
+    expect(byRef.get('F26')?.grade).toBe('pass');
+    expect(byRef.get('B32')?.grade).toBe('pass');
   });
 });
 

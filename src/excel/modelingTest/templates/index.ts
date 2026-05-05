@@ -1,10 +1,12 @@
 import type { ModelingTestTemplate, ModelingTestDifficulty } from '../../../types/modelingTest';
 import { dcfFiveYrSuburbanOffice } from './dcfFiveYrSuburbanOffice';
 import { loanSizingThreeConstraint } from './loanSizingThreeConstraint';
+import { acqProformaMultifamily } from './acqProformaMultifamily';
 
 export const MODELING_TEST_TEMPLATES: ModelingTestTemplate[] = [
   dcfFiveYrSuburbanOffice,
   loanSizingThreeConstraint,
+  acqProformaMultifamily,
 ];
 
 export interface PlannedTemplate {
@@ -17,16 +19,7 @@ export interface PlannedTemplate {
 
 /** Stubs for templates that are designed but not yet authored. Surfaced on the
  *  setup screen as locked previews so the user can see what's coming. */
-export const PLANNED_TEMPLATES: PlannedTemplate[] = [
-  {
-    id: 'acq-proforma-multifamily',
-    title: 'Acquisition Pro-Forma — Multifamily',
-    estimatedMinutes: 25,
-    difficulty: 'advanced',
-    description:
-      '$40M MF acquisition with rent bumps + capex reserve + DSCR-constrained debt sizing. Build trended NOI, compute exit, and report levered IRR + equity multiple.',
-  },
-];
+export const PLANNED_TEMPLATES: PlannedTemplate[] = [];
 
 export function findTemplate(id: string): ModelingTestTemplate | null {
   return MODELING_TEST_TEMPLATES.find((t) => t.id === id) ?? null;
