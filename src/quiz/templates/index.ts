@@ -49,6 +49,19 @@ import { costToCompleteTemplate } from './costToComplete';
 import { drawAllocationTemplate } from './drawAllocation';
 import { retainageRunningTemplate } from './retainageRunning';
 import { contingencyDrawDownTemplate } from './contingencyDrawDown';
+import { revparFromAdrOccTemplate } from './revparFromAdrOcc';
+import { gopMarginTemplate } from './gopMargin';
+import { ffeReserveDollarsTemplate } from './ffeReserveDollars';
+import { revporVsRevparTemplate } from './revporVsRevpar';
+import { waltTemplate } from './walt';
+import { tiPerSfPerYearOfTermTemplate } from './tiPerSfPerYearOfTerm';
+import { renewalProbabilityWeightedRentTemplate } from './renewalProbabilityWeightedRent';
+import { salesPerSfTemplate } from './salesPerSf';
+import { occupancyCostRatioTemplate } from './occupancyCostRatio';
+import { percentageRentBreakpointTemplate } from './percentageRentBreakpoint';
+import { clearHeightPremiumTemplate } from './clearHeightPremium';
+import { truckCountPerSfTemplate } from './truckCountPerSf';
+import { lossToLeaseTemplate } from './lossToLease';
 
 export const templates: Record<QuestionKind, QuestionTemplate> = {
   capCompression: capCompressionTemplate,
@@ -101,6 +114,19 @@ export const templates: Record<QuestionKind, QuestionTemplate> = {
   drawAllocation: drawAllocationTemplate,
   retainageRunning: retainageRunningTemplate,
   contingencyDrawDown: contingencyDrawDownTemplate,
+  revparFromAdrOcc: revparFromAdrOccTemplate,
+  gopMargin: gopMarginTemplate,
+  ffeReserveDollars: ffeReserveDollarsTemplate,
+  revporVsRevpar: revporVsRevparTemplate,
+  walt: waltTemplate,
+  tiPerSfPerYearOfTerm: tiPerSfPerYearOfTermTemplate,
+  renewalProbabilityWeightedRent: renewalProbabilityWeightedRentTemplate,
+  salesPerSf: salesPerSfTemplate,
+  occupancyCostRatio: occupancyCostRatioTemplate,
+  percentageRentBreakpoint: percentageRentBreakpointTemplate,
+  clearHeightPremium: clearHeightPremiumTemplate,
+  truckCountPerSf: truckCountPerSfTemplate,
+  lossToLease: lossToLeaseTemplate,
 };
 
 export const allKinds: QuestionKind[] = [
@@ -154,4 +180,17 @@ export const allKinds: QuestionKind[] = [
   'drawAllocation',
   'retainageRunning',
   'contingencyDrawDown',
+  'revparFromAdrOcc',
+  'gopMargin',
+  'ffeReserveDollars',
+  'revporVsRevpar',
+  'walt',
+  'tiPerSfPerYearOfTerm',
+  'renewalProbabilityWeightedRent',
+  'salesPerSf',
+  'occupancyCostRatio',
+  'percentageRentBreakpoint',
+  'clearHeightPremium',
+  'truckCountPerSf',
+  'lossToLease',
 ];

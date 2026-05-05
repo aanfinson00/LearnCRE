@@ -1039,6 +1039,206 @@ function constructionDrawWalk(): WalkthroughDef {
   };
 }
 
+function hotelRevparWalk(): WalkthroughDef {
+  // 240-key limited-service hotel.
+  const totalRooms = 240;
+  const adr = 195;
+  const occupancy = 0.72;
+  const days = 365;
+  const roomsSold = totalRooms * occupancy * days; // 63,072
+  const roomRevenue = roomsSold * adr; // 12,299,040
+  const otherRevPctOfRoom = 0.18; // F&B, parking, ancillary
+  const otherRevenue = roomRevenue * otherRevPctOfRoom;
+  const totalRevenue = roomRevenue + otherRevenue;
+  const gopMarginPct = 0.36;
+  const gop = totalRevenue * gopMarginPct;
+  const fixedCosts = 1_200_000; // taxes, insurance, mgmt fee
+  const ffeReserveRate = 0.04;
+  const ffeReserve = totalRevenue * ffeReserveRate;
+  const noi = gop - fixedCosts - ffeReserve;
+  const capRate = 0.075;
+  const value = noi / capRate;
+
+  return {
+    id: 'walk-hotel-revpar-1',
+    kind: 'hotelRevparWalk',
+    label: 'Hotel — RevPAR to Value',
+    description:
+      'Walk a hotel from operating drivers (ADR + occupancy) all the way to enterprise value via RevPAR → Total Revenue → GOP → NOI → Cap.',
+    context: {
+      adr,
+      roomsAvailable: totalRooms,
+      capRate,
+    },
+    setupNarrative: `${totalRooms}-room limited-service hotel running at ${formatUsd(adr)} ADR and ${formatPct(occupancy, 0)} occupancy. Other-revenue (F&B, parking, ancillary) is ~${formatPct(otherRevPctOfRoom, 0)} of room revenue. GOP margin is ${formatPct(gopMarginPct, 0)}; fixed costs (taxes/ins/mgmt) total ${formatUsd(fixedCosts)}; FF&E reserve is ${formatPct(ffeReserveRate, 0)} of total revenue. Market cap rate is ${formatPct(capRate, 1)}. Compute the property value.`,
+    steps: [
+      {
+        id: 'revpar',
+        label: 'Step 1 — RevPAR',
+        prompt: `Compute RevPAR from ADR and occupancy.`,
+        expected: adr * occupancy,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'RevPAR = ADR × Occupancy.',
+        resultDescription: `${formatUsd(adr)} × ${formatPct(occupancy, 0)} = ${formatUsd(adr * occupancy)} RevPAR.`,
+      },
+      {
+        id: 'room-rev',
+        label: 'Step 2 — Annual room revenue',
+        prompt: `Total annual room revenue (rooms × occ × 365 × ADR)?`,
+        expected: roomRevenue,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'RevPAR × rooms × 365 — or rooms-sold × ADR.',
+        resultDescription: `${totalRooms} × ${formatPct(occupancy, 0)} × 365 × ${formatUsd(adr)} ≈ ${formatUsd(roomRevenue)}.`,
+      },
+      {
+        id: 'total-rev',
+        label: 'Step 3 — Total revenue (incl. ancillary)',
+        prompt: `Add other-revenue at 18% of room revenue. What\'s total revenue?`,
+        expected: totalRevenue,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'Room rev × (1 + ancillary %).',
+        resultDescription: `${formatUsd(roomRevenue)} × 1.18 ≈ ${formatUsd(totalRevenue)}.`,
+      },
+      {
+        id: 'gop',
+        label: 'Step 4 — GOP at 36% margin',
+        prompt: `GOP at ${formatPct(gopMarginPct, 0)} margin?`,
+        expected: gop,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'Total revenue × GOP margin.',
+        resultDescription: `${formatUsd(totalRevenue)} × ${formatPct(gopMarginPct, 0)} ≈ ${formatUsd(gop)}.`,
+      },
+      {
+        id: 'noi',
+        label: 'Step 5 — NOI (after fixed costs + FF&E reserve)',
+        prompt: `Subtract fixed costs (${formatUsd(fixedCosts)}) and FF&E reserve (${formatPct(ffeReserveRate, 0)} of total rev). What\'s NOI?`,
+        expected: noi,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'GOP − fixed − FF&E reserve.',
+        resultDescription: `${formatUsd(gop)} − ${formatUsd(fixedCosts)} − ${formatUsd(ffeReserve)} ≈ ${formatUsd(noi)}.`,
+      },
+      {
+        id: 'value',
+        label: 'Step 6 — Value at market cap',
+        prompt: `Cap NOI at ${formatPct(capRate, 1)}. What\'s the property value?`,
+        expected: value,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.03 },
+        hint: 'NOI / Cap.',
+        resultDescription: `${formatUsd(noi)} / ${formatPct(capRate, 1)} ≈ ${formatUsd(value)}.`,
+      },
+    ],
+    takeaway:
+      'Hotel valuation chains down from ADR + occupancy: RevPAR → room revenue → total revenue → GOP → NOI → cap. The two hospitality-only adjustments are FF&E reserve (4% of revenue) and the GOP margin (function of service tier). Buyers who skip FF&E reserve overstate NOI by 4% of revenue — material to value.',
+    roles: ['acquisitions', 'assetManagement'],
+  };
+}
+
+function officeWaltWalk(): WalkthroughDef {
+  // 5-tenant office building, computing rent-weighted WALT + roll impact.
+  const leases = [
+    { rent: 1_200_000, remainingTerm: 7, suite: 'Floor 12' },
+    { rent: 850_000, remainingTerm: 3, suite: 'Floor 8-9' },
+    { rent: 620_000, remainingTerm: 5, suite: 'Floor 5' },
+    { rent: 450_000, remainingTerm: 2, suite: 'Floor 3' },
+    { rent: 380_000, remainingTerm: 9, suite: 'Floor 2 retail' },
+  ];
+  const totalRent = leases.reduce((s, l) => s + l.rent, 0);
+  const weightedSum = leases.reduce((s, l) => s + l.rent * l.remainingTerm, 0);
+  const walt = weightedSum / totalRent;
+
+  // Tenant 4 (Floor 3) is rolling in 2 years
+  const rollingTenant = leases[3];
+  const inPlaceRent = rollingTenant.rent;
+  // Suite is 18,000 SF; in-place is $25/SF, market is $32/SF
+  const sf = 18_000;
+  const inPlacePerSf = inPlaceRent / sf;
+  const marketPerSf = 32;
+  const renewalProb = 0.65;
+  const expectedRentPerSf = renewalProb * inPlacePerSf + (1 - renewalProb) * marketPerSf;
+  const expectedAnnualRent = expectedRentPerSf * sf;
+  // TI on rollover: $45/SF × 18,000 SF, amortized over 7-year new lease
+  const newLeaseTermYears = 7;
+  const tiPerSf = 45;
+  const tiTotal = tiPerSf * sf;
+  const amortizedTiPerYear = tiTotal / newLeaseTermYears;
+  // Net effective rent annual on the rolling tenant
+  const netEffectiveAnnual = expectedAnnualRent - amortizedTiPerYear;
+
+  return {
+    id: 'walk-office-walt-1',
+    kind: 'officeWaltWalk',
+    label: 'Office — WALT, Rollover, and Net-Effective Rent',
+    description:
+      'Walk a multi-tenant office stack: WALT, identify rollover risk, weight in-place vs market on rollover, then bridge to net-effective via amortized TI.',
+    context: {
+      leases: leases.map(({ rent, remainingTerm }) => ({ rent, remainingTerm })),
+      walt,
+    },
+    setupNarrative: `Multi-tenant Class-A office, 5 tenants on stacked floors. Rent roll: ${leases.map((l) => `${l.suite} ${formatUsd(l.rent)}/yr / ${l.remainingTerm}y left`).join('; ')}. Tenant on Floor 3 (18,000 SF) is rolling in 2 years; in-place rent is ${formatUsd(inPlacePerSf)}/SF; market is ${formatUsd(marketPerSf)}/SF. Renewal probability is ${formatPct(renewalProb, 0)}. New-lease TI on rollover is $${tiPerSf}/SF over a ${newLeaseTermYears}-year term.`,
+    steps: [
+      {
+        id: 'walt',
+        label: 'Step 1 — Rent-weighted WALT',
+        prompt: `Compute the rent-weighted WALT across all 5 leases.`,
+        expected: walt,
+        unit: 'multiple',
+        tolerance: { type: 'pct', band: 0.03 },
+        hint: 'Σ(rent × term) / Σ(rent).',
+        resultDescription: `Σ(rent × term) ${weightedSum.toLocaleString()} / Σ(rent) ${totalRent.toLocaleString()} ≈ ${walt.toFixed(2)} years.`,
+      },
+      {
+        id: 'expected-rent',
+        label: 'Step 2 — Expected rent on Floor 3 rollover',
+        prompt: `Renewal-probability-weighted rent on rollover (in-place $${inPlacePerSf}/SF; market $${marketPerSf}/SF; renewal prob ${formatPct(renewalProb, 0)})?`,
+        expected: expectedRentPerSf,
+        unit: 'usdPerSf',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'P × in-place + (1−P) × market.',
+        resultDescription: `${formatPct(renewalProb, 0)} × $${inPlacePerSf}/SF + ${formatPct(1 - renewalProb, 0)} × $${marketPerSf}/SF ≈ $${expectedRentPerSf.toFixed(2)}/SF.`,
+      },
+      {
+        id: 'expected-annual',
+        label: 'Step 3 — Expected annual rent (Floor 3)',
+        prompt: `On 18,000 SF, what\'s the expected annual rent post-rollover?`,
+        expected: expectedAnnualRent,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'Expected rent/SF × SF.',
+        resultDescription: `$${expectedRentPerSf.toFixed(2)}/SF × 18,000 SF ≈ ${formatUsd(expectedAnnualRent)}.`,
+      },
+      {
+        id: 'amortized-ti',
+        label: 'Step 4 — Amortized TI/yr',
+        prompt: `TI cost is $${tiPerSf}/SF over a ${newLeaseTermYears}-year lease. What\'s the annual amortized cost across the suite?`,
+        expected: amortizedTiPerYear,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: '(TI/SF × SF) / lease term years.',
+        resultDescription: `($${tiPerSf} × 18,000) / ${newLeaseTermYears} years ≈ ${formatUsd(amortizedTiPerYear)}/yr.`,
+      },
+      {
+        id: 'net-effective',
+        label: 'Step 5 — Net-effective annual rent',
+        prompt: `Subtract amortized TI from expected annual rent. What\'s the NER on the suite?`,
+        expected: netEffectiveAnnual,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.03 },
+        hint: 'Expected annual rent − amortized TI/yr.',
+        resultDescription: `${formatUsd(expectedAnnualRent)} − ${formatUsd(amortizedTiPerYear)} ≈ ${formatUsd(netEffectiveAnnual)}.`,
+      },
+    ],
+    takeaway:
+      'Office WALT tells you when income is at risk; renewal-weighted rent + amortized TI tell you what income will be after rollover. NER on rollovers is materially below face rent (often 70-85%) once TI + LC are amortized — sponsor pro-formas that show face-rent NER on rollovers are over-stating economics.',
+    roles: ['acquisitions', 'assetManagement'],
+  };
+}
+
 export const walkthroughs: WalkthroughDef[] = [
   combinedScenarioWalk(),
   dscrLoanSizingWalk(),
@@ -1049,6 +1249,8 @@ export const walkthroughs: WalkthroughDef[] = [
   distressedLoanWorkoutWalk(),
   waterfallWalk(),
   constructionDrawWalk(),
+  hotelRevparWalk(),
+  officeWaltWalk(),
 ];
 
 export function getWalkthroughById(id: string): WalkthroughDef | undefined {

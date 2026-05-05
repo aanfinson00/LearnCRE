@@ -85,4 +85,24 @@ export interface DealInputs {
   drawAmount?: number;
   drawCount?: number;
   cumulativeDraws?: number;
+  // Asset-class-specific fields (Phase E)
+  adr?: number;
+  roomsAvailable?: number;
+  roomsSold?: number;
+  totalRevenue?: number;
+  ffeReserveRate?: number;
+  walt?: number;
+  leases?: { rent: number; remainingTerm: number }[];
+  marketRent?: number;
+  inPlaceRent?: number;
+  renewalProbability?: number;
+  tenantSales?: number;
+  tenantSalesPerSf?: number;
+  occupancyCostRatio?: number;
+  percentageRate?: number;
+  baseRent?: number;
+  clearHeight?: number;
+  baselineRent?: number;
+  premiumPerFt?: number;
+  truckCount?: number;
 }

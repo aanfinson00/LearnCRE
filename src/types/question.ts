@@ -52,7 +52,20 @@ export type QuestionKind =
   | 'costToComplete'
   | 'drawAllocation'
   | 'retainageRunning'
-  | 'contingencyDrawDown';
+  | 'contingencyDrawDown'
+  | 'revparFromAdrOcc'
+  | 'gopMargin'
+  | 'ffeReserveDollars'
+  | 'revporVsRevpar'
+  | 'walt'
+  | 'tiPerSfPerYearOfTerm'
+  | 'renewalProbabilityWeightedRent'
+  | 'salesPerSf'
+  | 'occupancyCostRatio'
+  | 'percentageRentBreakpoint'
+  | 'clearHeightPremium'
+  | 'truckCountPerSf'
+  | 'lossToLease';
 
 export type UnitFormat = 'usd' | 'pct' | 'bps' | 'pctChange' | 'usdChange' | 'multiple' | 'usdPerSf';
 

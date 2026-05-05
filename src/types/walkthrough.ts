@@ -11,7 +11,9 @@ export type WalkthroughKind =
   | 'holdSellWalk'
   | 'distressedLoanWorkoutWalk'
   | 'waterfallWalk'
-  | 'constructionDrawWalk';
+  | 'constructionDrawWalk'
+  | 'hotelRevparWalk'
+  | 'officeWaltWalk';
 
 export interface WalkthroughStep {
   /** Stable id used as key + used in stats */
