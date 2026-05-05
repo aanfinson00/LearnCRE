@@ -9,6 +9,7 @@ type Mode =
   | 'situational'
   | 'excel'
   | 'longform'
+  | 'vocab'
   | 'certify'
   | 'profile';
 
@@ -24,6 +25,7 @@ const TABS: { id: Mode; label: string; hint: string }[] = [
   { id: 'situational', label: 'Situational', hint: 'Mini case studies and reasoning.' },
   { id: 'longform', label: 'Case study', hint: 'Long-form prose answers, graded against a rubric.' },
   { id: 'excel', label: 'Excel', hint: 'Write spreadsheet formulas against a mini-grid.' },
+  { id: 'vocab', label: 'Vocab', hint: 'Flashcard drill on industry terminology.' },
   { id: 'study', label: 'Study tables', hint: 'Reference cheat sheets.' },
   { id: 'certify', label: 'Certify', hint: 'Benchmark-gated certifications.' },
   { id: 'profile', label: 'Profile', hint: 'Your stats, tier, and achievements.' },

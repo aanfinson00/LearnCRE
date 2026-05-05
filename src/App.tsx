@@ -26,6 +26,9 @@ import { ExcelResults } from './components/ExcelResults';
 import { LongformSetup } from './components/LongformSetup';
 import { LongformScreen } from './components/LongformScreen';
 import { LongformResults } from './components/LongformResults';
+import { VocabSetup } from './components/VocabSetup';
+import { VocabScreen } from './components/VocabScreen';
+import { VocabResults } from './components/VocabResults';
 import { CertListScreen } from './components/CertListScreen';
 import { CertDetailScreen, type CertMode } from './components/CertDetailScreen';
 import { FinalExamScreen } from './components/FinalExamScreen';
@@ -35,6 +38,7 @@ import { useWalkthrough } from './hooks/useWalkthrough';
 import { useSituational } from './hooks/useSituational';
 import { useExcel } from './hooks/useExcel';
 import { useLongform } from './hooks/useLongform';
+import { useVocab } from './hooks/useVocab';
 
 type Mode =
   | 'quiz'
@@ -44,6 +48,7 @@ type Mode =
   | 'situational'
   | 'excel'
   | 'longform'
+  | 'vocab'
   | 'certify'
   | 'profile';
 
@@ -62,6 +67,7 @@ export default function App() {
   const sit = useSituational();
   const excel = useExcel();
   const longform = useLongform();
+  const vocab = useVocab();
 
   const handleSwitch = (m: Mode) => {
     if (m === mode) return;
@@ -80,6 +86,7 @@ export default function App() {
     (mode === 'situational' && sit.state === null) ||
     (mode === 'excel' && excel.state === null) ||
     (mode === 'longform' && longform.state === null) ||
+    (mode === 'vocab' && vocab.state === null) ||
     mode === 'study' ||
     (mode === 'certify' && certView.kind !== 'exam') ||
     mode === 'profile';
@@ -258,6 +265,42 @@ export default function App() {
           onAdvance={longform.advance}
           onQuit={() => {
             longform.reset();
+            setMode('quiz');
+          }}
+        />
+      );
+    }
+
+    if (mode === 'vocab') {
+      if (vocab.state === null) {
+        return (
+          <VocabSetup
+            onStart={(config) => vocab.start(config)}
+            onBack={() => setMode('quiz')}
+          />
+        );
+      }
+      if (vocab.state.status === 'finished') {
+        return (
+          <VocabResults
+            state={vocab.state}
+            onRestart={() => {
+              const cfg = vocab.state!.config;
+              vocab.reset();
+              vocab.start(cfg);
+            }}
+            onNewSetup={vocab.reset}
+          />
+        );
+      }
+      return (
+        <VocabScreen
+          state={vocab.state}
+          onSubmit={vocab.submit}
+          onAdvance={vocab.advance}
+          onFinish={vocab.finish}
+          onQuit={() => {
+            vocab.reset();
             setMode('quiz');
           }}
         />
