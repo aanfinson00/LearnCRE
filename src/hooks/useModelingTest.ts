@@ -8,6 +8,9 @@ import {
 } from '../storage/modelingTest';
 import { applyXpDelta } from '../quiz/xp';
 import { recordSession } from '../storage/localStorage';
+import { evaluateAchievements } from '../quiz/achievements';
+import { buildContext } from '../quiz/achievementContext';
+import { showAchievementToast } from '../components/AchievementToast';
 import type {
   ModelingTestState,
   ModelingTestTemplate,
@@ -141,14 +144,22 @@ export function useModelingTest() {
       state.template.difficulty,
     );
     if (xp > 0) applyXpDelta(xp);
-    recordSession({
+    const checkpointsPassed = state.result.checkpoints.filter(
+      (c) => c.grade === 'pass',
+    ).length;
+    const sessionRecord = {
       id: `modelingTest_${state.startedAt}`,
       finishedAt: completedAt,
-      kind: 'modelingTest',
+      kind: 'modelingTest' as const,
       config: {
         templateId: state.template.id,
         title: state.template.title,
         difficulty: state.template.difficulty,
+        passed: state.result.passed,
+        outputsCorrect: state.result.outputsCorrect,
+        outputsTotal: state.result.outputsTotal,
+        checkpointsPassed,
+        checkpointsTotal: state.result.checkpoints.length,
       },
       attempts: 1,
       correct: state.result.passed ? 1 : 0,
@@ -157,7 +168,10 @@ export function useModelingTest() {
         : state.result.outputsCorrect / state.result.outputsTotal,
       durationMs,
       xpEarned: xp,
-    });
+    };
+    recordSession(sessionRecord);
+    const ctx = buildContext({ latestSession: sessionRecord });
+    for (const id of evaluateAchievements(ctx)) showAchievementToast(id);
     recordedRef.current = state.startedAt;
   }, [state]);
 

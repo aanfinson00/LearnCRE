@@ -1,8 +1,10 @@
 import type { ModelingTestTemplate, ModelingTestDifficulty } from '../../../types/modelingTest';
 import { dcfFiveYrSuburbanOffice } from './dcfFiveYrSuburbanOffice';
+import { loanSizingThreeConstraint } from './loanSizingThreeConstraint';
 
 export const MODELING_TEST_TEMPLATES: ModelingTestTemplate[] = [
   dcfFiveYrSuburbanOffice,
+  loanSizingThreeConstraint,
 ];
 
 export interface PlannedTemplate {
@@ -17,20 +19,12 @@ export interface PlannedTemplate {
  *  setup screen as locked previews so the user can see what's coming. */
 export const PLANNED_TEMPLATES: PlannedTemplate[] = [
   {
-    id: 'loan-sizing-three-constraint',
-    title: 'Loan Sizing — Three Constraints',
-    estimatedMinutes: 15,
-    difficulty: 'intermediate',
-    description:
-      'NOI $5M, value $80M. Solve max loan that simultaneously passes 1.25× DSCR, 75% LTV, and 8% debt yield. Identify the binding constraint.',
-  },
-  {
-    id: 'acq-proforma-sensitivity',
-    title: 'Acquisition Pro-Forma + Sensitivity',
+    id: 'acq-proforma-multifamily',
+    title: 'Acquisition Pro-Forma — Multifamily',
     estimatedMinutes: 25,
     difficulty: 'advanced',
     description:
-      '$40M multifamily acquisition. Build trended NOI (yr 1-5), build a 5×5 sensitivity matrix (going-in cap × exit cap → levered IRR), and report base-case equity multiple.',
+      '$40M MF acquisition with rent bumps + capex reserve + DSCR-constrained debt sizing. Build trended NOI, compute exit, and report levered IRR + equity multiple.',
   },
 ];
 

@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { gradeSubmission, withinTolerance, buildSheet } from '../grade';
 import { dcfFiveYrSuburbanOffice } from '../templates/dcfFiveYrSuburbanOffice';
+import { loanSizingThreeConstraint } from '../templates/loanSizingThreeConstraint';
 
 describe('withinTolerance', () => {
   it('passes within absolute tolerance', () => {
@@ -120,6 +121,67 @@ describe('gradeSubmission — DCF 5-yr template, deliberately wrong loan balance
     const byRef = new Map(result.outputs.map((o) => [o.ref, o]));
     expect(byRef.get('F15')?.grade).toBe('pass');
     expect(byRef.get('B19')?.grade).toBe('pass');
+  });
+});
+
+// Canonical correct formulas for the loan-sizing template.
+const correctLoanSizingFormulas: Record<string, string> = {
+  B11: '=B7/(1-(1+B7)^-B8)',
+  B14: '=B2/B4/B11',
+  B15: '=B3*B5',
+  B16: '=B2/B6',
+  B19: '=MIN(B14:B16)',
+  B22: '=B2/B4',
+  B23: '=B2/(B15*B11)',
+};
+
+describe('gradeSubmission — Loan sizing template, canonical correct formulas', () => {
+  const result = gradeSubmission(loanSizingThreeConstraint, correctLoanSizingFormulas);
+
+  it('passes all outputs and checkpoints', () => {
+    expect(result.passed).toBe(true);
+    for (const o of result.outputs) {
+      expect(o.grade, `${o.ref} ${o.label}`).toBe('pass');
+    }
+    for (const cp of result.checkpoints) {
+      expect(cp.grade, `${cp.ref} ${cp.label}`).toBe('pass');
+    }
+  });
+
+  it('confirms DSCR is the binding constraint', () => {
+    const { sheet } = buildSheet(loanSizingThreeConstraint, correctLoanSizingFormulas);
+    expect(sheet['B14']).toBeLessThan(sheet['B15']!);
+    expect(sheet['B14']).toBeLessThan(sheet['B16']!);
+    expect(sheet['B19']).toBeCloseTo(sheet['B14']!, 0);
+    // Implied DSCR at LTV max should be well below 1.25
+    expect(sheet['B23']).toBeLessThan(1.25);
+    expect(sheet['B23']).toBeGreaterThan(1.05);
+  });
+});
+
+describe('gradeSubmission — Loan sizing, wrong loan constant', () => {
+  // Common error: forget the (1 - (1+r)^-n) denominator and just use rate.
+  const wrong: Record<string, string> = {
+    ...correctLoanSizingFormulas,
+    B11: '=B7',
+  };
+  const result = gradeSubmission(loanSizingThreeConstraint, wrong);
+
+  it('fails the loan constant output', () => {
+    const o = result.outputs.find((x) => x.ref === 'B11');
+    expect(o?.grade).toBe('fail');
+  });
+
+  it('cascades: DSCR-constrained max loan and final max loan also fail', () => {
+    const byRef = new Map(result.outputs.map((o) => [o.ref, o]));
+    expect(byRef.get('B14')?.grade).toBe('fail');
+    expect(byRef.get('B19')?.grade).toBe('fail');
+  });
+
+  it('LTV and debt-yield max-loans still pass — they do not depend on the loan constant', () => {
+    const byRef = new Map(result.outputs.map((o) => [o.ref, o]));
+    expect(byRef.get('B15')?.grade).toBe('pass');
+    expect(byRef.get('B16')?.grade).toBe('pass');
   });
 });
 

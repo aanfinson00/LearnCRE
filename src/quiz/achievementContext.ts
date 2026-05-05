@@ -130,6 +130,31 @@ function excelCorrectIds(sessions: SessionRecord[]): Set<string> {
   return set;
 }
 
+function modelingTestPassedIds(sessions: SessionRecord[]): Set<string> {
+  const set = new Set<string>();
+  for (const s of sessions) {
+    if (s.kind !== 'modelingTest') continue;
+    const cfg = s.config as Record<string, unknown> | undefined;
+    if (cfg?.passed && typeof cfg.templateId === 'string') set.add(cfg.templateId);
+  }
+  return set;
+}
+
+function modelingTestCleanSheetIds(sessions: SessionRecord[]): Set<string> {
+  const set = new Set<string>();
+  for (const s of sessions) {
+    if (s.kind !== 'modelingTest') continue;
+    const cfg = s.config as Record<string, unknown> | undefined;
+    if (!cfg?.passed) continue;
+    const cpPassed = (cfg.checkpointsPassed as number | undefined) ?? 0;
+    const cpTotal = (cfg.checkpointsTotal as number | undefined) ?? 0;
+    if (cpTotal > 0 && cpPassed === cpTotal && typeof cfg.templateId === 'string') {
+      set.add(cfg.templateId);
+    }
+  }
+  return set;
+}
+
 function situationalCategoryAccuracy(
   sessions: SessionRecord[],
 ): Record<string, { total: number; correct: number }> {
@@ -180,5 +205,7 @@ export function buildContext(opts?: {
     situationalCorrectIds: situationalCorrectIds(sessions),
     situationalCategoryAccuracy: situationalCategoryAccuracy(sessions),
     excelCorrectIds: excelCorrectIds(sessions),
+    modelingTestPassedIds: modelingTestPassedIds(sessions),
+    modelingTestCleanSheetIds: modelingTestCleanSheetIds(sessions),
   };
 }
