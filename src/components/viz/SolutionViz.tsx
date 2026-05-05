@@ -32,6 +32,9 @@ import { OperatingExpenseRatioViz } from './OperatingExpenseRatioViz';
 import { YieldOnCostViz } from './YieldOnCostViz';
 import { ReversionValueViz } from './ReversionValueViz';
 import { BreakEvenOccupancyViz } from './BreakEvenOccupancyViz';
+import { NetEffectiveRentViz } from './NetEffectiveRentViz';
+import { WaltViz } from './WaltViz';
+import { CagrViz } from './CagrViz';
 
 interface Props {
   question: Question;
@@ -477,6 +480,46 @@ export function SolutionViz({ question }: Props) {
             pgi={ctx.pgi}
             opex={ctx.opex}
             debtServiceAnnual={ctx.debtServiceAnnual}
+          />
+        );
+      }
+      return null;
+
+    case 'netEffectiveRent':
+      if (
+        ctx.rentPerSf !== undefined &&
+        ctx.leaseTermYears !== undefined &&
+        ctx.tiPerSf !== undefined &&
+        ctx.freeMonths !== undefined
+      ) {
+        return (
+          <NetEffectiveRentViz
+            rentPerSf={ctx.rentPerSf}
+            leaseTermYears={ctx.leaseTermYears}
+            tiPerSf={ctx.tiPerSf}
+            freeMonths={ctx.freeMonths}
+          />
+        );
+      }
+      return null;
+
+    case 'walt':
+      if (Array.isArray(ctx.leases) && ctx.leases.length > 0) {
+        return <WaltViz leases={ctx.leases} />;
+      }
+      return null;
+
+    case 'cagr':
+      if (
+        ctx.startValue !== undefined &&
+        ctx.endValue !== undefined &&
+        ctx.projectionYears !== undefined
+      ) {
+        return (
+          <CagrViz
+            startValue={ctx.startValue}
+            endValue={ctx.endValue}
+            projectionYears={ctx.projectionYears}
           />
         );
       }
