@@ -23,18 +23,14 @@ export function TierBadge() {
   const { tier: next, xpToGo } = nextTier(xp);
 
   return (
-    <div className="flex flex-col gap-1 font-mono text-[11px] num">
-      <div className="flex items-baseline gap-1.5">
-        <span className="rounded-md bg-warm-paper/60 px-2 py-0.5 font-medium text-warm-ink">
-          {tier.label}
-        </span>
-        <span className="text-warm-mute">{xp.toLocaleString()} XP</span>
+    <div className="flex flex-col items-start gap-1.5 font-mono text-[11px] num">
+      <span className="whitespace-nowrap rounded-md bg-warm-paper/60 px-2 py-0.5 font-medium text-warm-ink">
+        {tier.label}
+      </span>
+      <div className="whitespace-nowrap text-[10px] text-warm-mute">
+        {xp.toLocaleString()} XP
+        {next && <> · {xpToGo.toLocaleString()} → {next.label}</>}
       </div>
-      {next && (
-        <div className="text-[10px] text-warm-mute">
-          {xpToGo.toLocaleString()} → {next.label}
-        </div>
-      )}
     </div>
   );
 }
