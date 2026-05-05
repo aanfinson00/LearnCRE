@@ -140,6 +140,12 @@ function modelingTestPassedIds(sessions: SessionRecord[]): Set<string> {
   return set;
 }
 
+function distinctModeKinds(sessions: SessionRecord[]): Set<string> {
+  const set = new Set<string>();
+  for (const s of sessions) set.add(s.kind);
+  return set;
+}
+
 function modelingTestCleanSheetIds(sessions: SessionRecord[]): Set<string> {
   const set = new Set<string>();
   for (const s of sessions) {
@@ -207,5 +213,6 @@ export function buildContext(opts?: {
     excelCorrectIds: excelCorrectIds(sessions),
     modelingTestPassedIds: modelingTestPassedIds(sessions),
     modelingTestCleanSheetIds: modelingTestCleanSheetIds(sessions),
+    distinctModeKinds: distinctModeKinds(sessions),
   };
 }

@@ -50,6 +50,8 @@ export interface AchievementContext {
   modelingTestPassedIds: Set<string>;
   /** Distinct modeling-test template ids the user has passed with all checkpoints clean */
   modelingTestCleanSheetIds: Set<string>;
+  /** Distinct mode kinds the user has run a session in */
+  distinctModeKinds: Set<string>;
 }
 
 export interface AchievementDef {
@@ -216,6 +218,26 @@ export const ACHIEVEMENTS: AchievementDef[] = [
     description: 'Pass a modeling-test template with every checkpoint also correct.',
     icon: '✨',
     evaluate: (c) => c.modelingTestCleanSheetIds.size >= 1,
+  },
+  {
+    id: 'tour-guide',
+    label: 'Tour Guide',
+    description: 'Run a session in every mode at least once.',
+    icon: '🗺️',
+    evaluate: (c) => {
+      const REQUIRED: SessionRecord['kind'][] = [
+        'quiz',
+        'speedDrill',
+        'walkthrough',
+        'situational',
+        'excel',
+        'longform',
+        'vocab',
+        'mockInterview',
+        'modelingTest',
+      ];
+      return REQUIRED.every((k) => c.distinctModeKinds.has(k));
+    },
   },
 ];
 
