@@ -124,6 +124,27 @@ export const mortgageUw: Cert = {
         },
       ],
     },
+    {
+      id: 'uw-m5-loan-docs',
+      title: 'Loan-document literacy',
+      description:
+        'Read DSCR / cash-trap / springing-recourse / cure-rights language as it actually appears in loan docs.',
+      benchmarks: [
+        {
+          id: 'uw-m5-situational',
+          kind: 'situationalCorrect',
+          label: 'DSCR + remedies doc-literacy',
+          caseIds: [
+            'dscr-test-timing-mechanics',
+            'dscr-cash-trap-trigger',
+            'dscr-cure-rights',
+            'dscr-springing-recourse',
+          ],
+          minBestAnswerPct: 0.75,
+          minAttempts: 6,
+        },
+      ],
+    },
   ],
   finalExam: {
     totalQuestions: 20,
@@ -157,6 +178,10 @@ export const mortgageUw: Cert = {
         'distressed-loan-workout',
         'waterfall-clawback-mechanics',
         'waterfall-key-person-event',
+        'dscr-test-timing-mechanics',
+        'dscr-cash-trap-trigger',
+        'dscr-cure-rights',
+        'dscr-springing-recourse',
       ],
       excelIds: ['loan-sizing-dscr', 'amortization-principal'],
       walkIds: ['walk-dscr-1', 'walk-distressed-1', 'walk-combined-1'],

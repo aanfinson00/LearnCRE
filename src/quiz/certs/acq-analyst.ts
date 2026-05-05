@@ -86,12 +86,13 @@ export const acqAnalyst: Cert = {
         {
           id: 'acq-m3-situational',
           kind: 'situationalCorrect',
-          label: 'OM red-flag reasoning',
+          label: 'OM + PSA reasoning',
           caseIds: [
             'sponsor-proforma-aggressive',
             'om-red-flags',
             'noi-growth-smell-test',
             'exit-cap-conservatism',
+            'psa-earnest-money-default',
           ],
           minBestAnswerPct: 0.75,
           minAttempts: 8,
@@ -167,6 +168,7 @@ export const acqAnalyst: Cert = {
         'om-red-flags',
         'exit-cap-conservatism',
         'tenant-credit-pricing',
+        'psa-earnest-money-default',
       ],
       excelIds: ['mark-to-market-lift', 'cap-rate-from-comps'],
       walkIds: ['walk-acq-mock-1'],

@@ -72,12 +72,13 @@ export const developer: Cert = {
         {
           id: 'dev-m3-situational',
           kind: 'situationalCorrect',
-          label: 'Construction process reasoning',
+          label: 'Construction process + contract reasoning',
           caseIds: [
             'construction-cost-overrun',
             'lender-draw-mechanics',
             'capital-call-mechanics',
             'bank-account-structure',
+            'construction-liquidated-damages',
           ],
           minBestAnswerPct: 0.7,
           minAttempts: 8,
@@ -137,6 +138,8 @@ export const developer: Cert = {
         'capital-call-mechanics',
         'bank-account-structure',
         'om-red-flags',
+        'construction-liquidated-damages',
+        'lpa-cost-overrun-sharing',
       ],
       walkIds: ['walk-dev-feasibility-1', 'walk-am-valueadd-1'],
       excelIds: ['per-unit-normalization', 'reversion-value'],

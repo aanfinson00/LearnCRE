@@ -82,6 +82,18 @@ export const assetManager: Cert = {
           minBestAnswerPct: 0.7,
           minAttempts: 8,
         },
+        {
+          id: 'am-m2-doc-literacy',
+          kind: 'situationalCorrect',
+          label: 'Lease document literacy',
+          caseIds: [
+            'lease-billback-allowance',
+            'lease-base-year-vs-stop',
+            'lease-cam-reconciliation',
+          ],
+          minBestAnswerPct: 0.7,
+          minAttempts: 6,
+        },
       ],
     },
     {
@@ -182,6 +194,9 @@ export const assetManager: Cert = {
         'refi-vs-sell',
         'hold-extension-discipline',
         'capex-reserve-discipline',
+        'lease-billback-allowance',
+        'lease-base-year-vs-stop',
+        'lease-cam-reconciliation',
       ],
       walkIds: ['walk-am-holdsell-1', 'walk-am-valueadd-1'],
       longformIds: ['diagnose-noi-miss', 'refi-or-sell-memo'],

@@ -55,6 +55,19 @@ import { waterfallIrrVsMoicHurdle } from './waterfallIrrVsMoicHurdle';
 import { waterfallClawbackMechanics } from './waterfallClawbackMechanics';
 import { waterfallPrefCompoundVsSimple } from './waterfallPrefCompoundVsSimple';
 import { waterfallKeyPersonEvent } from './waterfallKeyPersonEvent';
+import { dscrTestTimingMechanics } from './dscrTestTimingMechanics';
+import { dscrCashTrapTrigger } from './dscrCashTrapTrigger';
+import { dscrCureRights } from './dscrCureRights';
+import { dscrSpringingRecourse } from './dscrSpringingRecourse';
+import { lpaInitialVsAdditionalCapital } from './lpaInitialVsAdditionalCapital';
+import { lpaCapitalCallDefault } from './lpaCapitalCallDefault';
+import { lpaCostOverrunSharing } from './lpaCostOverrunSharing';
+import { lpaContributionRatios } from './lpaContributionRatios';
+import { leaseBillbackAllowance } from './leaseBillbackAllowance';
+import { leaseBaseYearVsStop } from './leaseBaseYearVsStop';
+import { leaseCamReconciliation } from './leaseCamReconciliation';
+import { constructionLiquidatedDamages } from './constructionLiquidatedDamages';
+import { psaEarnestMoneyDefault } from './psaEarnestMoneyDefault';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -107,6 +120,19 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   waterfallClawbackMechanics,
   waterfallPrefCompoundVsSimple,
   waterfallKeyPersonEvent,
+  dscrTestTimingMechanics,
+  dscrCashTrapTrigger,
+  dscrCureRights,
+  dscrSpringingRecourse,
+  lpaInitialVsAdditionalCapital,
+  lpaCapitalCallDefault,
+  lpaCostOverrunSharing,
+  lpaContributionRatios,
+  leaseBillbackAllowance,
+  leaseBaseYearVsStop,
+  leaseCamReconciliation,
+  constructionLiquidatedDamages,
+  psaEarnestMoneyDefault,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {
