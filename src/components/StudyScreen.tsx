@@ -11,6 +11,7 @@ import {
 } from '../math/rounding';
 import { Button } from './ui/Button';
 import { SimpleStudyList, StudyTable } from './StudyTable';
+import { ModePrimer } from './ModePrimer';
 
 interface Props {
   onBack: () => void;
@@ -46,6 +47,7 @@ const rule72Rows = [0.05, 0.06, 0.07, 0.08, 0.09, 0.1, 0.12, 0.15, 0.18, 0.2, 0.
 export function StudyScreen({ onBack }: Props) {
   return (
     <div className="mx-auto max-w-5xl space-y-8 py-10">
+      <ModePrimer mode="study" />
       <header className="flex items-start justify-between gap-6">
         <div className="space-y-2">
           <h1 className="display text-4xl text-warm-black">

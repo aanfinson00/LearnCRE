@@ -3,6 +3,7 @@ import { useCertProgress } from '../hooks/useCertProgress';
 import { CertProgressBar } from './CertProgressBar';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
+import { ModePrimer } from './ModePrimer';
 
 interface Props {
   onOpenCert: (certId: string) => void;
@@ -14,6 +15,7 @@ export function CertListScreen({ onOpenCert, onBack }: Props) {
 
   return (
     <div className="mx-auto max-w-5xl space-y-8 py-10">
+      <ModePrimer mode="certify" />
       <header className="flex items-start justify-between gap-6">
         <div className="space-y-2">
           <h1 className="display text-4xl text-warm-black">

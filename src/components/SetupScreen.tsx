@@ -12,6 +12,8 @@ import { AnchorsCard } from './AnchorsCard';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
 import { loadConfig, loadLifetime, saveConfig } from '../storage/localStorage';
+import { loadPreferredRole } from '../storage/onboarding';
+import { ModePrimer } from './ModePrimer';
 
 interface Props {
   onStart: (config: SessionConfig) => void;
@@ -85,7 +87,9 @@ export function SetupScreen({ onStart }: Props) {
   const [tolerance, setTolerance] = useState<TolerancePreset>(stored?.tolerancePreset ?? 'normal');
   const [difficulty, setDifficulty] = useState<DifficultyMode>(stored?.difficulty ?? 'intermediate');
   const [assetClass, setAssetClass] = useState<AssetClass>(stored?.assetClass ?? 'mixed');
-  const [role, setRole] = useState<Role | 'all'>(stored?.role ?? 'all');
+  const [role, setRole] = useState<Role | 'all'>(
+    stored?.role ?? loadPreferredRole() ?? 'all',
+  );
   const [spacedRepetition, setSpacedRepetition] = useState<boolean>(stored?.spacedRepetition ?? false);
   const [lifetime, setLifetime] = useState<LifetimeStats | null>(null);
   const [missKinds, setMissKinds] = useState<QuestionKind[]>([]);
@@ -173,6 +177,7 @@ export function SetupScreen({ onStart }: Props) {
 
   return (
     <div className="mx-auto max-w-3xl space-y-8 py-12 pb-32 sm:pb-12">
+      <ModePrimer mode="quiz" />
       <header className="flex items-start justify-between gap-6">
         <div className="space-y-3">
           <h1 className="display text-5xl text-warm-black">

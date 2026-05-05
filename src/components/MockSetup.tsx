@@ -6,6 +6,7 @@ import type { MockArchetypeId } from '../types/mockInterview';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
 import { MockHistory } from './MockHistory';
+import { ModePrimer } from './ModePrimer';
 
 interface Props {
   onStart: (archetypeId: MockArchetypeId) => void;
@@ -27,6 +28,7 @@ export function MockSetup({ onStart, onBack }: Props) {
 
   return (
     <div className="mx-auto max-w-3xl space-y-6 py-10">
+      <ModePrimer mode="mockInterview" />
       <header className="flex items-start justify-between gap-6">
         <div className="space-y-2">
           <h1 className="display text-4xl text-warm-black">
