@@ -8,7 +8,7 @@ import { SpeedDrillScreen } from './components/SpeedDrillScreen';
 import { SpeedDrillResults } from './components/SpeedDrillResults';
 import { ProfileScreen } from './components/ProfileScreen';
 import { StudyScreen } from './components/StudyScreen';
-import { TopNav } from './components/TopNav';
+import { SideNav } from './components/SideNav';
 import { AchievementToastHost } from './components/AchievementToast';
 import { FeedbackButton } from './components/FeedbackButton';
 import { FeedbackContextProvider } from './hooks/useFeedbackContext';
@@ -84,19 +84,6 @@ export default function App() {
   const handleCertDeepLink = (m: CertMode) => {
     setMode(m);
   };
-
-  const showTopNav =
-    (mode === 'quiz' && session.status === 'setup') ||
-    (mode === 'speedDrill' && drill.state.cells.length === 0) ||
-    (mode === 'walkthrough' && walk.state === null) ||
-    (mode === 'situational' && sit.state === null) ||
-    (mode === 'excel' && excel.state === null) ||
-    (mode === 'longform' && longform.state === null) ||
-    (mode === 'vocab' && vocab.state === null) ||
-    (mode === 'mockInterview' && mock.state === null) ||
-    mode === 'study' ||
-    (mode === 'certify' && certView.kind !== 'exam') ||
-    mode === 'profile';
 
   const innerContent = (() => {
     if (mode === 'study') {
@@ -433,8 +420,8 @@ export default function App() {
   return (
     <FeedbackContextProvider>
       <ScratchSheetProvider>
-        {showTopNav && <TopNav active={mode} onSwitch={handleSwitch} />}
-        {innerContent}
+        <SideNav active={mode} onSwitch={handleSwitch} />
+        <main className="lg:pl-56">{innerContent}</main>
         <AchievementToastHost />
         <ScratchSheet />
         <FeedbackButton />
