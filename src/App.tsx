@@ -29,6 +29,9 @@ import { LongformResults } from './components/LongformResults';
 import { VocabSetup } from './components/VocabSetup';
 import { VocabScreen } from './components/VocabScreen';
 import { VocabResults } from './components/VocabResults';
+import { MockSetup } from './components/MockSetup';
+import { MockScreen } from './components/MockScreen';
+import { MockResults } from './components/MockResults';
 import { CertListScreen } from './components/CertListScreen';
 import { CertDetailScreen, type CertMode } from './components/CertDetailScreen';
 import { FinalExamScreen } from './components/FinalExamScreen';
@@ -39,6 +42,7 @@ import { useSituational } from './hooks/useSituational';
 import { useExcel } from './hooks/useExcel';
 import { useLongform } from './hooks/useLongform';
 import { useVocab } from './hooks/useVocab';
+import { useMockInterview } from './hooks/useMockInterview';
 
 type Mode =
   | 'quiz'
@@ -49,6 +53,7 @@ type Mode =
   | 'excel'
   | 'longform'
   | 'vocab'
+  | 'mockInterview'
   | 'certify'
   | 'profile';
 
@@ -68,6 +73,7 @@ export default function App() {
   const excel = useExcel();
   const longform = useLongform();
   const vocab = useVocab();
+  const mock = useMockInterview();
 
   const handleSwitch = (m: Mode) => {
     if (m === mode) return;
@@ -87,6 +93,7 @@ export default function App() {
     (mode === 'excel' && excel.state === null) ||
     (mode === 'longform' && longform.state === null) ||
     (mode === 'vocab' && vocab.state === null) ||
+    (mode === 'mockInterview' && mock.state === null) ||
     mode === 'study' ||
     (mode === 'certify' && certView.kind !== 'exam') ||
     mode === 'profile';
@@ -301,6 +308,41 @@ export default function App() {
           onFinish={vocab.finish}
           onQuit={() => {
             vocab.reset();
+            setMode('quiz');
+          }}
+        />
+      );
+    }
+
+    if (mode === 'mockInterview') {
+      if (mock.state === null) {
+        return (
+          <MockSetup
+            onStart={(archetypeId) => mock.start(archetypeId)}
+            onBack={() => setMode('quiz')}
+          />
+        );
+      }
+      if (mock.state.status === 'finished') {
+        return (
+          <MockResults
+            state={mock.state}
+            onRestart={() => {
+              const id = mock.state!.spec.id;
+              mock.reset();
+              mock.start(id);
+            }}
+            onNewSetup={mock.reset}
+          />
+        );
+      }
+      return (
+        <MockScreen
+          state={mock.state}
+          onSubmit={mock.submit}
+          onAdvance={mock.advance}
+          onQuit={() => {
+            mock.reset();
             setMode('quiz');
           }}
         />

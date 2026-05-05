@@ -17,7 +17,7 @@ export interface ProfilesRegistry {
 export interface SessionRecord {
   id: string;
   finishedAt: number;
-  kind: 'quiz' | 'speedDrill' | 'walkthrough' | 'situational' | 'excel' | 'longform' | 'vocab';
+  kind: 'quiz' | 'speedDrill' | 'walkthrough' | 'situational' | 'excel' | 'longform' | 'vocab' | 'mockInterview';
   /** snapshot of the relevant config — not strongly typed to keep storage small */
   config: Record<string, unknown>;
   attempts: number;
