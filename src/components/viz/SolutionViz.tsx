@@ -20,6 +20,11 @@ import { PricePerUnitViz } from './PricePerUnitViz';
 import { RentPerUnitViz } from './RentPerUnitViz';
 import { OpexPerUnitViz } from './OpexPerUnitViz';
 import { SalesPerSfViz } from './SalesPerSfViz';
+import { GoingInCapViz } from './GoingInCapViz';
+import { LoanConstantViz } from './LoanConstantViz';
+import { DscrFromNoiAndDsViz } from './DscrFromNoiAndDsViz';
+import { DscrTestPassesViz } from './DscrTestPassesViz';
+import { GrossRentMultiplierViz } from './GrossRentMultiplierViz';
 
 interface Props {
   question: Question;
@@ -322,6 +327,63 @@ export function SolutionViz({ question }: Props) {
           <SalesPerSfViz
             tenantSales={ctx.tenantSales}
             buildingSf={ctx.buildingSf}
+          />
+        );
+      }
+      return null;
+
+    case 'goingInCap':
+      if (ctx.purchasePrice !== undefined && ctx.noi !== undefined) {
+        return (
+          <GoingInCapViz purchasePrice={ctx.purchasePrice} noi={ctx.noi} />
+        );
+      }
+      return null;
+
+    case 'loanConstant':
+      if (ctx.interestRate !== undefined && ctx.amortYears !== undefined) {
+        return (
+          <LoanConstantViz
+            interestRate={ctx.interestRate}
+            amortYears={ctx.amortYears}
+          />
+        );
+      }
+      return null;
+
+    case 'dscrFromNoiAndDs':
+      if (ctx.noi !== undefined && ctx.debtServiceAnnual !== undefined) {
+        return (
+          <DscrFromNoiAndDsViz
+            noi={ctx.noi}
+            debtServiceAnnual={ctx.debtServiceAnnual}
+          />
+        );
+      }
+      return null;
+
+    case 'dscrTestPasses':
+      if (
+        ctx.noi !== undefined &&
+        ctx.debtServiceAnnual !== undefined &&
+        ctx.dscrTarget !== undefined
+      ) {
+        return (
+          <DscrTestPassesViz
+            noi={ctx.noi}
+            debtServiceAnnual={ctx.debtServiceAnnual}
+            dscrTarget={ctx.dscrTarget}
+          />
+        );
+      }
+      return null;
+
+    case 'grossRentMultiplier':
+      if (ctx.purchasePrice !== undefined && ctx.gpr !== undefined) {
+        return (
+          <GrossRentMultiplierViz
+            purchasePrice={ctx.purchasePrice}
+            gpr={ctx.gpr}
           />
         );
       }
