@@ -15,6 +15,11 @@ import { RentRollChangeViz } from './RentRollChangeViz';
 import { ReplacementCostViz } from './ReplacementCostViz';
 import { TiVsRentViz } from './TiVsRentViz';
 import { VacancyViz } from './VacancyViz';
+import { PricePerSfViz } from './PricePerSfViz';
+import { PricePerUnitViz } from './PricePerUnitViz';
+import { RentPerUnitViz } from './RentPerUnitViz';
+import { OpexPerUnitViz } from './OpexPerUnitViz';
+import { SalesPerSfViz } from './SalesPerSfViz';
 
 interface Props {
   question: Question;
@@ -271,6 +276,51 @@ export function SolutionViz({ question }: Props) {
             purchasePrice={ctx.purchasePrice}
             capex={ctx.capex}
             closingCostRate={ctx.closingCostRate}
+            buildingSf={ctx.buildingSf}
+          />
+        );
+      }
+      return null;
+
+    case 'pricePerSf':
+      if (ctx.purchasePrice !== undefined && ctx.buildingSf !== undefined) {
+        return (
+          <PricePerSfViz
+            purchasePrice={ctx.purchasePrice}
+            buildingSf={ctx.buildingSf}
+          />
+        );
+      }
+      return null;
+
+    case 'pricePerUnit':
+      if (ctx.purchasePrice !== undefined && ctx.units !== undefined) {
+        return (
+          <PricePerUnitViz
+            purchasePrice={ctx.purchasePrice}
+            units={ctx.units}
+          />
+        );
+      }
+      return null;
+
+    case 'rentPerUnit':
+      if (ctx.gpr !== undefined && ctx.units !== undefined) {
+        return <RentPerUnitViz gpr={ctx.gpr} units={ctx.units} />;
+      }
+      return null;
+
+    case 'opexPerUnit':
+      if (ctx.opex !== undefined && ctx.units !== undefined) {
+        return <OpexPerUnitViz opex={ctx.opex} units={ctx.units} />;
+      }
+      return null;
+
+    case 'salesPerSf':
+      if (ctx.tenantSales !== undefined && ctx.buildingSf !== undefined) {
+        return (
+          <SalesPerSfViz
+            tenantSales={ctx.tenantSales}
             buildingSf={ctx.buildingSf}
           />
         );
