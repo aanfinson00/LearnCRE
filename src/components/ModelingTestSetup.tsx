@@ -7,6 +7,7 @@ import { bestAttempt, loadDraft } from '../storage/modelingTest';
 import type { ModelingTestTemplate } from '../types/modelingTest';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
+import { ModePrimer } from './ModePrimer';
 
 interface Props {
   onOpen: (template: ModelingTestTemplate) => void;
@@ -42,6 +43,7 @@ export function ModelingTestSetup({ onOpen, onBack }: Props) {
 
   return (
     <div className="mx-auto max-w-3xl space-y-6 py-10">
+      <ModePrimer mode="modelingTest" />
       <header className="flex items-baseline justify-between gap-4">
         <div>
           <div className="display text-3xl text-warm-black">

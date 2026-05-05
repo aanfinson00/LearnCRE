@@ -10,6 +10,7 @@ import { assetClassOrder, assetClasses, type AssetClass } from '../quiz/assetCla
 import { ROLES, type Role } from '../types/role';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
+import { ModePrimer } from './ModePrimer';
 
 interface Props {
   onStart: (config: SituationalRunConfig) => void;
@@ -44,6 +45,7 @@ export function SituationalSetup({ onStart, onBack }: Props) {
 
   return (
     <div className="mx-auto max-w-3xl space-y-6 py-10">
+      <ModePrimer mode="situational" />
       <header className="flex items-start justify-between gap-6">
         <div className="space-y-2">
           <h1 className="display text-4xl text-warm-black">

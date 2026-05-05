@@ -4,6 +4,7 @@ import { formatCellExpected, variants } from '../quiz/speedDrillVariants';
 import type { CellOrder, DrillVariantId, SpeedDrillConfig } from '../types/speedDrill';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
+import { ModePrimer } from './ModePrimer';
 
 const CRE_VARIANTS: DrillVariantId[] = ['capCompression', 'irrToEm', 'loanConstant', 'noiCapToValue'];
 const PURE_MATH_VARIANTS: DrillVariantId[] = [
@@ -98,6 +99,7 @@ export function SpeedDrillSetup({ onStart, onBack }: Props) {
 
   return (
     <div className="mx-auto max-w-3xl space-y-6 py-8">
+      <ModePrimer mode="speedDrill" />
       <header className="space-y-1">
         <h1 className="text-2xl font-semibold text-warm-black">Times Table Speed Drill</h1>
         <p className="text-sm text-warm-stone">

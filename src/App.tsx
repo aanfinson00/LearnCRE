@@ -9,6 +9,8 @@ import { SpeedDrillResults } from './components/SpeedDrillResults';
 import { ProfileScreen } from './components/ProfileScreen';
 import { StudyScreen } from './components/StudyScreen';
 import { SideNav } from './components/SideNav';
+import { WelcomeModal } from './components/WelcomeModal';
+import { hasSeenWelcome } from './storage/onboarding';
 import { AchievementToastHost } from './components/AchievementToast';
 import { FeedbackButton } from './components/FeedbackButton';
 import { FeedbackContextProvider } from './hooks/useFeedbackContext';
@@ -70,6 +72,7 @@ type CertView =
 export default function App() {
   const [mode, setMode] = useState<Mode>('quiz');
   const [certView, setCertView] = useState<CertView>({ kind: 'list' });
+  const [showWelcome, setShowWelcome] = useState<boolean>(() => !hasSeenWelcome());
   const { session, stats, start, submit, next, reset, endSession, enterReview, exitReview } =
     useQuizSession();
   const drill = useSpeedDrill();
@@ -457,6 +460,15 @@ export default function App() {
       <ScratchSheetProvider>
         <SideNav active={mode} onSwitch={handleSwitch} />
         <main className="lg:pl-56">{innerContent}</main>
+        {showWelcome && (
+          <WelcomeModal
+            onSkip={() => setShowWelcome(false)}
+            onStartQuiz={() => {
+              setShowWelcome(false);
+              setMode('quiz');
+            }}
+          />
+        )}
         <AchievementToastHost />
         <ScratchSheet />
         <FeedbackButton />

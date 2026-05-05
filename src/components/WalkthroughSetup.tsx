@@ -4,6 +4,7 @@ import type { WalkthroughDef } from '../types/walkthrough';
 import { ROLES, matchesRole, type Role } from '../types/role';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
+import { ModePrimer } from './ModePrimer';
 
 interface Props {
   onStart: (def: WalkthroughDef) => void;
@@ -19,6 +20,7 @@ export function WalkthroughSetup({ onStart, onBack }: Props) {
 
   return (
     <div className="mx-auto max-w-3xl space-y-6 py-10">
+      <ModePrimer mode="walkthrough" />
       <header className="flex items-start justify-between gap-6">
         <div className="space-y-2">
           <h1 className="display text-4xl text-warm-black">
