@@ -25,6 +25,10 @@ import { LoanConstantViz } from './LoanConstantViz';
 import { DscrFromNoiAndDsViz } from './DscrFromNoiAndDsViz';
 import { DscrTestPassesViz } from './DscrTestPassesViz';
 import { GrossRentMultiplierViz } from './GrossRentMultiplierViz';
+import { OtherIncomeImpactViz } from './OtherIncomeImpactViz';
+import { LossToLeaseViz } from './LossToLeaseViz';
+import { OccupancyCostRatioViz } from './OccupancyCostRatioViz';
+import { OperatingExpenseRatioViz } from './OperatingExpenseRatioViz';
 
 interface Props {
   question: Question;
@@ -386,6 +390,50 @@ export function SolutionViz({ question }: Props) {
             gpr={ctx.gpr}
           />
         );
+      }
+      return null;
+
+    case 'otherIncomeImpact':
+      if (
+        ctx.otherIncome !== undefined &&
+        ctx.vacancyRate !== undefined &&
+        ctx.capRate !== undefined
+      ) {
+        return (
+          <OtherIncomeImpactViz
+            otherIncome={ctx.otherIncome}
+            vacancyRate={ctx.vacancyRate}
+            capRate={ctx.capRate}
+          />
+        );
+      }
+      return null;
+
+    case 'lossToLease':
+      if (ctx.marketRent !== undefined && ctx.inPlaceRent !== undefined) {
+        return (
+          <LossToLeaseViz
+            marketRent={ctx.marketRent}
+            inPlaceRent={ctx.inPlaceRent}
+          />
+        );
+      }
+      return null;
+
+    case 'occupancyCostRatio':
+      if (ctx.baseRent !== undefined && ctx.tenantSales !== undefined) {
+        return (
+          <OccupancyCostRatioViz
+            baseRent={ctx.baseRent}
+            tenantSales={ctx.tenantSales}
+          />
+        );
+      }
+      return null;
+
+    case 'operatingExpenseRatio':
+      if (ctx.egi !== undefined && ctx.opex !== undefined) {
+        return <OperatingExpenseRatioViz egi={ctx.egi} opex={ctx.opex} />;
       }
       return null;
 
