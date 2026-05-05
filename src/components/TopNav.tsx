@@ -9,6 +9,7 @@ type Mode =
   | 'situational'
   | 'excel'
   | 'longform'
+  | 'certify'
   | 'profile';
 
 interface Props {
@@ -24,6 +25,7 @@ const TABS: { id: Mode; label: string; hint: string }[] = [
   { id: 'longform', label: 'Case study', hint: 'Long-form prose answers, graded against a rubric.' },
   { id: 'excel', label: 'Excel', hint: 'Write spreadsheet formulas against a mini-grid.' },
   { id: 'study', label: 'Study tables', hint: 'Reference cheat sheets.' },
+  { id: 'certify', label: 'Certify', hint: 'Benchmark-gated certifications.' },
   { id: 'profile', label: 'Profile', hint: 'Your stats, tier, and achievements.' },
 ];
 

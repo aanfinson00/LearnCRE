@@ -26,6 +26,9 @@ import { ExcelResults } from './components/ExcelResults';
 import { LongformSetup } from './components/LongformSetup';
 import { LongformScreen } from './components/LongformScreen';
 import { LongformResults } from './components/LongformResults';
+import { CertListScreen } from './components/CertListScreen';
+import { CertDetailScreen, type CertMode } from './components/CertDetailScreen';
+import { FinalExamScreen } from './components/FinalExamScreen';
 import { useQuizSession } from './hooks/useQuizSession';
 import { useSpeedDrill } from './hooks/useSpeedDrill';
 import { useWalkthrough } from './hooks/useWalkthrough';
@@ -41,10 +44,17 @@ type Mode =
   | 'situational'
   | 'excel'
   | 'longform'
+  | 'certify'
   | 'profile';
+
+type CertView =
+  | { kind: 'list' }
+  | { kind: 'detail'; certId: string }
+  | { kind: 'exam'; certId: string };
 
 export default function App() {
   const [mode, setMode] = useState<Mode>('quiz');
+  const [certView, setCertView] = useState<CertView>({ kind: 'list' });
   const { session, stats, start, submit, next, reset, endSession, enterReview, exitReview } =
     useQuizSession();
   const drill = useSpeedDrill();
@@ -56,6 +66,11 @@ export default function App() {
   const handleSwitch = (m: Mode) => {
     if (m === mode) return;
     setMode(m);
+    if (m === 'certify') setCertView({ kind: 'list' });
+  };
+
+  const handleCertDeepLink = (m: CertMode) => {
+    setMode(m);
   };
 
   const showTopNav =
@@ -66,6 +81,7 @@ export default function App() {
     (mode === 'excel' && excel.state === null) ||
     (mode === 'longform' && longform.state === null) ||
     mode === 'study' ||
+    (mode === 'certify' && certView.kind !== 'exam') ||
     mode === 'profile';
 
   const innerContent = (() => {
@@ -75,6 +91,37 @@ export default function App() {
 
     if (mode === 'profile') {
       return <ProfileScreen onBack={() => setMode('quiz')} />;
+    }
+
+    if (mode === 'certify') {
+      if (certView.kind === 'exam') {
+        return (
+          <FinalExamScreen
+            certId={certView.certId}
+            onExit={() =>
+              setCertView({ kind: 'detail', certId: certView.certId })
+            }
+          />
+        );
+      }
+      if (certView.kind === 'detail') {
+        return (
+          <CertDetailScreen
+            certId={certView.certId}
+            onBack={() => setCertView({ kind: 'list' })}
+            onDeepLink={handleCertDeepLink}
+            onStartFinalExam={(id) =>
+              setCertView({ kind: 'exam', certId: id })
+            }
+          />
+        );
+      }
+      return (
+        <CertListScreen
+          onOpenCert={(id) => setCertView({ kind: 'detail', certId: id })}
+          onBack={() => setMode('quiz')}
+        />
+      );
     }
 
     if (mode === 'walkthrough') {
