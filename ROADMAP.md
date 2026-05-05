@@ -49,7 +49,7 @@ First Steps · Foundations · Hot Streak · Week One · Hundred Club · Five-Hun
 - Austin Anfinson tokens: warm-black/copper/warm-white palette, Outfit + Instrument Serif, motion `cubic-bezier(0.22, 1, 0.36, 1)` at 150/250/400ms
 - Persistent left **SideNav** (4 sections — Drill / Apply / Reference / Progress) with hamburger drawer below `lg`. Replaces the legacy 11-tab top nav
 - TierBadge in sidebar header, ProfilePicker docked at sidebar footer (drop-up to avoid viewport clipping)
-- Inline-SVG visualizations covering 6 of 35 question kinds (cap compression, NOI waterfall, vacancy, IRR/hold, compound growth, generic solution viz)
+- Inline-SVG visualizations covering 36 of 63 question kinds (cap compression, NOI waterfall, vacancy, IRR/hold, compound growth, rent roll change, TI vs rent, replacement cost, dev spread, debt yield, DSCR loan sizing, cash-on-cash, equity multiple, all-in basis, going-in cap, loan constant, DSCR-from-NOI/DS, DSCR pass test, GRM, price/SF, price/unit, rent/unit, opex/unit, sales/SF, other-income impact, loss-to-lease, occupancy cost ratio, OER, yield on cost, reversion value, break-even occupancy, NER, WALT, CAGR — plus rent change + generic solution viz)
 - Calculator panel, anchors card, review screen, results screens for every game mode
 - Scratch sheet (open across any drill mode), feedback button (in-app log), achievement toasts
 
@@ -71,7 +71,7 @@ First Steps · Foundations · Hot Streak · Week One · Hundred Club · Five-Hun
 
 Sequenced by readiness, not priority. Specs live in the design-spec section at the bottom.
 
-- **Visualization coverage** — 6 of 35 question kinds have viz today. Backfill the highest-impact 10 (rent roll change, mark-to-market, TI vs rent, replacement cost, dev spread, debt yield, DSCR, cash-on-cash, equity multiple, all-in basis).
+- **Visualization coverage** — 36 of 63 question kinds have viz today (the 16 originals + the Foundations batch of 20 just shipped). Remaining 27 split into three batches awaiting their own design rounds: Returns / promote (~10: leveredIrr, holdVsSellIrr, irrAfterPromote, gpCatchUp, gpEffectivePromote, prefAccrual, waterfallSimpleSplit, taxAdjustedExit, dscrSensitivityRate, extensionDrag — multi-tier waterfall + multi-year CF timelines), Construction draws (~5: drawAllocation, contingencyDrawDown, costToComplete, retainageRunning, ffeReserveDollars — share a draw-schedule pattern), Niche / asset-class (~12: revparFromAdrOcc, gopMargin, revporVsRevpar, taxReassessment, opexChange, noiFromOer, percentageRentBreakpoint, clearHeightPremium, truckCountPerSf, tiPayback, tiPerSfPerYearOfTerm, renewalProbabilityWeightedRent).
 - **Modeling test UX polish** — Tab-to-next-empty-target, "fill across" formula-chain helper for repetitive horizontal rows, copy-paste support, mobile horizontal-scroll polish on the wider 7-column grids.
 - **`refiStressTest` quiz template** — matches the shipped `refi-cap-stress` situational. Random-generates a permanent loan today + a refi-stress scenario; user picks the stressed cap that defends the take-out. Mortgage-UW track GAP per [`docs/interview-questions.md`](./docs/interview-questions.md).
 - **`feeDragOnIrr` quiz template** — matches the shipped `fund-vs-deal-irr-gap` situational. Random LP-vs-deal IRR scenarios with management fee + carry waterfall layered on top. Portfolio-mgmt track GAP.
@@ -503,7 +503,7 @@ Local-first works for a single user, but doesn't survive device switches or enab
 6. ✅ Sidebar navigation refactor (TopNav → SideNav, 4-section grouping)
 7. ✅ PR Z — Modeling test mode + 6 templates (DCF, loan sizing, construction loan, MF pro-forma, refi-vs-sell, distressed basis-play)
 8. ✅ Onboarding — welcome modal + per-mode primers + Tour Guide achievement
-9. Visualization backfill (10 highest-impact kinds)
+9. ✅ Visualization Foundations batch — 20 viz (per-SF/unit, cap/DSCR/GRM, operating ratios, yield/exit, NER/WALT/CAGR)
 10. Modeling test UX polish (Tab-to-next, fill-across, copy-paste)
 11. Quiz / situational / walkthrough GAPs from `docs/interview-questions.md` (refi stress test, fee drag, lease-up reserve, distressed walkthrough)
 12. PR L → PR U — cloud track, in order
