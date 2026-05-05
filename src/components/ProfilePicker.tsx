@@ -1,7 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { useProfile } from '../hooks/useProfile';
 
-export function ProfilePicker() {
+interface Props {
+  dropUp?: boolean;
+  align?: 'left' | 'right';
+}
+
+export function ProfilePicker({ dropUp = false, align = 'right' }: Props = {}) {
   const { active, profiles, switchTo, create, rename, remove } = useProfile();
   const [open, setOpen] = useState(false);
   const [creating, setCreating] = useState(false);
@@ -73,7 +78,9 @@ export function ProfilePicker() {
       {open && (
         <div
           role="menu"
-          className="absolute right-0 z-30 mt-2 w-72 rounded-lg border border-warm-line bg-warm-white shadow-aa"
+          className={`absolute z-30 w-72 max-w-[calc(100vw-1.5rem)] rounded-lg border border-warm-line bg-warm-white shadow-aa ${
+            align === 'right' ? 'right-0' : 'left-0'
+          } ${dropUp ? 'bottom-full mb-2' : 'mt-2'}`}
         >
           <div className="border-b border-warm-line px-3 py-2 text-[10px] font-medium uppercase tracking-widest text-warm-mute">
             Profiles
