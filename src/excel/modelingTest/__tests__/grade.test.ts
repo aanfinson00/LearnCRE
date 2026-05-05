@@ -5,6 +5,7 @@ import { loanSizingThreeConstraint } from '../templates/loanSizingThreeConstrain
 import { acqProformaMultifamily } from '../templates/acqProformaMultifamily';
 import { refiVsSellY5 } from '../templates/refiVsSellY5';
 import { constructionLoanSizing } from '../templates/constructionLoanSizing';
+import { distressedOfficeBasisPlay } from '../templates/distressedOfficeBasisPlay';
 
 describe('withinTolerance', () => {
   it('passes within absolute tolerance', () => {
@@ -533,6 +534,105 @@ describe('gradeSubmission — Construction sizing, picks LTV instead of MIN', ()
     expect(byRef.get('B14')?.grade).toBe('pass');
     expect(byRef.get('B18')?.grade).toBe('pass');
     expect(byRef.get('B27')?.grade).toBe('pass');
+  });
+});
+
+// Canonical correct formulas for the distressed-office basis-play template.
+const correctDistressedFormulas: Record<string, string> = {
+  B15: '=B3/B2',
+  B16: '=(B4-B15)/B4',
+  B17: '=B2*B5',
+  B18: '=B17*B6',
+  B19: '=B2*B7',
+  B20: '=B18-B19',
+  B23: '=B2*(B8-B5)',
+  B24: '=B23*B10',
+  B25: '=B23*B9*(B11/12)',
+  B28: '=B3+B24+B25',
+  B31: '=B2*B8',
+  B32: '=B17*B6+B23*B9',
+  B33: '=B32-B19',
+  B36: '=B33/B12',
+  B37: '=B33/B28',
+  B38: '=(B36-B28)/B28',
+};
+
+describe('gradeSubmission — Distressed deal, canonical correct formulas', () => {
+  const result = gradeSubmission(distressedOfficeBasisPlay, correctDistressedFormulas);
+
+  it('passes all outputs and checkpoints', () => {
+    expect(result.passed).toBe(true);
+    for (const o of result.outputs) {
+      expect(o.grade, `${o.ref} ${o.label}`).toBe('pass');
+    }
+    for (const cp of result.checkpoints) {
+      expect(cp.grade, `${cp.ref} ${cp.label}`).toBe('pass');
+    }
+  });
+
+  it('Yield on basis (~10%) is well above the 6.5% market cap', () => {
+    const { sheet } = buildSheet(distressedOfficeBasisPlay, correctDistressedFormulas);
+    expect(sheet['B37']).toBeGreaterThan(0.08);
+    expect(sheet['B37']).toBeLessThan(0.12);
+  });
+
+  it('Profit on basis is ~50% — the basis-play margin', () => {
+    const { sheet } = buildSheet(distressedOfficeBasisPlay, correctDistressedFormulas);
+    expect(sheet['B38']).toBeGreaterThan(0.40);
+    expect(sheet['B38']).toBeLessThan(0.65);
+  });
+});
+
+describe('gradeSubmission — Distressed deal, OpEx scaled with occupancy', () => {
+  // Common error: treat OpEx as variable with occupancy. Most office OpEx is
+  // fixed — vacant space still costs you taxes, insurance, base service.
+  const wrong: Record<string, string> = {
+    ...correctDistressedFormulas,
+    B19: '=B17*B7',
+  };
+  const result = gradeSubmission(distressedOfficeBasisPlay, wrong);
+
+  it('In-place NOI and Stabilized NOI both fail', () => {
+    const byRef = new Map(result.outputs.map((o) => [o.ref, o]));
+    expect(byRef.get('B20')?.grade).toBe('fail');
+    expect(byRef.get('B33')?.grade).toBe('fail');
+  });
+
+  it('Yield on basis and Profit on basis cascade', () => {
+    const byRef = new Map(result.outputs.map((o) => [o.ref, o]));
+    expect(byRef.get('B37')?.grade).toBe('fail');
+    expect(byRef.get('B38')?.grade).toBe('fail');
+  });
+
+  it('All-in basis still passes — does not depend on OpEx', () => {
+    const byRef = new Map(result.outputs.map((o) => [o.ref, o]));
+    expect(byRef.get('B28')?.grade).toBe('pass');
+  });
+});
+
+describe('gradeSubmission — Distressed deal, free rent forgotten', () => {
+  // Common error: forget to include free rent reserve in all-in basis.
+  const wrong: Record<string, string> = {
+    ...correctDistressedFormulas,
+    B28: '=B3+B24',
+  };
+  const result = gradeSubmission(distressedOfficeBasisPlay, wrong);
+
+  it('All-in basis fails', () => {
+    const byRef = new Map(result.outputs.map((o) => [o.ref, o]));
+    expect(byRef.get('B28')?.grade).toBe('fail');
+  });
+
+  it('Yield on basis and Profit on basis cascade', () => {
+    const byRef = new Map(result.outputs.map((o) => [o.ref, o]));
+    expect(byRef.get('B37')?.grade).toBe('fail');
+    expect(byRef.get('B38')?.grade).toBe('fail');
+  });
+
+  it('NOI cells still pass — they do not depend on basis', () => {
+    const byRef = new Map(result.outputs.map((o) => [o.ref, o]));
+    expect(byRef.get('B20')?.grade).toBe('pass');
+    expect(byRef.get('B33')?.grade).toBe('pass');
   });
 });
 

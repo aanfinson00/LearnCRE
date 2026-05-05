@@ -4,6 +4,7 @@ import { loanSizingThreeConstraint } from './loanSizingThreeConstraint';
 import { acqProformaMultifamily } from './acqProformaMultifamily';
 import { refiVsSellY5 } from './refiVsSellY5';
 import { constructionLoanSizing } from './constructionLoanSizing';
+import { distressedOfficeBasisPlay } from './distressedOfficeBasisPlay';
 
 export const MODELING_TEST_TEMPLATES: ModelingTestTemplate[] = [
   dcfFiveYrSuburbanOffice,
@@ -11,6 +12,7 @@ export const MODELING_TEST_TEMPLATES: ModelingTestTemplate[] = [
   acqProformaMultifamily,
   refiVsSellY5,
   constructionLoanSizing,
+  distressedOfficeBasisPlay,
 ];
 
 export interface PlannedTemplate {
