@@ -10,6 +10,9 @@ import type { SessionRecord, XpState } from '../types/profile';
 import { AchievementGallery } from './AchievementGallery';
 import { Card } from './ui/Card';
 import { Sparkline } from './Sparkline';
+import { CertBadge } from './CertBadge';
+import { useCertProgress } from '../hooks/useCertProgress';
+import { CERTS, certById } from '../quiz/certs';
 
 interface Props {
   onBack: () => void;
@@ -30,6 +33,7 @@ function fmtMinutes(ms: number): string {
 
 export function ProfileScreen({ onBack }: Props) {
   const { active } = useProfile();
+  const { views, records } = useCertProgress();
   const [xp, setXp] = useState<XpState>(() => loadXp());
   const [lifetime, setLifetime] = useState<LifetimeStats>(() => loadLifetime());
   const [sessions, setSessions] = useState<SessionRecord[]>(() => loadSessions());
@@ -204,6 +208,46 @@ export function ProfileScreen({ onBack }: Props) {
             );
           })}
         </div>
+      </Card>
+
+      <Card className="space-y-3">
+        <div className="flex items-baseline justify-between">
+          <div className="text-xs font-medium uppercase tracking-widest text-warm-stone">
+            Earned certifications
+          </div>
+          <div className="font-mono text-[11px] text-warm-mute num">
+            {CERTS.filter((c) => views[c.id]?.earned).length}/{CERTS.length}
+          </div>
+        </div>
+        {(() => {
+          const earnedCerts = CERTS.filter((c) => views[c.id]?.earned);
+          if (earnedCerts.length === 0) {
+            return (
+              <p className="text-sm text-warm-stone">
+                None yet. Open the Certify tab to start.
+              </p>
+            );
+          }
+          return (
+            <div className="grid grid-cols-1 gap-2">
+              {earnedCerts.map((c) => {
+                const rec = records[c.id];
+                const view = views[c.id];
+                if (!rec?.earnedAt) return null;
+                const cert = certById(c.id)!;
+                return (
+                  <CertBadge
+                    key={c.id}
+                    compact
+                    cert={cert}
+                    earnedAt={rec.earnedAt}
+                    scorePct={view?.bestFinalScorePct ?? null}
+                  />
+                );
+              })}
+            </div>
+          );
+        })()}
       </Card>
 
       <Card className="space-y-3">

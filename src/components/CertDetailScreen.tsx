@@ -9,8 +9,11 @@ import type { Benchmark, Module } from '../types/cert';
 import type { BenchmarkResult } from '../quiz/certs/evaluate';
 import { CertProgressBar } from './CertProgressBar';
 import { CertBadge } from './CertBadge';
+import { CertArtifact } from './CertArtifact';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
+import { useProfile } from '../hooks/useProfile';
+import { loadSessions } from '../storage/localStorage';
 
 export type CertMode =
   | 'quiz'
@@ -187,6 +190,8 @@ export function CertDetailScreen({
 }: Props) {
   const cert = certById(certId);
   const { views, records, moduleResults } = useCertProgress();
+  const { active } = useProfile();
+  const sessions = useMemo(() => loadSessions(active.id), [active.id]);
 
   const view = cert ? views[cert.id] : undefined;
   const record = cert ? records[cert.id] : undefined;
@@ -238,11 +243,26 @@ export function CertDetailScreen({
       </header>
 
       {view.earned && record?.earnedAt && (
-        <CertBadge
-          cert={cert}
-          earnedAt={record.earnedAt}
-          scorePct={bestExam}
-        />
+        <>
+          <CertBadge
+            cert={cert}
+            earnedAt={record.earnedAt}
+            scorePct={bestExam}
+          />
+          <CertArtifact
+            cert={cert}
+            holderName={active.name}
+            earnedAt={record.earnedAt}
+            finalScorePct={bestExam}
+            sessions={sessions}
+            examFinishedAt={
+              record.finalExamAttempts.length
+                ? record.finalExamAttempts[record.finalExamAttempts.length - 1]
+                    .finishedAt
+                : record.earnedAt
+            }
+          />
+        </>
       )}
 
       {prereq && !prereqMet && (
