@@ -88,7 +88,7 @@ The "v3 path B" arc. Each PR is independently shippable and can be sequenced aft
 - **PR P — Curated weekly challenges (shipped)** — `Compete → Weekly themes` in the SideNav. 6 hand-authored themes for May–June 2026 (Debt fundamentals, Lease economics, MF acquisition, Capital stack & promote, Hotel underwriting, Refi & exit) defined in `src/quiz/weeklyChallenges.ts` with explicit start/end ISO timestamps (Mondays 12:00 UTC). Themes are app code (not DB rows) so adding new ones is a code change, not a data migration. New 0004 migration adds `weekly_results` table mirroring daily — PK `(challenge_id, user_id)` enforces one play per theme. Leaderboard sorts by `correct DESC, time_ms ASC`; respects `is_public` RLS like daily. Empty-state shows next upcoming theme + curator handle. 12 unit tests cover theme uniqueness, non-overlapping windows, current/next selection, deterministic generation, kind-pool conformance.
 - **PR Q — Head-to-head** — 1v1 async match: same seed, both players play independently, results compared at end.
 - **PR R — Friends / follows** — follow other handles, see their recent unlocks + sessions in a feed.
-- **PR S — Global leaderboards** — all-time XP, weekly XP, daily challenge accuracy, longest streak.
+- **PR S — Global leaderboards (shipped)** — `Compete → Leaderboards` in the SideNav. 4 tabs: All-time XP, This week (ISO-week XP via session-payload sum), Longest streak, Daily today. Implemented as plain queries (Supabase free tier has no built-in cron for matview refresh) ordered + capped at 100. New 0005 migration adds `best_streak` column to `xp_state`; `sync.ts` now pushes/pulls it. Public visibility flows through existing RLS — only rows whose linked profile has `is_public = true` appear. ISO-week-start helper covered by 5 unit tests (Mon noon, Sun rollback, year boundary, Wed mid-week, time zeroing).
 - **PR T — Cohort / org leaderboards** — invite-by-link cohorts (e.g. "Acme RE summer interns") with their own ranking. Useful for instructor-led use.
 - **PR U — Notifications** — opt-in email weekly digest, friend unlocked an achievement, daily challenge reminder.
 
@@ -511,7 +511,8 @@ Local-first works for a single user, but doesn't survive device switches or enab
 12c. ✅ PR N — Public profiles (`/u/<handle>` page + 0002 RLS migration + Make-public toggle on Profile screen)
 12d. ✅ PR O — Daily challenge (deterministic seed-of-the-day, 10 questions, leaderboard, 0003 migration)
 12e. ✅ PR P — Curated weekly themes (6 themes shipped May–June 2026, 0004 migration)
-13. PR Q → PR U — cloud track, in order (head-to-head, friends, leaderboards, cohort, notifications)
+12f. ✅ PR S — Global leaderboards (4 tabs: alltime XP, weekly XP, longest streak, daily today; 0005 migration)
+13. PR Q, R, T, U — cloud track (head-to-head, friends, cohort/org leaderboards, notifications)
 
 Re-sequence freely as priorities shift. Update the "In design" section when a PR lands and move the entry up to "What's shipped today".
 

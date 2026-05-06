@@ -51,7 +51,7 @@ export async function pullAll(userId: string): Promise<PullResult> {
       totalXp: xpRes.data.total_xp ?? 0,
       bestSessionXp: 0, // not yet on cloud schema — local-only field
       currentStreak: xpRes.data.current_streak ?? 0,
-      bestStreak: 0, // not yet on cloud schema
+      bestStreak: xpRes.data.best_streak ?? 0,
     }));
   }
 
@@ -119,6 +119,7 @@ export async function pushAll(userId: string): Promise<PullResult> {
       user_id: userId,
       total_xp: xp.totalXp,
       current_streak: xp.currentStreak,
+      best_streak: xp.bestStreak,
       last_active_at: now,
       updated_at: now,
     }) as never,

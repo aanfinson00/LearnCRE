@@ -12,6 +12,7 @@ import { SideNav } from './components/SideNav';
 import { ClaimLocalProfile } from './components/ClaimLocalProfile';
 import { DailyChallengeScreen } from './components/DailyChallengeScreen';
 import { WeeklyChallengeScreen } from './components/WeeklyChallengeScreen';
+import { LeaderboardScreen } from './components/LeaderboardScreen';
 import { PublicProfile } from './components/PublicProfile';
 import { useCloudSync } from './cloud/useCloudSync';
 
@@ -78,7 +79,8 @@ type Mode =
   | 'certify'
   | 'profile'
   | 'daily'
-  | 'weekly';
+  | 'weekly'
+  | 'leaderboards';
 
 type CertView =
   | { kind: 'list' }
@@ -129,6 +131,10 @@ function AppShell() {
 
     if (mode === 'weekly') {
       return <WeeklyChallengeScreen onBack={() => setMode('quiz')} />;
+    }
+
+    if (mode === 'leaderboards') {
+      return <LeaderboardScreen onBack={() => setMode('quiz')} />;
     }
 
     if (mode === 'profile') {
