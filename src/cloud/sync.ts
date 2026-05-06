@@ -174,6 +174,10 @@ export async function pushAll(userId: string): Promise<PullResult> {
           added_at: new Date(m.loggedAt).toISOString(),
           updated_at: now,
         })),
+        // Server-generated id PK doesn't help here; the unique key for
+        // dedupe is (user_id, question_id). Without this, repeated pushes
+        // would re-insert and trip the unique constraint.
+        { onConflict: 'user_id,question_id' },
       ) as never,
     );
   }

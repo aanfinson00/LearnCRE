@@ -7,6 +7,8 @@ export interface Match {
   host_id: string;
   opponent_id: string | null;
   invite_token: string;
+  /** SQL bigint, but kept in JS-number range by generateSeed() (31-bit max).
+   *  Don't widen past Number.MAX_SAFE_INTEGER without a string round-trip. */
   seed: number;
   status: MatchStatus;
   host_correct: number | null;

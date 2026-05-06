@@ -20,7 +20,8 @@ type Mode =
   | 'leaderboards'
   | 'friends'
   | 'cohorts'
-  | 'headToHead';
+  | 'headToHead'
+  | 'submitQuestion';
 
 interface Props {
   active: Mode;
@@ -73,6 +74,12 @@ const SECTIONS: Section[] = [
     label: 'Reference',
     items: [
       { id: 'study', label: 'Study tables', hint: 'Reference cheat sheets.' },
+    ],
+  },
+  {
+    label: 'Contribute',
+    items: [
+      { id: 'submitQuestion', label: 'Submit a question', hint: 'Pitch a question for the catalog. Reviewer integrates the best ones.' },
     ],
   },
   {

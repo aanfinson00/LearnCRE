@@ -10,6 +10,8 @@ export interface NotificationPreferences {
   unsubscribe_token: string;
   last_weekly_sent_at: string | null;
   last_daily_sent_at: string | null;
+  created_at: string;
+  updated_at: string;
 }
 
 /** Fetch (or create) the prefs row for the current user. Returns null when
