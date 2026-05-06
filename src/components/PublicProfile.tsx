@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
+import { useAuth } from '../cloud/auth';
+import { fetchFollowerCount, follow, isFollowing, unfollow } from '../cloud/follows';
 import { getPublicProfileByHandle } from '../cloud/profile';
 import type { PublicProfileSnapshot } from '../cloud/types';
 import { ACHIEVEMENTS } from '../quiz/achievements';
+import { Button } from './ui/Button';
 import { Card } from './ui/Card';
 
 interface Props {
@@ -37,8 +40,12 @@ const ACH_LABEL: Record<string, string> = Object.fromEntries(
 );
 
 export function PublicProfile({ handle }: Props) {
+  const { user } = useAuth();
   const [snapshot, setSnapshot] = useState<PublicProfileSnapshot | null>(null);
   const [status, setStatus] = useState<'loading' | 'ready' | 'not-found'>('loading');
+  const [followerCount, setFollowerCount] = useState<number>(0);
+  const [following, setFollowing] = useState<boolean>(false);
+  const [followBusy, setFollowBusy] = useState<boolean>(false);
 
   useEffect(() => {
     let active = true;
@@ -56,6 +63,41 @@ export function PublicProfile({ handle }: Props) {
       active = false;
     };
   }, [handle]);
+
+  useEffect(() => {
+    if (!snapshot) return;
+    let active = true;
+    fetchFollowerCount(snapshot.profile.id).then((n) => {
+      if (active) setFollowerCount(n);
+    });
+    if (user && user.id !== snapshot.profile.id) {
+      isFollowing(user.id, snapshot.profile.id).then((f) => {
+        if (active) setFollowing(f);
+      });
+    }
+    return () => {
+      active = false;
+    };
+  }, [snapshot, user]);
+
+  async function handleFollowToggle() {
+    if (!user || !snapshot) return;
+    setFollowBusy(true);
+    if (following) {
+      const res = await unfollow(user.id, snapshot.profile.id);
+      if (res.ok) {
+        setFollowing(false);
+        setFollowerCount((n) => Math.max(0, n - 1));
+      }
+    } else {
+      const res = await follow(user.id, snapshot.profile.id);
+      if (res.ok) {
+        setFollowing(true);
+        setFollowerCount((n) => n + 1);
+      }
+    }
+    setFollowBusy(false);
+  }
 
   if (status === 'loading') {
     return (
@@ -97,6 +139,9 @@ export function PublicProfile({ handle }: Props) {
   const achievementCount = achievements.length;
   const lastSessionAt = recentSessions[0]?.ended_at ?? null;
 
+  const isOwnProfile = user?.id === profile.id;
+  const showFollowButton = user && !isOwnProfile;
+
   return (
     <main className="mx-auto max-w-3xl space-y-5 py-10">
       <header className="flex items-center gap-4">
@@ -108,16 +153,26 @@ export function PublicProfile({ handle }: Props) {
             {(profile.display_name ?? profile.handle).slice(0, 1).toUpperCase()}
           </span>
         </div>
-        <div>
+        <div className="flex-1">
           <div className="display text-3xl text-warm-black">
             {profile.display_name ?? profile.handle}
             <span className="text-copper">.</span>
           </div>
           <div className="font-mono text-[11px] uppercase tracking-widest text-warm-mute num">
-            @{profile.handle} · member since {memberSince} · last seen{' '}
+            @{profile.handle} · {followerCount} follower{followerCount === 1 ? '' : 's'} · member since {memberSince} · last seen{' '}
             {fmtRelative(lastSessionAt)}
           </div>
         </div>
+        {showFollowButton && (
+          <Button
+            variant={following ? 'ghost' : undefined}
+            onClick={handleFollowToggle}
+            disabled={followBusy}
+            className="text-xs"
+          >
+            {followBusy ? '…' : following ? 'Following' : 'Follow'}
+          </Button>
+        )}
       </header>
 
       {profile.bio && (

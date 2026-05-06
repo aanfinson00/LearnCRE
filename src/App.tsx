@@ -13,6 +13,7 @@ import { ClaimLocalProfile } from './components/ClaimLocalProfile';
 import { DailyChallengeScreen } from './components/DailyChallengeScreen';
 import { WeeklyChallengeScreen } from './components/WeeklyChallengeScreen';
 import { LeaderboardScreen } from './components/LeaderboardScreen';
+import { FriendsFeedScreen } from './components/FriendsFeedScreen';
 import { PublicProfile } from './components/PublicProfile';
 import { useCloudSync } from './cloud/useCloudSync';
 
@@ -80,7 +81,8 @@ type Mode =
   | 'profile'
   | 'daily'
   | 'weekly'
-  | 'leaderboards';
+  | 'leaderboards'
+  | 'friends';
 
 type CertView =
   | { kind: 'list' }
@@ -135,6 +137,10 @@ function AppShell() {
 
     if (mode === 'leaderboards') {
       return <LeaderboardScreen onBack={() => setMode('quiz')} />;
+    }
+
+    if (mode === 'friends') {
+      return <FriendsFeedScreen onBack={() => setMode('quiz')} />;
     }
 
     if (mode === 'profile') {
