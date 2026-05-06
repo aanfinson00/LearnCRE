@@ -17,6 +17,7 @@ import { FriendsFeedScreen } from './components/FriendsFeedScreen';
 import { CohortsScreen } from './components/CohortsScreen';
 import { HeadToHeadScreen } from './components/HeadToHeadScreen';
 import { QuestionSubmitScreen } from './components/QuestionSubmitScreen';
+import { AdminSubmissionsScreen } from './components/AdminSubmissionsScreen';
 import { UnsubscribePage } from './components/NotificationPreferencesCard';
 import { PublicProfile } from './components/PublicProfile';
 import { useCloudSync } from './cloud/useCloudSync';
@@ -36,6 +37,12 @@ function detectUnsubscribeToken(): string | null {
   if (window.location.pathname.replace(/\/+$/, '') !== '/unsubscribe') return null;
   const t = new URLSearchParams(window.location.search).get('token');
   return t && t.trim() ? t.trim() : null;
+}
+
+/** True when the current URL is /admin/submissions (with optional trailing slash). */
+function isAdminSubmissionsRoute(): boolean {
+  if (typeof window === 'undefined') return false;
+  return window.location.pathname.replace(/\/+$/, '') === '/admin/submissions';
 }
 import { WelcomeModal } from './components/WelcomeModal';
 import { hasSeenWelcome } from './storage/onboarding';
@@ -110,6 +117,8 @@ export default function App() {
 
   const unsubscribeToken = detectUnsubscribeToken();
   if (unsubscribeToken) return <UnsubscribePage token={unsubscribeToken} />;
+
+  if (isAdminSubmissionsRoute()) return <AdminSubmissionsScreen />;
 
   return <AppShell />;
 }
