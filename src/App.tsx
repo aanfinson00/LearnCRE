@@ -16,6 +16,7 @@ import { LeaderboardScreen } from './components/LeaderboardScreen';
 import { FriendsFeedScreen } from './components/FriendsFeedScreen';
 import { CohortsScreen } from './components/CohortsScreen';
 import { HeadToHeadScreen } from './components/HeadToHeadScreen';
+import { UnsubscribePage } from './components/NotificationPreferencesCard';
 import { PublicProfile } from './components/PublicProfile';
 import { useCloudSync } from './cloud/useCloudSync';
 
@@ -26,6 +27,14 @@ function detectPublicProfileHandle(): string | null {
   if (typeof window === 'undefined') return null;
   const m = window.location.pathname.match(PUBLIC_PROFILE_RE);
   return m ? m[1].toLowerCase() : null;
+}
+
+/** Returns the unsubscribe token when the current URL is /unsubscribe?token=…, else null. */
+function detectUnsubscribeToken(): string | null {
+  if (typeof window === 'undefined') return null;
+  if (window.location.pathname.replace(/\/+$/, '') !== '/unsubscribe') return null;
+  const t = new URLSearchParams(window.location.search).get('token');
+  return t && t.trim() ? t.trim() : null;
 }
 import { WelcomeModal } from './components/WelcomeModal';
 import { hasSeenWelcome } from './storage/onboarding';
@@ -96,6 +105,9 @@ type CertView =
 export default function App() {
   const publicHandle = detectPublicProfileHandle();
   if (publicHandle) return <PublicProfile handle={publicHandle} />;
+
+  const unsubscribeToken = detectUnsubscribeToken();
+  if (unsubscribeToken) return <UnsubscribePage token={unsubscribeToken} />;
 
   return <AppShell />;
 }
