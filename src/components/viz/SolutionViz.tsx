@@ -49,6 +49,18 @@ import { DrawAllocationViz } from './DrawAllocationViz';
 import { ContingencyDrawDownViz } from './ContingencyDrawDownViz';
 import { RetainageRunningViz } from './RetainageRunningViz';
 import { FfeReserveDollarsViz } from './FfeReserveDollarsViz';
+import { RevparFromAdrOccViz } from './RevparFromAdrOccViz';
+import { GopMarginViz } from './GopMarginViz';
+import { RevporVsRevparViz } from './RevporVsRevparViz';
+import { PercentageRentBreakpointViz } from './PercentageRentBreakpointViz';
+import { ClearHeightPremiumViz } from './ClearHeightPremiumViz';
+import { TruckCountPerSfViz } from './TruckCountPerSfViz';
+import { TaxReassessmentViz } from './TaxReassessmentViz';
+import { OpexChangeViz } from './OpexChangeViz';
+import { NoiFromOerViz } from './NoiFromOerViz';
+import { TiPaybackViz } from './TiPaybackViz';
+import { TiPerSfPerYearOfTermViz } from './TiPerSfPerYearOfTermViz';
+import { RenewalProbabilityWeightedRentViz } from './RenewalProbabilityWeightedRentViz';
 
 interface Props {
   question: Question;
@@ -754,6 +766,154 @@ export function SolutionViz({ question }: Props) {
           <FfeReserveDollarsViz
             totalRevenue={ctx.totalRevenue}
             ffeReserveRate={ctx.ffeReserveRate}
+          />
+        );
+      }
+      return null;
+
+    case 'revparFromAdrOcc':
+      if (ctx.adr !== undefined && ctx.roomsAvailable !== undefined) {
+        return (
+          <RevparFromAdrOccViz
+            adr={ctx.adr}
+            roomsAvailable={ctx.roomsAvailable}
+            revpar={question.expected}
+          />
+        );
+      }
+      return null;
+
+    case 'gopMargin':
+      if (ctx.totalRevenue !== undefined) {
+        return (
+          <GopMarginViz
+            totalRevenue={ctx.totalRevenue}
+            gopMargin={question.expected}
+          />
+        );
+      }
+      return null;
+
+    case 'revporVsRevpar':
+      if (
+        ctx.roomsAvailable !== undefined &&
+        ctx.roomsSold !== undefined &&
+        ctx.totalRevenue !== undefined
+      ) {
+        return (
+          <RevporVsRevparViz
+            roomsAvailable={ctx.roomsAvailable}
+            roomsSold={ctx.roomsSold}
+            totalRevenue={ctx.totalRevenue}
+          />
+        );
+      }
+      return null;
+
+    case 'percentageRentBreakpoint':
+      if (ctx.baseRent !== undefined && ctx.percentageRate !== undefined) {
+        return (
+          <PercentageRentBreakpointViz
+            baseRent={ctx.baseRent}
+            percentageRate={ctx.percentageRate}
+          />
+        );
+      }
+      return null;
+
+    case 'clearHeightPremium':
+      if (
+        ctx.baselineRent !== undefined &&
+        ctx.clearHeight !== undefined &&
+        ctx.premiumPerFt !== undefined
+      ) {
+        return (
+          <ClearHeightPremiumViz
+            baselineRent={ctx.baselineRent}
+            clearHeight={ctx.clearHeight}
+            premiumPerFt={ctx.premiumPerFt}
+            finalRent={question.expected}
+          />
+        );
+      }
+      return null;
+
+    case 'truckCountPerSf':
+      if (ctx.buildingSf !== undefined && ctx.truckCount !== undefined) {
+        return (
+          <TruckCountPerSfViz
+            buildingSf={ctx.buildingSf}
+            truckCount={ctx.truckCount}
+          />
+        );
+      }
+      return null;
+
+    case 'taxReassessment':
+      if (
+        ctx.purchasePrice !== undefined &&
+        ctx.oldAnnualTax !== undefined &&
+        ctx.newTaxRate !== undefined &&
+        ctx.capRate !== undefined
+      ) {
+        return (
+          <TaxReassessmentViz
+            purchasePrice={ctx.purchasePrice}
+            oldAnnualTax={ctx.oldAnnualTax}
+            newTaxRate={ctx.newTaxRate}
+            capRate={ctx.capRate}
+          />
+        );
+      }
+      return null;
+
+    case 'opexChange':
+      if (ctx.opex !== undefined && ctx.capRate !== undefined) {
+        return <OpexChangeViz opexDelta={ctx.opex} capRate={ctx.capRate} />;
+      }
+      return null;
+
+    case 'noiFromOer':
+      if (ctx.egi !== undefined && ctx.opexRatioValue !== undefined) {
+        return (
+          <NoiFromOerViz egi={ctx.egi} opexRatioValue={ctx.opexRatioValue} />
+        );
+      }
+      return null;
+
+    case 'tiPayback':
+      if (ctx.tiPerSf !== undefined && ctx.paybackYears !== undefined) {
+        return (
+          <TiPaybackViz
+            tiPerSf={ctx.tiPerSf}
+            paybackYears={ctx.paybackYears}
+          />
+        );
+      }
+      return null;
+
+    case 'tiPerSfPerYearOfTerm':
+      if (ctx.tiPerSf !== undefined && ctx.leaseTermYears !== undefined) {
+        return (
+          <TiPerSfPerYearOfTermViz
+            tiPerSf={ctx.tiPerSf}
+            leaseTermYears={ctx.leaseTermYears}
+          />
+        );
+      }
+      return null;
+
+    case 'renewalProbabilityWeightedRent':
+      if (
+        ctx.inPlaceRent !== undefined &&
+        ctx.marketRent !== undefined &&
+        ctx.renewalProbability !== undefined
+      ) {
+        return (
+          <RenewalProbabilityWeightedRentViz
+            inPlaceRent={ctx.inPlaceRent}
+            marketRent={ctx.marketRent}
+            renewalProbability={ctx.renewalProbability}
           />
         );
       }
