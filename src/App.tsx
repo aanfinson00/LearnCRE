@@ -10,7 +10,17 @@ import { ProfileScreen } from './components/ProfileScreen';
 import { StudyScreen } from './components/StudyScreen';
 import { SideNav } from './components/SideNav';
 import { ClaimLocalProfile } from './components/ClaimLocalProfile';
+import { PublicProfile } from './components/PublicProfile';
 import { useCloudSync } from './cloud/useCloudSync';
+
+const PUBLIC_PROFILE_RE = /^\/u\/([a-z0-9_-]{3,24})\/?$/i;
+
+/** Returns the handle when the current URL is /u/<handle>, else null. */
+function detectPublicProfileHandle(): string | null {
+  if (typeof window === 'undefined') return null;
+  const m = window.location.pathname.match(PUBLIC_PROFILE_RE);
+  return m ? m[1].toLowerCase() : null;
+}
 import { WelcomeModal } from './components/WelcomeModal';
 import { hasSeenWelcome } from './storage/onboarding';
 import { AchievementToastHost } from './components/AchievementToast';
@@ -72,6 +82,13 @@ type CertView =
   | { kind: 'exam'; certId: string };
 
 export default function App() {
+  const publicHandle = detectPublicProfileHandle();
+  if (publicHandle) return <PublicProfile handle={publicHandle} />;
+
+  return <AppShell />;
+}
+
+function AppShell() {
   useCloudSync();
   const [mode, setMode] = useState<Mode>('quiz');
   const [certView, setCertView] = useState<CertView>({ kind: 'list' });

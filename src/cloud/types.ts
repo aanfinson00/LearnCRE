@@ -25,3 +25,19 @@ export interface ProfileClaimPayload {
   /** Local profile id being uploaded — stamped into imported_at metadata */
   local_profile_id: string;
 }
+
+/** Joined view returned by getPublicProfileByHandle. */
+export interface PublicProfileSnapshot {
+  profile: CloudProfile;
+  totalXp: number;
+  currentStreak: number;
+  tier: string | null;
+  achievements: { achievement_id: string; unlocked_at: string }[];
+  recentSessions: {
+    id: string;
+    mode: string;
+    ended_at: string | null;
+    attempts: number;
+    correct: number;
+  }[];
+}

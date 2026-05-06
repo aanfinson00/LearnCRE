@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '../cloud/auth';
+import { fetchCloudProfile, setProfilePublic } from '../cloud/profile';
+import type { CloudProfile } from '../cloud/types';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
 
@@ -33,17 +35,7 @@ export function SignIn({ compact = false }: Props) {
   }
 
   if (user) {
-    return (
-      <Card className="space-y-2">
-        <div className="text-xs font-medium uppercase tracking-widest text-warm-mute">
-          Signed in
-        </div>
-        <p className="text-sm text-warm-black">{user.email}</p>
-        <Button variant="ghost" onClick={signOut} className="text-xs">
-          Sign out
-        </Button>
-      </Card>
-    );
+    return <SignedInPanel email={user.email ?? ''} userId={user.id} onSignOut={signOut} />;
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -98,6 +90,109 @@ export function SignIn({ compact = false }: Props) {
           </div>
         </form>
       )}
+    </Card>
+  );
+}
+
+function SignedInPanel({
+  email,
+  userId,
+  onSignOut,
+}: {
+  email: string;
+  userId: string;
+  onSignOut: () => Promise<void>;
+}) {
+  const [profile, setProfile] = useState<CloudProfile | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    fetchCloudProfile(userId).then((p) => {
+      if (active) setProfile(p);
+    });
+    return () => {
+      active = false;
+    };
+  }, [userId]);
+
+  async function handleToggle() {
+    if (!profile) return;
+    setBusy(true);
+    setError(null);
+    const res = await setProfilePublic(userId, !profile.is_public);
+    setBusy(false);
+    if (res.ok) {
+      setProfile({ ...profile, is_public: !profile.is_public });
+    } else {
+      setError(res.error ?? 'Could not update.');
+    }
+  }
+
+  async function handleCopy() {
+    if (!profile) return;
+    const url = `${window.location.origin}/u/${profile.handle}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1500);
+    } catch {
+      /* ignore */
+    }
+  }
+
+  return (
+    <Card className="space-y-3">
+      <div className="text-xs font-medium uppercase tracking-widest text-warm-mute">
+        Signed in
+      </div>
+      <p className="text-sm text-warm-black">{email}</p>
+      {profile ? (
+        <div className="space-y-2 border-t border-warm-line pt-3">
+          <div className="font-mono text-[11px] uppercase tracking-widest text-warm-mute num">
+            Public profile
+          </div>
+          <div className="flex items-center justify-between gap-3">
+            <div className="text-sm">
+              <div className="text-warm-black">@{profile.handle}</div>
+              <div className="font-mono text-[11px] text-warm-mute num">
+                {profile.is_public
+                  ? 'Public — visible at /u/' + profile.handle
+                  : 'Private — only you can see it'}
+              </div>
+            </div>
+            <Button
+              variant="ghost"
+              onClick={handleToggle}
+              disabled={busy}
+              className="text-xs"
+            >
+              {busy
+                ? '…'
+                : profile.is_public
+                  ? 'Make private'
+                  : 'Make public'}
+            </Button>
+          </div>
+          {profile.is_public && (
+            <Button variant="ghost" onClick={handleCopy} className="text-xs">
+              {copied ? 'Copied!' : 'Copy share URL'}
+            </Button>
+          )}
+          {error && (
+            <p className="font-mono text-[11px] text-signal-bad-ink">{error}</p>
+          )}
+        </div>
+      ) : (
+        <p className="font-mono text-[11px] text-warm-mute">
+          Loading profile…
+        </p>
+      )}
+      <Button variant="ghost" onClick={onSignOut} className="text-xs">
+        Sign out
+      </Button>
     </Card>
   );
 }
