@@ -29,6 +29,12 @@ export interface MatchWithProfiles extends Match {
   opponent_display_name: string | null;
 }
 
+/** Build the shareable invite URL for a match. */
+export function buildMatchInviteUrl(matchId: string, token: string): string {
+  const origin = typeof window !== 'undefined' ? window.location.origin : '';
+  return `${origin}/m/${matchId}?token=${encodeURIComponent(token)}`;
+}
+
 /** Random 32-bit unsigned int for the match seed. */
 function generateSeed(): number {
   return Math.floor(Math.random() * 2 ** 31) >>> 0;

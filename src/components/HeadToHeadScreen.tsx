@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useAuth } from '../cloud/auth';
 import {
   acceptMatchByToken,
+  buildMatchInviteUrl,
   canPlay,
   createMatch,
   fetchMatchById,
@@ -381,24 +382,7 @@ function MatchDetail({ matchId, userId, onBack }: MatchDetailProps) {
       </Card>
 
       {match.status === 'open' && isHost && (
-        <Card className="space-y-2">
-          <div className="text-xs font-medium uppercase tracking-widest text-warm-mute">
-            Invite a peer
-          </div>
-          <p className="text-sm text-warm-stone">
-            Share both values — they'll paste them into the Accept-a-match form.
-          </p>
-          <div className="space-y-1 font-mono text-[11px] num">
-            <div className="flex items-baseline justify-between border-b border-dotted border-warm-line py-1">
-              <span className="text-warm-mute">match id</span>
-              <span className="text-warm-black break-all">{match.id}</span>
-            </div>
-            <div className="flex items-baseline justify-between py-1">
-              <span className="text-warm-mute">token</span>
-              <span className="text-warm-black break-all">{match.invite_token}</span>
-            </div>
-          </div>
-        </Card>
+        <InviteCard match={match} />
       )}
 
       {match.status === 'settled' && <SettledCard match={match} userId={userId} />}
@@ -540,5 +524,43 @@ function PlayMatch({ match, userId, onDone, onCancel }: PlayProps) {
         )}
       </Card>
     </Layout>
+  );
+}
+
+function InviteCard({ match }: { match: MatchWithProfiles }) {
+  const [copied, setCopied] = useState(false);
+  const inviteUrl = buildMatchInviteUrl(match.id, match.invite_token);
+  async function copy() {
+    try {
+      await navigator.clipboard.writeText(inviteUrl);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1500);
+    } catch {
+      /* ignore */
+    }
+  }
+  return (
+    <Card className="space-y-2">
+      <div className="text-xs font-medium uppercase tracking-widest text-warm-mute">
+        Invite a peer
+      </div>
+      <p className="text-sm text-warm-stone">
+        Share this link. The recipient lands on a sign-in-and-accept page;
+        once they're authed the match accept completes automatically.
+      </p>
+      <div className="rounded-lg border border-warm-line bg-warm-paper/30 p-2 font-mono text-[11px] break-all text-warm-black">
+        {inviteUrl}
+      </div>
+      <Button variant="ghost" onClick={copy} className="text-xs">
+        {copied ? 'Copied!' : 'Copy invite link'}
+      </Button>
+      <details className="font-mono text-[10px] text-warm-mute">
+        <summary className="cursor-pointer">Match id + token (legacy)</summary>
+        <div className="mt-1 space-y-0.5 num">
+          <div>id: <span className="text-warm-black break-all">{match.id}</span></div>
+          <div>token: <span className="text-warm-black break-all">{match.invite_token}</span></div>
+        </div>
+      </details>
+    </Card>
   );
 }

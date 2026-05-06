@@ -4,6 +4,7 @@ import {
   type Cohort,
   type CohortLeaderboardEntry,
   type CohortMember,
+  buildCohortInviteUrl,
   createCohort,
   fetchCohortAlltimeXp,
   fetchCohortMembers,
@@ -323,9 +324,11 @@ function CohortDetail({
     };
   }, [cohort.id]);
 
-  async function copyToken() {
+  const inviteUrl = buildCohortInviteUrl(cohort.slug, cohort.invite_token);
+
+  async function copyInviteUrl() {
     try {
-      await navigator.clipboard.writeText(cohort.invite_token);
+      await navigator.clipboard.writeText(inviteUrl);
       setTokenCopied(true);
       window.setTimeout(() => setTokenCopied(false), 1500);
     } catch {
@@ -366,22 +369,22 @@ function CohortDetail({
             Invite link
           </div>
           <p className="text-sm text-warm-stone">
-            Share these two values with anyone you want to invite. They'll
-            paste them into the Join cohort form.
+            Share this link. The recipient lands on a sign-in-and-join page;
+            once they're authed the cohort join completes automatically.
           </p>
-          <div className="space-y-1 font-mono text-[11px] num">
-            <div className="flex items-baseline justify-between border-b border-dotted border-warm-line py-1">
-              <span className="text-warm-mute">slug</span>
-              <span className="text-warm-black">{cohort.slug}</span>
-            </div>
-            <div className="flex items-baseline justify-between py-1">
-              <span className="text-warm-mute">token</span>
-              <span className="text-warm-black break-all">{cohort.invite_token}</span>
-            </div>
+          <div className="rounded-lg border border-warm-line bg-warm-paper/30 p-2 font-mono text-[11px] break-all text-warm-black">
+            {inviteUrl}
           </div>
-          <Button variant="ghost" onClick={copyToken} className="text-xs">
-            {tokenCopied ? 'Copied!' : 'Copy token'}
+          <Button variant="ghost" onClick={copyInviteUrl} className="text-xs">
+            {tokenCopied ? 'Copied!' : 'Copy invite link'}
           </Button>
+          <details className="font-mono text-[10px] text-warm-mute">
+            <summary className="cursor-pointer">Slug + token (legacy)</summary>
+            <div className="mt-1 space-y-0.5 num">
+              <div>slug: <span className="text-warm-black">{cohort.slug}</span></div>
+              <div>token: <span className="text-warm-black break-all">{cohort.invite_token}</span></div>
+            </div>
+          </details>
         </Card>
       )}
 

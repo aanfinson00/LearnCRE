@@ -18,6 +18,8 @@ import { CohortsScreen } from './components/CohortsScreen';
 import { HeadToHeadScreen } from './components/HeadToHeadScreen';
 import { QuestionSubmitScreen } from './components/QuestionSubmitScreen';
 import { AdminSubmissionsScreen } from './components/AdminSubmissionsScreen';
+import { CohortInviteLanding } from './components/CohortInviteLanding';
+import { MatchInviteLanding } from './components/MatchInviteLanding';
 import { UnsubscribePage } from './components/NotificationPreferencesCard';
 import { PublicProfile } from './components/PublicProfile';
 import { useCloudSync } from './cloud/useCloudSync';
@@ -43,6 +45,28 @@ function detectUnsubscribeToken(): string | null {
 function isAdminSubmissionsRoute(): boolean {
   if (typeof window === 'undefined') return false;
   return window.location.pathname.replace(/\/+$/, '') === '/admin/submissions';
+}
+
+const COHORT_INVITE_RE = /^\/c\/([a-z0-9-]{3,32})\/?$/i;
+const MATCH_INVITE_RE =
+  /^\/m\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\/?$/i;
+
+function detectCohortInvite(): { slug: string; token: string } | null {
+  if (typeof window === 'undefined') return null;
+  const m = window.location.pathname.match(COHORT_INVITE_RE);
+  if (!m) return null;
+  const token = new URLSearchParams(window.location.search).get('token');
+  if (!token || !token.trim()) return null;
+  return { slug: m[1].toLowerCase(), token: token.trim() };
+}
+
+function detectMatchInvite(): { matchId: string; token: string } | null {
+  if (typeof window === 'undefined') return null;
+  const m = window.location.pathname.match(MATCH_INVITE_RE);
+  if (!m) return null;
+  const token = new URLSearchParams(window.location.search).get('token');
+  if (!token || !token.trim()) return null;
+  return { matchId: m[1].toLowerCase(), token: token.trim() };
 }
 import { WelcomeModal } from './components/WelcomeModal';
 import { hasSeenWelcome } from './storage/onboarding';
@@ -119,6 +143,12 @@ export default function App() {
   if (unsubscribeToken) return <UnsubscribePage token={unsubscribeToken} />;
 
   if (isAdminSubmissionsRoute()) return <AdminSubmissionsScreen />;
+
+  const cohortInvite = detectCohortInvite();
+  if (cohortInvite) return <CohortInviteLanding {...cohortInvite} />;
+
+  const matchInvite = detectMatchInvite();
+  if (matchInvite) return <MatchInviteLanding {...matchInvite} />;
 
   return <AppShell />;
 }

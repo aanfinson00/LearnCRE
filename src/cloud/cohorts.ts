@@ -27,6 +27,12 @@ export interface CohortLeaderboardEntry {
   totalXp: number;
 }
 
+/** Build the shareable invite URL for a cohort. */
+export function buildCohortInviteUrl(slug: string, token: string): string {
+  const origin = typeof window !== 'undefined' ? window.location.origin : '';
+  return `${origin}/c/${slug}?token=${encodeURIComponent(token)}`;
+}
+
 /** Normalize a slug — lowercase, replace runs of non-[a-z0-9] with '-'. */
 export function normalizeSlug(input: string): string {
   return input
