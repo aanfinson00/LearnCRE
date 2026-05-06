@@ -35,6 +35,10 @@ import { BreakEvenOccupancyViz } from './BreakEvenOccupancyViz';
 import { NetEffectiveRentViz } from './NetEffectiveRentViz';
 import { WaltViz } from './WaltViz';
 import { CagrViz } from './CagrViz';
+import { PrefAccrualViz } from './PrefAccrualViz';
+import { GpCatchUpViz } from './GpCatchUpViz';
+import { WaterfallSimpleSplitViz } from './WaterfallSimpleSplitViz';
+import { GpEffectivePromoteViz } from './GpEffectivePromoteViz';
 
 interface Props {
   question: Question;
@@ -520,6 +524,70 @@ export function SolutionViz({ question }: Props) {
             startValue={ctx.startValue}
             endValue={ctx.endValue}
             projectionYears={ctx.projectionYears}
+          />
+        );
+      }
+      return null;
+
+    case 'prefAccrual':
+      if (
+        ctx.lpCapital !== undefined &&
+        ctx.prefRate !== undefined &&
+        ctx.holdYears !== undefined
+      ) {
+        return (
+          <PrefAccrualViz
+            lpCapital={ctx.lpCapital}
+            prefRate={ctx.prefRate}
+            holdYears={ctx.holdYears}
+          />
+        );
+      }
+      return null;
+
+    case 'gpCatchUp':
+      if (
+        ctx.prefPaid !== undefined &&
+        ctx.catchUpTargetGpPct !== undefined
+      ) {
+        return (
+          <GpCatchUpViz
+            prefPaid={ctx.prefPaid}
+            catchUpTargetGpPct={ctx.catchUpTargetGpPct}
+          />
+        );
+      }
+      return null;
+
+    case 'waterfallSimpleSplit':
+      if (
+        ctx.residual !== undefined &&
+        ctx.lpSplitPct !== undefined &&
+        ctx.gpSplitPct !== undefined
+      ) {
+        return (
+          <WaterfallSimpleSplitViz
+            residual={ctx.residual}
+            lpSplitPct={ctx.lpSplitPct}
+            gpSplitPct={ctx.gpSplitPct}
+          />
+        );
+      }
+      return null;
+
+    case 'gpEffectivePromote':
+      if (
+        ctx.lpCapital !== undefined &&
+        ctx.gpCapital !== undefined &&
+        ctx.totalDistributable !== undefined &&
+        ctx.gpTake !== undefined
+      ) {
+        return (
+          <GpEffectivePromoteViz
+            lpCapital={ctx.lpCapital}
+            gpCapital={ctx.gpCapital}
+            totalDistributable={ctx.totalDistributable}
+            gpTake={ctx.gpTake}
           />
         );
       }
