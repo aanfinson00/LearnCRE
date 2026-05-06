@@ -9,6 +9,33 @@ import { SpeedDrillResults } from './components/SpeedDrillResults';
 import { ProfileScreen } from './components/ProfileScreen';
 import { StudyScreen } from './components/StudyScreen';
 import { SideNav } from './components/SideNav';
+import { ClaimLocalProfile } from './components/ClaimLocalProfile';
+import { DailyChallengeScreen } from './components/DailyChallengeScreen';
+import { WeeklyChallengeScreen } from './components/WeeklyChallengeScreen';
+import { LeaderboardScreen } from './components/LeaderboardScreen';
+import { FriendsFeedScreen } from './components/FriendsFeedScreen';
+import { CohortsScreen } from './components/CohortsScreen';
+import { HeadToHeadScreen } from './components/HeadToHeadScreen';
+import { UnsubscribePage } from './components/NotificationPreferencesCard';
+import { PublicProfile } from './components/PublicProfile';
+import { useCloudSync } from './cloud/useCloudSync';
+
+const PUBLIC_PROFILE_RE = /^\/u\/([a-z0-9_-]{3,24})\/?$/i;
+
+/** Returns the handle when the current URL is /u/<handle>, else null. */
+function detectPublicProfileHandle(): string | null {
+  if (typeof window === 'undefined') return null;
+  const m = window.location.pathname.match(PUBLIC_PROFILE_RE);
+  return m ? m[1].toLowerCase() : null;
+}
+
+/** Returns the unsubscribe token when the current URL is /unsubscribe?token=…, else null. */
+function detectUnsubscribeToken(): string | null {
+  if (typeof window === 'undefined') return null;
+  if (window.location.pathname.replace(/\/+$/, '') !== '/unsubscribe') return null;
+  const t = new URLSearchParams(window.location.search).get('token');
+  return t && t.trim() ? t.trim() : null;
+}
 import { WelcomeModal } from './components/WelcomeModal';
 import { hasSeenWelcome } from './storage/onboarding';
 import { AchievementToastHost } from './components/AchievementToast';
@@ -62,7 +89,13 @@ type Mode =
   | 'mockInterview'
   | 'modelingTest'
   | 'certify'
-  | 'profile';
+  | 'profile'
+  | 'daily'
+  | 'weekly'
+  | 'leaderboards'
+  | 'friends'
+  | 'cohorts'
+  | 'headToHead';
 
 type CertView =
   | { kind: 'list' }
@@ -70,6 +103,17 @@ type CertView =
   | { kind: 'exam'; certId: string };
 
 export default function App() {
+  const publicHandle = detectPublicProfileHandle();
+  if (publicHandle) return <PublicProfile handle={publicHandle} />;
+
+  const unsubscribeToken = detectUnsubscribeToken();
+  if (unsubscribeToken) return <UnsubscribePage token={unsubscribeToken} />;
+
+  return <AppShell />;
+}
+
+function AppShell() {
+  useCloudSync();
   const [mode, setMode] = useState<Mode>('quiz');
   const [certView, setCertView] = useState<CertView>({ kind: 'list' });
   const [showWelcome, setShowWelcome] = useState<boolean>(() => !hasSeenWelcome());
@@ -97,6 +141,30 @@ export default function App() {
   const innerContent = (() => {
     if (mode === 'study') {
       return <StudyScreen onBack={() => setMode('quiz')} />;
+    }
+
+    if (mode === 'daily') {
+      return <DailyChallengeScreen onBack={() => setMode('quiz')} />;
+    }
+
+    if (mode === 'weekly') {
+      return <WeeklyChallengeScreen onBack={() => setMode('quiz')} />;
+    }
+
+    if (mode === 'leaderboards') {
+      return <LeaderboardScreen onBack={() => setMode('quiz')} />;
+    }
+
+    if (mode === 'friends') {
+      return <FriendsFeedScreen onBack={() => setMode('quiz')} />;
+    }
+
+    if (mode === 'cohorts') {
+      return <CohortsScreen onBack={() => setMode('quiz')} />;
+    }
+
+    if (mode === 'headToHead') {
+      return <HeadToHeadScreen onBack={() => setMode('quiz')} />;
     }
 
     if (mode === 'profile') {
@@ -472,6 +540,7 @@ export default function App() {
         <AchievementToastHost />
         <ScratchSheet />
         <FeedbackButton />
+        <ClaimLocalProfile />
       </ScratchSheetProvider>
     </FeedbackContextProvider>
   );

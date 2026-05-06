@@ -16,11 +16,18 @@ The durable home for shipped features, in-design work, and the deferred ideas pi
 - Distractor generation with band-aware near-misses; seedable RNG (`mulberry32`)
 - Per-question cards: prompt + assumptions + step-by-step solution + mental-math anchors
 
-### Modes
-- **Quiz** — pick categories, length (10/20/50/endless), difficulty, tolerance, answer mode
+### Modes (11 + Profile)
+- **Quiz** — pick categories, length (10/20/50/endless), difficulty, tolerance, answer mode, role filter, asset class
 - **Speed Drill** — cap-rate times-tables grid (5×5/7×7/9×9) with timer, heatmap, per-row/col accuracy. 9 variants (cap compression, IRR↔EM, loan constant, NOI×cap→value, percent-of, divide-by, combined discount, nth root, reciprocal table)
-- **Walkthroughs** — multi-step guided problems (combined-scenario value, DSCR loan sizing); each step gates on the previous
-- **Study** — reference tables for cap rates, multiples, growth, debt, lease econ
+- **Vocab** — flashcard drill on industry terminology, role-filtered, multiple format choices (definition / acronym / opposite-of)
+- **Walkthroughs** — multi-step guided problems (combined-scenario value, DSCR loan sizing, mock acquisition); each step gates on the previous
+- **Situational** — 69 hand-crafted reasoning cases across 8 categories (pricing, absorption, risk, investment thesis, diagnostic, lease econ, comp selection, sensitivity)
+- **Case study** (long-form) — prose answers graded against a rubric; trains the 4-6 sentence interview answer
+- **Mock interview** — 8 firm-archetype mocks (megafund acquisitions, regional asset mgr, debt shop, etc.) with mixed-mode question sets and self-graded rubrics, full run history
+- **Excel formula** — one-formula-at-a-time drill with live preview, parser, and tolerance + structure check; 11+ templates spanning amortization, NOI roll-forward, IRR/XIRR, debt sizing, sensitivity
+- **Modeling test** — 6 take-home-style multi-cell templates (5-yr DCF · 3-constraint loan sizing · construction loan sizing · MF acquisition pro-forma · refi-vs-sell · distressed basis-play). Grading on designated output cells with tolerance + diagnostic checkpoints; auto-save / resume
+- **Study tables** — reference cheat sheets for cap rates, multiples, growth, debt, lease econ
+- **Certify** — 5 role certifications (Acquisitions, Asset Mgmt, Mortgage UW, Development, Portfolio Mgmt) with benchmark exam, downloadable artifact
 - **Profile** — XP / tier / accuracy trend / by-difficulty bars / achievements gallery / recent sessions
 
 ### Persistence & profiles
@@ -35,14 +42,21 @@ The durable home for shipped features, in-design work, and the deferred ideas pi
 - Soft gates: Advanced needs Analyst I or 50 Q · Dynamic needs Analyst II or 200 Q · Speed Drill needs Analyst I or 30 Q · Walkthroughs need Analyst I or 25 Q
 - Per-profile "show me everything" bypass toggle
 
-### Achievements (12)
-First Steps · Foundations · Hot Streak · Week One · Hundred Club · Five-Hundred Club · Marathoner · Time Traveler · All Tracks · Pure Math Master · Walkthrough Apprentice · Mistake Crusher. Idempotent evaluator runs on session-finish across all three game modes; toast host renders unlocks.
+### Achievements (19)
+First Steps · Foundations · Hot Streak · Week One · Hundred Club · Five-Hundred Club · Marathoner · Time Traveler · All Tracks · Pure Math Master · Walkthrough Apprentice · Mistake Crusher · Reasoning Apprentice · Diagnostic Eye · Spreadsheet Apprentice · Modeling Apprentice · Modeling Pro · Clean Sheet · Tour Guide. Idempotent evaluator runs on session-finish across every mode; toast host renders unlocks.
 
 ### UI / brand
 - Austin Anfinson tokens: warm-black/copper/warm-white palette, Outfit + Instrument Serif, motion `cubic-bezier(0.22, 1, 0.36, 1)` at 150/250/400ms
-- TopNav with 5 tabs + ProfilePicker dropdown + TierBadge
-- 6 inline-SVG visualizations (cap compression, NOI waterfall, vacancy, IRR/hold, compound growth, generic solution viz)
-- Calculator panel, anchors card, review screen, results screens for all three modes
+- Persistent left **SideNav** (4 sections — Drill / Apply / Reference / Progress) with hamburger drawer below `lg`. Replaces the legacy 11-tab top nav
+- TierBadge in sidebar header, ProfilePicker docked at sidebar footer (drop-up to avoid viewport clipping)
+- Inline-SVG visualizations covering 62 of 63 question kinds. Foundations batch (20): cap compression, NOI waterfall, vacancy, IRR/hold, compound growth, rent roll change, TI vs rent, replacement cost, dev spread, debt yield, DSCR loan sizing, cash-on-cash, equity multiple, all-in basis, going-in cap, loan constant, DSCR-from-NOI/DS, DSCR pass test, GRM, price/SF, price/unit, rent/unit, opex/unit, sales/SF, other-income impact, loss-to-lease, occupancy cost ratio, OER, yield on cost, reversion value, break-even occupancy, NER, WALT, CAGR. Returns/Promote batch (9): pref accrual, GP catch-up, waterfall simple split, GP effective promote, levered IRR, hold-vs-sell IRR, IRR after promote, DSCR sensitivity rate, extension drag. Construction draws batch (5): cost to complete, draw allocation, contingency drawdown, retainage running, FF&E reserve dollars. Niche/asset-class batch (12): RevPAR, GOP margin, RevPOR vs RevPAR, percentage-rent breakpoint, clear-height premium, truck-doors per SF, tax reassessment, opex change, NOI from OER, TI payback, TI per SF per year of term, renewal-prob-weighted rent. Plus rent change + generic solution viz.
+- Calculator panel, anchors card, review screen, results screens for every game mode
+- Scratch sheet (open across any drill mode), feedback button (in-app log), achievement toasts
+
+### Onboarding
+- **Welcome modal** — 3 slides on first profile launch (what LearnCRE is · role pick · ready-to-quiz CTA), dismissible at any slide via X / Skip / Esc / backdrop click. Persists once-seen flag per profile.
+- **Per-mode primers** — first-visit Card on every mode's setup screen with blurb / when-to-use / expected time. Dismissible per-mode-per-profile.
+- Welcome modal's role pick flows into `loadPreferredRole()` which pre-fills SetupScreen on the user's first session.
 
 ### Build / deploy
 - Vite + React 18 + TypeScript + Tailwind + Vitest
@@ -57,12 +71,9 @@ First Steps · Foundations · Hot Streak · Week One · Hundred Club · Five-Hun
 
 Sequenced by readiness, not priority. Specs live in the design-spec section at the bottom.
 
-- **PR W — Situational case mode foundation** — types, hook, setup/play/results screens, 6 hand-crafted cases. See [Design spec — Situational case studies](#design-spec--situational-case-studies).
-- **PR X — Situational expansion** — 6 more cases, per-asset-class filtering, achievements ("Reasoning Apprentice", "Diagnostic Eye").
-- **PR Y — Excel formula mode foundation** — formula parser + evaluator + 5 starter templates (amortization, NOI roll-forward, IRR/XIRR mapping, growth-rate fill, per-unit normalization). See [Design spec — Excel formula mode](#design-spec--excel-formula-mode).
-- **PR Y+ — Excel mode expansion** — 5 more templates, formula-error coaching, tolerance for rounding differences, mini-grid styling polish.
-- **PR Z — Modeling test mode** — multi-cell take-home-style templates graded on designated output cells (3-6 outputs + 2-3 diagnostic checkpoints per template); auto-save / resume; 3 starter templates (5-yr DCF, loan sizing, acq pro-forma + sensitivity). See [Design spec — Modeling test mode](#design-spec--modeling-test-mode).
-- **Visualization coverage** — 6 of 35 question kinds have viz today. Backfill the highest-impact 10 (rent roll change, mark-to-market, TI vs rent, replacement cost, dev spread, debt yield, DSCR, cash-on-cash, equity multiple, all-in basis).
+- **Visualization coverage** — 62 of 63 question kinds shipped (Foundations + Returns/Promote + Construction draws + Niche/asset-class). Only `taxAdjustedExit` parked: context only carries purchasePrice + holdYears; the actual mechanics (sale proceeds, recapture, cap-gains rate) live in the solution builder. Expanding the context to populate viz is a content-side decision that warrants its own round.
+- **Modeling test UX polish (partial)** — ⌘↵ (next-empty target) and ⌘D (fill-from-left with relative-reference shift, Excel-style) shipped via new `shiftFormula` helper in `src/excel/shift.ts` (11 unit tests). Native ⌘C/⌘V works through the formula-bar input. Still open: mobile horizontal-scroll polish on wider 7-column grids; per-cell formula-history recall.
+- **Interview-questions.md GAPs (shipped)** — three new quiz templates closing the named GAPs from item 11: `refiStressTest` (cap_stress = LTV × NOI / loan; mortgage-UW), `feeDragOnIrr` (LP IRR after committed-capital management fees; portfolio-mgmt), `leaseUpReserve` (linear-ramp NOI shortfall sizing for ground-up dev). Distressed-deal GAP was already shipped as `walk-distressed-1` walkthrough (`distressedLoanWorkoutWalk`). All 3 new kinds covered by the 1000-iteration template test.
 
 ---
 
@@ -70,16 +81,16 @@ Sequenced by readiness, not priority. Specs live in the design-spec section at t
 
 The "v3 path B" arc. Each PR is independently shippable and can be sequenced after Excel + Situational land. See [Design spec — Cloud / leaderboards / challenges](#design-spec--cloud--leaderboards--challenges) for the architectural details.
 
-- **PR L — Cloud identity foundation** — Supabase project, magic-link auth, profile sync schema, "claim local profile" flow that uploads existing localStorage state on first sign-in.
-- **PR M — Cross-device sync** — sessions/XP/achievements/mistake bank reconcile via last-write-wins + per-record `updated_at`. localStorage stays the source of truth for offline; cloud is an async mirror.
-- **PR N — Public profiles** — opt-in shareable URL `/u/<handle>` showing tier, lifetime stats, achievements, recent sessions. Privacy default: handle-only, no email.
-- **PR O — Daily challenge** — deterministic seed of the day, same 10 questions for everyone, leaderboard for the day's accuracy + speed.
-- **PR P — Curated weekly challenges** — hand-authored 10-question themed sets ("debt fundamentals", "lease econ", "MF acquisition") with leaderboards.
-- **PR Q — Head-to-head** — 1v1 async match: same seed, both players play independently, results compared at end.
-- **PR R — Friends / follows** — follow other handles, see their recent unlocks + sessions in a feed.
-- **PR S — Global leaderboards** — all-time XP, weekly XP, daily challenge accuracy, longest streak.
-- **PR T — Cohort / org leaderboards** — invite-by-link cohorts (e.g. "Acme RE summer interns") with their own ranking. Useful for instructor-led use.
-- **PR U — Notifications** — opt-in email weekly digest, friend unlocked an achievement, daily challenge reminder.
+- **PR L — Cloud identity foundation (shipped, frontend complete; user provides Supabase project + env vars to activate)** — `@supabase/supabase-js` client wrapper at `src/cloud/client.ts` with cloud-disabled fallback when env vars missing (app continues local-first). `useAuth()` hook + `AuthProvider` at `src/cloud/auth.tsx`; magic-link `SignIn` component on `ProfileScreen`; first-sign-in `ClaimLocalProfile` modal seeds the cloud `profiles` row from active local profile. SQL migration at `supabase/migrations/0001_initial.sql` defines `profiles` (RLS: owner read+write, public-read when `is_public=true`) plus 5 placeholder tables (`xp_state`, `tier_state`, `sessions`, `achievements`, `mistake_bank_items`) shape-only with owner-RLS — used by PR M for cross-device sync. `.env.example` documents the activation flow.
+- **PR M — Cross-device sync (shipped)** — `src/cloud/sync.ts` exposes `pushAll(userId)` + `pullAll(userId)` over the 5 placeholder tables from PR L. Pure merge helpers (`mergeXp`, `mergeSessions`, `mergeAchievements`, `mergeMistakes`) use union-and-max semantics — no per-record `updated_at` plumbing required, which keeps the existing local writers untouched. `useCloudSync()` hook in `App` runs initial pull-then-push on auth-state-change, then a 30s periodic push, plus `beforeunload` flush. Activates only when cloud is enabled + signed in; full no-op otherwise. 9 unit tests covering the merge corner cases (empty local, id collisions, prompt-key uniqueness).
+- **PR N — Public profiles (shipped)** — `/u/<handle>` route renders avatar/handle/display name, total XP, current streak, tier, achievements list, last 8 sessions. Hand-rolled router (`detectPublicProfileHandle()` early return in `App.tsx`) avoids adding a router dep for a single dynamic route. New 0002 migration adds public-read RLS on `xp_state`, `tier_state`, `sessions`, `achievements` gated on `profiles.is_public = true` (mistakes stay private). `SignIn` panel on Profile screen now exposes a make-public toggle + Copy-share-URL button. Privacy default unchanged: rows opt-in only.
+- **PR O — Daily challenge (shipped)** — `Compete → Daily` in the SideNav. Same 10 questions worldwide for any UTC date (3 beginner / 5 intermediate / 2 advanced), seeded by FNV-1a hash of `YYYY-MM-DD`. `src/quiz/dailyChallenge.ts` exposes `dailyDate()`, `seedFromDate()`, `generateDaily()` plus local play-tracking. New 0003 migration adds `daily_results` table with primary-key (date, user_id) for one-play-per-day enforcement, owner-only insert, public read gated on `profiles.is_public`. Leaderboard view sorts by `correct DESC, time_ms ASC`; rows whose owner is private filter out client-side. Cloud-disabled fallback: app still plays locally, leaderboard hidden. 11 unit tests covering UTC date format, seed determinism, difficulty mix, question stability across calls.
+- **PR P — Curated weekly challenges (shipped)** — `Compete → Weekly themes` in the SideNav. 6 hand-authored themes for May–June 2026 (Debt fundamentals, Lease economics, MF acquisition, Capital stack & promote, Hotel underwriting, Refi & exit) defined in `src/quiz/weeklyChallenges.ts` with explicit start/end ISO timestamps (Mondays 12:00 UTC). Themes are app code (not DB rows) so adding new ones is a code change, not a data migration. New 0004 migration adds `weekly_results` table mirroring daily — PK `(challenge_id, user_id)` enforces one play per theme. Leaderboard sorts by `correct DESC, time_ms ASC`; respects `is_public` RLS like daily. Empty-state shows next upcoming theme + curator handle. 12 unit tests cover theme uniqueness, non-overlapping windows, current/next selection, deterministic generation, kind-pool conformance.
+- **PR Q — Head-to-head (shipped)** — `Compete → Head-to-head` in the SideNav. Host creates a match → gets a `(match_id, invite_token)` pair → opponent claims the slot via `accept_match_by_token()` SECURITY DEFINER fn → both play the same seeded 10-question set independently → result auto-settles when both have submitted via `submit_match_result()` SECURITY DEFINER fn (status flips to `settled` only when both `*_completed_at` are non-null). 7-day expiry baked into the row default. Higher correct wins; ties broken on speed. Refactored `dailyChallenge.ts` to expose `generateFromSeed(seed)` so both daily (date-derived) and h2h (random per match) share the question generator. New 0008 migration with two SECURITY DEFINER functions; RLS lets host do anything with their matches and opponent read theirs. 11 unit tests cover `settleOutcome` (host-win / opponent-win / draw / incomplete + tie-break) and `canPlay` (settled / expired / role / already-submitted).
+- **PR R — Friends / follows (shipped)** — `Compete → Friends feed` in the SideNav. Asymmetric Twitter-style follows backed by a `follows` table (PK `follower_id, followee_id`, no self-follow check, RLS lets a user CRUD their own edges + lets anyone read edges whose followee profile is public so follower counts work). Follow / Following toggle + follower count on `/u/<handle>` for any signed-in viewer who isn't the profile owner. Friends feed aggregates achievements + daily-challenge results across followees, sorted descending by timestamp; rows from non-public followees never surface (RLS gates on linked profile). Pure `mergeFeedEvents` helper covered by 4 tests. Not in scope: muting (skipped — unfollow covers it), tier-up events in feed, follower lists on profile pages.
+- **PR S — Global leaderboards (shipped)** — `Compete → Leaderboards` in the SideNav. 4 tabs: All-time XP, This week (ISO-week XP via session-payload sum), Longest streak, Daily today. Implemented as plain queries (Supabase free tier has no built-in cron for matview refresh) ordered + capped at 100. New 0005 migration adds `best_streak` column to `xp_state`; `sync.ts` now pushes/pulls it. Public visibility flows through existing RLS — only rows whose linked profile has `is_public = true` appear. ISO-week-start helper covered by 5 unit tests (Mon noon, Sun rollback, year boundary, Wed mid-week, time zeroing).
+- **PR T — Cohort / org leaderboards (shipped)** — `Compete → Cohorts` in the SideNav. Owner creates a named cohort with a slug + auto-generated `invite_token`; invitees paste `(slug, token)` into a Join form which calls a `SECURITY DEFINER` `join_cohort_by_token()` function so non-members can't read tokens by guessing slugs. New 0007 migration: `cohorts` (with slug/name length+regex CHECKs) + `cohort_members` (PK `(cohort_id, user_id)`) + an `is_cohort_member()` SECURITY DEFINER helper that breaks the RLS-recursion you'd otherwise get on cross-table membership checks. Cohort detail screen shows member list, invite token (owner only) with Copy button, leave button (members), and a cohort-scoped XP leaderboard reusing the PR S query pattern filtered to `user_id IN (members)`. 9 unit tests cover slug normalization + validation.
+- **PR U — Notifications (shipped)** — Email-only opt-in. New `notification_preferences` table (off-by-default toggles for weekly digest / daily reminder / friend unlock + UTC reminder hour + per-row unsubscribe token). `unsubscribe_by_token()` SECURITY DEFINER fn flips every flag off in one click; granted to `anon` so unsubscribe links work without sign-in. Edge Function at `supabase/functions/send-notifications/` is a stateless dispatcher (POST `?type=weekly_digest` / `?type=daily_reminder` with `Authorization: Bearer $CRON_SECRET`); reads opted-in users via service-role client, sends through Resend, throttles via `last_*_sent_at` (6 days for weekly, 20 hours for daily), matches `daily_reminder_hour_utc` against current UTC hour so an hourly cron reaches each user once at their chosen time. README in the function dir documents pg_cron + pg_net (or any external cron) wiring. Frontend: `NotificationPreferencesCard` on Profile screen; `UnsubscribePage` rendered at `/unsubscribe?token=…` via the existing hand-rolled router. Friend-unlock notification is wired in the schema but the trigger that fires on `achievements` insert is parked for a follow-up since it requires deciding between database trigger vs application-side enqueue.
 
 ---
 
@@ -119,6 +130,8 @@ Explicitly not pursuing. Listed so future contributors don't burn cycles relitig
 ---
 
 ## Design spec — Excel formula mode
+
+> ✅ **Shipped.** Foundation + expansion both delivered. 11+ templates across `src/excel/templates/`. Kept here as historical reference for the architecture call.
 
 ### Why
 Existing kinds test "can the user compute". Excel mode tests "can the user write the formula a junior analyst would actually type". Closes the gap between mental math and real-world deliverables.
@@ -164,6 +177,8 @@ Existing kinds test "can the user compute". Excel mode tests "can the user write
 ---
 
 ## Design spec — Modeling test mode
+
+> ✅ **Shipped.** All architecture in this spec landed. Templates 1-3 from the original spec shipped + three additional (construction loan sizing, refi-vs-sell Y5 decision, distressed-office basis-play) for 6 total. Achievements (Modeling Apprentice / Pro / Clean Sheet) wired. Auto-save / resume working. Modeling Pro now requires passing all 6.
 
 ### Why
 Existing Excel mode is a recall drill: write one formula, get judged on that formula. Real interview take-homes and on-the-job modeling tests are different — you're handed a partial template, you fill in many cells, and you're judged on whether the bottom-line outputs (IRR, exit value, max loan) come out right. This mode closes the gap between "I can write `=IRR(B2:B7)`" and "I can build a model an MD will trust."
@@ -322,6 +337,8 @@ This catches answer-key drift any time the parser/evaluator or template changes.
 
 ## Design spec — Situational case studies
 
+> ✅ **Shipped.** Foundation + expansion both delivered. Catalog grew from the spec's 12-case starter set to 69 cases across 8 categories (pricing, absorption, risk, investment thesis, diagnostic, lease econ, comp selection, sensitivity). Achievements (Reasoning Apprentice, Diagnostic Eye) wired.
+
 ### Why
 Every existing kind tests *can the user compute*. Situational tests *can the user reason about why a deal looks the way it does*. Closes the analytical gap between mechanics and judgment. Hand-crafted, never random-generated.
 
@@ -475,14 +492,30 @@ Local-first works for a single user, but doesn't survive device switches or enab
 
 ## Implementation order (current)
 
-1. ✅ This `ROADMAP.md` lands. README links to it.
-2. PR W — Situational foundation
-3. PR X — Situational expansion
-4. PR Y — Excel mode foundation
-5. PR Y+ — Excel mode expansion
-6. PR Z — Modeling test mode (3 starter templates)
-7. Visualization backfill (10 highest-impact kinds)
-8. PR L → PR U — cloud track, in order
+1. ✅ Situational foundation + expansion (now 69 cases across 8 categories)
+2. ✅ Excel formula mode foundation + 11+ templates
+3. ✅ Mock interview mode + 8 firm archetypes + run history
+4. ✅ Theme 2 — capital-stack waterfalls, document literacy, vocab speed-drill, construction draws + cost overrun, asset-class-native math
+5. ✅ Certifications — 5 role certs + benchmark exam + downloadable artifact
+6. ✅ Sidebar navigation refactor (TopNav → SideNav, 4-section grouping)
+7. ✅ PR Z — Modeling test mode + 6 templates (DCF, loan sizing, construction loan, MF pro-forma, refi-vs-sell, distressed basis-play)
+8. ✅ Onboarding — welcome modal + per-mode primers + Tour Guide achievement
+9. ✅ Visualization Foundations batch — 20 viz (per-SF/unit, cap/DSCR/GRM, operating ratios, yield/exit, NER/WALT/CAGR)
+9b. ✅ Visualization Returns/Promote batch — 9 viz (pref/catch-up/waterfall/promote, levered IRR, hold-vs-sell, post-promote IRR, DSCR-rate sensitivity, extension drag); taxAdjustedExit parked
+9c. ✅ Visualization Construction draws batch — 5 viz (cost to complete, draw allocation, contingency drawdown, retainage running, FF&E reserve)
+9d. ✅ Visualization Niche/asset-class batch — 12 viz (Hotel: RevPAR, GOP, RevPOR vs RevPAR; Retail/Industrial: % rent breakpoint, clear-height premium, truck-doors/SF; Operating: tax reassessment, opex change, NOI from OER, TI payback, TI/SF/yr-of-term, renewal-prob-weighted rent). Viz coverage closed at 62/63; taxAdjustedExit parked.
+10. ✅ Modeling test UX polish (⌘↵ next-empty + ⌘D fill-from-left shipped; mobile scroll polish + history recall still open)
+11. ✅ Quiz / situational / walkthrough GAPs from `docs/interview-questions.md` (refiStressTest + feeDragOnIrr + leaseUpReserve quiz templates shipped; distressed walkthrough was already shipped as walk-distressed-1)
+12. ✅ PR L — Cloud identity foundation (frontend + SQL migration shipped; activates when user supplies Supabase project + env vars)
+12b. ✅ PR M — Cross-device sync (push/pull + merge helpers + useCloudSync lifecycle hook)
+12c. ✅ PR N — Public profiles (`/u/<handle>` page + 0002 RLS migration + Make-public toggle on Profile screen)
+12d. ✅ PR O — Daily challenge (deterministic seed-of-the-day, 10 questions, leaderboard, 0003 migration)
+12e. ✅ PR P — Curated weekly themes (6 themes shipped May–June 2026, 0004 migration)
+12f. ✅ PR S — Global leaderboards (4 tabs: alltime XP, weekly XP, longest streak, daily today; 0005 migration)
+12g. ✅ PR R — Friends / follows (asymmetric follows, follow button on /u/<handle>, friends feed, 0006 migration)
+12h. ✅ PR T — Cohort / org leaderboards (cohorts + cohort_members + RLS, invite token, scoped XP leaderboard, 0007 migration)
+12i. ✅ PR Q — Head-to-head async match (matches + accept/submit SECURITY DEFINER fns, settle on both-submitted, 0008 migration)
+12j. ✅ PR U — Notifications (preferences + Edge Function dispatcher + unsubscribe page, 0009 migration). Cloud track L → U complete.
 
 Re-sequence freely as priorities shift. Update the "In design" section when a PR lands and move the entry up to "What's shipped today".
 

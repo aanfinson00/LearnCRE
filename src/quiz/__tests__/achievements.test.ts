@@ -29,6 +29,7 @@ const ctx = (over: Partial<AchievementContext>): AchievementContext => ({
   excelCorrectIds: new Set(),
   modelingTestPassedIds: new Set(),
   modelingTestCleanSheetIds: new Set(),
+  distinctModeKinds: new Set(),
   ...over,
 });
 

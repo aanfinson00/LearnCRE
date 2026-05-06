@@ -71,6 +71,8 @@ import { psaEarnestMoneyDefault } from './psaEarnestMoneyDefault';
 import { constructionEquityFirstVsParipassu } from './constructionEquityFirstVsParipassu';
 import { constructionChangeOrderPricing } from './constructionChangeOrderPricing';
 import { constructionRetainageRelease } from './constructionRetainageRelease';
+import { capitalAllocationPriority } from './capitalAllocationPriority';
+import { riskAdjustedReturnFramework } from './riskAdjustedReturnFramework';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -139,6 +141,8 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   constructionEquityFirstVsParipassu,
   constructionChangeOrderPricing,
   constructionRetainageRelease,
+  capitalAllocationPriority,
+  riskAdjustedReturnFramework,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {

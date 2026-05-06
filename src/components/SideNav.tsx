@@ -14,7 +14,13 @@ type Mode =
   | 'mockInterview'
   | 'modelingTest'
   | 'certify'
-  | 'profile';
+  | 'profile'
+  | 'daily'
+  | 'weekly'
+  | 'leaderboards'
+  | 'friends'
+  | 'cohorts'
+  | 'headToHead';
 
 interface Props {
   active: Mode;
@@ -50,6 +56,17 @@ const SECTIONS: Section[] = [
       { id: 'excel', label: 'Excel', hint: 'Write spreadsheet formulas against a mini-grid.' },
       { id: 'modelingTest', label: 'Modeling test', hint: 'Take-home-style multi-cell models, graded on output cells.' },
       { id: 'mockInterview', label: 'Mock interview', hint: 'Firm-archetype mocks: mixed-mode, self-graded.' },
+    ],
+  },
+  {
+    label: 'Compete',
+    items: [
+      { id: 'daily', label: 'Daily', hint: '10-question challenge with a global leaderboard.' },
+      { id: 'weekly', label: 'Weekly themes', hint: 'Curated themed challenges; new theme every Monday.' },
+      { id: 'leaderboards', label: 'Leaderboards', hint: 'Top 100 by XP, streak, and daily-challenge accuracy.' },
+      { id: 'friends', label: 'Friends feed', hint: 'Recent activity from people you follow.' },
+      { id: 'cohorts', label: 'Cohorts', hint: 'Invite-only groups with their own scoped leaderboard.' },
+      { id: 'headToHead', label: 'Head-to-head', hint: '1v1 async match — same seed, results compared on settle.' },
     ],
   },
   {
