@@ -16,6 +16,7 @@ import { LeaderboardScreen } from './components/LeaderboardScreen';
 import { FriendsFeedScreen } from './components/FriendsFeedScreen';
 import { CohortsScreen } from './components/CohortsScreen';
 import { HeadToHeadScreen } from './components/HeadToHeadScreen';
+import { QuestionSubmitScreen } from './components/QuestionSubmitScreen';
 import { UnsubscribePage } from './components/NotificationPreferencesCard';
 import { PublicProfile } from './components/PublicProfile';
 import { useCloudSync } from './cloud/useCloudSync';
@@ -95,7 +96,8 @@ type Mode =
   | 'leaderboards'
   | 'friends'
   | 'cohorts'
-  | 'headToHead';
+  | 'headToHead'
+  | 'submitQuestion';
 
 type CertView =
   | { kind: 'list' }
@@ -165,6 +167,10 @@ function AppShell() {
 
     if (mode === 'headToHead') {
       return <HeadToHeadScreen onBack={() => setMode('quiz')} />;
+    }
+
+    if (mode === 'submitQuestion') {
+      return <QuestionSubmitScreen onBack={() => setMode('quiz')} />;
     }
 
     if (mode === 'profile') {
