@@ -89,7 +89,7 @@ The "v3 path B" arc. Each PR is independently shippable and can be sequenced aft
 - **PR Q — Head-to-head** — 1v1 async match: same seed, both players play independently, results compared at end.
 - **PR R — Friends / follows (shipped)** — `Compete → Friends feed` in the SideNav. Asymmetric Twitter-style follows backed by a `follows` table (PK `follower_id, followee_id`, no self-follow check, RLS lets a user CRUD their own edges + lets anyone read edges whose followee profile is public so follower counts work). Follow / Following toggle + follower count on `/u/<handle>` for any signed-in viewer who isn't the profile owner. Friends feed aggregates achievements + daily-challenge results across followees, sorted descending by timestamp; rows from non-public followees never surface (RLS gates on linked profile). Pure `mergeFeedEvents` helper covered by 4 tests. Not in scope: muting (skipped — unfollow covers it), tier-up events in feed, follower lists on profile pages.
 - **PR S — Global leaderboards (shipped)** — `Compete → Leaderboards` in the SideNav. 4 tabs: All-time XP, This week (ISO-week XP via session-payload sum), Longest streak, Daily today. Implemented as plain queries (Supabase free tier has no built-in cron for matview refresh) ordered + capped at 100. New 0005 migration adds `best_streak` column to `xp_state`; `sync.ts` now pushes/pulls it. Public visibility flows through existing RLS — only rows whose linked profile has `is_public = true` appear. ISO-week-start helper covered by 5 unit tests (Mon noon, Sun rollback, year boundary, Wed mid-week, time zeroing).
-- **PR T — Cohort / org leaderboards** — invite-by-link cohorts (e.g. "Acme RE summer interns") with their own ranking. Useful for instructor-led use.
+- **PR T — Cohort / org leaderboards (shipped)** — `Compete → Cohorts` in the SideNav. Owner creates a named cohort with a slug + auto-generated `invite_token`; invitees paste `(slug, token)` into a Join form which calls a `SECURITY DEFINER` `join_cohort_by_token()` function so non-members can't read tokens by guessing slugs. New 0007 migration: `cohorts` (with slug/name length+regex CHECKs) + `cohort_members` (PK `(cohort_id, user_id)`) + an `is_cohort_member()` SECURITY DEFINER helper that breaks the RLS-recursion you'd otherwise get on cross-table membership checks. Cohort detail screen shows member list, invite token (owner only) with Copy button, leave button (members), and a cohort-scoped XP leaderboard reusing the PR S query pattern filtered to `user_id IN (members)`. 9 unit tests cover slug normalization + validation.
 - **PR U — Notifications** — opt-in email weekly digest, friend unlocked an achievement, daily challenge reminder.
 
 ---
@@ -513,7 +513,8 @@ Local-first works for a single user, but doesn't survive device switches or enab
 12e. ✅ PR P — Curated weekly themes (6 themes shipped May–June 2026, 0004 migration)
 12f. ✅ PR S — Global leaderboards (4 tabs: alltime XP, weekly XP, longest streak, daily today; 0005 migration)
 12g. ✅ PR R — Friends / follows (asymmetric follows, follow button on /u/<handle>, friends feed, 0006 migration)
-13. PR Q, T, U — cloud track (head-to-head, cohort/org leaderboards, notifications)
+12h. ✅ PR T — Cohort / org leaderboards (cohorts + cohort_members + RLS, invite token, scoped XP leaderboard, 0007 migration)
+13. PR Q, U — cloud track (head-to-head, notifications)
 
 Re-sequence freely as priorities shift. Update the "In design" section when a PR lands and move the entry up to "What's shipped today".
 

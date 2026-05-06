@@ -18,7 +18,8 @@ type Mode =
   | 'daily'
   | 'weekly'
   | 'leaderboards'
-  | 'friends';
+  | 'friends'
+  | 'cohorts';
 
 interface Props {
   active: Mode;
@@ -63,6 +64,7 @@ const SECTIONS: Section[] = [
       { id: 'weekly', label: 'Weekly themes', hint: 'Curated themed challenges; new theme every Monday.' },
       { id: 'leaderboards', label: 'Leaderboards', hint: 'Top 100 by XP, streak, and daily-challenge accuracy.' },
       { id: 'friends', label: 'Friends feed', hint: 'Recent activity from people you follow.' },
+      { id: 'cohorts', label: 'Cohorts', hint: 'Invite-only groups with their own scoped leaderboard.' },
     ],
   },
   {

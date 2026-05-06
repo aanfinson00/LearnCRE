@@ -14,6 +14,7 @@ import { DailyChallengeScreen } from './components/DailyChallengeScreen';
 import { WeeklyChallengeScreen } from './components/WeeklyChallengeScreen';
 import { LeaderboardScreen } from './components/LeaderboardScreen';
 import { FriendsFeedScreen } from './components/FriendsFeedScreen';
+import { CohortsScreen } from './components/CohortsScreen';
 import { PublicProfile } from './components/PublicProfile';
 import { useCloudSync } from './cloud/useCloudSync';
 
@@ -82,7 +83,8 @@ type Mode =
   | 'daily'
   | 'weekly'
   | 'leaderboards'
-  | 'friends';
+  | 'friends'
+  | 'cohorts';
 
 type CertView =
   | { kind: 'list' }
@@ -141,6 +143,10 @@ function AppShell() {
 
     if (mode === 'friends') {
       return <FriendsFeedScreen onBack={() => setMode('quiz')} />;
+    }
+
+    if (mode === 'cohorts') {
+      return <CohortsScreen onBack={() => setMode('quiz')} />;
     }
 
     if (mode === 'profile') {
