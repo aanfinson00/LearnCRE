@@ -62,6 +62,24 @@ curl -X POST \
   "https://<project>.supabase.co/functions/v1/send-notifications?type=daily_reminder"
 ```
 
+### Friend-unlock trigger (event-driven, not cron)
+
+The `friend_unlock` type is invoked by a Postgres trigger on
+`achievements` (migration `0012_friend_unlock_trigger.sql`). Two
+database-level settings need to be set once after deploying the function:
+
+```sql
+alter database postgres
+  set app.notification_function_url =
+      'https://<project>.supabase.co/functions/v1/send-notifications';
+alter database postgres
+  set app.cron_secret = '<your CRON_SECRET>';
+```
+
+`pg_net` must be enabled in Database → Extensions. The trigger filters
+to fresh unlocks only (within 5 min of `now()`), so backfill / re-sync
+inserts whose `unlocked_at` is in the past won't spam followers.
+
 ## Returns
 
 JSON `{ sent, skipped }` per invocation.

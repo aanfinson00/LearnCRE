@@ -198,13 +198,100 @@ function startOfIsoWeek(now: Date): Date {
   return d;
 }
 
+function friendUnlockHtml(
+  actorHandle: string,
+  achievementId: string,
+  unsubscribeToken: string,
+): string {
+  return `<div style="font-family:system-ui,sans-serif;max-width:520px;margin:0 auto">
+    <h2 style="font-weight:500">@${actorHandle} unlocked an achievement</h2>
+    <p>${achievementId.replace(/-/g, ' ')} is now on their profile.</p>
+    <p><a href="${APP_URL}/u/${actorHandle}">View their profile →</a></p>
+    ${unsubscribeFooter(unsubscribeToken)}
+  </div>`;
+}
+
+interface FriendUnlockPayload {
+  user_id?: string;
+  achievement_id?: string;
+}
+
+async function handleFriendUnlock(
+  client: ReturnType<typeof createClient>,
+  payload: FriendUnlockPayload,
+): Promise<{ sent: number; skipped: number }> {
+  const userId = payload.user_id;
+  const achievementId = payload.achievement_id;
+  if (!userId || !achievementId) return { sent: 0, skipped: 0 };
+
+  // Only fan out for public-profile actors. If the actor is private their
+  // followers can't verify the unlock, so we skip the notification rather
+  // than send a dead link.
+  const { data: actor } = await client
+    .from('profiles')
+    .select('handle, is_public')
+    .eq('id', userId)
+    .maybeSingle();
+  if (!actor || !actor.is_public) return { sent: 0, skipped: 0 };
+
+  const { data: edges } = await client
+    .from('follows')
+    .select('follower_id')
+    .eq('followee_id', userId);
+  const followerIds = (edges ?? []).map((e) => e.follower_id as string);
+  if (followerIds.length === 0) return { sent: 0, skipped: 0 };
+
+  const { data: prefs } = await client
+    .from('notification_preferences')
+    .select('*')
+    .in('user_id', followerIds)
+    .eq('friend_unlock_enabled', true);
+  const rows = (prefs ?? []) as PrefsRow[];
+
+  let sent = 0;
+  let skipped = 0;
+  for (const row of rows) {
+    if (!row.email) {
+      skipped++;
+      continue;
+    }
+    const html = friendUnlockHtml(
+      actor.handle as string,
+      achievementId,
+      row.unsubscribe_token,
+    );
+    const ok = await sendEmail(
+      row.email,
+      `@${actor.handle as string} unlocked an achievement on LearnCRE`,
+      html,
+    );
+    if (ok) sent++;
+    else skipped++;
+  }
+  return { sent, skipped };
+}
+
 Deno.serve(async (req) => {
   const auth = req.headers.get('authorization');
   if (auth !== `Bearer ${CRON_SECRET}`) {
     return new Response('unauthorized', { status: 401 });
   }
   const url = new URL(req.url);
-  const type = url.searchParams.get('type');
+  let type = url.searchParams.get('type');
+  let body: FriendUnlockPayload = {};
+  if (req.method === 'POST') {
+    try {
+      const raw = await req.text();
+      if (raw.trim()) {
+        const parsed = JSON.parse(raw);
+        if (!type && typeof parsed.type === 'string') type = parsed.type;
+        if (typeof parsed.user_id === 'string') body.user_id = parsed.user_id;
+        if (typeof parsed.achievement_id === 'string') body.achievement_id = parsed.achievement_id;
+      }
+    } catch {
+      /* ignore body parse errors; fall back to query string */
+    }
+  }
 
   const client = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE);
 
@@ -220,7 +307,13 @@ Deno.serve(async (req) => {
       headers: { 'content-type': 'application/json' },
     });
   }
-  return new Response('unknown type (use weekly_digest or daily_reminder)', {
+  if (type === 'friend_unlock') {
+    const r = await handleFriendUnlock(client, body);
+    return new Response(JSON.stringify(r), {
+      headers: { 'content-type': 'application/json' },
+    });
+  }
+  return new Response('unknown type (use weekly_digest, daily_reminder, or friend_unlock)', {
     status: 400,
   });
 });
