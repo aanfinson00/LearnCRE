@@ -198,7 +198,7 @@ in a future PR.
 
 ---
 
-## Portfolio Management (8)
+## Portfolio Management (13)
 
 ### Q: Your fund is 40% office vs 25% target. Which assets do you sell first to rebalance?
 - **Role:** portfolioMgmt · **Difficulty:** advanced
@@ -240,9 +240,34 @@ in a future PR.
 - **Why:** EM↔IRR translation; common filter.
 - **Maps to:** `equityMultiple` quiz template + `irrSimple` quiz template + `EquityMultipleViz`.
 
+### Q: How does undeployed capital in a closed-end fund create a J-curve? When does a typical 5-year fund inflect to positive cumulative cash?
+- **Role:** portfolioMgmt · **Difficulty:** intermediate
+- **Why:** fee drag + deployment lag compound the early return depression; candidates often know the J-curve label without understanding the arithmetic.
+- **Maps to:** **GAP — propose `jCurveDrag` situational**.
+
+### Q: An LP wants to exit a 7-year closed-end fund at year 3. Walk through how a secondary buyer prices the LP interest — and what discount to NAV is typical in a rising-rate environment.
+- **Role:** portfolioMgmt · **Difficulty:** advanced
+- **Why:** LP secondary pricing combines waterfall math, NAV estimation, and current yield expectations; increasingly asked at fund-of-funds and secondaries shops.
+- **Maps to:** **GAP — propose `lpSecondaryPricing` situational**.
+
+### Q: How do you compare risk-adjusted returns across a 6.5% going-in core asset and a 16% IRR value-add play in the same market? What's your framework?
+- **Role:** portfolioMgmt · **Difficulty:** advanced
+- **Why:** risk-adjusted return framing separates candidates who cite only headline IRR from those who can anchor to spread-to-risk-free or a Sharpe-equivalent; a filter for PM-track roles.
+- **Maps to:** **GAP — propose `risk-adjusted-return-framework` situational**.
+
+### Q: You have $50M to deploy across 5 live deals; only 3 will likely close, and two are competitive. How do you allocate capital across an uncertain deal set?
+- **Role:** portfolioMgmt · **Difficulty:** advanced
+- **Why:** capital allocation under close-probability uncertainty separates analysts who size deals individually from those who think in portfolio terms; common at closed-end GP shops.
+- **Maps to:** **GAP — propose `capital-allocation-priority` situational**.
+
+### Q: Your fund uses a subscription credit facility to fund draws before calling LP capital. How does this inflate the reported fund-level IRR, and how should LPs adjust for it?
+- **Role:** portfolioMgmt · **Difficulty:** advanced
+- **Why:** subscription-line IRR inflation is a known GP-LP friction point; increasingly standard in LP due-diligence questionnaires.
+- **Maps to:** **GAP — propose `subscriptionLineIrrInflation` situational**.
+
 ---
 
-## Development (7)
+## Development (12)
 
 ### Q: Land cost $8M, hard cost $38M, soft $7M, 5% contingency. What's TPC and what's the yield-on-cost on $4.5M stabilized NOI?
 - **Role:** development · **Difficulty:** intermediate
@@ -278,6 +303,31 @@ in a future PR.
 - **Role:** development · **Difficulty:** advanced
 - **Why:** ground-lease economics; common at urban infill developers.
 - **Maps to:** **GAP — propose `groundLeaseVsFee` situational**.
+
+### Q: How do you size an interest reserve on a construction loan? Walk through an 18-month project with a $30M commitment at 7%.
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** interest reserve is routinely under-modeled by junior candidates — it's a hidden carry cost that inflates TPC and constrains the equity check.
+- **Maps to:** **GAP — propose `interestReserve` quiz template**.
+
+### Q: What's a lease-up reserve, and how would you size one for a 200-unit multifamily development projecting 18-month stabilization at $2,200/unit/month?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** lease-up reserves require real absorption assumptions to size correctly; candidates who skip them overstate equity returns during the lease-up window.
+- **Maps to:** **GAP — propose `leaseUpReserve` quiz template**.
+
+### Q: Hard costs come in 10% over budget at substantial completion. Who funds the overrun in a typical JV LP agreement, and in what sequence?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** LPA cost-overrun funding mechanics — sponsor equity first, LP second, mezzanine third — are a frequent interview topic at development-focused shops.
+- **Maps to:** `lpa-cost-overrun-sharing` situational.
+
+### Q: What's the difference between preferred equity and mezzanine debt in a development capital stack? How does each affect the sponsor waterfall at exit?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** pref equity vs. mezz is a capital structure nuance that separates junior from senior candidates; the distinction matters for waterfall order, foreclosure rights, and cost of capital.
+- **Maps to:** **GAP — propose `prefEquityVsMezz` situational**.
+
+### Q: A 200-unit project is 18 months delayed. Outstanding loan is $28M at 7%. Quantify the carry cost of the delay and explain the options for curing the extended interest reserve.
+- **Role:** development · **Difficulty:** advanced
+- **Why:** construction delay is the most common value-destruction scenario in development; candidates rarely model carry cost impact before presenting to equity partners.
+- **Maps to:** **GAP — propose `constructionDelayIrrImpact` situational**.
 
 ---
 
@@ -315,10 +365,10 @@ regardless of position.
 
 ## Summary statistics
 
-- **Total questions in this doc:** 52
-- **Mapped to existing content:** 41 (78%)
-- **Flagged as GAPs:** 8 (15%)
-- **Out of scope (time-sensitive / behavioral):** 4 (8%)
+- **Total questions in this doc:** 62
+- **Mapped to existing content:** 42 (68%)
+- **Flagged as GAPs:** 16 (26%)
+- **Out of scope (time-sensitive / behavioral):** 4 (6%)
 
 Top GAPs to address (ranked by interview frequency):
 
@@ -327,6 +377,15 @@ Top GAPs to address (ranked by interview frequency):
 3. `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz (portfolio mgmt)
 4. `constructionLoanSizing` quiz + `dev-ltc-vs-ltv` situational (development)
 5. `walk-distressed-1` walkthrough (cross-cutting)
+6. `interestReserve` quiz template (development)
+7. `leaseUpReserve` quiz template (development)
+8. `jCurveDrag` situational (portfolio mgmt)
+9. `lpSecondaryPricing` situational (portfolio mgmt)
+10. `risk-adjusted-return-framework` situational (portfolio mgmt)
+11. `capital-allocation-priority` situational (portfolio mgmt)
+12. `subscriptionLineIrrInflation` situational (portfolio mgmt)
+13. `prefEquityVsMezz` situational (development)
+14. `constructionDelayIrrImpact` situational (development)
 
 These five gaps would lift mapped-to-content coverage from 78% → ~93% with
 ~½ day of content work each, and they all surface from real interview-question
