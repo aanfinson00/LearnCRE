@@ -19,7 +19,8 @@ type Mode =
   | 'weekly'
   | 'leaderboards'
   | 'friends'
-  | 'cohorts';
+  | 'cohorts'
+  | 'headToHead';
 
 interface Props {
   active: Mode;
@@ -65,6 +66,7 @@ const SECTIONS: Section[] = [
       { id: 'leaderboards', label: 'Leaderboards', hint: 'Top 100 by XP, streak, and daily-challenge accuracy.' },
       { id: 'friends', label: 'Friends feed', hint: 'Recent activity from people you follow.' },
       { id: 'cohorts', label: 'Cohorts', hint: 'Invite-only groups with their own scoped leaderboard.' },
+      { id: 'headToHead', label: 'Head-to-head', hint: '1v1 async match — same seed, results compared on settle.' },
     ],
   },
   {

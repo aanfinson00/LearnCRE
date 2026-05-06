@@ -83,7 +83,15 @@ export function seedFromDate(date: string): number {
  * exact same questions for every caller, regardless of clock or session.
  */
 export function generateDaily(date: string): Question[] {
-  const seed = seedFromDate(date);
+  return generateFromSeed(seedFromDate(date));
+}
+
+/**
+ * Generate a 10-question set deterministically from any 32-bit seed. Used by
+ * the daily challenge (date-derived seed) and head-to-head matches (random
+ * seed assigned at match creation).
+ */
+export function generateFromSeed(seed: number): Question[] {
   const rng = createRng(seed);
   const questions: Question[] = [];
 
