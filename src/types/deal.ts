@@ -105,4 +105,7 @@ export interface DealInputs {
   baselineRent?: number;
   premiumPerFt?: number;
   truckCount?: number;
+  // Mortgage-UW + portfolio-mgmt + development GAP fields
+  feeRate?: number;
+  leaseUpMonths?: number;
 }

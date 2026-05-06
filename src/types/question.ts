@@ -65,7 +65,10 @@ export type QuestionKind =
   | 'percentageRentBreakpoint'
   | 'clearHeightPremium'
   | 'truckCountPerSf'
-  | 'lossToLease';
+  | 'lossToLease'
+  | 'refiStressTest'
+  | 'feeDragOnIrr'
+  | 'leaseUpReserve';
 
 export type UnitFormat = 'usd' | 'pct' | 'bps' | 'pctChange' | 'usdChange' | 'multiple' | 'usdPerSf';
 

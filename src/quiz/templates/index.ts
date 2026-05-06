@@ -62,6 +62,9 @@ import { percentageRentBreakpointTemplate } from './percentageRentBreakpoint';
 import { clearHeightPremiumTemplate } from './clearHeightPremium';
 import { truckCountPerSfTemplate } from './truckCountPerSf';
 import { lossToLeaseTemplate } from './lossToLease';
+import { refiStressTestTemplate } from './refiStressTest';
+import { feeDragOnIrrTemplate } from './feeDragOnIrr';
+import { leaseUpReserveTemplate } from './leaseUpReserve';
 
 export const templates: Record<QuestionKind, QuestionTemplate> = {
   capCompression: capCompressionTemplate,
@@ -127,6 +130,9 @@ export const templates: Record<QuestionKind, QuestionTemplate> = {
   clearHeightPremium: clearHeightPremiumTemplate,
   truckCountPerSf: truckCountPerSfTemplate,
   lossToLease: lossToLeaseTemplate,
+  refiStressTest: refiStressTestTemplate,
+  feeDragOnIrr: feeDragOnIrrTemplate,
+  leaseUpReserve: leaseUpReserveTemplate,
 };
 
 export const allKinds: QuestionKind[] = [
@@ -193,4 +199,7 @@ export const allKinds: QuestionKind[] = [
   'clearHeightPremium',
   'truckCountPerSf',
   'lossToLease',
+  'refiStressTest',
+  'feeDragOnIrr',
+  'leaseUpReserve',
 ];

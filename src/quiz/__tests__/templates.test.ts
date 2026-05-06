@@ -334,6 +334,25 @@ describe('quiz/templates', () => {
             expect(q.expected).toBeCloseTo(perUnit(ctx.purchasePrice!, ctx.units!), 6);
             break;
           }
+          case 'refiStressTest': {
+            const recomputed =
+              (ctx.ltv! * ctx.noi!) / ctx.loanAmount!;
+            expect(q.expected).toBeCloseTo(recomputed, 8);
+            break;
+          }
+          case 'feeDragOnIrr': {
+            const grossEm = Math.pow(1 + ctx.unleveredIrr!, ctx.holdYears!);
+            const netEm = grossEm - ctx.feeRate! * ctx.holdYears!;
+            const lpIrr = Math.pow(Math.max(netEm, 0.01), 1 / ctx.holdYears!) - 1;
+            expect(q.expected).toBeCloseTo(lpIrr, 8);
+            break;
+          }
+          case 'leaseUpReserve': {
+            const recomputed =
+              ctx.stabilizedNoi! * (ctx.leaseUpMonths! / 12) * 0.5;
+            expect(q.expected).toBeCloseTo(recomputed, 6);
+            break;
+          }
         }
       }
     }

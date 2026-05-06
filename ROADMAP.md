@@ -73,10 +73,7 @@ Sequenced by readiness, not priority. Specs live in the design-spec section at t
 
 - **Visualization coverage** — 62 of 63 question kinds shipped (Foundations + Returns/Promote + Construction draws + Niche/asset-class). Only `taxAdjustedExit` parked: context only carries purchasePrice + holdYears; the actual mechanics (sale proceeds, recapture, cap-gains rate) live in the solution builder. Expanding the context to populate viz is a content-side decision that warrants its own round.
 - **Modeling test UX polish (partial)** — ⌘↵ (next-empty target) and ⌘D (fill-from-left with relative-reference shift, Excel-style) shipped via new `shiftFormula` helper in `src/excel/shift.ts` (11 unit tests). Native ⌘C/⌘V works through the formula-bar input. Still open: mobile horizontal-scroll polish on wider 7-column grids; per-cell formula-history recall.
-- **`refiStressTest` quiz template** — matches the shipped `refi-cap-stress` situational. Random-generates a permanent loan today + a refi-stress scenario; user picks the stressed cap that defends the take-out. Mortgage-UW track GAP per [`docs/interview-questions.md`](./docs/interview-questions.md).
-- **`feeDragOnIrr` quiz template** — matches the shipped `fund-vs-deal-irr-gap` situational. Random LP-vs-deal IRR scenarios with management fee + carry waterfall layered on top. Portfolio-mgmt track GAP.
-- **`leaseUpReserve` quiz template** — sizes a lease-up reserve for ground-up MF stabilizing in year 2-3. Development track GAP.
-- **`walk-distressed-1` walkthrough** — multi-step distressed-deal underwrite (basis math → lease-up plan → exit). Cross-cutting GAP. The shipped Modeling Test template `distressed-office-basis-play` covers the spreadsheet surface; the walkthrough covers the chained-question oral framing.
+- **Interview-questions.md GAPs (shipped)** — three new quiz templates closing the named GAPs from item 11: `refiStressTest` (cap_stress = LTV × NOI / loan; mortgage-UW), `feeDragOnIrr` (LP IRR after committed-capital management fees; portfolio-mgmt), `leaseUpReserve` (linear-ramp NOI shortfall sizing for ground-up dev). Distressed-deal GAP was already shipped as `walk-distressed-1` walkthrough (`distressedLoanWorkoutWalk`). All 3 new kinds covered by the 1000-iteration template test.
 
 ---
 
@@ -508,7 +505,7 @@ Local-first works for a single user, but doesn't survive device switches or enab
 9c. ✅ Visualization Construction draws batch — 5 viz (cost to complete, draw allocation, contingency drawdown, retainage running, FF&E reserve)
 9d. ✅ Visualization Niche/asset-class batch — 12 viz (Hotel: RevPAR, GOP, RevPOR vs RevPAR; Retail/Industrial: % rent breakpoint, clear-height premium, truck-doors/SF; Operating: tax reassessment, opex change, NOI from OER, TI payback, TI/SF/yr-of-term, renewal-prob-weighted rent). Viz coverage closed at 62/63; taxAdjustedExit parked.
 10. ✅ Modeling test UX polish (⌘↵ next-empty + ⌘D fill-from-left shipped; mobile scroll polish + history recall still open)
-11. Quiz / situational / walkthrough GAPs from `docs/interview-questions.md` (refi stress test, fee drag, lease-up reserve, distressed walkthrough)
+11. ✅ Quiz / situational / walkthrough GAPs from `docs/interview-questions.md` (refiStressTest + feeDragOnIrr + leaseUpReserve quiz templates shipped; distressed walkthrough was already shipped as walk-distressed-1)
 12. PR L → PR U — cloud track, in order
 
 Re-sequence freely as priorities shift. Update the "In design" section when a PR lands and move the entry up to "What's shipped today".
