@@ -44,6 +44,11 @@ import { HoldVsSellIrrViz } from './HoldVsSellIrrViz';
 import { IrrAfterPromoteViz } from './IrrAfterPromoteViz';
 import { DscrSensitivityRateViz } from './DscrSensitivityRateViz';
 import { ExtensionDragViz } from './ExtensionDragViz';
+import { CostToCompleteViz } from './CostToCompleteViz';
+import { DrawAllocationViz } from './DrawAllocationViz';
+import { ContingencyDrawDownViz } from './ContingencyDrawDownViz';
+import { RetainageRunningViz } from './RetainageRunningViz';
+import { FfeReserveDollarsViz } from './FfeReserveDollarsViz';
 
 interface Props {
   question: Question;
@@ -678,6 +683,77 @@ export function SolutionViz({ question }: Props) {
             equityOut={ctx.equityOut}
             holdYears={ctx.holdYears}
             drag={question.expected}
+          />
+        );
+      }
+      return null;
+
+    case 'costToComplete':
+      if (ctx.totalBudget !== undefined && ctx.incurred !== undefined) {
+        return (
+          <CostToCompleteViz
+            totalBudget={ctx.totalBudget}
+            incurred={ctx.incurred}
+          />
+        );
+      }
+      return null;
+
+    case 'drawAllocation':
+      if (
+        ctx.equityCommitted !== undefined &&
+        ctx.equityDrawnSoFar !== undefined &&
+        ctx.drawAmount !== undefined
+      ) {
+        return (
+          <DrawAllocationViz
+            equityCommitted={ctx.equityCommitted}
+            equityDrawnSoFar={ctx.equityDrawnSoFar}
+            drawAmount={ctx.drawAmount}
+          />
+        );
+      }
+      return null;
+
+    case 'contingencyDrawDown':
+      if (
+        ctx.hardCostBudget !== undefined &&
+        ctx.contingency !== undefined &&
+        ctx.overrunsToDate !== undefined
+      ) {
+        return (
+          <ContingencyDrawDownViz
+            hardCostBudget={ctx.hardCostBudget}
+            contingency={ctx.contingency}
+            overrunsToDate={ctx.overrunsToDate}
+          />
+        );
+      }
+      return null;
+
+    case 'retainageRunning':
+      if (
+        ctx.cumulativeDraws !== undefined &&
+        ctx.retainagePct !== undefined
+      ) {
+        return (
+          <RetainageRunningViz
+            cumulativeDraws={ctx.cumulativeDraws}
+            retainagePct={ctx.retainagePct}
+          />
+        );
+      }
+      return null;
+
+    case 'ffeReserveDollars':
+      if (
+        ctx.totalRevenue !== undefined &&
+        ctx.ffeReserveRate !== undefined
+      ) {
+        return (
+          <FfeReserveDollarsViz
+            totalRevenue={ctx.totalRevenue}
+            ffeReserveRate={ctx.ffeReserveRate}
           />
         );
       }
