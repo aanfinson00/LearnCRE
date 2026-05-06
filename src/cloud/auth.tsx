@@ -10,8 +10,10 @@ interface AuthContextValue {
   session: Session | null;
   /** True until the initial session probe completes. */
   loading: boolean;
-  /** Triggers a magic-link send. Returns null on success, error message on failure. */
-  signInWithEmail: (email: string) => Promise<string | null>;
+  /** Triggers a magic-link send. Returns null on success, error message on failure.
+   *  Optional `redirectTo` overrides the default origin (used by invite-link
+   *  landings so the magic-link callback returns to the same invite URL). */
+  signInWithEmail: (email: string, redirectTo?: string) => Promise<string | null>;
   /** Signs out and clears the local session. */
   signOut: () => Promise<void>;
   /** True when env vars are present and the client is initialized. */
@@ -74,10 +76,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       session,
       loading,
       cloudEnabled: true,
-      signInWithEmail: async (email) => {
+      signInWithEmail: async (email, redirectTo) => {
         const { error } = await supabase.auth.signInWithOtp({
           email,
-          options: { emailRedirectTo: window.location.origin },
+          options: { emailRedirectTo: redirectTo ?? window.location.origin },
         });
         return error?.message ?? null;
       },
