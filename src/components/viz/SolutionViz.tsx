@@ -39,6 +39,11 @@ import { PrefAccrualViz } from './PrefAccrualViz';
 import { GpCatchUpViz } from './GpCatchUpViz';
 import { WaterfallSimpleSplitViz } from './WaterfallSimpleSplitViz';
 import { GpEffectivePromoteViz } from './GpEffectivePromoteViz';
+import { LeveredIrrViz } from './LeveredIrrViz';
+import { HoldVsSellIrrViz } from './HoldVsSellIrrViz';
+import { IrrAfterPromoteViz } from './IrrAfterPromoteViz';
+import { DscrSensitivityRateViz } from './DscrSensitivityRateViz';
+import { ExtensionDragViz } from './ExtensionDragViz';
 
 interface Props {
   question: Question;
@@ -588,6 +593,91 @@ export function SolutionViz({ question }: Props) {
             gpCapital={ctx.gpCapital}
             totalDistributable={ctx.totalDistributable}
             gpTake={ctx.gpTake}
+          />
+        );
+      }
+      return null;
+
+    case 'leveredIrr':
+      if (
+        ctx.unleveredIrr !== undefined &&
+        ctx.borrowRate !== undefined &&
+        ctx.ltv !== undefined
+      ) {
+        return (
+          <LeveredIrrViz
+            unleveredIrr={ctx.unleveredIrr}
+            borrowRate={ctx.borrowRate}
+            ltv={ctx.ltv}
+          />
+        );
+      }
+      return null;
+
+    case 'holdVsSellIrr':
+      if (
+        ctx.noi !== undefined &&
+        ctx.capRate !== undefined &&
+        ctx.holdYears !== undefined
+      ) {
+        return (
+          <HoldVsSellIrrViz
+            noi={ctx.noi}
+            capRate={ctx.capRate}
+            holdYears={ctx.holdYears}
+            extensionIrr={question.expected}
+          />
+        );
+      }
+      return null;
+
+    case 'irrAfterPromote':
+      if (
+        ctx.irrBeforePromote !== undefined &&
+        ctx.promotePctOfProfit !== undefined &&
+        ctx.holdYears !== undefined
+      ) {
+        return (
+          <IrrAfterPromoteViz
+            irrBeforePromote={ctx.irrBeforePromote}
+            promotePctOfProfit={ctx.promotePctOfProfit}
+            holdYears={ctx.holdYears}
+            irrAfterPromote={question.expected}
+          />
+        );
+      }
+      return null;
+
+    case 'dscrSensitivityRate':
+      if (
+        ctx.noi !== undefined &&
+        ctx.loanAmount !== undefined &&
+        ctx.interestRate !== undefined &&
+        ctx.amortYears !== undefined
+      ) {
+        return (
+          <DscrSensitivityRateViz
+            noi={ctx.noi}
+            loanAmount={ctx.loanAmount}
+            interestRate={ctx.interestRate}
+            amortYears={ctx.amortYears}
+          />
+        );
+      }
+      return null;
+
+    case 'extensionDrag':
+      if (
+        ctx.equityIn !== undefined &&
+        ctx.equityOut !== undefined &&
+        ctx.holdYears !== undefined
+      ) {
+        return (
+          <ExtensionDragViz
+            equityIn={ctx.equityIn}
+            equityOut={ctx.equityOut}
+            holdYears={ctx.holdYears}
+            drag={question.expected}
           />
         );
       }
