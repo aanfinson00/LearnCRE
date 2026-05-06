@@ -51,6 +51,10 @@ export function OperatingExpenseRatioViz({ egi, opex }: Props) {
           <span className="text-warm-mute">NOI margin</span>
           <span className="text-warm-stone">{formatPct(1 - oer)}</span>
         </div>
+        <div className="text-[10px] leading-snug text-warm-mute">
+          Office: 35-45%; multifamily: 35-50%; industrial: 20-30%. Anomalies
+          flag expense leakage or RE-tax / insurance pass-through gaps.
+        </div>
       </div>
     </div>
   );

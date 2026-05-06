@@ -32,11 +32,17 @@ export function SalesPerSfViz({ tenantSales, buildingSf }: Props) {
         />
       </div>
 
-      <div className="flex items-baseline justify-between border-t border-warm-line pt-2 text-xs">
-        <span className="text-warm-stone">Sales per SF</span>
-        <span className="font-mono num font-medium text-copper-deep">
-          {formatUsdPerSf(perSf)}
-        </span>
+      <div className="space-y-1 border-t border-warm-line pt-2 font-mono text-[11px] num">
+        <div className="flex items-baseline justify-between">
+          <span className="text-warm-stone">Sales per SF</span>
+          <span className="font-medium text-copper-deep">
+            {formatUsdPerSf(perSf)}
+          </span>
+        </div>
+        <div className="text-[10px] leading-snug text-warm-mute">
+          Healthy in-line: ~$400-600/SF; anchor grocery: $700-1k+. Pair with
+          rent/SF to size the occupancy cost ratio (rent ÷ sales).
+        </div>
       </div>
     </div>
   );

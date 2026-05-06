@@ -63,6 +63,10 @@ export function DscrTestPassesViz({ noi, debtServiceAnnual, dscrTarget }: Props)
             {headroomBps} bps headroom)
           </span>
         </div>
+        <div className="text-[10px] leading-snug text-warm-mute">
+          If DSCR fails the threshold, the loan is sized down (or the sponsor
+          must raise more equity) until the constraint clears.
+        </div>
       </div>
     </div>
   );

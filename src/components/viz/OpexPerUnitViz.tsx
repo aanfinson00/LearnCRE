@@ -32,11 +32,15 @@ export function OpexPerUnitViz({ opex, units }: Props) {
         />
       </div>
 
-      <div className="flex items-baseline justify-between border-t border-warm-line pt-2 text-xs">
-        <span className="text-warm-stone">OpEx per unit / yr</span>
-        <span className="font-mono num font-medium text-copper-deep">
-          {formatUsd(perUnit)}
-        </span>
+      <div className="space-y-1 border-t border-warm-line pt-2 font-mono text-[11px] num">
+        <div className="flex items-baseline justify-between">
+          <span className="text-warm-stone">OpEx per unit / yr</span>
+          <span className="font-medium text-copper-deep">{formatUsd(perUnit)}</span>
+        </div>
+        <div className="text-[10px] leading-snug text-warm-mute">
+          Class B garden typically $4-6k/unit; Class A urban $7-12k. Above-peer
+          usually flags age, sub-meter exposure, or operator inefficiency.
+        </div>
       </div>
     </div>
   );

@@ -36,13 +36,19 @@ export function DscrFromNoiAndDsViz({ noi, debtServiceAnnual }: Props) {
         />
       </div>
 
-      <div className="flex items-baseline justify-between border-t border-warm-line pt-2 text-xs">
-        <span className="text-warm-stone">DSCR (NOI ÷ DS)</span>
-        <span
-          className={`font-mono num font-medium ${healthy ? 'text-copper-deep' : 'text-signal-bad-ink'}`}
-        >
-          {formatMultiple(dscr)}
-        </span>
+      <div className="space-y-1 border-t border-warm-line pt-2 font-mono text-[11px] num">
+        <div className="flex items-baseline justify-between">
+          <span className="text-warm-stone">DSCR (NOI ÷ DS)</span>
+          <span
+            className={`font-medium ${healthy ? 'text-copper-deep' : 'text-signal-bad-ink'}`}
+          >
+            {formatMultiple(dscr)}
+          </span>
+        </div>
+        <div className="text-[10px] leading-snug text-warm-mute">
+          Lender minimums typically 1.20-1.25x stabilized, 1.30-1.40x
+          transitional. Below 1.0x = NOI alone doesn't cover debt service.
+        </div>
       </div>
     </div>
   );

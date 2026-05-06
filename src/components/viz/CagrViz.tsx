@@ -55,6 +55,11 @@ export function CagrViz({ startValue, endValue, projectionYears }: Props) {
         <Cell label={`End (yr ${projectionYears})`} value={formatUsd(endValue)} highlight />
         <Cell label="CAGR" value={formatPct(cagr)} highlight />
       </div>
+
+      <div className="border-t border-warm-line pt-2 text-[10px] leading-snug text-warm-mute">
+        The constant annual rate that would have produced the same end value —
+        the apples-to-apples comparison across deals of different hold periods.
+      </div>
     </div>
   );
 }

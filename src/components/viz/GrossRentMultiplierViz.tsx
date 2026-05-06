@@ -42,8 +42,9 @@ export function GrossRentMultiplierViz({ purchasePrice, gpr }: Props) {
           </span>
         </div>
         <div className="text-[10px] leading-snug text-warm-mute">
-          Rough valuation shorthand — multiply the property's annual gross rent
-          by the GRM to get back to price. Lower = cheaper, higher = richer.
+          Rough valuation shorthand — multiply annual gross rent by the GRM to
+          get back to price. Typical multifamily: 8-12x; lower = cheaper /
+          higher cap, higher = richer / lower cap.
         </div>
       </div>
     </div>

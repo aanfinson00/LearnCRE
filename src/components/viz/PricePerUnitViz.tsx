@@ -32,11 +32,15 @@ export function PricePerUnitViz({ purchasePrice, units }: Props) {
         />
       </div>
 
-      <div className="flex items-baseline justify-between border-t border-warm-line pt-2 text-xs">
-        <span className="text-warm-stone">Price per unit</span>
-        <span className="font-mono num font-medium text-copper-deep">
-          {formatUsd(perUnit)}
-        </span>
+      <div className="space-y-1 border-t border-warm-line pt-2 font-mono text-[11px] num">
+        <div className="flex items-baseline justify-between">
+          <span className="text-warm-stone">Price per unit</span>
+          <span className="font-medium text-copper-deep">{formatUsd(perUnit)}</span>
+        </div>
+        <div className="text-[10px] leading-snug text-warm-mute">
+          Multifamily comp standard. Triangulate with cap rate + rent/unit to
+          gauge whether the price is in line with the market clearing level.
+        </div>
       </div>
     </div>
   );

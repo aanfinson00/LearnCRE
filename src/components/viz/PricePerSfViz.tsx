@@ -32,11 +32,17 @@ export function PricePerSfViz({ purchasePrice, buildingSf }: Props) {
         />
       </div>
 
-      <div className="flex items-baseline justify-between border-t border-warm-line pt-2 text-xs">
-        <span className="text-warm-stone">Price per SF</span>
-        <span className="font-mono num font-medium text-copper-deep">
-          {formatUsdPerSf(perSf)}
-        </span>
+      <div className="space-y-1 border-t border-warm-line pt-2 font-mono text-[11px] num">
+        <div className="flex items-baseline justify-between">
+          <span className="text-warm-stone">Price per SF</span>
+          <span className="font-medium text-copper-deep">
+            {formatUsdPerSf(perSf)}
+          </span>
+        </div>
+        <div className="text-[10px] leading-snug text-warm-mute">
+          Compare to submarket replacement cost — buying below replacement is
+          usually structural alpha; above demands a clear thesis.
+        </div>
       </div>
     </div>
   );

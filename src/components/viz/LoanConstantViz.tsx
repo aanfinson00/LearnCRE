@@ -50,7 +50,8 @@ export function LoanConstantViz({ interestRate, amortYears }: Props) {
         </div>
         <div className="text-[10px] leading-snug text-warm-mute">
           {amortYears}-yr amortizing at {formatPct(interestRate)}. Multiply by
-          loan amount to get annual debt service.
+          loan amount to back into annual DS without an amortization schedule —
+          useful when an interviewer asks "roughly what's debt service?"
         </div>
       </div>
     </div>
