@@ -72,7 +72,7 @@ First Steps · Foundations · Hot Streak · Week One · Hundred Club · Five-Hun
 Sequenced by readiness, not priority. Specs live in the design-spec section at the bottom.
 
 - **Visualization coverage** — 62 of 63 question kinds shipped (Foundations + Returns/Promote + Construction draws + Niche/asset-class). Only `taxAdjustedExit` parked: context only carries purchasePrice + holdYears; the actual mechanics (sale proceeds, recapture, cap-gains rate) live in the solution builder. Expanding the context to populate viz is a content-side decision that warrants its own round.
-- **Modeling test UX polish** — Tab-to-next-empty-target, "fill across" formula-chain helper for repetitive horizontal rows, copy-paste support, mobile horizontal-scroll polish on the wider 7-column grids.
+- **Modeling test UX polish (partial)** — ⌘↵ (next-empty target) and ⌘D (fill-from-left with relative-reference shift, Excel-style) shipped via new `shiftFormula` helper in `src/excel/shift.ts` (11 unit tests). Native ⌘C/⌘V works through the formula-bar input. Still open: mobile horizontal-scroll polish on wider 7-column grids; per-cell formula-history recall.
 - **`refiStressTest` quiz template** — matches the shipped `refi-cap-stress` situational. Random-generates a permanent loan today + a refi-stress scenario; user picks the stressed cap that defends the take-out. Mortgage-UW track GAP per [`docs/interview-questions.md`](./docs/interview-questions.md).
 - **`feeDragOnIrr` quiz template** — matches the shipped `fund-vs-deal-irr-gap` situational. Random LP-vs-deal IRR scenarios with management fee + carry waterfall layered on top. Portfolio-mgmt track GAP.
 - **`leaseUpReserve` quiz template** — sizes a lease-up reserve for ground-up MF stabilizing in year 2-3. Development track GAP.
@@ -507,7 +507,7 @@ Local-first works for a single user, but doesn't survive device switches or enab
 9b. ✅ Visualization Returns/Promote batch — 9 viz (pref/catch-up/waterfall/promote, levered IRR, hold-vs-sell, post-promote IRR, DSCR-rate sensitivity, extension drag); taxAdjustedExit parked
 9c. ✅ Visualization Construction draws batch — 5 viz (cost to complete, draw allocation, contingency drawdown, retainage running, FF&E reserve)
 9d. ✅ Visualization Niche/asset-class batch — 12 viz (Hotel: RevPAR, GOP, RevPOR vs RevPAR; Retail/Industrial: % rent breakpoint, clear-height premium, truck-doors/SF; Operating: tax reassessment, opex change, NOI from OER, TI payback, TI/SF/yr-of-term, renewal-prob-weighted rent). Viz coverage closed at 62/63; taxAdjustedExit parked.
-10. Modeling test UX polish (Tab-to-next, fill-across, copy-paste)
+10. ✅ Modeling test UX polish (⌘↵ next-empty + ⌘D fill-from-left shipped; mobile scroll polish + history recall still open)
 11. Quiz / situational / walkthrough GAPs from `docs/interview-questions.md` (refi stress test, fee drag, lease-up reserve, distressed walkthrough)
 12. PR L → PR U — cloud track, in order
 

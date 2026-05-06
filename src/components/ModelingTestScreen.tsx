@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { buildSheet } from '../excel/modelingTest/grade';
-import { extractReferencedAddresses } from '../excel/parser';
+import { a1ToCellRef, extractReferencedAddresses } from '../excel/parser';
+import { shiftFormula } from '../excel/shift';
 import type { ModelingTestState } from '../types/modelingTest';
 import { ModelingTestGrid } from './ModelingTestGrid';
 import { Button } from './ui/Button';
@@ -107,6 +108,61 @@ export function ModelingTestScreen({
     if (idx === -1 || idx === targetCells.length - 1) return;
     onFocus(targetCells[idx + 1].address);
   };
+  const goNextEmpty = () => {
+    if (!focusRef) return;
+    const idx = targetCells.findIndex((c) => c.address === focusRef);
+    if (idx === -1) return;
+    // Search forward (wrap once) for the first target whose formula is empty.
+    for (let i = 1; i <= targetCells.length; i++) {
+      const next = targetCells[(idx + i) % targetCells.length];
+      const raw = (formulas[next.address] ?? '').trim();
+      if (raw === '' || raw === '=') {
+        onFocus(next.address);
+        return;
+      }
+    }
+  };
+
+  /** Excel-style fill-right: take the formula from the nearest target on the
+   * same row whose column is to the left of focus, shift its column refs by
+   * the column delta, and write into the focused cell. Falls back to the
+   * previous-in-sequence target's formula verbatim if no left-neighbor exists.
+   */
+  const fillFromLeft = useCallback(() => {
+    if (!focusRef) return;
+    const focusParsed = a1ToCellRef(focusRef);
+    if (!focusParsed) return;
+    // Same-row, lower-col target neighbors.
+    const sameRow = targetCells.filter((c) => {
+      const ref = a1ToCellRef(c.address);
+      return ref && ref.row === focusParsed.row && ref.col < focusParsed.col;
+    });
+    let source: string | null = null;
+    let dCol = 0;
+    if (sameRow.length > 0) {
+      // Pick the closest (highest col) left-neighbor.
+      const closest = sameRow.reduce((best, c) => {
+        const ref = a1ToCellRef(c.address)!;
+        const bestRef = a1ToCellRef(best.address)!;
+        return ref.col > bestRef.col ? c : best;
+      });
+      const closestRef = a1ToCellRef(closest.address)!;
+      const raw = formulas[closest.address] ?? '';
+      if (raw.trim() !== '' && raw.trim() !== '=') {
+        source = raw;
+        dCol = focusParsed.col - closestRef.col;
+      }
+    }
+    if (source === null) {
+      // Fallback: previous-in-sequence target verbatim, no shift.
+      const idx = targetCells.findIndex((c) => c.address === focusRef);
+      if (idx > 0) {
+        const raw = formulas[targetCells[idx - 1].address] ?? '';
+        if (raw.trim() !== '' && raw.trim() !== '=') source = raw;
+      }
+    }
+    if (source !== null) onSetFormula(focusRef, shiftFormula(source, dCol, 0));
+  }, [focusRef, formulas, onSetFormula, targetCells]);
 
   return (
     <div className="mx-auto max-w-5xl space-y-5 py-8">
@@ -208,14 +264,27 @@ export function ModelingTestScreen({
                 placeholder="type a formula or click cells to insert"
                 onChange={(e) => onSetFormula(focusRef, e.target.value)}
                 onKeyDown={(e) => {
+                  const mod = e.metaKey || e.ctrlKey;
+                  if (e.key === 'Enter' && mod) {
+                    e.preventDefault();
+                    goNextEmpty();
+                    return;
+                  }
                   if (e.key === 'Enter') {
                     e.preventDefault();
                     goNext();
+                    return;
                   }
                   if (e.key === 'Tab') {
                     e.preventDefault();
                     if (e.shiftKey) goPrev();
                     else goNext();
+                    return;
+                  }
+                  if ((e.key === 'd' || e.key === 'D') && mod) {
+                    e.preventDefault();
+                    fillFromLeft();
+                    return;
                   }
                 }}
                 className="flex-1 bg-transparent px-2 py-2.5 font-mono text-sm outline-none num placeholder:text-warm-mute/70"
@@ -236,7 +305,9 @@ export function ModelingTestScreen({
                   </span>
                 </span>
               ) : (
-                <span>↵ to advance · Tab/Shift-Tab to move · click cells to insert</span>
+                <span>
+                  ↵ next · Tab/Shift-Tab move · ⌘↵ next-empty · ⌘D fill-from-left · click to insert
+                </span>
               )}
             </div>
           </>
