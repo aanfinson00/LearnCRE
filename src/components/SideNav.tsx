@@ -15,7 +15,8 @@ type Mode =
   | 'modelingTest'
   | 'certify'
   | 'profile'
-  | 'daily';
+  | 'daily'
+  | 'weekly';
 
 interface Props {
   active: Mode;
@@ -57,6 +58,7 @@ const SECTIONS: Section[] = [
     label: 'Compete',
     items: [
       { id: 'daily', label: 'Daily', hint: '10-question challenge with a global leaderboard.' },
+      { id: 'weekly', label: 'Weekly themes', hint: 'Curated themed challenges; new theme every Monday.' },
     ],
   },
   {
