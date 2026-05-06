@@ -82,7 +82,7 @@ Sequenced by readiness, not priority. Specs live in the design-spec section at t
 The "v3 path B" arc. Each PR is independently shippable and can be sequenced after Excel + Situational land. See [Design spec — Cloud / leaderboards / challenges](#design-spec--cloud--leaderboards--challenges) for the architectural details.
 
 - **PR L — Cloud identity foundation (shipped, frontend complete; user provides Supabase project + env vars to activate)** — `@supabase/supabase-js` client wrapper at `src/cloud/client.ts` with cloud-disabled fallback when env vars missing (app continues local-first). `useAuth()` hook + `AuthProvider` at `src/cloud/auth.tsx`; magic-link `SignIn` component on `ProfileScreen`; first-sign-in `ClaimLocalProfile` modal seeds the cloud `profiles` row from active local profile. SQL migration at `supabase/migrations/0001_initial.sql` defines `profiles` (RLS: owner read+write, public-read when `is_public=true`) plus 5 placeholder tables (`xp_state`, `tier_state`, `sessions`, `achievements`, `mistake_bank_items`) shape-only with owner-RLS — used by PR M for cross-device sync. `.env.example` documents the activation flow.
-- **PR M — Cross-device sync** — sessions/XP/achievements/mistake bank reconcile via last-write-wins + per-record `updated_at`. localStorage stays the source of truth for offline; cloud is an async mirror.
+- **PR M — Cross-device sync (shipped)** — `src/cloud/sync.ts` exposes `pushAll(userId)` + `pullAll(userId)` over the 5 placeholder tables from PR L. Pure merge helpers (`mergeXp`, `mergeSessions`, `mergeAchievements`, `mergeMistakes`) use union-and-max semantics — no per-record `updated_at` plumbing required, which keeps the existing local writers untouched. `useCloudSync()` hook in `App` runs initial pull-then-push on auth-state-change, then a 30s periodic push, plus `beforeunload` flush. Activates only when cloud is enabled + signed in; full no-op otherwise. 9 unit tests covering the merge corner cases (empty local, id collisions, prompt-key uniqueness).
 - **PR N — Public profiles** — opt-in shareable URL `/u/<handle>` showing tier, lifetime stats, achievements, recent sessions. Privacy default: handle-only, no email.
 - **PR O — Daily challenge** — deterministic seed of the day, same 10 questions for everyone, leaderboard for the day's accuracy + speed.
 - **PR P — Curated weekly challenges** — hand-authored 10-question themed sets ("debt fundamentals", "lease econ", "MF acquisition") with leaderboards.
@@ -507,7 +507,8 @@ Local-first works for a single user, but doesn't survive device switches or enab
 10. ✅ Modeling test UX polish (⌘↵ next-empty + ⌘D fill-from-left shipped; mobile scroll polish + history recall still open)
 11. ✅ Quiz / situational / walkthrough GAPs from `docs/interview-questions.md` (refiStressTest + feeDragOnIrr + leaseUpReserve quiz templates shipped; distressed walkthrough was already shipped as walk-distressed-1)
 12. ✅ PR L — Cloud identity foundation (frontend + SQL migration shipped; activates when user supplies Supabase project + env vars)
-13. PR M → PR U — cloud track, in order (sync, public profiles, leaderboards, challenges, friends, notifications)
+12b. ✅ PR M — Cross-device sync (push/pull + merge helpers + useCloudSync lifecycle hook)
+13. PR N → PR U — cloud track, in order (public profiles, leaderboards, challenges, friends, notifications)
 
 Re-sequence freely as priorities shift. Update the "In design" section when a PR lands and move the entry up to "What's shipped today".
 

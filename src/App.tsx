@@ -10,6 +10,7 @@ import { ProfileScreen } from './components/ProfileScreen';
 import { StudyScreen } from './components/StudyScreen';
 import { SideNav } from './components/SideNav';
 import { ClaimLocalProfile } from './components/ClaimLocalProfile';
+import { useCloudSync } from './cloud/useCloudSync';
 import { WelcomeModal } from './components/WelcomeModal';
 import { hasSeenWelcome } from './storage/onboarding';
 import { AchievementToastHost } from './components/AchievementToast';
@@ -71,6 +72,7 @@ type CertView =
   | { kind: 'exam'; certId: string };
 
 export default function App() {
+  useCloudSync();
   const [mode, setMode] = useState<Mode>('quiz');
   const [certView, setCertView] = useState<CertView>({ kind: 'list' });
   const [showWelcome, setShowWelcome] = useState<boolean>(() => !hasSeenWelcome());
