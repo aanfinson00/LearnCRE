@@ -81,7 +81,7 @@ Sequenced by readiness, not priority. Specs live in the design-spec section at t
 
 The "v3 path B" arc. Each PR is independently shippable and can be sequenced after Excel + Situational land. See [Design spec — Cloud / leaderboards / challenges](#design-spec--cloud--leaderboards--challenges) for the architectural details.
 
-- **PR L — Cloud identity foundation** — Supabase project, magic-link auth, profile sync schema, "claim local profile" flow that uploads existing localStorage state on first sign-in.
+- **PR L — Cloud identity foundation (shipped, frontend complete; user provides Supabase project + env vars to activate)** — `@supabase/supabase-js` client wrapper at `src/cloud/client.ts` with cloud-disabled fallback when env vars missing (app continues local-first). `useAuth()` hook + `AuthProvider` at `src/cloud/auth.tsx`; magic-link `SignIn` component on `ProfileScreen`; first-sign-in `ClaimLocalProfile` modal seeds the cloud `profiles` row from active local profile. SQL migration at `supabase/migrations/0001_initial.sql` defines `profiles` (RLS: owner read+write, public-read when `is_public=true`) plus 5 placeholder tables (`xp_state`, `tier_state`, `sessions`, `achievements`, `mistake_bank_items`) shape-only with owner-RLS — used by PR M for cross-device sync. `.env.example` documents the activation flow.
 - **PR M — Cross-device sync** — sessions/XP/achievements/mistake bank reconcile via last-write-wins + per-record `updated_at`. localStorage stays the source of truth for offline; cloud is an async mirror.
 - **PR N — Public profiles** — opt-in shareable URL `/u/<handle>` showing tier, lifetime stats, achievements, recent sessions. Privacy default: handle-only, no email.
 - **PR O — Daily challenge** — deterministic seed of the day, same 10 questions for everyone, leaderboard for the day's accuracy + speed.
@@ -506,7 +506,8 @@ Local-first works for a single user, but doesn't survive device switches or enab
 9d. ✅ Visualization Niche/asset-class batch — 12 viz (Hotel: RevPAR, GOP, RevPOR vs RevPAR; Retail/Industrial: % rent breakpoint, clear-height premium, truck-doors/SF; Operating: tax reassessment, opex change, NOI from OER, TI payback, TI/SF/yr-of-term, renewal-prob-weighted rent). Viz coverage closed at 62/63; taxAdjustedExit parked.
 10. ✅ Modeling test UX polish (⌘↵ next-empty + ⌘D fill-from-left shipped; mobile scroll polish + history recall still open)
 11. ✅ Quiz / situational / walkthrough GAPs from `docs/interview-questions.md` (refiStressTest + feeDragOnIrr + leaseUpReserve quiz templates shipped; distressed walkthrough was already shipped as walk-distressed-1)
-12. PR L → PR U — cloud track, in order
+12. ✅ PR L — Cloud identity foundation (frontend + SQL migration shipped; activates when user supplies Supabase project + env vars)
+13. PR M → PR U — cloud track, in order (sync, public profiles, leaderboards, challenges, friends, notifications)
 
 Re-sequence freely as priorities shift. Update the "In design" section when a PR lands and move the entry up to "What's shipped today".
 

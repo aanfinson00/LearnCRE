@@ -13,6 +13,7 @@ import { Sparkline } from './Sparkline';
 import { CertBadge } from './CertBadge';
 import { useCertProgress } from '../hooks/useCertProgress';
 import { CERTS, certById } from '../quiz/certs';
+import { SignIn } from './SignIn';
 
 interface Props {
   onBack: () => void;
@@ -284,6 +285,8 @@ export function ProfileScreen({ onBack }: Props) {
           </div>
         )}
       </Card>
+
+      <SignIn />
     </div>
   );
 }

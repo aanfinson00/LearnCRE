@@ -9,6 +9,7 @@ import { SpeedDrillResults } from './components/SpeedDrillResults';
 import { ProfileScreen } from './components/ProfileScreen';
 import { StudyScreen } from './components/StudyScreen';
 import { SideNav } from './components/SideNav';
+import { ClaimLocalProfile } from './components/ClaimLocalProfile';
 import { WelcomeModal } from './components/WelcomeModal';
 import { hasSeenWelcome } from './storage/onboarding';
 import { AchievementToastHost } from './components/AchievementToast';
@@ -472,6 +473,7 @@ export default function App() {
         <AchievementToastHost />
         <ScratchSheet />
         <FeedbackButton />
+        <ClaimLocalProfile />
       </ScratchSheetProvider>
     </FeedbackContextProvider>
   );
