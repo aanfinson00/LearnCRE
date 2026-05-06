@@ -10,6 +10,7 @@ import { ProfileScreen } from './components/ProfileScreen';
 import { StudyScreen } from './components/StudyScreen';
 import { SideNav } from './components/SideNav';
 import { ClaimLocalProfile } from './components/ClaimLocalProfile';
+import { DailyChallengeScreen } from './components/DailyChallengeScreen';
 import { PublicProfile } from './components/PublicProfile';
 import { useCloudSync } from './cloud/useCloudSync';
 
@@ -74,7 +75,8 @@ type Mode =
   | 'mockInterview'
   | 'modelingTest'
   | 'certify'
-  | 'profile';
+  | 'profile'
+  | 'daily';
 
 type CertView =
   | { kind: 'list' }
@@ -117,6 +119,10 @@ function AppShell() {
   const innerContent = (() => {
     if (mode === 'study') {
       return <StudyScreen onBack={() => setMode('quiz')} />;
+    }
+
+    if (mode === 'daily') {
+      return <DailyChallengeScreen onBack={() => setMode('quiz')} />;
     }
 
     if (mode === 'profile') {

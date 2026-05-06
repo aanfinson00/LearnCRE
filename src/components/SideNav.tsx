@@ -14,7 +14,8 @@ type Mode =
   | 'mockInterview'
   | 'modelingTest'
   | 'certify'
-  | 'profile';
+  | 'profile'
+  | 'daily';
 
 interface Props {
   active: Mode;
@@ -50,6 +51,12 @@ const SECTIONS: Section[] = [
       { id: 'excel', label: 'Excel', hint: 'Write spreadsheet formulas against a mini-grid.' },
       { id: 'modelingTest', label: 'Modeling test', hint: 'Take-home-style multi-cell models, graded on output cells.' },
       { id: 'mockInterview', label: 'Mock interview', hint: 'Firm-archetype mocks: mixed-mode, self-graded.' },
+    ],
+  },
+  {
+    label: 'Compete',
+    items: [
+      { id: 'daily', label: 'Daily', hint: '10-question challenge with a global leaderboard.' },
     ],
   },
   {
