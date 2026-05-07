@@ -108,6 +108,8 @@ export interface DealInputs {
   // Mortgage-UW + portfolio-mgmt + development GAP fields
   feeRate?: number;
   leaseUpMonths?: number;
+  /** Loan-to-cost ratio for construction loan sizing. */
+  ltc?: number;
   // After-tax exit (taxAdjustedExit)
   saleProceeds?: number;
   accumulatedDep?: number;

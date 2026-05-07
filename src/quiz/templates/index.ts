@@ -65,6 +65,7 @@ import { lossToLeaseTemplate } from './lossToLease';
 import { refiStressTestTemplate } from './refiStressTest';
 import { feeDragOnIrrTemplate } from './feeDragOnIrr';
 import { leaseUpReserveTemplate } from './leaseUpReserve';
+import { constructionLoanSizingTemplate } from './constructionLoanSizing';
 
 export const templates: Record<QuestionKind, QuestionTemplate> = {
   capCompression: capCompressionTemplate,
@@ -133,6 +134,7 @@ export const templates: Record<QuestionKind, QuestionTemplate> = {
   refiStressTest: refiStressTestTemplate,
   feeDragOnIrr: feeDragOnIrrTemplate,
   leaseUpReserve: leaseUpReserveTemplate,
+  constructionLoanSizing: constructionLoanSizingTemplate,
 };
 
 export const allKinds: QuestionKind[] = [
@@ -202,4 +204,5 @@ export const allKinds: QuestionKind[] = [
   'refiStressTest',
   'feeDragOnIrr',
   'leaseUpReserve',
+  'constructionLoanSizing',
 ];
