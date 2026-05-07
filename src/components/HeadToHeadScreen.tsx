@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useAuth } from '../cloud/auth';
 import {
   acceptMatchByToken,
@@ -14,10 +14,11 @@ import {
   submitMatchResult,
 } from '../cloud/matches';
 import { generateFromSeed } from '../quiz/dailyChallenge';
-import { parseInput } from '../quiz/parseInput';
-import { scoreAnswer } from '../quiz/tolerance';
-import type { Question } from '../types/question';
-import { AnswerInput, type AnswerInputHandle } from './AnswerInput';
+import {
+  type ChallengeAttempt,
+  useChallengeRunner,
+} from '../hooks/useChallengeRunner';
+import { AnswerInput } from './AnswerInput';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
 import { QuestionCard } from './QuestionCard';
@@ -436,26 +437,13 @@ interface PlayProps {
   onCancel: () => void;
 }
 
-interface Attempt {
-  correct: boolean;
-  userInput: number | null;
-  elapsedMs: number;
-}
-
 function PlayMatch({ match, userId, onDone, onCancel }: PlayProps) {
   const questions = useMemo(() => generateFromSeed(match.seed), [match.seed]);
-  const [index, setIndex] = useState(0);
-  const [raw, setRaw] = useState('');
-  const [attempts, setAttempts] = useState<Attempt[]>([]);
-  const startRef = useRef<number>(Date.now());
-  const stepStartRef = useRef<number>(Date.now());
-  const inputRef = useRef<AnswerInputHandle>(null);
   const [submitState, setSubmitState] = useState<'idle' | 'pending' | 'error'>('idle');
   const [error, setError] = useState<string | null>(null);
 
-  async function finalize(finalAttempts: Attempt[]) {
-    const correctCount = finalAttempts.filter((a) => a.correct).length;
-    const totalMs = Date.now() - startRef.current;
+  async function handleComplete(attempts: ChallengeAttempt[], totalMs: number) {
+    const correctCount = attempts.filter((a) => a.correct).length;
     setSubmitState('pending');
     const res = await submitMatchResult(match.id, correctCount, totalMs);
     if (!res.ok) {
@@ -466,55 +454,37 @@ function PlayMatch({ match, userId, onDone, onCancel }: PlayProps) {
     onDone();
   }
 
-  function handleSubmit() {
-    const q: Question = questions[index];
-    const value = parseInput(raw, q.unit);
-    const now = Date.now();
-    const elapsed = now - stepStartRef.current;
-    let correct = false;
-    if (value !== null) {
-      const result = scoreAnswer(value, q);
-      correct = result.correct;
-    }
-    const next: Attempt = { correct, userInput: value, elapsedMs: elapsed };
-    const newAttempts = [...attempts, next];
-    setAttempts(newAttempts);
-
-    if (index + 1 >= questions.length) {
-      finalize(newAttempts);
-    } else {
-      setIndex(index + 1);
-      setRaw('');
-      stepStartRef.current = now;
-      window.setTimeout(() => inputRef.current?.focus(), 0);
-    }
-  }
+  const runner = useChallengeRunner({ questions, onComplete: handleComplete });
+  const q = questions[runner.index];
+  const isLast = runner.index + 1 === questions.length;
+  const submitDisabled =
+    runner.raw.trim() === '' || submitState === 'pending' || runner.isFinished;
 
   return (
     <Layout onBack={onCancel}>
       <Card className="space-y-3">
         <div className="flex items-baseline justify-between font-mono text-[11px] uppercase tracking-widest text-warm-mute num">
           <span>
-            Question {index + 1} / {questions.length}
+            Question {runner.index + 1} / {questions.length}
           </span>
-          <span>{questions[index].appliedDifficulty ?? '—'}</span>
+          <span>{q.appliedDifficulty ?? '—'}</span>
         </div>
-        <QuestionCard question={questions[index]} />
+        <QuestionCard question={q} />
         <AnswerInput
-          ref={inputRef}
-          unit={questions[index].unit}
-          value={raw}
-          onChange={setRaw}
-          onSubmit={handleSubmit}
+          ref={runner.inputRef}
+          unit={q.unit}
+          value={runner.raw}
+          onChange={runner.setRaw}
+          onSubmit={runner.submit}
         />
         <div className="flex items-center justify-between">
           <span className="font-mono text-[11px] text-warm-mute num">
             {match.host_id === userId ? 'You are host' : 'You are opponent'}
           </span>
-          <Button onClick={handleSubmit} disabled={raw.trim() === '' || submitState === 'pending'}>
+          <Button onClick={runner.submit} disabled={submitDisabled}>
             {submitState === 'pending'
               ? 'Submitting…'
-              : index + 1 === questions.length
+              : isLast
                 ? 'Submit final'
                 : 'Next →'}
           </Button>
