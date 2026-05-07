@@ -54,7 +54,7 @@ First Steps · Foundations · Hot Streak · Week One · Hundred Club · Five-Hun
 - Scratch sheet (open across any drill mode), feedback button (in-app log), achievement toasts
 
 ### Onboarding
-- **Welcome modal** — 3 slides on first profile launch (what LearnCRE is · role pick · ready-to-quiz CTA), dismissible at any slide via X / Skip / Esc / backdrop click. Persists once-seen flag per profile.
+- **Welcome modal** — 4 slides on first profile launch (what LearnCRE is · role pick · Compete &amp; contribute · ready-to-quiz CTA), dismissible at any slide via X / Skip / Esc / backdrop click. Compete slide surfaces the cloud-gated features (Daily / Weekly / Leaderboards / Head-to-head / Cohorts / Friends feed) + the Contribute submission form so first-time users discover the layers above the quiz core. Persists once-seen flag per profile.
 - **Per-mode primers** — first-visit Card on every mode's setup screen with blurb / when-to-use / expected time. Dismissible per-mode-per-profile.
 - Welcome modal's role pick flows into `loadPreferredRole()` which pre-fills SetupScreen on the user's first session.
 

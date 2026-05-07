@@ -51,7 +51,7 @@ export function WelcomeModal({ onSkip, onStartQuiz }: Props) {
 
         <div className="px-8 pt-8 pb-3">
           <div className="font-mono text-[10px] uppercase tracking-widest text-copper-deep num">
-            Welcome · {slide + 1} / 3
+            Welcome · {slide + 1} / 4
           </div>
         </div>
 
@@ -60,12 +60,13 @@ export function WelcomeModal({ onSkip, onStartQuiz }: Props) {
           {slide === 1 && (
             <SlideTwo selected={selectedRole} onPick={setSelectedRole} />
           )}
-          {slide === 2 && <SlideThree role={selectedRole} />}
+          {slide === 2 && <SlideCompete />}
+          {slide === 3 && <SlideReady role={selectedRole} />}
         </div>
 
         <div className="flex items-center justify-between border-t border-warm-line px-8 py-4">
           <div className="flex gap-1.5">
-            {[0, 1, 2].map((i) => (
+            {[0, 1, 2, 3].map((i) => (
               <span
                 key={i}
                 className={`h-1.5 w-1.5 rounded-full transition-all duration-aa ease-aa ${
@@ -88,7 +89,7 @@ export function WelcomeModal({ onSkip, onStartQuiz }: Props) {
                 Back
               </Button>
             )}
-            {slide < 2 ? (
+            {slide < 3 ? (
               <Button onClick={() => setSlide(slide + 1)}>Next</Button>
             ) : (
               <Button onClick={handleStart}>Start with a quiz</Button>
@@ -115,16 +116,18 @@ function SlideOne() {
         <li className="flex gap-2">
           <span className="text-copper">▸</span>
           <span>
-            <span className="font-medium text-warm-ink">11 modes</span> across
-            quick drills, applied cases, and full take-home-style modeling
-            tests
+            <span className="font-medium text-warm-ink">16+ modes</span> across
+            quick drills, applied cases, take-home-style modeling tests, and a
+            global competition layer
           </span>
         </li>
         <li className="flex gap-2">
           <span className="text-copper">▸</span>
           <span>
-            <span className="font-medium text-warm-ink">35 question kinds</span>
-            {' '}covering valuation, returns, debt, lease economics, growth, basis
+            <span className="font-medium text-warm-ink">60+ question kinds</span>
+            {' '}covering valuation, returns, debt, lease economics, growth,
+            basis, promote waterfalls, and asset-class specifics (hotel,
+            retail, industrial)
           </span>
         </li>
         <li className="flex gap-2">
@@ -137,8 +140,9 @@ function SlideOne() {
         <li className="flex gap-2">
           <span className="text-copper">▸</span>
           <span>
-            <span className="font-medium text-warm-ink">No signup, no cloud</span>
-            {' '}— everything runs in your browser, all progress is local
+            <span className="font-medium text-warm-ink">Local-first, cloud-optional</span>
+            {' '}— works offline with no signup. Sign in (magic link, no
+            password) to sync progress across devices and unlock leaderboards.
           </span>
         </li>
       </ul>
@@ -218,7 +222,62 @@ function RoleButton({
   );
 }
 
-function SlideThree({ role }: { role: Role | 'all' }) {
+function SlideCompete() {
+  return (
+    <div className="space-y-4">
+      <div>
+        <div className="display text-2xl text-warm-black">
+          Compete &amp; contribute<span className="text-copper">.</span>
+        </div>
+        <p className="mt-2 text-sm text-warm-stone">
+          When you're ready to test against more than yourself, the Compete
+          section unlocks once you sign in. Contributing back doesn't even
+          need cloud.
+        </p>
+      </div>
+
+      <div className="space-y-2">
+        <div className="font-mono text-[10px] uppercase tracking-widest text-copper-deep num">
+          Compete · cloud sign-in required
+        </div>
+        <ul className="grid grid-cols-1 gap-1 text-sm text-warm-ink sm:grid-cols-2">
+          <FeatureLi label="Daily" hint="Same 10 questions worldwide, leaderboard." />
+          <FeatureLi label="Weekly themes" hint="Curated themed sets, swap Mondays." />
+          <FeatureLi label="Leaderboards" hint="All-time XP, weekly XP, longest streak." />
+          <FeatureLi label="Head-to-head" hint="1v1 async match, same seed both sides." />
+          <FeatureLi label="Cohorts" hint="Invite-only group leaderboards." />
+          <FeatureLi label="Friends feed" hint="Follow + see unlocks." />
+        </ul>
+      </div>
+
+      <div className="space-y-2">
+        <div className="font-mono text-[10px] uppercase tracking-widest text-copper-deep num">
+          Contribute · helps the catalog
+        </div>
+        <ul className="text-sm text-warm-ink">
+          <FeatureLi
+            label="Submit a question"
+            hint="MC, solvable, or word problem. Reviewer integrates the best ones."
+          />
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+function FeatureLi({ label, hint }: { label: string; hint: string }) {
+  return (
+    <li className="flex gap-2">
+      <span className="text-copper">▸</span>
+      <span>
+        <span className="font-medium text-warm-ink">{label}</span>{' '}
+        <span className="text-warm-stone">— {hint}</span>
+      </span>
+    </li>
+  );
+}
+
+function SlideReady({ role }: { role: Role | 'all' }) {
   const roleLabel =
     role === 'all'
       ? 'All roles'
