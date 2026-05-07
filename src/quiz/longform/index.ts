@@ -10,6 +10,9 @@ import { defendDealToIc } from './defendDealToIc';
 import { refiOrSellMemo } from './refiOrSellMemo';
 import { walkMeThroughWaterfall } from './walkMeThroughWaterfall';
 import { defendWaterfallTerms } from './defendWaterfallTerms';
+import { devFeasibilityMemo } from './devFeasibilityMemo';
+import { loanCommitteeMemo } from './loanCommitteeMemo';
+import { amNoiDiagnosis } from './amNoiDiagnosis';
 
 export const LONGFORM_CASES: LongformCase[] = [
   walkMeThroughBid,
@@ -18,6 +21,9 @@ export const LONGFORM_CASES: LongformCase[] = [
   refiOrSellMemo,
   walkMeThroughWaterfall,
   defendWaterfallTerms,
+  devFeasibilityMemo,
+  loanCommitteeMemo,
+  amNoiDiagnosis,
 ];
 
 export function caseById(id: string): LongformCase | undefined {

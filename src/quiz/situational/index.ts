@@ -73,6 +73,9 @@ import { constructionChangeOrderPricing } from './constructionChangeOrderPricing
 import { constructionRetainageRelease } from './constructionRetainageRelease';
 import { capitalAllocationPriority } from './capitalAllocationPriority';
 import { riskAdjustedReturnFramework } from './riskAdjustedReturnFramework';
+import { hotelRevparDivergence } from './hotelRevparDivergence';
+import { retailPercentageRentClause } from './retailPercentageRentClause';
+import { industrialTruckCourtBid } from './industrialTruckCourtBid';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -143,6 +146,9 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   constructionRetainageRelease,
   capitalAllocationPriority,
   riskAdjustedReturnFramework,
+  hotelRevparDivergence,
+  retailPercentageRentClause,
+  industrialTruckCourtBid,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {
