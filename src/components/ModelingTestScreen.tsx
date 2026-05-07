@@ -28,6 +28,11 @@ export function ModelingTestScreen({
   const [briefOpen, setBriefOpen] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
   const pendingCursorRef = useRef<number | null>(null);
+  // Session-wide formula history for ⌘↑ / ⌘↓ recall. Capped at 50 unique
+  // values; consecutive duplicates collapse. Reset cursor when the focused
+  // cell changes so cycling is anchored to the current edit.
+  const [formulaHistory, setFormulaHistory] = useState<string[]>([]);
+  const [historyCursor, setHistoryCursor] = useState<number | null>(null);
 
   const targetCells = useMemo(
     () => template.layout.cells.filter((c) => c.role === 'target'),
@@ -94,22 +99,44 @@ export function ModelingTestScreen({
     [focusRaw],
   );
 
-  const handleTargetClick = useCallback((address: string) => onFocus(address), [onFocus]);
+  const handleTargetClick = useCallback(
+    (address: string) => {
+      setHistoryCursor(null);
+      onFocus(address);
+    },
+    [onFocus],
+  );
+
+  const appendToHistory = useCallback((value: string) => {
+    const trimmed = value.trim();
+    if (!trimmed || trimmed === '=') return;
+    setFormulaHistory((h) => {
+      if (h[h.length - 1] === trimmed) return h;
+      const next = [...h, trimmed];
+      return next.length > 50 ? next.slice(next.length - 50) : next;
+    });
+  }, []);
 
   const goPrev = () => {
     if (!focusRef) return;
+    appendToHistory(focusRaw);
+    setHistoryCursor(null);
     const idx = targetCells.findIndex((c) => c.address === focusRef);
     if (idx <= 0) return;
     onFocus(targetCells[idx - 1].address);
   };
   const goNext = () => {
     if (!focusRef) return;
+    appendToHistory(focusRaw);
+    setHistoryCursor(null);
     const idx = targetCells.findIndex((c) => c.address === focusRef);
     if (idx === -1 || idx === targetCells.length - 1) return;
     onFocus(targetCells[idx + 1].address);
   };
   const goNextEmpty = () => {
     if (!focusRef) return;
+    appendToHistory(focusRaw);
+    setHistoryCursor(null);
     const idx = targetCells.findIndex((c) => c.address === focusRef);
     if (idx === -1) return;
     // Search forward (wrap once) for the first target whose formula is empty.
@@ -121,6 +148,28 @@ export function ModelingTestScreen({
         return;
       }
     }
+  };
+
+  /** Cycle the focused cell's formula through the session history. ⌘↑ steps
+   *  to older entries; ⌘↓ steps forward toward present. Cursor null = at
+   *  current input (post-step). */
+  const cycleHistory = (direction: 'back' | 'forward') => {
+    if (!focusRef || formulaHistory.length === 0) return;
+    let nextCursor: number | null;
+    if (direction === 'back') {
+      nextCursor =
+        historyCursor === null
+          ? 0
+          : Math.min(historyCursor + 1, formulaHistory.length - 1);
+    } else {
+      nextCursor = historyCursor === null ? null : historyCursor - 1;
+      if (nextCursor !== null && nextCursor < 0) nextCursor = null;
+    }
+    setHistoryCursor(nextCursor);
+    if (nextCursor === null) return;
+    const value =
+      formulaHistory[formulaHistory.length - 1 - nextCursor];
+    onSetFormula(focusRef, value);
   };
 
   /** Excel-style fill-right: take the formula from the nearest target on the
@@ -262,7 +311,11 @@ export function ModelingTestScreen({
                 autoComplete="off"
                 autoCorrect="off"
                 placeholder="type a formula or click cells to insert"
-                onChange={(e) => onSetFormula(focusRef, e.target.value)}
+                onChange={(e) => {
+                  onSetFormula(focusRef, e.target.value);
+                  // User typed something new — drop out of history-cycle mode.
+                  if (historyCursor !== null) setHistoryCursor(null);
+                }}
                 onKeyDown={(e) => {
                   const mod = e.metaKey || e.ctrlKey;
                   if (e.key === 'Enter' && mod) {
@@ -286,6 +339,16 @@ export function ModelingTestScreen({
                     fillFromLeft();
                     return;
                   }
+                  if (e.key === 'ArrowUp' && mod) {
+                    e.preventDefault();
+                    cycleHistory('back');
+                    return;
+                  }
+                  if (e.key === 'ArrowDown' && mod) {
+                    e.preventDefault();
+                    cycleHistory('forward');
+                    return;
+                  }
                 }}
                 className="flex-1 bg-transparent px-2 py-2.5 font-mono text-sm outline-none num placeholder:text-warm-mute/70"
               />
@@ -306,7 +369,7 @@ export function ModelingTestScreen({
                 </span>
               ) : (
                 <span>
-                  ↵ next · Tab/Shift-Tab move · ⌘↵ next-empty · ⌘D fill-from-left · click to insert
+                  ↵ next · Tab/Shift-Tab move · ⌘↵ next-empty · ⌘D fill-from-left · ⌘↑/⌘↓ history · click to insert
                 </span>
               )}
             </div>

@@ -69,7 +69,9 @@ export function ModelingTestGrid({
       <table className="w-full border-collapse font-mono text-xs num">
         <thead>
           <tr className="bg-warm-paper/60">
-            <th className="border-r border-warm-line px-2 py-1.5 text-warm-mute" />
+            {/* Corner cell — sticky to the left so the row-number column has a
+                matching opaque header during horizontal scroll. */}
+            <th className="sticky left-0 z-20 border-r border-warm-line bg-warm-paper px-2 py-1.5 text-warm-mute" />
             {colHeaders.map((h) => (
               <th
                 key={h}
@@ -83,7 +85,9 @@ export function ModelingTestGrid({
         <tbody>
           {Array.from({ length: layout.rows }, (_, r) => (
             <tr key={r} className="border-t border-warm-line">
-              <td className="border-r border-warm-line bg-warm-paper/40 px-2 py-1.5 text-center text-[10px] text-warm-mute">
+              {/* Row-number column — sticky-left so users keep their bearings
+                  on phones / narrow viewports during horizontal scroll. */}
+              <td className="sticky left-0 z-10 border-r border-warm-line bg-warm-paper px-2 py-1.5 text-center text-[10px] text-warm-mute">
                 {r + 1}
               </td>
               {Array.from({ length: layout.cols }, (_, c) => {
