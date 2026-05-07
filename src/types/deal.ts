@@ -110,6 +110,8 @@ export interface DealInputs {
   leaseUpMonths?: number;
   /** Loan-to-cost ratio for construction loan sizing. */
   ltc?: number;
+  /** Capex reserve assumption ($/SF/yr) for hold-period reserve sizing. */
+  capexReservePerSf?: number;
   // After-tax exit (taxAdjustedExit)
   saleProceeds?: number;
   accumulatedDep?: number;

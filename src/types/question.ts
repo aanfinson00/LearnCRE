@@ -69,7 +69,8 @@ export type QuestionKind =
   | 'refiStressTest'
   | 'feeDragOnIrr'
   | 'leaseUpReserve'
-  | 'constructionLoanSizing';
+  | 'constructionLoanSizing'
+  | 'capexReserveSizing';
 
 export type UnitFormat = 'usd' | 'pct' | 'bps' | 'pctChange' | 'usdChange' | 'multiple' | 'usdPerSf';
 

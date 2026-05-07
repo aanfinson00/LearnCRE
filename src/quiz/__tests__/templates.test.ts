@@ -358,6 +358,12 @@ describe('quiz/templates', () => {
             expect(q.expected).toBeCloseTo(recomputed, 6);
             break;
           }
+          case 'capexReserveSizing': {
+            const recomputed =
+              ctx.buildingSf! * ctx.capexReservePerSf! * ctx.holdYears!;
+            expect(q.expected).toBeCloseTo(recomputed, 6);
+            break;
+          }
         }
       }
     }

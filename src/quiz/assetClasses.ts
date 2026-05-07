@@ -1,7 +1,7 @@
 import { bands, type Band } from './bands';
 import type { QuestionKind } from '../types/question';
 
-export type AssetClass = 'mixed' | 'multifamily' | 'office' | 'retail' | 'industrial';
+export type AssetClass = 'mixed' | 'multifamily' | 'office' | 'retail' | 'industrial' | 'hotel';
 
 export interface AssetClassProfile {
   id: AssetClass;
@@ -107,6 +107,26 @@ const INDUSTRIAL: AssetClassProfile = {
   excludeKinds: ['rentPerUnit', 'opexPerUnit', 'pricePerUnit'],
 };
 
+const HOTEL: AssetClassProfile = {
+  id: 'hotel',
+  label: 'Hotel',
+  hint: 'Operating asset — RevPAR, GOP margin, FF&E reserve. 6.5–8.5% caps.',
+  noun: 'hotel',
+  nounPlural: 'hospitality asset',
+  // Hotels don't fit the gross/nn/nnn taxonomy — closest analog is gross
+  // since the operator runs OpEx end-to-end. Kept generic so prompts read
+  // naturally; specific hotel content (RevPAR / GOP / FF&E) lives in the
+  // hospitality-specific question kinds + viz.
+  leaseType: 'gross',
+  bandOverrides: {
+    capRate: { min: 0.065, max: 0.095, step: 0.0025 },
+    exitCapRate: { min: 0.07, max: 0.1, step: 0.0025 },
+    opexRatio: { min: 0.55, max: 0.75, step: 0.025 },
+  },
+  opexRatios: [0.55, 0.6, 0.65, 0.7, 0.75] as const,
+  excludeKinds: ['rentPerUnit', 'opexPerUnit', 'pricePerUnit'],
+};
+
 const MIXED: AssetClassProfile = {
   id: 'mixed',
   label: 'All asset classes',
@@ -124,6 +144,7 @@ export const assetClasses: Record<AssetClass, AssetClassProfile> = {
   office: OFFICE,
   retail: RETAIL,
   industrial: INDUSTRIAL,
+  hotel: HOTEL,
 };
 
 export const assetClassOrder: AssetClass[] = [
@@ -132,6 +153,7 @@ export const assetClassOrder: AssetClass[] = [
   'office',
   'retail',
   'industrial',
+  'hotel',
 ];
 
 export function getProfile(assetClass: AssetClass): AssetClassProfile {
