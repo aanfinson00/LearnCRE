@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useAuth } from '../cloud/auth';
 import {
   fetchDailyLeaderboard,
@@ -6,16 +6,18 @@ import {
   submitDailyResult,
   type LeaderboardRow,
 } from '../cloud/dailyChallenge';
-import { parseInput } from '../quiz/parseInput';
 import {
   dailyDate,
   generateDaily,
   markPlayedLocally,
   wasPlayedLocally,
 } from '../quiz/dailyChallenge';
-import { scoreAnswer } from '../quiz/tolerance';
+import {
+  type ChallengeAttempt,
+  useChallengeRunner,
+} from '../hooks/useChallengeRunner';
 import type { Question } from '../types/question';
-import { AnswerInput, type AnswerInputHandle } from './AnswerInput';
+import { AnswerInput } from './AnswerInput';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
 import { QuestionCard } from './QuestionCard';
@@ -25,12 +27,6 @@ interface Props {
 }
 
 type Stage = 'intro' | 'playing' | 'finished';
-
-interface Attempt {
-  correct: boolean;
-  userInput: number | null;
-  elapsedMs: number;
-}
 
 function fmtMs(ms: number): string {
   const total = Math.round(ms / 1000);
@@ -47,12 +43,8 @@ export function DailyChallengeScreen({ onBack }: Props) {
   const [stage, setStage] = useState<Stage>(
     wasPlayedLocally(today) ? 'finished' : 'intro',
   );
-  const [index, setIndex] = useState(0);
-  const [raw, setRaw] = useState('');
-  const [attempts, setAttempts] = useState<Attempt[]>([]);
-  const startRef = useRef<number>(0);
-  const stepStartRef = useRef<number>(0);
-  const inputRef = useRef<AnswerInputHandle>(null);
+  const [finalAttempts, setFinalAttempts] = useState<ChallengeAttempt[]>([]);
+  const [finalTotalMs, setFinalTotalMs] = useState(0);
 
   const [leaderboard, setLeaderboard] = useState<LeaderboardRow[]>([]);
   const [myCloudResult, setMyCloudResult] = useState<{
@@ -81,44 +73,10 @@ export function DailyChallengeScreen({ onBack }: Props) {
     };
   }, [stage, today, cloudEnabled, user]);
 
-  function startPlay() {
-    setStage('playing');
-    setIndex(0);
-    setRaw('');
-    setAttempts([]);
-    startRef.current = Date.now();
-    stepStartRef.current = Date.now();
-  }
-
-  function handleSubmit() {
-    if (stage !== 'playing') return;
-    const q: Question = questions[index];
-    const value = parseInput(raw, q.unit);
-    const now = Date.now();
-    const elapsed = now - stepStartRef.current;
-    let correct = false;
-    if (value !== null) {
-      const result = scoreAnswer(value, q);
-      correct = result.correct;
-    }
-    const next: Attempt = { correct, userInput: value, elapsedMs: elapsed };
-    const newAttempts = [...attempts, next];
-    setAttempts(newAttempts);
-
-    if (index + 1 >= questions.length) {
-      finalize(newAttempts);
-    } else {
-      setIndex(index + 1);
-      setRaw('');
-      stepStartRef.current = now;
-      // Refocus input on the next question
-      window.setTimeout(() => inputRef.current?.focus(), 0);
-    }
-  }
-
-  async function finalize(finalAttempts: Attempt[]) {
-    const correctCount = finalAttempts.filter((a) => a.correct).length;
-    const totalMs = Date.now() - startRef.current;
+  async function handlePlayerComplete(attempts: ChallengeAttempt[], totalMs: number) {
+    const correctCount = attempts.filter((a) => a.correct).length;
+    setFinalAttempts(attempts);
+    setFinalTotalMs(totalMs);
     markPlayedLocally(today);
     setStage('finished');
 
@@ -135,11 +93,7 @@ export function DailyChallengeScreen({ onBack }: Props) {
     }
   }
 
-  const correctCount = attempts.filter((a) => a.correct).length;
-  const totalMs =
-    stage === 'finished' && attempts.length > 0
-      ? attempts.reduce((sum, a) => sum + a.elapsedMs, 0)
-      : 0;
+  const correctCount = finalAttempts.filter((a) => a.correct).length;
 
   return (
     <div className="mx-auto max-w-3xl space-y-5 py-8">
@@ -169,35 +123,13 @@ export function DailyChallengeScreen({ onBack }: Props) {
             {!cloudEnabled && ' Cloud sync is off, so you can play locally but the leaderboard is hidden.'}
           </p>
           <div className="flex justify-end pt-2">
-            <Button onClick={startPlay}>Begin daily</Button>
+            <Button onClick={() => setStage('playing')}>Begin daily</Button>
           </div>
         </Card>
       )}
 
       {stage === 'playing' && (
-        <>
-          <Card className="space-y-3">
-            <div className="flex items-baseline justify-between font-mono text-[11px] uppercase tracking-widest text-warm-mute num">
-              <span>
-                Question {index + 1} / {questions.length}
-              </span>
-              <span>{questions[index].appliedDifficulty ?? '—'}</span>
-            </div>
-            <QuestionCard question={questions[index]} />
-            <AnswerInput
-              ref={inputRef}
-              unit={questions[index].unit}
-              value={raw}
-              onChange={setRaw}
-              onSubmit={handleSubmit}
-            />
-            <div className="flex items-center justify-end">
-              <Button onClick={handleSubmit} disabled={raw.trim() === ''}>
-                {index + 1 === questions.length ? 'Submit final' : 'Next →'}
-              </Button>
-            </div>
-          </Card>
-        </>
+        <DailyPlayer questions={questions} onComplete={handlePlayerComplete} />
       )}
 
       {stage === 'finished' && (
@@ -206,11 +138,11 @@ export function DailyChallengeScreen({ onBack }: Props) {
             <div className="text-xs font-medium uppercase tracking-widest text-warm-mute">
               Your run
             </div>
-            {attempts.length > 0 ? (
+            {finalAttempts.length > 0 ? (
               <div className="grid grid-cols-3 gap-3 font-mono text-sm num">
                 <Stat label="Correct" value={`${correctCount} / ${questions.length}`} />
                 <Stat label="Accuracy" value={`${Math.round((correctCount / questions.length) * 100)}%`} />
-                <Stat label="Time" value={fmtMs(totalMs)} />
+                <Stat label="Time" value={fmtMs(finalTotalMs)} />
               </div>
             ) : myCloudResult ? (
               <div className="grid grid-cols-3 gap-3 font-mono text-sm num">
@@ -289,6 +221,41 @@ export function DailyChallengeScreen({ onBack }: Props) {
         </>
       )}
     </div>
+  );
+}
+
+function DailyPlayer({
+  questions,
+  onComplete,
+}: {
+  questions: Question[];
+  onComplete: (attempts: ChallengeAttempt[], totalMs: number) => void;
+}) {
+  const runner = useChallengeRunner({ questions, onComplete });
+  const q = questions[runner.index];
+  const isLast = runner.index + 1 === questions.length;
+  return (
+    <Card className="space-y-3">
+      <div className="flex items-baseline justify-between font-mono text-[11px] uppercase tracking-widest text-warm-mute num">
+        <span>
+          Question {runner.index + 1} / {questions.length}
+        </span>
+        <span>{q.appliedDifficulty ?? '—'}</span>
+      </div>
+      <QuestionCard question={q} />
+      <AnswerInput
+        ref={runner.inputRef}
+        unit={q.unit}
+        value={runner.raw}
+        onChange={runner.setRaw}
+        onSubmit={runner.submit}
+      />
+      <div className="flex items-center justify-end">
+        <Button onClick={runner.submit} disabled={runner.raw.trim() === ''}>
+          {isLast ? 'Submit final' : 'Next →'}
+        </Button>
+      </div>
+    </Card>
   );
 }
 
