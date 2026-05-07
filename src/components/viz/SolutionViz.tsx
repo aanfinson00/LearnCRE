@@ -44,6 +44,7 @@ import { HoldVsSellIrrViz } from './HoldVsSellIrrViz';
 import { IrrAfterPromoteViz } from './IrrAfterPromoteViz';
 import { DscrSensitivityRateViz } from './DscrSensitivityRateViz';
 import { ExtensionDragViz } from './ExtensionDragViz';
+import { TaxAdjustedExitViz } from './TaxAdjustedExitViz';
 import { CostToCompleteViz } from './CostToCompleteViz';
 import { DrawAllocationViz } from './DrawAllocationViz';
 import { ContingencyDrawDownViz } from './ContingencyDrawDownViz';
@@ -695,6 +696,28 @@ export function SolutionViz({ question }: Props) {
             equityOut={ctx.equityOut}
             holdYears={ctx.holdYears}
             drag={question.expected}
+          />
+        );
+      }
+      return null;
+
+    case 'taxAdjustedExit':
+      if (
+        ctx.purchasePrice !== undefined &&
+        ctx.saleProceeds !== undefined &&
+        ctx.accumulatedDep !== undefined &&
+        ctx.saleCostRate !== undefined &&
+        ctx.recaptureRate !== undefined &&
+        ctx.capGainsRate !== undefined
+      ) {
+        return (
+          <TaxAdjustedExitViz
+            purchasePrice={ctx.purchasePrice}
+            saleProceeds={ctx.saleProceeds}
+            accumulatedDep={ctx.accumulatedDep}
+            saleCostRate={ctx.saleCostRate}
+            recaptureRate={ctx.recaptureRate}
+            capGainsRate={ctx.capGainsRate}
           />
         );
       }

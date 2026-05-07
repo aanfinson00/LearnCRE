@@ -108,4 +108,10 @@ export interface DealInputs {
   // Mortgage-UW + portfolio-mgmt + development GAP fields
   feeRate?: number;
   leaseUpMonths?: number;
+  // After-tax exit (taxAdjustedExit)
+  saleProceeds?: number;
+  accumulatedDep?: number;
+  saleCostRate?: number;
+  recaptureRate?: number;
+  capGainsRate?: number;
 }
