@@ -353,6 +353,11 @@ describe('quiz/templates', () => {
             expect(q.expected).toBeCloseTo(recomputed, 6);
             break;
           }
+          case 'constructionLoanSizing': {
+            const recomputed = ctx.totalProjectCost! * (1 - ctx.ltc!);
+            expect(q.expected).toBeCloseTo(recomputed, 6);
+            break;
+          }
         }
       }
     }
