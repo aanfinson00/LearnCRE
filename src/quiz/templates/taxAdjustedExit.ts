@@ -96,6 +96,11 @@ export const taxAdjustedExitTemplate: QuestionTemplate<'taxAdjustedExit'> = {
       context: {
         purchasePrice: purchase,
         holdYears,
+        saleProceeds,
+        accumulatedDep,
+        saleCostRate,
+        recaptureRate,
+        capGainsRate,
       },
       expected: result.afterTaxProceeds,
       unit: 'usd',
