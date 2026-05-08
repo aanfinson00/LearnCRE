@@ -7,6 +7,16 @@ import { matchesRole } from '../../types/role';
 import type { AssetClass } from '../assetClasses';
 import { capRateDivergence } from './capRateDivergence';
 import { absorptionTiming } from './absorptionTiming';
+import { officeNetVsGrossAbsorption } from './officeNetVsGrossAbsorption';
+import { industrialSubleaseOverhang } from './industrialSubleaseOverhang';
+import { anchorLeaseUpTiming } from './anchorLeaseUpTiming';
+import { floatingRateDscrStress } from './floatingRateDscrStress';
+import { rentGrowthVsExitCapSensitivity } from './rentGrowthVsExitCapSensitivity';
+import { valueAddOccupancySensitivity } from './valueAddOccupancySensitivity';
+import { freeRentTimingNpv } from './freeRentTimingNpv';
+import { baseYearAnomalyAdjust } from './baseYearAnomalyAdjust';
+import { distressedSaleCompFilter } from './distressedSaleCompFilter';
+import { portfolioTradeCompAdjust } from './portfolioTradeCompAdjust';
 import { markToMarketUpside } from './markToMarketUpside';
 import { noiGrowthSmellTest } from './noiGrowthSmellTest';
 import { compSetVetting } from './compSetVetting';
@@ -149,6 +159,16 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   hotelRevparDivergence,
   retailPercentageRentClause,
   industrialTruckCourtBid,
+  officeNetVsGrossAbsorption,
+  industrialSubleaseOverhang,
+  anchorLeaseUpTiming,
+  floatingRateDscrStress,
+  rentGrowthVsExitCapSensitivity,
+  valueAddOccupancySensitivity,
+  freeRentTimingNpv,
+  baseYearAnomalyAdjust,
+  distressedSaleCompFilter,
+  portfolioTradeCompAdjust,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {
