@@ -7,9 +7,15 @@ import { matchesRole } from '../../types/role';
 import type { AssetClass } from '../assetClasses';
 import { capRateDivergence } from './capRateDivergence';
 import { absorptionTiming } from './absorptionTiming';
+import { absorptionLeaseUpNewDev } from './absorptionLeaseUpNewDev';
+import { absorptionOfficeRecovery } from './absorptionOfficeRecovery';
+import { absorptionNewSupplyTipping } from './absorptionNewSupplyTipping';
 import { markToMarketUpside } from './markToMarketUpside';
 import { noiGrowthSmellTest } from './noiGrowthSmellTest';
 import { compSetVetting } from './compSetVetting';
+import { compSizeScaling } from './compSizeScaling';
+import { compDistressSale } from './compDistressSale';
+import { compLeaseUpVsStabilized } from './compLeaseUpVsStabilized';
 import { taxReassessmentSurprise } from './taxReassessmentSurprise';
 import { rentRollUndervalued } from './rentRollUndervalued';
 import { tiVsRentGiveBack } from './tiVsRentGiveBack';
@@ -20,6 +26,8 @@ import { tenantCreditPricing } from './tenantCreditPricing';
 import { dscrRefiFailing } from './dscrRefiFailing';
 import { compVintageAdjustment } from './compVintageAdjustment';
 import { exitCapConservatism } from './exitCapConservatism';
+import { sensitivityRentGrowthIrr } from './sensitivityRentGrowthIrr';
+import { sensitivityFloatingRateStress } from './sensitivityFloatingRateStress';
 import { trendedVsInplaceLeaseup } from './trendedVsInplaceLeaseup';
 import { noiGrowthMissing } from './noiGrowthMissing';
 import { rolloverConcentration } from './rolloverConcentration';
@@ -34,6 +42,8 @@ import { fundVsDealIrrGap } from './fundVsDealIrrGap';
 import { devLtcVsLtv } from './devLtcVsLtv';
 import { distressedLoanWorkout } from './distressedLoanWorkout';
 import { leaseStructureNnnVsGross } from './leaseStructureNnnVsGross';
+import { leaseRenewalVsReplace } from './leaseRenewalVsReplace';
+import { leaseFreeRentAnalysis } from './leaseFreeRentAnalysis';
 import { sponsorRecourseVsCovenants } from './sponsorRecourseVsCovenants';
 import { groundLeaseVsFee } from './groundLeaseVsFee';
 import { capitalCallMechanics } from './capitalCallMechanics';
@@ -80,9 +90,15 @@ import { industrialTruckCourtBid } from './industrialTruckCourtBid';
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
   absorptionTiming,
+  absorptionLeaseUpNewDev,
+  absorptionOfficeRecovery,
+  absorptionNewSupplyTipping,
   markToMarketUpside,
   noiGrowthSmellTest,
   compSetVetting,
+  compSizeScaling,
+  compDistressSale,
+  compLeaseUpVsStabilized,
   taxReassessmentSurprise,
   rentRollUndervalued,
   tiVsRentGiveBack,
@@ -93,6 +109,8 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   dscrRefiFailing,
   compVintageAdjustment,
   exitCapConservatism,
+  sensitivityRentGrowthIrr,
+  sensitivityFloatingRateStress,
   trendedVsInplaceLeaseup,
   noiGrowthMissing,
   rolloverConcentration,
@@ -107,6 +125,8 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   devLtcVsLtv,
   distressedLoanWorkout,
   leaseStructureNnnVsGross,
+  leaseRenewalVsReplace,
+  leaseFreeRentAnalysis,
   sponsorRecourseVsCovenants,
   groundLeaseVsFee,
   capitalCallMechanics,
