@@ -76,6 +76,16 @@ import { riskAdjustedReturnFramework } from './riskAdjustedReturnFramework';
 import { hotelRevparDivergence } from './hotelRevparDivergence';
 import { retailPercentageRentClause } from './retailPercentageRentClause';
 import { industrialTruckCourtBid } from './industrialTruckCourtBid';
+import { industrialAbsorptionBackfill } from './industrialAbsorptionBackfill';
+import { officeNegativeAbsorption } from './officeNegativeAbsorption';
+import { multifamilyNewSupplyAbsorption } from './multifamilyNewSupplyAbsorption';
+import { multifamilyCompSelection } from './multifamilyCompSelection';
+import { officeNerCompNormalization } from './officeNerCompNormalization';
+import { leaseRenewalVsMarkToMarket } from './leaseRenewalVsMarkToMarket';
+import { grossLeaseExpenseCreep } from './grossLeaseExpenseCreep';
+import { exitCapSensitivityEquity } from './exitCapSensitivityEquity';
+import { occupancyBreakEvenDscr } from './occupancyBreakEvenDscr';
+import { noiComponentDiagnostic } from './noiComponentDiagnostic';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -149,6 +159,16 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   hotelRevparDivergence,
   retailPercentageRentClause,
   industrialTruckCourtBid,
+  industrialAbsorptionBackfill,
+  officeNegativeAbsorption,
+  multifamilyNewSupplyAbsorption,
+  multifamilyCompSelection,
+  officeNerCompNormalization,
+  leaseRenewalVsMarkToMarket,
+  grossLeaseExpenseCreep,
+  exitCapSensitivityEquity,
+  occupancyBreakEvenDscr,
+  noiComponentDiagnostic,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {
