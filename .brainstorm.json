@@ -1,0 +1,144 @@
+{
+  "domain": "CRE mental-math quiz app (27+ question kinds: valuation, debt sizing, lease economics, waterfall, returns) for analysts, associates, and career-switchers drilling intuition on cap rates, NOI, DSCR, IRR, NER, and waterfall distributions",
+  "subsystems": [
+    {
+      "name": "valuation-and-noi-math",
+      "files": [
+        "src/math/core.ts",
+        "src/math/sensitivity.ts",
+        "src/math/growth.ts"
+      ],
+      "patterns": [
+        "export function value",
+        "export function capRate",
+        "export function noi",
+        "export function egi",
+        "impliedValue",
+        "export function sensitivity"
+      ]
+    },
+    {
+      "name": "debt-sizing",
+      "files": [
+        "src/math/debt.ts",
+        "src/math/returns.ts"
+      ],
+      "patterns": [
+        "loanConstant",
+        "maxLoanByDscr",
+        "maxLoanByDebtYield",
+        "cashOnCash",
+        "breakEvenOccupancy",
+        "leveredIrrApprox"
+      ]
+    },
+    {
+      "name": "lease-economics",
+      "files": [
+        "src/math/lease.ts",
+        "src/math/basis.ts"
+      ],
+      "patterns": [
+        "netEffectiveRent",
+        "tiVsRentDelta",
+        "rentRollNoiChange",
+        "requiredRentPremiumPerSf",
+        "effectiveRentCostPerSf"
+      ]
+    },
+    {
+      "name": "waterfall-and-promote",
+      "files": [
+        "src/math/waterfall.ts",
+        "src/math/tax.ts"
+      ],
+      "patterns": [
+        "WaterfallTerms",
+        "WaterfallResult",
+        "prefAccrual",
+        "catchUpTargetGpPct",
+        "runWaterfall",
+        "gpCatchUp"
+      ]
+    },
+    {
+      "name": "quiz-engine-and-difficulty",
+      "files": [
+        "src/quiz/engine.ts",
+        "src/quiz/spacedRepetition.ts",
+        "src/quiz/dynamic.ts"
+      ],
+      "patterns": [
+        "generateQuestion",
+        "resolveDifficulty",
+        "pickKindWeighted",
+        "weightsForKinds",
+        "computeDynamicDifficulty",
+        "buildChoices"
+      ]
+    },
+    {
+      "name": "speed-drill",
+      "files": [
+        "src/quiz/speedDrill.ts",
+        "src/quiz/speedDrillVariants.ts"
+      ],
+      "patterns": [
+        "buildCells",
+        "computeCell",
+        "CAP_PRESETS",
+        "isDiagonalZero",
+        "scoreCell",
+        "cellKey"
+      ]
+    },
+    {
+      "name": "certification-and-progression",
+      "files": [
+        "src/quiz/certs/evaluate.ts",
+        "src/quiz/certs/finalExam.ts",
+        "src/quiz/gates.ts"
+      ],
+      "patterns": [
+        "BenchmarkResult",
+        "QuizAccuracyBenchmark",
+        "CertProgressView",
+        "finalExam",
+        "evaluateBenchmark",
+        "TierState"
+      ]
+    },
+    {
+      "name": "xp-and-achievements",
+      "files": [
+        "src/quiz/xp.ts",
+        "src/quiz/achievements.ts",
+        "src/quiz/achievementContext.ts"
+      ],
+      "patterns": [
+        "xpForAttempt",
+        "AchievementDef",
+        "evaluateAchievements",
+        "PURE_MATH_VARIANTS",
+        "CRE_VARIANTS",
+        "AchievementUnlock"
+      ]
+    },
+    {
+      "name": "cloud-sync-and-social",
+      "files": [
+        "src/cloud/sync.ts",
+        "src/cloud/leaderboards.ts",
+        "src/cloud/cohorts.ts"
+      ],
+      "patterns": [
+        "pullAll",
+        "pushAll",
+        "mergeXp",
+        "xp_state",
+        "LeaderboardKind",
+        "fetchAlltimeXp"
+      ]
+    }
+  ]
+}
