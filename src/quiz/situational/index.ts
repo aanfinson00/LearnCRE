@@ -76,6 +76,16 @@ import { riskAdjustedReturnFramework } from './riskAdjustedReturnFramework';
 import { hotelRevparDivergence } from './hotelRevparDivergence';
 import { retailPercentageRentClause } from './retailPercentageRentClause';
 import { industrialTruckCourtBid } from './industrialTruckCourtBid';
+import { depreciationRecaptureOnSale } from './depreciationRecaptureOnSale';
+import { costSegregationPencilTest } from './costSegregationPencilTest';
+import { exchangeBootMechanics } from './exchangeBootMechanics';
+import { industrialSaleLeaseback } from './industrialSaleLeaseback';
+import { industrialDockRatioAdequacy } from './industrialDockRatioAdequacy';
+import { retailAnchorDeparture } from './retailAnchorDeparture';
+import { retailOccupancyCostRatio } from './retailOccupancyCostRatio';
+import { hotelPipKeyMoney } from './hotelPipKeyMoney';
+import { hotelSeasonalUnderwriting } from './hotelSeasonalUnderwriting';
+import { constructionCloseoutStabilization } from './constructionCloseoutStabilization';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -149,6 +159,16 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   hotelRevparDivergence,
   retailPercentageRentClause,
   industrialTruckCourtBid,
+  depreciationRecaptureOnSale,
+  costSegregationPencilTest,
+  exchangeBootMechanics,
+  industrialSaleLeaseback,
+  industrialDockRatioAdequacy,
+  retailAnchorDeparture,
+  retailOccupancyCostRatio,
+  hotelPipKeyMoney,
+  hotelSeasonalUnderwriting,
+  constructionCloseoutStabilization,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {
