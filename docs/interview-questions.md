@@ -26,7 +26,7 @@ in a future PR.
 
 ---
 
-## Acquisitions (12)
+## Acquisitions (13)
 
 ### Q: How do you compute cap rate, and what's a typical going-in cap range for stabilized industrial in a tier-1 market today?
 - **Role:** acquisitions · **Difficulty:** beginner
@@ -88,9 +88,14 @@ in a future PR.
 - **Why:** single-tenant pricing nuance.
 - **Maps to:** `tenant-credit-pricing` situational.
 
+### Q: A 450,000-SF distribution center has 28-ft clear height; the submarket standard is 36 ft. If the 36-ft market rent is $9.50/SF and the premium is $0.08/SF per foot of additional height, what rent do you underwrite for this asset?
+- **Role:** acquisitions · **Difficulty:** intermediate
+- **Why:** clear-height discounts are easy to miss in comp selection; tests whether candidates can price a physical-spec difference rather than applying market rent flat.
+- **Maps to:** `clearHeightPremium` quiz template.
+
 ---
 
-## Asset Management (10)
+## Asset Management (13)
 
 ### Q: Year-3 NOI came in 8% below pro forma. Where do you look first?
 - **Role:** assetManagement · **Difficulty:** intermediate
@@ -142,9 +147,24 @@ in a future PR.
 - **Why:** capex discipline; common pitfall is using the OM number unchanged.
 - **Maps to:** **GAP — propose `capex-reserve-discipline` situational + `capexReserveSizing` quiz template**.
 
+### Q: A 200,000-SF last-mile fulfillment building has 60 truck doors. What's the truck density per 10,000 SF, and what use-type tier does that put it in?
+- **Role:** assetManagement · **Difficulty:** beginner
+- **Why:** truck density (doors per 10k SF) differentiates distribution from last-mile from cross-dock; it sets the rent and tenant-credit tier for industrial leases.
+- **Maps to:** `truckCountPerSf` quiz template.
+
+### Q: A national apparel tenant occupies 8,000 SF and reported $3.2M in annual sales last year. What's their sales per SF, and does this number signal health or watch-list status?
+- **Role:** assetManagement · **Difficulty:** beginner
+- **Why:** sales/SF is the headline retail tenant-health metric; benchmarks matter as much as the arithmetic — a candidate who can compute but can't interpret is half-prepared.
+- **Maps to:** `salesPerSf` quiz template.
+
+### Q: A 300-room hotel has 72% occupancy and an ADR of $220. RevPAR is $158.40. What's the RevPOR, and why do hotel operators track it separately from RevPAR?
+- **Role:** assetManagement · **Difficulty:** intermediate
+- **Why:** RevPOR isolates pricing power on occupied rooms; it can stay flat while RevPAR drops — a key distinction for diagnosing revenue-management issues vs. demand softness.
+- **Maps to:** `revporVsRevpar` quiz template.
+
 ---
 
-## Mortgage Underwriting (10)
+## Mortgage Underwriting (11)
 
 ### Q: What's the formula for DSCR? What's a healthy threshold?
 - **Role:** mortgageUw · **Difficulty:** beginner
@@ -196,9 +216,14 @@ in a future PR.
 - **Why:** refi-risk underwriting; common at life cos and debt funds.
 - **Maps to:** **GAP — propose `refiStressTest` quiz template + `refi-cap-stress` situational**.
 
+### Q: A grocery anchor pays $650,000/year in base rent, and the lease includes a 6% percentage-rent rate. At what annual sales level does percentage rent begin? What's the term for this threshold?
+- **Role:** mortgageUw · **Difficulty:** intermediate
+- **Why:** the natural-breakpoint calculation directly affects the lender's gross-revenue underwriting on retail; candidates who conflate "natural" and "stated" breakpoints mis-size cash flow.
+- **Maps to:** `percentageRentBreakpoint` quiz template.
+
 ---
 
-## Portfolio Management (8)
+## Portfolio Management (10)
 
 ### Q: Your fund is 40% office vs 25% target. Which assets do you sell first to rebalance?
 - **Role:** portfolioMgmt · **Difficulty:** advanced
@@ -240,9 +265,19 @@ in a future PR.
 - **Why:** EM↔IRR translation; common filter.
 - **Maps to:** `equityMultiple` quiz template + `irrSimple` quiz template + `EquityMultipleViz`.
 
+### Q: LPs have received $4M in preferred return on a deal with a 20% promote tier and a full GP catch-up. How many dollars does the GP receive in the catch-up tier, and why does a "full" catch-up matter?
+- **Role:** portfolioMgmt · **Difficulty:** intermediate
+- **Why:** catch-up mechanics are a filter at every senior associate / VP interview for fund-track roles; candidates must know the formula (pref × target / (1 − target)) and what "full" vs. "half" catch-up means for LP economics.
+- **Maps to:** `gpCatchUp` quiz template + `waterfallSimpleSplit` quiz template.
+
+### Q: The GP co-invested 10% ($3M) on a $30M deal. Total profit is $12M, and the GP earns 25% of all profit distributions. What is the GP's effective promote in dollars — i.e., how much did they earn beyond their fair pro-rata share?
+- **Role:** portfolioMgmt · **Difficulty:** advanced
+- **Why:** effective promote vs. blended capital return is the carry sanity-check most junior analysts miss; this separates candidates who understand waterfall mechanics from those who only know the split percentages.
+- **Maps to:** `gpEffectivePromote` quiz template + `irrAfterPromote` quiz template.
+
 ---
 
-## Development (7)
+## Development (10)
 
 ### Q: Land cost $8M, hard cost $38M, soft $7M, 5% contingency. What's TPC and what's the yield-on-cost on $4.5M stabilized NOI?
 - **Role:** development · **Difficulty:** intermediate
@@ -278,6 +313,21 @@ in a future PR.
 - **Role:** development · **Difficulty:** advanced
 - **Why:** ground-lease economics; common at urban infill developers.
 - **Maps to:** **GAP — propose `groundLeaseVsFee` situational**.
+
+### Q: The sponsor committed $12M in equity and has drawn $10.5M so far. The current draw request is $3M. Under an equity-first waterfall, how much of this draw comes from the construction lender?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** equity-first vs. pari-passu draw logic is tested at development underwriting shops and construction lenders; candidates often forget to subtract equity already drawn.
+- **Maps to:** `drawAllocation` quiz template.
+
+### Q: A contractor has submitted $28M in cumulative draw requests on a project with a standard 10% retainage rate. How much cash is the lender holding back, and when does it release?
+- **Role:** development · **Difficulty:** beginner
+- **Why:** retainage math is elementary but chronically confused with contingency; candidates must know retainage accumulates per draw and releases at substantial completion.
+- **Maps to:** `retainageRunning` quiz template.
+
+### Q: A $60M hard-cost project carries a 7.5% contingency reserve. Cumulative cost overruns to date are $2.7M. What percentage of contingency remains, and at what threshold should a construction lender start asking hard questions?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** contingency burn-rate is a critical progress signal; lenders typically flag deals when less than 30% of contingency remains — knowing the threshold matters as much as the arithmetic.
+- **Maps to:** `contingencyDrawDown` quiz template.
 
 ---
 
@@ -315,12 +365,19 @@ regardless of position.
 
 ## Summary statistics
 
-- **Total questions in this doc:** 52
-- **Mapped to existing content:** 41 (78%)
-- **Flagged as GAPs:** 8 (15%)
-- **Out of scope (time-sensitive / behavioral):** 4 (8%)
+- **Total questions in this doc:** 62
+- **Mapped to existing content:** 51 (82%)
+- **Flagged as GAPs:** 8 (13%)
+- **Out of scope (time-sensitive / behavioral):** 4 (6%)
 
-Top GAPs to address (ranked by interview frequency):
+**10 questions added (2026-05-13)** targeting under-represented areas:
+- Industrial (0 → 2): `clearHeightPremium`, `truckCountPerSf`
+- Retail (0 → 2): `salesPerSf`, `percentageRentBreakpoint`
+- Hotel (0 → 1): `revporVsRevpar`
+- Waterfall / Promote (0 → 2): `gpCatchUp`, `gpEffectivePromote`
+- Development construction math (0 → 3): `drawAllocation`, `retainageRunning`, `contingencyDrawDown`
+
+Top remaining GAPs to address (ranked by interview frequency):
 
 1. `capexReserveSizing` quiz + `capex-reserve-discipline` situational (asset mgmt)
 2. `refiStressTest` quiz + `refi-cap-stress` situational (mortgage UW)
@@ -328,6 +385,6 @@ Top GAPs to address (ranked by interview frequency):
 4. `constructionLoanSizing` quiz + `dev-ltc-vs-ltv` situational (development)
 5. `walk-distressed-1` walkthrough (cross-cutting)
 
-These five gaps would lift mapped-to-content coverage from 78% → ~93% with
+These five gaps would lift mapped-to-content coverage from 82% → ~95% with
 ~½ day of content work each, and they all surface from real interview-question
 patterns rather than top-down design guesses.
