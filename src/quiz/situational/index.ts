@@ -76,6 +76,17 @@ import { riskAdjustedReturnFramework } from './riskAdjustedReturnFramework';
 import { hotelRevparDivergence } from './hotelRevparDivergence';
 import { retailPercentageRentClause } from './retailPercentageRentClause';
 import { industrialTruckCourtBid } from './industrialTruckCourtBid';
+import { hotelGopMarginDrop } from './hotelGopMarginDrop';
+import { retailAnchorTenantDeparture } from './retailAnchorTenantDeparture';
+import { industrialSpecAbsorption } from './industrialSpecAbsorption';
+import { multifamilyCompSelection } from './multifamilyCompSelection';
+import { hotelAdrOccTradeoff } from './hotelAdrOccTradeoff';
+import { retailLeaseEconNnnVsModGross } from './retailLeaseEconNnnVsModGross';
+import { industrialColdStoragePremium } from './industrialColdStoragePremium';
+import { officeExitCapSensitivity } from './officeExitCapSensitivity';
+import { multifamilyLeaseUpAbsorption } from './multifamilyLeaseUpAbsorption';
+import { officeAbsorptionSubmarket } from './officeAbsorptionSubmarket';
+import { hotelCompSetSelection } from './hotelCompSetSelection';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -149,6 +160,17 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   hotelRevparDivergence,
   retailPercentageRentClause,
   industrialTruckCourtBid,
+  hotelGopMarginDrop,
+  retailAnchorTenantDeparture,
+  industrialSpecAbsorption,
+  multifamilyCompSelection,
+  hotelAdrOccTradeoff,
+  retailLeaseEconNnnVsModGross,
+  industrialColdStoragePremium,
+  officeExitCapSensitivity,
+  multifamilyLeaseUpAbsorption,
+  officeAbsorptionSubmarket,
+  hotelCompSetSelection,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {
