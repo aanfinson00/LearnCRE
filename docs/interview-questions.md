@@ -198,7 +198,7 @@ in a future PR.
 
 ---
 
-## Portfolio Management (8)
+## Portfolio Management (12)
 
 ### Q: Your fund is 40% office vs 25% target. Which assets do you sell first to rebalance?
 - **Role:** portfolioMgmt · **Difficulty:** advanced
@@ -240,9 +240,29 @@ in a future PR.
 - **Why:** EM↔IRR translation; common filter.
 - **Maps to:** `equityMultiple` quiz template + `irrSimple` quiz template + `EquityMultipleViz`.
 
+### Q: Your $500M closed-end fund has deployed $480M. A 13th deal appears with the highest risk-adjusted return in the portfolio. How do you fund it — and what do you sacrifice?
+- **Role:** portfolioMgmt · **Difficulty:** advanced
+- **Why:** capital-pacing discipline at end of fund life; forces candidate to weigh unfunded commitments, reserves, and GP discretion rather than just saying "it's a great deal."
+- **Maps to:** `capital-allocation-priority` situational.
+
+### Q: The fund's TVPI is 1.6x after 8 years but gross IRR is 14%. A skeptical LP says the IRR is "juiced by early distributions." How do you defend it — or concede?
+- **Role:** portfolioMgmt · **Difficulty:** intermediate
+- **Why:** TVPI / DPI / IRR distinction; J-curve literacy; tests whether candidate can translate between yield-rate and multiple-based return frames.
+- **Maps to:** `fund-vs-deal-irr-gap` situational + **GAP — propose `tvpiVsDpiVsIrr` quiz template**.
+
+### Q: Gross IRR is 18%, management fee is 2% on committed capital, promote is 20% above an 8% pref. What's the approximate net IRR to LP?
+- **Role:** portfolioMgmt · **Difficulty:** intermediate
+- **Why:** fee-drag and carry math in one prompt; most candidates skip one of the two haircuts.
+- **Maps to:** **GAP — propose `feeDragOnIrr` quiz template** (top-ranked GAP from interview-questions summary).
+
+### Q: Your fund holds office at 38% of NAV vs. a 25% target. The market is deteriorating. You can sell two CBD towers at a 12% discount to appraised value today, or wait two years and hope for recovery. Frame the forward-IRR analysis.
+- **Role:** portfolioMgmt · **Difficulty:** advanced
+- **Why:** sector-overweight rebalancing with realized-vs-unrealized loss tradeoff; deeper than the simpler "which asset do you sell first" prompt above.
+- **Maps to:** `over-weight-office` situational + `hold-extension-discipline` situational.
+
 ---
 
-## Development (7)
+## Development (11)
 
 ### Q: Land cost $8M, hard cost $38M, soft $7M, 5% contingency. What's TPC and what's the yield-on-cost on $4.5M stabilized NOI?
 - **Role:** development · **Difficulty:** intermediate
@@ -279,9 +299,29 @@ in a future PR.
 - **Why:** ground-lease economics; common at urban infill developers.
 - **Maps to:** **GAP — propose `groundLeaseVsFee` situational**.
 
+### Q: Your construction loan carries a $2.4M interest reserve on a 24-month term. At month 18 the project is 70% funded but draw pace slowed — you've burned $2.1M of reserve. Do you have enough to reach TCO without a modification?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** interest-reserve burn-rate math; most candidates model straight-line and miss that slowing draws also slows reserve consumption, requiring an updated draw schedule.
+- **Maps to:** `lender-draw-mechanics` situational + **GAP — propose `interestReserveBurnRate` quiz template**.
+
+### Q: Your GC comes back 11% over budget: $42M vs. $38M hard cost bid. Walk through how much this compresses yield on cost and at what overrun the deal fails to clear the dev-spread threshold.
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** cost-overrun sensitivity on YoC; candidates who don't connect the TPC change to the yield fraction get the direction right but not the magnitude.
+- **Maps to:** `construction-cost-overrun` situational + `yieldOnCost` quiz template.
+
+### Q: You've received entitlement on a 200-unit mid-rise. A national developer offers to JV in at a land valuation 25% above your basis. What are the economic and control tradeoffs of accepting before you break ground?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** JV entry at entitlement; forces candidate to weigh dilution of upside vs. capital risk reduction and completion-risk sharing — standard question at institutional developers.
+- **Maps to:** **GAP — propose `devJvEntryTiming` situational**.
+
+### Q: Submarket absorbs 40 units/month and you're delivering 250 units in month 12. Competing projects add 300 more units in months 13–15. How does the competitive supply picture change your lease-up reserve sizing?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** absorption math plus competing deliveries; connects pipeline-reading to reserve sizing rather than treating lease-up as a flat-rate assumption.
+- **Maps to:** `absorption-timing` situational + **GAP — propose `leaseUpReserve` quiz template** (top-ranked development GAP).
+
 ---
 
-## Cross-cutting / market awareness (5)
+## Cross-cutting / market awareness (7)
 
 These appear across all roles — they're filters at first-round interviews
 regardless of position.
@@ -311,14 +351,24 @@ regardless of position.
 - **Why:** distressed underwriting; increasingly relevant 2024+.
 - **Maps to:** **GAP — propose `walk-distressed-1` walkthrough**.
 
+### Q: A tenant offers to sell its owner-occupied HQ at $40M (implied 6% cap) and sign a 15-yr NNN lease at $2.4M/yr. As buyer, confirm the going-in cap and name the three biggest underwriting risks that differ from a standard NNN acquisition.
+- **Role:** acquisitions · assetManagement · **Difficulty:** intermediate
+- **Why:** sale-leaseback underwriting is tested across acq and AM roles; the distinctive risks (credit concentraton, residual-value uncertainty, and above-market rent lock-in) separate candidates who understand the structure from those who see it as vanilla NNN.
+- **Maps to:** **GAP — propose `saleLeaseback` situational**.
+
+### Q: A distressed office building is 45% occupied. The lender holds a $30M note; book value after write-downs is $22M. You can purchase the note at $15M. Walk through the upside and downside scenarios.
+- **Role:** acquisitions · **Difficulty:** advanced
+- **Why:** distressed note purchase math; tests loan-to-own thesis framing, recovery value analysis, and foreclosure-vs-workout optionality — increasingly common at debt funds and opportunistic equity platforms.
+- **Maps to:** **GAP — propose `distressedNotePurchase` situational** (linked to `walk-distressed-1` when built).
+
 ---
 
 ## Summary statistics
 
-- **Total questions in this doc:** 52
-- **Mapped to existing content:** 41 (78%)
-- **Flagged as GAPs:** 8 (15%)
-- **Out of scope (time-sensitive / behavioral):** 4 (8%)
+- **Total questions in this doc:** 62
+- **Mapped to existing content:** 46 (74%)
+- **Flagged as GAPs:** 12 (19%)
+- **Out of scope (time-sensitive / behavioral):** 4 (6%)
 
 Top GAPs to address (ranked by interview frequency):
 
@@ -327,7 +377,15 @@ Top GAPs to address (ranked by interview frequency):
 3. `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz (portfolio mgmt)
 4. `constructionLoanSizing` quiz + `dev-ltc-vs-ltv` situational (development)
 5. `walk-distressed-1` walkthrough (cross-cutting)
+6. `leaseUpReserve` quiz template (development)
+7. `saleLeaseback` situational (cross-cutting)
+8. `distressedNotePurchase` situational (cross-cutting)
+9. `devJvEntryTiming` situational (development)
+10. `interestReserveBurnRate` quiz template (development)
+11. `tvpiVsDpiVsIrr` quiz template (portfolio mgmt)
 
-These five gaps would lift mapped-to-content coverage from 78% → ~93% with
+These gaps would lift mapped-to-content coverage from 74% → ~95% with
 ~½ day of content work each, and they all surface from real interview-question
 patterns rather than top-down design guesses.
+
+_10 questions added 2026-05-15: 4 portfolio management, 4 development, 2 cross-cutting._
