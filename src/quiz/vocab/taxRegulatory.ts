@@ -162,4 +162,36 @@ export const TAX_REGULATORY_TERMS: VocabTerm[] = [
     ],
     reverseDistractorIds: ['section-1031', 'reit', 'oz'],
   },
+  {
+    id: 'passive-activity-loss',
+    term: 'Passive Activity Loss (PAL)',
+    category: 'tax-regulatory',
+    difficulty: 'advanced',
+    shortDef:
+      'Tax losses from passive real estate activities that can only offset passive income, not ordinary wages.',
+    longDef:
+      'IRS rules limit deductibility of losses from passive activities (rental real estate, limited partnerships). PALs can only offset passive income — not salaries or portfolio income — unless the taxpayer qualifies as a Real Estate Professional (750+ hrs/yr). Unused PALs carry forward and are released when the property is sold. Exception: up to $25K of rental losses allowed against ordinary income if AGI < $100K (phases out by $150K).',
+    distractors: [
+      'A loss from real estate that immediately offsets all income types.',
+      'A tax credit for passive investors in affordable housing.',
+      'Capital loss carryforward from a property sale below basis.',
+    ],
+    reverseDistractorIds: ['cost-seg', 'bonus-depreciation', 'recapture'],
+  },
+  {
+    id: 'carried-interest',
+    term: 'Carried Interest',
+    category: 'tax-regulatory',
+    difficulty: 'advanced',
+    shortDef:
+      'GP\'s profit participation taxed as long-term capital gains (not ordinary income) if the fund hold period exceeds 3 years.',
+    longDef:
+      'The general partner\'s promote (share of profits beyond contributed capital) is treated as capital gains under IRC §1061 if the fund holds assets for more than 3 years. This is significantly more favorable than ordinary income tax rates (20% vs 37% top bracket). Carried interest is a recurring political target — proposals to tax it as ordinary income have been debated repeatedly without full passage as of 2024.',
+    distractors: [
+      'Interest expense on construction loans carried through a development period.',
+      'Accrued but unpaid preferred return carried into future periods.',
+      'The borrower\'s interest obligation that is deferred and added to the loan balance.',
+    ],
+    reverseDistractorIds: ['op-units', 'recapture', 'section-1031'],
+  },
 ];
