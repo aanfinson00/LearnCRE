@@ -74,8 +74,18 @@ import { constructionRetainageRelease } from './constructionRetainageRelease';
 import { capitalAllocationPriority } from './capitalAllocationPriority';
 import { riskAdjustedReturnFramework } from './riskAdjustedReturnFramework';
 import { hotelRevparDivergence } from './hotelRevparDivergence';
+import { hotelPipRequirement } from './hotelPipRequirement';
+import { hotelGroupVsTransient } from './hotelGroupVsTransient';
+import { hotelSeasonalityRisk } from './hotelSeasonalityRisk';
 import { retailPercentageRentClause } from './retailPercentageRentClause';
+import { retailAnchorDarkening } from './retailAnchorDarkening';
+import { retailCoTenancyClause } from './retailCoTenancyClause';
 import { industrialTruckCourtBid } from './industrialTruckCourtBid';
+import { industrialSaleLeasebackUw } from './industrialSaleLeasebackUw';
+import { industrialSingleTenantRisk } from './industrialSingleTenantRisk';
+import { industrialLastMilePricing } from './industrialLastMilePricing';
+import { sensitivityExitCapVsNoi } from './sensitivityExitCapVsNoi';
+import { devYieldOnCostVsCoreAcq } from './devYieldOnCostVsCoreAcq';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -147,8 +157,18 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   capitalAllocationPriority,
   riskAdjustedReturnFramework,
   hotelRevparDivergence,
+  hotelPipRequirement,
+  hotelGroupVsTransient,
+  hotelSeasonalityRisk,
   retailPercentageRentClause,
+  retailAnchorDarkening,
+  retailCoTenancyClause,
   industrialTruckCourtBid,
+  industrialSaleLeasebackUw,
+  industrialSingleTenantRisk,
+  industrialLastMilePricing,
+  sensitivityExitCapVsNoi,
+  devYieldOnCostVsCoreAcq,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {
