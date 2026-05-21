@@ -4,11 +4,69 @@ The durable home for shipped features, in-design work, and the deferred ideas pi
 
 **Status legend:** ✅ shipped · 🛠️ in design · 🟡 deferred / future · ❌ explicitly out of scope
 
+This file is organized so open work is on top and shipped detail moves to a clearly-labeled archive at the bottom. Two surfaces share the backlog: the **Active backlog** section below and the deduped daily-brainstorm distillation at [`docs/IDEAS_BACKLOG.md`](./docs/IDEAS_BACKLOG.md).
+
 ---
 
-## ✅ What's shipped today
+## 🟡 Active backlog
 
-### Question framework
+The items still genuinely open. Everything else has shipped — see the [✅ Shipped — archive](#-shipped--archive) below.
+
+### In design / queued
+
+- **Question-base depth pass — Phases 2-4** — Phase 1 shipped (see archive). Queued tail closes the catalog-distribution skew identified in Phase 1's audit (88% acquisitions-tagged templates; sparse coverage for development / mortgageUw / hotel / retail / industrial outside MF/office):
+  - **Phase 2** — walkthrough role/asset retrofit + 2 new walkthroughs
+  - **Phase 3** — modeling-test asset-class expansion
+  - **Phase 4** — vocab depth pass
+
+### Adjacent / nice-to-have
+
+Not blocking, not deferred-by-architecture — just lower-priority polish, engagement, and UX wins. Pick off opportunistically.
+
+- <a id="shareable-seeds"></a>**Shareable seeds** — URL-encoded RNG seed + categories so friends can replay your exact set
+- <a id="mistake-only-mode"></a>**Mistake-only mode** — start a session restricted to your open misses, weighted by how stale each is
+- <a id="hint-reveal"></a>**Per-question hint reveal** — graduated hints (formula → first step → solved one variable) for stuck users
+- <a id="end-of-session-diff"></a>**End-of-session "what changed"** — diff your accuracy / time-per-question vs your last session
+- <a id="anchor-flashcards"></a>**Anchor flashcards** — pull just the anchors content into a 60-second flashcard mode
+- <a id="length-presets-named"></a>**Session length presets named** — "Coffee break (5 Q)", "Subway ride (15 Q)", "Lunch (30 Q)"
+- <a id="calculator-history"></a>**Calculator history** — last 10 expressions, click to re-run
+- <a id="theme-variants"></a>**Theme variants** — high-contrast mode, larger-type mode (a11y)
+- <a id="glossary-popovers"></a>**Glossary popovers** — hover a term in a question to see its definition + related anchors
+- <a id="per-kind-cheat-sheet"></a>**Per-kind cheat sheet on first-attempt** — tiny inline reference the first three times a user encounters a new kind
+- <a id="why-was-i-wrong"></a>**"Why was I wrong" deep-dive** — link from review-screen wrong answer to the precise math step that diverged
+- <a id="speed-drill-ghost-runs"></a>**Speed-drill ghost runs** — replay your best previous attempt cell-by-cell over the new run
+- <a id="streak-save"></a>**Streak save** — one-time "freeze" per week to protect a streak after a missed day
+
+See [`docs/IDEAS_BACKLOG.md`](./docs/IDEAS_BACKLOG.md) for the deduped daily-brainstorm backlog (cross-referenced against the items above).
+
+---
+
+## ❌ Out of scope
+
+Explicitly not pursuing. Listed so future contributors don't burn cycles relitigating.
+
+- **Multi-tier waterfalls** — pref + catch-up + multiple promote tiers. Out of pedagogical scope; closer to LP/GP modeling than valuation intuition.
+- **Real-time multiplayer** — sync cursors, live races. Async head-to-head (PR Q) covers the social need without WebSocket infra.
+- **Charting libraries** (Recharts, D3) — inline SVG covers what we need; libraries balloon bundle size and clash with the singlefile build.
+- **Server-side question rendering** — questions stay client-generated for offline use and to keep cloud costs at zero.
+- **Mobile-native apps** — responsive web is sufficient; PWA install is the upgrade path if needed.
+- **Tax modeling beyond reassessment** — depreciation recapture, 1031 exchange mechanics, cost segregation. Too domain-specific.
+- **Tenant-credit-rating data** — would need a third-party feed; can be referenced narratively in situational cases instead.
+- **AI-graded long-form answers (verbal mode)** — interesting but adds an LLM dependency and a billing surface. Listed under Situational adjacent ideas, deferred.
+- **Push notifications** — email-only delivery is the chosen lane (PR U shipped). Push adds OS-permission friction + native infra and isn't worth the lift for an LMS.
+- **Real-time collaboration / live races** — collapsed into "Real-time multiplayer" above; recurring brainstorm pitch, same answer.
+- **Video walkthroughs / tutorials** — would balloon bundle, require hosting, and clash with the singlefile build. Existing per-question step-by-step solutions + walkthroughs + situational explanations cover the same teaching surface in text.
+- **Personalized human coaching** — requires real humans (or an LLM dependency); orthogonal to the local-first, free-tier app.
+
+---
+
+## ✅ Shipped — archive
+
+Everything below has landed. Kept verbatim for historical reference. The first block summarizes the live feature surface; the rest documents the design-track and PR work delivered to get here.
+
+### What's shipped today
+
+#### Question framework
 - 35 question kinds across valuation, returns, debt, lease economics, basis, growth
 - 4 difficulty tiers: Beginner / Intermediate / Advanced / Dynamic (auto-adapts to recent accuracy)
 - Asset class profiles: All / Multifamily / Office / Retail / Industrial — overrides bands & vocabulary
@@ -16,7 +74,7 @@ The durable home for shipped features, in-design work, and the deferred ideas pi
 - Distractor generation with band-aware near-misses; seedable RNG (`mulberry32`)
 - Per-question cards: prompt + assumptions + step-by-step solution + mental-math anchors
 
-### Modes (11 + Profile)
+#### Modes (11 + Profile)
 - **Quiz** — pick categories, length (10/20/50/endless), difficulty, tolerance, answer mode, role filter, asset class
 - **Speed Drill** — cap-rate times-tables grid (5×5/7×7/9×9) with timer, heatmap, per-row/col accuracy. 9 variants (cap compression, IRR↔EM, loan constant, NOI×cap→value, percent-of, divide-by, combined discount, nth root, reciprocal table)
 - **Vocab** — flashcard drill on industry terminology, role-filtered, multiple format choices (definition / acronym / opposite-of)
@@ -30,22 +88,22 @@ The durable home for shipped features, in-design work, and the deferred ideas pi
 - **Certify** — 5 role certifications (Acquisitions, Asset Mgmt, Mortgage UW, Development, Portfolio Mgmt) with benchmark exam, downloadable artifact
 - **Profile** — XP / tier / accuracy trend / by-difficulty bars / achievements gallery / recent sessions
 
-### Persistence & profiles
+#### Persistence & profiles
 - Multi-profile localStorage namespacing (`learncre.profile.<id>.<suffix>`)
 - One-time legacy migration from v2 single-user keys
 - Rolling 100-session history with kind/config/accuracy/duration
 - Mistake bank with spaced-repetition weighting toward weak categories
 
-### Progression & gating
+#### Progression & gating
 - 6-tier ladder: Rookie → Analyst I → Analyst II → Associate → VP → MD (0 / 500 / 1.5k / 4k / 10k / 25k XP)
 - Weighted XP: base by difficulty + speed bonus (<15s) + streak multiplier (1+min(streak,10)×0.05)
 - Soft gates: Advanced needs Analyst I or 50 Q · Dynamic needs Analyst II or 200 Q · Speed Drill needs Analyst I or 30 Q · Walkthroughs need Analyst I or 25 Q
 - Per-profile "show me everything" bypass toggle
 
-### Achievements (19)
+#### Achievements (19)
 First Steps · Foundations · Hot Streak · Week One · Hundred Club · Five-Hundred Club · Marathoner · Time Traveler · All Tracks · Pure Math Master · Walkthrough Apprentice · Mistake Crusher · Reasoning Apprentice · Diagnostic Eye · Spreadsheet Apprentice · Modeling Apprentice · Modeling Pro · Clean Sheet · Tour Guide. Idempotent evaluator runs on session-finish across every mode; toast host renders unlocks.
 
-### UI / brand
+#### UI / brand
 - Austin Anfinson tokens: warm-black/copper/warm-white palette, Outfit + Instrument Serif, motion `cubic-bezier(0.22, 1, 0.36, 1)` at 150/250/400ms
 - Persistent left **SideNav** (4 sections — Drill / Apply / Reference / Progress) with hamburger drawer below `lg`. Replaces the legacy 11-tab top nav
 - TierBadge in sidebar header, ProfilePicker docked at sidebar footer (drop-up to avoid viewport clipping)
@@ -53,33 +111,29 @@ First Steps · Foundations · Hot Streak · Week One · Hundred Club · Five-Hun
 - Calculator panel, anchors card, review screen, results screens for every game mode
 - Scratch sheet (open across any drill mode), feedback button (in-app log), achievement toasts
 
-### Onboarding
+#### Onboarding
 - **Welcome modal** — 4 slides on first profile launch (what LearnCRE is · role pick · Compete &amp; contribute · ready-to-quiz CTA), dismissible at any slide via X / Skip / Esc / backdrop click. Compete slide surfaces the cloud-gated features (Daily / Weekly / Leaderboards / Head-to-head / Cohorts / Friends feed) + the Contribute submission form so first-time users discover the layers above the quiz core. Persists once-seen flag per profile.
 - **Per-mode primers** — first-visit Card on every mode's setup screen with blurb / when-to-use / expected time. Dismissible per-mode-per-profile.
 - Welcome modal's role pick flows into `loadPreferredRole()` which pre-fills SetupScreen on the user's first session.
 
-### Build / deploy
+#### Build / deploy
 - Vite + React 18 + TypeScript + Tailwind + Vitest
 - `vite-plugin-singlefile` produces ~360 KB single-HTML for offline / corp-firewall use
 - GitHub Pages deploy via `.github/workflows/deploy.yml`
 - Standalone HTML kept in sync via `.github/workflows/update-standalone.yml`
 - Vercel deploy via `vercel.json` (Vite framework, must-revalidate cache headers)
 
----
+### In design / next up — all shipped
 
-## 🛠️ In design / next up
-
-Sequenced by readiness, not priority. Specs live in the design-spec section at the bottom.
+Originally sequenced by readiness, not priority. Every bullet below shipped; kept for historical reference. (The Phase 2-4 tail of the question-base depth pass — referenced in the cloud-track archive entry below — is the only still-open piece, promoted to [Active backlog](#-active-backlog).)
 
 - **Visualization coverage** — 63 of 63 question kinds shipped (Foundations + Returns/Promote + Construction draws + Niche/asset-class + post-tax exit). `taxAdjustedExit` was the lone parked viz; closed by extending `DealInputs` with `saleProceeds` / `accumulatedDep` / `saleCostRate` / `recaptureRate` / `capGainsRate`, threading those through the template's `context`, and shipping `TaxAdjustedExitViz` (6-bar waterfall: Sale → −Costs → Net → −Recapture → −Cap gains → After-tax + total-drag stat). Catalog complete.
-- **Modeling test UX polish (shipped, full)** — ⌘↵ (next-empty target) + ⌘D (fill-from-left with relative-reference shift, Excel-style) via `shiftFormula` (11 unit tests) shipped earlier. Now closed with: (a) sticky-left row-number + corner-header cells in `ModelingTestGrid` so phones / narrow viewports keep their bearings during horizontal scroll on wider 7-column grids, and (b) ⌘↑ / ⌘↓ formula-history recall in the formula bar — session-wide history (capped at 50 unique entries; consecutive duplicates collapse) appended on every Tab / Enter / ⌘↵ advance, cycled by ⌘↑ (older) and ⌘↓ (newer). Cursor resets when the user types or switches focused cell, so cycling is anchored to the current edit. Hint line under the formula bar surfaces the new shortcuts. Native ⌘C/⌘V remains for free.
-- **Interview-questions.md GAPs (shipped)** — three new quiz templates closing the named GAPs from item 11: `refiStressTest` (cap_stress = LTV × NOI / loan; mortgage-UW), `feeDragOnIrr` (LP IRR after committed-capital management fees; portfolio-mgmt), `leaseUpReserve` (linear-ramp NOI shortfall sizing for ground-up dev). Distressed-deal GAP was already shipped as `walk-distressed-1` walkthrough (`distressedLoanWorkoutWalk`). All 3 new kinds covered by the 1000-iteration template test.
+- **Modeling test UX polish, full** — ⌘↵ (next-empty target) + ⌘D (fill-from-left with relative-reference shift, Excel-style) via `shiftFormula` (11 unit tests) shipped earlier. Now closed with: (a) sticky-left row-number + corner-header cells in `ModelingTestGrid` so phones / narrow viewports keep their bearings during horizontal scroll on wider 7-column grids, and (b) ⌘↑ / ⌘↓ formula-history recall in the formula bar — session-wide history (capped at 50 unique entries; consecutive duplicates collapse) appended on every Tab / Enter / ⌘↵ advance, cycled by ⌘↑ (older) and ⌘↓ (newer). Cursor resets when the user types or switches focused cell, so cycling is anchored to the current edit. Hint line under the formula bar surfaces the new shortcuts. Native ⌘C/⌘V remains for free.
+- **Interview-questions.md GAPs** — three new quiz templates closing the named GAPs from the cloud-track archive's GAPs-round-2 entry: `refiStressTest` (cap_stress = LTV × NOI / loan; mortgage-UW), `feeDragOnIrr` (LP IRR after committed-capital management fees; portfolio-mgmt), `leaseUpReserve` (linear-ramp NOI shortfall sizing for ground-up dev). Distressed-deal GAP was already shipped as `walk-distressed-1` walkthrough (`distressedLoanWorkoutWalk`). All 3 new kinds covered by the 1000-iteration template test.
 
----
+### Deferred — Cloud, accounts, leaderboards, social (all shipped)
 
-## 🟡 Deferred — Cloud, accounts, leaderboards, social
-
-The "v3 path B" arc. Each PR is independently shippable and can be sequenced after Excel + Situational land. See [Design spec — Cloud / leaderboards / challenges](#design-spec--cloud--leaderboards--challenges) for the architectural details.
+The "v3 path B" arc. Each PR was independently shippable and sequenced after Excel + Situational landed. See [Design spec — Cloud / leaderboards / challenges](#design-spec--cloud--leaderboards--challenges) for the architectural details.
 
 - **PR L — Cloud identity foundation (shipped, frontend complete; user provides Supabase project + env vars to activate)** — `@supabase/supabase-js` client wrapper at `src/cloud/client.ts` with cloud-disabled fallback when env vars missing (app continues local-first). `useAuth()` hook + `AuthProvider` at `src/cloud/auth.tsx`; magic-link `SignIn` component on `ProfileScreen`; first-sign-in `ClaimLocalProfile` modal seeds the cloud `profiles` row from active local profile. SQL migration at `supabase/migrations/0001_initial.sql` defines `profiles` (RLS: owner read+write, public-read when `is_public=true`) plus 5 placeholder tables (`xp_state`, `tier_state`, `sessions`, `achievements`, `mistake_bank_items`) shape-only with owner-RLS — used by PR M for cross-device sync. `.env.example` documents the activation flow.
 - **PR M — Cross-device sync (shipped)** — `src/cloud/sync.ts` exposes `pushAll(userId)` + `pullAll(userId)` over the 5 placeholder tables from PR L. Pure merge helpers (`mergeXp`, `mergeSessions`, `mergeAchievements`, `mergeMistakes`) use union-and-max semantics — no per-record `updated_at` plumbing required, which keeps the existing local writers untouched. `useCloudSync()` hook in `App` runs initial pull-then-push on auth-state-change, then a 30s periodic push, plus `beforeunload` flush. Activates only when cloud is enabled + signed in; full no-op otherwise. 9 unit tests covering the merge corner cases (empty local, id collisions, prompt-key uniqueness).
@@ -96,44 +150,13 @@ The "v3 path B" arc. Each PR is independently shippable and can be sequenced aft
 - **URL invite pass (shipped)** — Single-link invites for cohorts and head-to-head. `/c/<slug>?token=…` and `/m/<id>?token=…` routes via the hand-rolled router land on dedicated `CohortInviteLanding` / `MatchInviteLanding` pages: signed-in users see auto-join in flight, signed-out users get an inline magic-link form whose `emailRedirectTo` is the invite URL itself so the magic-link callback returns to the same page and finishes the join in one shot. `signInWithEmail(email, redirectTo?)` gained the optional `redirectTo` arg used here. The two existing invite cards on `CohortsScreen` + `HeadToHeadScreen` now show a single copy-able URL plus a `<details>` reveal for the legacy slug+token / id+token pair (kept for any tooling that needs the raw values).
 - **Interview-questions GAPs round 2 (shipped, content closed)** — The 4 situational items (`dev-ltc-vs-ltv`, `groundLeaseVsFee`, `risk-adjusted-return-framework`, `capital-allocation-priority`) were already shipped in earlier rounds. The lone remaining quiz template `constructionLoanSizing` now lands: equity check on a ground-up dev given total project cost + lender LTC. Inputs from existing `bands.projectCost` + a new `LTC_OPTIONS` set spanning 55-75%; equity = TPC × (1 − LTC). New `ltc` field on `DealInputs`. Per-kind recompute case added to the 1000-iteration template test (now 67k seeded generations across `allKinds`). Every Mortgage-UW / Development / Portfolio-mgmt GAP from `docs/interview-questions.md` is now mapped to shipped content.
 - **Consolidation pass: `useChallengeRunner` hook (shipped)** — The Daily / Weekly / Head-to-head play loops were three near-identical state machines (~50 lines each: index, raw input, attempts array, per-step + total timers, refocus ref, score-and-advance-or-finalize logic). Extracted into `src/hooks/useChallengeRunner.ts` with `{ questions, onComplete }` -> `{ index, raw, setRaw, attempts, inputRef, submit, isFinished, totalMs }`. The three screens each got a small `*Player` sub-component that mounts only during the playing stage, uses the hook, and renders its own surrounding chrome (the per-screen "you are host" hint, the shared question-card layout, etc.). Net: ~150 lines of duplication deleted; future challenge variants are cheap. Behavior unchanged — 586/586 tests pass, bundle within ±0.5 KB of pre-refactor.
-- **Question-base depth pass — Phase 1 (shipped)** — Audit revealed catalog distribution was heavily skewed: 88% of quiz templates tagged for `acquisitions`, longform layer had zero cases for `development` and `mortgageUw`, and asset-class skew was severe (hotel = 0 situationals, retail = 1, industrial = 2 vs MF/office at 11/9). This phase adds 7 pieces of content + 1 quiz template + extends `AssetClass` to include `'hotel'`. **3 longforms**: `dev-feasibility-memo` (development IC defense of a ground-up MF dev pencil), `loan-committee-memo` (mortgageUw credit memo on a stressed-market office permanent), `am-noi-diagnosis` (assetMgmt diagnostic on Year-2 NOI miss). **3 situationals**: `hotel-revpar-divergence` (RevPAR Index decomposition), `retail-percentage-rent-clause` (haircut + risk separation underwriting), `industrial-truck-court-bid` (physical-spec premium defense). **1 quiz template**: `capexReserveSizing` (closes the lone unaddressed `interview-questions.md` GAP — `reserve = SF × $/SF/yr × hold years`, mirrors `leaseUpReserve` shape, paired with the existing `capex-reserve-discipline` situational). Hotel asset class added with cap-rate band 6.5-9.5%, exit cap 7-10%, OpEx ratio 55-75% (operating-asset reflective). 586 → 587 tests; bundle 442.6 → 454.1 KB gzipped (+11.5 KB — most of it is the longform prose). Phases 2-4 queued (walkthrough role/asset retrofit + 2 new walkthroughs; modeling-test asset-class expansion; vocab depth pass).
+- **Question-base depth pass — Phase 1 (shipped)** — Audit revealed catalog distribution was heavily skewed: 88% of quiz templates tagged for `acquisitions`, longform layer had zero cases for `development` and `mortgageUw`, and asset-class skew was severe (hotel = 0 situationals, retail = 1, industrial = 2 vs MF/office at 11/9). This phase adds 7 pieces of content + 1 quiz template + extends `AssetClass` to include `'hotel'`. **3 longforms**: `dev-feasibility-memo` (development IC defense of a ground-up MF dev pencil), `loan-committee-memo` (mortgageUw credit memo on a stressed-market office permanent), `am-noi-diagnosis` (assetMgmt diagnostic on Year-2 NOI miss). **3 situationals**: `hotel-revpar-divergence` (RevPAR Index decomposition), `retail-percentage-rent-clause` (haircut + risk separation underwriting), `industrial-truck-court-bid` (physical-spec premium defense). **1 quiz template**: `capexReserveSizing` (closes the lone unaddressed `interview-questions.md` GAP — `reserve = SF × $/SF/yr × hold years`, mirrors `leaseUpReserve` shape, paired with the existing `capex-reserve-discipline` situational). Hotel asset class added with cap-rate band 6.5-9.5%, exit cap 7-10%, OpEx ratio 55-75% (operating-asset reflective). 586 → 587 tests; bundle 442.6 → 454.1 KB gzipped (+11.5 KB — most of it is the longform prose). Phases 2-4 still queued — see [Active backlog](#-active-backlog).
 
 ---
 
-## 🟡 Adjacent / nice-to-have
+## Design specs — historical reference
 
-Not blocking, not deferred-by-architecture — just lower-priority polish, engagement, and UX wins. Pick off opportunistically.
-
-- **Shareable seeds** — URL-encoded RNG seed + categories so friends can replay your exact set
-- **Mistake-only mode** — start a session restricted to your open misses, weighted by how stale each is
-- **Per-question hint reveal** — graduated hints (formula → first step → solved one variable) for stuck users
-- **End-of-session "what changed"** — diff your accuracy / time-per-question vs your last session
-- **Anchor flashcards** — pull just the anchors content into a 60-second flashcard mode
-- **Session length presets named** — "Coffee break (5 Q)", "Subway ride (15 Q)", "Lunch (30 Q)"
-- **Calculator history** — last 10 expressions, click to re-run
-- **Theme variants** — high-contrast mode, larger-type mode (a11y)
-- **Glossary popovers** — hover a term in a question to see its definition + related anchors
-- **Per-kind cheat sheet on first-attempt** — tiny inline reference the first three times a user encounters a new kind
-- **"Why was I wrong" deep-dive** — link from review-screen wrong answer to the precise math step that diverged
-- **Speed-drill ghost runs** — replay your best previous attempt cell-by-cell over the new run
-- **Streak save** — one-time "freeze" per week to protect a streak after a missed day
-
----
-
-## ❌ Out of scope
-
-Explicitly not pursuing. Listed so future contributors don't burn cycles relitigating.
-
-- **Multi-tier waterfalls** — pref + catch-up + multiple promote tiers. Out of pedagogical scope; closer to LP/GP modeling than valuation intuition.
-- **Real-time multiplayer** — sync cursors, live races. Async head-to-head (PR Q) covers the social need without WebSocket infra.
-- **Charting libraries** (Recharts, D3) — inline SVG covers what we need; libraries balloon bundle size and clash with the singlefile build.
-- **Server-side question rendering** — questions stay client-generated for offline use and to keep cloud costs at zero.
-- **Mobile-native apps** — responsive web is sufficient; PWA install is the upgrade path if needed.
-- **Tax modeling beyond reassessment** — depreciation recapture, 1031 exchange mechanics, cost segregation. Too domain-specific.
-- **Tenant-credit-rating data** — would need a third-party feed; can be referenced narratively in situational cases instead.
-- **AI-graded long-form answers (verbal mode)** — interesting but adds an LLM dependency and a billing surface. Listed under Situational adjacent ideas, deferred.
-
----
+The architecture writeups below are kept as reference for the implementations they shipped. Useful when extending or debugging the corresponding modes. All four are annotated "✅ Shipped" inline.
 
 ## Design spec — Excel formula mode
 
@@ -496,7 +519,7 @@ Local-first works for a single user, but doesn't survive device switches or enab
 
 ---
 
-## Implementation order (current)
+## Implementation order (history)
 
 1. ✅ Situational foundation + expansion (now 69 cases across 8 categories)
 2. ✅ Excel formula mode foundation + 11+ templates
@@ -523,13 +546,14 @@ Local-first works for a single user, but doesn't survive device switches or enab
 12i. ✅ PR Q — Head-to-head async match (matches + accept/submit SECURITY DEFINER fns, settle on both-submitted, 0008 migration)
 12j. ✅ PR U — Notifications (preferences + Edge Function dispatcher + unsubscribe page, 0009 migration). Cloud track L → U complete.
 
-Re-sequence freely as priorities shift. Update the "In design" section when a PR lands and move the entry up to "What's shipped today".
+Re-sequence freely as priorities shift. When a backlog item lands, move its entry into the [✅ Shipped — archive](#-shipped--archive) above.
 
 ---
 
 ## Verification
 
 - `ROADMAP.md` renders cleanly on GitHub (preview locally with `npx serve` or open in any markdown viewer)
+- The first screen of the rendered doc shows only Active backlog + Out of scope before any shipped detail
 - README "Planned" section links here
 - Every shipped commit referenced is verifiable via `git log --oneline`
 - Anyone can pick up the Situational or Excel design spec and start coding without further design conversation

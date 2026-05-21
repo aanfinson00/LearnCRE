@@ -72,11 +72,9 @@ npm run build
 
 ## Planned
 
-The full backlog — shipped features, in-design work, deferred ideas, design specs — lives in [`ROADMAP.md`](./ROADMAP.md). Highlights of what's next:
+The active backlog lives at the top of [`ROADMAP.md`](./ROADMAP.md); deduped daily-brainstorm ideas live in [`docs/IDEAS_BACKLOG.md`](./docs/IDEAS_BACKLOG.md). Highlights of what's actually open right now:
 
-- **Situational case studies** — short scenarios + multiple-choice reasoning (e.g. "why is this trading at 8 cap when comps are 6?")
-- **Excel formula mode** — write the formula a junior analyst would actually type, against a mini-grid
-- **Visualization backfill** for the remaining ~30 question kinds
-- **Cloud sync, public profiles, leaderboards, daily / weekly / head-to-head challenges** (deferred track)
+- **Question-base depth pass — Phases 2-4** — walkthrough role/asset retrofit + 2 new walkthroughs, modeling-test asset-class expansion, vocab depth pass (Phase 1 shipped)
+- **Adjacent / nice-to-have polish** — shareable seeds, mistake-only mode, graduated hint reveal, end-of-session "what changed", anchor flashcards, calculator history, a11y theme variants, glossary popovers, "why was I wrong" deep-dive, speed-drill ghost runs, streak save
 
-See [`ROADMAP.md`](./ROADMAP.md) for the full design specs and sequencing.
+The shipped surface (modes, question framework, achievements, cloud track L–U, design specs) is preserved in the [✅ Shipped — archive](./ROADMAP.md#-shipped--archive) section of `ROADMAP.md`.
