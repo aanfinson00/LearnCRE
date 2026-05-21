@@ -67,6 +67,16 @@ import { feeDragOnIrrTemplate } from './feeDragOnIrr';
 import { leaseUpReserveTemplate } from './leaseUpReserve';
 import { constructionLoanSizingTemplate } from './constructionLoanSizing';
 import { capexReserveSizingTemplate } from './capexReserveSizing';
+import { interestCarryTemplate } from './interestCarry';
+import { developmentFeeTemplate } from './developmentFee';
+import { profitOnCostTemplate } from './profitOnCost';
+import { hardCostPerSfTemplate } from './hardCostPerSf';
+import { ltvLoanSizingTemplate } from './ltvLoanSizing';
+import { ioAnnualPaymentTemplate } from './ioAnnualPayment';
+import { dscrWithReservesTemplate } from './dscrWithReserves';
+import { managementFeeTemplate } from './managementFee';
+import { blendedPortfolioCapRateTemplate } from './blendedPortfolioCapRate';
+import { capitalCallProrataTemplate } from './capitalCallProrata';
 
 export const templates: Record<QuestionKind, QuestionTemplate> = {
   capCompression: capCompressionTemplate,
@@ -137,6 +147,16 @@ export const templates: Record<QuestionKind, QuestionTemplate> = {
   leaseUpReserve: leaseUpReserveTemplate,
   constructionLoanSizing: constructionLoanSizingTemplate,
   capexReserveSizing: capexReserveSizingTemplate,
+  interestCarry: interestCarryTemplate,
+  developmentFee: developmentFeeTemplate,
+  profitOnCost: profitOnCostTemplate,
+  hardCostPerSf: hardCostPerSfTemplate,
+  ltvLoanSizing: ltvLoanSizingTemplate,
+  ioAnnualPayment: ioAnnualPaymentTemplate,
+  dscrWithReserves: dscrWithReservesTemplate,
+  managementFee: managementFeeTemplate,
+  blendedPortfolioCapRate: blendedPortfolioCapRateTemplate,
+  capitalCallProrata: capitalCallProrataTemplate,
 };
 
 export const allKinds: QuestionKind[] = [
@@ -208,4 +228,14 @@ export const allKinds: QuestionKind[] = [
   'leaseUpReserve',
   'constructionLoanSizing',
   'capexReserveSizing',
+  'interestCarry',
+  'developmentFee',
+  'profitOnCost',
+  'hardCostPerSf',
+  'ltvLoanSizing',
+  'ioAnnualPayment',
+  'dscrWithReserves',
+  'managementFee',
+  'blendedPortfolioCapRate',
+  'capitalCallProrata',
 ];

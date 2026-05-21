@@ -117,6 +117,10 @@ export const bands = {
   opexPerUnitYear: { min: 4_000, max: 14_000, step: 250 },
   pricePerUnitValue: { min: 150_000, max: 600_000, step: 5_000 },
   exitCapRate: { min: 0.045, max: 0.095, step: 0.0025 },
+  // Development templates
+  devSf: { min: 50_000, max: 500_000, step: 10_000 },
+  // Portfolio management templates — AUM in dollars for fund-level questions
+  aum: { min: 100_000_000, max: 2_000_000_000, step: 100_000_000 },
 } as const;
 
 export const discreteMoves = {

@@ -2,6 +2,14 @@ export function value(noi: number, capRate: number): number {
   return noi / capRate;
 }
 
+/** Blended portfolio cap rate across two properties. */
+export function blendedCapRate(
+  noi1: number, value1: number,
+  noi2: number, value2: number,
+): number {
+  return (noi1 + noi2) / (value1 + value2);
+}
+
 export function capRate(propertyValue: number, noi: number): number {
   return noi / propertyValue;
 }

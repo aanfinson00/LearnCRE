@@ -112,6 +112,15 @@ export interface DealInputs {
   ltc?: number;
   /** Capex reserve assumption ($/SF/yr) for hold-period reserve sizing. */
   capexReservePerSf?: number;
+  // Development gap fields
+  constructionMonths?: number;
+  // Portfolio management fields
+  aum?: number;
+  noi2?: number;
+  value2?: number;
+  // Capital call fields
+  lpOwnershipPct?: number;
+  totalCapitalCall?: number;
   // After-tax exit (taxAdjustedExit)
   saleProceeds?: number;
   accumulatedDep?: number;

@@ -52,6 +52,26 @@ export function breakEvenOccupancy(params: {
   return (params.opex + params.debtServiceAnnual) / params.pgi;
 }
 
+/** Max loan from an LTV constraint: appraisedValue × ltv. */
+export function maxLoanByLtv(appraisedValue: number, ltv: number): number {
+  return appraisedValue * ltv;
+}
+
+/** Annual interest-only debt service: loanAmount × annualRate. */
+export function interestOnlyPayment(loanAmount: number, annualRate: number): number {
+  return loanAmount * annualRate;
+}
+
+/** DSCR net of annual reserves: (NOI − reserves) / debtService. */
+export function dscrNetOfReserves(
+  noi: number,
+  annualReserves: number,
+  debtService: number,
+): number {
+  if (debtService <= 0) return 0;
+  return (noi - annualReserves) / debtService;
+}
+
 export function leveredIrrApprox(params: {
   unleveredIrr: number;
   borrowRate: number;

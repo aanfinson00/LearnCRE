@@ -75,6 +75,30 @@ export function pariPassuDraw(args: {
 }
 
 /**
+ * Construction interest carry under a linear-draw assumption.
+ * Average outstanding balance = loan × 0.5 (draws from 0 → full over the period).
+ * carry = avg_balance × rate × (months / 12)
+ */
+export function constructionInterestCarry(
+  loanAmount: number,
+  annualRate: number,
+  constructionMonths: number,
+): number {
+  return loanAmount * 0.5 * annualRate * (constructionMonths / 12);
+}
+
+/** Profit on cost as a decimal fraction.
+ * = (exitNoi / exitCapRate − totalCost) / totalCost */
+export function profitOnCostPct(
+  exitNoi: number,
+  exitCapRate: number,
+  totalCost: number,
+): number {
+  const exitValue = exitNoi / exitCapRate;
+  return (exitValue - totalCost) / totalCost;
+}
+
+/**
  * Single-draw retainage split — funded vs held.
  * E.g. 10% retainage on a $1M draw → $900k funded, $100k held.
  */

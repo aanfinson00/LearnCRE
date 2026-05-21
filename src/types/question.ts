@@ -70,7 +70,17 @@ export type QuestionKind =
   | 'feeDragOnIrr'
   | 'leaseUpReserve'
   | 'constructionLoanSizing'
-  | 'capexReserveSizing';
+  | 'capexReserveSizing'
+  | 'interestCarry'
+  | 'developmentFee'
+  | 'profitOnCost'
+  | 'hardCostPerSf'
+  | 'ltvLoanSizing'
+  | 'ioAnnualPayment'
+  | 'dscrWithReserves'
+  | 'managementFee'
+  | 'blendedPortfolioCapRate'
+  | 'capitalCallProrata';
 
 export type UnitFormat = 'usd' | 'pct' | 'bps' | 'pctChange' | 'usdChange' | 'multiple' | 'usdPerSf';
 
