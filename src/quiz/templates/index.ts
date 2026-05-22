@@ -67,6 +67,16 @@ import { feeDragOnIrrTemplate } from './feeDragOnIrr';
 import { leaseUpReserveTemplate } from './leaseUpReserve';
 import { constructionLoanSizingTemplate } from './constructionLoanSizing';
 import { capexReserveSizingTemplate } from './capexReserveSizing';
+import { constructionInterestCarryTemplate } from './constructionInterestCarry';
+import { hardCostPerUnitTemplate } from './hardCostPerUnit';
+import { profitOnCostTemplate } from './profitOnCost';
+import { softCostRatioTemplate } from './softCostRatio';
+import { concessionEffectiveRentTemplate } from './concessionEffectiveRent';
+import { economicVacancyRateTemplate } from './economicVacancyRate';
+import { blendedUnitMixRentTemplate } from './blendedUnitMixRent';
+import { rollToMarketUpliftTemplate } from './rollToMarketUplift';
+import { buildingCoverageRatioTemplate } from './buildingCoverageRatio';
+import { warehouseEfficiencyRatioTemplate } from './warehouseEfficiencyRatio';
 
 export const templates: Record<QuestionKind, QuestionTemplate> = {
   capCompression: capCompressionTemplate,
@@ -137,6 +147,16 @@ export const templates: Record<QuestionKind, QuestionTemplate> = {
   leaseUpReserve: leaseUpReserveTemplate,
   constructionLoanSizing: constructionLoanSizingTemplate,
   capexReserveSizing: capexReserveSizingTemplate,
+  constructionInterestCarry: constructionInterestCarryTemplate,
+  hardCostPerUnit: hardCostPerUnitTemplate,
+  profitOnCost: profitOnCostTemplate,
+  softCostRatio: softCostRatioTemplate,
+  concessionEffectiveRent: concessionEffectiveRentTemplate,
+  economicVacancyRate: economicVacancyRateTemplate,
+  blendedUnitMixRent: blendedUnitMixRentTemplate,
+  rollToMarketUplift: rollToMarketUpliftTemplate,
+  buildingCoverageRatio: buildingCoverageRatioTemplate,
+  warehouseEfficiencyRatio: warehouseEfficiencyRatioTemplate,
 };
 
 export const allKinds: QuestionKind[] = [
@@ -208,4 +228,14 @@ export const allKinds: QuestionKind[] = [
   'leaseUpReserve',
   'constructionLoanSizing',
   'capexReserveSizing',
+  'constructionInterestCarry',
+  'hardCostPerUnit',
+  'profitOnCost',
+  'softCostRatio',
+  'concessionEffectiveRent',
+  'economicVacancyRate',
+  'blendedUnitMixRent',
+  'rollToMarketUplift',
+  'buildingCoverageRatio',
+  'warehouseEfficiencyRatio',
 ];

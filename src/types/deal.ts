@@ -110,6 +110,40 @@ export interface DealInputs {
   leaseUpMonths?: number;
   /** Loan-to-cost ratio for construction loan sizing. */
   ltc?: number;
+  /** Total construction loan commitment (constructionInterestCarry). */
+  loanCommitment?: number;
+  /** Average outstanding balance as fraction of commitment (constructionInterestCarry). */
+  avgOutstandingPct?: number;
+  /** Draw period in months (constructionInterestCarry). */
+  constructionMonths?: number;
+  /** Hard construction costs (hardCostPerUnit, softCostRatio). */
+  hardCosts?: number;
+  /** Soft costs — arch, engineering, permits, legal (softCostRatio). */
+  softCosts?: number;
+  /** Land acquisition cost (softCostRatio). */
+  landCost?: number;
+  /** Physically vacant units (economicVacancyRate). */
+  vacantUnits?: number;
+  /** Occupied units not paying full rent — delinquent or concession (economicVacancyRate). */
+  nonPayingUnits?: number;
+  /** Units rolling to market over the next 12 months (rollToMarketUplift). */
+  rollingUnits?: number;
+  /** Site size in acres (buildingCoverageRatio). */
+  siteAcres?: number;
+  /** Bulk warehouse / distribution SF within a building (warehouseEfficiencyRatio). */
+  warehouseSf?: number;
+  /** Studio unit count (blendedUnitMixRent). */
+  studioCount?: number;
+  /** One-bedroom unit count (blendedUnitMixRent). */
+  oneBrCount?: number;
+  /** Two-bedroom unit count (blendedUnitMixRent). */
+  twoBrCount?: number;
+  /** Studio monthly rent (blendedUnitMixRent). */
+  studioRent?: number;
+  /** One-bedroom monthly rent (blendedUnitMixRent). */
+  oneBrRent?: number;
+  /** Two-bedroom monthly rent (blendedUnitMixRent). */
+  twoBrRent?: number;
   /** Capex reserve assumption ($/SF/yr) for hold-period reserve sizing. */
   capexReservePerSf?: number;
   // After-tax exit (taxAdjustedExit)
