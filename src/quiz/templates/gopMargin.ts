@@ -39,7 +39,10 @@ export const gopMarginTemplate: QuestionTemplate<'gopMargin'> = {
     return {
       id: nextId('gop'),
       kind: 'gopMargin',
-      prompt: `A full-service hotel reports ${formatUsd(revenue)} of total revenue and ${formatUsd(gop)} of GOP for the trailing year. What\'s the GOP margin?`,
+      prompt: rng.pickFromSet([
+        `A full-service hotel reports ${formatUsd(revenue)} of total revenue and ${formatUsd(gop)} of GOP for the trailing year. What\'s the GOP margin?`,
+        `A limited-service hotel generated ${formatUsd(gop)} in gross operating profit on ${formatUsd(revenue)} of total revenue for the trailing twelve months. What is the property\'s GOP margin?`,
+      ] as const),
       context: { totalRevenue: revenue },
       expected,
       unit: 'pct',

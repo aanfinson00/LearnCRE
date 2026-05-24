@@ -44,7 +44,10 @@ export const revporVsRevparTemplate: QuestionTemplate<'revporVsRevpar'> = {
     return {
       id: nextId('revpor'),
       kind: 'revporVsRevpar',
-      prompt: `A ${totalRooms}-room hotel ran ${formatPct(occ, 0)} occupancy across the year (${roomsSold.toLocaleString()} rooms sold). Room revenue was ${formatUsd(roomRevenue)}. What\'s the RevPOR?`,
+      prompt: rng.pickFromSet([
+        `A ${totalRooms}-room hotel ran ${formatPct(occ, 0)} occupancy across the year (${roomsSold.toLocaleString()} rooms sold). Room revenue was ${formatUsd(roomRevenue)}. What\'s the RevPOR?`,
+        `A hotel sold ${roomsSold.toLocaleString()} room nights and collected ${formatUsd(roomRevenue)} in room revenue for the year. What was the RevPOR?`,
+      ] as const),
       context: { roomsAvailable: totalRooms, roomsSold, totalRevenue: roomRevenue },
       expected,
       unit: 'usd',

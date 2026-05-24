@@ -45,7 +45,10 @@ export const occupancyCostRatioTemplate: QuestionTemplate<'occupancyCostRatio'> 
     return {
       id: nextId('ocr'),
       kind: 'occupancyCostRatio',
-      prompt: `Retail tenant pays ${formatUsd(rent)} in total annual rent (base + CAM) and reported ${formatUsd(sales)} of sales. What\'s the occupancy cost ratio?`,
+      prompt: rng.pickFromSet([
+        `Retail tenant pays ${formatUsd(rent)} in total annual rent (base + CAM) and reported ${formatUsd(sales)} of sales. What\'s the occupancy cost ratio?`,
+        `You\'re reviewing a retail tenant\'s credit: annual rent (base + CAM) is ${formatUsd(rent)} and reported sales last year were ${formatUsd(sales)}. What is the occupancy cost ratio?`,
+      ] as const),
       context: { baseRent: rent, tenantSales: sales },
       expected,
       unit: 'pct',

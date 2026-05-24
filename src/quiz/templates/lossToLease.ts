@@ -49,7 +49,10 @@ export const lossToLeaseTemplate: QuestionTemplate<'lossToLease'> = {
     return {
       id: nextId('ltl'),
       kind: 'lossToLease',
-      prompt: `Multifamily property: market GPR is ${formatUsd(market)}; in-place GPR is ${formatUsd(inPlace)}. What\'s the loss to lease?`,
+      prompt: rng.pickFromSet([
+        `Multifamily property: market GPR is ${formatUsd(market)}; in-place GPR is ${formatUsd(inPlace)}. What\'s the loss to lease?`,
+        `A value-add multifamily acquisition has in-place GPR of ${formatUsd(inPlace)} against current market GPR of ${formatUsd(market)}. What is the loss to lease as a percentage of market?`,
+      ] as const),
       context: { marketRent: market, inPlaceRent: inPlace },
       expected,
       unit: 'pct',

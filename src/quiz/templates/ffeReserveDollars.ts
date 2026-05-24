@@ -38,7 +38,10 @@ export const ffeReserveDollarsTemplate: QuestionTemplate<'ffeReserveDollars'> = 
     return {
       id: nextId('ffe'),
       kind: 'ffeReserveDollars',
-      prompt: `A hotel reports ${formatUsd(revenue)} of total revenue. The lender requires a ${formatPct(rate, 1)} FF&E reserve. What\'s the annual reserve amount?`,
+      prompt: rng.pickFromSet([
+        `A hotel reports ${formatUsd(revenue)} of total revenue. The lender requires a ${formatPct(rate, 1)} FF&E reserve. What\'s the annual reserve amount?`,
+        `Your acquisition model projects ${formatUsd(revenue)} of total revenue for a full-service hotel. Brand standards require a ${formatPct(rate, 1)} FF&E reserve. What is the annual reserve in dollars?`,
+      ] as const),
       context: { totalRevenue: revenue, ffeReserveRate: rate },
       expected,
       unit: 'usd',

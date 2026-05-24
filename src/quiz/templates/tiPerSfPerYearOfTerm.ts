@@ -44,7 +44,10 @@ export const tiPerSfPerYearOfTermTemplate: QuestionTemplate<'tiPerSfPerYearOfTer
     return {
       id: nextId('tiyr'),
       kind: 'tiPerSfPerYearOfTerm',
-      prompt: `Landlord is offering ${formatUsd(tiPerSf)}/SF of TI on a ${termYears}-year lease. What\'s the amortized TI cost per SF per year?`,
+      prompt: rng.pickFromSet([
+        `Landlord is offering ${formatUsd(tiPerSf)}/SF of TI on a ${termYears}-year lease. What\'s the amortized TI cost per SF per year?`,
+        `Comparing two office deals: one offers ${formatUsd(tiPerSf)}/SF TI on a ${termYears}-year term. What is the amortized TI allowance per SF per year of lease term?`,
+      ] as const),
       context: { tiPerSf, leaseTermYears: termYears },
       expected,
       unit: 'usdPerSf',

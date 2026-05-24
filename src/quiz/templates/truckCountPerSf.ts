@@ -41,7 +41,10 @@ export const truckCountPerSfTemplate: QuestionTemplate<'truckCountPerSf'> = {
     return {
       id: nextId('trk'),
       kind: 'truckCountPerSf',
-      prompt: `An industrial building has ${sf.toLocaleString()} SF and ${trucks} truck doors. What\'s the truck-door density per 10,000 SF?`,
+      prompt: rng.pickFromSet([
+        `An industrial building has ${sf.toLocaleString()} SF and ${trucks} truck doors. What\'s the truck-door density per 10,000 SF?`,
+        `A logistics facility totaling ${sf.toLocaleString()} SF has ${trucks} dock-high loading doors. What is the truck-door density per 10,000 SF?`,
+      ] as const),
       context: { buildingSf: sf, truckCount: trucks },
       expected,
       unit: 'multiple',

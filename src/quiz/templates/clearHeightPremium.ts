@@ -57,7 +57,10 @@ export const clearHeightPremiumTemplate: QuestionTemplate<'clearHeightPremium'> 
     return {
       id: nextId('clear'),
       kind: 'clearHeightPremium',
-      prompt: `Comp set: ${baselineHeight}-ft clear industrial trades at ${formatUsdPerSf(baselineRent, 2)}. Subject is ${targetHeight}-ft clear; the market premium is $${premiumPerFt.toFixed(3)}/SF per foot of additional clear height. What rent should the subject command?`,
+      prompt: rng.pickFromSet([
+        `Comp set: ${baselineHeight}-ft clear industrial trades at ${formatUsdPerSf(baselineRent, 2)}. Subject is ${targetHeight}-ft clear; the market premium is $${premiumPerFt.toFixed(3)}/SF per foot of additional clear height. What rent should the subject command?`,
+        `A ${targetHeight}-ft clear warehouse is being priced against a ${baselineHeight}-ft comp at ${formatUsdPerSf(baselineRent, 2)}/SF. The market applies a $${premiumPerFt.toFixed(3)}/SF premium per additional foot of clear height. What is the subject\'s indicated rent?`,
+      ] as const),
       context: { baselineRent, clearHeight: targetHeight, premiumPerFt },
       expected,
       unit: 'usdPerSf',

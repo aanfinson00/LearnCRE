@@ -38,7 +38,10 @@ export const revparFromAdrOccTemplate: QuestionTemplate<'revparFromAdrOcc'> = {
     return {
       id: nextId('revpar'),
       kind: 'revparFromAdrOcc',
-      prompt: `A 240-room limited-service hotel runs at ${formatUsd(adr)} ADR and ${formatPct(occ, 0)} occupancy. What\'s the property\'s RevPAR?`,
+      prompt: rng.pickFromSet([
+        `A 240-room limited-service hotel runs at ${formatUsd(adr)} ADR and ${formatPct(occ, 0)} occupancy. What\'s the property\'s RevPAR?`,
+        `Your asset management report shows a select-service property running ${formatPct(occ, 0)} occupancy at an ADR of ${formatUsd(adr)}. What is the trailing RevPAR?`,
+      ] as const),
       context: { adr, roomsAvailable: 240 },
       expected,
       unit: 'usd',

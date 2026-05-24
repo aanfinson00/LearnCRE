@@ -41,7 +41,10 @@ export const percentageRentBreakpointTemplate: QuestionTemplate<'percentageRentB
       return {
         id: nextId('prb'),
         kind: 'percentageRentBreakpoint',
-        prompt: `Retail lease: ${formatUsd(baseRent)} base rent, with percentage rent of ${formatPct(rate, 1)} of sales above the natural breakpoint. At what sales level does percentage rent kick in?`,
+        prompt: rng.pickFromSet([
+          `Retail lease: ${formatUsd(baseRent)} base rent, with percentage rent of ${formatPct(rate, 1)} of sales above the natural breakpoint. At what sales level does percentage rent kick in?`,
+          `A specialty retailer\'s lease carries ${formatUsd(baseRent)} in annual base rent and a ${formatPct(rate, 1)} percentage rent clause on sales above the natural breakpoint. What is the natural breakpoint?`,
+        ] as const),
         context: { baseRent, percentageRate: rate },
         expected,
         unit: 'usd',
