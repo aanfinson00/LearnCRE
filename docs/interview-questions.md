@@ -90,7 +90,7 @@ in a future PR.
 
 ---
 
-## Asset Management (10)
+## Asset Management (11)
 
 ### Q: Year-3 NOI came in 8% below pro forma. Where do you look first?
 - **Role:** assetManagement · **Difficulty:** intermediate
@@ -136,6 +136,11 @@ in a future PR.
 - **Role:** assetManagement · **Difficulty:** advanced
 - **Why:** tax-deferral vs redeployment-opportunity tradeoff.
 - **Maps to:** `tax-vs-irr-tradeoff` situational + `refi-vs-sell` situational.
+
+### Q: Your asset grew same-store NOI 4% last year; the submarket grew 6%. Is this a problem, and what do you look for first?
+- **Role:** assetManagement · **Difficulty:** intermediate
+- **Why:** same-store NOI benchmarking vs market; tests whether candidates can distinguish asset-specific underperformance from macro lag without defaulting to "pull the rent roll" as a non-answer.
+- **Maps to:** `noi-growth-missing` situational + `budget-vs-actual-variance` situational.
 
 ### Q: GAP — How do you set a capex reserve on a stabilized asset, and what gets included vs excluded?
 - **Role:** assetManagement · **Difficulty:** intermediate
@@ -198,7 +203,7 @@ in a future PR.
 
 ---
 
-## Portfolio Management (8)
+## Portfolio Management (13)
 
 ### Q: Your fund is 40% office vs 25% target. Which assets do you sell first to rebalance?
 - **Role:** portfolioMgmt · **Difficulty:** advanced
@@ -240,9 +245,34 @@ in a future PR.
 - **Why:** EM↔IRR translation; common filter.
 - **Maps to:** `equityMultiple` quiz template + `irrSimple` quiz template + `EquityMultipleViz`.
 
+### Q: Fund is 2 years in and net IRR is -3%. An LP on the advisory board asks why. What do you say?
+- **Role:** portfolioMgmt · **Difficulty:** intermediate
+- **Why:** J-curve literacy; critical for reporting to LPs in early vintages; candidates who can't explain it can't manage LP relationships.
+- **Maps to:** **GAP — propose `j-curve-explanation` situational**.
+
+### Q: An LP wants to benchmark your fund against NCREIF. You agree to share the comparison. What caveats come first?
+- **Role:** portfolioMgmt · **Difficulty:** advanced
+- **Why:** benchmark-selection discipline; NCREIF is appraisal-smoothed, unlevered, and lagged — an uncaveated comparison misleads.
+- **Maps to:** **GAP — propose `ncreif-benchmark-limitations` situational**.
+
+### Q: $500M fund charges 1.5% annual management fee on committed capital in years 1-5, then on NAV. Estimate the fee drag on fund IRR assuming 5-year full deployment.
+- **Role:** portfolioMgmt · **Difficulty:** intermediate
+- **Why:** management-fee-drag math; common filter at fund-of-funds and large LP interviews.
+- **Maps to:** `feeDragOnIrr` quiz template + `fund-vs-deal-irr-gap` situational.
+
+### Q: An LP wants to co-invest alongside the fund in a specific deal at your offered terms. What governance issues does this raise for the other LPs?
+- **Role:** portfolioMgmt · **Difficulty:** advanced
+- **Why:** co-investment conflict-of-interest and LPAC dynamics; increasingly tested at senior levels.
+- **Maps to:** **GAP — propose `lp-coinvest-governance` situational**.
+
+### Q: A value-add fund is 4 years into a 7-year life. Only 2 of 8 assets have been sold. LPs want to know when distributions start. What drives the answer?
+- **Role:** portfolioMgmt · **Difficulty:** intermediate
+- **Why:** distribution-timing + preferred-return-accrual mechanics; common mid-hold LP communication question.
+- **Maps to:** `prefAccrual` quiz template + `distribution-waterfall` situational.
+
 ---
 
-## Development (7)
+## Development (11)
 
 ### Q: Land cost $8M, hard cost $38M, soft $7M, 5% contingency. What's TPC and what's the yield-on-cost on $4.5M stabilized NOI?
 - **Role:** development · **Difficulty:** intermediate
@@ -278,6 +308,26 @@ in a future PR.
 - **Role:** development · **Difficulty:** advanced
 - **Why:** ground-lease economics; common at urban infill developers.
 - **Maps to:** **GAP — propose `groundLeaseVsFee` situational**.
+
+### Q: You've got conceptual city approval but no building permit on a $55M TPC site. How do you price entitlement risk in your IRR targets and equity structure?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** entitlement-risk pricing; candidates conflate "project approved in concept" with "shovel ready" and misprice the risk premium needed to compensate for permit uncertainty.
+- **Maps to:** **GAP — propose `entitlement-risk-pricing` situational**.
+
+### Q: You're 60% through construction and hard costs come in 15% over budget. Walk through the capital impact on the equity check and the construction loan.
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** cost-overrun capital mechanics; tests whether candidates understand contingency burn-down, equity cure rights, and lender notification triggers.
+- **Maps to:** `construction-cost-overrun` situational + `lpaCostOverrunSharing` situational + `contingencyDrawDown` quiz template.
+
+### Q: You're developing a 300,000 SF spec industrial building. How much pre-leasing do you need before breaking ground, and what's your threshold on office vs industrial?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** pre-leasing threshold discipline; thresholds differ by asset class and lender and candidates often give a blanket number without context.
+- **Maps to:** **GAP — propose `pre-leasing-threshold` situational**.
+
+### Q: Developer charges a 4% development-management fee on hard costs in the waterfall before equity returns. How does that interact with GP promote, and is it fair to LP investors?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** developer-fee-vs-promote conflict-of-interest; common governance question in development joint ventures.
+- **Maps to:** `gpEffectivePromote` quiz template + `dev-feasibility-memo` longform.
 
 ---
 
@@ -315,19 +365,38 @@ regardless of position.
 
 ## Summary statistics
 
-- **Total questions in this doc:** 52
-- **Mapped to existing content:** 41 (78%)
-- **Flagged as GAPs:** 8 (15%)
-- **Out of scope (time-sensitive / behavioral):** 4 (8%)
+- **Total questions in this doc:** 62
+- **Mapped to existing content:** 48 (77%)
+- **Flagged as GAPs:** 10 (16%)
+- **Out of scope (time-sensitive / behavioral):** 4 (6%)
+
+**Questions by role:**
+
+| Role | Count | Notes |
+|------|-------|-------|
+| Acquisitions | 12 | Most content coverage |
+| Asset Management | 11 | +1 same-store NOI benchmarking |
+| Mortgage Underwriting | 10 | Solid coverage |
+| Portfolio Management | 13 | +5 — was most underbuilt |
+| Development | 11 | +4 — was second most underbuilt |
+| Cross-cutting | 5 | Time-sensitive/behavioral out of scope |
 
 Top GAPs to address (ranked by interview frequency):
 
-1. `capexReserveSizing` quiz + `capex-reserve-discipline` situational (asset mgmt)
-2. `refiStressTest` quiz + `refi-cap-stress` situational (mortgage UW)
-3. `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz (portfolio mgmt)
-4. `constructionLoanSizing` quiz + `dev-ltc-vs-ltv` situational (development)
-5. `walk-distressed-1` walkthrough (cross-cutting)
+1. `j-curve-explanation` situational (portfolio mgmt) — NEW
+2. `entitlement-risk-pricing` situational (development) — NEW
+3. `pre-leasing-threshold` situational (development) — NEW
+4. `lp-coinvest-governance` situational (portfolio mgmt) — NEW
+5. `ncreif-benchmark-limitations` situational (portfolio mgmt) — NEW
+6. `groundLeaseVsFee` situational (development) — previously flagged, still open
+7. `leaseUpReserve` quiz template (development) — previously flagged, still open
+8. `1-tier-promote-walk` walkthrough (portfolio mgmt) — deferred per ROADMAP
+9. `capital-allocation-priority` situational (portfolio mgmt) — ✅ integrated
+10. `risk-adjusted-return-framework` situational (portfolio mgmt) — ✅ integrated
 
-These five gaps would lift mapped-to-content coverage from 78% → ~93% with
-~½ day of content work each, and they all surface from real interview-question
-patterns rather than top-down design guesses.
+Previously resolved GAPs (content now shipped):
+- ✅ `capexReserveSizing` quiz + `capex-reserve-discipline` situational (asset mgmt)
+- ✅ `refiStressTest` quiz + `refi-cap-stress` situational (mortgage UW)
+- ✅ `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz (portfolio mgmt)
+- ✅ `constructionLoanSizing` quiz + `dev-ltc-vs-ltv` situational (development)
+- ✅ `walk-distressed-1` walkthrough (cross-cutting)
