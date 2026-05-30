@@ -76,6 +76,17 @@ import { riskAdjustedReturnFramework } from './riskAdjustedReturnFramework';
 import { hotelRevparDivergence } from './hotelRevparDivergence';
 import { retailPercentageRentClause } from './retailPercentageRentClause';
 import { industrialTruckCourtBid } from './industrialTruckCourtBid';
+import { absorptionOfficeSublet } from './absorptionOfficeSublet';
+import { absorptionIndustrialDelivery } from './absorptionIndustrialDelivery';
+import { absorptionHotelRampUp } from './absorptionHotelRampUp';
+import { compGeographyAdjustment } from './compGeographyAdjustment';
+import { compOccupancyAdjustment } from './compOccupancyAdjustment';
+import { industrialRentBumpsVsFlat } from './industrialRentBumpsVsFlat';
+import { multifamilyConcessionBurn } from './multifamilyConcessionBurn';
+import { rentGrowthSensitivity } from './rentGrowthSensitivity';
+import { dscrRateSensitivity } from './dscrRateSensitivity';
+import { residualLandValueCheck } from './residualLandValueCheck';
+import { vacancySensitivityOnLeveredReturn } from './vacancySensitivityOnLeveredReturn';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -149,6 +160,17 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   hotelRevparDivergence,
   retailPercentageRentClause,
   industrialTruckCourtBid,
+  absorptionOfficeSublet,
+  absorptionIndustrialDelivery,
+  absorptionHotelRampUp,
+  compGeographyAdjustment,
+  compOccupancyAdjustment,
+  industrialRentBumpsVsFlat,
+  multifamilyConcessionBurn,
+  rentGrowthSensitivity,
+  dscrRateSensitivity,
+  residualLandValueCheck,
+  vacancySensitivityOnLeveredReturn,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {
