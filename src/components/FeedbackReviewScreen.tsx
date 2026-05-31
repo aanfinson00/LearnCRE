@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
 import { DEFAULT_BATCH, useFeedbackReview } from '../hooks/useFeedbackReview';
-import type { ReviewBlock } from '../quiz/reviewQuestions';
+import type { ReviewAnswer, ReviewBlock } from '../quiz/reviewQuestions';
 import type { BatchMemoMeta } from '../storage/voiceMemos';
 
 interface Props {
@@ -50,38 +50,206 @@ function BlockView({ block }: { block: ReviewBlock }) {
       );
     case 'ask':
       return <p className="text-base font-medium text-warm-black">{block.text}</p>;
-    case 'options':
-      return (
-        <ol className="space-y-1.5">
-          {block.options.map((o, i) => (
-            <li
-              key={i}
-              className="flex gap-2 rounded-lg border border-warm-line bg-warm-white/50 px-3 py-2 text-sm text-warm-ink"
-            >
-              <span className="font-mono text-xs font-semibold text-copper">
-                {String.fromCharCode(65 + i)}
-              </span>
-              <span>{o}</span>
-            </li>
-          ))}
-        </ol>
-      );
-    case 'steps':
-      return (
-        <ol className="space-y-1.5">
-          {block.steps.map((s, i) => (
-            <li key={i} className="text-sm text-warm-ink">
-              <span className="font-mono text-xs text-warm-mute">{i + 1}.</span>{' '}
-              <span className="font-medium text-warm-black">{s.label}</span> — {s.prompt}
-            </li>
-          ))}
-        </ol>
-      );
     case 'note':
       return <p className="text-sm italic text-warm-stone">{block.text}</p>;
     default:
       return null;
   }
+}
+
+function TakeawayCard({ takeaway, tips }: { takeaway?: string; tips?: string[] }) {
+  if (!takeaway && !(tips && tips.length)) return null;
+  return (
+    <Card className="border-copper/40 bg-copper/10">
+      <div className="text-xs font-medium uppercase tracking-widest text-copper-ink">Takeaway</div>
+      {takeaway && (
+        <p className="editorial mt-2 text-base leading-relaxed text-warm-ink">{takeaway}</p>
+      )}
+      {tips && tips.length > 0 && (
+        <ul className="mt-3 space-y-1 border-t border-copper/30 pt-3">
+          {tips.map((t, i) => (
+            <li key={i} className="text-xs text-warm-stone">
+              · {t}
+            </li>
+          ))}
+        </ul>
+      )}
+    </Card>
+  );
+}
+
+/** Situational-style clickable options with reveal, mirroring the real mode. */
+function ChoiceAnswer({ answer }: { answer: Extract<ReviewAnswer, { kind: 'choice' }> }) {
+  const [picked, setPicked] = useState<number | null>(null);
+  const [hovered, setHovered] = useState<number | null>(null);
+  const answered = picked !== null;
+
+  return (
+    <div className="space-y-2.5">
+      {answer.options.map((opt, i) => {
+        const isPicked = picked === i;
+        const tone = !answered
+          ? hovered === i
+            ? 'border-copper bg-copper/5'
+            : 'border-warm-line bg-warm-white/70 hover:border-copper/60'
+          : opt.isBest
+            ? 'border-copper bg-copper/15'
+            : isPicked
+              ? 'border-signal-bad/60 bg-signal-bad/10'
+              : 'border-warm-line bg-warm-paper/40 opacity-80';
+        return (
+          <button
+            key={i}
+            type="button"
+            disabled={answered}
+            onMouseEnter={() => setHovered(i)}
+            onMouseLeave={() => setHovered(null)}
+            onClick={() => !answered && setPicked(i)}
+            className={`w-full rounded-lg border-2 p-4 text-left transition-all duration-aa ease-aa ${tone} ${answered ? 'cursor-default' : 'cursor-pointer'}`}
+          >
+            <div className="flex items-baseline gap-3">
+              <span
+                className={`num mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border font-mono text-[10px] ${
+                  answered && opt.isBest
+                    ? 'border-copper bg-copper text-warm-white'
+                    : answered && isPicked
+                      ? 'border-signal-bad bg-signal-bad text-warm-white'
+                      : 'border-warm-line text-warm-stone'
+                }`}
+              >
+                {answered ? (opt.isBest ? '✓' : isPicked ? '✗' : i + 1) : i + 1}
+              </span>
+              <span
+                className={`text-sm leading-snug ${
+                  answered && opt.isBest ? 'font-medium text-copper-deep' : 'text-warm-ink'
+                }`}
+              >
+                {opt.label}
+              </span>
+            </div>
+            {answered && (
+              <div
+                className={`ml-8 mt-2.5 text-[13px] leading-relaxed ${
+                  opt.isBest ? 'text-warm-ink' : 'text-warm-stone'
+                }`}
+              >
+                {opt.explanation}
+              </div>
+            )}
+          </button>
+        );
+      })}
+
+      {!answered && (
+        <p className="num text-right font-mono text-[11px] text-warm-mute">
+          Click an answer to see the reasoning
+        </p>
+      )}
+
+      {answered && (
+        <>
+          <TakeawayCard takeaway={answer.takeaway} tips={answer.tips} />
+          <div className="flex justify-end">
+            <Button variant="ghost" className="text-xs" onClick={() => setPicked(null)}>
+              Try again
+            </Button>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+/** Open-text (longform / mock): draft an answer, then reveal the model answer. */
+function ModelAnswer({ answer }: { answer: Extract<ReviewAnswer, { kind: 'model' }> }) {
+  const [draft, setDraft] = useState('');
+  const [revealed, setRevealed] = useState(false);
+
+  return (
+    <div className="space-y-3">
+      {answer.guidanceHint && (
+        <p className="text-sm italic text-warm-stone">Guidance: {answer.guidanceHint}</p>
+      )}
+      <textarea
+        value={draft}
+        onChange={(e) => setDraft(e.target.value)}
+        rows={5}
+        placeholder={
+          answer.expectedDurationSec
+            ? `Draft your answer (aim for ~${answer.expectedDurationSec}s spoken)…`
+            : 'Draft your answer…'
+        }
+        className="w-full rounded-lg border border-warm-line bg-warm-white px-3 py-2 text-sm leading-relaxed text-warm-ink placeholder:text-warm-mute"
+      />
+      {!revealed ? (
+        <Button variant="secondary" className="w-full" onClick={() => setRevealed(true)}>
+          Reveal model answer
+        </Button>
+      ) : (
+        <>
+          <Card className="space-y-3">
+            <div className="text-xs font-medium uppercase tracking-widest text-copper-ink">
+              Model answer
+            </div>
+            <p className="editorial whitespace-pre-line text-[15px] leading-relaxed text-warm-ink">
+              {answer.modelAnswer}
+            </p>
+            <div className="border-t border-warm-line pt-3">
+              <div className="text-xs font-medium uppercase tracking-widest text-warm-mute">
+                Graded on
+              </div>
+              <ul className="mt-2 space-y-1">
+                {answer.rubric.map((r, i) => (
+                  <li key={i} className="text-xs text-warm-stone">
+                    · {r}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Card>
+          <TakeawayCard takeaway={answer.takeaway} tips={answer.tips} />
+        </>
+      )}
+    </div>
+  );
+}
+
+/** Walkthrough steps: reveal the chained solution + per-step expected. */
+function StepsAnswer({ answer }: { answer: Extract<ReviewAnswer, { kind: 'steps' }> }) {
+  const [revealed, setRevealed] = useState(false);
+  return (
+    <div className="space-y-3">
+      <ol className="space-y-1.5">
+        {answer.steps.map((s, i) => (
+          <li key={i} className="text-sm text-warm-ink">
+            <span className="font-mono text-xs text-warm-mute">{i + 1}.</span>{' '}
+            <span className="font-medium text-warm-black">{s.label}</span> — {s.prompt}
+            {revealed && (
+              <div className="ml-5 mt-1 text-[13px] text-warm-stone">
+                <span className="num font-mono text-copper-deep">
+                  = {s.expected} {s.unit}
+                </span>{' '}
+                — {s.resultDescription}
+              </div>
+            )}
+          </li>
+        ))}
+      </ol>
+      {!revealed ? (
+        <Button variant="secondary" className="w-full" onClick={() => setRevealed(true)}>
+          Reveal solution
+        </Button>
+      ) : (
+        <TakeawayCard takeaway={answer.takeaway} />
+      )}
+    </div>
+  );
+}
+
+function AnswerView({ answer }: { answer: ReviewAnswer }) {
+  if (answer.kind === 'choice') return <ChoiceAnswer answer={answer} />;
+  if (answer.kind === 'model') return <ModelAnswer answer={answer} />;
+  return <StepsAnswer answer={answer} />;
 }
 
 function MemoRow({
@@ -98,7 +266,7 @@ function MemoRow({
   const [url, setUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    let live = url;
+    let live: string | null = null;
     let alive = true;
     loadAudioUrl(memo.id).then((u) => {
       if (!alive) {
@@ -167,7 +335,6 @@ export function FeedbackReviewScreen({ onBack }: Props) {
     const lo = clampNum(Math.min(from, to));
     const hi = clampNum(Math.max(from, to));
     await fb.saveBatch({ fromNumber: lo, toNumber: hi, note, file });
-    // Advance the default range to the next batch for a smooth flow.
     const nextFrom = clampNum(hi + 1);
     setFrom(nextFrom);
     setTo(clampNum(nextFrom + DEFAULT_BATCH - 1));
@@ -182,8 +349,8 @@ export function FeedbackReviewScreen({ onBack }: Props) {
             Feedback studio<span className="text-copper">.</span>
           </div>
           <p className="text-xs leading-relaxed text-warm-stone">
-            Read the questions below, record one voice memo covering a batch (10–15 at a time),
-            then upload it tagged with the range it covers.
+            Answer each question like a real user — click through, see the reasoning — then record
+            one voice memo covering a batch (10–15 at a time) and upload it tagged with its range.
           </p>
         </div>
         <Button variant="ghost" onClick={onBack} className="text-xs">
@@ -272,9 +439,7 @@ export function FeedbackReviewScreen({ onBack }: Props) {
       {fb.memos.length > 0 && (
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-warm-black">
-              Your memos ({fb.memos.length})
-            </h3>
+            <h3 className="text-sm font-semibold text-warm-black">Your memos ({fb.memos.length})</h3>
             <Button
               variant="secondary"
               className="text-xs"
@@ -296,13 +461,12 @@ export function FeedbackReviewScreen({ onBack }: Props) {
         </div>
       )}
 
-      {/* ---- Question reader ---- */}
+      {/* ---- Question reader (real interactive experience) ---- */}
       <div className="border-t border-warm-line pt-5">
         <p className="num mb-2 font-mono text-[11px] uppercase tracking-widest text-warm-mute">
           Question {current.number} / {TOTAL} · {current.meta}
         </p>
 
-        {/* Jump rail — current + covered-by-a-memo at a glance. */}
         <div className="mb-4 grid grid-cols-10 gap-1">
           {fb.questions.map((q, i) => {
             const isCur = i === fb.index;
@@ -332,6 +496,11 @@ export function FeedbackReviewScreen({ onBack }: Props) {
             <BlockView key={i} block={b} />
           ))}
         </Card>
+
+        {/* key on id so the interaction state resets per question */}
+        <div className="mt-4">
+          <AnswerView key={current.id} answer={current.answer} />
+        </div>
 
         <div className="mt-4 flex items-center justify-between">
           <Button variant="secondary" onClick={fb.prev} disabled={fb.index === 0}>
