@@ -7,61 +7,72 @@ import {
   deleteMemo,
   getMemo,
   listMemoMeta,
-  putMemo,
-  type MemoMeta,
+  saveMemo,
+  type BatchMemoMeta,
 } from '../storage/voiceMemos';
 import { buildZip, type ZipEntry } from '../lib/zip';
+
+/** Default number of questions a single batch memo covers. */
+export const DEFAULT_BATCH = 15;
 
 function slugify(s: string): string {
   return s
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
-    .slice(0, 40);
+    .slice(0, 30);
 }
 
-function extFor(meta: MemoMeta): string {
+function extFor(meta: BatchMemoMeta): string {
   const fromName = meta.filename.includes('.') ? meta.filename.split('.').pop() : '';
   if (fromName) return fromName.toLowerCase();
-  const fromMime = meta.mime.split('/')[1];
-  return fromMime || 'audio';
+  return meta.mime.split('/')[1] || 'audio';
 }
 
 function pad(n: number): string {
   return String(n).padStart(3, '0');
 }
 
+export interface SaveBatch {
+  fromNumber: number;
+  toNumber: number;
+  note?: string;
+  file: File;
+}
+
 export interface UseFeedbackReview {
   questions: ReviewQuestion[];
   index: number;
   current: ReviewQuestion;
-  /** questionId -> memo metadata, for attached/progress rendering. */
-  memos: Record<string, MemoMeta>;
-  attachedCount: number;
+  memos: BatchMemoMeta[];
+  /** Set of question numbers covered by at least one memo. */
+  coveredNumbers: Set<number>;
+  coveredCount: number;
   busy: boolean;
   goto: (i: number) => void;
   next: () => void;
   prev: () => void;
-  attach: (file: File) => Promise<void>;
-  remove: () => Promise<void>;
-  /** Resolve a playable object-URL for the current question's memo, if any. */
-  loadAudioUrl: (questionId: string) => Promise<string | null>;
+  saveBatch: (b: SaveBatch) => Promise<void>;
+  removeBatch: (id: string) => Promise<void>;
+  loadAudioUrl: (id: string) => Promise<string | null>;
   exportAll: () => Promise<void>;
 }
 
 export function useFeedbackReview(): UseFeedbackReview {
   const questions = REVIEW_QUESTIONS;
   const [index, setIndex] = useState(0);
-  const [memos, setMemos] = useState<Record<string, MemoMeta>>({});
+  const [memos, setMemos] = useState<BatchMemoMeta[]>([]);
   const [busy, setBusy] = useState(false);
+
+  const refresh = useCallback(async () => {
+    const list = await listMemoMeta();
+    setMemos(list);
+  }, []);
 
   useEffect(() => {
     let alive = true;
     listMemoMeta().then((list) => {
-      if (!alive) return;
-      const map: Record<string, MemoMeta> = {};
-      for (const m of list) map[m.questionId] = m;
-      setMemos(map);
+      if (alive) setMemos(list);
     });
     return () => {
       alive = false;
@@ -77,79 +88,84 @@ export function useFeedbackReview(): UseFeedbackReview {
   const next = useCallback(() => goto(index + 1), [goto, index]);
   const prev = useCallback(() => goto(index - 1), [goto, index]);
 
-  const attach = useCallback(
-    async (file: File) => {
+  const saveBatch = useCallback(
+    async (b: SaveBatch) => {
       setBusy(true);
       try {
-        const meta = await putMemo(current.id, file);
-        setMemos((m) => ({ ...m, [current.id]: meta }));
+        const from = Math.min(b.fromNumber, b.toNumber);
+        const to = Math.max(b.fromNumber, b.toNumber);
+        await saveMemo({ fromNumber: from, toNumber: to, note: b.note, file: b.file });
+        await refresh();
       } finally {
         setBusy(false);
       }
     },
-    [current.id],
+    [refresh],
   );
 
-  const remove = useCallback(async () => {
-    setBusy(true);
-    try {
-      await deleteMemo(current.id);
-      setMemos((m) => {
-        const { [current.id]: _gone, ...rest } = m;
-        return rest;
-      });
-    } finally {
-      setBusy(false);
-    }
-  }, [current.id]);
+  const removeBatch = useCallback(
+    async (id: string) => {
+      setBusy(true);
+      try {
+        await deleteMemo(id);
+        await refresh();
+      } finally {
+        setBusy(false);
+      }
+    },
+    [refresh],
+  );
 
-  const loadAudioUrl = useCallback(async (questionId: string) => {
-    const rec = await getMemo(questionId);
+  const loadAudioUrl = useCallback(async (id: string) => {
+    const rec = await getMemo(id);
     if (!rec) return null;
     return URL.createObjectURL(rec.blob);
   }, []);
+
+  const coveredNumbers = useMemo(() => {
+    const set = new Set<number>();
+    for (const m of memos) {
+      for (let n = m.fromNumber; n <= m.toNumber; n++) set.add(n);
+    }
+    return set;
+  }, [memos]);
 
   const exportAll = useCallback(async () => {
     setBusy(true);
     try {
       const entries: ZipEntry[] = [];
       const manifest: Array<{
-        number: number;
-        id: string;
-        type: string;
-        title: string;
-        memoFile: string | null;
+        fromNumber: number;
+        toNumber: number;
+        note?: string;
+        memoFile: string;
+        covers: Array<{ number: number; id: string; title: string }>;
       }> = [];
 
-      for (const q of questions) {
-        const meta = memos[q.id];
-        let memoFile: string | null = null;
-        if (meta) {
-          const rec = await getMemo(q.id);
-          if (rec) {
-            memoFile = `q${pad(q.number)}-${slugify(q.title)}.${extFor(meta)}`;
-            const buf = new Uint8Array(await rec.blob.arrayBuffer());
-            entries.push({ name: `voice-memos/${memoFile}`, data: buf });
-          }
-        }
+      for (const meta of memos) {
+        const rec = await getMemo(meta.id);
+        if (!rec) continue;
+        const slug = meta.note ? slugify(meta.note) : 'memo';
+        const memoFile = `q${pad(meta.fromNumber)}-${pad(meta.toNumber)}-${slug}.${extFor(meta)}`;
+        const buf = new Uint8Array(await rec.blob.arrayBuffer());
+        entries.push({ name: `voice-memos/${memoFile}`, data: buf });
         manifest.push({
-          number: q.number,
-          id: q.id,
-          type: q.type,
-          title: q.title,
+          fromNumber: meta.fromNumber,
+          toNumber: meta.toNumber,
+          note: meta.note,
           memoFile,
+          covers: questions
+            .filter((q) => q.number >= meta.fromNumber && q.number <= meta.toNumber)
+            .map((q) => ({ number: q.number, id: q.id, title: q.title })),
         });
       }
 
       const manifestJson = JSON.stringify(
-        { exportedAt: new Date().toISOString(), total: questions.length, items: manifest },
+        { exportedAt: new Date().toISOString(), totalQuestions: questions.length, memos: manifest },
         null,
         2,
       );
-      entries.push({
-        name: 'manifest.json',
-        data: new TextEncoder().encode(manifestJson),
-      });
+      entries.push({ name: 'manifest.json', data: new TextEncoder().encode(manifestJson) });
 
       const blob = buildZip(entries);
       const url = URL.createObjectURL(blob);
@@ -165,20 +181,19 @@ export function useFeedbackReview(): UseFeedbackReview {
     }
   }, [questions, memos]);
 
-  const attachedCount = useMemo(() => Object.keys(memos).length, [memos]);
-
   return {
     questions,
     index,
     current,
     memos,
-    attachedCount,
+    coveredNumbers,
+    coveredCount: coveredNumbers.size,
     busy,
     goto,
     next,
     prev,
-    attach,
-    remove,
+    saveBatch,
+    removeBatch,
     loadAudioUrl,
     exportAll,
   };

@@ -1,11 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
-import { useFeedbackReview } from '../hooks/useFeedbackReview';
-import type { ReviewBlock, ReviewQuestion } from '../quiz/reviewQuestions';
+import { DEFAULT_BATCH, useFeedbackReview } from '../hooks/useFeedbackReview';
+import type { ReviewBlock } from '../quiz/reviewQuestions';
+import type { BatchMemoMeta } from '../storage/voiceMemos';
 
 interface Props {
   onBack: () => void;
+}
+
+const TOTAL = 100;
+
+function clampNum(n: number): number {
+  if (Number.isNaN(n)) return 1;
+  return Math.max(1, Math.min(TOTAL, Math.round(n)));
 }
 
 function BlockView({ block }: { block: ReviewBlock }) {
@@ -76,98 +84,68 @@ function BlockView({ block }: { block: ReviewBlock }) {
   }
 }
 
-function MemoPanel({
-  question,
-  attached,
-  version,
+function MemoRow({
+  memo,
   busy,
-  onAttach,
   onRemove,
   loadAudioUrl,
 }: {
-  question: ReviewQuestion;
-  attached: boolean;
-  /** Bumps when the memo is replaced so playback reloads the new file. */
-  version: number;
+  memo: BatchMemoMeta;
   busy: boolean;
-  onAttach: (file: File) => void;
   onRemove: () => void;
   loadAudioUrl: (id: string) => Promise<string | null>;
 }) {
-  const fileRef = useRef<HTMLInputElement>(null);
-  const [audioUrl, setAudioUrl] = useState<string | null>(null);
+  const [url, setUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    let url: string | null = null;
+    let live = url;
     let alive = true;
-    if (attached) {
-      loadAudioUrl(question.id).then((u) => {
-        if (!alive) {
-          if (u) URL.revokeObjectURL(u);
-          return;
-        }
-        url = u;
-        setAudioUrl(u);
-      });
-    } else {
-      setAudioUrl(null);
-    }
+    loadAudioUrl(memo.id).then((u) => {
+      if (!alive) {
+        if (u) URL.revokeObjectURL(u);
+        return;
+      }
+      live = u;
+      setUrl(u);
+    });
     return () => {
       alive = false;
-      if (url) URL.revokeObjectURL(url);
+      if (live) URL.revokeObjectURL(live);
     };
-  }, [question.id, attached, version, loadAudioUrl]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [memo.id, memo.updatedAt]);
 
   return (
-    <Card className="space-y-3 border-copper/30 bg-copper/[0.03]">
-      <div className="flex items-center justify-between">
-        <h3 className="text-sm font-semibold text-warm-black">
-          Voice memo {attached ? '· attached' : ''}
-        </h3>
-        {attached && (
-          <Button variant="ghost" className="text-xs" onClick={onRemove} disabled={busy}>
-            Remove
-          </Button>
-        )}
+    <div className="space-y-2 rounded-lg border border-warm-line bg-warm-white/50 p-3">
+      <div className="flex items-center justify-between gap-2">
+        <div className="min-w-0">
+          <span className="num inline-block rounded bg-copper/10 px-2 py-0.5 font-mono text-xs font-semibold text-copper">
+            Q{memo.fromNumber}–{memo.toNumber}
+          </span>
+          {memo.note && <span className="ml-2 text-sm text-warm-ink">{memo.note}</span>}
+          <span className="ml-2 truncate text-[11px] text-warm-mute">{memo.filename}</span>
+        </div>
+        <Button variant="ghost" className="shrink-0 text-xs" onClick={onRemove} disabled={busy}>
+          Remove
+        </Button>
       </div>
-
-      {attached && audioUrl && (
-        <audio key={audioUrl} controls src={audioUrl} className="w-full">
+      {url && (
+        <audio key={url} controls src={url} className="w-full">
           <track kind="captions" />
         </audio>
       )}
-
-      <input
-        ref={fileRef}
-        type="file"
-        accept="audio/*"
-        className="hidden"
-        onChange={(e) => {
-          const f = e.target.files?.[0];
-          if (f) onAttach(f);
-          e.target.value = '';
-        }}
-      />
-      <Button
-        variant={attached ? 'secondary' : 'primary'}
-        className="w-full"
-        disabled={busy}
-        onClick={() => fileRef.current?.click()}
-      >
-        {busy ? 'Saving…' : attached ? 'Replace memo' : 'Upload voice memo'}
-      </Button>
-      <p className="text-[11px] leading-relaxed text-warm-mute">
-        Record your feedback on this question (phone voice memo, etc.) and attach the audio file.
-        Stored locally on this device; use Export to bundle every memo for review.
-      </p>
-    </Card>
+    </div>
   );
 }
 
 export function FeedbackReviewScreen({ onBack }: Props) {
   const fb = useFeedbackReview();
   const { current } = fb;
-  const attached = Boolean(fb.memos[current.id]);
+
+  const [from, setFrom] = useState(1);
+  const [to, setTo] = useState(Math.min(DEFAULT_BATCH, TOTAL));
+  const [note, setNote] = useState('');
+  const fileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -185,6 +163,17 @@ export function FeedbackReviewScreen({ onBack }: Props) {
     return () => window.removeEventListener('keydown', onKey);
   }, [fb]);
 
+  const handleFile = async (file: File) => {
+    const lo = clampNum(Math.min(from, to));
+    const hi = clampNum(Math.max(from, to));
+    await fb.saveBatch({ fromNumber: lo, toNumber: hi, note, file });
+    // Advance the default range to the next batch for a smooth flow.
+    const nextFrom = clampNum(hi + 1);
+    setFrom(nextFrom);
+    setTo(clampNum(nextFrom + DEFAULT_BATCH - 1));
+    setNote('');
+  };
+
   return (
     <div className="mx-auto max-w-3xl space-y-5 py-8">
       <div className="flex items-baseline justify-between">
@@ -192,8 +181,9 @@ export function FeedbackReviewScreen({ onBack }: Props) {
           <div className="display text-3xl text-warm-black">
             Feedback studio<span className="text-copper">.</span>
           </div>
-          <p className="num font-mono text-[11px] uppercase tracking-widest text-warm-mute">
-            Question {current.number} / {fb.questions.length} · {current.meta}
+          <p className="text-xs leading-relaxed text-warm-stone">
+            Read the questions below, record one voice memo covering a batch (10–15 at a time),
+            then upload it tagged with the range it covers.
           </p>
         </div>
         <Button variant="ghost" onClick={onBack} className="text-xs">
@@ -201,73 +191,157 @@ export function FeedbackReviewScreen({ onBack }: Props) {
         </Button>
       </div>
 
-      <div className="flex items-center justify-between gap-3">
-        <span className="text-xs text-warm-stone">
-          <span className="num font-mono text-warm-black">{fb.attachedCount}</span> / {fb.questions.length} memos attached
-        </span>
+      {/* ---- Batch memo uploader ---- */}
+      <Card className="space-y-3 border-copper/30 bg-copper/[0.03]">
+        <div className="flex items-center justify-between">
+          <h3 className="text-sm font-semibold text-warm-black">Add a batch memo</h3>
+          <span className="text-xs text-warm-stone">
+            <span className="num font-mono text-warm-black">{fb.coveredCount}</span> / {TOTAL} questions covered
+          </span>
+        </div>
+
+        <div className="flex flex-wrap items-end gap-3">
+          <label className="text-xs text-warm-stone">
+            Covers Q
+            <input
+              type="number"
+              min={1}
+              max={TOTAL}
+              value={from}
+              onChange={(e) => setFrom(clampNum(Number(e.target.value)))}
+              className="num ml-1 w-16 rounded border border-warm-line bg-warm-white px-2 py-1 font-mono text-sm text-warm-black"
+            />
+          </label>
+          <label className="text-xs text-warm-stone">
+            to
+            <input
+              type="number"
+              min={1}
+              max={TOTAL}
+              value={to}
+              onChange={(e) => setTo(clampNum(Number(e.target.value)))}
+              className="num ml-1 w-16 rounded border border-warm-line bg-warm-white px-2 py-1 font-mono text-sm text-warm-black"
+            />
+          </label>
+          <button
+            type="button"
+            onClick={() => {
+              setFrom(current.number);
+              setTo(clampNum(current.number + DEFAULT_BATCH - 1));
+            }}
+            className="rounded border border-warm-line px-2 py-1 text-[11px] text-warm-stone transition-colors duration-aa ease-aa hover:border-warm-black hover:text-warm-black"
+          >
+            From current (Q{current.number})
+          </button>
+        </div>
+
+        <input
+          type="text"
+          value={note}
+          onChange={(e) => setNote(e.target.value)}
+          placeholder="Optional label (e.g. 'pricing cases')"
+          className="w-full rounded border border-warm-line bg-warm-white px-2 py-1.5 text-sm text-warm-ink placeholder:text-warm-mute"
+        />
+
+        <input
+          ref={fileRef}
+          type="file"
+          accept="audio/*"
+          className="hidden"
+          onChange={(e) => {
+            const f = e.target.files?.[0];
+            if (f) handleFile(f);
+            e.target.value = '';
+          }}
+        />
         <Button
-          variant="secondary"
-          className="text-xs"
-          disabled={fb.busy || fb.attachedCount === 0}
-          onClick={() => fb.exportAll()}
+          variant="primary"
+          className="w-full"
+          disabled={fb.busy}
+          onClick={() => fileRef.current?.click()}
         >
-          Export all ({fb.attachedCount})
+          {fb.busy ? 'Saving…' : `Upload memo for Q${Math.min(from, to)}–${Math.max(from, to)}`}
         </Button>
-      </div>
-
-      {/* Numbered jump rail — current + attached state at a glance. */}
-      <div className="grid grid-cols-10 gap-1">
-        {fb.questions.map((q, i) => {
-          const isCur = i === fb.index;
-          const has = Boolean(fb.memos[q.id]);
-          const tone = isCur
-            ? 'bg-copper text-warm-white'
-            : has
-              ? 'bg-signal-good/20 text-warm-black ring-1 ring-signal-good/50'
-              : 'bg-warm-line/40 text-warm-mute hover:bg-warm-line';
-          return (
-            <button
-              key={q.id}
-              type="button"
-              onClick={() => fb.goto(i)}
-              title={`${q.number}. ${q.title}`}
-              className={`num rounded py-1 text-[10px] font-mono transition-colors duration-aa ease-aa ${tone}`}
-            >
-              {q.number}
-            </button>
-          );
-        })}
-      </div>
-
-      <Card className="space-y-4">
-        <div className="display text-xl text-warm-black">{current.title}</div>
-        {current.blocks.map((b, i) => (
-          <BlockView key={i} block={b} />
-        ))}
+        <p className="text-[11px] leading-relaxed text-warm-mute">
+          Stored locally on this device. Use Export to bundle every memo with a manifest mapping each
+          recording to the questions it covers.
+        </p>
       </Card>
 
-      <MemoPanel
-        question={current}
-        attached={attached}
-        version={fb.memos[current.id]?.updatedAt ?? 0}
-        busy={fb.busy}
-        onAttach={(f) => fb.attach(f)}
-        onRemove={() => fb.remove()}
-        loadAudioUrl={fb.loadAudioUrl}
-      />
+      {/* ---- Saved memos ---- */}
+      {fb.memos.length > 0 && (
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-semibold text-warm-black">
+              Your memos ({fb.memos.length})
+            </h3>
+            <Button
+              variant="secondary"
+              className="text-xs"
+              disabled={fb.busy}
+              onClick={() => fb.exportAll()}
+            >
+              Export all
+            </Button>
+          </div>
+          {fb.memos.map((m) => (
+            <MemoRow
+              key={m.id}
+              memo={m}
+              busy={fb.busy}
+              onRemove={() => fb.removeBatch(m.id)}
+              loadAudioUrl={fb.loadAudioUrl}
+            />
+          ))}
+        </div>
+      )}
 
-      <div className="flex items-center justify-between">
-        <Button variant="secondary" onClick={fb.prev} disabled={fb.index === 0}>
-          ← Previous
-        </Button>
-        <span className="text-xs text-warm-mute">Use ← / → to move</span>
-        <Button
-          variant="secondary"
-          onClick={fb.next}
-          disabled={fb.index === fb.questions.length - 1}
-        >
-          Next →
-        </Button>
+      {/* ---- Question reader ---- */}
+      <div className="border-t border-warm-line pt-5">
+        <p className="num mb-2 font-mono text-[11px] uppercase tracking-widest text-warm-mute">
+          Question {current.number} / {TOTAL} · {current.meta}
+        </p>
+
+        {/* Jump rail — current + covered-by-a-memo at a glance. */}
+        <div className="mb-4 grid grid-cols-10 gap-1">
+          {fb.questions.map((q, i) => {
+            const isCur = i === fb.index;
+            const covered = fb.coveredNumbers.has(q.number);
+            const tone = isCur
+              ? 'bg-copper text-warm-white'
+              : covered
+                ? 'bg-signal-good/20 text-warm-black ring-1 ring-signal-good/50'
+                : 'bg-warm-line/40 text-warm-mute hover:bg-warm-line';
+            return (
+              <button
+                key={q.id}
+                type="button"
+                onClick={() => fb.goto(i)}
+                title={`${q.number}. ${q.title}`}
+                className={`num rounded py-1 text-[10px] font-mono transition-colors duration-aa ease-aa ${tone}`}
+              >
+                {q.number}
+              </button>
+            );
+          })}
+        </div>
+
+        <Card className="space-y-4">
+          <div className="display text-xl text-warm-black">{current.title}</div>
+          {current.blocks.map((b, i) => (
+            <BlockView key={i} block={b} />
+          ))}
+        </Card>
+
+        <div className="mt-4 flex items-center justify-between">
+          <Button variant="secondary" onClick={fb.prev} disabled={fb.index === 0}>
+            ← Previous
+          </Button>
+          <span className="text-xs text-warm-mute">Use ← / → to move</span>
+          <Button variant="secondary" onClick={fb.next} disabled={fb.index === TOTAL - 1}>
+            Next →
+          </Button>
+        </div>
       </div>
     </div>
   );

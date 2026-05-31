@@ -21,27 +21,46 @@ npx vitest run src/test/extractQuestions.test.ts
 
 ## How the memos get here
 
-The Feedback studio is local-first: as you work through the questions it stores
-each uploaded memo in the browser (IndexedDB). When you click **Export all**, it
-downloads a single zip:
+Memos are **batch memos**: one recording covers a range of questions (e.g.
+"Q1–15"), not one file per question. The Feedback studio is local-first — each
+uploaded memo is stored in the browser (IndexedDB) tagged with the range it
+covers. When you click **Export all**, it downloads a single zip:
 
 ```
 learncre-feedback-YYYY-MM-DD.zip
-├── manifest.json            # number ↔ id ↔ title ↔ memoFile
+├── manifest.json            # per-memo range + the questions it covers
 └── voice-memos/
-    ├── q001-<slug>.m4a
-    ├── q002-<slug>.m4a
+    ├── q001-015-<slug>.m4a
+    ├── q016-030-<slug>.m4a
     └── …
 ```
 
+The audio filename encodes the range: `q{from}-{to}-{label}.<ext>`.
+
 To make the memos reviewable here, unzip it into this `feedback/` folder so the
 audio lands in `feedback/voice-memos/` and `manifest.json` sits alongside
-`questions.json`, then commit. (If you instead keep memos in iCloud named
-`q001…q100`, just drop them into `feedback/voice-memos/` before review.)
+`questions.json`, then commit.
 
 ## For the review session
 
-To pair feedback with questions: read `questions.json`, then for each
-`voice-memos/qNNN-*.<ext>` (or `manifest.json[].memoFile`), the leading `qNNN`
-is the question `number`. Transcribe each memo and map it back to that question
-to produce structure/framing edits.
+`manifest.json` shape:
+
+```json
+{
+  "memos": [
+    {
+      "fromNumber": 1,
+      "toNumber": 15,
+      "note": "pricing cases",
+      "memoFile": "q001-015-pricing-cases.m4a",
+      "covers": [{ "number": 1, "id": "sit:...", "title": "…" }, …]
+    }
+  ]
+}
+```
+
+To pair feedback with questions: for each memo, transcribe the audio, then walk
+its `covers[]` (or read questions `fromNumber..toNumber` from `questions.json`)
+and attribute each segment of spoken feedback to the question it addresses —
+producing structure/framing edits. The `q{from}-{to}` prefix on each filename is
+enough to recover the range even without the manifest.
