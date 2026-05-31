@@ -1,13 +1,11 @@
 # LearnCRE — Question Review Sheet (1–100)
 
-Wordier, framing-sensitive questions pulled live from the app. Work through 1–100 and record a voice memo per item on structure & framing. Each entry shows exactly what the learner reads (scenario → data → the ask → answer choices). Model answers / explanations are omitted on purpose — this pass is about how the question is *posed*.
+Wordier, framing-sensitive questions pulled live from the app (the same set the in-app **Feedback studio** serves). Work through 1–100 and record a voice memo per item on structure & framing. Each entry shows exactly what the learner reads. Model answers / explanations are omitted on purpose — this pass is about how the question is *posed*.
 
 ---
 
-## Situational cases
-
 ### 1. Why is this trading off-market?
-*Type: Situational · pricing · intermediate · office · acquisitions*
+*Situational · pricing · intermediate · office · acquisitions*
 
 A suburban office asset is being marketed at an 8.0% going-in cap rate. Recent trades in the submarket for similar vintage and quality have printed at 5.75–6.25%. Tenancy is single-tenant, investment-grade credit, but the lease has 14 months of remaining term. In-place rent is $24/SF; market rent for the submarket is $32–34/SF.
 
@@ -24,7 +22,7 @@ A suburban office asset is being marketed at an 8.0% going-in cap rate. Recent t
 - D. Cap rate methodology differs — the broker is quoting trailing while comps are forward.
 
 ### 2. How long until the market hits 95%?
-*Type: Situational · absorption · intermediate · multifamily · acquisitions/development*
+*Situational · absorption · intermediate · multifamily · acquisitions/development*
 
 A multifamily submarket has 4,000 units in inventory and is currently 85% leased. Two new deliveries are coming online this quarter, adding 300 units to the inventory. Quarterly absorption has been running at 150 units, or roughly 50 units per month. Rents are stable; you're evaluating a deal that needs the submarket to reach 95% occupancy before stabilization.
 
@@ -42,7 +40,7 @@ A multifamily submarket has 4,000 units in inventory and is currently 85% leased
 - D. It depends entirely on rent growth, which drives absorption.
 
 ### 3. How much upside is in the rent roll?
-*Type: Situational · pricing · beginner · office · acquisitions/assetManagement*
+*Situational · pricing · beginner · office · acquisitions/assetManagement*
 
 You're underwriting an office acquisition. In-place rent is $24/SF on the major tenant; recent leasing in the building and submarket is signing at $32/SF. The major tenant's lease expires in 12 months and is widely expected to vacate (the broker has already begun marketing the space).
 
@@ -59,7 +57,7 @@ You're underwriting an office acquisition. In-place rent is $24/SF on the major 
 - D. Price at the in-place rent of $24/SF and treat the market rent as conservative downside.
 
 ### 4. Does this NOI growth assumption hold up?
-*Type: Situational · diagnostic · intermediate · multifamily · assetManagement/mortgageUw*
+*Situational · diagnostic · intermediate · multifamily · assetManagement/mortgageUw*
 
 A broker's offering memorandum on a stabilized garden-style multifamily asset shows 8.0% annual NOI growth in years 1–5 of the proforma. The submarket has averaged 2.5–3.0% rent growth historically, with a recent peak of ~5% during the 2021 spike. Property is 95% occupied, leased to market, no value-add story, no upcoming reassessment.
 
@@ -77,7 +75,7 @@ A broker's offering memorandum on a stabilized garden-style multifamily asset sh
 - D. It's within range — 8% is achievable in inflationary environments.
 
 ### 5. Which comps belong in this set?
-*Type: Situational · comp-selection · beginner · industrial · acquisitions*
+*Situational · comp-selection · beginner · industrial · acquisitions*
 
 You're pricing a 200,000 SF Class-B industrial asset in a major distribution submarket. The broker provides 5 trade comps to support pricing. You need to vet each before averaging the cap rates.
 
@@ -95,7 +93,7 @@ You're pricing a 200,000 SF Class-B industrial asset in a major distribution sub
 - D. Trust the broker's sourcing — they would have filtered out bad comps already.
 
 ### 6. What does the reassessment do to your bid?
-*Type: Situational · risk · advanced · multifamily · acquisitions/mortgageUw*
+*Situational · risk · advanced · multifamily · acquisitions/mortgageUw*
 
 You're bidding $50M for a stabilized multifamily asset in a jurisdiction that reassesses property tax on sale. The seller has owned for 12 years; current annual property tax is $200,000 (effectively ~0.4% of your bid price). The jurisdiction's post-sale assessment rate is 1.25% of sale price.
 
@@ -112,7 +110,7 @@ You're bidding $50M for a stabilized multifamily asset in a jurisdiction that re
 - D. Reassessment is a wash because the cap rate already reflects the tax environment.
 
 ### 7. Why does this rent roll look like a bargain?
-*Type: Situational · pricing · intermediate · multifamily · acquisitions/assetManagement*
+*Situational · pricing · intermediate · multifamily · acquisitions/assetManagement*
 
 A multifamily portfolio has a weighted average remaining lease term of 7 years on its anchor leases (commercial ground-floor) with annual bumps of 1.0%. The submarket has been growing rents at ~4% per year for the past 5 years. Residential units (95% of NRSF) are on standard 12-month leases at market. The deal is being marketed at a 5.75% cap, in line with comps.
 
@@ -130,7 +128,7 @@ A multifamily portfolio has a weighted average remaining lease term of 7 years o
 - D. The 1% anchor bumps are a red flag — those tenants negotiated a below-market deal that signals weak demand.
 
 ### 8. Should you give the TI or the rent break?
-*Type: Situational · lease-econ · intermediate · office · assetManagement/acquisitions*
+*Situational · lease-econ · intermediate · office · assetManagement/acquisitions*
 
 A prospective tenant wants to sign a 5-year lease at $20/SF face rent. Comparable space in the building has been signing at the same face rent with $20/SF in TIs. The new prospect is asking for $30/SF in TIs instead. They've indicated they'd also consider a rent reduction in lieu of the extra TI dollars.
 
@@ -148,7 +146,7 @@ A prospective tenant wants to sign a 5-year lease at $20/SF face rent. Comparabl
 - D. Give the rent reduction instead — the tenant's spending the TI on something they'd build anyway, so a rent break is a real concession.
 
 ### 9. Refinance or sell?
-*Type: Situational · investment-thesis · advanced · mixed · assetManagement/portfolioMgmt*
+*Situational · investment-thesis · advanced · mixed · assetManagement/portfolioMgmt*
 
 You're three years into a five-year hold on a stabilized industrial asset. You've modeled two paths to year-5 close-out: (a) hold + refi at year 3 to a 60% LTV loan, distribute proceeds, and sell at year 5; (b) sell now and redeploy into a similar deal at current pricing. The IRR on both paths is materially identical (~14.5%) on the model.
 
@@ -165,7 +163,7 @@ You're three years into a five-year hold on a stabilized industrial asset. You'v
 - D. Run the analysis longer — 14.5% on both paths means you're missing something in the model.
 
 ### 10. Is your exit cap conservative enough?
-*Type: Situational · sensitivity · intermediate · mixed · acquisitions*
+*Situational · sensitivity · intermediate · mixed · acquisitions*
 
 You're underwriting a 5-year hold at a 5.0% going-in cap rate. Your model uses a 6.0% exit cap — 100 bps of cap expansion. The deal otherwise pencils to a 14% IRR. A senior reviewer pushes back: "Why 100 bps? Why not 75 or 125?" The submarket has seen cap rates trade in a tight band over the past 10 years (4.75–5.50%) outside of brief stress periods.
 
@@ -183,7 +181,7 @@ You're underwriting a 5-year hold at a 5.0% going-in cap rate. Your model uses a
 - D. Match the spread to the going-in IRR — the higher the IRR, the more cap expansion you can absorb.
 
 ### 11. A 15-point vacancy spike — what now?
-*Type: Situational · diagnostic · intermediate · office · assetManagement*
+*Situational · diagnostic · intermediate · office · assetManagement*
 
 A 200,000 SF Class-A office building has run at 95%+ occupancy for the past four years. In the most recent quarter, occupancy dropped from 95% to 80% — a 15-point swing. The seller's broker is marketing this as a "temporary leasing opportunity" at the same pricing as a year ago. You're being asked to bid this week.
 
@@ -201,7 +199,7 @@ A 200,000 SF Class-A office building has run at 95%+ occupancy for the past four
 - D. What's the WALT on the remaining 80% of the rent roll?
 
 ### 12. How much should credit compress the cap?
-*Type: Situational · pricing · advanced · industrial · acquisitions/mortgageUw*
+*Situational · pricing · advanced · industrial · acquisitions/mortgageUw*
 
 You're bidding on a single-tenant industrial distribution asset. The tenant is investment-grade rated (BBB+ from S&P), occupies 100% of the building, and has a 15-year remaining lease term with 2.5% annual escalations. Comparable trades for spec-grade or short-term-leased product are pricing at 6.0% caps in this submarket.
 
@@ -219,7 +217,7 @@ You're bidding on a single-tenant industrial distribution asset. The tenant is i
 - D. Wider than 6.0% — single-tenant deals carry binary risk (one departure = 100% vacant) that should *expand* the cap.
 
 ### 13. The refi DSCR test is failing — what now?
-*Type: Situational · risk · intermediate · office · mortgageUw/assetManagement*
+*Situational · risk · intermediate · office · mortgageUw/assetManagement*
 
 Your asset is approaching loan maturity. The current loan is $50M at 4.0% on a 30-year amort, IO. NOI is flat at $3.0M. Today's market rate is 7.0%. The refinance lender requires a 1.25x DSCR. At 7.0% on the same $50M loan amount, the DSCR test fails. The borrower wants to know what levers exist to make the refi pencil.
 
@@ -239,7 +237,7 @@ Your asset is approaching loan maturity. The current loan is $50M at 4.0% on a 3
 - D. Refinance with a bridge / debt fund at a higher rate and a 1.05x DSCR to get past the trough.
 
 ### 14. Why does the comp set support a tighter cap?
-*Type: Situational · comp-selection · intermediate · multifamily · acquisitions*
+*Situational · comp-selection · intermediate · multifamily · acquisitions*
 
 You're bidding on a Class-B 1985-vintage multifamily asset. Three recent comps in the same submarket support a 5.50–5.75% cap. The subject's broker is pushing for a 5.25% going-in cap, citing those exact comps. You need to pick the right adjustment.
 
@@ -257,7 +255,7 @@ You're bidding on a Class-B 1985-vintage multifamily asset. Three recent comps i
 - D. Ask the broker for older comps; if none exist, drop the bid and move on.
 
 ### 15. Defend the 150 bps exit cap expansion
-*Type: Situational · sensitivity · advanced · mixed · acquisitions*
+*Situational · sensitivity · advanced · mixed · acquisitions*
 
 You're underwriting a 5-year industrial hold at a 5.0% going-in cap, modeling a 6.5% exit cap (150 bps of expansion). The deal pencils to a 12% IRR at this exit. A senior partner challenges: "150 bps is overkill — comps in this submarket have traded in a tight 4.75–5.50% band for 8 years." You need to defend the 150 bps spread.
 
@@ -275,7 +273,7 @@ You're underwriting a 5-year industrial hold at a 5.0% going-in cap, modeling a 
 - D. You're right — drop to 100 bps. The historical band supports it.
 
 ### 16. Which NOI denominator do you use for the exit cap?
-*Type: Situational · pricing · advanced · multifamily · acquisitions*
+*Situational · pricing · advanced · multifamily · acquisitions*
 
 You're acquiring a brand-new multifamily lease-up. The property is 80% leased today; stabilization (95%+) is expected in Year 2. You're modeling a 5-year hold and need to choose what NOI to apply the exit cap to. The seller's pro forma shows a stabilized $2.1M NOI; current trailing NOI is $1.4M.
 
@@ -292,7 +290,7 @@ You're acquiring a brand-new multifamily lease-up. The property is 80% leased to
 - D. Average of trailing and stabilized — splits the lease-up risk.
 
 ### 17. Year-3 NOI is 8% below pro forma — where do you look first?
-*Type: Situational · diagnostic · intermediate · multifamily · assetManagement*
+*Situational · diagnostic · intermediate · multifamily · assetManagement*
 
 You're three years into a five-year hold on a 200-unit multifamily asset. Year-3 actual NOI came in at $2.30M vs the underwritten $2.50M — an 8% miss. Rents look in line with market; the property has run at 94% occupancy (vs UW 95%). You're asked to diagnose the miss in your year-end memo to the LP.
 
@@ -310,7 +308,7 @@ You're three years into a five-year hold on a 200-unit multifamily asset. Year-3
 - D. It's probably noise — single-year NOI variance is normal; report the variance and move on.
 
 ### 18. A single tenant rolling 40% of NRSF — hold or sell?
-*Type: Situational · risk · intermediate · office · assetManagement*
+*Situational · risk · intermediate · office · assetManagement*
 
 You own a 250,000 SF Class-A office building. The largest tenant (100,000 SF, 40% of NRSF) has a lease expiring in 14 months. They've given mixed signals on renewal but historically have always renewed. The submarket vacancy is at a 10-year high (15%). You're deciding whether to sell *now* (with the lease in place) or hold and risk the rollover.
 
@@ -328,7 +326,7 @@ You own a 250,000 SF Class-A office building. The largest tenant (100,000 SF, 40
 - D. Recapitalize via a JV partner now — keep upside if they renew, share downside if they don't.
 
 ### 19. Re-cut the sponsor's aggressive pro forma
-*Type: Situational · diagnostic · advanced · multifamily · mortgageUw*
+*Situational · diagnostic · advanced · multifamily · mortgageUw*
 
 You're lending on a $50M acquisition. The sponsor's pro forma shows 8% NOI growth in years 1–5, no capex, occupancy ramping from 92% to 97% in Year 1, and a 5.5% exit cap (vs 5.25% going-in — only 25 bps of expansion). The submarket has averaged 3% rent growth and the asset is stabilized. You're writing your credit memo.
 
@@ -347,7 +345,7 @@ You're lending on a $50M acquisition. The sponsor's pro forma shows 8% NOI growt
 - D. Demand recourse to the sponsor in lieu of underwriting changes.
 
 ### 20. Same loan passes DSCR but fails debt yield — which wins?
-*Type: Situational · risk · advanced · office · mortgageUw*
+*Situational · risk · advanced · office · mortgageUw*
 
 You're sizing a permanent loan. NOI is $5.0M; the requested loan is $65M; 30-year amortization at 5.0%. The DSCR test (1.25x threshold) passes at 1.19x — wait, that fails. Let me re-state: the DSCR comes in at 1.31x (passes); the debt yield (NOI / loan = 7.7%) fails the 8.0% threshold. The sponsor argues "DSCR is what matters." How do you respond?
 
@@ -365,7 +363,7 @@ You're sizing a permanent loan. NOI is $5.0M; the requested loan is $65M; 30-yea
 - D. DSCR is what banks care about; debt yield is mostly a CMBS/agency thing.
 
 ### 21. Fund is 40% office vs 25% target — which assets sell first?
-*Type: Situational · investment-thesis · advanced · mixed · portfolioMgmt*
+*Situational · investment-thesis · advanced · mixed · portfolioMgmt*
 
 You manage a $2B value-add fund. Sector allocation has drifted: office is now 40% of NAV vs the 25% IC mandate. You need to bring it down by selling ~$300M of office. The portfolio has 12 office assets ranging from a Class-A trophy with 9 years of WALT (priced tightly) to a half-vacant 1980s suburban park (likely a sale at a meaningful discount to basis). Which assets do you sell first?
 
@@ -382,7 +380,7 @@ You manage a $2B value-add fund. Sector allocation has drifted: office is now 40
 - D. Don't sell — wait for the office market to recover.
 
 ### 22. The sponsor wants to extend "to capture more growth"
-*Type: Situational · investment-thesis · advanced · multifamily · assetManagement/portfolioMgmt*
+*Situational · investment-thesis · advanced · multifamily · assetManagement/portfolioMgmt*
 
 You're the LP IC member on a Class-B multifamily deal that's 5 years into a 5-year hold. The sponsor proposes extending 2 more years "to capture additional rent growth from the renovation completed last year." Original-hold IRR is 14% to LPs. The sponsor projects 16% if the extension goes well. The fund's required return on redeployed capital today is also 14%.
 
@@ -400,7 +398,7 @@ You're the LP IC member on a Class-B multifamily deal that's 5 years into a 5-ye
 - D. Reject — but only because the sponsor extended their last deal and missed the projection.
 
 ### 23. Same after-tax IRR — what tips the decision?
-*Type: Situational · investment-thesis · advanced · mixed · portfolioMgmt/assetManagement*
+*Situational · investment-thesis · advanced · mixed · portfolioMgmt/assetManagement*
 
 You're a fund GP. Two paths produce identical after-tax IRRs to LPs (~13%): (a) sell the asset now, distribute proceeds; (b) hold + refi to a 65% LTV loan, distribute proceeds, sell at the original year-5 mark. The fund is in year 4 of a 7-year vehicle. Sale costs and recapture/cap gains are baked into both numbers.
 
@@ -418,7 +416,7 @@ You're a fund GP. Two paths produce identical after-tax IRRs to LPs (~13%): (a) 
 - D. Carry / promote economics for the GP — refi+hold often pays the GP more carry.
 
 ### 24. How do you size the capex reserve on a stabilized asset?
-*Type: Situational · diagnostic · intermediate · multifamily · assetManagement/acquisitions*
+*Situational · diagnostic · intermediate · multifamily · assetManagement/acquisitions*
 
 You're underwriting a 200-unit Class-B multifamily acquisition built in 2005. The OM models a $250/unit/yr capex reserve. The roof is 18 years old (40-yr life), boilers are due in 2 years, and you've identified ~$400k of deferred maintenance from the property tour.
 
@@ -437,7 +435,7 @@ You're underwriting a 200-unit Class-B multifamily acquisition built in 2005. Th
 - D. Set the recurring reserve high enough ($800/unit/yr) to absorb everything — roof, boiler, deferred — over the 5-year hold.
 
 ### 25. Stress-testing a permanent loan for refi at maturity
-*Type: Situational · risk · advanced · office · mortgageUw*
+*Situational · risk · advanced · office · mortgageUw*
 
 You're underwriting a 5-year permanent loan on a stabilized office asset. Going-in cap is 6.5%; the loan sizes to 65% LTV at a 1.30x DSCR + 9% debt yield. Today's market is steady, but you need to confirm the loan will refi cleanly at maturity — even if cap rates widen and rates rise.
 
@@ -455,7 +453,7 @@ You're underwriting a 5-year permanent loan on a stabilized office asset. Going-
 - D. Stress only the debt yield test — DSCR is already conservative because rates would have to triple to fail it.
 
 ### 26. Why is fund-level IRR 14% when deal-level is 16%?
-*Type: Situational · diagnostic · advanced · mixed · portfolioMgmt*
+*Situational · diagnostic · advanced · mixed · portfolioMgmt*
 
 You're reviewing an LP report. Deal-level IRRs across the fund's 8 acquisitions average 16%. The fund-level IRR (net to LPs) is 14%. The 200 bps gap is a recurring question from your investor base.
 
@@ -474,7 +472,7 @@ You're reviewing an LP report. Deal-level IRRs across the fund's 8 acquisitions 
 - D. Tax leakage between the deal entity and the fund vehicle.
 
 ### 27. Construction loan: when does LTC bind vs LTV?
-*Type: Situational · risk · advanced · mixed · development/mortgageUw*
+*Situational · risk · advanced · mixed · development/mortgageUw*
 
 You're sizing a construction loan on a $50M total project cost (TPC). The lender quotes 65% LTC and 60% LTV-on-stabilized-value. Stabilized NOI is projected at $4M; market cap is 5.5%. The construction loan converts to permanent at certificate of occupancy.
 
@@ -492,7 +490,7 @@ You're sizing a construction loan on a $50M total project cost (TPC). The lender
 - D. Lender lends the average of the two limits ($38M) to balance LTC and LTV concerns.
 
 ### 28. Buying a distressed CRE loan — when does it pencil?
-*Type: Situational · investment-thesis · advanced · office · acquisitions/portfolioMgmt*
+*Situational · investment-thesis · advanced · office · acquisitions/portfolioMgmt*
 
 A regional bank is offering a non-performing $40M senior loan on a Class-B office building. Original loan: $40M at 4.5%, 4 years remaining. Borrower hasn't paid in 2 quarters. The asset's estimated current value is $30M (loan is 33% under-water). The bank wants to clear it. They're asking $24M (a 40% discount to face).
 
@@ -510,7 +508,7 @@ A regional bank is offering a non-performing $40M senior loan on a Class-B offic
 - D. Negotiate down to $20M; at $30M asset value, $20M basis is the right entry for foreclosure protection.
 
 ### 29. NNN vs Gross — who actually bears the OpEx risk?
-*Type: Situational · lease-econ · intermediate · retail · assetManagement/acquisitions*
+*Situational · lease-econ · intermediate · retail · assetManagement/acquisitions*
 
 You own a single-tenant retail asset on a 10-year NNN lease at $25/SF base rent. Property taxes have risen 8%/yr for the past 3 years (vs 3% expected). The tenant is now pushing to renew on a *gross* basis at a higher face rent ($32/SF) to "make their costs predictable." The new gross rent is, on paper, higher than the NNN base.
 
@@ -528,7 +526,7 @@ You own a single-tenant retail asset on a 10-year NNN lease at $25/SF base rent.
 - D. Convert to gross at the proposed $32/SF — the rent uplift makes up for OpEx growth, and the predictability for the tenant reduces re-leasing risk.
 
 ### 30. Recourse vs covenants — which structures protect the lender?
-*Type: Situational · risk · advanced · multifamily · mortgageUw*
+*Situational · risk · advanced · multifamily · mortgageUw*
 
 You're structuring a $40M permanent loan on a stabilized MF asset. Sponsor is mid-tier (good track record, modest balance sheet, no public credit rating). Sponsor is asking for non-recourse. The credit committee wants protection beyond just the asset itself.
 
@@ -546,7 +544,7 @@ You're structuring a $40M permanent loan on a stabilized MF asset. Sponsor is mi
 - D. Tight covenants only — DSCR maintenance plus a low LTV floor — and skip both recourse and carve-outs to win the deal.
 
 ### 31. Ground lease vs fee simple — what changes in your underwriting?
-*Type: Situational · investment-thesis · advanced · mixed · development/acquisitions*
+*Situational · investment-thesis · advanced · mixed · development/acquisitions*
 
 You're evaluating two land deals for a 200-unit MF development. Site A: $10M fee-simple purchase. Site B: 99-year ground lease at $400k/yr (fixed for 10 years, then 10% bumps every 10 years thereafter). Construction cost is identical at $40M for both sites.
 
@@ -564,7 +562,7 @@ You're evaluating two land deals for a 200-unit MF development. Site A: $10M fee
 - D. Use a discount-rate comparison: the present value of ground rents at 7% discount vs the $10M upfront cost — pick whichever is lower.
 
 ### 32. Funding the close: how does the capital call flow?
-*Type: Situational · deal-process · beginner · acquisitions/assetManagement/portfolioMgmt*
+*Situational · deal-process · beginner · acquisitions/assetManagement/portfolioMgmt*
 
 Your fund is closing on a $50M acquisition Friday. Equity check is $20M (after $30M of debt). Fund has $40M of unfunded LP commitments. The closing schedule needs cash wired Thursday by 2pm to the title company.
 
@@ -582,7 +580,7 @@ Your fund is closing on a $50M acquisition Friday. Equity check is $20M (after $
 - D. Wait for the equity to be funded after closing — title companies will accept a closing-day promise to fund within 30 days.
 
 ### 33. Prorations at closing — who pays what?
-*Type: Situational · deal-process · intermediate · acquisitions/assetManagement*
+*Situational · deal-process · intermediate · acquisitions/assetManagement*
 
 You're closing a $30M MF acquisition on the 15th of the month. Property tax for the year is $360k (annualized; bills land in Q4). Tenant rents totaling $250k were collected by the seller for the full month on the 1st. Insurance prepaid for the next 6 months is $90k.
 
@@ -599,7 +597,7 @@ You're closing a $30M MF acquisition on the 15th of the month. Property tax for 
 - D. Apply a flat 1% reduction to the purchase price as a "proration adjustment" and skip the line-item math.
 
 ### 34. A $2M cost overrun on a development — where does the money come from?
-*Type: Situational · deal-process · intermediate · development/assetManagement/mortgageUw*
+*Situational · deal-process · intermediate · development/assetManagement/mortgageUw*
 
 You're developing a 200-unit MF building. Original TPC was $50M with a 5% ($2.5M) hard-cost contingency. You're 80% through construction; the GC has identified $2M of additional costs (foundation issues + steel price spike). Your construction loan is at the 65% LTC ceiling. You've already drawn 70% of the loan.
 
@@ -618,7 +616,7 @@ You're developing a 200-unit MF building. Original TPC was $50M with a 5% ($2.5M
 - D. Have the GC absorb the overrun under their guaranteed maximum price (GMP) contract — that's what the GMP is for.
 
 ### 35. Construction loan draw — what does the bank actually require?
-*Type: Situational · deal-process · intermediate · development/mortgageUw*
+*Situational · deal-process · intermediate · development/mortgageUw*
 
 You're submitting a $4M construction draw for the next 30 days of work on a ground-up MF project. The lender has 5 business days to approve. The GC says they need the funds wired by the 28th to pay subs on time.
 
@@ -635,7 +633,7 @@ You're submitting a $4M construction draw for the next 30 days of work on a grou
 - D. A written request from the borrower; lender will release funds based on the loan agreement schedule without further docs.
 
 ### 36. What are all these different bank accounts for?
-*Type: Situational · deal-process · beginner · assetManagement/portfolioMgmt*
+*Situational · deal-process · beginner · assetManagement/portfolioMgmt*
 
 You've just stepped into asset management on a stabilized MF property. The financials show four different bank accounts: an operating account, a security deposit account, a replacement reserve, and a tax & insurance escrow. The lender requires monthly reporting from each.
 
@@ -652,7 +650,7 @@ You've just stepped into asset management on a stabilized MF property. The finan
 - D. Money flows from reserves into operating monthly to smooth NOI; reserves are just a pre-paid expense pool.
 
 ### 37. How does a cash-out refi flow through the balance sheet?
-*Type: Situational · deal-process · intermediate · assetManagement/portfolioMgmt*
+*Situational · deal-process · intermediate · assetManagement/portfolioMgmt*
 
 You're refinancing a stabilized asset. Before refi: book value of asset = $40M, debt = $20M, equity = $20M. The new loan is $32M (60% LTV against current value of $53M). Net cash to the LPs after refi closing costs is $11M. Walk through the balance sheet impact.
 
@@ -670,7 +668,7 @@ You're refinancing a stabilized asset. Before refi: book value of asset = $40M, 
 - D. The refi is balance-sheet-neutral until the next operating period — debt and equity stay the same, only cash moves.
 
 ### 38. Q3 expenses ran 12% over budget — how do you investigate?
-*Type: Situational · deal-process · intermediate · assetManagement/portfolioMgmt*
+*Situational · deal-process · intermediate · assetManagement/portfolioMgmt*
 
 You're presenting Q3 results to the LPs. Total OpEx came in 12% above plan ($1.34M actual vs $1.20M budget on a $4M revenue base). Revenue and occupancy were on plan. The LP IC asks "where did the variance come from?" Your initial PnL summary just shows "OpEx $1.34M (Budget $1.20M)" with no further breakdown.
 
@@ -688,7 +686,7 @@ You're presenting Q3 results to the LPs. Total OpEx came in 12% above plan ($1.3
 - D. Add a "$140k OpEx variance — under investigation" line to the report and follow up next quarter when more data is available.
 
 ### 39. A 1-tier waterfall: in what order does cash get distributed?
-*Type: Situational · deal-process · intermediate · portfolioMgmt/assetManagement/acquisitions*
+*Situational · deal-process · intermediate · portfolioMgmt/assetManagement/acquisitions*
 
 You're modeling distributions on a deal sale. Joint venture: LP contributed $20M (90%), GP contributed $2.2M (10%). Waterfall is 1-tier: 8% pref to LP, then return of capital pro-rata, then 80/20 split (LP/GP) on residual. Sale net proceeds + accumulated cash flow = $35M total distributable. Hold was 4 years.
 
@@ -707,7 +705,7 @@ You're modeling distributions on a deal sale. Joint venture: LP contributed $20M
 - D. Pay the LP $20M back, then split the remaining $15M 80/20.
 
 ### 40. Closing in 30 days — what's the right diligence sequence?
-*Type: Situational · deal-process · intermediate · acquisitions*
+*Situational · deal-process · intermediate · acquisitions*
 
 You've signed a PSA on a $40M MF acquisition with a 30-day diligence period and a 15-day financing-contingency carveout. The deal team is six people including legal, environmental, financial, and operations diligence streams. The PSA hard-money goes up day 30; loss of all earnest money happens at PSA term plus 5 days for closing.
 
@@ -724,7 +722,7 @@ You've signed a PSA on a $40M MF acquisition with a 30-day diligence period and 
 - D. Wait for the lender to provide their diligence checklist; align your work to theirs.
 
 ### 41. When does the lender actually check covenant compliance?
-*Type: Situational · deal-process · intermediate · mortgageUw/assetManagement*
+*Situational · deal-process · intermediate · mortgageUw/assetManagement*
 
 You've closed on a permanent loan with these covenants: 1.20x maintenance DSCR (springing recourse below), 8% debt yield floor (cash sweep below), no transfer of property without lender consent. The borrower's monthly NOI fluctuates with vacancy and seasonal expenses. As the asset manager, when does the lender actually run these tests?
 
@@ -741,7 +739,7 @@ You've closed on a permanent loan with these covenants: 1.20x maintenance DSCR (
 - D. Tested CONTINUOUSLY by the lender via direct access to the property's bank accounts.
 
 ### 42. Cost segregation — what does it actually do for your IRR?
-*Type: Situational · deal-process · intermediate · assetManagement/portfolioMgmt/acquisitions*
+*Situational · deal-process · intermediate · assetManagement/portfolioMgmt/acquisitions*
 
 You've just closed on a $30M MF acquisition. The CFO asks whether to spend $25k on a cost segregation study. You're holding 5 years; the LP base is mostly tax-paying individuals + family offices. The asset has $24M of depreciable basis (80% of purchase, excluding land).
 
@@ -759,7 +757,7 @@ You've just closed on a $30M MF acquisition. The CFO asks whether to spend $25k 
 - D. Cost seg increases the depreciable basis itself by including items the standard schedule misses.
 
 ### 43. Reading an OM — what are the red flags?
-*Type: Situational · pricing · intermediate · acquisitions*
+*Situational · pricing · intermediate · acquisitions*
 
 You're reviewing a broker's offering memorandum on a $35M MF deal. The OM shows: 5.0% going-in cap on T-3 NOI annualized, 8% Year-1 NOI growth, $0 capex reserve, "trended NOI" used for the cap calculation, comp set of 4 deals from 18+ months ago, and a 5.25% exit cap (only 25 bps of expansion). Asset is a 1995-vintage Class-B garden-style.
 
@@ -778,7 +776,7 @@ You're reviewing a broker's offering memorandum on a $35M MF deal. The OM shows:
 - D. Demand the broker re-issue the OM with corrections; if they refuse, walk away.
 
 ### 44. TI approval — who needs to sign off, and in what order?
-*Type: Situational · deal-process · intermediate · assetManagement*
+*Situational · deal-process · intermediate · assetManagement*
 
 A new office tenant signed a 7-year lease at $32/SF with $40/SF in TI allowance. The tenant's GC has submitted plans + a $1.05M draw request (the first of three planned during build-out). The lender requires consent on TI draws above a certain threshold; the operating budget allocated $1.4M for TI on this lease.
 
@@ -796,7 +794,7 @@ A new office tenant signed a 7-year lease at $32/SF with $40/SF in TI allowance.
 - D. Lender approves all TI draws by default; their consent is the gating step.
 
 ### 45. European vs American waterfall — which one favors LPs?
-*Type: Situational · deal-process · intermediate · portfolioMgmt/acquisitions*
+*Situational · deal-process · intermediate · portfolioMgmt/acquisitions*
 
 You're reviewing two fund LPAs side by side. Fund A uses a deal-by-deal (American) waterfall: GP earns promote on each individual deal as it pays out, with no fund-level lookback. Fund B uses a fund-level (European) waterfall: GP gets no promote until LPs have been returned all contributed capital + pref across the entire fund. Both funds target a 7-year vehicle life and 8% pref / 80-20 above. The early-vintage deals are most likely to outperform; later deals may underperform.
 
@@ -808,7 +806,7 @@ You're reviewing two fund LPAs side by side. Fund A uses a deal-by-deal (America
 - D. European favors GP — they get the certainty of seeing fund-level performance before promote crystallizes.
 
 ### 46. Full catch-up vs 50/50 catch-up — which is more sponsor-friendly?
-*Type: Situational · deal-process · intermediate · portfolioMgmt/acquisitions*
+*Situational · deal-process · intermediate · portfolioMgmt/acquisitions*
 
 Two LPAs propose different catch-up structures, both targeting a 20% promote tier above 8% pref. Structure A: 100% catch-up to GP — every dollar above pref flows to GP until GP has 20% of (pref + cat-up). Structure B: 50/50 catch-up — every dollar above pref splits 50/50 (LP/GP) until GP has 20% of (pref + cat-up). Both then split 80/20 above the catch-up tier. The deal earns $4M of pref, $5M of cash above pref before hitting the catch-up target.
 
@@ -825,7 +823,7 @@ Two LPAs propose different catch-up structures, both targeting a 20% promote tie
 - D. Full catch-up pays GP ~$0.5M; 50/50 pays GP ~$1M.
 
 ### 47. IRR hurdle vs MOIC hurdle — which does the sponsor prefer?
-*Type: Situational · deal-process · advanced · portfolioMgmt/acquisitions*
+*Situational · deal-process · advanced · portfolioMgmt/acquisitions*
 
 You're negotiating an LPA. Two structures on the table: Structure X — pref hurdle is 8% IRR; promote starts at 8% and steepens at 14% IRR. Structure Y — pref hurdle is 1.5× MOIC (multiple of capital); promote starts at 1.5× and steepens at 1.8×. The deal is a value-add multifamily with a planned 5-year hold. The sponsor expects to outperform on time (push IRR by exiting in year 3 or 4 if pricing allows) but expects a modest MOIC because the cap-rate environment is volatile.
 
@@ -843,7 +841,7 @@ You're negotiating an LPA. Two structures on the table: Structure X — pref hur
 - D. Sponsor prefers MOIC because it pays absolute dollars and the deal is value-add.
 
 ### 48. When does the GP have to give promote dollars back?
-*Type: Situational · deal-process · advanced · portfolioMgmt/mortgageUw*
+*Situational · deal-process · advanced · portfolioMgmt/mortgageUw*
 
 Mid-life check on a $400M PE real estate fund using an American (deal-by-deal) waterfall. Year-3 status: Deals 1-3 closed and exited at outsized returns; GP collected $12M in promote across them. Deals 4-7 are still active, with two of them (Deals 5 and 6) trending toward losses. If those losses materialize at exit, the fund-level lookback would have shown LP failed to clear pref. The LPA includes a clawback provision triggered at fund liquidation.
 
@@ -860,7 +858,7 @@ Mid-life check on a $400M PE real estate fund using an American (deal-by-deal) w
 - D. GP must return all $12M of promote dollars regardless of fund-level outcome — clawbacks always equal the full distributed promote.
 
 ### 49. Compound vs simple pref — how much does the language actually move?
-*Type: Situational · deal-process · intermediate · portfolioMgmt/acquisitions*
+*Situational · deal-process · intermediate · portfolioMgmt/acquisitions*
 
 You're reading two LPAs back-to-back. Both stipulate an 8% preferred return on $20M of LP capital over a 5-year hold. LPA #1 says "8% annual preferred return, *compounded*". LPA #2 says "8% annual preferred return, *simple*". The deal generates exactly enough cash above ROC to clear pref + a modest catch-up + about $3M of above-pref residual.
 
@@ -878,7 +876,7 @@ You're reading two LPAs back-to-back. Both stipulate an 8% preferred return on $
 - D. Compound pref pays LP ~$1.4M more, but it doesn't affect GP's catch-up because catch-up is calculated against ROC, not pref.
 
 ### 50. Key-person event — what happens to the GP's promote?
-*Type: Situational · deal-process · advanced · portfolioMgmt/acquisitions*
+*Situational · deal-process · advanced · portfolioMgmt/acquisitions*
 
 A $500M closed-end fund is in year 4 of a 7-year vehicle. The LPA names two key persons (the founder + the head of acquisitions). The head of acquisitions has just resigned to join a competitor. Per the LPA, this triggers a "key-person event" with a 60-day cure period. The fund has 5 active deals, 3 of which are in the catch-up tier or above. Mid-fund GP promote distributions year-to-date are $8M. The LP advisory committee meets in 14 days.
 
@@ -896,7 +894,7 @@ A $500M closed-end fund is in year 4 of a 7-year vehicle. The LPA names two key 
 - D. Nothing happens immediately — the LPA only requires GP to disclose the resignation; LPs have no formal rights.
 
 ### 51. DSCR test timing — when does the lender actually measure?
-*Type: Situational · document-literacy · advanced · mortgageUw/assetManagement*
+*Situational · document-literacy · advanced · mortgageUw/assetManagement*
 
 > **[LOAN — Section 6.04 — Financial Covenants]**
 > (a) Minimum Debt Service Coverage Ratio. As of the last day of each
@@ -927,7 +925,7 @@ You're reviewing a loan agreement's DSCR covenant for a mid-size MF refi. The le
 - D. The 1.20× test is measured on spot NOI at Test Date, so seasonal fluctuations alone could trigger it.
 
 ### 52. Cash trap activation — what does this lender clause actually do?
-*Type: Situational · document-literacy · advanced · mortgageUw/assetManagement/portfolioMgmt*
+*Situational · document-literacy · advanced · mortgageUw/assetManagement/portfolioMgmt*
 
 > **[LOAN — Section 4.03 — Cash Management]**
 > (a) Lockbox Activation Event. Upon the earlier to occur of (i) any
@@ -962,7 +960,7 @@ Your borrower's DSCR just printed at 1.08× on the most recent Test Date — bel
 - D. Sponsor can negotiate to keep distributions during the trap period — these clauses are typically waivable.
 
 ### 53. DSCR cure rights — how much cash does the sponsor actually need?
-*Type: Situational · document-literacy · advanced · mortgageUw/assetManagement*
+*Situational · document-literacy · advanced · mortgageUw/assetManagement*
 
 > **[LOAN — Section 6.04(b) — DSCR Cure Mechanics]**
 > Borrower may cure any failure of the DSCR covenant by depositing
@@ -997,7 +995,7 @@ NOI is running $2.4M annualized; debt service is $2.2M ($25M loan @ 7%, 30-year 
 - D. They can simply keep curing repeatedly until NOI recovers — there's no limit.
 
 ### 54. Springing recourse — what triggers personal liability?
-*Type: Situational · document-literacy · advanced · mortgageUw/acquisitions*
+*Situational · document-literacy · advanced · mortgageUw/acquisitions*
 
 > **[LOAN — Section 9 — Recourse Carve-Outs]**
 > Notwithstanding anything to the contrary in this Agreement, the
@@ -1033,7 +1031,7 @@ You're advising a sponsor whose Class B office asset has been hit hard by a tena
 - D. Transferring 49% can't trigger (b) because it's less than 50% — controlling interest = majority by definition.
 
 ### 55. Initial vs Additional Capital — what's a partner actually obligated to fund?
-*Type: Situational · document-literacy · advanced · portfolioMgmt/acquisitions*
+*Situational · document-literacy · advanced · portfolioMgmt/acquisitions*
 
 > **[LPA — Article IV — Capital Contributions]**
 > 4.1 Initial Capital Contributions. Each Member's "Initial Capital
@@ -1070,7 +1068,7 @@ You're an LP at a JV that funded $20M of Initial Capital ($18M LP, $2M GP). The 
 - D. GP must fund the entire $6M cost overrun alone — that's the point of putting the GP first in 4.3(i).
 
 ### 56. Capital call default — what does the LPA actually do to a non-funder?
-*Type: Situational · document-literacy · advanced · portfolioMgmt/acquisitions*
+*Situational · document-literacy · advanced · portfolioMgmt/acquisitions*
 
 > **[LPA — Section 4.5 — Member Default Remedies]**
 > If a Member fails to fund any required Capital Contribution within
@@ -1111,7 +1109,7 @@ A capital call has been issued for $3M (LP's pro-rata share). LP cannot fund —
 - D. Non-defaulting Members would always pick Forced Buyout (d) because it ends the relationship cleanly.
 
 ### 57. Cost overrun sharing — who eats what when the budget blows up?
-*Type: Situational · document-literacy · advanced · portfolioMgmt/acquisitions*
+*Situational · document-literacy · advanced · portfolioMgmt/acquisitions*
 
 > **[LPA — Section 4.3 — Cost Overrun Allocation]**
 > Cost Overruns shall be allocated and funded as follows:
@@ -1145,7 +1143,7 @@ A development project has a $50M budget with a $2.5M Contingency Reserve. Initia
 - D. LP funds all $7M because GP's Sponsor Skin is its only obligation.
 
 ### 58. Contribution ratios — when do Percentage Interests actually shift?
-*Type: Situational · document-literacy · advanced · portfolioMgmt/acquisitions*
+*Situational · document-literacy · advanced · portfolioMgmt/acquisitions*
 
 > **[LPA — Section 4.6 — Adjustment of Percentage Interests]**
 > (a) Default Position. Members' Percentage Interests shall be
@@ -1183,7 +1181,7 @@ JV started 90/10 LP/GP at Initial Capital of $20M LP + $2M GP = $22M total. Mid-
 - D. Capital Accounts and Percentage Interests are the same thing — both track contributions for distributions.
 
 ### 59. Bill-back allowance — what can the landlord actually pass through?
-*Type: Situational · document-literacy · advanced · assetManagement/acquisitions*
+*Situational · document-literacy · advanced · assetManagement/acquisitions*
 
 > **[LEASE — Article 5 — Operating Expense Pass-Through]**
 > 5.1 Tenant's Share. Tenant shall pay Tenant's Pro Rata Share of
@@ -1231,7 +1229,7 @@ You're reviewing year-end CAM reconciliation for an office tenant. The landlord 
 - D. The 2.94% pro-rata share is wrong; tenants should always re-measure and reduce their share.
 
 ### 60. Base year vs expense stop — which one are you actually reading?
-*Type: Situational · document-literacy · intermediate · assetManagement/acquisitions*
+*Situational · document-literacy · intermediate · assetManagement/acquisitions*
 
 > **[LEASE — Article 5.1 — Operating Expense Pass-Through]**
 > 5.1(a) Operating Expenses. Tenant shall pay, as Additional Rent,
@@ -1265,7 +1263,7 @@ You're reviewing a 5-year lease in an office building you're acquiring. The buil
 - D. The gross-up clause works against the tenant — it inflates expenses on the landlord side and increases tenant's share.
 
 ### 61. CAM reconciliation — what does the year-end true-up actually do?
-*Type: Situational · document-literacy · intermediate · assetManagement*
+*Situational · document-literacy · intermediate · assetManagement*
 
 > **[LEASE — Article 7 — CAM Reconciliation]**
 > 7.1 Estimated Monthly Payments. Tenant shall pay, in advance and
@@ -1308,7 +1306,7 @@ You're a tenant on a NNN lease. You paid $250/month CAM estimates throughout 202
 - D. Audit rights are the only remedy — invoke them and pay whatever the audit determines.
 
 ### 62. Construction LDs — does this clause actually cover the owner's losses?
-*Type: Situational · document-literacy · advanced · development/acquisitions*
+*Situational · document-literacy · advanced · development/acquisitions*
 
 > **[CONSTRUCTION — Article 12 — Time of Performance / Liquidated Damages]**
 > 12.1 Substantial Completion Date. Contractor shall achieve
@@ -1346,7 +1344,7 @@ Your $50M development project is now 90 days past the contractual Substantial Co
 - D. Owner recovers $500k cap *plus* actual damages above the cap, since LDs and actual damages can stack.
 
 ### 63. PSA earnest money — who keeps the deposit when the deal blows up?
-*Type: Situational · document-literacy · advanced · acquisitions*
+*Situational · document-literacy · advanced · acquisitions*
 
 > **[PSA — Article 11 — Default and Remedies]**
 > 11.1 Buyer's Default. If Buyer fails to consummate the purchase
@@ -1390,7 +1388,7 @@ You're Buyer on a $40M industrial acquisition. The DD period was 45 days; it end
 - D. You only owe the $1M Initial Deposit; the Additional Deposit isn't due until you fund it, so you can refuse and walk with that money saved.
 
 ### 64. Equity-first vs pari-passu — which structure does the lender want?
-*Type: Situational · deal-process · intermediate · development/mortgageUw*
+*Situational · deal-process · intermediate · development/mortgageUw*
 
 You're negotiating a construction loan term sheet. The lender is proposing equity-first funding ($20M sponsor equity must be drawn in full before the lender funds the first dollar). Sponsor is pushing for pari-passu (each draw splits 40/60 sponsor/lender from day 1). Total project cost is $50M; expected duration is 18 months. The current rate environment makes carry costs significant.
 
@@ -1407,7 +1405,7 @@ You're negotiating a construction loan term sheet. The lender is proposing equit
 - D. Lender prefers pari-passu — it gives the lender more visibility into sponsor cash flow throughout construction.
 
 ### 65. Change order pricing — who pays for the variance?
-*Type: Situational · deal-process · advanced · development/acquisitions*
+*Situational · deal-process · advanced · development/acquisitions*
 
 > **[CONSTRUCTION — Article 7 — Change Orders]**
 > (a) Definition. A "Change Order" is a written instrument modifying
@@ -1441,7 +1439,7 @@ Your project is mid-build. Three Change Orders are on the table: (1) Owner asked
 - D. CO 3 (fire-rating omission) requires Owner to pay because architects are Owner's consultants, not Contractor's.
 
 ### 66. Retainage release — when does the contractor get paid?
-*Type: Situational · deal-process · advanced · development/mortgageUw*
+*Situational · deal-process · advanced · development/mortgageUw*
 
 > **[CONSTRUCTION — Article 9 — Retainage]**
 > (a) Hold-Back. Owner shall retain ten percent (10%) from each
@@ -1475,7 +1473,7 @@ Your $50M project (40M hard costs + 10M soft) just achieved Substantial Completi
 - D. Owner can hold all $3M indefinitely until punch is complete, regardless of Substantial Completion.
 
 ### 67. Five deals, three slots — which framework picks?
-*Type: Situational · investment-thesis · advanced · portfolioMgmt/acquisitions*
+*Situational · investment-thesis · advanced · portfolioMgmt/acquisitions*
 
 Your fund has $150M of dry powder and five acquisitions in the pipeline that all clear committee individually. Each is roughly $50M of equity, so only three will close. Deal A is a 14% IRR / 1.7x EM Class-A office. Deal B is a 22% IRR / 2.2x EM ground-up MF. Deal C is a 16% IRR / 1.9x EM stabilized MF (off-market). Deal D is a 24% IRR / 2.5x EM distressed retail. Deal E is a 12% IRR / 1.6x EM industrial. Pick the three.
 
@@ -1495,7 +1493,7 @@ Your fund has $150M of dry powder and five acquisitions in the pipeline that all
 - D. A, B, and D. Diversify by deal type (one stable office, one ground-up, one distressed) and let the highest-return deal in each bucket carry the fund.
 
 ### 68. Risk-adjusted return — what's the actual framework?
-*Type: Situational · investment-thesis · advanced · portfolioMgmt*
+*Situational · investment-thesis · advanced · portfolioMgmt*
 
 An LP asks: "How are you measuring risk-adjusted returns across your fund's holdings?" You can't just say "IRR" — every deal in the book has a different IRR. You need a defensible framework that lets you compare a 14% stabilized industrial deal to a 24% ground-up MF deal on the same axis.
 
@@ -1513,7 +1511,7 @@ An LP asks: "How are you measuring risk-adjusted returns across your fund's hold
 - D. Use the deal's downside IRR (5th-percentile sensitivity case) instead of base-case IRR. Whichever deal still produces a positive IRR in the downside case is the lowest-risk deal regardless of base-case return.
 
 ### 69. Hotel: your RevPAR index is below 100 and falling — what now?
-*Type: Situational · diagnostic · intermediate · hotel · assetManagement*
+*Situational · diagnostic · intermediate · hotel · assetManagement*
 
 You manage a 220-key full-service hotel in a primary market. STR data shows your trailing-12 RevPAR is up 8% YoY (good in absolute terms) but the comp set is up 14%. RevPAR Index has slipped from 102 to 94 over four quarters. ADR Index is at 97 (basically flat); occupancy index is at 96 (sliding). The brand flag relationship-manager just flagged the trend in your QBR.
 
@@ -1532,7 +1530,7 @@ You manage a 220-key full-service hotel in a primary market. STR data shows your
 - D. It's an FF&E reserve issue — the asset is showing wear and guests are choosing newer comp set hotels. Accelerate the renovation budget by 12 months.
 
 ### 70. Retail: how do you underwrite percentage rent that's 8% of NOI?
-*Type: Situational · investment-thesis · intermediate · retail · acquisitions/assetManagement*
+*Situational · investment-thesis · intermediate · retail · acquisitions/assetManagement*
 
 You're underwriting a $40M anchored grocery-shadow center. T-12 NOI is $2.6M. The rent roll: 60% of in-place rent is base rent, 8% is percentage rent overages from three in-line tenants (a bakery, a fitness studio, a quick-service restaurant), and the remainder is recoveries (CAM / tax / insurance). T-12 sales reports show all three percentage-rent tenants are flat YoY. The seller's broker is presenting the 8% as recurring and is asking you to underwrite it at full value over the 5-year hold.
 
@@ -1553,7 +1551,7 @@ You're underwriting a $40M anchored grocery-shadow center. T-12 NOI is $2.6M. Th
 - D. Cap the entire NOI ($2.6M) at a higher cap rate (7.0% instead of 6.5%) to compensate for the percentage-rent risk in the going-in yield.
 
 ### 71. Industrial: defend a higher $/SF bid on a wider truck court
-*Type: Situational · pricing · intermediate · industrial · acquisitions*
+*Situational · pricing · intermediate · industrial · acquisitions*
 
 You're in best-and-final on a 500,000 SF Class A logistics facility (32' clear, ESFR sprinklers, 60 dock doors). A competing bidder is at $135/SF; you're at $145/SF — 7% higher. The asset has a 200' deep truck court; the comp set in the submarket averages 130'. Your in-place rent is 15% below the comp set's market rent, and you've underwritten an 18-month rollover to market on lease expiration in year 3. The seller's broker is asking why you're paying 7% above the competing bid when in-place rent is below market.
 
@@ -1573,12 +1571,8 @@ You're in best-and-final on a 500,000 SF Class A logistics facility (32' clear, 
 - C. 200' vs 130' is a 70' difference — not material at this asset size. The bid premium has to come from the rent mark-to-market, which depends on submarket vacancy and concession pace at rollover.
 - D. You should match the competing bid at $135/SF — paying 7% more on a single physical attribute is overpaying when you could deploy the spread elsewhere.
 
----
-
-## Longform case studies (open-text)
-
 ### 72. Walk me through your bid
-*Type: Longform · intermediate · multifamily · acquisitions*
+*Longform · intermediate · multifamily · acquisitions*
 
 You're the lead analyst on a $42M acquisition of a 200-unit Class-B garden-style multifamily asset, built 1998, in a top-50 MSA. The OM presents: T-3 annualized NOI of $2.45M (5.83% going-in cap), 5% Year-1 NOI growth tapering to 3% by Year 5, a $300/unit/yr capex reserve, and a 6.0% exit cap (just 17 bps wider than going-in). Submarket vacancy is 6%; the asset is at 94%. Recent comps in the submarket trade 5.50–6.25%, including one trophy 2018-built asset at 5.50%. Your IRR target is 14% on a 5-year hold; the deal pencils to 13.8% at the OM's assumptions.
 
@@ -1594,7 +1588,7 @@ You're the lead analyst on a $42M acquisition of a 200-unit Class-B garden-style
 **Q: In 4-6 sentences: how do you re-cut this OM, what bid do you recommend, and why? Be specific about which assumptions you change and how each one moves the price.**
 
 ### 73. Diagnose the NOI miss for the LP IC memo
-*Type: Longform · intermediate · multifamily · assetManagement*
+*Longform · intermediate · multifamily · assetManagement*
 
 You're the asset manager on a 250-unit MF asset purchased 18 months ago. Year-1 NOI underwriting was $3.0M; trailing-12 NOI just came in at $2.65M — an 11.7% miss. Revenue is $4.85M (vs UW $4.95M, 2% under). Rents are at market, occupancy is 93% (vs UW 94%). OpEx came in at $2.20M vs UW $1.95M — a $250k or 12.8% overage. Insurance jumped 28% YoY at renewal; property tax was reassessed and rose 18%; payroll inflation ran 6%; everything else was within 3% of plan. The LP IC asks for a 2-page memo explaining the variance and proposing actions. You need to draft the variance analysis section.
 
@@ -1610,7 +1604,7 @@ You're the asset manager on a 250-unit MF asset purchased 18 months ago. Year-1 
 **Q: Draft the variance analysis section: what caused the miss, what's structural vs one-time, and what's your action plan? Aim for 5-7 sentences in the LP's tone (factual, prioritized, specific).**
 
 ### 74. Defend this deal to a skeptical IC
-*Type: Longform · advanced · industrial · acquisitions/portfolioMgmt*
+*Longform · advanced · industrial · acquisitions/portfolioMgmt*
 
 You've underwritten a $65M industrial acquisition. Going-in cap is 5.2% (modeled at $3.4M NOI), exit cap 6.0% (80 bps spread), levered IRR 16.5% on a 5-year hold at 60% LTV. The submarket is tight (3% vacancy), the building is a 2015-vintage Class-A distribution facility leased to a single investment-grade tenant on 9 years of remaining term with 2.5% annual escalations. The IC chairman opens by saying "industrial caps have compressed too far; we're late in the cycle. Why are we buying at 5.2% when the historical avg is 6.5%?"
 
@@ -1626,7 +1620,7 @@ You've underwritten a $65M industrial acquisition. Going-in cap is 5.2% (modeled
 **Q: Defend the buy thesis to the IC in 6-8 sentences. Don't pretend the chairman's concern doesn't exist; address it directly with specific reasons this asset earns the tight cap.**
 
 ### 75. Recommend: refi or sell — write the IC memo
-*Type: Longform · advanced · mixed · portfolioMgmt/assetManagement*
+*Longform · advanced · mixed · portfolioMgmt/assetManagement*
 
 You're three years into a five-year hold on a stabilized $80M MF asset. Realized IRR through Y3 is 14% to LPs. Two paths to year-5 close-out: (a) hold + refi at year 3 to a 65% LTV loan ($52M new loan vs $30M existing), distribute ~$20M of refi proceeds, sell at year 5; (b) sell now at $85M (current market). After-tax IRR on path A is ~14.2%, path B is ~13.9%. The fund is in year 4 of a 7-year vehicle. The LP base is 60% taxable individuals + family offices, 40% pension funds. The fund's alternative deployment opportunity set today is thin (most viable deals priced at 10-12% IRR). Draft the recommendation memo to the IC.
 
@@ -1641,14 +1635,14 @@ You're three years into a five-year hold on a stabilized $80M MF asset. Realized
 **Q: Write the recommendation in 6-8 sentences. Take a position; don't hedge. Explain how each non-IRR factor (LP tax mix, fund life, redeployment) shaped the decision.**
 
 ### 76. Walk me through a 3-tier American waterfall
-*Type: Longform · intermediate · portfolioMgmt/acquisitions*
+*Longform · intermediate · portfolioMgmt/acquisitions*
 
 You're in a final-round interview at a real-estate PE shop. The senior partner says: "I want to make sure you actually understand fund economics. Walk me through how a 3-tier American waterfall works for a single deal. Pick your own numbers — small enough to do mental math, real enough to ground the explanation. Tell me what each tier does, why it exists, and where the GP's economics come from."
 
 **Q: In 4-6 sentences, walk through the three tiers of an American waterfall on a deal you make up. Address: (1) what each tier does; (2) the order they pay in; (3) why the catch-up tier exists and how it scales; (4) where the GP's economic incentive lives — i.e. what dollars are "promote" vs "pro-rata return".**
 
 ### 77. Defend the waterfall terms to IC
-*Type: Longform · advanced · portfolioMgmt/acquisitions*
+*Longform · advanced · portfolioMgmt/acquisitions*
 
 You're the lead analyst on a $300M co-GP venture pitching the IC of a major institutional LP. Your sponsor is proposing: 6% pref, 50/50 catch-up to a 25% GP target, 70/30 above. The LP's IC counter-proposal: 9% pref, 100% catch-up to 20%, 80/20 above. Both structures clear under base-case modeling, but the dispersion across upside / downside cases is dramatically different. The relationship matters — this LP allocated $200M to the sponsor's last fund. The IC meeting is tomorrow.
 
@@ -1661,7 +1655,7 @@ You're the lead analyst on a $300M co-GP venture pitching the IC of a major inst
 **Q: Draft a recommendation in 6-8 sentences for *which structure to land on*. Take a position; defend it on math + relationship. Explicitly address: where the sponsor wins on the sponsor proposal, where LP wins on the IC counter, and what middle position you'd propose to close the deal.**
 
 ### 78. IC memo: defend a ground-up MF dev pencil
-*Type: Longform · advanced · multifamily · development/acquisitions*
+*Longform · advanced · multifamily · development/acquisitions*
 
 You're presenting a 200-unit Class A ground-up multifamily dev to your firm's investment committee. TPC is $50M ($250k/unit). Stabilized NOI is $3.25M (6.5% yield-on-cost). The market cap on stabilized comps is 5.0%, giving a stabilized value of $65M and a 150 bps dev spread vs market cap. The deal is 65% LTC; equity check is $17.5M. Lease-up is 18 months from CO; you're modeling a $1.6M lease-up reserve and a 24-month construction window. Submarket vacancy is 4%; pipeline is +800 units delivering over the next 24 months in your trade area. Construction lender is asking the chairman why you're building when comps trade tighter than your YoC.
 
@@ -1679,7 +1673,7 @@ You're presenting a 200-unit Class A ground-up multifamily dev to your firm's in
 **Q: Write a 4-6 sentence IC memo defending the buy. Don't pretend the lender's challenge isn't fair — address it directly. What's your dev spread, what stresses the deal, what's the trigger to re-underwrite or walk?**
 
 ### 79. Loan committee: defend a $30M permanent on a stressed-market office
-*Type: Longform · advanced · office · mortgageUw/acquisitions*
+*Longform · advanced · office · mortgageUw/acquisitions*
 
 You're underwriting a $30M permanent loan on a $50M Class B office in a market that's been under stress: submarket vacancy is 18%, sublease availability +200 bps in the past year, and three Fortune-500 tenants downsized in the trade area in Q3. The loan is 60% LTV, 1.30x DSCR at a 6.5% rate / 30-yr amort. The asset is 90% leased on a WALT of 5.2 years; the largest tenant (28% of NOI) has 7 years remaining at +6% to market with two 5-year options. The borrower is a top-quartile sponsor with a 20-year track record; recourse is non-recourse with standard bad-boy carveouts. Your committee chair opens with: 'why are we lending in this market, and what's our view if the largest tenant doesn't renew?'
 
@@ -1696,7 +1690,7 @@ You're underwriting a $30M permanent loan on a $50M Class B office in a market t
 **Q: Write a 5-7 sentence credit memo defending the lend. Address the chair's market concern directly. What's your refi-risk view, what triggers the cash-trap, what would change your stance?**
 
 ### 80. Year 2 NOI miss: diagnose, prove it, fix it
-*Type: Longform · intermediate · multifamily · assetManagement*
+*Longform · intermediate · multifamily · assetManagement*
 
 You're the asset manager on a 300-unit Class B multifamily acquisition. You're 14 months into a 5-year hold. Year 2 NOI is tracking 4% below underwriting ($3.84M actual vs $4M projected) — not catastrophic, but the trend has been deteriorating quarter-over-quarter for the past three quarters. Underwriting assumed 95% economic occupancy, 3% rent growth, and OpEx in line with comps. T-12 financials show: physical occupancy 94%, economic occupancy 91%, rent growth +2.1%, OpEx +5.3% YoY. The investment committee asks for a diagnostic memo before next quarter's review.
 
@@ -1711,86 +1705,78 @@ You're the asset manager on a 300-unit Class B multifamily acquisition. You're 1
 
 **Q: Write a 3-paragraph diagnostic for the AM committee. Paragraph 1: rank the three most-likely root causes by NOI impact. Paragraph 2: how do you prove which one is binding (what data, from where). Paragraph 3: what you do about it.**
 
----
-
-## Mock-interview prompts (spoken/prose)
-
 ### 81. Tell me about yourself…
-*Type: Mock · fit · ~90s*
+*Mock · fit · ~90s*
 
 **Q: Tell me about yourself. Walk me through your background and what brought you to commercial real estate.**
 
 ### 82. Why commercial real estate, as opposed to corporate finance,…
-*Type: Mock · fit · ~60s*
+*Mock · fit · ~60s*
 
 **Q: Why commercial real estate, as opposed to corporate finance, private equity, or investment banking?**
 
-### 83. Why our firm specifically? What do you see in our platform t…
-*Type: Mock · fit · ~75s*
+### 83. Why our firm specifically…
+*Mock · fit · ~75s*
 
 **Q: Why our firm specifically? What do you see in our platform that draws you here over our peers?**
 
-### 84. Tell me about a time you disagreed with someone more senior …
-*Type: Mock · behavioral · ~120s*
+### 84. Tell me about a time you disagreed with someone more senior…
+*Mock · behavioral · ~120s*
 
 **Q: Tell me about a time you disagreed with someone more senior on a deal. How did you handle it, and what was the outcome?**
 
 ### 85. Tell me about a deal that didn't work out the way you expect…
-*Type: Mock · behavioral · ~120s*
+*Mock · behavioral · ~120s*
 
 **Q: Tell me about a deal that didn't work out the way you expected. What happened, and what did you learn?**
 
 ### 86. Tell me about a time the data said one thing and your instin…
-*Type: Mock · behavioral · ~100s*
+*Mock · behavioral · ~100s*
 
 **Q: Tell me about a time the data said one thing and your instinct said another. What did you do?**
 
 ### 87. Tell me about a piece of critical feedback you received that…
-*Type: Mock · behavioral · ~90s*
+*Mock · behavioral · ~90s*
 
 **Q: Tell me about a piece of critical feedback you received that changed how you work. What was the feedback, and what did you do about it?**
 
 ### 88. Tell me about a time you had to deliver under serious time p…
-*Type: Mock · behavioral · ~100s*
+*Mock · behavioral · ~100s*
 
 **Q: Tell me about a time you had to deliver under serious time pressure. How did you prioritize, and what got done vs left on the floor?**
 
-### 89. Tell me about a tenant negotiation you led where the stakes …
-*Type: Mock · behavioral · ~110s*
+### 89. Tell me about a tenant negotiation you led where the stakes…
+*Mock · behavioral · ~110s*
 
 **Q: Tell me about a tenant negotiation you led where the stakes were high. What did you ask for, what did you concede, and what was the outcome?**
 
 ### 90. Tell me about a close credit-call you made on a deal — one w…
-*Type: Mock · behavioral · ~100s*
+*Mock · behavioral · ~100s*
 
 **Q: Tell me about a close credit-call you made on a deal — one where you had to weigh borrower strength against deal economics. What did you decide, and how did it play out?**
 
 ### 91. Where do you see institutional CRE cap rates over the next 1…
-*Type: Mock · marketView · ~120s*
+*Mock · marketView · ~120s*
 
 **Q: Where do you see institutional CRE cap rates over the next 12-18 months? Pick a position and defend it.**
 
-### 92. If you had $100M of dry powder to deploy in CRE in the next …
-*Type: Mock · marketView · ~120s*
+### 92. If you had $100M of dry powder to deploy in CRE in the next…
+*Mock · marketView · ~120s*
 
 **Q: If you had $100M of dry powder to deploy in CRE in the next year, which sector would you over-weight, and which would you under-weight? Why?**
 
 ### 93. Where do you see CRE debt spreads moving over the next 12 mo…
-*Type: Mock · marketView · ~120s*
+*Mock · marketView · ~120s*
 
 **Q: Where do you see CRE debt spreads moving over the next 12 months — for senior bank debt, agency, and CMBS? Pick a stance and defend it.**
 
 ### 94. How are you thinking about the debt-vs-equity mix in CRE dep…
-*Type: Mock · marketView · ~120s*
+*Mock · marketView · ~120s*
 
 **Q: How are you thinking about the debt-vs-equity mix in CRE deployment today? Should investors lean more into preferred equity / mezz / debt funds, or stay in common equity?**
 
----
-
-## Guided walkthroughs (multi-step framing)
-
 ### 95. Combined Proforma — chained
-*Type: Walkthrough · combinedScenarioWalk · acquisitions*
+*Walkthrough · combinedScenarioWalk · acquisitions*
 
 You're underwriting an apartment building. GPR is $4,500,000, other income is $250,000, vacancy is 5.00%, OpEx is $1,900,000, and you're using a 6.00% cap rate. Walk it step by step.
 
@@ -1800,7 +1786,7 @@ You're underwriting an apartment building. GPR is $4,500,000, other income is $2
 4. **Step 4 — Implied value** — At a 6.00% cap, what's the implied value?
 
 ### 96. DSCR Loan Sizing — chained
-*Type: Walkthrough · dscrLoanSizingWalk · mortgageUw/acquisitions*
+*Walkthrough · dscrLoanSizingWalk · mortgageUw/acquisitions*
 
 Your stabilized NOI is $750,000. Your lender requires a 1.25× DSCR on a 30 years amortizing loan at 6.00%. Size the loan in three steps.
 
@@ -1809,7 +1795,7 @@ Your stabilized NOI is $750,000. Your lender requires a 1.25× DSCR on a 30 year
 3. **Step 3 — Max loan amount** — Convert that DS allowance into a loan amount. What's the max loan?
 
 ### 97. Mock Acquisition — full unlevered walkthrough
-*Type: Walkthrough · mockAcquisitionWalk · acquisitions*
+*Walkthrough · mockAcquisitionWalk · acquisitions*
 
 Stabilized multifamily acquisition. GPR $4,000,000, other income $200,000, 5.00% vacancy, OpEx $1,600,000. Going-in cap 5.50%; you're modeling a 5 years hold with 3.00% annual NOI growth and a 6.00% exit cap (50 bps spread). Sale costs 1.50%. All-cash analysis — unlevered IRR.
 
@@ -1825,7 +1811,7 @@ Stabilized multifamily acquisition. GPR $4,000,000, other income $200,000, 5.00%
 10. **Step 10 — Approximate unlevered IRR** — EM^(1/n) − 1 over a 5 years hold. What's the approximate IRR?
 
 ### 98. Value-Add Underwriting — chained
-*Type: Walkthrough · valueAddWalk · assetManagement*
+*Walkthrough · valueAddWalk · assetManagement*
 
 100-unit Class-B garden-style MF. Year-1 NOI $1,200,000. Renovation budget $12,000/unit ($1,200,000 total) drives 18.00% rent uplift. Acquire at 5.50%, exit at 5.25% (cap compression on improved asset). Walk the value-creation arc.
 
@@ -1839,7 +1825,7 @@ Stabilized multifamily acquisition. GPR $4,000,000, other income $200,000, 5.00%
 8. **Step 8 — Value created** — Stabilized value − all-in basis. What's the value created (gross)?
 
 ### 99. Development Feasibility — chained
-*Type: Walkthrough · developmentFeasibilityWalk · development/acquisitions*
+*Walkthrough · developmentFeasibilityWalk · development/acquisitions*
 
 Mid-rise multifamily development. Land $8,000,000; hard cost $38,000,000; soft cost $7,000,000; contingency 5.00% of (hard + soft). Stabilized NOI projected $4,500,000; market cap 5.00% on completed product. Walk the feasibility test.
 
@@ -1855,7 +1841,7 @@ Mid-rise multifamily development. Land $8,000,000; hard cost $38,000,000; soft c
 10. **Step 10 — Profit margin on cost** — Profit / TPC. What's the profit margin?
 
 ### 100. Hold or Sell — chained
-*Type: Walkthrough · holdSellWalk · assetManagement/portfolioMgmt*
+*Walkthrough · holdSellWalk · assetManagement/portfolioMgmt*
 
 Year 3 of a 5-year hold. Bought for $40,000,000; current NOI $2,400,000; today's value $40,000,000 at a 6.00% cap. NOI growing 3.00%/yr. If you hold 2 more years, expect a 6.25% exit cap (25 bps drift). Walk the sell-now vs hold-through math.
 

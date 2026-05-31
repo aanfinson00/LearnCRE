@@ -17,6 +17,7 @@ import { FriendsFeedScreen } from './components/FriendsFeedScreen';
 import { CohortsScreen } from './components/CohortsScreen';
 import { HeadToHeadScreen } from './components/HeadToHeadScreen';
 import { QuestionSubmitScreen } from './components/QuestionSubmitScreen';
+import { FeedbackReviewScreen } from './components/FeedbackReviewScreen';
 import { AdminSubmissionsScreen } from './components/AdminSubmissionsScreen';
 import { CohortInviteLanding } from './components/CohortInviteLanding';
 import { MatchInviteLanding } from './components/MatchInviteLanding';
@@ -128,7 +129,8 @@ type Mode =
   | 'friends'
   | 'cohorts'
   | 'headToHead'
-  | 'submitQuestion';
+  | 'submitQuestion'
+  | 'feedbackReview';
 
 type CertView =
   | { kind: 'list' }
@@ -210,6 +212,10 @@ function AppShell() {
 
     if (mode === 'submitQuestion') {
       return <QuestionSubmitScreen onBack={() => setMode('quiz')} />;
+    }
+
+    if (mode === 'feedbackReview') {
+      return <FeedbackReviewScreen onBack={() => setMode('quiz')} />;
     }
 
     if (mode === 'profile') {

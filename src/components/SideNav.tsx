@@ -21,7 +21,8 @@ type Mode =
   | 'friends'
   | 'cohorts'
   | 'headToHead'
-  | 'submitQuestion';
+  | 'submitQuestion'
+  | 'feedbackReview';
 
 interface Props {
   active: Mode;
@@ -80,6 +81,7 @@ const SECTIONS: Section[] = [
     label: 'Contribute',
     items: [
       { id: 'submitQuestion', label: 'Submit a question', hint: 'Pitch a question for the catalog. Reviewer integrates the best ones.' },
+      { id: 'feedbackReview', label: 'Feedback studio', hint: 'Work through 100 questions and attach a voice memo on each.' },
     ],
   },
   {
