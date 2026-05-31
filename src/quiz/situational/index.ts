@@ -76,6 +76,16 @@ import { riskAdjustedReturnFramework } from './riskAdjustedReturnFramework';
 import { hotelRevparDivergence } from './hotelRevparDivergence';
 import { retailPercentageRentClause } from './retailPercentageRentClause';
 import { industrialTruckCourtBid } from './industrialTruckCourtBid';
+import { officeNegativeAbsorption } from './officeNegativeAbsorption';
+import { industrialSpecAbsorption } from './industrialSpecAbsorption';
+import { retailDarkAnchorAbsorption } from './retailDarkAnchorAbsorption';
+import { breakEvenOccupancy } from './breakEvenOccupancy';
+import { rentGrowthFlatSensitivity } from './rentGrowthFlatSensitivity';
+import { freeRentNoiTreatment } from './freeRentNoiTreatment';
+import { fixedVsCpiRentBumps } from './fixedVsCpiRentBumps';
+import { outOfMarketComps } from './outOfMarketComps';
+import { qualityTierCompAdjustment } from './qualityTierCompAdjustment';
+import { specPreLeasingThreshold } from './specPreLeasingThreshold';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -149,6 +159,16 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   hotelRevparDivergence,
   retailPercentageRentClause,
   industrialTruckCourtBid,
+  officeNegativeAbsorption,
+  industrialSpecAbsorption,
+  retailDarkAnchorAbsorption,
+  breakEvenOccupancy,
+  rentGrowthFlatSensitivity,
+  freeRentNoiTreatment,
+  fixedVsCpiRentBumps,
+  outOfMarketComps,
+  qualityTierCompAdjustment,
+  specPreLeasingThreshold,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {
