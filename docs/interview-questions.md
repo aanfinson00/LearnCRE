@@ -198,7 +198,7 @@ in a future PR.
 
 ---
 
-## Portfolio Management (8)
+## Portfolio Management (13)
 
 ### Q: Your fund is 40% office vs 25% target. Which assets do you sell first to rebalance?
 - **Role:** portfolioMgmt · **Difficulty:** advanced
@@ -240,9 +240,34 @@ in a future PR.
 - **Why:** EM↔IRR translation; common filter.
 - **Maps to:** `equityMultiple` quiz template + `irrSimple` quiz template + `EquityMultipleViz`.
 
+### Q: Fund owns Asset A ($80M, 5.5% cap) and Asset B ($120M, 6.8% cap). What is the portfolio's weighted-average going-in cap rate? Why is simple-averaging wrong?
+- **Role:** portfolioMgmt · **Difficulty:** beginner
+- **Why:** weighted-average cap rate is the single most common portfolio-analytics sanity check; simple-averaging is a pervasive error candidates bring from school that signals a weak grasp of value-weighting.
+- **Maps to:** **GAP — propose `weightedAvgCapRate` quiz template + `portfolio-cap-blending` situational**.
+
+### Q: A $300M fund has called 25% of commitments through year 1. Deployed capital earns a 4.5% cash yield. What is the fund-level cash yield on total committed capital in year 1? What does this J-curve shape imply for reported fund-level IRR vs. deal-level IRR?
+- **Role:** portfolioMgmt · **Difficulty:** intermediate
+- **Why:** J-curve drag is the most misunderstood concept for junior analysts entering fund roles — it explains why fund-level performance always lags deal-level IRR in early years and shapes LP expectations.
+- **Maps to:** `feeDragOnIrr` quiz template + **GAP — propose `jcurve-deployed-capital` situational**.
+
+### Q: A fund reports DPI of 0.6x and TVPI of 1.6x at the 5-year mark in a 10-year vehicle. How do you interpret this for an LP who needs quarterly distributions? What would it mean if DPI exceeded TVPI?
+- **Role:** portfolioMgmt · **Difficulty:** intermediate
+- **Why:** DPI vs. TVPI interpretation separates candidates who understand liquidity risk from those who track only headline return metrics — critical distinction for open-end and interval funds.
+- **Maps to:** **GAP — propose `dpi-tvpi-interpretation` situational**.
+
+### Q: Fund holds 5 assets totaling $400M in value with $260M of non-recourse debt. One $50M asset is transferred to the lender; its $38M loan is extinguished. What is the new portfolio LTV on the remaining assets?
+- **Role:** portfolioMgmt · **Difficulty:** advanced
+- **Why:** tests LTV arithmetic after a workout and teaches how non-recourse structure isolates — and fails to isolate — overall portfolio leverage.
+- **Maps to:** **GAP — propose `portfolio-ltv-restructure` situational**.
+
+### Q: You hold 5 assets: 3 earned 19% IRR over 6 years (above the 10% hurdle); 2 earned 7% IRR after 3 years (below hurdle). If you sell all five today, can the outperformers' promote offset the laggards? What does this imply about harvest sequencing?
+- **Role:** portfolioMgmt · **Difficulty:** advanced
+- **Why:** harvest sequencing directly affects LP promote economics; candidates who focus on maximizing deal-level IRR often misread the fund-level promote implications of selling winners early vs. waiting for laggards.
+- **Maps to:** `holdVsSellIrr` quiz template + `irrAfterPromote` quiz template + **GAP — propose `harvest-timing-promote` situational**.
+
 ---
 
-## Development (7)
+## Development (12)
 
 ### Q: Land cost $8M, hard cost $38M, soft $7M, 5% contingency. What's TPC and what's the yield-on-cost on $4.5M stabilized NOI?
 - **Role:** development · **Difficulty:** intermediate
@@ -278,6 +303,31 @@ in a future PR.
 - **Role:** development · **Difficulty:** advanced
 - **Why:** ground-lease economics; common at urban infill developers.
 - **Maps to:** **GAP — propose `groundLeaseVsFee` situational**.
+
+### Q: Target YOC is 7%. Total costs before land: $36M hard + $7M soft + $2M contingency. Stabilized NOI is $4.0M. What is the maximum you can pay for land?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** residual land value is the core feasibility gate in every development underwriting — working backwards from a target YOC to max land cost is the move most candidates miss.
+- **Maps to:** **GAP — propose `residualLandValue` quiz template + `land-residual-value` situational**.
+
+### Q: Hard costs are $50M; soft costs came in at $12.5M. What is soft cost as a percentage of hard? Is that ratio typical for a ground-up industrial build vs. mid-rise multifamily?
+- **Role:** development · **Difficulty:** beginner
+- **Why:** cost-structure sanity check; candidates often have no intuition for normal soft/hard splits across product types, which undermines pro-forma credibility.
+- **Maps to:** **GAP — propose `soft-cost-ratio` situational**.
+
+### Q: A lender requires 60% pre-leasing on a 200,000 SF building for construction takeout. You have 95,000 SF signed. How many more square feet must you execute, and what fraction of your remaining unleased space does that represent?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** pre-leasing threshold arithmetic is a first-screen at every construction lender; candidates routinely confuse % of total SF with % of remaining unleased space.
+- **Maps to:** **GAP — propose `preleasing-threshold` situational**.
+
+### Q: A 9-month construction delay on a $60M project at a 6.5% construction-loan rate adds how much in carry cost? If stabilized NOI stays at $3.9M, how much does this erode YOC vs. the original 7% target?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** schedule slippage is the most common development-risk realization; candidates need to convert months of carry into basis-point hits on yield on cost.
+- **Maps to:** `yieldOnCost` quiz template + **GAP — propose `schedule-slippage-yoc` situational**.
+
+### Q: The GC has billed $36M gross on a $48M hard-cost budget; you are holding 10% retainage. How much retainage have you withheld to date, and what percent of the hard-cost budget remains unfunded?
+- **Role:** development · **Difficulty:** beginner
+- **Why:** retainage tracking is a basic construction-accounting literacy check; surfaces regularly in both development-side and mortgage underwriting interviews.
+- **Maps to:** `retainageRunning` quiz template + **GAP — propose `retainage-release-mechanics` situational**.
 
 ---
 
@@ -315,10 +365,14 @@ regardless of position.
 
 ## Summary statistics
 
-- **Total questions in this doc:** 52
-- **Mapped to existing content:** 41 (78%)
-- **Flagged as GAPs:** 8 (15%)
-- **Out of scope (time-sensitive / behavioral):** 4 (8%)
+- **Total questions in this doc:** 62
+- **Mapped to existing content:** 45 (73%)
+- **Flagged as GAPs:** 17 (27%)
+- **Out of scope (time-sensitive / behavioral):** 4 (6%)
+
+*Note: some questions reference an existing quiz template AND propose a new
+situational, so they appear in both the "mapped" and "GAP" tallies; counts
+sum to slightly more than 62.*
 
 Top GAPs to address (ranked by interview frequency):
 
@@ -327,7 +381,19 @@ Top GAPs to address (ranked by interview frequency):
 3. `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz (portfolio mgmt)
 4. `constructionLoanSizing` quiz + `dev-ltc-vs-ltv` situational (development)
 5. `walk-distressed-1` walkthrough (cross-cutting)
+6. `residualLandValue` quiz + `land-residual-value` situational (development)
+7. `weightedAvgCapRate` quiz + `portfolio-cap-blending` situational (portfolio mgmt)
+8. `jcurve-deployed-capital` situational (portfolio mgmt)
+9. `preleasing-threshold` situational (development)
+10. `schedule-slippage-yoc` situational (development)
+11. `dpi-tvpi-interpretation` situational (portfolio mgmt)
+12. `harvest-timing-promote` situational (portfolio mgmt)
+13. `portfolio-ltv-restructure` situational (portfolio mgmt)
+14. `soft-cost-ratio` situational (development)
+15. `retainage-release-mechanics` situational (development)
+16. `groundLeaseVsFee` situational (development)
 
-These five gaps would lift mapped-to-content coverage from 78% → ~93% with
-~½ day of content work each, and they all surface from real interview-question
-patterns rather than top-down design guesses.
+The original top-5 gaps would lift mapped coverage from 73% → ~85%. The
+newly added development and portfolio-mgmt gaps (items 6-16) address the two
+most underrepresented roles and are all tied to real interview patterns rather
+than top-down guesses.
