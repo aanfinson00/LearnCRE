@@ -76,6 +76,16 @@ import { riskAdjustedReturnFramework } from './riskAdjustedReturnFramework';
 import { hotelRevparDivergence } from './hotelRevparDivergence';
 import { retailPercentageRentClause } from './retailPercentageRentClause';
 import { industrialTruckCourtBid } from './industrialTruckCourtBid';
+import { industrialSubmarketOverbuilt } from './industrialSubmarketOverbuilt';
+import { shadowSpaceOffice } from './shadowSpaceOffice';
+import { leasingVelocityDecline } from './leasingVelocityDecline';
+import { rentGrowthIrrSensitivity } from './rentGrowthIrrSensitivity';
+import { floatingRateDebtShock } from './floatingRateDebtShock';
+import { rentBumpStructureComparison } from './rentBumpStructureComparison';
+import { leaseTerminationOptionRisk } from './leaseTerminationOptionRisk';
+import { distressedSaleCompExclusion } from './distressedSaleCompExclusion';
+import { compSizeAdjustment } from './compSizeAdjustment';
+import { compGeographicExpansion } from './compGeographicExpansion';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -149,6 +159,16 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   hotelRevparDivergence,
   retailPercentageRentClause,
   industrialTruckCourtBid,
+  industrialSubmarketOverbuilt,
+  shadowSpaceOffice,
+  leasingVelocityDecline,
+  rentGrowthIrrSensitivity,
+  floatingRateDebtShock,
+  rentBumpStructureComparison,
+  leaseTerminationOptionRisk,
+  distressedSaleCompExclusion,
+  compSizeAdjustment,
+  compGeographicExpansion,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {
