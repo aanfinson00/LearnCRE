@@ -1,5 +1,329 @@
 {
-  "version": 1,
-  "ideas": {},
-  "log": []
+  "ideas": {
+    "building-a-cre-investment-portfolio-99887": {
+      "category": "tools-workflow",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-06-05T22:53:08Z",
+      "graded_at": "2026-06-05T22:53:20Z",
+      "id": "building-a-cre-investment-portfolio-99887",
+      "key_numbers": [
+        "10 assets",
+        "$5M"
+      ],
+      "outline": "Guides learners through strategies for building and managing an investment portfolio in the commercial real estate market, including diversification techniques.",
+      "reasoning": "The idea is valuable but not essential for all CRE professionals. It fits as a concept but may require more mathematical depth. The content partially overlaps with existing material, focusing on common strategies and techniques.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 13,
+      "scores": {
+        "foundational": 4,
+        "novelty": 2,
+        "reach": 4,
+        "walkthroughFit": 3
+      },
+      "status": "rejected",
+      "title": "Building a CRE Investment Portfolio"
+    },
+    "construction-loan-fundamentals-99885": {
+      "category": "capital-stack",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-06-05T22:53:08Z",
+      "graded_at": "2026-06-05T22:53:33Z",
+      "id": "construction-loan-fundamentals-99885",
+      "key_numbers": [
+        "85%",
+        "$10M",
+        "6 months"
+      ],
+      "outline": "Introduces the basics of construction loans in CRE, including loan terms specific to development projects and lender requirements during construction.",
+      "reasoning": "The topic is important but not essential for all CRE professionals. It fits moderately well as a walkthrough with room for improvement in concept integration. The content overlaps somewhat with existing material, though it could add value with unique insights or specific lender requirements. The reach is moderate given its relevance to those involved in construction projects.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 12,
+      "scores": {
+        "foundational": 4,
+        "novelty": 2,
+        "reach": 3,
+        "walkthroughFit": 3
+      },
+      "status": "rejected",
+      "title": "Construction Loan Fundamentals"
+    },
+    "cre-ethics-professional-conduct-99888": {
+      "category": "trust-relationships",
+      "draft_quiz_path": "docs/CURRICULUM_DRAFTS/quiz-cre-ethics-professional-conduct-99888.md",
+      "draft_walkthrough_path": "docs/CURRICULUM_DRAFTS/walkthrough-cre-ethics-professional-conduct-99888.md",
+      "drafted_at": "2026-06-05T22:57:33Z",
+      "generated_at": "2026-06-05T22:53:08Z",
+      "graded_at": "2026-06-05T22:53:47Z",
+      "id": "cre-ethics-professional-conduct-99888",
+      "key_numbers": [],
+      "outline": "Discusses ethical considerations and best practices for maintaining integrity in CRE transactions and relationships with clients, partners, and vendors.",
+      "reasoning": "Ethics and professional conduct are essential for all CRE professionals (universal need), but the idea of a walkthrough focused on these aspects is less practical compared to technical or transactional content, thus scoring lower in fit. The topic's novelty is limited since it already exists as an existing piece of content, reducing its uniqueness.",
+      "refined_at": "2026-06-05T23:04:27Z",
+      "refined_quiz_path": "docs/CURRICULUM_DRAFTS/quiz-cre-ethics-professional-conduct-99888.refined.md",
+      "refined_walkthrough_path": "docs/CURRICULUM_DRAFTS/walkthrough-cre-ethics-professional-conduct-99888.refined.md",
+      "score_total": 14,
+      "scores": {
+        "foundational": 5,
+        "novelty": 2,
+        "reach": 4,
+        "walkthroughFit": 3
+      },
+      "status": "refined",
+      "title": "CRE Ethics & Professional Conduct"
+    },
+    "due-diligence-for-commercial-leases-99886": {
+      "category": "legal-document",
+      "draft_quiz_path": "docs/CURRICULUM_DRAFTS/quiz-due-diligence-for-commercial-leases-99886.md",
+      "draft_walkthrough_path": "docs/CURRICULUM_DRAFTS/walkthrough-due-diligence-for-commercial-leases-99886.md",
+      "drafted_at": "2026-06-05T22:59:08Z",
+      "generated_at": "2026-06-05T22:53:08Z",
+      "graded_at": "2026-06-05T22:53:57Z",
+      "id": "due-diligence-for-commercial-leases-99886",
+      "key_numbers": [],
+      "outline": "Explains the critical components of commercial lease due diligence, including legal review and negotiation points to protect tenant rights.",
+      "reasoning": "The topic is essential for all CRE professionals involved in leasing activities. However, it may not integrate seamlessly with math-focused walkthrough steps and overlaps somewhat with existing content.",
+      "refined_at": "2026-06-05T23:05:24Z",
+      "refined_quiz_path": "docs/CURRICULUM_DRAFTS/quiz-due-diligence-for-commercial-leases-99886.refined.md",
+      "refined_walkthrough_path": "docs/CURRICULUM_DRAFTS/walkthrough-due-diligence-for-commercial-leases-99886.refined.md",
+      "score_total": 14,
+      "scores": {
+        "foundational": 5,
+        "novelty": 2,
+        "reach": 4,
+        "walkthroughFit": 3
+      },
+      "status": "refined",
+      "title": "Due Diligence for Commercial Leases"
+    },
+    "office-building-maintenance-reserves-99882": {
+      "category": "asset-class-deepdive",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-06-05T22:53:08Z",
+      "graded_at": "2026-06-05T22:54:09Z",
+      "id": "office-building-maintenance-reserves-99882",
+      "key_numbers": [
+        "500k",
+        "1%",
+        "20 years"
+      ],
+      "outline": "Explains the importance of setting aside reserves for maintenance in office buildings. Includes how to calculate and allocate these funds based on property age.",
+      "reasoning": "The topic is crucial for property management but less essential for all CRE professionals. It fits partially as walkthrough content but lacks the complexity or breadth of current samples. The idea overlaps with existing content and has a specific audience focus.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 12,
+      "scores": {
+        "foundational": 4,
+        "novelty": 2,
+        "reach": 3,
+        "walkthroughFit": 3
+      },
+      "status": "rejected",
+      "title": "Office Building Maintenance Reserves"
+    },
+    "property-valuation-during-economic-downturns-99884": {
+      "category": "macro-cycle",
+      "draft_quiz_path": "docs/CURRICULUM_DRAFTS/quiz-property-valuation-during-economic-downturns-99884.md",
+      "draft_walkthrough_path": "docs/CURRICULUM_DRAFTS/walkthrough-property-valuation-during-economic-downturns-99884.md",
+      "drafted_at": "2026-06-05T23:00:42Z",
+      "generated_at": "2026-06-05T22:53:08Z",
+      "graded_at": "2026-06-05T22:54:20Z",
+      "id": "property-valuation-during-economic-downturns-99884",
+      "key_numbers": [
+        "10%",
+        "-20%"
+      ],
+      "outline": "Teaches how economic downturns affect property valuation techniques, including adjustments to cap rates and income multipliers used in valuations.",
+      "reasoning": "The topic is foundational for understanding real estate valuation dynamics during economic shifts but lacks novelty since it's a known subject in existing content. It fits well as walkthrough material and has moderate reach across CRE tiers.",
+      "refined_at": "2026-06-05T23:06:59Z",
+      "refined_quiz_path": "docs/CURRICULUM_DRAFTS/quiz-property-valuation-during-economic-downturns-99884.refined.md",
+      "refined_walkthrough_path": "docs/CURRICULUM_DRAFTS/walkthrough-property-valuation-during-economic-downturns-99884.refined.md",
+      "score_total": 14,
+      "scores": {
+        "foundational": 5,
+        "novelty": 2,
+        "reach": 3,
+        "walkthroughFit": 4
+      },
+      "status": "refined",
+      "title": "Property Valuation During Economic Downturns"
+    },
+    "retail-leasing-dynamics-99881": {
+      "category": "asset-class-deepdive",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-06-05T22:53:08Z",
+      "graded_at": "2026-06-05T22:54:33Z",
+      "id": "retail-leasing-dynamics-99881",
+      "key_numbers": [
+        "75%",
+        "10%",
+        "3 years"
+      ],
+      "outline": "Covers the unique factors affecting retail leasing such as anchor store impact and tenant mix. Learners will understand how to optimize a retail property's occupancy rate.",
+      "reasoning": "Retail Leasing Dynamics is foundational for those specializing in retail CRE but not universal. It fits well as a walkthrough with math and concepts relevant to retail property optimization. The topic partially overlaps existing content, focusing on unique aspects of retail leasing. Its reach is limited primarily to retail professionals.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 13,
+      "scores": {
+        "foundational": 4,
+        "novelty": 3,
+        "reach": 2,
+        "walkthroughFit": 4
+      },
+      "status": "rejected",
+      "title": "Retail Leasing Dynamics"
+    },
+    "the-role-of-a-cre-analyst-99883": {
+      "category": "role-profile",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-06-05T22:53:08Z",
+      "graded_at": "2026-06-05T22:54:45Z",
+      "id": "the-role-of-a-cre-analyst-99883",
+      "key_numbers": [],
+      "outline": "Describes the day-to-day responsibilities, skills required, and career growth path for an entry-level commercial real estate analyst.",
+      "reasoning": "The concept is foundational knowledge for entry-level CRE analysts but exists as a sample title already. The idea could fit into a walkthrough format with some adaptation, and it has limited novelty given existing content. However, its reach extends widely across the industry's early career stages.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 13,
+      "scores": {
+        "foundational": 5,
+        "novelty": 1,
+        "reach": 4,
+        "walkthroughFit": 3
+      },
+      "status": "rejected",
+      "title": "The Role of a CRE Analyst"
+    },
+    "understanding-mezzanine-debt-99880": {
+      "category": "capital-stack",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-06-05T22:53:08Z",
+      "graded_at": "2026-06-05T22:55:01Z",
+      "id": "understanding-mezzanine-debt-99880",
+      "key_numbers": [
+        "12%",
+        "80%",
+        "25%"
+      ],
+      "outline": "Explains what mezzanine debt is in CRE transactions and its role between equity and senior debt. Learners will understand how it can enhance leverage and the risks involved.",
+      "reasoning": "Mezzanine debt is a specialized topic within CRE that many professionals might encounter but not all need daily. It fits well as a walkthrough with some math and conceptual steps, though it may be somewhat formulaic compared to other topics. The content overlaps partially with existing materials on mezzanine debt, thus reducing its novelty score slightly. Its relevance spans across different tiers of CRE professionals but is more pertinent to those involved in structured financing deals.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 12,
+      "scores": {
+        "foundational": 4,
+        "novelty": 2,
+        "reach": 3,
+        "walkthroughFit": 3
+      },
+      "status": "rejected",
+      "title": "Understanding Mezzanine Debt"
+    },
+    "understanding-reits-vs-direct-ownership-99889": {
+      "category": "concept-primer",
+      "draft_quiz_path": "docs/CURRICULUM_DRAFTS/quiz-understanding-reits-vs-direct-ownership-99889.md",
+      "draft_walkthrough_path": "docs/CURRICULUM_DRAFTS/walkthrough-understanding-reits-vs-direct-ownership-99889.md",
+      "drafted_at": "2026-06-05T23:02:51Z",
+      "generated_at": "2026-06-05T22:53:08Z",
+      "graded_at": "2026-06-05T22:55:13Z",
+      "id": "understanding-reits-vs-direct-ownership-99889",
+      "key_numbers": [
+        "10%",
+        "$5k",
+        "40%"
+      ],
+      "outline": "Compares direct property ownership to investing in REITs, covering benefits, risks, and tax implications for both approaches.",
+      "reasoning": "The topic is foundational for understanding CRE investment but slightly less critical than core concepts. It fits moderately well as a walkthrough, being concept-rich with some math. Novelty is limited due to existing content overlap. Broadly applicable across CRE tiers.",
+      "refined_at": "2026-06-05T23:08:29Z",
+      "refined_quiz_path": "docs/CURRICULUM_DRAFTS/quiz-understanding-reits-vs-direct-ownership-99889.refined.md",
+      "refined_walkthrough_path": "docs/CURRICULUM_DRAFTS/walkthrough-understanding-reits-vs-direct-ownership-99889.refined.md",
+      "score_total": 14,
+      "scores": {
+        "foundational": 4,
+        "novelty": 2,
+        "reach": 5,
+        "walkthroughFit": 3
+      },
+      "status": "refined",
+      "title": "Understanding REITs vs. Direct Ownership"
+    }
+  },
+  "log": [
+    {
+      "at": "2026-06-05T22:53:08Z",
+      "msg": "generate: added 10 new ideas (requested 10)"
+    },
+    {
+      "at": "2026-06-05T22:55:13Z",
+      "msg": "grade: processed 10"
+    },
+    {
+      "at": "2026-06-05T22:55:40Z",
+      "msg": "manual: cre-ethics-professional-conduct-99888 -> accepted"
+    },
+    {
+      "at": "2026-06-05T22:55:40Z",
+      "msg": "manual: due-diligence-for-commercial-leases-99886 -> accepted"
+    },
+    {
+      "at": "2026-06-05T22:55:41Z",
+      "msg": "manual: property-valuation-during-economic-downturns-99884 -> accepted"
+    },
+    {
+      "at": "2026-06-05T22:55:41Z",
+      "msg": "manual: understanding-reits-vs-direct-ownership-99889 -> accepted"
+    },
+    {
+      "at": "2026-06-05T22:57:33Z",
+      "msg": "draft: cre-ethics-professional-conduct-99888 -> drafted"
+    },
+    {
+      "at": "2026-06-05T22:59:08Z",
+      "msg": "draft: due-diligence-for-commercial-leases-99886 -> drafted"
+    },
+    {
+      "at": "2026-06-05T23:00:42Z",
+      "msg": "draft: property-valuation-during-economic-downturns-99884 -> drafted"
+    },
+    {
+      "at": "2026-06-05T23:02:51Z",
+      "msg": "draft: understanding-reits-vs-direct-ownership-99889 -> drafted"
+    },
+    {
+      "at": "2026-06-05T23:04:27Z",
+      "msg": "refine: cre-ethics-professional-conduct-99888 -> refined"
+    },
+    {
+      "at": "2026-06-05T23:05:24Z",
+      "msg": "refine: due-diligence-for-commercial-leases-99886 -> refined"
+    },
+    {
+      "at": "2026-06-05T23:06:59Z",
+      "msg": "refine: property-valuation-during-economic-downturns-99884 -> refined"
+    },
+    {
+      "at": "2026-06-05T23:08:29Z",
+      "msg": "refine: understanding-reits-vs-direct-ownership-99889 -> refined"
+    }
+  ],
+  "version": 1
 }
