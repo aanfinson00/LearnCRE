@@ -7,7 +7,8 @@ Stages:
   2. Grade       — each idea scored on rubric (foundational, walkthroughFit, novelty, reach)
   3. Queue       — high-scoring ideas surface in docs/CURRICULUM_QUEUE.md for human vetting
   4. Draft       — for accepted ideas, Ollama drafts a walkthrough + quiz template as MARKDOWN
-  5. Knowledge base — .curriculum-state.json accumulates all ideas with full history
+  5. Refine      — Claude (Opus) verifies math, fixes conceptual errors, polishes prose
+  6. Knowledge base — .curriculum-state.json accumulates all ideas with full history
 
 Idea status lifecycle:
   pending (ungraded)
@@ -15,13 +16,19 @@ Idea status lifecycle:
   queued (≥ threshold)  OR  rejected (< threshold)
      ↓ human vets in queue.md → marks [x]
   accepted
-     ↓ draft
-  drafted (markdown ready in docs/CURRICULUM_DRAFTS/)
+     ↓ draft (Ollama)
+  drafted (raw markdown in docs/CURRICULUM_DRAFTS/walkthrough-<id>.md + quiz-<id>.md)
+     ↓ refine (Claude Opus via `claude -p` subprocess)
+  refined (polished markdown in docs/CURRICULUM_DRAFTS/walkthrough-<id>.refined.md + quiz-<id>.refined.md)
      ↓ human reviews + manually merges to src/quiz/walkthroughs.ts and src/quiz/templates/
   shipped (manual status update)
 
 DRAFT FORMAT: Ollama writes MARKDOWN, not TypeScript. Math hallucinations in markdown
 are easier to spot during human review than math hallucinations in compiled code.
+
+REFINEMENT: Ollama is fast and free but error-prone (math, concepts). Claude is expensive
+but accurate. We use Ollama for high-volume ideation/drafting and Claude for the final
+polish on the small subset of drafts that survive grading and human vetting.
 
 CONFIGURATION: .curriculum.json (repo root)
 STATE:         .curriculum-state.json (repo root)
@@ -36,18 +43,22 @@ USAGE:
   curriculum-pipeline.py accept <id>        # mark idea as accepted
   curriculum-pipeline.py reject <id>        # mark idea as rejected
   curriculum-pipeline.py draft <id|next>    # draft walkthrough + quiz md for an accepted idea
-  curriculum-pipeline.py tick               # one auto step (draft if accepted, else grade, else generate)
+  curriculum-pipeline.py refine <id|next>   # polish a drafted idea via Claude Opus
+  curriculum-pipeline.py tick               # one auto step (refine > draft > grade > generate)
   curriculum-pipeline.py status             # print summary
 
 LOOP:
   /loop 30m bash python3 scripts/curriculum-pipeline.py tick
 
-DEPENDENCIES: stdlib only + local Ollama daemon with the configured model pulled.
+DEPENDENCIES: stdlib only + local Ollama daemon with the configured model pulled +
+the `claude` CLI on PATH (used for the refine stage; skip refine if unavailable).
 """
 
 import argparse
 import json
 import re
+import shutil
+import subprocess
 import sys
 import time
 import urllib.error
@@ -63,6 +74,7 @@ DRAFTS_DIR = REPO / "docs" / "CURRICULUM_DRAFTS"
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
 OLLAMA_TIMEOUT = 300  # seconds; some prompts run long
+CLAUDE_TIMEOUT = 600  # seconds; refinement can chew on long drafts
 
 # ============================================================
 # State + config
@@ -114,6 +126,31 @@ def ollama_generate(model, prompt, json_mode=False):
             f"Ollama unreachable at {OLLAMA_URL}: {e}. "
             f"Is the daemon running? Try: `ollama serve` in another terminal."
         )
+
+# ============================================================
+# Claude client (refinement only — `claude -p` subprocess)
+# ============================================================
+
+def claude_available():
+    return shutil.which("claude") is not None
+
+def claude_refine(prompt, model="opus"):
+    if not claude_available():
+        raise RuntimeError(
+            "`claude` CLI not on PATH. Refinement step requires Claude Code installed. "
+            "Skip refinement by running `tick` after pinning state to 'drafted' externally."
+        )
+    result = subprocess.run(
+        ["claude", "-p", "--model", model, prompt],
+        capture_output=True,
+        text=True,
+        timeout=CLAUDE_TIMEOUT,
+    )
+    if result.returncode != 0:
+        raise RuntimeError(
+            f"`claude -p` exited {result.returncode}: {result.stderr.strip()[:500]}"
+        )
+    return result.stdout
 
 # ============================================================
 # Prompts
@@ -269,6 +306,45 @@ OUTPUT FORMAT (strict markdown; do NOT wrap in code fences):
 Now produce ONLY the markdown. NO commentary outside.
 """
 
+REFINE_PROMPT = """\
+You are refining curriculum drafts for LearnCRE, a CRE mental-math + concept app. The raw drafts below were produced by a smaller local model and frequently contain wrong arithmetic, conceptual errors (confusing cap rate with yield, mixing levered vs unlevered IRR, etc.), and structural mistakes.
+
+Your job: produce CORRECT, POLISHED versions of BOTH the walkthrough and the quiz template.
+
+IDEA CONTEXT
+  Title:    {title}
+  Category: {category}
+  Outline:  {outline}
+
+REFINEMENT REQUIREMENTS
+- Walkthrough: 5-8 steps, each step computes ONE number. Numbers must be round and ARITHMETICALLY SELF-CONSISTENT across steps. Verify every value yourself before writing it.
+- Quiz template: the "Expected computation" formula must produce the answer from the listed inputs alone, with no hidden steps.
+- Concepts: fix anything that misrepresents CRE practice. If a step teaches the wrong mental model, rewrite the step.
+- Structure: preserve the markdown headings/fields exactly — they are consumed downstream.
+- Tone: punchy, analyst-grade, no hedging. Don't pad. If the draft is mostly right, change little.
+- Numbers: prefer the units actually used on a deal (NOI in dollars, cap rates as percentages with one decimal, IRR as %, EM as multiple).
+
+OUTPUT FORMAT
+Emit BOTH refined documents, bracketed by these exact marker lines on their own line:
+
+=====LEARNCRE-WALKTHROUGH-BEGIN=====
+<refined walkthrough markdown>
+=====LEARNCRE-WALKTHROUGH-END=====
+=====LEARNCRE-QUIZ-BEGIN=====
+<refined quiz template markdown>
+=====LEARNCRE-QUIZ-END=====
+
+NO commentary outside the marker blocks.
+
+=====RAW WALKTHROUGH DRAFT (from Ollama)=====
+{walkthrough_raw}
+=====END RAW WALKTHROUGH=====
+
+=====RAW QUIZ DRAFT (from Ollama)=====
+{quiz_raw}
+=====END RAW QUIZ=====
+"""
+
 # ============================================================
 # Helpers
 # ============================================================
@@ -344,9 +420,12 @@ def cmd_generate(args):
             "reasoning": None,
             "draft_walkthrough_path": None,
             "draft_quiz_path": None,
+            "refined_walkthrough_path": None,
+            "refined_quiz_path": None,
             "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
             "graded_at": None,
             "drafted_at": None,
+            "refined_at": None,
         }
         seen_titles.add(title.lower())
         added += 1
@@ -398,8 +477,8 @@ def cmd_queue(_args):
     state = load_state()
     DRAFTS_DIR.mkdir(parents=True, exist_ok=True)
     QUEUE_PATH.parent.mkdir(parents=True, exist_ok=True)
-    queued = [i for i in state["ideas"].values() if i["status"] in ("queued", "accepted", "drafted")]
-    queued.sort(key=lambda i: (-(i["score_total"] or 0), i["title"]))
+    active = [i for i in state["ideas"].values() if i["status"] in ("queued", "accepted", "drafted", "refined")]
+    active.sort(key=lambda i: (-(i["score_total"] or 0), i["title"]))
 
     lines = ["# Curriculum vet queue", ""]
     now_iso = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -407,29 +486,41 @@ def cmd_queue(_args):
     lines.append("")
     lines.append("Edit the checkboxes below, then run `python3 scripts/curriculum-pipeline.py sync-queue` to apply.")
     lines.append("")
-    lines.append("Status legend: `[ ]` queued · `[x]` accepted · `[r]` rejected · `[d]` drafted (markdown in `docs/CURRICULUM_DRAFTS/`)")
+    lines.append(
+        "Status legend: `[ ]` queued · `[x]` accepted · `[r]` rejected · `[d]` drafted (Ollama markdown) · `[R]` refined (Claude-polished markdown; **review this one**)"
+    )
     lines.append("")
-    if not queued:
+    if not active:
         lines.append("_No queued ideas. Run `curriculum-pipeline.py generate` to add some._")
     else:
         by_cat = {}
-        for idea in queued:
+        for idea in active:
             by_cat.setdefault(idea["category"], []).append(idea)
         for cat in sorted(by_cat.keys()):
             lines.append(f"## {cat}")
             lines.append("")
             for idea in by_cat[cat]:
-                mark = {"queued": "[ ]", "accepted": "[x]", "rejected": "[r]", "drafted": "[d]"}.get(idea["status"], "[ ]")
+                mark = {
+                    "queued": "[ ]",
+                    "accepted": "[x]",
+                    "rejected": "[r]",
+                    "drafted": "[d]",
+                    "refined": "[R]",
+                }.get(idea["status"], "[ ]")
                 lines.append(f"- {mark} **{idea['title']}** — score {idea['score_total']}/20 — `{idea['id']}`")
                 if idea["outline"]:
                     lines.append(f"      {idea['outline']}")
-                if idea.get("draft_walkthrough_path"):
+                if idea.get("refined_walkthrough_path"):
+                    lines.append(f"      walkthrough (refined): `{idea['refined_walkthrough_path']}`")
+                elif idea.get("draft_walkthrough_path"):
                     lines.append(f"      walkthrough draft: `{idea['draft_walkthrough_path']}`")
-                if idea.get("draft_quiz_path"):
+                if idea.get("refined_quiz_path"):
+                    lines.append(f"      quiz (refined): `{idea['refined_quiz_path']}`")
+                elif idea.get("draft_quiz_path"):
                     lines.append(f"      quiz draft: `{idea['draft_quiz_path']}`")
             lines.append("")
     QUEUE_PATH.write_text("\n".join(lines) + "\n")
-    print(f"Wrote {QUEUE_PATH.relative_to(REPO)} ({len(queued)} active ideas).")
+    print(f"Wrote {QUEUE_PATH.relative_to(REPO)} ({len(active)} active ideas).")
 
 def cmd_sync_queue(_args):
     if not QUEUE_PATH.exists():
@@ -437,8 +528,8 @@ def cmd_sync_queue(_args):
         return
     state = load_state()
     text = QUEUE_PATH.read_text()
-    pattern = re.compile(r"^- \[(?P<mark>[ xrd])\] .*?`(?P<id>[a-z0-9\-]+)`", re.MULTILINE)
-    mark_to_status = {" ": "queued", "x": "accepted", "r": "rejected", "d": "drafted"}
+    pattern = re.compile(r"^- \[(?P<mark>[ xrdR])\] .*?`(?P<id>[a-z0-9\-]+)`", re.MULTILINE)
+    mark_to_status = {" ": "queued", "x": "accepted", "r": "rejected", "d": "drafted", "R": "refined"}
     changes = 0
     for m in pattern.finditer(text):
         idea_id = m.group("id")
@@ -519,15 +610,95 @@ def cmd_draft(args):
     cmd_queue(args)
     print(f"\nDrafts written:\n  {wt_path.relative_to(REPO)}\n  {quiz_path.relative_to(REPO)}")
 
+_REFINED_BLOCK_RE = re.compile(
+    r"=====LEARNCRE-(?P<which>WALKTHROUGH|QUIZ)-BEGIN=====\s*\n"
+    r"(?P<body>.*?)\n"
+    r"=====LEARNCRE-(?P=which)-END=====",
+    re.DOTALL,
+)
+
+def _split_refined(raw):
+    """Pull the walkthrough + quiz blocks out of Claude's refined output."""
+    found = {}
+    for m in _REFINED_BLOCK_RE.finditer(raw):
+        found[m.group("which")] = m.group("body").strip()
+    if "WALKTHROUGH" not in found or "QUIZ" not in found:
+        missing = [k for k in ("WALKTHROUGH", "QUIZ") if k not in found]
+        raise RuntimeError(
+            f"Refined output missing marker block(s): {missing}. "
+            f"First 300 chars: {raw[:300]!r}"
+        )
+    return found["WALKTHROUGH"], found["QUIZ"]
+
+def cmd_refine(args):
+    config = load_config()
+    state = load_state()
+    if args.id == "next":
+        candidates = [i for i in state["ideas"].values() if i["status"] == "drafted"]
+        if not candidates:
+            print("No drafted ideas waiting for refinement.")
+            return
+        candidates.sort(key=lambda i: -(i["score_total"] or 0))
+        idea = candidates[0]
+    else:
+        idea = state["ideas"].get(args.id)
+        if not idea:
+            print(f"No idea with id {args.id!r}.", file=sys.stderr)
+            sys.exit(1)
+        if idea["status"] not in ("drafted", "refined"):
+            print(f"Idea {args.id} is {idea['status']!r}; only 'drafted' or 'refined' can be refined.", file=sys.stderr)
+            sys.exit(1)
+
+    wt_path = REPO / (idea.get("draft_walkthrough_path") or "")
+    quiz_path = REPO / (idea.get("draft_quiz_path") or "")
+    if not wt_path.is_file() or not quiz_path.is_file():
+        print(
+            f"Draft files for {idea['id']} are missing — re-run `draft {idea['id']}` first.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+    print(f"Refining via Claude ({config.get('claude_model', 'opus')}): {idea['title']}")
+    prompt = REFINE_PROMPT.format(
+        title=idea["title"],
+        category=idea["category"],
+        outline=idea["outline"],
+        walkthrough_raw=wt_path.read_text(),
+        quiz_raw=quiz_path.read_text(),
+    )
+    raw = claude_refine(prompt, model=config.get("claude_model", "opus"))
+    wt_refined, quiz_refined = _split_refined(raw)
+
+    wt_refined_path = DRAFTS_DIR / f"walkthrough-{idea['id']}.refined.md"
+    quiz_refined_path = DRAFTS_DIR / f"quiz-{idea['id']}.refined.md"
+    wt_refined_path.write_text(wt_refined.rstrip() + "\n")
+    quiz_refined_path.write_text(quiz_refined.rstrip() + "\n")
+
+    idea["status"] = "refined"
+    idea["refined_walkthrough_path"] = str(wt_refined_path.relative_to(REPO))
+    idea["refined_quiz_path"] = str(quiz_refined_path.relative_to(REPO))
+    idea["refined_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    log(state, f"refine: {idea['id']} -> refined")
+    save_state(state)
+    cmd_queue(args)
+    print(f"\nRefined drafts written:\n  {wt_refined_path.relative_to(REPO)}\n  {quiz_refined_path.relative_to(REPO)}")
+
 def cmd_tick(args):
     config = load_config()
     state = load_state()
     ideas = state["ideas"].values()
+    drafted = [i for i in ideas if i["status"] == "drafted"]
     accepted = [i for i in ideas if i["status"] == "accepted"]
     queued = [i for i in ideas if i["status"] == "queued"]
     pending = [i for i in ideas if i["status"] == "pending"]
 
-    # Priority: draft accepted > grade pending > generate if queue is low
+    # Priority: refine drafted > draft accepted > grade pending > generate if queue is low.
+    # Finishing items already in flight beats starting new ones.
+    if drafted and claude_available():
+        drafted.sort(key=lambda i: -(i["score_total"] or 0))
+        args.id = drafted[0]["id"]
+        cmd_refine(args)
+        return
     if accepted:
         accepted.sort(key=lambda i: -(i["score_total"] or 0))
         args.id = accepted[0]["id"]
@@ -540,7 +711,11 @@ def cmd_tick(args):
         args.n = config["batch_size"]
         cmd_generate(args)
         return
-    print(f"Tick: {len(queued)} queued ideas awaiting vetting; nothing automatic to do.")
+    waiting = [
+        f"{len(queued)} queued awaiting vetting" if queued else None,
+        f"{len(drafted)} drafted awaiting refine (claude CLI missing)" if drafted and not claude_available() else None,
+    ]
+    print("Tick: " + "; ".join(w for w in waiting if w) + "; nothing automatic to do.")
 
 def cmd_status(_args):
     state = load_state()
@@ -548,8 +723,9 @@ def cmd_status(_args):
     for idea in state["ideas"].values():
         counts[idea["status"]] = counts.get(idea["status"], 0) + 1
     print(f"Curriculum pipeline — total ideas: {len(state['ideas'])}")
-    for s in ("pending", "queued", "accepted", "drafted", "rejected"):
+    for s in ("pending", "queued", "accepted", "drafted", "refined", "rejected"):
         print(f"  {s:>9}: {counts.get(s, 0)}")
+    print(f"  claude CLI: {'available' if claude_available() else 'MISSING'}")
     recent = state.get("log", [])[-5:]
     if recent:
         print("\nRecent activity:")
@@ -589,7 +765,11 @@ def main():
     p.add_argument("id")
     p.set_defaults(func=cmd_draft)
 
-    p = sub.add_parser("tick", help="One auto step: draft if accepted, else grade if pending, else generate")
+    p = sub.add_parser("refine", help="Refine a drafted idea via Claude Opus (use 'next' for highest-scoring)")
+    p.add_argument("id")
+    p.set_defaults(func=cmd_refine)
+
+    p = sub.add_parser("tick", help="One auto step: refine > draft > grade > generate")
     p.set_defaults(func=cmd_tick)
 
     p = sub.add_parser("status", help="Print pipeline state summary")

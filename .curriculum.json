@@ -1,6 +1,7 @@
 {
   "domain": "LearnCRE is a CRE mental-math + concept learning app. Curriculum content fills three modes: Walkthroughs (multi-step lessons), Situational cases (applied scenarios), and Quiz templates (procedural mental-math drills). Each curriculum item targets foundational CRE knowledge a career switcher, pre-internship student, or working analyst would benefit from.",
   "ollama_model": "qwen2.5:14b",
+  "claude_model": "opus",
   "categories": [
     {
       "id": "asset-class-deepdive",
