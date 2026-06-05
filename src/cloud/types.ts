@@ -26,6 +26,17 @@ export interface ProfileClaimPayload {
   local_profile_id: string;
 }
 
+export interface QuestionNoteRow {
+  id: string;
+  user_id: string;
+  mode: string;
+  item_key: string;
+  body: string;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+}
+
 /** Joined view returned by getPublicProfileByHandle. */
 export interface PublicProfileSnapshot {
   profile: CloudProfile;
