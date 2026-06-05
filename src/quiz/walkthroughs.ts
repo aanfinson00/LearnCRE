@@ -1239,6 +1239,328 @@ function officeWaltWalk(): WalkthroughDef {
   };
 }
 
+// ============================================================
+// Concept primers — the "what is X, actually?" series
+// ============================================================
+// Designed as foundational lessons for any audience tier (career switcher /
+// student / analyst). The math is intentionally light; the depth lives in
+// step prompts, result descriptions, and takeaways.
+
+function capRateActuallyWalk(): WalkthroughDef {
+  // Round numbers so each step is computable in head.
+  const noi = 1_000_000;
+  const baseCap = 0.06;
+  const baseValue = noi / baseCap;          // $16.67M
+  const tenYearRate = 0.04;
+  const spreadBps = Math.round((baseCap - tenYearRate) * 10_000); // 200
+  const growth = 0.03;
+  const impliedDiscountRate = baseCap + growth;                    // 9%
+  const exitCap = 0.07;
+  const exitValueFlat = noi / exitCap;                             // $14.29M
+  const compressedCap = 0.05;
+  const compressedValue = noi / compressedCap;                     // $20M
+  const compressedValueLiftPct = (compressedValue - baseValue) / baseValue;
+  const driftValueLossPct = (baseValue - exitValueFlat) / baseValue;
+
+  return {
+    id: 'walk-cap-rate-1',
+    kind: 'capRateActuallyWalk',
+    label: 'Cap rate — what it actually is',
+    description:
+      'Primer: cap rate as divisor, yield, sensitivity, and market verdict. The four mental models every CRE pro reasons in.',
+    context: {
+      noi,
+      capRate: baseCap,
+      growthRate: growth,
+      exitCap,
+    },
+    setupNarrative: `Cap rate is the most-thrown-around number in CRE and the most loosely defined. You'll hear it used as a price, a yield, a spread, and a vibe. This primer walks through what it actually is — four mental models you can switch between depending on the question. Anchors: NOI ${formatUsd(noi)}, market cap ${formatPct(baseCap)}, 10Y treasury at ${formatPct(tenYearRate)}.`,
+    steps: [
+      {
+        id: 'value-from-cap',
+        label: 'Step 1 — Cap rate as a divisor',
+        prompt: `At a ${formatPct(baseCap)} cap and ${formatUsd(noi)} NOI, what's the implied value?`,
+        expected: baseValue,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'NOI / cap.',
+        resultDescription: `${formatUsd(noi)} / ${formatPct(baseCap)} = ${formatUsd(baseValue)}. The literal definition: cap rate is a divisor that turns income into value. That's the surface — the next 5 steps unpack what the number actually means.`,
+      },
+      {
+        id: 'cap-as-yield',
+        label: 'Step 2 — Cap rate as a yield',
+        prompt: `If you paid ${formatUsd(baseValue)} all-cash and collected ${formatUsd(noi)} of NOI in year 1, what's your Y1 unlevered yield?`,
+        expected: baseCap,
+        unit: 'pct',
+        tolerance: { type: 'abs', band: 0.0025 },
+        hint: 'NOI / price.',
+        resultDescription: `${formatUsd(noi)} / ${formatUsd(baseValue)} = ${formatPct(baseCap)}. Cap rate IS the Y1 unlevered yield. When someone says "I bought at a 6 cap," they're telling you their starting unlevered return. Everything from here — growth, exit, leverage — is layered on top.`,
+      },
+      {
+        id: 'compression-sensitivity',
+        label: 'Step 3 — Sensitivity (100 bps of cap compression)',
+        prompt: `If the cap compresses from ${formatPct(baseCap)} to ${formatPct(compressedCap)} (NOI unchanged), what's the new value?`,
+        expected: compressedValue,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'Same NOI, new cap.',
+        resultDescription: `${formatUsd(noi)} / ${formatPct(compressedCap)} = ${formatUsd(compressedValue)} — a ${formatPct(compressedValueLiftPct)} value lift for a 100 bps cap move. Cap rates are high-beta — small moves drive big value swings. This is why senior PMs talk about caps in 25 bps increments and why "I have a directional view on caps" is a real thesis.`,
+      },
+      {
+        id: 'spread-to-treasury',
+        label: 'Step 4 — Cap rate as a spread',
+        prompt: `10Y treasury is ${formatPct(tenYearRate)}. What's the cap-rate spread (in bps)?`,
+        expected: spreadBps,
+        unit: 'bps',
+        tolerance: { type: 'abs', band: 10 },
+        hint: '(Cap − 10Y) × 10,000.',
+        resultDescription: `${formatPct(baseCap)} − ${formatPct(tenYearRate)} = ${spreadBps} bps. The spread is the risk premium the market demands for CRE over risk-free. Historical avg ~250–300 bps; tighter = aggressive market; wider = early cycle / dislocation. A 200 bps spread is on the tight side — markets are paying you less for CRE risk vs treasuries than the long-term average.`,
+      },
+      {
+        id: 'gordon-equivalence',
+        label: 'Step 5 — Cap rate vs implied discount rate',
+        prompt: `If the market expects ${formatPct(growth)}/yr NOI growth forever on this asset, what's the implied discount rate? (Gordon: r = cap + g.)`,
+        expected: impliedDiscountRate,
+        unit: 'pct',
+        tolerance: { type: 'abs', band: 0.0025 },
+        hint: 'Cap rate + growth.',
+        resultDescription: `${formatPct(baseCap)} + ${formatPct(growth)} = ${formatPct(impliedDiscountRate)}. Cap rate = discount rate − growth. A "compressed" cap isn't always overvalued — sometimes the market is pricing in faster growth (life sci '21, data centers '23–'24). Always ask: what growth rate would justify this cap? If the implied growth is plausible, the cap isn't crazy. If it isn't, you're looking at froth.`,
+      },
+      {
+        id: 'exit-cap-drift',
+        label: 'Step 6 — Going-in vs exit (cap drift)',
+        prompt: `If you buy at ${formatPct(baseCap)} and exit at ${formatPct(exitCap)} (NOI unchanged), what's the exit value?`,
+        expected: exitValueFlat,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'NOI / exit cap.',
+        resultDescription: `${formatUsd(noi)} / ${formatPct(exitCap)} = ${formatUsd(exitValueFlat)} — a ${formatPct(driftValueLossPct)} value loss from cap drift alone. Cap-rate drift between going-in and exit is the single biggest risk in any underwriting without NOI growth. 100 bps of drift ≈ 14% of value evaporated. If your underwriting doesn't justify the exit cap, your IRR is a guess.`,
+      },
+    ],
+    takeaway:
+      'Cap rate is four things at once: (1) a divisor (NOI/cap = value), (2) a yield (Y1 unlevered return), (3) a sensitivity (high-beta — 100 bps ≈ 14–20% of value), (4) a market verdict (= discount rate − growth, anchored to a 10Y spread). Most analysts only learn the first. Dealmakers reason about all four — and you can tell which kind of investor you\'re talking to by which model they default to.',
+    roles: ['acquisitions', 'assetManagement', 'mortgageUw', 'portfolioMgmt', 'development'],
+  };
+}
+
+function riskAdjustedReturnWalk(): WalkthroughDef {
+  // Same building, two capital structures, two outcomes — forces the user
+  // to actually compute leverage's asymmetric impact on downside.
+  const noi = 1_400_000;
+  const baseCap = 0.07;
+  const assetValue = noi / baseCap;                                // $20M
+  const tenYearRate = 0.04;
+  const riskPremiumBps = Math.round((baseCap - tenYearRate) * 10_000); // 300
+
+  // Downside: NOI permanently impaired 10%, exit cap +100 bps
+  const downsideNoi = noi * 0.9;                                   // $1.26M
+  const downsideExitCap = baseCap + 0.01;                          // 8%
+  const downsideExitValue = downsideNoi / downsideExitCap;          // $15.75M
+  const holdYears = 5;
+  const unleveredDownsideTotal = downsideNoi * holdYears + downsideExitValue;
+  const unleveredDownsideEm = unleveredDownsideTotal / assetValue;
+
+  // Levered: 60% LTV interest-only at 5%
+  const ltv = 0.60;
+  const debt = assetValue * ltv;                                   // $12M
+  const equityCheck = assetValue - debt;                           // $8M
+  const debtRate = 0.05;
+  const debtServiceAnnual = debt * debtRate;                       // $0.6M
+  const leveredDownsideNetExit = downsideExitValue - debt;         // $3.75M
+  const leveredDownsideInterimCf = (downsideNoi - debtServiceAnnual) * holdYears;
+
+  return {
+    id: 'walk-rar-1',
+    kind: 'riskAdjustedReturnWalk',
+    label: 'Risk-adjusted return — what it actually is',
+    description:
+      'Primer: RAR is a discipline, not a formula. Anchor to risk-free, run downside, layer leverage. See how the same building becomes two different deals.',
+    context: {
+      noi,
+      capRate: baseCap,
+      purchasePrice: assetValue,
+      ltv,
+      interestRate: debtRate,
+      exitCap: downsideExitCap,
+      holdYears,
+    },
+    setupNarrative: `You're underwriting a stabilized asset. NOI is ${formatUsd(noi)}, market cap is ${formatPct(baseCap)}, 10Y treasury at ${formatPct(tenYearRate)}. The same deal looks very different to two investors depending on (a) the leverage they use and (b) what they assume in the downside. This primer walks through risk-adjusted return as a discipline: anchor to risk-free, run the downside, layer in leverage.`,
+    steps: [
+      {
+        id: 'y1-yield',
+        label: 'Step 1 — Unlevered Y1 yield',
+        prompt: `NOI ${formatUsd(noi)} at a ${formatPct(baseCap)} cap. What's the unlevered Y1 yield?`,
+        expected: baseCap,
+        unit: 'pct',
+        tolerance: { type: 'abs', band: 0.0025 },
+        hint: 'Cap rate = Y1 unlevered yield.',
+        resultDescription: `${formatPct(baseCap)}. Your starting return. Everything above this is growth, market movement, or leverage — each carrying its own risk.`,
+      },
+      {
+        id: 'risk-premium',
+        label: 'Step 2 — Risk premium vs treasuries',
+        prompt: `10Y treasury is ${formatPct(tenYearRate)}. What's the risk premium (in bps)?`,
+        expected: riskPremiumBps,
+        unit: 'bps',
+        tolerance: { type: 'abs', band: 10 },
+        hint: '(Y1 yield − 10Y) × 10,000.',
+        resultDescription: `${formatPct(baseCap)} − ${formatPct(tenYearRate)} = ${riskPremiumBps} bps. This is the market\'s price for CRE risk vs risk-free — illiquidity, asset-specific, operating, cap-rate risk all rolled into one spread. If a future deal offers tighter spread for similar risk, you\'re being paid less for the same exposure. Anchoring to this baseline is step one of every risk-adjusted comparison.`,
+      },
+      {
+        id: 'downside-exit',
+        label: 'Step 3 — Downside exit value',
+        prompt: `Downside: NOI drops 10% to ${formatUsd(downsideNoi)} and exit cap widens 100 bps to ${formatPct(downsideExitCap)}. What's the downside exit value?`,
+        expected: downsideExitValue,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'Downside NOI / downside cap.',
+        resultDescription: `${formatUsd(downsideNoi)} / ${formatPct(downsideExitCap)} = ${formatUsd(downsideExitValue)}. NOI down 10% AND cap +100 bps — the two compound. Value drops ${formatPct((assetValue - downsideExitValue) / assetValue)} from a 10% NOI miss. This compounding IS the mechanism of CRE downside risk. No serious underwriting skips it.`,
+      },
+      {
+        id: 'unlevered-recovery',
+        label: 'Step 4 — Unlevered downside: total cash returned',
+        prompt: `Unlevered, ${formatYears(holdYears)} hold of the downside scenario: ${formatUsd(downsideNoi)} × ${holdYears} NOI + ${formatUsd(downsideExitValue)} exit. Total cash returned?`,
+        expected: unleveredDownsideTotal,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: `${holdYears} × downside NOI + downside exit.`,
+        resultDescription: `${formatUsd(downsideNoi)} × ${holdYears} + ${formatUsd(downsideExitValue)} = ${formatUsd(unleveredDownsideTotal)}. On a ${formatUsd(assetValue)} check, you got back ${formatUsd(unleveredDownsideTotal)}. EM ≈ ${unleveredDownsideEm.toFixed(2)}x — thin positive return. Even in the downside, the unlevered investor preserves capital. That\'s the unlevered investor\'s structural advantage.`,
+      },
+      {
+        id: 'levered-equity-check',
+        label: 'Step 5 — Levered equity check at 60% LTV',
+        prompt: `Asset ${formatUsd(assetValue)}, ${formatPct(ltv)} LTV. What's the equity check?`,
+        expected: equityCheck,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'Asset × (1 − LTV).',
+        resultDescription: `${formatUsd(assetValue)} × (1 − ${formatPct(ltv)}) = ${formatUsd(equityCheck)}. ${formatPct(ltv)} leverage means you put up ${formatUsd(equityCheck)} to control a ${formatUsd(assetValue)} asset. Same building, half the cash — but debt sits in front of you in the capital stack.`,
+      },
+      {
+        id: 'levered-downside-net',
+        label: 'Step 6 — Levered downside: net equity proceeds',
+        prompt: `Downside exit ${formatUsd(downsideExitValue)}, debt of ${formatUsd(debt)} to repay. Net cash to equity at exit?`,
+        expected: leveredDownsideNetExit,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.05 },
+        hint: 'Exit value − debt principal.',
+        resultDescription: `${formatUsd(downsideExitValue)} − ${formatUsd(debt)} = ${formatUsd(leveredDownsideNetExit)}. You put in ${formatUsd(equityCheck)} and get back ${formatUsd(leveredDownsideNetExit)} of exit (plus ${formatYears(holdYears)} of thin interim CF ≈ ${formatUsd(leveredDownsideInterimCf)}). You\'re materially under water on the levered downside — while the unlevered investor on the SAME building still made money. Leverage doesn\'t just amplify upside; it accelerates downside disproportionately.`,
+      },
+    ],
+    takeaway:
+      'Risk-adjusted return is a discipline, not a formula. (1) Anchor every return to the risk-free rate — the spread is what you\'re being paid for risk. (2) Run a downside case where NOI misses by 10% AND caps widen 100 bps — they compound, and that compounding is the real mechanism of CRE downside. (3) Re-run with the leverage you intend to use; leverage cuts both ways but harder on downside. The "right" deal is the one whose downside is tolerable AND whose upside compensates you for the leverage required to get there.',
+    roles: ['acquisitions', 'assetManagement', 'mortgageUw', 'portfolioMgmt', 'development'],
+  };
+}
+
+function gpLpPrimerWalk(): WalkthroughDef {
+  // Small round numbers so the intuition lands cleanly. No catch-up tier —
+  // this primer focuses on pref + ROC + 80/20 above. The deeper
+  // 'Capital-Stack Waterfall' walkthrough covers the full 3-tier American
+  // structure with catch-up using realistic deal numbers.
+  const lpCapital = 9_000_000;
+  const gpCapital = 1_000_000;
+  const totalCap = lpCapital + gpCapital;                          // $10M
+  const lpPctOfCap = lpCapital / totalCap;                          // 90%
+  const gpPctOfCap = gpCapital / totalCap;                          // 10%
+  const prefRate = 0.08;
+  const holdYears = 5;
+  const prefDue = lpCapital * prefRate * holdYears;                 // simple: $3.6M
+  const totalDistributable = 25_000_000;
+  const cashAfterPref = totalDistributable - prefDue;               // $21.4M
+  const cashAfterRoc = cashAfterPref - totalCap;                    // $11.4M
+  const gpSplitAbove = 0.20;
+  const lpSplitAbove = 0.80;
+  const gpAboveSplit = cashAfterRoc * gpSplitAbove;                 // $2.28M
+  const totalProfit = totalDistributable - totalCap;                // $15M
+  const gpProfit = gpAboveSplit;                                    // $2.28M (no pref/ROC adds to profit)
+  const gpProRataProfitWouldBe = gpPctOfCap * totalProfit;          // $1.5M
+  const gpPromoteDollars = gpProfit - gpProRataProfitWouldBe;       // $0.78M
+
+  return {
+    id: 'walk-gp-lp-1',
+    kind: 'gpLpPrimerWalk',
+    label: 'GP/LP — what it actually is',
+    description:
+      'Primer: what each party brings, how cash flows in a 2-tier waterfall, and when the GP\'s promote actually pays vs pure pro-rata.',
+    context: {
+      lpCapital,
+      gpCapital,
+      prefRate,
+      holdYears,
+      totalDistributable,
+      gpSplitPct: gpSplitAbove,
+      lpSplitPct: lpSplitAbove,
+    },
+    setupNarrative: `Almost every CRE deal has two sides: a GP (General Partner — the sponsor/operator who finds and runs the deal and puts up a small slice of equity) and one or more LPs (Limited Partners — the capital partners who fund the bulk). This primer walks the basic 2-tier waterfall: ${formatPct(prefRate)} pref to LP → return of capital → 80/20 above. The deeper "Capital-Stack Waterfall" walkthrough covers the full 3-tier American structure with catch-up. Setup: LP ${formatUsd(lpCapital)}; GP ${formatUsd(gpCapital)}; ${formatYears(holdYears)} hold; exit distributes ${formatUsd(totalDistributable)}.`,
+    steps: [
+      {
+        id: 'capital-pct',
+        label: 'Step 1 — Capital split',
+        prompt: `LP puts in ${formatUsd(lpCapital)}, GP puts in ${formatUsd(gpCapital)}. What % of total capital is LP?`,
+        expected: lpPctOfCap,
+        unit: 'pct',
+        tolerance: { type: 'abs', band: 0.005 },
+        hint: 'LP / total.',
+        resultDescription: `${formatUsd(lpCapital)} / ${formatUsd(totalCap)} = ${formatPct(lpPctOfCap)}. The LP is almost always the dominant capital contributor (typically 85–95%). The GP\'s 5–15% "co-invest" exists to align interests (skin in the game) — but the GP\'s real economics come from somewhere else: the promote.`,
+      },
+      {
+        id: 'pref-due',
+        label: 'Step 2 — LP preferred return',
+        prompt: `LP gets a ${formatPct(prefRate)} simple preferred return on its capital over ${formatYears(holdYears)}. What's the pref due?`,
+        expected: prefDue,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'LP × rate × years (simple).',
+        resultDescription: `${formatUsd(lpCapital)} × ${formatPct(prefRate)} × ${holdYears} = ${formatUsd(prefDue)}. The pref is the LP\'s minimum acceptable return — first dollars out before GP sees any promote. 8% is the standard pref; some funds run 6% (lower hurdle), value-add can require 9–10% (higher hurdle). The pref is the price the LP charges for taking capital risk.`,
+      },
+      {
+        id: 'cash-after-roc',
+        label: 'Step 3 — Cash after pref + return of capital',
+        prompt: `From ${formatUsd(totalDistributable)} distributable, subtract LP pref (${formatUsd(prefDue)}) and total return of capital (${formatUsd(totalCap)}, both sides). What's the residual?`,
+        expected: cashAfterRoc,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: `${formatUsd(totalDistributable)} − pref − total capital.`,
+        resultDescription: `${formatUsd(totalDistributable)} − ${formatUsd(prefDue)} − ${formatUsd(totalCap)} = ${formatUsd(cashAfterRoc)}. This residual is where the GP actually earns its promote. If the deal had only produced ${formatUsd(prefDue + totalCap)} total, residual would be zero and GP gets nothing extra. The whole structure incentivizes GPs to deliver beyond pref + capital.`,
+      },
+      {
+        id: 'gp-promote-take',
+        label: 'Step 4 — GP take from above-pref split',
+        prompt: `Residual splits 80/20 (LP/GP). What does the GP get from this tier?`,
+        expected: gpAboveSplit,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'Residual × 20%.',
+        resultDescription: `${formatUsd(cashAfterRoc)} × ${formatPct(gpSplitAbove)} = ${formatUsd(gpAboveSplit)}. 20% of the upside on top of GP\'s pro-rata return of capital. GP put in 10% of equity but takes 20% of profits above pref — the 10pp delta is the GP\'s compensation for sourcing, structuring, and executing.`,
+      },
+      {
+        id: 'gp-pro-rata-comparison',
+        label: 'Step 5 — Pure pro-rata comparison',
+        prompt: `If this were pure pro-rata (no pref, no promote), GP would get ${formatPct(gpPctOfCap)} of total profit (${formatUsd(totalProfit)}). What\'s GP\'s pure-pro-rata profit?`,
+        expected: gpProRataProfitWouldBe,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.02 },
+        hint: 'GP capital % × total profit.',
+        resultDescription: `${formatPct(gpPctOfCap)} × ${formatUsd(totalProfit)} = ${formatUsd(gpProRataProfitWouldBe)}. This is what GP *would* earn in a plain-vanilla pro-rata deal — the baseline against which the promote is measured.`,
+      },
+      {
+        id: 'gp-effective-promote',
+        label: 'Step 6 — GP effective promote',
+        prompt: `GP actually earned ${formatUsd(gpProfit)} of profit. Pure pro-rata would have been ${formatUsd(gpProRataProfitWouldBe)}. What's the effective promote (the delta)?`,
+        expected: gpPromoteDollars,
+        unit: 'usd',
+        tolerance: { type: 'pct', band: 0.05 },
+        hint: 'GP profit − pure-pro-rata profit.',
+        resultDescription: `${formatUsd(gpProfit)} − ${formatUsd(gpProRataProfitWouldBe)} = ${formatUsd(gpPromoteDollars)}. That delta IS the promote. Now flip the framing: on a smaller exit (say ${formatUsd(prefDue + totalCap + 100_000)}), residual is near-zero and the promote is essentially nothing — GP would have earned more under pure pro-rata. The structure rewards GPs only when deals significantly exceed pref + capital. That\'s why GP cash flows are bimodal: nothing or a lot.`,
+      },
+    ],
+    takeaway:
+      'A GP/LP deal is a structural answer to one question: how do you align a capital partner (LP) with an operator (GP) who controls execution? LP gets a preferred return + return of capital first (downside protection); GP gets a disproportionate share of upside above that hurdle (alignment). The mental model: GP\'s promote pays only on deals that significantly exceed pref — which is exactly what you want. Operators who don\'t deliver get pure pro-rata; operators who deliver get rewarded asymmetrically.',
+    roles: ['acquisitions', 'assetManagement', 'mortgageUw', 'portfolioMgmt', 'development'],
+  };
+}
+
 export const walkthroughs: WalkthroughDef[] = [
   combinedScenarioWalk(),
   dscrLoanSizingWalk(),
@@ -1251,6 +1573,9 @@ export const walkthroughs: WalkthroughDef[] = [
   constructionDrawWalk(),
   hotelRevparWalk(),
   officeWaltWalk(),
+  capRateActuallyWalk(),
+  riskAdjustedReturnWalk(),
+  gpLpPrimerWalk(),
 ];
 
 export function getWalkthroughById(id: string): WalkthroughDef | undefined {

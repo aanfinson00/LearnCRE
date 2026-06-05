@@ -13,7 +13,10 @@ export type WalkthroughKind =
   | 'waterfallWalk'
   | 'constructionDrawWalk'
   | 'hotelRevparWalk'
-  | 'officeWaltWalk';
+  | 'officeWaltWalk'
+  | 'capRateActuallyWalk'
+  | 'riskAdjustedReturnWalk'
+  | 'gpLpPrimerWalk';
 
 export interface WalkthroughStep {
   /** Stable id used as key + used in stats */
