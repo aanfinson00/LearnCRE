@@ -73,6 +73,7 @@ import { WelcomeModal } from './components/WelcomeModal';
 import { hasSeenWelcome } from './storage/onboarding';
 import { AchievementToastHost } from './components/AchievementToast';
 import { FeedbackButton } from './components/FeedbackButton';
+import { NotesButton } from './components/NotesButton';
 import { FeedbackContextProvider } from './hooks/useFeedbackContext';
 import { ScratchSheet } from './components/ScratchSheet';
 import { ScratchSheetProvider } from './hooks/useScratchSheet';
@@ -591,6 +592,7 @@ function AppShell() {
         <AchievementToastHost />
         <ScratchSheet />
         <FeedbackButton />
+        <NotesButton />
         <ClaimLocalProfile />
       </ScratchSheetProvider>
     </FeedbackContextProvider>

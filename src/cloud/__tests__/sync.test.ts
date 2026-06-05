@@ -2,11 +2,13 @@ import { describe, expect, it } from 'vitest';
 import {
   mergeAchievements,
   mergeMistakes,
+  mergeNotes,
   mergeSessions,
   mergeXp,
 } from '../sync';
 import type { AchievementUnlock, SessionRecord, XpState } from '../../types/profile';
 import type { MistakeRecord } from '../../storage/mistakeBank';
+import type { QuestionNote } from '../../storage/notes';
 
 describe('cloud/sync — merge helpers', () => {
   describe('mergeXp', () => {
@@ -102,6 +104,58 @@ describe('cloud/sync — merge helpers', () => {
         [m('cashOnCash', 'p2', 2)],
       );
       expect(merged).toHaveLength(2);
+    });
+  });
+
+  describe('mergeNotes', () => {
+    const n = (
+      mode: string,
+      itemKey: string,
+      body: string,
+      updatedAt: number,
+      deletedAt: number | null = null,
+    ): QuestionNote => ({
+      id: `${mode}::${itemKey}`,
+      mode,
+      itemKey,
+      body,
+      createdAt: updatedAt,
+      updatedAt,
+      deletedAt,
+    });
+
+    it('UNIONs by (mode, itemKey) and keeps the higher updatedAt', () => {
+      const localRow = n('quiz', 'capCompression', 'newer', 2000);
+      const cloudRow = n('quiz', 'capCompression', 'older', 1000);
+      const merged = mergeNotes([localRow], [cloudRow]);
+      expect(merged).toHaveLength(1);
+      expect(merged[0].body).toBe('newer');
+      expect(merged[0].updatedAt).toBe(2000);
+    });
+
+    it('combines distinct (mode, itemKey) pairs', () => {
+      const merged = mergeNotes(
+        [n('quiz', 'cap', 'q', 1)],
+        [n('situational', 'case-1', 's', 2)],
+      );
+      expect(merged).toHaveLength(2);
+    });
+
+    it('cloud tombstone with higher updatedAt propagates delete to local', () => {
+      const localLive = n('quiz', 'cap', 'still here', 1000);
+      const cloudTombstone = n('quiz', 'cap', 'still here', 2000, 2000);
+      const merged = mergeNotes([localLive], [cloudTombstone]);
+      expect(merged).toHaveLength(1);
+      expect(merged[0].deletedAt).toBe(2000);
+    });
+
+    it('local re-edit with higher updatedAt un-deletes a cloud tombstone', () => {
+      const localRevived = n('quiz', 'cap', 'back from the dead', 3000);
+      const cloudTombstone = n('quiz', 'cap', 'old body', 2000, 2000);
+      const merged = mergeNotes([localRevived], [cloudTombstone]);
+      expect(merged).toHaveLength(1);
+      expect(merged[0].deletedAt).toBeNull();
+      expect(merged[0].body).toBe('back from the dead');
     });
   });
 });

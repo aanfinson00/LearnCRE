@@ -1,10 +1,13 @@
 import type { AchievementUnlock, SessionRecord, XpState } from '../types/profile';
 import type { MistakeRecord } from '../storage/mistakeBank';
+import type { QuestionNote } from '../storage/notes';
+import type { QuestionNoteRow } from './types';
 import { loadXp, saveXp } from '../quiz/xp';
 import { loadTierState, saveTierState } from '../quiz/gates';
 import { loadSessions, saveSessions } from '../storage/localStorage';
 import { loadUnlocked, saveUnlocked } from '../quiz/achievements';
 import { loadMistakes, saveMistakes } from '../storage/mistakeBank';
+import { loadNotes, noteId, saveNotes } from '../storage/notes';
 import { getSupabase } from './client';
 
 /**
@@ -19,6 +22,9 @@ import { getSupabase } from './client';
  * - achievements: UNION by achievement_id; earliest unlock wins.
  * - mistake_bank_items: UNION by question_id; collisions keep newer
  *   loggedAt.
+ * - question_notes: UNION by (mode, item_key); newer updatedAt wins. Tombstones
+ *   (deletedAt) ride the same channel — a delete on one device has the highest
+ *   updatedAt and so propagates.
  */
 
 interface PullResult {
@@ -30,13 +36,14 @@ export async function pullAll(userId: string): Promise<PullResult> {
   const supabase = getSupabase();
   if (!supabase) return { ok: false, error: 'cloud disabled' };
 
-  const [xpRes, tierRes, sessionsRes, achievementsRes, mistakesRes] =
+  const [xpRes, tierRes, sessionsRes, achievementsRes, mistakesRes, notesRes] =
     await Promise.all([
       supabase.from('xp_state').select('*').eq('user_id', userId).maybeSingle(),
       supabase.from('tier_state').select('*').eq('user_id', userId).maybeSingle(),
       supabase.from('sessions').select('*').eq('user_id', userId),
       supabase.from('achievements').select('*').eq('user_id', userId),
       supabase.from('mistake_bank_items').select('*').eq('user_id', userId),
+      supabase.from('question_notes').select('*').eq('user_id', userId),
     ]);
 
   if (xpRes.error) return { ok: false, error: xpRes.error.message };
@@ -44,6 +51,7 @@ export async function pullAll(userId: string): Promise<PullResult> {
   if (sessionsRes.error) return { ok: false, error: sessionsRes.error.message };
   if (achievementsRes.error) return { ok: false, error: achievementsRes.error.message };
   if (mistakesRes.error) return { ok: false, error: mistakesRes.error.message };
+  if (notesRes.error) return { ok: false, error: notesRes.error.message };
 
   // XP — field-wise max (all fields monotonic).
   if (xpRes.data) {
@@ -98,6 +106,17 @@ export async function pullAll(userId: string): Promise<PullResult> {
     );
   }
 
+  // Notes — UNION by (mode, item_key), newer updatedAt wins.
+  if (notesRes.data && notesRes.data.length > 0) {
+    const localNotes = loadNotes();
+    saveNotes(
+      mergeNotes(
+        localNotes,
+        notesRes.data.map(rowToNote),
+      ),
+    );
+  }
+
   return { ok: true, error: null };
 }
 
@@ -110,6 +129,7 @@ export async function pushAll(userId: string): Promise<PullResult> {
   const sessions = loadSessions();
   const achievements = loadUnlocked();
   const mistakes = loadMistakes();
+  const notes = loadNotes();
   const now = new Date().toISOString();
 
   const tasks: Promise<{ error: { message: string } | null }>[] = [];
@@ -182,6 +202,23 @@ export async function pushAll(userId: string): Promise<PullResult> {
     );
   }
 
+  if (notes.length > 0) {
+    tasks.push(
+      supabase.from('question_notes').upsert(
+        notes.map((n) => ({
+          user_id: userId,
+          mode: n.mode,
+          item_key: n.itemKey,
+          body: n.body,
+          created_at: new Date(n.createdAt).toISOString(),
+          updated_at: new Date(n.updatedAt).toISOString(),
+          deleted_at: n.deletedAt === null ? null : new Date(n.deletedAt).toISOString(),
+        })),
+        { onConflict: 'user_id,mode,item_key' },
+      ) as never,
+    );
+  }
+
   const results = await Promise.all(tasks);
   const firstError = results.find((r) => r.error);
   if (firstError && firstError.error) {
@@ -238,6 +275,19 @@ export function mergeMistakes(
   return Array.from(byKey.values()).sort((a, b) => a.loggedAt - b.loggedAt);
 }
 
+export function mergeNotes(
+  local: QuestionNote[],
+  cloud: QuestionNote[],
+): QuestionNote[] {
+  const byId = new Map<string, QuestionNote>();
+  for (const n of cloud) byId.set(n.id, n);
+  for (const n of local) {
+    const existing = byId.get(n.id);
+    if (!existing || n.updatedAt > existing.updatedAt) byId.set(n.id, n);
+  }
+  return Array.from(byId.values()).sort((a, b) => a.updatedAt - b.updatedAt);
+}
+
 function mistakeKey(m: MistakeRecord): string {
   // Stable key from kind + prompt hash. Prompt is unique per generated question.
   return `${m.kind}:${hashString(m.prompt)}`;
@@ -286,4 +336,16 @@ interface MistakeRow {
 function rowToMistake(r: MistakeRow): MistakeRecord {
   // The full local-shape MistakeRecord lives in payload; cheap to round-trip.
   return r.payload;
+}
+
+function rowToNote(r: QuestionNoteRow): QuestionNote {
+  return {
+    id: noteId(r.mode, r.item_key),
+    mode: r.mode,
+    itemKey: r.item_key,
+    body: r.body,
+    createdAt: new Date(r.created_at).getTime(),
+    updatedAt: new Date(r.updated_at).getTime(),
+    deletedAt: r.deleted_at ? new Date(r.deleted_at).getTime() : null,
+  };
 }
