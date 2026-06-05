@@ -1,0 +1,61 @@
+{
+  "domain": "LearnCRE is a CRE mental-math + concept learning app. Curriculum content fills three modes: Walkthroughs (multi-step lessons), Situational cases (applied scenarios), and Quiz templates (procedural mental-math drills). Each curriculum item targets foundational CRE knowledge a career switcher, pre-internship student, or working analyst would benefit from.",
+  "ollama_model": "qwen2.5:14b",
+  "categories": [
+    {
+      "id": "asset-class-deepdive",
+      "label": "Asset class deep dives",
+      "examples": "What makes industrial different from multi; data-center underwriting; hotel RevPAR; storage cap rate compression cycles"
+    },
+    {
+      "id": "development-lifecycle",
+      "label": "Development lifecycle",
+      "examples": "Entitlement → land basis → capital stack → construction draws → lease-up → stabilization → recap"
+    },
+    {
+      "id": "capital-stack",
+      "label": "Capital stack & fund economics",
+      "examples": "Mezz vs pref; agency vs CMBS; fund-of-funds; open-end vs closed-end; debt funds"
+    },
+    {
+      "id": "legal-document",
+      "label": "Legal documents",
+      "examples": "PSA reps & warranties; JV major decisions; LPA key-man; lease abstracts; loan-doc trio; title commitment Schedule B"
+    },
+    {
+      "id": "role-profile",
+      "label": "Roles & business lines",
+      "examples": "What an acquisitions analyst does day-to-day; debt-broker comp; appraiser path; AM vs PM"
+    },
+    {
+      "id": "macro-cycle",
+      "label": "Macro, cycles, and history",
+      "examples": "Cap-rate spreads to 10Y over cycles; lessons from RTC / GFC / COVID / 2022 rate shock; what the Fed does to caps"
+    },
+    {
+      "id": "tools-workflow",
+      "label": "Tools & workflow",
+      "examples": "Argus mental model; CoStar vs RCA; Excel modeling discipline; first-90-days analyst toolkit"
+    },
+    {
+      "id": "trust-relationships",
+      "label": "Trust, relationships, ethics",
+      "examples": "Reference checks; reading the room in a JV negotiation; when to walk; conflicts of interest"
+    },
+    {
+      "id": "concept-primer",
+      "label": "Foundational concept primers",
+      "examples": "NOI as a signal; IRR vs EM; leverage's asymmetric impact; the 5 ways a proforma lies"
+    }
+  ],
+  "audience_tiers": ["pre-intern", "career-switcher", "analyst-associate"],
+  "rubric_threshold_total": 15,
+  "rubric_dims": [
+    {"id": "foundational", "label": "Foundational — does every CRE pro need this?", "scale": "1=niche, 5=table-stakes"},
+    {"id": "walkthroughFit", "label": "Walkthrough fit — works as 5-8 math-with-concept steps?", "scale": "1=poor fit, 5=natural fit"},
+    {"id": "novelty", "label": "Novelty — covers something not in existing walkthroughs/situational/vocab?", "scale": "1=duplicate, 5=net-new"},
+    {"id": "reach", "label": "Audience reach — applies across all tiers?", "scale": "1=narrow, 5=universal"}
+  ],
+  "batch_size": 10,
+  "max_pending": 50
+}
