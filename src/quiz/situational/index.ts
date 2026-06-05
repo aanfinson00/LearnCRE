@@ -76,6 +76,16 @@ import { riskAdjustedReturnFramework } from './riskAdjustedReturnFramework';
 import { hotelRevparDivergence } from './hotelRevparDivergence';
 import { retailPercentageRentClause } from './retailPercentageRentClause';
 import { industrialTruckCourtBid } from './industrialTruckCourtBid';
+import { absorptionOfficeHeadwinds } from './absorptionOfficeHeadwinds';
+import { absorptionPaceDecline } from './absorptionPaceDecline';
+import { absorptionNewSupplyWave } from './absorptionNewSupplyWave';
+import { leaseRenewalLeverage } from './leaseRenewalLeverage';
+import { leaseEscalationStructure } from './leaseEscalationStructure';
+import { leaseFreeRentNPV } from './leaseFreeRentNPV';
+import { compTimeAdjustment } from './compTimeAdjustment';
+import { compQualityAdjustment } from './compQualityAdjustment';
+import { sensitivityRentGrowth } from './sensitivityRentGrowth';
+import { sensitivityCapExpansion } from './sensitivityCapExpansion';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -149,6 +159,16 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   hotelRevparDivergence,
   retailPercentageRentClause,
   industrialTruckCourtBid,
+  absorptionOfficeHeadwinds,
+  absorptionPaceDecline,
+  absorptionNewSupplyWave,
+  leaseRenewalLeverage,
+  leaseEscalationStructure,
+  leaseFreeRentNPV,
+  compTimeAdjustment,
+  compQualityAdjustment,
+  sensitivityRentGrowth,
+  sensitivityCapExpansion,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {
