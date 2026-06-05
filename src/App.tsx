@@ -19,6 +19,7 @@ import { HeadToHeadScreen } from './components/HeadToHeadScreen';
 import { QuestionSubmitScreen } from './components/QuestionSubmitScreen';
 import { FeedbackReviewScreen } from './components/FeedbackReviewScreen';
 import { AdminSubmissionsScreen } from './components/AdminSubmissionsScreen';
+import { AdminCurriculumScreen } from './components/AdminCurriculumScreen';
 import { CohortInviteLanding } from './components/CohortInviteLanding';
 import { MatchInviteLanding } from './components/MatchInviteLanding';
 import { UnsubscribePage } from './components/NotificationPreferencesCard';
@@ -46,6 +47,12 @@ function detectUnsubscribeToken(): string | null {
 function isAdminSubmissionsRoute(): boolean {
   if (typeof window === 'undefined') return false;
   return window.location.pathname.replace(/\/+$/, '') === '/admin/submissions';
+}
+
+/** True when the current URL is /admin/curriculum (with optional trailing slash). */
+function isAdminCurriculumRoute(): boolean {
+  if (typeof window === 'undefined') return false;
+  return window.location.pathname.replace(/\/+$/, '') === '/admin/curriculum';
 }
 
 const COHORT_INVITE_RE = /^\/c\/([a-z0-9-]{3,32})\/?$/i;
@@ -145,6 +152,7 @@ export default function App() {
   if (unsubscribeToken) return <UnsubscribePage token={unsubscribeToken} />;
 
   if (isAdminSubmissionsRoute()) return <AdminSubmissionsScreen />;
+  if (isAdminCurriculumRoute()) return <AdminCurriculumScreen />;
 
   const cohortInvite = detectCohortInvite();
   if (cohortInvite) return <CohortInviteLanding {...cohortInvite} />;
