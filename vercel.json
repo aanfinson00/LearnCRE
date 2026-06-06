@@ -6,6 +6,9 @@
   "installCommand": "npm ci",
   "trailingSlash": false,
   "cleanUrls": true,
+  "rewrites": [
+    { "source": "/((?!assets/).*)", "destination": "/index.html" }
+  ],
   "headers": [
     {
       "source": "/(.*)",
