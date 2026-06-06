@@ -76,6 +76,16 @@ import { riskAdjustedReturnFramework } from './riskAdjustedReturnFramework';
 import { hotelRevparDivergence } from './hotelRevparDivergence';
 import { retailPercentageRentClause } from './retailPercentageRentClause';
 import { industrialTruckCourtBid } from './industrialTruckCourtBid';
+import { officeSubleaseAbsorption } from './officeSubleaseAbsorption';
+import { pipelineVsAbsorption } from './pipelineVsAbsorption';
+import { deceleratingAbsorptionPace } from './deceleratingAbsorptionPace';
+import { rentGrowthBreakevenSensitivity } from './rentGrowthBreakevenSensitivity';
+import { exitCapVsRentGrowthSensitivity } from './exitCapVsRentGrowthSensitivity';
+import { refinanceSensitivityTest } from './refinanceSensitivityTest';
+import { saleLeasbackCompAdjustment } from './saleLeasbackCompAdjustment';
+import { distressedCompFiltering } from './distressedCompFiltering';
+import { cpiEscalationVsFixedBumps } from './cpiEscalationVsFixedBumps';
+import { modifiedGrossLeaseExpenseStop } from './modifiedGrossLeaseExpenseStop';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -149,6 +159,16 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   hotelRevparDivergence,
   retailPercentageRentClause,
   industrialTruckCourtBid,
+  officeSubleaseAbsorption,
+  pipelineVsAbsorption,
+  deceleratingAbsorptionPace,
+  rentGrowthBreakevenSensitivity,
+  exitCapVsRentGrowthSensitivity,
+  refinanceSensitivityTest,
+  saleLeasbackCompAdjustment,
+  distressedCompFiltering,
+  cpiEscalationVsFixedBumps,
+  modifiedGrossLeaseExpenseStop,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {
