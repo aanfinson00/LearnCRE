@@ -76,6 +76,16 @@ import { riskAdjustedReturnFramework } from './riskAdjustedReturnFramework';
 import { hotelRevparDivergence } from './hotelRevparDivergence';
 import { retailPercentageRentClause } from './retailPercentageRentClause';
 import { industrialTruckCourtBid } from './industrialTruckCourtBid';
+import { officeNegAbsorption } from './officeNegAbsorption';
+import { industrialSpecLeaseup } from './industrialSpecLeaseup';
+import { absorptionPaceDecline } from './absorptionPaceDecline';
+import { noiMissSensitivity } from './noiMissSensitivity';
+import { floatingRateBridgeStress } from './floatingRateBridgeStress';
+import { holdPeriodIrrDilution } from './holdPeriodIrrDilution';
+import { freeRentNer } from './freeRentNer';
+import { renewalOptionPricing } from './renewalOptionPricing';
+import { compsAcrossMarketTiers } from './compsAcrossMarketTiers';
+import { compsSizeTierAdjustment } from './compsSizeTierAdjustment';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -149,6 +159,16 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   hotelRevparDivergence,
   retailPercentageRentClause,
   industrialTruckCourtBid,
+  officeNegAbsorption,
+  industrialSpecLeaseup,
+  absorptionPaceDecline,
+  noiMissSensitivity,
+  floatingRateBridgeStress,
+  holdPeriodIrrDilution,
+  freeRentNer,
+  renewalOptionPricing,
+  compsAcrossMarketTiers,
+  compsSizeTierAdjustment,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {
