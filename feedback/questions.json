@@ -1,5 +1,5 @@
 {
-  "total": 100,
+  "total": 110,
   "questions": [
     {
       "number": 1,
@@ -6363,6 +6363,582 @@
           }
         ],
         "takeaway": "Hold-vs-sell decisions live in three layers: pre-tax IRR (Steps 1–5), after-tax cash (Steps 6–7), and the LP-tax-position lens (deferral matters more for tax-sensitive LPs). When pre-tax IRR is similar, deferral usually tips toward holding — but the cap-rate drift on the hold side often offsets the deferral benefit. Always run all three layers; never decide on pre-tax alone."
+      }
+    }
+  ,
+    {
+      "number": 101,
+      "id": "sit:negative-net-absorption",
+      "type": "situational",
+      "title": "Office market is shrinking — when does it stabilize?",
+      "meta": "Situational · absorption · advanced · office · acquisitions/assetManagement",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "A CBD office submarket has 8,000,000 SF of inventory at 78% occupancy. No new deliveries are planned. Net absorption has been running at −150,000 SF/quarter for the past six quarters (tenants are shrinking space on renewal, not vacating outright). You're underwriting a Class-B asset in the submarket and need to project when, if ever, the market stabilizes."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Inventory", "value": "8,000,000 SF" },
+            { "label": "Current occupancy", "value": "78%" },
+            { "label": "Net absorption (trailing)", "value": "−150,000 SF/quarter" },
+            { "label": "New supply pipeline", "value": "Zero" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "What is the right framework for projecting stabilization, and what does it imply for your underwriting?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Negative absorption with no new supply means occupancy falls until tenant demand shifts. At −150k SF/qtr, occupancy drops ~1.9 pts/yr on an 8M SF base. Stabilization requires absorption to turn positive — model a bear/base/bull view on when that inflects, not a point estimate.",
+            "isBest": true,
+            "explanation": "−150k SF/qtr = −600k SF/yr on an 8M SF base = −7.5% of inventory leaking annually. With 78% starting occupancy, the market hits 70% in roughly 1 year, 62% in two, absent a reversal. There is no mechanical stabilization without demand turning. The right underwriting move is a scenario tree: bear (absorption stays negative for 3+ years), base (inflects in 18 months), bull (inflects in 6 months). Your bid must survive the bear case."
+          },
+          {
+            "label": "Stabilization is ~12 months — absorption was only negative due to pandemic-era sublease overhang, which is clearing.",
+            "isBest": false,
+            "explanation": "States the bull-case conclusion as a given. Sublease overhang is one possible driver of negative absorption, but six consecutive negative quarters suggest structural demand shrinkage (hybrid work, space rationalization), not just a temporary overhang. Assuming 12-month inflection without evidence invites ruin."
+          },
+          {
+            "label": "Zero new supply means the market can't get materially worse — cap the downside at current occupancy.",
+            "isBest": false,
+            "explanation": "Confuses supply-side and demand-side drivers. No new deliveries prevent supply from growing, but negative absorption means existing tenants are releasing space. A market can contract indefinitely without new supply if demand shrinks. No-supply is a necessary but not sufficient condition for stabilization."
+          },
+          {
+            "label": "Underwrite to current 78% occupancy flat — past absorption data is backward-looking.",
+            "isBest": false,
+            "explanation": "Flat occupancy assumes absorption is zero, not negative. Six consecutive negative quarters is a trend, not noise. Ignoring it systematically overestimates NOI in years 1–3 and understates the risk premium needed to own the asset."
+          }
+        ],
+        "takeaway": "Negative net absorption with no new supply still produces a declining market — it just means demand is shrinking, not supply growing. Stabilization requires absorption to turn positive, which must be projected via scenario, not assumed. In CBD office post-2020, flat-absorption underwriting is the most common and most expensive mistake.",
+        "tips": [
+          "Net absorption = (leased SF change) − (new supply); negative = market contracting.",
+          "Six consecutive negative quarters implies structural, not cyclical, demand change.",
+          "Model base/bear/bull absorption inflection dates; price the asset to survive bear case."
+        ]
+      }
+    },
+    {
+      "number": 102,
+      "id": "sit:industrial-supply-demand-gap",
+      "type": "situational",
+      "title": "Is this industrial submarket getting worse before better?",
+      "meta": "Situational · absorption · intermediate · industrial · acquisitions/development",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "An industrial submarket currently has 500,000 SF of vacant space across 5,000,000 SF of inventory (90% occupied). Three new projects will deliver 600,000 SF over the next 12 months. The trailing 12-month net absorption is 400,000 SF. A developer pitches you a 200,000 SF spec build with an 18-month construction timeline."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Inventory / occupancy", "value": "5,000,000 SF / 90%" },
+            { "label": "Current vacancy", "value": "500,000 SF" },
+            { "label": "Pipeline deliveries (12 mo)", "value": "600,000 SF" },
+            { "label": "Trailing net absorption (12 mo)", "value": "400,000 SF" },
+            { "label": "Proposed spec build", "value": "200,000 SF, 18-mo delivery" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "How do you assess the submarket's supply/demand balance at your spec building's delivery date?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "At delivery, total vacancy will be ~700k SF on a 5.7M SF base (~12.3% vacancy) before your building adds another 200k. With 400k SF/yr absorption, the market needs 2.25 years to clear the pipeline overhang — your spec building is delivering into a softening market.",
+            "isBest": true,
+            "explanation": "At month 12: existing 500k vacancy + 600k pipeline − 400k absorbed = 700k vacant on 5.6M SF base = 12.5% vacancy. Your 200k building delivers at month 18 adding to ~900k total vacant on 5.8M = 15.5% vacancy, assuming absorption continues at 400k/yr (33k/mo). Clearing from 15.5% to 5% (stabilized) takes ~600k SF of absorption = 18 months after delivery. Total exposure: ~3 years. That's the underwriting risk."
+          },
+          {
+            "label": "The market is absorbing 400k/yr, pipeline is only 600k — demand clears the pipeline in 18 months with no issue.",
+            "isBest": false,
+            "explanation": "Ignores existing vacancy. Existing 500k vacant + 600k pipeline = 1.1M SF to clear, not just 600k. At 400k/yr, clearing takes ~2.75 years. Also ignores your own building adding another 200k. Underwriting only the pipeline, not total vacancy, is a systematic error."
+          },
+          {
+            "label": "Pass on the deal — 90% occupancy is too low to start a spec build.",
+            "isBest": false,
+            "explanation": "90% is actually healthy for industrial — sub-5% vacancy would be unusually tight. The risk is pipeline-driven softening, not current occupancy. Passing because 90% looks low misreads the starting conditions."
+          },
+          {
+            "label": "Proceed — industrial demand is structural and spec supply gets absorbed quickly in any market.",
+            "isBest": false,
+            "explanation": "Too categorical. Industrial demand has been strong but is not immune to oversupply. 600k SF of competing pipeline into a 400k/yr absorption market is exactly the scenario that has produced rent rollback in multiple industrial submarkets. Demand being \"structural\" doesn't override supply math."
+          }
+        ],
+        "takeaway": "Supply/demand analysis has three components: existing vacancy, pipeline deliveries, and trailing absorption. Missing any one produces a wrong picture. The spec developer's pitch often omits existing vacancy and counts only their building vs absorption — always rebuild the full stack.",
+        "tips": [
+          "Total supply to absorb = existing vacancy + pipeline (including your own).",
+          "Months to clear = total vacancy ÷ (absorption per month); compare to your lease-up target.",
+          "Absorption pace is trailing — watch for deceleration signals (fewer deals, rising concessions)."
+        ]
+      }
+    },
+    {
+      "number": 103,
+      "id": "sit:concession-burnoff-signal",
+      "type": "situational",
+      "title": "Concessions are burning off — what does that tell you about absorption?",
+      "meta": "Situational · absorption · intermediate · multifamily · acquisitions/assetManagement",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "A multifamily submarket has averaged 6–8 weeks of free rent concessions for 18 months. In the most recent quarter, the average free rent dropped to 2 weeks. Occupancy across the submarket is 91%, flat quarter-over-quarter. No new deliveries are expected in the next 6 months."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Free rent concessions (prior 18 mo)", "value": "6–8 weeks average" },
+            { "label": "Free rent concessions (current qtr)", "value": "~2 weeks average" },
+            { "label": "Submarket occupancy", "value": "91%, flat Q/Q" },
+            { "label": "Near-term pipeline", "value": "No deliveries in 6 months" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "What does the concession burn-off signal, and how should it affect your underwriting?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Concession burn-off is a leading indicator of improving effective rents — landlords only pull concessions when absorption is strong enough that they don't need them. With no supply coming and occupancy stable, this likely precedes face rent growth. Underwrite a modest effective rent lift in 6–12 months.",
+            "isBest": true,
+            "explanation": "Free rent is the first concession added in a soft market and the first cut in a recovering one. If operators are pulling 4–6 weeks of concessions while occupancy holds flat, they're clearing units without incentivizing — that means demand at current face rents is real. The sequence typically is: concessions burn off → occupancy firms above 93% → face rents tick up. Stable 91% occupancy + no pipeline + concession reduction = early-cycle improvement. Underwrite a 2–4% effective rent lift in the first year as NER catches up to face."
+          },
+          {
+            "label": "Occupancy is only 91% — concessions are burning off because landlords are desperate to reduce cost, not because demand is improving.",
+            "isBest": false,
+            "explanation": "Backwards. Landlords add concessions when they're desperate, not cut them. Pulling concessions while maintaining occupancy is a sign of demand sufficiency at current pricing. 91% occupancy with declining concessions is better than 93% occupancy with rising concessions."
+          },
+          {
+            "label": "Concession data is unreliable — underwrite to face rent only and ignore concession trends.",
+            "isBest": false,
+            "explanation": "Concession data is one of the most actionable demand signals available in multifamily. Ignoring it means your NER assumptions lag reality by a full leasing cycle. In a recovering market, face rent underwriters systematically underestimate effective income."
+          },
+          {
+            "label": "Wait for occupancy to hit 95% before concluding the market is recovering.",
+            "isBest": false,
+            "explanation": "95% is a lagging confirmation, not a leading signal. The concession burn-off and stable occupancy in the absence of new supply already present a strong leading case for recovery. Waiting for 95% means buying the news after the market has priced it in."
+          }
+        ],
+        "takeaway": "Concession levels are a faster-moving indicator of rent health than occupancy. Concessions lead occupancy by 1–2 quarters; occupancy leads face-rent growth by 1–2 quarters. Read them in sequence: concessions drop → occupancy firms → face rents move. Underwrite the sequence, not just the current snapshot.",
+        "tips": [
+          "NER = face rent − free rent equivalent − other concessions; watch NER, not just face.",
+          "6–8 weeks free rent ≈ 11–15% NER discount on a 12-month lease.",
+          "Concession burn-off without occupancy loss = demand absorbing at current rents."
+        ]
+      }
+    },
+    {
+      "number": 104,
+      "id": "sit:floor-plate-comp-adjustment",
+      "type": "situational",
+      "title": "Large vs small floor plate — do they comp to each other?",
+      "meta": "Situational · comp-selection · advanced · office · acquisitions/mortgageUw",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You're pricing a 300,000 SF Class-A office tower with 25,000 SF floor plates in a CBD market. The broker provides three comps: two with 15,000 SF floor plates at 5.75–6.00% caps, one with 30,000 SF floor plates at 5.50% cap. All three traded within 8 months in the same submarket. The broker asks you to average the three caps to anchor pricing at ~5.75%."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Subject floor plate", "value": "25,000 SF" },
+            { "label": "Comp A & B (15k SF plates)", "value": "5.75–6.00% cap" },
+            { "label": "Comp C (30k SF plate)", "value": "5.50% cap" },
+            { "label": "All comps", "value": "Same CBD submarket, <8 months" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "How should you treat the floor plate difference in the comp set?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Weight toward Comp C for the subject's 25k SF plate — large-plate buildings appeal to a smaller, credit-quality tenant universe, which compresses cap rates. The smaller-plate comps have broader demand and should price wider. The subject sits in between; anchor closer to 5.60–5.75%, not a naive average.",
+            "isBest": true,
+            "explanation": "Floor plate size determines the tenant profile. 15k SF plates appeal to a wide range of tenants (law firms, tech firms, mid-size corporates); 25–30k SF plates are suitable only for large-block users (credit tenants, HQ users) — a smaller but often higher-quality buyer pool. Large-plate buildings tend to trade tighter because large-block credit leases are more durable. The subject at 25k SF is closer in profile to Comp C than to Comps A & B. Simple averaging ignores that the most comparable comp (Comp C) would anchor pricing tighter."
+          },
+          {
+            "label": "Average all three caps — they're all CBD, same submarket, recent. Floor plate is a tenant preference, not a pricing driver.",
+            "isBest": false,
+            "explanation": "Floor plate is a meaningful pricing driver because it determines the tenant universe. Buildings that can only accommodate large-block users have structural concentration risk on the lease-up side. Averaging across different plate sizes mixes different risk profiles and produces a muddled anchor."
+          },
+          {
+            "label": "Discard all three comps — none match the subject's floor plate exactly.",
+            "isBest": false,
+            "explanation": "Over-disciplined. No two office buildings have identical floor plates. The job is to adjust for known differences (vintage, size, plate) — not require exact matches. Three recent, same-submarket, same-class trades with a documented adjustment is a solid comp set."
+          },
+          {
+            "label": "Use only Comps A and B — smaller plates are a less favorable comparison and widen the cap, providing more conservatism.",
+            "isBest": false,
+            "explanation": "Discarding the most comparable comp (Comp C at 30k SF) to force a wider cap is motivated reasoning. Using the least comparable comps for conservatism sounds prudent but produces a systematically biased anchor. You can note conservatism in your IC memo without mis-weighting the comp set."
+          }
+        ],
+        "takeaway": "Comp weighting should track comparability, not desired outcomes. Floor plate size drives tenant demand profile — adjust toward the comps whose product most closely resembles the subject, then document the weight rationale. Equally-weighted averages across dissimilar product types are the broker's pricing tool, not yours.",
+        "tips": [
+          "15k SF plate = broad tenant pool; 25k+ SF = large-block / credit-tenant only.",
+          "Large-block lease concentration is a risk factor that both widens and tightens caps differently.",
+          "Document each adjustment in your IC memo: why you weighted Comp X at Y%."
+        ]
+      }
+    },
+    {
+      "number": 105,
+      "id": "sit:anchored-vs-unanchored-comp",
+      "type": "situational",
+      "title": "Anchored vs unanchored — can these retail comps share a cap?",
+      "meta": "Situational · comp-selection · intermediate · retail · acquisitions",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You're bidding on a 60,000 SF unanchored neighborhood strip center in a strong suburban submarket. The broker provides four recent comps — two anchored community centers (Grocery + national inline) at 5.75–6.25% caps, and two unanchored strips at 7.00–7.50%. All four traded within 10 months in adjacent submarkets. The broker argues \"same market, same vintage\" and proposes blending the comps to a 6.50% cap."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Subject", "value": "60k SF unanchored strip" },
+            { "label": "Anchored center comps", "value": "5.75–6.25% cap" },
+            { "label": "Unanchored strip comps", "value": "7.00–7.50% cap" },
+            { "label": "Broker proposal", "value": "Blend to ~6.50%" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "How should you use this comp set?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Use only the unanchored strip comps (7.00–7.50%). Anchored and unanchored retail are structurally different risk profiles — the grocery anchor drives traffic and survivorship for the whole center. Blending them is categorically wrong.",
+            "isBest": true,
+            "explanation": "Anchor tenants (especially grocery) are traffic generators that insulate inline tenants from e-commerce risk. Anchored centers have demonstrably lower inline vacancy over time, more predictable lease renewals, and a broader institutional buyer pool. The 125–175 bps cap spread between anchored and unanchored in the same submarket directly prices that difference. Blending them to 6.50% inflates your bid by roughly (7.25% − 6.50%) / 6.50% × 100 = ~11.5% relative to defensible unanchored comps."
+          },
+          {
+            "label": "Blend all four — the submarket drives pricing more than the anchor configuration.",
+            "isBest": false,
+            "explanation": "Submarket location is relevant but doesn't overcome structural product differences. A grocer-anchored center and an unanchored strip in the same submarket are not the same investment — their lease rollover risk, traffic dependency, and buyer universe are different. Blending them produces an anchor that misrepresents both."
+          },
+          {
+            "label": "Use the anchored comps and adjust down 50 bps for lack of anchor — arrives at 6.25–6.75%.",
+            "isBest": false,
+            "explanation": "Adjusting 50 bps from anchored comps implies you're saying \"unanchored is 50 bps worse than anchored.\" But the observed market spread is 125–175 bps. A 50 bps adjustment significantly underweights the structural difference and overprices the subject."
+          },
+          {
+            "label": "Request more comps before bidding — four comps are insufficient to price retail.",
+            "isBest": false,
+            "explanation": "Four comps (two directly comparable) is a workable data set. The problem is composition, not quantity. Two directly-relevant unanchored strip comps, adjusted for any minor vintage or location differences, is sufficient to anchor a defensible bid."
+          }
+        ],
+        "takeaway": "Retail comp sets must be stratified by anchor configuration before pricing. Anchored and unanchored retail are different products trading at structurally different caps — blending them on geography alone is the most common retail comp error. Always build two comp stacks (anchored/unanchored) and use the one that matches your subject.",
+        "tips": [
+          "Grocery-anchored vs unanchored spread: 100–200 bps in most markets.",
+          "Anchor quality matters: Kroger-anchored trades tighter than discount/dollar-anchor.",
+          "Inline tenant mix (national vs local) is a secondary comp filter within unanchored."
+        ]
+      }
+    },
+    {
+      "number": 106,
+      "id": "sit:free-rent-vs-ti-landlord",
+      "type": "situational",
+      "title": "Free rent or TI — which costs the landlord less?",
+      "meta": "Situational · lease-econ · intermediate · office · assetManagement/acquisitions",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "A prospective tenant will sign a 7-year office lease at $30/SF base rent if you offer either (a) 6 months of free rent upfront, or (b) $25/SF of TI. You're the landlord. Both require the same tenant credit; your hurdle rate is 8%."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Face rent", "value": "$30/SF/yr" },
+            { "label": "Lease term", "value": "7 years" },
+            { "label": "Option A", "value": "6 months free rent (upfront)" },
+            { "label": "Option B", "value": "$25/SF TI (paid at lease commencement)" },
+            { "label": "Discount rate", "value": "8%" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "Which concession is economically cheaper for the landlord on a PV basis?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Free rent costs less in PV terms: 6 months × $30/SF = $15/SF of forgone income, vs $25/SF of TI cash out the door at signing. Even undiscounted, the free rent is cheaper — at 8%, the PV gap widens slightly because TI is immediate.",
+            "isBest": true,
+            "explanation": "Option A: 6 months × ($30 / 12) = $15/SF in forgone rent. Since this is income not received (not cash spent), the cost is $15/SF in opportunity terms. Option B: $25/SF cash paid at signing. In PV terms, $25 upfront > $15 forgone over months 1–6 (even undiscounted, $25 > $15). Free rent is cheaper by ~$10/SF in this example. The key nuance: TI is cash out; free rent is income deferred. Both show up in NER, but TI creates a larger immediate equity draw."
+          },
+          {
+            "label": "TI is cheaper — it's capitalized as a lease asset on the balance sheet, not an income reduction.",
+            "isBest": false,
+            "explanation": "Accounting treatment is irrelevant to cash economics. TI paid is cash that leaves the entity regardless of how it's classified on the books. Capitalizing TI amortizes the charge over the lease term, but the cash went out on day one. Choosing TI because of accounting treatment is a common error that destroys cash return."
+          },
+          {
+            "label": "They are equivalent — both reduce NER by the same amount.",
+            "isBest": false,
+            "explanation": "They reduce NER by different amounts in this scenario: free rent reduces NER by $15/7 = ~$2.14/SF/yr; TI reduces NER by $25/7 = ~$3.57/SF/yr. Only if the dollar amounts were equal would NER be equivalent. Always compare actual cash flows, not categories."
+          },
+          {
+            "label": "Free rent is more expensive — you lose income AND have a tenant who hasn't proven they'll pay.",
+            "isBest": false,
+            "explanation": "Conflates credit risk with concession cost. Both options require the same tenant credit by the problem setup. The credit risk is identical; the concession cost is different. Free rent for 6 months at $30/SF = $15/SF; TI = $25/SF. Credit risk is a separate underwriting dimension."
+          }
+        ],
+        "takeaway": "Free rent and TI are not interchangeable concessions — they have different cash-cost profiles. TI requires immediate cash and reduces equity. Free rent defers income. On comparable dollar amounts, free rent is almost always cheaper in PV terms because the cost is deferred, not front-loaded. Always convert both to PV before comparing.",
+        "tips": [
+          "Quick compare: free-rent cost = (months ÷ 12) × face rent; TI cost = face dollar amount.",
+          "TI is cash today; free rent is income tomorrow — discount accordingly.",
+          "Landlords under liquidity pressure often prefer free rent even at equivalent NER."
+        ]
+      }
+    },
+    {
+      "number": 107,
+      "id": "sit:cpi-vs-fixed-bump",
+      "type": "situational",
+      "title": "CPI bumps or fixed annual escalations — which is the better lease?",
+      "meta": "Situational · lease-econ · advanced · office · assetManagement/acquisitions",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You're evaluating two 10-year leases for a 50,000 SF office building. Lease A has 3% fixed annual rent escalations. Lease B has CPI-based escalations with a 0% floor and 5% cap. Base rent is $40/SF for both. You're underwriting during a period where core CPI is running at 4.5%."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Base rent (both leases)", "value": "$40/SF" },
+            { "label": "Lease A escalation", "value": "3% fixed annual" },
+            { "label": "Lease B escalation", "value": "CPI, 0% floor / 5% cap" },
+            { "label": "Current CPI", "value": "4.5%" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "Which lease is more valuable to the landlord, and what's the key risk in each?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "It depends on the inflation path. At current CPI (4.5%), Lease B produces 5% bumps (the cap) vs Lease A's 3% — Lease B wins in a sustained-inflation environment. If CPI normalizes to 2–3%, Lease A wins. The key risk in Lease B is the 0% floor: in deflation, you still get 3% in Lease A but zero in Lease B.",
+            "isBest": true,
+            "explanation": "In a high-inflation environment (CPI at or above 5%), Lease B's cap prevents you from fully capturing inflation, but the 5% vs 3% delta still favors Lease B. In a low-inflation environment (CPI at 2%), Lease B yields 2% vs Lease A's guaranteed 3% — Lease A wins. In deflation, Lease A's 3% is far superior (Lease B's floor is 0%). The floor risk is the underpriced option: locking in CPI escalation means accepting that in a deflationary recession, your bumps go to zero while Lease A continues compounding. On a 10-year view at 4.5% CPI, Lease B is modestly better in years 1–5 (likely hitting 5% cap), but the tail risk lives in the 0% floor."
+          },
+          {
+            "label": "Lease B is always better — CPI-linked leases provide inflation protection that fixed bumps can't.",
+            "isBest": false,
+            "explanation": "\"Always better\" ignores the floor risk and cap constraint. Lease B provides inflation protection up to 5% — above that, the landlord bears inflation without compensation. And in deflation, the 0% floor means no rent growth at all. Fixed 3% bumps guarantee above-deflation compounding in all macro scenarios."
+          },
+          {
+            "label": "Lease A is always better — guaranteed 3% is more bankable for financing purposes.",
+            "isBest": false,
+            "explanation": "Partially correct: fixed bumps are easier to model for debt underwriting. But the economics of which is better depend on the inflation path. In sustained 4–5% inflation, Lease B generates more rent income over the term despite the debt-modeling simplicity of Lease A. \"More bankable\" doesn't mean more valuable."
+          },
+          {
+            "label": "They are equivalent — both escalate from the same base and will converge to similar rent levels.",
+            "isBest": false,
+            "explanation": "They converge only at CPI = 3.0% exactly. At any other inflation level, the cash flows diverge meaningfully. Over a 10-year hold with CPI ranging from 0% to 6%, the NPV difference between the two leases can exceed $5–10/SF. Treating them as equivalent is a refusal to underwrite the macro path."
+          }
+        ],
+        "takeaway": "CPI leases and fixed-bump leases are insurance products with different payoff profiles. Fixed bumps hedge against deflation; CPI bumps hedge against high inflation. The key terms to analyze are the floor (what happens in deflation?) and the cap (when does the landlord stop benefiting from inflation?). Neither is universally better — the answer depends on your inflation view over the hold period.",
+        "tips": [
+          "CPI cap is a ceiling on the landlord's inflation capture; floor is a ceiling on downside protection.",
+          "Financing lenders prefer fixed bumps — more predictable debt service coverage.",
+          "Run a scenario: 1% CPI, 3% CPI, 5% CPI — who wins in each?"
+        ]
+      }
+    },
+    {
+      "number": 108,
+      "id": "sit:lease-renewal-vs-new-tenant",
+      "type": "situational",
+      "title": "Renew the existing tenant or gamble on a new one?",
+      "meta": "Situational · lease-econ · intermediate · office · assetManagement/acquisitions",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "An existing office tenant occupying 20,000 SF wants to renew at $28/SF for 5 years with $15/SF in TIs (painting and carpet only). Market rent is $32/SF with $45/SF in market TIs for new tenants (full build-out). You expect 6 months of downtime and $50/SF TI to secure a new tenant at $32/SF face rent. Your discount rate is 8%."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Renewal rent / TI", "value": "$28/SF face / $15/SF TI" },
+            { "label": "Market rent / TI (new tenant)", "value": "$32/SF face / $45/SF TI" },
+            { "label": "Downtime if tenant leaves", "value": "6 months" },
+            { "label": "Discount rate", "value": "8%" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "Should you renew or try to replace the tenant at market?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Renewal likely wins on NPV — the $30/SF TI savings and 6 months of avoided downtime offset the $4/SF rent gap. Run the 5-year NPV: renewal NPV ≈ (5 × $28k − $15k) discounted; new-tenant NPV ≈ (4.5 years of $32k − $45k − downtime income lost).",
+            "isBest": true,
+            "explanation": "Renewal cash flows (per SF, 5yr): Year 1–5 income = $140; TI cost = $15; net = $125/SF. New-tenant cash flows: 6 months of $0 income = $16 lost; Year 1–4.5 income = $144; TI = $45; net = $83/SF. At 8% discount: renewal NPV ≈ $106/SF; new-tenant NPV ≈ $70/SF. Renewal wins by ~$36/SF despite lower face rent. The key drivers are TI savings ($30/SF) and downtime avoidance ($16/SF forgone). The $4/SF rent gap costs ~$17/SF over 5 years — not enough to offset the combined leasing friction."
+          },
+          {
+            "label": "Replace the tenant — $32 > $28, and the cap rate is applied to stabilized rents, not in-place below-market rents.",
+            "isBest": false,
+            "explanation": "The cap rate applies to NOI, which must account for TI and downtime costs. The $32/SF market lease does not produce $32/SF of Year 1 NOI — it requires $45/SF TI and 6 months of vacancy. On a 5-year NPV, those costs consume the $4/SF face rent advantage and then some."
+          },
+          {
+            "label": "The decision is tenant-dependent, not economic — if the existing tenant is a bad credit, always replace.",
+            "isBest": false,
+            "explanation": "Credit quality is a separate decision input, not a replacement for the economic analysis. If the renewal tenant has acceptable credit, the cash-flow math should drive the decision. If the credit is genuinely impaired, that's a separate adjustment (add a default premium to renewal cash flows). But the question presupposes equivalent credit quality."
+          },
+          {
+            "label": "Negotiate hard on renewal rent — push toward $30–31/SF before accepting $28/SF.",
+            "isBest": false,
+            "explanation": "Useful tactical advice but not an analytical answer. Even at $28/SF, the economic case favors renewal over the downtime and TI required to replace. The negotiating leverage question (how much can you push without losing the tenant?) is separate from the NPV comparison."
+          }
+        ],
+        "takeaway": "The true cost of not renewing is: downtime × lost rent + new TI − saved renewal TI. In most office scenarios, this cost exceeds the rent gap between below-market renewal and new-tenant market rent, especially on leases ≥5 years. Always run the NPV comparison before deciding the in-place tenant is \"below market\" and must be replaced.",
+        "tips": [
+          "Net cost of replacing a tenant = downtime loss + TI premium over renewal TI.",
+          "Renewal TI for carpet/paint is ~$10–20/SF; full build-out is $50–80/SF. The gap is the real number.",
+          "New-tenant deals also carry LC (leasing commission) — add 4–6% of total rent to the new-tenant cost."
+        ]
+      }
+    },
+    {
+      "number": 109,
+      "id": "sit:occupancy-stress-test",
+      "type": "situational",
+      "title": "A 5-point vacancy shift — how much does IRR move?",
+      "meta": "Situational · sensitivity · intermediate · multifamily · acquisitions",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You're underwriting a 200-unit multifamily acquisition at $40M. Your base case assumes 95% occupancy, $2,000/unit/month rents, and a 5.0% going-in cap on stabilized NOI. A colleague asks: \"What happens to IRR if occupancy runs at 90% instead of 95% for the first two years before recovering?\" Your base-case 5-year levered IRR is 15%."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Units / price", "value": "200 units / $40M" },
+            { "label": "Base rent", "value": "$2,000/unit/month" },
+            { "label": "Base case occupancy", "value": "95%" },
+            { "label": "Stressed occupancy (yr 1–2)", "value": "90%" },
+            { "label": "Base IRR", "value": "15%" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "What is the approximate IRR impact and which factors amplify or dampen the sensitivity?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "The 5-point occupancy drop reduces effective rent by ~5.3% and NOI by a larger percentage (since OpEx is partially fixed). Over 2 years, lost revenue ≈ $480k; the IRR impact is roughly 150–250 bps depending on leverage, compressing IRR to ~12.5–13.5%.",
+            "isBest": true,
+            "explanation": "Revenue impact: 200 units × 5% × $2,000/mo × 12 mo × 2 yrs = $480,000 in lost revenue. Operating expenses are semi-fixed (property tax, insurance, management fixed costs don't drop with occupancy), so NOI drops by more than 5%. If OpEx ratio is 40%, NOI margin is 60%; a 5.3% revenue reduction on a 60% NOI margin = ~8.8% NOI reduction in those years. At 60% LTV and a 5-year hold, a 2-year NOI reduction of this magnitude compresses levered IRR by 150–250 bps through reduced cash distributions and slightly lower exit NOI. The leverage amplifies the sensitivity — all the NOI pain flows to equity after debt service is paid."
+          },
+          {
+            "label": "IRR is unaffected — 2 years of lower occupancy is immaterial on a 5-year hold.",
+            "isBest": false,
+            "explanation": "Two years of $480k in lost revenue is $960k cumulative — a 2.4% hit on a $40M deal. At 60% LTV, that entire loss flows to equity ($16M equity base), representing a ~6% hit to equity value before time-value effects. Not immaterial, and highly amplified by leverage."
+          },
+          {
+            "label": "IRR drops by exactly 5% — the occupancy drop is 5 points, so IRR drops 5 points.",
+            "isBest": false,
+            "explanation": "Linear scaling doesn't apply. Revenue drops 5.3% (not 5 points), NOI drops more due to fixed operating expenses, and the IRR impact depends on the hold period and leverage. A mechanical 1-for-1 occupancy-to-IRR translation is wrong in both direction and magnitude."
+          },
+          {
+            "label": "IRR drops by 400–500 bps — occupancy stress always has an outsized impact through the exit cap applied to stressed NOI.",
+            "isBest": false,
+            "explanation": "Overstates the impact. A 400–500 bps IRR compression would imply the deal breaks on a 5-point, 2-year occupancy stress — that's recession-grade underwriting, not a 5-point dip. By year 3 of a 5-year hold, the recovering occupancy drives NOI back toward base case; the exit is on year-5 stabilized NOI, not year-2 stressed NOI."
+          }
+        ],
+        "takeaway": "Occupancy sensitivity is amplified by (1) high leverage (all NOI pain goes to equity after debt service), (2) high fixed-cost ratio (NOI drops faster than revenue), and (3) near-term nature (losses in years 1–2 are discounted less than losses in years 4–5). A 5-point, 2-year occupancy stress on a 5-year levered deal typically moves IRR 150–250 bps — enough to matter but not enough to break a well-underwritten deal.",
+        "tips": [
+          "OpEx is semi-fixed: a 5% revenue drop creates a >5% NOI drop. Know your fixed vs variable cost split.",
+          "Leverage amplifies occupancy stress: all NOI shortfall comes from equity after debt service.",
+          "Run occupancy sensitivity in every IC model — it's the most commonly tested scenario."
+        ]
+      }
+    },
+    {
+      "number": 110,
+      "id": "sit:rent-growth-sensitivity",
+      "type": "situational",
+      "title": "Zero vs 3% rent growth — how wide is the IRR gap?",
+      "meta": "Situational · sensitivity · intermediate · multifamily · acquisitions",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You're underwriting a 5-year multifamily hold. Base rents are $2,400/unit/month on 150 units. Your model assumes 3% annual rent growth in the base case, producing an 18% levered IRR. A reviewer challenges: \"What if rents are flat the entire hold?\" The going-in cap is 5.0%; exit cap is 5.5%."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Units / base rent", "value": "150 units / $2,400/mo" },
+            { "label": "Base case rent growth", "value": "3%/yr" },
+            { "label": "Stress scenario rent growth", "value": "0%/yr" },
+            { "label": "Hold period", "value": "5 years" },
+            { "label": "Going-in / exit cap", "value": "5.0% / 5.5%" },
+            { "label": "Base IRR", "value": "18%" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "Estimate the IRR impact of flat rents and identify what absorbs most of the loss."
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Flat rents cost ~250–400 bps of IRR. Most of the loss comes from a lower exit value: without rent growth, year-5 NOI stays at the going-in level — applied to the same exit cap, that flattens your terminal value. Lost exit appreciation accounts for 60–70% of the IRR compression.",
+            "isBest": true,
+            "explanation": "At 3% annual growth, year-5 rent = $2,400 × 1.03⁵ ≈ $2,783/mo. At 0% growth, year-5 rent = $2,400. Revenue delta at year 5: (150 × $2,783 − 150 × $2,400) × 12 = $690k NOI delta. At 5.5% exit cap, that represents $690k / 0.055 ≈ $12.5M of value difference. On a ~$50M base investment, that's a 25% terminal value reduction — which is the dominant IRR driver. Annual cash flow losses from lower NOI in years 1–4 account for the remaining 30–40%. Total IRR compression: 250–400 bps depending on leverage and actual NOI margins."
+          },
+          {
+            "label": "Flat rents cost ~100 bps — rent growth is just one of several return drivers and a 3% assumption is modest.",
+            "isBest": false,
+            "explanation": "Underestimates the compounding effect on the exit. Rent growth isn't just about annual cash flow — it drives the terminal value (NOI × exit cap), which is the single largest driver of levered IRR on a 5-year hold. A 3% vs 0% rent growth difference compounds to ~16% higher NOI by year 5 — the terminal value gap dwarfs the cash flow gap."
+          },
+          {
+            "label": "Flat rents produce a negative IRR because the exit cap expansion from 5% to 5.5% wipes out equity without NOI growth.",
+            "isBest": false,
+            "explanation": "Cap expansion from 5% to 5.5% is a 10% NOI multiple compression, but on flat rents that means a ~10% exit value reduction from the going-in value — painful but not equity-wiping unless leverage is extreme. The deal would typically still produce a positive IRR; it just underperforms the base case meaningfully."
+          },
+          {
+            "label": "Rent growth doesn't affect IRR significantly — what matters is the spread between going-in and exit cap.",
+            "isBest": false,
+            "explanation": "The cap spread matters, but exit NOI is the other half of the exit value formula (Exit Value = NOI ÷ Exit Cap). A flat NOI with cap expansion compresses exit value; a growing NOI with cap expansion partially offsets the compression. Rent growth directly determines which direction exit NOI moves."
+          }
+        ],
+        "takeaway": "Rent growth is a terminal-value driver first and a cash-flow driver second. In a 5-year levered hold, the exit proceeds (NOI ÷ exit cap) typically account for 60–70% of total return — so anything that affects year-5 NOI has an outsized IRR effect. Always run your rent-growth sensitivity against exit value, not just against annual NOI.",
+        "tips": [
+          "Exit value = year-5 NOI ÷ exit cap. Rent growth compounds into this denominator.",
+          "3% annual growth × 5 years ≈ 16% higher NOI at exit — that's 16% more terminal value at the same cap.",
+          "When stress-testing, isolate the exit value impact separately from the cash-flow impact."
+        ]
       }
     }
   ]
