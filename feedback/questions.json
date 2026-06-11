@@ -1,5 +1,5 @@
 {
-  "total": 100,
+  "total": 110,
   "questions": [
     {
       "number": 1,
@@ -6363,6 +6363,586 @@
           }
         ],
         "takeaway": "Hold-vs-sell decisions live in three layers: pre-tax IRR (Steps 1–5), after-tax cash (Steps 6–7), and the LP-tax-position lens (deferral matters more for tax-sensitive LPs). When pre-tax IRR is similar, deferral usually tips toward holding — but the cap-rate drift on the hold side often offsets the deferral benefit. Always run all three layers; never decide on pre-tax alone."
+      }
+    },
+    {
+      "number": 101,
+      "id": "sit:office-submarket-recovery-timeline",
+      "type": "situational",
+      "title": "How long before this office submarket recovers?",
+      "meta": "Situational · absorption · intermediate · office · acquisitions/development",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "A CBD office submarket has 15M SF of inventory. Vacancy peaked at 18% eighteen months ago and has been improving. The last two quarters showed positive net absorption of +80k SF and +110k SF respectively — an improving trend after four quarters of negative absorption. No new supply is in the permitted pipeline. You're evaluating a development that needs the submarket to reach 88% occupancy by Year 5 to underwrite stabilization."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Submarket inventory", "value": "15M SF" },
+            { "label": "Current vacancy", "value": "14%" },
+            { "label": "Net absorption Q-1 / Q0", "value": "+80k / +110k SF" },
+            { "label": "New supply pipeline", "value": "None" },
+            { "label": "Target occupancy", "value": "88% by Year 5" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "What's the most defensible way to underwrite the submarket recovery timeline?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Anchor the base case to the current absorption pace and model a stress case at half that pace — both should appear in IC materials with explicit Year 5 occupancy targets.",
+            "isBest": true,
+            "explanation": "Current vacant SF: 15M × 14% = 2.1M. Target leased at 88%: 15M × 88% = 13.2M; currently leased at 86% = 12.9M. Net required absorption: 300k SF. At ~100k SF/quarter (current pace), that's ~3 quarters — easily inside Year 5. But two quarters of positive absorption after four negative quarters is an inflection, not a trend confirmation. A base case at +100k/quarter is defensible; a lag case at +50k/quarter stretches recovery to 6+ quarters. Both cases should be shown. Document that the pace has only been positive for two consecutive quarters."
+          },
+          {
+            "label": "Use peak historical absorption to support an aggressive Year 2 stabilization scenario.",
+            "isBest": false,
+            "explanation": "Peak historical absorption reflects the strongest demand environment on record, not the expected one. Using it to justify an accelerated timeline systematically overstates recovery speed in a market that just posted four quarters of negative absorption. Conservative underwriting anchors to current pace, not best-ever pace."
+          },
+          {
+            "label": "The market is recovering, so Year 5 stabilization is essentially certain — proceed with the base case only.",
+            "isBest": false,
+            "explanation": "Two quarters of positive absorption after a deep spike is encouraging but not confirming. CBD office recovery cycles historically take 4–8 years after a major demand shock. Presenting a single-scenario base without a stress case is not IC-ready underwriting; it's advocacy."
+          },
+          {
+            "label": "Wait for 4 more quarters of absorption data before committing to any timeline.",
+            "isBest": false,
+            "explanation": "Waiting is a business decision, not an underwriting discipline. If the deal requires action now, you model with available data and widen your uncertainty bands. A well-constructed sensitivity range is the professional answer to incomplete data — not paralysis."
+          }
+        ],
+        "takeaway": "Absorption underwriting in recovering markets runs in two steps: anchor the base to current observable pace, then stress it with a scenario that reflects realistic recovery friction. Year 5 occupancy arithmetic is just (target leased − current leased) ÷ quarterly pace — the judgment is whether the pace is reliable enough to treat as a base.",
+        "tips": [
+          "Two consecutive positive quarters after a downturn = inflection, not trend confirmation. At least 4 matters.",
+          "No new supply pipeline is a meaningful tailwind — always check what's permitted even if not under construction.",
+          "CBD office recovery from 14% vacancy historically takes 3–7 years; development underwriting needs a long hold buffer."
+        ]
+      }
+    },
+    {
+      "number": 102,
+      "id": "sit:spec-industrial-supply-absorption",
+      "type": "situational",
+      "title": "Can the submarket absorb your spec development and two competitors?",
+      "meta": "Situational · absorption · advanced · industrial · development",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You're evaluating a 500k SF spec distribution center. The submarket has 3.5M SF of inventory, is currently 96% occupied, and has run 400–650k SF of annual net absorption over the past three years. Two competing sponsors are delivering spec buildings of 350k and 450k SF respectively — both within 18 months of your expected delivery date."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Submarket inventory", "value": "3.5M SF" },
+            { "label": "Current occupancy", "value": "96%" },
+            { "label": "Annual net absorption (3-yr range)", "value": "400–650k SF" },
+            { "label": "Competing spec deliveries", "value": "350k + 450k SF (same 18-mo window)" },
+            { "label": "Your building", "value": "500k SF spec" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "What is the primary absorption risk, and how should it be reflected in the underwriting?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Simultaneous supply absorption risk: 1.3M SF of combined spec delivers into a market absorbing 400–650k SF/year. Even at the high end, the pipeline is 2× annual demand. Model an 18–30 month lease-up with tiered concessions, not the standard 12-month assumption.",
+            "isBest": true,
+            "explanation": "Total new spec: 500k + 350k + 450k = 1.3M SF. At 650k SF/yr absorption (high end), the pipeline represents exactly 2 years of total demand; at 400k/yr it's 3.25 years. The 96% occupancy is a lagging indicator of a zero-spec market — it tells you nothing about forward lease-up speed once 1.3M SF hits simultaneously. IC should present: (a) 18-month base case, (b) 30-month stress, (c) concession sensitivity showing the NER impact of 3–6 months free rent needed to maintain pace in a competitive environment."
+          },
+          {
+            "label": "Minimal risk — 96% occupancy proves demand is robust and the market will absorb new supply easily.",
+            "isBest": false,
+            "explanation": "96% reflects a no-supply environment, not a high-demand environment. Tight existing occupancy does not predict future absorption speed when 1.3M SF delivers simultaneously. The forward question is whether demand growth can absorb all the spec at once — existing occupancy is backward-looking evidence."
+          },
+          {
+            "label": "The competing specs are the primary issue — focus on pre-leasing before theirs deliver.",
+            "isBest": false,
+            "explanation": "Correct instinct, incomplete framing. Pre-leasing de-risks execution, but the underwriting problem is systemic, not just competitive positioning. If all three specs compete for the same tenant pool, concessions rise market-wide regardless of which building leases first. IC needs the supply/demand math, not just a pre-leasing target."
+          },
+          {
+            "label": "Raise asking rents now to capture the tight market before competing supply arrives.",
+            "isBest": false,
+            "explanation": "You can't price a building that doesn't exist yet. Pre-lease rents are negotiated months before delivery; the tight market today may have eased by the time you deliver. The risk is your exit rent environment on a 12–18 month forward basis, not the current spot vacancy."
+          }
+        ],
+        "takeaway": "Spec development absorption risk starts with one equation: total new SF ÷ annual absorption pace = years to clear the pipeline. When the result exceeds 1.5×, model extended lease-up as the base case, not the stress. Layer in concession sensitivity — free rent, TI escalation — to stress NER and IRR at realistic lease-up speeds.",
+        "tips": [
+          "Pipeline-to-absorption ratio > 1.5× = model extended lease-up as base, not stress.",
+          "Spec industrial concessions in oversupply: 3–6 months free rent plus potential TI is normal.",
+          "Pre-lease of 30%+ before delivery materially de-risks; track monthly and flag to IC if slipping."
+        ]
+      }
+    },
+    {
+      "number": 103,
+      "id": "sit:multifamily-90-day-lease-up",
+      "type": "situational",
+      "title": "Is a 90-day stabilization realistic for this new apartment development?",
+      "meta": "Situational · absorption · intermediate · multifamily · development",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "A 200-unit Class-A garden apartment development is expected to deliver in Q3. The developer's pro forma and construction loan both assume 95% occupancy within 90 days — roughly 63 units/month. The submarket currently has 12 comparable Class-A communities in active lease-up, each averaging 20–25 units/month. Submarket vacancy for stabilized product is 6%."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Units", "value": "200" },
+            { "label": "Target occupancy", "value": "95% (190 units) within 90 days" },
+            { "label": "Implied absorption pace", "value": "~63 units/month" },
+            { "label": "Comp community pace", "value": "20–25 units/month (12 active communities)" },
+            { "label": "Submarket vacancy (stabilized)", "value": "6%" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "What's the primary problem with the 90-day assumption, and what should the underwrite use instead?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "63 units/month is 2.5–3× the comp pace. At market pace (20–25 units/month), stabilization takes 8–10 months. 90 days is only achievable with heavy concessions that erode NER — model 9–10 months as the base case.",
+            "isBest": true,
+            "explanation": "Market pace: 20–25 units/month across 12 comparable communities. Each community's fair share of total submarket demand: roughly 1/(12+1) of total monthly demand. If the entire market of 13 lease-up communities (12 existing + yours) absorbs 300–325 units/month total, your building's fair share is ~25 units/month. At that pace: 190 units ÷ 25/mo = 7.6 months. To achieve 63 units/month, you'd need to capture 3× your market-share — only possible via 2–3 months free rent and pricing below market. Even then, concessions erode NER and impact valuation. The right base case is 9–10 months at market pace; stress case at 12+ months if comps raise concessions in response."
+          },
+          {
+            "label": "If you price 10% below market on opening, you can capture 3× market share and hit 90 days.",
+            "isBest": false,
+            "explanation": "Demand is a flow from the real economy, not a pool waiting for price signals. Pricing 10% below market accelerates your capture rate somewhat but doesn't create 3× more demand — you're drawing from the same renter pool as the 12 comp communities. And the 10% pricing concession damages NER, making the question of whether you \"hit 90 days\" somewhat beside the point economically."
+          },
+          {
+            "label": "6% vacancy in the submarket is tight enough to support rapid lease-up — the 90-day assumption is defensible.",
+            "isBest": false,
+            "explanation": "Stabilized vacancy is a stock measure; absorption is a flow measure. 6% vacancy tells you the existing base is healthy, not that 200 new units can be absorbed in 90 days. Absorption speed is determined by monthly demand flow, not by existing vacancy stock. 12 communities actively competing for that flow is the binding constraint."
+          },
+          {
+            "label": "The construction loan has a lease-up reserve, so the stabilization timeline doesn't materially affect returns.",
+            "isBest": false,
+            "explanation": "A reserve softens cash-flow pain but doesn't change deal economics. A 7-month lease-up extension vs the base case costs: 7 months of construction loan carry + 7 months of below-stabilized distributable cash flow + potential LP clawback issues if the preferred return timeline slips. The reserve is a buffer, not a return-neutral mechanism."
+          }
+        ],
+        "takeaway": "New development lease-up pace is anchored to the renter demand flow in the submarket, divided by the number of competing communities fighting for that demand. Comp absorption is the observable data point. Your fair market share is approximately 1/(N+1) of total demand, where N is active comp communities. 90-day stabilization is a developer aspiration; conservative underwriting uses the observable market pace.",
+        "tips": [
+          "Your fair-share pace ≈ (total submarket monthly demand) ÷ (comp communities + 1).",
+          "Extra construction loan carry during lease-up extension is a real cost: 6 months at 7% on $30M = $1.05M.",
+          "IC should present a 9–10 month base and a 12+ month stress; 90-day stabilization is sensitivity upside, not base."
+        ]
+      }
+    },
+    {
+      "number": 104,
+      "id": "sit:free-rent-vs-ti-nер",
+      "type": "situational",
+      "title": "4 months of free rent or $50/SF in TI — which costs the landlord more?",
+      "meta": "Situational · lease-econ · intermediate · office · assetManagement/acquisitions",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You're leasing up a 5,000 SF office vacancy. Two tenants are equally qualified. Tenant A wants 4 months of free rent on a 5-year, $40/SF deal with no TI. Tenant B wants $50/SF in TI on a 5-year, $40/SF deal with no free rent. Face rent and term are identical."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Space", "value": "5,000 SF" },
+            { "label": "Face rent (both)", "value": "$40/SF" },
+            { "label": "Term (both)", "value": "5 years" },
+            { "label": "Tenant A concession", "value": "4 months free rent / $0 TI" },
+            { "label": "Tenant B concession", "value": "$50/SF TI / 0 months free rent" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "Which deal has better economics for the landlord, and by how much?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Tenant A is significantly better. Free rent costs ~$13.33/SF one-time; TI costs $50/SF one-time. NER: Tenant A ≈ $37.33/SF vs Tenant B ≈ $30/SF — a $7.33/SF/yr gap, or $183,250 over the term.",
+            "isBest": true,
+            "explanation": "Simple NER = face rent − (total concessions ÷ term). Tenant A: free rent = 4/12 × $40 = $13.33/SF total; annualized = $13.33 / 5 = $2.67/SF/yr. NER = $40 − $2.67 = $37.33/SF. Tenant B: TI = $50/SF total; annualized = $50 / 5 = $10/SF/yr. NER = $40 − $10 = $30/SF. Gap: $7.33/SF/yr × 5,000 SF = $36,650/yr, or $183,250 over the full term. The TI is nearly 4× more expensive than the free rent concession on a same-face-rent, same-term deal."
+          },
+          {
+            "label": "Tenant B is better — TIs are capitalized and don't directly reduce NOI the way free rent does.",
+            "isBest": false,
+            "explanation": "Accounting treatment doesn't change economics. TI is cash out the door immediately; free rent is income foregone over 4 months. Both reduce landlord value by their present value. The $50/SF TI is ~4× larger than the $13.33/SF free rent concession — capitalization spreads when you recognize it, but the cash left your account at signing."
+          },
+          {
+            "label": "They're roughly equivalent — both are normal 5-year office concessions.",
+            "isBest": false,
+            "explanation": "Not at all equivalent in this case. Economically equivalent concessions would be: 4 months free rent (=$13.33/SF) ≈ $13.33/SF of TI. Tenant B is asking for $50/SF TI, which is 3.75× more expensive. Saying they're \"normal\" ignores the magnitude difference — NER arithmetic doesn't lie."
+          },
+          {
+            "label": "Can't decide without a discount rate — TI is front-loaded, free rent is deferred.",
+            "isBest": false,
+            "explanation": "Discounting refines the comparison but doesn't change the direction — the TI is still ~4× larger than the free rent. At a 7% discount rate, NPV of $50/SF TI ≈ $50 immediately vs NPV of free rent ≈ ~$12.50/SF spread over 4 months. The gap is so large that the time-value argument doesn't reverse the conclusion. Use discounting for precision; use NER for direction."
+          }
+        ],
+        "takeaway": "Free rent and TI are both concessions, but they're rarely equivalent in size. Always convert both to NER (annualized concessions ÷ term, subtracted from face) before comparing. On a 5-year deal, $1/SF of TI costs ~$0.20/SF/yr — meaning $50/SF TI is $10/SF/yr. A few months of free rent is almost always cheaper than $40+/SF of TI on a mid-term deal.",
+        "tips": [
+          "NER = face rent − (total concessions ÷ term). Discount for precision, not direction.",
+          "$1/SF of TI ≈ $0.20/SF/yr of NER impact on a 5-year deal (less on longer terms).",
+          "1 month of free rent on a $40/SF deal = $3.33/SF total = $0.67/SF/yr over 5 years."
+        ]
+      }
+    },
+    {
+      "number": 105,
+      "id": "sit:below-market-renewal-option-pricing",
+      "type": "situational",
+      "title": "This renewal option is way below market — how does it change your bid?",
+      "meta": "Situational · lease-econ · advanced · office · acquisitions/assetManagement",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You're acquiring a 200,000 SF suburban office building. The anchor tenant (80,000 SF, 40% of GLA) has 4 years of remaining term and a 5-year renewal option at $18/SF — fixed, no escalation. Current market rent is $28/SF growing at ~3%/yr. The tenant is investment-grade credit. The broker is marketing the building at a 6.0% going-in cap on current in-place NOI."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Anchor tenant SF", "value": "80,000 SF (40% of GLA)" },
+            { "label": "Remaining term", "value": "4 years" },
+            { "label": "Renewal option", "value": "5-year at $18/SF fixed (no escalation)" },
+            { "label": "Current market rent", "value": "$28/SF, growing ~3%/yr" },
+            { "label": "Tenant credit", "value": "Investment grade" },
+            { "label": "Offered cap", "value": "6.0% going-in" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "How does the renewal option affect your bid relative to the broker's 6.0% cap pricing?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "The option is a multi-year below-market income drag worth $4–7M in NPV — your effective bid cap needs to be materially wider than 6.0% to compensate for the locked-in discount through option expiry.",
+            "isBest": true,
+            "explanation": "In-place drag (years 1–4): $28 − $18 = $10/SF × 80k SF = $800k/yr. At 7% discount rate over 4 years, NPV ≈ $2.7M. Option drag (years 5–9, if exercised): market rent at 3%/yr reaches ~$31.50/SF in year 4. Drag in option years: ($31.50–$34.50) − $18 = $13–$16/SF × 80k × P(exercise). At 70% exercise probability, discounted over years 5–9: roughly $2.5–4M additional NPV drag. Combined impairment: $5–7M. A 6.0% going-in cap on in-place NOI completely ignores this. Your bid should reflect a blended cap that prices in the income impairment — likely 6.5–7.0%+ effective on a through-option-expiry basis."
+          },
+          {
+            "label": "Investment-grade credit on the anchor justifies paying the 6.0% cap — credit safety offsets the below-market rent.",
+            "isBest": false,
+            "explanation": "IG credit is already reflected in the cap rate compression; it doesn't additionally compensate for below-market rent embedded in the lease structure. Credit risk and lease economics are separate dimensions. IG credit means low default probability; it says nothing about the income you'll collect if the tenant exercises a locked-in $18/SF option in a $31+/SF market."
+          },
+          {
+            "label": "Model the option as exercised and re-underwrite the whole deal at $18/SF for 9 total years.",
+            "isBest": false,
+            "explanation": "Directionally right but overly conservative — modeling 9 years of below-market rent assumes 100% option exercise. The correct approach is a probability-weighted NPV: estimate exercise probability (typically 60–80% when option rent is >20% below projected market), discount the drag, and subtract from value. A 100% exercise assumption overstates the impairment and may cause you to underbid versus the realistic probability."
+          },
+          {
+            "label": "The option doesn't affect current NOI, so it doesn't affect today's going-in cap or value.",
+            "isBest": false,
+            "explanation": "Sophisticated buyers underwrite the durability of the income stream, not just the Year-1 snapshot. An anchor tenant locked into $18/SF against a $31+/SF market in 4 years is a foreseeable, quantifiable income impairment. Any buyer who prices only the going-in NOI will overpay relative to buyers who model the full cash flow horizon including the option."
+          }
+        ],
+        "takeaway": "Below-market renewal options are embedded income impairments that don't appear in Year-1 NOI but show up in every year the option governs. Quantify: (projected market rent − option rent) × SF × P(exercise), discounted over the option period. Then translate to a cap-rate adjustment. The 6.0% going-in cap is a misleading anchor here — the real question is what effective return you're buying for the full hold period.",
+        "tips": [
+          "Option drag NPV = Σ [(market_rent_yr − option_rent) × SF × P(exercise)] / (1+r)^yr",
+          "Exercise probability is typically 60–80% when option rent is >15% below projected market.",
+          "WALT understates income risk when below-market options are attached — always pull option terms from the lease, not the OM."
+        ]
+      }
+    },
+    {
+      "number": 106,
+      "id": "sit:class-a-to-class-b-comp-gap",
+      "type": "situational",
+      "title": "Your only recent comps are Class-A. You're buying Class-B.",
+      "meta": "Situational · comp-selection · intermediate · office · acquisitions",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You're bidding on a 150,000 SF Class-B suburban office building. No Class-B trades have occurred in the submarket for 18+ months. The broker provides three recent comps, all Class-A in the same submarket: 5.50%, 5.75%, and 5.90% cap rates. The most recent Class-B trade you can find is 18 months old at a 7.10% cap."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Subject", "value": "Class-B, 150k SF, suburban office" },
+            { "label": "Class-A comps (recent)", "value": "5.50% / 5.75% / 5.90%" },
+            { "label": "Class-B comp (stale)", "value": "7.10% cap (18 months ago)" },
+            { "label": "Recent Class-B trades", "value": "None in 18+ months" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "How do you establish a defensible cap rate range for the subject?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Apply a 75–150 bps Class-A/B spread to the recent Class-A comps, then weight against the stale Class-B trade with a time adjustment. Defensible range: roughly 6.50–7.25%.",
+            "isBest": true,
+            "explanation": "Class-A/B spread in suburban office typically runs 75–150 bps, reflecting higher vacancy risk, shorter WALT, and weaker tenant credit on B-quality product. Midpoint Class-A comp: ~5.72%. Adding 75–150 bps → 6.47–7.22%. The 18-month Class-B comp at 7.10% is stale — if Class-A tightened ~75 bps over the same period (from ~6.5% to ~5.75%), Class-B likely moved proportionally. Time-adjusted Class-B range: ~6.35–6.85%. Weighting: favor the Class-A-adjusted range for recency; anchor against the stale comp for class validation. Defensible: 6.50–7.25%, center-weighted ~6.75–7.00%."
+          },
+          {
+            "label": "Use the Class-A comps at face value — same submarket is close enough.",
+            "isBest": false,
+            "explanation": "Class-A and Class-B are systematically different product types with different investor demand, financing, and risk profiles. A Class-A/B spread of 75–150 bps is not noise — it's the market's compensation for real differences in tenant credit, WALT, leasing velocity, and CapEx risk. Applying Class-A comps without adjustment will systematically overpay."
+          },
+          {
+            "label": "Use only the 18-month Class-B comp — it's the only true comparable for Class-B.",
+            "isBest": false,
+            "explanation": "An 18-month-old comp in a market where rates have moved materially is a data point, not pricing. It needs a time adjustment at minimum. Using it as-is anchors to a potentially outdated rate environment. The correct approach layers it with the Class-A comps + spread adjustment to triangulate a current read."
+          },
+          {
+            "label": "No direct comps = no reliable pricing; pass on the deal.",
+            "isBest": false,
+            "explanation": "Passing because of thin comps is a recipe for zero deal flow in secondary and mid-size markets where Class-B trades infrequently. The Class-A comps plus spread adjustment, combined with a time-adjusted stale comp, is exactly how pricing is established in thin markets. Document the methodology; the range is wider but defensible."
+          }
+        ],
+        "takeaway": "Thin comp markets require a triangulation method: take the most recent comps in the same submarket, apply a class-spread adjustment, then validate against the most recent same-class trade (time-adjusted). The result is a range, not a point — and that range is explicitly wider in thin markets. Document your spread assumption and time adjustment at IC so reviewers understand the confidence interval.",
+        "tips": [
+          "Typical suburban office Class-A/B spread: 75–150 bps (wider in weak markets, tighter in recoveries).",
+          "Stale comps need a time adjustment: if Class-A moved 75 bps in 18 months, Class-B likely moved similarly.",
+          "In thin-trade markets, present a pricing range with explicit methodology — IC can accept or tighten it from there."
+        ]
+      }
+    },
+    {
+      "number": 107,
+      "id": "sit:distressed-comp-treatment",
+      "type": "situational",
+      "title": "Should this lender-forced sale count as a pricing comp?",
+      "meta": "Situational · comp-selection · intermediate · multifamily · acquisitions",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You're pricing a stabilized 150-unit multifamily acquisition. The broker provides four comps. Three are arm's-length trades in the past 6 months at 4.90%, 5.00%, and 5.15% cap rates. The fourth traded 8 months ago at a 6.40% cap — it was a lender-forced sale after the borrower defaulted on a floating-rate bridge loan. All four are comparable size, vintage, and quality in the same submarket."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Arm's-length comps (recent)", "value": "4.90% / 5.00% / 5.15% (<6 months)" },
+            { "label": "Distressed comp", "value": "6.40% (8 months ago, lender-forced)" },
+            { "label": "Subject", "value": "150-unit stabilized MF, same submarket" },
+            { "label": "All comps", "value": "Comparable size, vintage, quality" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "How should you treat the 6.40% distressed comp in your analysis?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Exclude from the pricing range; flag it in IC materials as a forced-sale stress reference. The market range is 4.90–5.15% based on arm's-length data.",
+            "isBest": true,
+            "explanation": "Distressed sales reflect seller motivation, not asset value. Lender-forced sales typically transact at a 10–25% discount to arm's-length because the lender's priority is execution speed, not price maximization. The 6.40% vs ~5.00% mid-market spread (~140 bps) is entirely consistent with a motivated-seller discount on an otherwise comparable asset. Including it in your pricing average would produce a blended cap (~5.36%) that doesn't represent any market scenario — too wide for arm's-length, too narrow for a forced exit. Correct treatment: exclude from pricing comps, disclose in IC with explanation, and label it the 'distressed floor' scenario."
+          },
+          {
+            "label": "Weight it equally with the other three comps — all trades reveal price information.",
+            "isBest": false,
+            "explanation": "Distressed sales reveal information about the seller's situation, not the asset's market value. Equal-weighting a forced sale with arm's-length transactions produces a blended number that doesn't represent any real scenario. Sophisticated counterparts will recognize the distress flag and discount your analysis if you've anchored to it."
+          },
+          {
+            "label": "Use the 6.40% as your primary pricing anchor — it's the most conservative data point.",
+            "isBest": false,
+            "explanation": "Conservative underwriting uses the top of the arm's-length range (5.15%), not a non-replicable distressed sale. A non-distressed seller will never accept a price that implies a lender-default discount. Using the distressed comp as an anchor doesn't protect you — it just makes you lose every competitive deal in the market."
+          },
+          {
+            "label": "Discard all four comps and order an independent appraisal since the data set is now contaminated.",
+            "isBest": false,
+            "explanation": "Three arm's-length comps in the same submarket within 6 months is a solid data set. One distressed outlier with a documented cause doesn't contaminate it — it's an identifiable outlier, not noise. The professional move is to document the outlier, exclude it with explanation, and price from the valid data. Ordering an appraisal to avoid methodology decisions is not a discipline — it's a delay."
+          }
+        ],
+        "takeaway": "Always determine sale motivation before weighting a comp. Lender-forced, estate, and entity-dissolution sales reflect non-economic seller motivation and systematically print wide of arm's-length. Exclude from pricing; document in IC as the forced-sale stress scenario. Your pricing range is built from arm's-length data only — but showing the distressed comp's context demonstrates analytical rigor.",
+        "tips": [
+          "Distressed sale discount vs arm's-length: typically 10–25% on price, 50–150 bps on cap rate.",
+          "Ask the broker why every comp traded — motivation is as important as the price.",
+          "IC footnote format: 'Comp 4 excluded — lender-forced sale following bridge default; not representative of arm's-length pricing.'"
+        ]
+      }
+    },
+    {
+      "number": 108,
+      "id": "sit:dual-variable-irr-stress",
+      "type": "situational",
+      "title": "What happens to your IRR if both rent growth and cap rates move against you?",
+      "meta": "Situational · sensitivity · intermediate · multifamily · acquisitions",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You're acquiring a stabilized multifamily asset at a 5.0% going-in cap. Your base case uses 3%/yr rent growth and a 6.0% exit cap, producing a 14% levered IRR on a 5-year hold. A senior PM asks for a stress test: \"What if rent growth slows to 1% AND the exit cap widens to 7.0%?\" The deal uses 60% LTV fixed-rate debt at 5.75%."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Going-in cap", "value": "5.0%" },
+            { "label": "Base IRR", "value": "14% (3% rent growth, 6.0% exit cap)" },
+            { "label": "Stress scenario", "value": "1% rent growth + 7.0% exit cap" },
+            { "label": "Hold period", "value": "5 years" },
+            { "label": "Leverage", "value": "60% LTV, fixed 5.75%" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "What IRR range should the stress scenario produce, and what does it tell you about the deal?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Expect stress IRR to fall to roughly 5–8% — likely at or below the fund's preferred return. The two stresses compound: slower rent growth reduces exit NOI by ~10%; the wider exit cap applies that lower NOI to a higher divisor. Combined, the deal loses 6–9 IRR points from base.",
+            "isBest": true,
+            "explanation": "Rent growth miss: (1.01)⁵ vs (1.03)⁵ ≈ 5.1% vs 15.9% cumulative growth — Year-5 NOI in stress is roughly 9–10% below base. Exit cap expansion: 100 bps on a moderately levered 5-year hold costs approximately 4–5 IRR points (rule of thumb: each 50 bps of exit cap expansion ≈ 2–2.5 IRR points at 60% LTV). Slower rent growth adds another 2–3 IRR points of drag. Combined: ~14% − 6–8 points = 6–8% stress IRR. At 5.75% fixed-rate debt, you're above the loan cost but below a typical 8% preferred return. Whether it breaches the fund hurdle determines whether this is a \"watchable\" or \"deal-breaking\" stress — IC should see both."
+          },
+          {
+            "label": "IRR barely moves — rent growth and cap rate expansion partially offset each other in the exit math.",
+            "isBest": false,
+            "explanation": "They don't offset — they stack. Lower NOI (from slower rent growth) AND a higher exit cap both reduce exit value in the same direction. There is no natural hedge between the two variables; both hurt. The stress case is additive damage, not partially offsetting."
+          },
+          {
+            "label": "A 14% base with 60% LTV has plenty of buffer to absorb both stresses and still clear a 10% hurdle.",
+            "isBest": false,
+            "explanation": "Leverage amplifies losses as well as gains. With 60% LTV at fixed 5.75%, the debt service is locked. As equity cash flows compress from slower rent growth and a lower exit value, the fixed debt magnifies the IRR hit to equity. A 14% levered base provides roughly 6 points of buffer before hitting 8% pref — the dual stress consumes most of that buffer."
+          },
+          {
+            "label": "Run the sensitivity table, but don't surface it in IC — showing the stress will kill a deal that otherwise pencils.",
+            "isBest": false,
+            "explanation": "Suppressing downside analysis from IC is a fiduciary and professional standards issue. The PM is explicitly asking for this analysis because it's decision-relevant. If the stress breaks the hurdle, IC should decide whether to re-price, add structural protections, or pass — not be shielded from the information. Transparent risk disclosure protects everyone, including the deal team."
+          }
+        ],
+        "takeaway": "Two-variable sensitivity always produces worse outcomes than either variable alone because the stresses compound on exit value. Quick mental model: 100 bps of exit cap expansion costs ~4–5 IRR points on a 60% LTV, 5-year levered deal; 200 bps of rent growth miss costs another 2–3 points. Combined stress of 6–9 IRR points off a 14% base is a realistic, severe-but-plausible scenario — IC should always see it.",
+        "tips": [
+          "Build a 3×3 sensitivity table: rows = exit cap (−50, base, +50, +100 bps), columns = rent growth (−1%, base, +1%).",
+          "Label stress cases as 'Realistic downside' — worst-case is a separate, more extreme scenario.",
+          "If the deal only pencils at base or better, document the margin-of-error explicitly; IC needs to know it's thin."
+        ]
+      }
+    },
+    {
+      "number": 109,
+      "id": "sit:rent-growth-irr-rule-of-thumb",
+      "type": "situational",
+      "title": "How much does 1% of annual rent growth actually move your IRR?",
+      "meta": "Situational · sensitivity · beginner · multifamily · acquisitions",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You're modeling a 200-unit multifamily acquisition at a 5.5% going-in cap on $1.5M of Year-1 NOI. Your base case uses 3%/yr rent growth and 2%/yr expense growth, producing a 12% levered IRR over a 5-year hold at a 6.25% exit cap with 60% LTV fixed-rate financing. A junior associate asks: \"If rent growth ends up at 2% instead of 3%, how much does the IRR actually move?\""
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Year-1 NOI", "value": "$1.5M" },
+            { "label": "Going-in cap", "value": "5.5%" },
+            { "label": "Base IRR", "value": "12% (3% rent growth, 6.25% exit cap)" },
+            { "label": "Stress scenario", "value": "2% rent growth (exit cap and expenses unchanged)" },
+            { "label": "Leverage", "value": "60% LTV, fixed rate" },
+            { "label": "Hold", "value": "5 years" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "What's the approximate IRR impact of a 1% rent growth miss, and what's the intuition behind it?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Roughly 150–250 bps of IRR drag. 1% less annual rent growth produces ~5% lower Year-5 NOI, reducing exit value by ~$1.2M+ on this deal, amplified further by the 60% leverage.",
+            "isBest": true,
+            "explanation": "Compounding: (1.03)⁵ ≈ 1.159 vs (1.02)⁵ ≈ 1.104 — roughly 5% more NOI in the base by Year 5. On $1.5M Year-1 NOI, 5% = ~$75k of incremental NOI by Year 5 (using Year-1 as a rough anchor). At a 6.25% exit cap: $75k ÷ 6.25% ≈ $1.2M of incremental exit value. Equity is $1.5M NOI / 5.5% cap = $27.3M asset; 60% LTV = $16.4M debt, $10.9M equity. A $1.2M swing in exit value plus ~$350k of incremental cash flow over 5 years ÷ $10.9M equity, spread over 5 years ≈ roughly 150–200 bps of IRR impact. Leverage amplifies it — at higher LTV, the same NOI miss costs proportionally more."
+          },
+          {
+            "label": "Negligible — 1% is a rounding error on a 5-year hold.",
+            "isBest": false,
+            "explanation": "Compounded over 5 years, 1% rent growth produces ~5% more NOI at Year 5. At a typical exit cap, that's over $1M in additional exit value on a mid-size deal. For a levered equity investor with a ~$10M equity check, $1M+ of exit value is 10%+ of invested capital — not a rounding error."
+          },
+          {
+            "label": "It depends entirely on the exit cap — if the cap compresses, the rent growth miss is fully offset.",
+            "isBest": false,
+            "explanation": "Sensitivity analysis isolates variables. Cap compression and rent growth are separate inputs; you can't bank on an upside cap move to cover a rent miss in a base case. Run them as independent variables, then show the combined scenarios in a sensitivity table. Conflating them obscures your actual exposure."
+          },
+          {
+            "label": "About 400–500 bps of IRR drag — rent growth is the single most important lever in multifamily.",
+            "isBest": false,
+            "explanation": "Overstated by a factor of ~2–3×. A 400–500 bps IRR drag from 1% of rent growth is consistent with a highly levered, short-hold, or income-compressed scenario. On a normal 60% LTV, 5-year hold with reasonable going-in yield, the correct order of magnitude is 150–250 bps. Knowing the rough magnitude matters — it's what makes the mental model useful."
+          }
+        ],
+        "takeaway": "Every 1% of annual rent growth compounds into roughly 5% more Year-5 NOI over a 5-year hold. At a typical exit cap, that translates to ~$1–2M of exit value on a mid-size deal — and leverage amplifies the equity-level impact. Rule of thumb: 1% rent growth ≈ 150–200 bps of levered IRR on a 60% LTV, 5-year hold. Always include a 1% and 2% downshift in your rent growth sensitivity — these are realistic, not extreme, scenarios.",
+        "tips": [
+          "Year-5 NOI delta for 1% rent growth miss ≈ 5% of Year-1 NOI (compounded over 5 years).",
+          "Exit value delta ≈ (5% × Year-1 NOI) ÷ exit cap rate.",
+          "Higher LTV = bigger IRR swing per dollar of NOI miss — leverage is a two-way amplifier."
+        ]
+      }
+    },
+    {
+      "number": 110,
+      "id": "sit:rate-move-kills-dscr",
+      "type": "situational",
+      "title": "Rates moved 100 bps between LOI and lender commitment — what breaks?",
+      "meta": "Situational · sensitivity · intermediate · mixed · mortgageUw/acquisitions",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You signed an LOI on a stabilized retail strip center at a $16M purchase price. Your debt model assumed a $10M loan at 6.00% interest-only (years 1–2), producing a 1.30× DSCR. Between LOI execution and lender commitment 45 days later, the 10-year Treasury moved +100 bps and the lender quoted a revised all-in rate of 7.00%. Stabilized NOI is $780,000."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Purchase price", "value": "$16M" },
+            { "label": "Loan amount", "value": "$10M (~62.5% LTV)" },
+            { "label": "Original rate / DSCR", "value": "6.00% I/O → $600k DS → 1.30× DSCR" },
+            { "label": "Revised rate", "value": "7.00% (+100 bps)" },
+            { "label": "Stabilized NOI", "value": "$780,000" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "What does the DSCR become at the new rate, and what are your options to close the deal?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "DSCR drops from 1.30× to 1.11× — below most lenders' 1.20–1.25× floor. Options: reduce loan to ~$8.9M, renegotiate purchase price, or buy down the rate. The deal likely requires one of these to close.",
+            "isBest": true,
+            "explanation": "Original: $10M × 6.00% = $600k DS. DSCR = $780k / $600k = 1.30×. Revised: $10M × 7.00% = $700k DS. DSCR = $780k / $700k = 1.11×. At 1.11×, most institutional lenders won't close (floor is 1.20–1.25×). Fix options: (a) Reduce loan to restore DSCR — max DS at 1.25× floor: $780k / 1.25 = $624k/yr. At 7%, max loan = $624k / 7% = $8.91M — requires $1.09M more equity. (b) Negotiate purchase price down ~$1.5M to reduce LTV and justify a smaller loan. (c) Rate buydown — lender may accept 50–75 bps for 100–150 bps of points upfront. Model all three and choose by economics. Also: check if the deal was contingent on financing terms — if so, the LOI may allow re-opening the purchase price conversation."
+          },
+          {
+            "label": "An I/O loan has a fixed payment — a rate change after commitment doesn't affect DSCR.",
+            "isBest": false,
+            "explanation": "I/O means interest-only; the payment IS rate × principal. If the rate changes before commitment, the I/O payment changes too. $10M × 6% = $600k; $10M × 7% = $700k — that's a $100k/yr increase in debt service, which is the entire cushion above a 1.11× DSCR. I/O doesn't mean rate-insensitive; it means no amortization component."
+          },
+          {
+            "label": "Walk from the deal — a 100 bps rate move makes this unexecutable.",
+            "isBest": false,
+            "explanation": "Premature. Three paths remain before walking: reduce loan size, renegotiate purchase price, or buy down the rate. A well-modeled deal should have had pre-LOI rate sensitivity to know which paths were viable. Walking without exploring options is leaving capital on the table — and potentially triggering deposit forfeiture depending on LOI terms."
+          },
+          {
+            "label": "Increase the loan amount to maintain the original LTV — the higher NOI will cover the rate increase over time.",
+            "isBest": false,
+            "explanation": "Increasing the loan at a higher rate makes the DSCR worse, not better: more principal × higher rate = more debt service against the same NOI. NOI doesn't increase because the rate moved — this framing confuses leverage with income. The fix is to reduce debt or reduce price, not add more debt."
+          }
+        ],
+        "takeaway": "I/O DSCR sensitivity is simple: every 100 bps of rate increase adds (loan × 1%) to annual debt service. On a $10M loan, that's $100k/yr — a 15% increase in debt service against $780k of NOI. Always pre-stress DSCR for ±100–150 bps before signing an LOI so you know your rate tolerance and can build financing contingency language accordingly.",
+        "tips": [
+          "I/O DSCR sensitivity: 100 bps rate increase = loan × 1% of additional annual debt service.",
+          "Max loan at a target DSCR: (NOI / required DSCR) / interest rate.",
+          "Rate buydown cost: roughly 100–150 bps of upfront points per 50 bps of rate reduction — model vs equity top-up."
+        ]
       }
     }
   ]
