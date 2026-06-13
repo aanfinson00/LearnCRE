@@ -1,5 +1,5 @@
 {
-  "total": 100,
+  "total": 110,
   "questions": [
     {
       "number": 1,
@@ -6363,6 +6363,594 @@
           }
         ],
         "takeaway": "Hold-vs-sell decisions live in three layers: pre-tax IRR (Steps 1–5), after-tax cash (Steps 6–7), and the LP-tax-position lens (deferral matters more for tax-sensitive LPs). When pre-tax IRR is similar, deferral usually tips toward holding — but the cap-rate drift on the hold side often offsets the deferral benefit. Always run all three layers; never decide on pre-tax alone."
+      }
+    },
+    {
+      "number": 101,
+      "id": "sit:absorption-negative-signal",
+      "type": "situational",
+      "title": "What does one quarter of negative absorption actually mean?",
+      "meta": "Situational · absorption · intermediate · industrial · acquisitions/assetManagement",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "An industrial submarket has tracked positive net absorption for 18 consecutive quarters. This quarter it posts −85,000 SF of net absorption for the first time. Market occupancy moved from 95.4% to 95.0%. A new 200,000 SF Class-A distribution facility delivered at 40% pre-leased. You are evaluating an acquisition of a 150,000 SF building at 97% occupancy in the same submarket."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Net absorption this quarter", "value": "−85,000 SF" },
+            { "label": "Market occupancy change", "value": "95.4% → 95.0%" },
+            { "label": "New supply delivered", "value": "200,000 SF (40% pre-leased)" },
+            { "label": "Subject building occupancy", "value": "97%" },
+            { "label": "Trailing 4-quarter absorption avg", "value": "+120,000 SF/qtr" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "What does this quarter's negative absorption most likely signal, and how should it affect your underwriting?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Supply temporarily outpaced demand — one large under-leased delivery changed the quarter's math; underlying demand remains healthy and 95% is still a tight market.",
+            "isBest": true,
+            "explanation": "Net absorption = net new occupancy (move-ins minus move-outs). When a large building delivers below its pre-leased rate, the arithmetic goes negative even if no tenant is vacating. A single quarter of supply-driven negative absorption at 95% occupancy is not a demand signal. The 18-quarter positive trend and 97% subject occupancy argue against a structural turn."
+          },
+          {
+            "label": "The submarket has turned — pull back rent growth assumptions and lower exit occupancy in your model.",
+            "isBest": false,
+            "explanation": "One data point in isolation does not define a trend, especially when context (delivery-driven, 95% market occupancy) clearly explains the arithmetic. Revising rent growth on one quarter of supply-driven negative absorption would be an overreaction unsupported by the underlying demand picture."
+          },
+          {
+            "label": "The new delivery will drag market occupancy toward 90% over the next 4–6 quarters.",
+            "isBest": false,
+            "explanation": "This projects delivery-driven negative absorption forward without evidence. At +120k/qtr trailing absorption, the 200k SF delivery is absorbed in under 2 quarters at market pace. A 5-percentage-point occupancy drop requires sustained supply overwhelm that isn't present here."
+          },
+          {
+            "label": "Negative net absorption means tenants are vacating — the submarket is losing demand.",
+            "isBest": false,
+            "explanation": "This conflates the sign of absorption with its cause. Negative net absorption can result from large new supply delivering below pre-leased, not just from tenant move-outs. Always identify the driver before concluding demand has weakened."
+          }
+        ],
+        "takeaway": "One quarter of negative net absorption driven by a large new delivery does not signal demand destruction. Net absorption is a flow measure — it captures the net of move-ins minus move-outs and can go negative arithmetically when new supply hits before it's fully leased. Context always matters: a 40 bps dip from a 95% base is very different from a structural demand reversal.",
+        "tips": [
+          "Net absorption = new occupancy (move-ins − move-outs), not just vacancy change",
+          "One data point ≠ trend; look at trailing 4–8 quarters and identify the driver",
+          "Delivery-driven negative absorption typically resolves faster than demand-driven weakness"
+        ]
+      }
+    },
+    {
+      "number": 102,
+      "id": "sit:absorption-shadow-vacancy",
+      "type": "situational",
+      "title": "Does shadow vacancy blow up this lease-up underwrite?",
+      "meta": "Situational · absorption · advanced · office · acquisitions/development",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "A CBD office submarket has 15M SF of inventory, 12% direct vacancy (1.8M SF), and 4% sublease availability (600,000 SF). Active tenant requirements in the market total 500,000 SF. Historical net absorption has averaged +180,000 SF per quarter over the last 8 quarters. You are evaluating a 400,000 SF Class-A development targeting full stabilization in 24 months."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Inventory", "value": "15M SF" },
+            { "label": "Direct vacancy", "value": "12% (1.8M SF)" },
+            { "label": "Sublease availability", "value": "4% (600,000 SF)" },
+            { "label": "Active tenant requirements", "value": "500,000 SF" },
+            { "label": "Trailing avg absorption", "value": "+180,000 SF/qtr" },
+            { "label": "New development to lease-up", "value": "400,000 SF" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "Is a 24-month stabilization assumption reasonable, and how does the sublease inventory affect your view?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Yes — active requirements of 500,000 SF exceed the development's 400,000 SF and absorption is positive, making 24 months achievable.",
+            "isBest": false,
+            "explanation": "This ignores that your 400k SF is competing against 2.4M SF of other available space for the same 500k SF of active demand. The development captures only a fraction of market-wide absorption, and sublease space priced at a 15–25% discount creates significant pricing headwinds."
+          },
+          {
+            "label": "Probably not — at 180,000 SF/qtr market absorption and ~2.4M SF of competing availability including sublease, a realistic lease-up is 36–48 months.",
+            "isBest": true,
+            "explanation": "Total competing supply = 1.8M direct + 600k sublease = 2.4M SF, against 500k active requirements. Even at 100% of market absorption going to this building (unrealistic), 400k SF ÷ 180k/qtr ≈ 2.2 quarters. But this building competes for a fraction of market demand, not all of it. A more realistic capture rate (20–30%) puts stabilization at 7–10 quarters (28–40 months). Sublease adds a pricing competitor that slows absorption for new Class-A space."
+          },
+          {
+            "label": "Yes — Class-A new supply absorbs faster than the market average because tenants prefer fresh space and modern amenities.",
+            "isBest": false,
+            "explanation": "Class-A premium is real but not a multiplier that overrides supply/demand fundamentals. When a market has 16% total availability and 500k SF of active demand, even Class-A buildings face a long lease-up. Flight to quality doesn't overcome oversupply."
+          },
+          {
+            "label": "It depends on whether the sublease space has the same floor-plate configuration as the development.",
+            "isBest": false,
+            "explanation": "Product differentiation is a secondary factor. The primary variables are the volume of competing supply relative to demand, and the pricing headwind from sublease (which is typically 15–25% below direct market rates). Configuration matters at the margin, not at the macro level."
+          }
+        ],
+        "takeaway": "Sublease availability (shadow vacancy) competes directly with new development, often at 15–25% discounts to market. Total competing supply = direct vacancy + sublease space. When total availability dwarfs active demand, the market-level absorption rate divided by your building's realistic capture share is the honest lease-up timeline — not a simple square footage comparison to active requirements.",
+        "tips": [
+          "Shadow vacancy = sublease + available-but-not-listed space; both compete for the same demand",
+          "Sublease is typically priced 15–25% below direct, creating a pricing headwind for new construction",
+          "Realistic absorption capture = (building SF ÷ total competing supply) × market absorption pace"
+        ]
+      }
+    },
+    {
+      "number": 103,
+      "id": "sit:absorption-supply-pipeline",
+      "type": "situational",
+      "title": "Does the supply pipeline kill your value-add thesis?",
+      "meta": "Situational · absorption · intermediate · multifamily · acquisitions/assetManagement",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "A multifamily submarket has 12,000 units at 94% occupancy. Market absorption has been 300 units per quarter. The development pipeline shows 1,800 units under construction scheduled to deliver over the next 4 quarters at roughly 450 units per quarter. Rents are flat to +1% annually. You are evaluating a value-add acquisition that needs 93% occupancy at stabilization to hit your return targets."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Inventory", "value": "12,000 units" },
+            { "label": "Current occupancy", "value": "94%" },
+            { "label": "Quarterly absorption", "value": "300 units/qtr" },
+            { "label": "Pipeline", "value": "1,800 units over 4 quarters (~450/qtr)" },
+            { "label": "Rent trend", "value": "Flat to +1%" },
+            { "label": "Required stabilization occupancy", "value": "93%" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "What does the supply pipeline tell you about submarket occupancy over the next 12 months, and does your stabilization target hold?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Occupancy will improve — positive absorption at 300 units/qtr will continue to fill existing vacancy.",
+            "isBest": false,
+            "explanation": "This ignores that 450 units/qtr of new supply exceeds 300 units/qtr of absorption. When supply outpaces absorption, occupancy compresses regardless of demand being positive. You need net absorption (absorption minus new supply) to be positive for occupancy to improve."
+          },
+          {
+            "label": "Occupancy will likely compress — new supply (450/qtr) exceeds absorption (300/qtr) by 150 units/qtr, and market occupancy could fall 200–400 bps over 12 months.",
+            "isBest": true,
+            "explanation": "Net supply pressure = 450 new units/qtr − 300 absorbed = 150 net additions to vacancy each quarter. Over 4 quarters: ~600 units added to vacant inventory on a growing base of ~13,800 units, compressing occupancy from 94% to approximately 90–91%. Your 93% stabilization target requires the subject asset to outperform the submarket by 200–300 bps — possible with below-market rents, but the headwind must be underwritten explicitly."
+          },
+          {
+            "label": "The pipeline is irrelevant to your specific asset if it has strong in-place rents and a differentiated tenant profile.",
+            "isBest": false,
+            "explanation": "Asset-specific factors can offset submarket headwinds at the margin, but not 400 bps of occupancy compression. When supply overwhelms absorption market-wide, all assets feel it — some earlier, some later. \"My building is different\" cannot override supply/demand math."
+          },
+          {
+            "label": "You can discount the pipeline because construction deliveries typically run 6–12 months late.",
+            "isBest": false,
+            "explanation": "Delays are common but should be modeled as a scenario, not assumed in the base case. If deliveries are on schedule (as stated), ignoring them is wishful thinking. The safe approach: underwrite the base case to the stated pipeline and run a delayed-delivery scenario as upside."
+          }
+        ],
+        "takeaway": "When the supply pipeline exceeds absorption pace, occupancy compresses. The formula: net supply pressure = deliveries/quarter − absorption/quarter. Over 4 quarters here, ~600 units are added to vacant inventory on a base growing to 13,800, compressing market occupancy ~400 bps. A value-add asset needing 93% occupancy in a market trending toward 90% requires a credible reason for outperformance — below-market rents are the most defensible.",
+        "tips": [
+          "Net supply pressure = pipeline deliveries/qtr − absorption/qtr; if positive, occupancy compresses",
+          "Supply/absorption ratios above 1.5× historically produce measurable occupancy compression",
+          "Below-market rents (10%+ gap) are the strongest buffer against submarket supply headwinds"
+        ]
+      }
+    },
+    {
+      "number": 104,
+      "id": "sit:comp-distressed-sale",
+      "type": "situational",
+      "title": "Should a distressed sale go in your comp set?",
+      "meta": "Situational · comp-selection · intermediate · retail · acquisitions/mortgageUw",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You are valuing a 96%-occupied, Class-B retail strip center. Five sales have occurred in the submarket over the last 18 months. Four transactions ranged 6.25–7.00% cap rates on stabilized assets. The fifth was a 67%-occupied strip center that sold at a 9.5% cap rate two months ago — the seller was a distressed borrower facing a debt maturity default with two anchor vacancies. All five properties are 1990s vintage within a 5-mile radius."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Subject occupancy", "value": "96% (stabilized)" },
+            { "label": "Stabilized comp range (n=4)", "value": "6.25–7.00% cap" },
+            { "label": "Distressed comp cap rate", "value": "9.5% at 67% occupancy" },
+            { "label": "Distressed seller context", "value": "Debt maturity default, motivated seller" },
+            { "label": "Vintage / proximity", "value": "All 1990s, ≤5-mile radius" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "How should you treat the 9.5% distressed comp, and what cap rate range do you apply to the subject?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Include it equally — it traded in the submarket recently and represents real market evidence.",
+            "isBest": false,
+            "explanation": "Distressed sales represent the pricing of that specific distress, not the market for stabilized assets. Including it equally would bias the indicated cap rate to approximately 7.2% (average of all five) vs. the stabilized range of 6.25–7.00%. Appraisal standards explicitly allow exclusion of non-arm's-length or atypical transactions."
+          },
+          {
+            "label": "Weight it minimally or exclude it — it reflects a capital structure failure on non-stabilized product and would materially bias the stabilized cap rate upward.",
+            "isBest": true,
+            "explanation": "The 9.5% comp has two disqualifying features: (1) the seller was a motivated distressed borrower, making it non-arm's-length; (2) the occupancy (67%) is fundamentally different from the subject (96%), requiring a large and speculative adjustment. Both factors together are grounds for exclusion. The stabilized comp range of 6.25–7.00% is the appropriate market evidence for a 96%-occupied asset."
+          },
+          {
+            "label": "Average all five equally — a five-sale dataset is already thin; removing comps makes the analysis less reliable.",
+            "isBest": false,
+            "explanation": "Data quantity does not override data quality. Including a distressed, non-stabilized sale in a stabilized analysis introduces bias, not precision. Standard appraisal methodology calls for adjustment or exclusion of non-representative transactions."
+          },
+          {
+            "label": "Use it as your bear case cap rate — 9.5% is what the asset is worth if it destabilizes.",
+            "isBest": false,
+            "explanation": "A destabilized scenario cap rate should be derived from a stress scenario model, not from a distressed comp. The distressed comp reflects a specific motivated seller and a specific occupancy level — it's not a reliable proxy for 'what if occupancy drops.'"
+          }
+        ],
+        "takeaway": "Non-stabilized and distressed sales reflect the pricing of that specific distress, not the market for stabilized assets. Standard practice is to flag, footnote, and exclude or heavily adjust distressed comps. When a comp dataset is thin, the right answer is to expand the geographic or temporal search radius for stabilized evidence — not to include outliers that introduce systematic bias.",
+        "tips": [
+          "Distressed sale = motivated seller, imminent debt maturity, sub-market occupancy, or forced liquidation",
+          "Include a distressed comp only if you can make a credible, quantified adjustment for both occupancy and seller motivation",
+          "When the stabilized comp set is thin, expand geography before accepting distressed sales"
+        ]
+      }
+    },
+    {
+      "number": 105,
+      "id": "sit:comp-geographic-stretch",
+      "type": "situational",
+      "title": "Can you stretch your comp set across submarkets?",
+      "meta": "Situational · comp-selection · advanced · industrial · acquisitions/mortgageUw",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You are acquiring a light industrial property in a secondary submarket. Only 2 confirmed trades have occurred locally in 18 months at 6.2% and 6.8% cap rates. Your broker recommends including 3 trades from a primary submarket 15 miles away that printed 5.0–5.5%, arguing they 'reflect the direction of the market.' An independent appraiser using only the 2 local comps concludes a 6.5% cap rate. Your underwriting model needs a cap rate."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Local comps (18 months)", "value": "6.2% and 6.8% (n=2)" },
+            { "label": "Primary submarket comps (15 mi)", "value": "5.0–5.5% (n=3)" },
+            { "label": "Distance to primary market", "value": "15 miles" },
+            { "label": "Appraiser conclusion (local only)", "value": "6.5% cap" },
+            { "label": "Broker narrative", "value": "Primary market is converging" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "How do you resolve the comp set and determine the right cap rate for your underwriting?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Use the primary market comps — the broker is right that cap rates compress outward and 5.0–5.5% is more current.",
+            "isBest": false,
+            "explanation": "Primary-market trades are useful as a directional indicator of where cap rates may head, but they cannot substitute for local evidence. Different liquidity, tenant quality, and infrastructure access mean a 15-mile gap can represent a 75–150 bps permanent cap rate premium for secondary markets. Applying primary-market cap rates to a secondary asset systematically overstates value."
+          },
+          {
+            "label": "Average all five comps equally — more data reduces estimation error.",
+            "isBest": false,
+            "explanation": "Averaging across fundamentally different submarkets does not reduce error; it introduces a geographic mismatch bias. All five transactions are not economically equivalent. More data only helps when the data is comparable."
+          },
+          {
+            "label": "Use only the 2 local comps — geographic discipline is paramount and the appraiser's 6.5% reflects the actual market.",
+            "isBest": false,
+            "explanation": "Partially correct — the local comps should anchor the analysis. But the primary-market evidence is useful as a directional check and to quantify the location risk premium explicitly. Ignoring it entirely leaves value on the table if the secondary market is genuinely compressing toward the primary."
+          },
+          {
+            "label": "Anchor to the local comps (6.2–6.8%) and use the primary market comps only as a directional check, applying a 75–150 bps location risk premium explicitly.",
+            "isBest": true,
+            "explanation": "The disciplined answer: local comps are the primary evidence; primary-market comps help you frame the gap. If you believe convergence is occurring, you can apply a tighter premium — but you must quantify it explicitly rather than adopting primary-market pricing wholesale. 6.5% (appraiser's midpoint) is defensible; if you want to bid tighter, you need to argue the specific premium compression with data."
+          }
+        ],
+        "takeaway": "Geographic boundary stretching is one of the most common valuation errors in thin secondary markets. Primary-market trades serve as directional indicators, not direct evidence — the liquidity premium, tenant quality, and submarket dynamics differ. Anchor to local comps, quantify the location risk premium explicitly, and underwrite conservatively where evidence is thin. 'The market is converging' is a thesis to model, not an assumption to bake in.",
+        "tips": [
+          "Location risk premium (secondary vs. primary industrial): typically 50–150 bps; quantify it",
+          "\"Directional check\" vs. \"direct evidence\" — primary comps belong in the former bucket only",
+          "Thin local comp sets require wider hold-period assumptions to reduce exit-cap sensitivity"
+        ]
+      }
+    },
+    {
+      "number": 106,
+      "id": "sit:lease-econ-free-rent-vs-ti",
+      "type": "situational",
+      "title": "Free rent or TI allowance — which concession costs the landlord less?",
+      "meta": "Situational · lease-econ · intermediate · office · assetManagement/acquisitions",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "A 10,000 SF office tenant is negotiating a 5-year NNN lease at $35/SF/year. They've asked for either (A) 8 months of free rent upfront or (B) a $50/SF TI allowance ($500,000 total). The landlord's cost of capital is 8%. Both options are market-level concessions for this submarket and tenant credit. The tenant is investment-grade."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Lease size / term", "value": "10,000 SF / 5 years" },
+            { "label": "Base rent", "value": "$35/SF/yr ($350,000/yr)" },
+            { "label": "Option A: free rent", "value": "8 months (~$233,333 forgone)" },
+            { "label": "Option B: TI allowance", "value": "$50/SF ($500,000 cash out)" },
+            { "label": "Landlord cost of capital", "value": "8%" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "Which concession structure is cheaper for the landlord in present-value terms, and why?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Option B (TI allowance) — the $500k is amortized over 5 years and creates a depreciable asset, making the net cost lower.",
+            "isBest": false,
+            "explanation": "The TI allowance creates a landlord asset, but the cash outlay ($500k) is still real and occurs at signing. Tax amortization reduces the after-tax cost but does not change the present value comparison for a simple NPV analysis. $500k still exceeds the PV of 8 months' rent by a wide margin."
+          },
+          {
+            "label": "They are equivalent — both represent the same economic concession valued to market.",
+            "isBest": false,
+            "explanation": "They are not equivalent. $233k of forgone rent is materially less than $500k of cash out, and the timing differs. Equivalence would require a specific relationship between the lease rate, TI amount, and free-rent months that does not hold here."
+          },
+          {
+            "label": "Option A (free rent) — forgone rent of ~$233k is materially less than $500k cash out; even on a PV basis, 8 months of $29,167/month is well below $500k.",
+            "isBest": true,
+            "explanation": "Option A costs the landlord ~$233k in forgone income (8 × $29,167). Option B costs $500k in cash at signing. PV of free rent at 8% over 8 months ≈ $224k. PV of TI = $500k (immediate). Free rent is cheaper by approximately $276k in present value. Tenants often prefer TI because it funds real improvements; landlords prefer free rent because the economic cost is lower."
+          },
+          {
+            "label": "Option A costs more because the landlord still incurs operating expenses during the free-rent period without offsetting income.",
+            "isBest": false,
+            "explanation": "Under an NNN lease, the tenant pays all operating expenses regardless of free-rent periods. The landlord's only economic cost of free rent is the forgone base rent. In a gross lease context, operating expense exposure during free rent would be relevant — but not here."
+          }
+        ],
+        "takeaway": "Free rent and TI allowances are both concessions, but their economics are not symmetric. Free rent = forgone income (deferred, lower absolute cost). TI = hard cash out at commencement (immediate, higher absolute cost). Under NNN leases, the landlord avoids operating expense exposure during free rent, making the comparison straightforward: compare PV of forgone rent to PV of TI. Net effective rent captures both: (total rent value − total concession value) ÷ lease term.",
+        "tips": [
+          "Net effective rent = (total base rent − concessions) ÷ lease term; use it to compare different structures",
+          "TI allowance is immediate cash; free rent is deferred — time value amplifies TI's cost",
+          "NNN vs. gross matters: operating expense exposure during free rent only applies to gross leases"
+        ]
+      }
+    },
+    {
+      "number": 107,
+      "id": "sit:lease-econ-cam-dispute",
+      "type": "situational",
+      "title": "Who wins the CAM reconciliation dispute?",
+      "meta": "Situational · lease-econ · advanced · retail · assetManagement",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "A retail tenant signed a lease in 2020 with a base year CAM stop of $8.25/SF. In 2024, the landlord invoices $11.40/SF in actual CAM — a $3.15/SF overage. The tenant disputes the bill, citing a lease clause capping CAM at 5% annual increases. The lease caps controllable CAM expenses (management fees, maintenance, landscaping) at 5% per year compounded, but explicitly excludes insurance and property taxes from the cap. Since 2020, insurance has doubled; property taxes rose 18% after reassessment."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Base year CAM stop (2020)", "value": "$8.25/SF" },
+            { "label": "2024 actual CAM", "value": "$11.40/SF" },
+            { "label": "Tenant's cap calculation", "value": "$8.25 × 1.05⁴ = $10.02/SF" },
+            { "label": "Uncontrollable items (insurance + taxes)", "value": "~$2.10/SF above 2020 baseline" },
+            { "label": "Controllable items overage", "value": "~$1.05/SF above 2020 baseline" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "Who is right in this dispute, and what does the tenant legitimately owe above the 2020 stop?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "The tenant is right — the 5% annual cap applies to all CAM and the landlord is overbilling by $1.38/SF.",
+            "isBest": false,
+            "explanation": "The tenant is misreading the lease. The 5% cap applies only to controllable expenses. The lease explicitly carves out insurance and property taxes as uncontrollable. Applying the cap to all CAM ignores the carve-out and understates the landlord's legitimate recovery."
+          },
+          {
+            "label": "The landlord is right — CAM reconciliation is straightforward math and $11.40 is the correct number.",
+            "isBest": false,
+            "explanation": "Not necessarily. The controllable portion of CAM is subject to the 5% annual cap. If controllable expenses have grown faster than 5%/year compounded, the landlord cannot pass the excess through. The landlord needs to show that the controllable overage is within the cap."
+          },
+          {
+            "label": "Both parties are partially right — the 5% cap applies only to controllable expenses; uncontrollable items (insurance + taxes) pass through in full, yielding a legitimate overage of approximately $2.10–$2.25/SF, not $3.15/SF.",
+            "isBest": true,
+            "explanation": "The lease creates two buckets: (1) controllable CAM, capped at 5%/yr ($8.25 × 1.05⁴ = $10.02/SF equivalent for the controllable share); (2) uncontrollable CAM (insurance + taxes), passed through in full regardless of the cap. The ~$2.10/SF of uncontrollable increases is fully recoverable. The ~$1.05/SF of controllable growth needs to be checked against the 5% cap — if within the cap, it passes through too. The total legitimate overage is approximately $2.10–$2.25/SF, not $3.15/SF."
+          },
+          {
+            "label": "It depends on whether 'CAM stop' and 'CAM cap' are the same provision in the lease.",
+            "isBest": false,
+            "explanation": "They are different provisions: a CAM stop is a base-year threshold above which the tenant pays increases; a CAM cap limits annual growth on controllable items. In this scenario, both provisions exist and the question is how they interact. The answer is already determinable from the facts given."
+          }
+        ],
+        "takeaway": "CAM disputes turn on one question: which expenses are 'controllable' (subject to the cap) vs. 'uncontrollable' (not capped). Common uncontrollables: insurance, property taxes, utilities, snow removal. Common controllables: management fees, maintenance, landscaping. The cap applies only to its defined bucket. Run the math in two buckets, not one, and the dispute resolves to a precise dollar range.",
+        "tips": [
+          "CAM stop = base-year threshold; tenant pays growth above it",
+          "CAM cap = annual growth limit on controllable items only; uncontrollables pass through in full",
+          "Common uncontrollable carve-outs: insurance, real estate taxes, utilities, structural repairs"
+        ]
+      }
+    },
+    {
+      "number": 108,
+      "id": "sit:sensitivity-entry-cap",
+      "type": "situational",
+      "title": "How much does a 25 bps entry cap move your IRR?",
+      "meta": "Situational · sensitivity · intermediate · multifamily · acquisitions",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You are underwriting a multifamily acquisition at a $30M price, modeled at a 5.50% going-in cap rate ($1.65M NOI). You plan to exit in year 5 at a 6.00% cap rate (50 bps spread). LTV is 65% at 6.0% interest-only for 5 years. The model produces a 13.2% levered IRR. A competing bidder signals they will bid at a 5.25% going-in cap. Everything else — NOI, exit cap, debt terms — is unchanged."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Purchase price at 5.50% cap", "value": "$30.0M" },
+            { "label": "Purchase price at 5.25% cap", "value": "$31.4M" },
+            { "label": "NOI (unchanged)", "value": "$1.65M" },
+            { "label": "Exit cap (unchanged)", "value": "6.00%" },
+            { "label": "LTV / rate / structure", "value": "65% / 6.0% / IO 5-yr" },
+            { "label": "Levered IRR at $30M", "value": "13.2%" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "Approximately what levered IRR does the $31.4M entry price produce, and how do you estimate it quickly?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "About 13.0% — a $1.4M price increase has minimal impact on levered returns with IO debt.",
+            "isBest": false,
+            "explanation": "A $1.4M price increase at 65% LTV reduces equity by $490k (35% of $1.4M). On a $10.5M equity base, that's ~4.7% more equity invested with the same cash flows — a material IRR impact, not a minimal one."
+          },
+          {
+            "label": "About 11.5–12.0% — the $1.4M price increase reduces equity by ~$490k (35% × $1.4M), compressing levered IRR by approximately 100–150 bps.",
+            "isBest": true,
+            "explanation": "Quick math: $1.4M extra price at 65% LTV → $490k more equity (equity goes from $10.5M to $11.0M). Same cash flows over 5 years, same exit, but invested $490k more. On a 5-year hold with a ~13% return, a 4.7% increase in the equity denominator compresses levered IRR by roughly 100–150 bps. The rule: every 25 bps going-in cap ≈ 100–120 bps of levered IRR on a 65% LTV 5-year hold."
+          },
+          {
+            "label": "About 12.0% — each 10 bps of going-in cap translates to approximately 20 bps of levered IRR.",
+            "isBest": false,
+            "explanation": "Close but slightly off. The relationship depends on leverage and hold period. At 65% LTV, 25 bps in cap ≈ $1.4M in price ≈ $490k in equity — which compresses IRR by more than 50 bps (10 bps × 5). About 100–130 bps is more accurate."
+          },
+          {
+            "label": "About 14.5% — higher price means more debt, which creates more leverage and boosts levered IRR.",
+            "isBest": false,
+            "explanation": "Leverage amplifies returns only when the levered IRR exceeds the cost of debt. Paying more for the same asset does not improve returns — it reduces them, because you are investing more capital for the same income stream. More debt on a higher price means a higher debt-service load eroding cash flow, not amplifying it."
+          }
+        ],
+        "takeaway": "Entry cap sensitivity is multiplicative through leverage. A 25 bps going-in cap compression increases price by approximately NOI × (1/new cap − 1/old cap). At 65% LTV, 35% of that price increase hits equity directly. On a 5-year hold, that equity increment reduces levered IRR by roughly 100–150 bps per 25 bps of cap compression. Memorize the rule: cap sensitivity × leverage factor ≈ IRR sensitivity.",
+        "tips": [
+          "ΔPrice ≈ NOI × (1/new cap − 1/old cap); 25 bps on $30M ≈ $1.4M",
+          "Equity impact = ΔPrice × (1 − LTV); at 65% LTV that's 35% of price change",
+          "Rule of thumb: 25 bps going-in cap ≈ 100–130 bps levered IRR at 60–65% LTV on a 5-year hold"
+        ]
+      }
+    },
+    {
+      "number": 109,
+      "id": "sit:sensitivity-exit-cap",
+      "type": "situational",
+      "title": "How much does a 50 bps exit cap expansion hurt your IRR?",
+      "meta": "Situational · sensitivity · advanced · industrial · acquisitions/portfolioMgmt",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You underwrote an industrial acquisition at a $50M entry price (5.0% going-in cap) with $3.5M of projected Year-5 exit NOI and a 5.5% exit cap, producing a $63.6M sale price and 15.0% levered IRR. Debt is 60% LTV at 6.5% IO. At IC, a senior PM asks: 'What if the exit cap is 6.0% instead of 5.5%? That's only 50 bps — how much does it matter?'"
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Entry price / cap", "value": "$50M / 5.0%" },
+            { "label": "Year-5 exit NOI", "value": "$3.5M" },
+            { "label": "Exit at 5.5% cap", "value": "$63.6M sale" },
+            { "label": "Exit at 6.0% cap", "value": "$58.3M sale" },
+            { "label": "Debt", "value": "60% LTV ($30M), 6.5% IO" },
+            { "label": "Equity invested", "value": "$20M" },
+            { "label": "Levered IRR at base case", "value": "15.0%" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "Approximately what is the IRR impact of a 50 bps exit cap expansion, and why is the impact larger than it might appear?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Less than 50 bps — a small cap rate change has a modest impact over a 5-year hold.",
+            "isBest": false,
+            "explanation": "This underestimates the leverage effect. The $5.3M reduction in proceeds flows almost entirely to equity because debt is paid first. On a $20M equity base, losing $5.3M of terminal value is a 26% reduction in equity proceeds at exit — a very large impact on IRR."
+          },
+          {
+            "label": "About 200–250 bps — the $5.3M reduction in sale proceeds flows mostly to equity ($63.6M → $58.3M), compressing levered IRR from 15.0% to approximately 12.5–13.0%.",
+            "isBest": true,
+            "explanation": "Exit value drops from $63.6M to $58.3M (−$5.3M). Debt payoff is fixed at $30M; equity proceeds drop from ~$33.6M to ~$28.3M (−$5.3M). On a $20M equity investment, losing $5.3M of terminal equity compresses levered IRR by roughly 200–250 bps. The rule: 50 bps exit cap expansion on a mid-size deal typically costs 2–3× its face value in IRR points due to leverage amplification."
+          },
+          {
+            "label": "About 100 bps — each 10 bps of exit cap expansion translates to approximately 20 bps of IRR.",
+            "isBest": false,
+            "explanation": "The per-bps relationship is steeper than this at 60% LTV. The amplification ratio depends on leverage and hold period — at 60% LTV and a 5-year hold, 50 bps in exit cap tends to translate to 200+ bps of levered IRR impact. 100 bps would be closer to an unlevered deal."
+          },
+          {
+            "label": "It depends entirely on whether the debt is amortizing — amortization determines how much of the sale proceeds go to equity.",
+            "isBest": false,
+            "explanation": "Debt structure matters at the margin, but the principal insight holds regardless: a lower exit price reduces equity proceeds dollar-for-dollar after fixed debt payoff. IO vs. amortizing changes the debt payoff amount, which modestly adjusts the equity proceeds calculation — but doesn't change the direction or magnitude of the impact."
+          }
+        ],
+        "takeaway": "Exit cap sensitivity is amplified by leverage because debt is paid first at exit. Every dollar lost in sale price flows entirely to equity. A $5.3M reduction in exit value on a $20M equity base is a 26% reduction in equity proceeds — which compresses levered IRR by 200–250 bps, not 50 bps. The rule of thumb: a 50 bps exit cap expansion typically costs 2–3× its numerical value in levered IRR points on a 55–65% LTV deal.",
+        "tips": [
+          "Exit value sensitivity: ΔSale price = NOI × (1/new cap − 1/old cap); 50 bps here = −$5.3M",
+          "Equity proceeds = sale price − debt payoff; the full price reduction hits equity",
+          "Rule: 50 bps exit cap ≈ 200–250 bps levered IRR at 55–65% LTV on a 5-year hold"
+        ]
+      }
+    },
+    {
+      "number": 110,
+      "id": "sit:tax-depreciation-recapture",
+      "type": "situational",
+      "title": "How does depreciation recapture affect your net sale proceeds?",
+      "meta": "Situational · tax-regulatory · intermediate · multifamily · acquisitions/portfolioMgmt",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You own a multifamily property purchased 7 years ago for $10M. You allocated 75% of purchase price ($7.5M) to depreciable improvements on a 27.5-year straight-line schedule. Annual depreciation: $272,727. After 7 years, accumulated depreciation is $1.909M; adjusted basis is $8.091M. You are selling at $18M. Your CPA mentions you will owe both 'Section 1250 unrecaptured depreciation tax' and long-term capital gains tax. You are in the 20% federal LTCG bracket."
+        },
+        {
+          "kind": "data",
+          "points": [
+            { "label": "Original purchase price", "value": "$10M" },
+            { "label": "Depreciable basis (75%)", "value": "$7.5M (27.5-yr SL)" },
+            { "label": "Annual depreciation", "value": "$272,727/yr" },
+            { "label": "Accumulated depreciation (7 yr)", "value": "~$1.909M" },
+            { "label": "Adjusted basis", "value": "$8.091M" },
+            { "label": "Sale price", "value": "$18M" },
+            { "label": "Total gain", "value": "$9.909M" },
+            { "label": "Federal LTCG rate", "value": "20%" }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "How is the $9.909M gain split for federal tax purposes, and roughly what is the total federal tax bill?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "All taxed at 20% LTCG — held more than a year, so the entire gain qualifies for long-term capital gains treatment.",
+            "isBest": false,
+            "explanation": "Incorrect. Long-term capital gains treatment applies to appreciation above original cost. The portion attributable to prior depreciation deductions — unrecaptured Section 1250 gain — is taxed at a flat 25% federal rate, regardless of the investor's marginal tax rate. The 20% rate applies only to the remaining appreciation."
+          },
+          {
+            "label": "Split: ~$1.909M recaptured at 25% (Sec 1250); remaining ~$8.0M taxed at 20% LTCG. Federal tax ≈ $477k + $1.6M = ~$2.08M.",
+            "isBest": true,
+            "explanation": "The $9.909M gain divides into two buckets: (1) unrecaptured Section 1250 gain = accumulated depreciation = $1.909M, taxed at 25% = $477k; (2) remaining appreciation = $9.909M − $1.909M = $8.0M, taxed at 20% LTCG = $1.6M. Total federal tax ≈ $2.08M, or approximately 21% effective rate on the total gain — higher than the 20% LTCG rate investors often assume."
+          },
+          {
+            "label": "All taxed at ordinary income rates — depreciation deductions are always recaptured at ordinary rates when real property is sold.",
+            "isBest": false,
+            "explanation": "Ordinary income recapture (Section 1245) applies to personal property and accelerated depreciation. For Section 1250 real property (residential and commercial), unrecaptured depreciation is taxed at a capped rate of 25% — below ordinary income rates for most investors. True full ordinary income recapture would apply only if the taxpayer had taken accelerated depreciation on real property under pre-1986 rules."
+          },
+          {
+            "label": "Only the appreciation above original cost ($8M) is taxable; depreciation deductions cancel out the cost basis reduction.",
+            "isBest": false,
+            "explanation": "Depreciation deductions reduce adjusted basis, which increases the taxable gain — they do not offset it. The gain is measured from adjusted basis ($8.091M), not original cost ($10M). The depreciation you took as a deduction is recaptured as gain on sale — that is the mechanism Section 1250 is designed to address."
+          }
+        ],
+        "takeaway": "Real estate sale gains have two federal tax buckets: (1) unrecaptured Section 1250 depreciation — taxed at a flat 25% federal rate always; (2) remaining appreciation above original cost — taxed at long-term capital gains rates (0/15/20%). The two-bucket structure makes the effective rate on CRE sale proceeds higher than most investors expect. A 1031 exchange defers both buckets; an installment sale spreads them over time.",
+        "tips": [
+          "Section 1250 unrecaptured rate = 25% federal, always — it does not vary with your tax bracket",
+          "Adjusted basis = original cost − accumulated depreciation; lower basis = larger gain",
+          "1031 exchange defers both depreciation recapture and LTCG; it does not eliminate them — basis carries forward"
+        ]
       }
     }
   ]
