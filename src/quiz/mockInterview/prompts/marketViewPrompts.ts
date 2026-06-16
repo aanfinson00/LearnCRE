@@ -90,4 +90,64 @@ export const MARKET_VIEW_PROMPTS: MockProsePrompt[] = [
       'Acknowledge the convexity asymmetry: credit caps your upside.',
     ],
   },
+  {
+    id: 'mv-office-recovery-thesis',
+    kind: 'marketView',
+    prompt:
+      'Is office dead, or is there a recovery thesis? If so, where does it work and on what timeline?',
+    expectedDurationSec: 120,
+    rubric: [
+      { id: 'position', dimension: 'Takes a clear position — identifies where office recovers or argues it doesn\'t', weight: 2 },
+      { id: 'segmentation', dimension: 'Distinguishes trophy, Class-A, and Class-B/C — they are structurally different markets', weight: 1.5 },
+      { id: 'catalysts', dimension: 'Names specific demand catalysts (return-to-office mandates, conversion economics, etc.)', weight: 1 },
+      { id: 'counter', dimension: 'Acknowledges the structural bear case honestly' },
+    ],
+    modelAnswer:
+      'Office isn\'t dead, but it\'s a tale of two markets and only one has a recovery thesis. Trophy Class-A in primary MSAs — modern floor plates, full amenity package — is recovering because hybrid-work tenants are consolidating into quality space rather than just less space. Trophy leasing in Manhattan, Seattle, and Chicago has held. Class-B office in suburban markets is effectively obsolete for most use cases. The conversion thesis is real for some of that stock — I\'ve done the math on suburban campuses where the land is worth 2-3x more for multifamily or life-science use than for continued office operation. Timeline: trophy recovery is happening now in liquid primary markets; secondary markets lag 18-36 months. Class-B conversion takes 3-5 years from capital-raising through stabilization. The strongest bear case: if hybrid hardens into 2-day norms permanently, even trophy absorption slows meaningfully. I\'d watch Kastle badge-in data — if occupancy rates stop improving quarter-over-quarter, I re-evaluate.',
+    tips: [
+      'Never flatten office into one market. Trophy vs Class-A vs Class-B/C are three separate investment theses.',
+      'Conversion economics are real but require specific asset characteristics — don\'t overstate how broadly they apply.',
+      'Name a falsification trigger. "If Kastle data stops improving" is specific and shows you know how to monitor the thesis.',
+    ],
+  },
+  {
+    id: 'mv-msa-overweight',
+    kind: 'marketView',
+    prompt:
+      'Pick one MSA where you\'d concentrate capital today. Walk me through your thesis — and the bear case.',
+    expectedDurationSec: 120,
+    rubric: [
+      { id: 'position', dimension: 'Commits to a specific MSA, not a region or category', weight: 2 },
+      { id: 'thesis', dimension: 'Thesis is supply-demand-based, not just "it\'s a growing market"', weight: 1.5 },
+      { id: 'pricing', dimension: 'Addresses whether the market is already priced for the thesis', weight: 1 },
+      { id: 'bear', dimension: 'Gives an honest bear case with a specific trigger to watch', weight: 1 },
+    ],
+    modelAnswer:
+      'Nashville, specifically industrial and workforce multifamily. The thesis: Nashville is a top-5 fastest-growing MSA by net migration, but industrial supply has been absorbed faster than delivered — submarket vacancy is around 4%, well below the national average. Workforce housing is similarly constrained; the apartment pipeline is primarily luxury Class-A, leaving Class-B/C renters structurally supply-short. On pricing: Nashville industrial is trading at a slight premium to Phoenix or Dallas on a going-in cap basis, but still below the institutional compression you see in primary markets — you\'re still getting paid for the smaller-market liquidity discount. Bear case: Nashville\'s outperformance is partly an employer concentration story. If one of the major anchor employers contracts meaningfully, population growth slows disproportionately. The signal I\'d watch: net job postings from the top five Nashville employers — if those go negative quarter-over-quarter, I reduce position sizing.',
+    tips: [
+      'Commit to one market. A regional thesis ("Sun Belt generally") is safe and therefore weak — interviewers hear it constantly.',
+      'Supply-demand specifics beat demographic stories. "4% vacancy vs national average" is stronger than "people are moving there."',
+      'Show you understand the concentration risk of your own thesis. Acknowledging it is more credible than pretending it doesn\'t exist.',
+    ],
+  },
+  {
+    id: 'mv-distressed-opportunity',
+    kind: 'marketView',
+    prompt:
+      'How real is the "wall of maturities" distressed opportunity? Are you seeing it play out, and would you deploy into it?',
+    expectedDurationSec: 120,
+    rubric: [
+      { id: 'position', dimension: 'Takes a view on whether the distressed opportunity is real or has been absorbed', weight: 2 },
+      { id: 'evidence', dimension: 'Anchors view in maturity data, transaction volumes, or sector-specific experience', weight: 1.5 },
+      { id: 'execution', dimension: 'Names where the distress is visible vs where it isn\'t — avoids treating CRE as monolithic', weight: 1 },
+      { id: 'risk', dimension: 'Acknowledges the risk of deploying too early vs too late' },
+    ],
+    modelAnswer:
+      'The distress is real but unevenly distributed, and the maturity wall has materialized more slowly than the 2023 headlines implied. Office is genuinely distressed — note sales at 50-60 cents on the dollar in gateway markets, sponsor hand-backs on Class-B. Retail CMBS has specific pockets of distress on big-box-anchored centers. But multifamily and industrial have mostly avoided forced-sale dynamics because cash flows are still covering debt service, and lenders have extended maturities rather than force sales. Where I\'d deploy: directly into the note market on office in primary MSAs where land value creates a downside floor — you own the optionality on conversion without paying for the operating cash flow. Where I wouldn\'t: retail distress that\'s structural rather than cyclical. The timing risk is real — clearing-price discovery has been delayed by extend-and-pretend; I\'d be patient rather than forced to deploy into a wave that may take 12-18 more months to fully break.',
+    tips: [
+      'Separate structural distress (office, some retail) from cyclical distress (MF, industrial). Conflating them signals shallow analysis.',
+      '"The opportunity is massive" is not a view — every institutional allocator already knows the headline. Your edge is specificity on WHERE.',
+      'Acknowledge the timing risk explicitly. Being right about distress but wrong about timing still loses money.',
+    ],
+  },
 ];

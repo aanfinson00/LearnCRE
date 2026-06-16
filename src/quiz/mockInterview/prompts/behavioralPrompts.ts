@@ -151,4 +151,64 @@ export const BEHAVIORAL_PROMPTS: MockProsePrompt[] = [
       'Honest outcome reporting separates strong candidates. "Worked out fine" reads as luck; "they outperformed underwriting on these specific lines" reads as judgment.',
     ],
   },
+  {
+    id: 'beh-model-error',
+    kind: 'behavioral',
+    prompt:
+      'Tell me about a significant mistake you made in a financial model. How did you catch it — or how did you find out — and what changed afterward?',
+    expectedDurationSec: 100,
+    rubric: [
+      { id: 'ownership', dimension: 'Owns the mistake without blaming tools, templates, or time pressure', weight: 1.5 },
+      { id: 'impact', dimension: 'Honest about the potential or actual impact of the error', weight: 1.5 },
+      { id: 'recovery', dimension: 'Describes what they did immediately upon discovery', weight: 1 },
+      { id: 'prevention', dimension: 'Names a specific process change — not just "I was more careful"', weight: 1.5 },
+    ],
+    modelAnswer:
+      'On a $50M MF acquisition last spring I hardcoded a 5.25% exit cap in my returns module rather than linking it to the assumption input — so when we ran scenarios, the exit cap wasn\'t moving. We ran the deck for a week before my VP noticed IRR was completely insensitive to exit-cap changes during a sanity check. I found the hardcode immediately. The error hadn\'t gone to IC yet, but the IRR range we\'d shown internally was materially narrower than it should have been. My VP was focused on fixing it rather than blame, which I noticed and tried to internalize. After that I built a model-audit checklist: every cell in the returns module gets flagged for hardcodes before anything goes out — internal or external. It takes about 15 minutes. It\'s caught three issues since.',
+    tips: [
+      'Pick a real mistake with real impact potential, not "a time I almost made a mistake." Interviewers hear the difference.',
+      'The prevention answer matters most. "I was more careful" is not prevention; a new repeatable process is.',
+      'How and when you told your manager is part of the answer — hiding it vs. owning it immediately describes who you are.',
+    ],
+  },
+  {
+    id: 'beh-deal-you-passed',
+    kind: 'behavioral',
+    prompt:
+      'Tell me about a deal your team was pursuing that you were skeptical about. How did you raise it, what happened, and what did you take away?',
+    expectedDurationSec: 120,
+    rubric: [
+      { id: 'specificity', dimension: 'Real deal with concrete details — not a generic "I pushed back on assumptions"', weight: 1 },
+      { id: 'how-raised', dimension: 'Shows how they raised the concern — constructively, with analysis, not just objection', weight: 1.5 },
+      { id: 'outcome', dimension: 'Honest about what happened — deal closed, passed, or re-priced', weight: 1 },
+      { id: 'lesson', dimension: 'Names what they learned about raising conviction-level concerns inside a team', weight: 1.5 },
+    ],
+    modelAnswer:
+      'Second month of my first role, we were sizing on a $38M retail-anchored center in suburban Ohio — big-box with a Kohl\'s anchor, 85% leased. I ran the lease roll and flagged that three shop tenants representing 12% of GLA had co-tenancy clauses tied to Kohl\'s, and Kohl\'s had one year left with no renewal signal. I wasn\'t sure if anyone had modeled it, so I went to my associate first. She\'d seen the risk but hadn\'t quantified it. I drafted a one-page impact analysis showing the NPV gap if Kohl\'s didn\'t renew and co-tenancy clauses triggered — modeled at a $3.4M total value impact. I sent it with a note saying "wanted to make sure this was in the deck." My MD ended up using it in IC. The deal got re-priced $2.5M lower; seller walked. Kohl\'s closed in Q3. Lesson: raise concerns with the analysis, not just the concern. And if you\'re not sure whether seniors have thought of something, put it in a format that costs them nothing to use.',
+    tips: [
+      'Frame it as "here\'s what I found and here\'s the analysis" rather than "I objected." One invites dialogue; one invites defensiveness.',
+      'Show the hierarchy of how you communicated it — associate first, then MD. Skipping levels without trying the first step reads as political.',
+      'Outcome doesn\'t define the quality of the call. The quality of the process does.',
+    ],
+  },
+  {
+    id: 'beh-cross-functional',
+    kind: 'behavioral',
+    prompt:
+      'Tell me about a time you had to coordinate across teams — legal, asset management, capital markets — to get something done. What made it hard, and how did you manage it?',
+    expectedDurationSec: 100,
+    rubric: [
+      { id: 'situation', dimension: 'Concrete cross-team context with real stakes (deadline, deal, deliverable)', weight: 1 },
+      { id: 'friction', dimension: 'Names the specific friction — misaligned incentives, bandwidth, information gap', weight: 1.5 },
+      { id: 'action', dimension: 'What they personally did to bridge the gap — not "we worked it out together"', weight: 1.5 },
+      { id: 'outcome', dimension: 'Concrete result — deadline met, deal closed, relationship maintained', weight: 1 },
+    ],
+    modelAnswer:
+      'During a $25M refi last fall I needed the asset management team to provide trailing-12 actuals for the appraisal package. AM was mid-budget season and after two email chains I was still getting Q2 data when we needed trailing Q3. Rather than escalate to my VP, I called the AM analyst directly, explained the lender deadline, and asked what I could help clear off her plate so she could pull the report. Turned out she had the data — she just hadn\'t had time to reformat it for us. I offered to build the export template if she gave me read access to their reporting system. She got me access in an hour; I built the package and she signed off on the numbers. Saved four days. The lesson: when cross-team coordination stalls, the bottleneck is usually bandwidth and unclear handoff, not unwillingness. Make it easier for the other person to help you than not to.',
+    tips: [
+      'Name the specific friction point. Generic "communication challenges" is weak — the specific constraint shows you actually diagnosed it.',
+      'What *you* personally did matters. "I called her directly" and "I built the template" are specific; "we coordinated" is not.',
+      'Relationship outcome is part of the grade. Deal got done AND relationship intact beats deal got done period.',
+    ],
+  },
 ];
