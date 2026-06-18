@@ -76,6 +76,16 @@ import { riskAdjustedReturnFramework } from './riskAdjustedReturnFramework';
 import { hotelRevparDivergence } from './hotelRevparDivergence';
 import { retailPercentageRentClause } from './retailPercentageRentClause';
 import { industrialTruckCourtBid } from './industrialTruckCourtBid';
+import { absorptionRateDecline } from './absorptionRateDecline';
+import { netAbsorptionVsGross } from './netAbsorptionVsGross';
+import { negativeAbsorptionSignal } from './negativeAbsorptionSignal';
+import { rentGrowthSensitivity } from './rentGrowthSensitivity';
+import { vacancyBreakevenSensitivity } from './vacancyBreakevenSensitivity';
+import { refiRateSensitivity } from './refiRateSensitivity';
+import { freeRentEquivalence } from './freeRentEquivalence';
+import { blendedRentRollUnderwrite } from './blendedRentRollUnderwrite';
+import { compSizeAdjustment } from './compSizeAdjustment';
+import { crossSubmarketComp } from './crossSubmarketComp';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -149,6 +159,16 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   hotelRevparDivergence,
   retailPercentageRentClause,
   industrialTruckCourtBid,
+  absorptionRateDecline,
+  netAbsorptionVsGross,
+  negativeAbsorptionSignal,
+  rentGrowthSensitivity,
+  vacancyBreakevenSensitivity,
+  refiRateSensitivity,
+  freeRentEquivalence,
+  blendedRentRollUnderwrite,
+  compSizeAdjustment,
+  crossSubmarketComp,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {
