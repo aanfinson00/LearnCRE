@@ -6364,6 +6364,736 @@
         ],
         "takeaway": "Hold-vs-sell decisions live in three layers: pre-tax IRR (Steps 1–5), after-tax cash (Steps 6–7), and the LP-tax-position lens (deferral matters more for tax-sensitive LPs). When pre-tax IRR is similar, deferral usually tips toward holding — but the cap-rate drift on the hold side often offsets the deferral benefit. Always run all three layers; never decide on pre-tax alone."
       }
+    },
+    {
+      "number": 101,
+      "id": "sit:absorption-industrial-specpark",
+      "type": "situational",
+      "title": "When does the spec park lease up?",
+      "meta": "Situational · absorption · intermediate · industrial · development/acquisitions",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You're developing a 1.2M SF speculative industrial park (four 300K SF buildings) in a submarket that currently has 8.0M SF of leasable space at 94% occupancy. Two other developers are delivering 800K SF in the same quarter as your first two buildings (600K SF total for your first phase). Net absorption in the submarket has averaged 600K SF/year over the past three years, but softened sharply — the most recent quarter came in at only 120K SF."
+        },
+        {
+          "kind": "data",
+          "points": [
+            {
+              "label": "Submarket inventory (current)",
+              "value": "8.0M SF at 94% occupancy"
+            },
+            {
+              "label": "New supply this quarter (all developers)",
+              "value": "+1.4M SF (your 600K + competitors' 800K)"
+            },
+            {
+              "label": "Historical absorption",
+              "value": "600K SF/year avg; 120K SF last quarter"
+            },
+            {
+              "label": "Your target occupancy",
+              "value": "95% for stabilization"
+            }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "What is the most defensible lease-up assumption for your underwriting?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "18–24 months — run the softening quarterly pace annualized (~480K SF/yr) against a supply-heavy market to get an honest lease-up window for your 600K SF first phase.",
+            "isBest": true,
+            "explanation": "Using the trailing annual average (600K SF) ignores the deceleration signal from Q4 (120K SF = ~480K annualized). New supply of 1.4M SF in one quarter creates a heavy absorption headwind. Against 480K SF/yr of demand, your 600K SF phase could take 15+ months even if competitors' buildings absorb slowly — 18–24 months is the conservative, defensible range. Underwriting to the peak historical rate in a softening market is the fastest way to miss stabilization."
+          },
+          {
+            "label": "8 months — historical absorption of 600K SF/yr clears your 600K SF first phase by year-end.",
+            "isBest": false,
+            "explanation": "Uses peak absorption without adjusting for (a) the sharp deceleration in the most recent quarter and (b) 800K SF of competing supply arriving simultaneously. Your 600K SF has to compete with all the supply in the market, not absorb in isolation. Blending peak historical demand against a concurrent supply surge is aggressive underwriting."
+          },
+          {
+            "label": "36+ months — lease-up in a spec delivery during a supply surge always takes at least 3 years.",
+            "isBest": false,
+            "explanation": "Overly conservative without doing the math. Even at the softening 120K SF/quarter pace, 600K SF takes ~5 quarters if there are no competitors. The constraint is total market absorption vs. total new supply, not a fixed rule. 36+ months implies near-zero absorption — that's a recession assumption, not a supply-surge assumption."
+          },
+          {
+            "label": "12 months — new industrial supply creates its own demand (logistics and 3PLs expand into new, modern parks).",
+            "isBest": false,
+            "explanation": "This is a broker talking point, not an underwriting assumption. New supply can sometimes attract tenants who require modern clear-heights and dock configurations, but that effect is incremental and market-dependent. You can't rely on induced demand to absorb a full spec park. Underwrite to observed absorption data, then treat any above-baseline leasing as upside."
+          }
+        ],
+        "takeaway": "Lease-up underwriting for spec industrial uses market absorption as the demand ceiling, not your building's supply in isolation. Always rebase absorption to the most recent quarters — trailing averages mask turning-point signals. When absorption is decelerating into a supply surge, lean toward the slower end of the observed range.",
+        "tips": [
+          "Convert quarterly absorption to annual before comparing to your SF — absorption is often quoted by quarter.",
+          "Your lease-up pace is bounded by total market absorption ÷ your share of new supply.",
+          "If quarterly absorption decelerated materially, run a scenario at that pace annualized and treat the historical average as upside."
+        ]
+      }
+    },
+    {
+      "number": 102,
+      "id": "sit:absorption-retail-strip-recovery",
+      "type": "situational",
+      "title": "How long to fill the inline suites?",
+      "meta": "Situational · absorption · intermediate · retail · assetManagement",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You manage a 180,000 SF power center that lost a furniture tenant (28,000 SF). Inline availability rose to 22,000 SF across four suites. You've received LOIs on two suites (11,000 SF combined) from food-and-beverage concepts. Submarket net absorption for small-format retail has averaged 8,000 SF per quarter, but you've noticed local F&B activity accelerating — three new restaurant openings nearby in the past 90 days."
+        },
+        {
+          "kind": "data",
+          "points": [
+            {
+              "label": "Inline vacant",
+              "value": "22,000 SF (4 suites)"
+            },
+            {
+              "label": "LOIs received",
+              "value": "11,000 SF (2 suites, F&B concepts)"
+            },
+            {
+              "label": "Submarket net absorption (small-format)",
+              "value": "8,000 SF/quarter trailing avg"
+            },
+            {
+              "label": "Recent F&B openings nearby",
+              "value": "3 new openings in past 90 days"
+            }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "What is the most appropriate assumption for full stabilization of the inline space?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "~6 months — LOIs covering half the vacancy should close within 60 days; the accelerating F&B pipeline supports absorbing the remaining 11,000 SF in 1–2 more quarters.",
+            "isBest": true,
+            "explanation": "LOIs represent real demand in the pipeline — two signed deals close the gap to 11,000 SF. The local F&B acceleration is a legitimate leading indicator that demand is ahead of the trailing submarket average. Modeling full stabilization at roughly two quarters is supportable as a base case. Quick sanity check: 11,000 SF ÷ 8,000 SF/quarter = 1.4 quarters, consistent with ~6 months. Flag LOI execution risk as the primary assumption to stress."
+          },
+          {
+            "label": "18–24 months — submarket data supports no more than 8,000 SF/quarter, so you need at least 3 quarters to clear the remaining vacancy.",
+            "isBest": false,
+            "explanation": "Mechanically applies the trailing absorption rate to all 22,000 SF while ignoring the LOIs already in hand. LOIs are not hypothetical demand — they are units of committed pipeline. Discounting them entirely produces a conservative case, not a base case. Model LOIs separately from speculative absorption."
+          },
+          {
+            "label": "3 months — both LOIs execute within 60 days and the local F&B pipeline fills the rest simultaneously.",
+            "isBest": false,
+            "explanation": "Assumes perfect execution and immediate speculative absorption alongside LOI closings. LOIs historically take 60–90 days to progress to executed leases, and speculative absorption requires active prospecting. Modeling simultaneous execution of everything compresses the timeline in a way that's hard to defend to a lender or partner."
+          },
+          {
+            "label": "36 months — post-pandemic inline retail vacancy is structurally elevated; budget conservatively.",
+            "isBest": false,
+            "explanation": "Structural retail vacancy is a real phenomenon in deteriorating centers, but this submarket is showing active absorption (F&B openings, LOIs in hand). Applying a structural headwind to a submarket with observable leading indicators of demand produces a needlessly pessimistic underwriting that undersells the asset and the recovery signal."
+          }
+        ],
+        "takeaway": "Always separate in-pipeline demand (LOIs) from speculative demand in your lease-up assumptions. Trailing absorption data is the floor for speculative leasing; active LOIs are incremental to that figure. When both signals are constructive, a 6–9 month stabilization window is defensible for modest inline vacancies.",
+        "tips": [
+          "LOIs in hand are incremental to the trailing absorption rate — model them separately from speculative fill.",
+          "Local F&B acceleration is a leading indicator, not a lagging one — use it to shade above the submarket average.",
+          "Always stress the LOI execution assumption: what if one falls out? That's your downside case."
+        ]
+      }
+    },
+    {
+      "number": 103,
+      "id": "sit:absorption-office-sublease-shadow",
+      "type": "situational",
+      "title": "Does shadow supply change the vacancy math?",
+      "meta": "Situational · absorption · advanced · office · acquisitions",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You're evaluating a value-add CBD office acquisition. The submarket shows 14% direct vacancy, but tenants have sublet a combined 220,000 SF that competes directly with landlord space. Total submarket inventory is 5.0M SF. Net direct absorption has averaged +40,000 SF per quarter over the trailing four quarters, while net total absorption — direct plus sublease — has averaged –20,000 SF per quarter. Your subject property is asking 20% below the direct comp set."
+        },
+        {
+          "kind": "data",
+          "points": [
+            {
+              "label": "Submarket inventory",
+              "value": "5.0M SF"
+            },
+            {
+              "label": "Direct vacancy",
+              "value": "14% (700,000 SF)"
+            },
+            {
+              "label": "Sublease availability",
+              "value": "220,000 SF additional"
+            },
+            {
+              "label": "Net direct absorption (trailing 4Q avg)",
+              "value": "+40,000 SF/quarter"
+            },
+            {
+              "label": "Net total absorption (direct + sublease)",
+              "value": "–20,000 SF/quarter"
+            }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "How should the sublease overhang factor into your lease-up underwriting?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Underwrite to total (direct + sublease) absorption pace — the –20,000 SF/quarter figure is the honest demand signal, and sublease space competes directly with your product at a discount.",
+            "isBest": true,
+            "explanation": "When sublease availability is large relative to direct vacancy, tenants can easily substitute sublease for direct space — especially if it's furnished, shorter-term, or priced at a discount. The positive direct absorption (+40K/quarter) masks total demand contraction (–20K/quarter): tenants are choosing sublease over direct. Underwriting your lease-up to the direct figure alone assumes tenants bypass competing sublease and land with you — an aggressive assumption without a differentiated product story."
+          },
+          {
+            "label": "Ignore the sublease data; direct absorption is positive so the market is functionally tightening for landlords.",
+            "isBest": false,
+            "explanation": "Direct absorption appears positive because some direct space is being backfilled by tenants who previously occupied sublease — not because new demand is entering the market. Total demand is contracting. Ignoring 220,000 SF of competing supply because it's technically 'sublease' misrepresents the demand environment."
+          },
+          {
+            "label": "Assume sublease space burns off in 12 months because tenants re-absorb their sublease when growth resumes.",
+            "isBest": false,
+            "explanation": "This is a forward-looking assumption that requires a demand inflection not supported by trailing data. Sublease space can persist well beyond 12 months in weak markets, and when companies reduce footprints structurally, that space may trade multiple times as sublease. Without a visible demand catalyst (job growth, industry expansion), penciling in a 12-month sublease burn is speculative."
+          },
+          {
+            "label": "Ask the broker to identify active tenants in the market and size the pipeline before modeling.",
+            "isBest": false,
+            "explanation": "Understanding the tenant pipeline is useful diligence, but it is not a substitute for modeling to observed absorption data. Brokers have incentives to present a robust pipeline. Absorption data is observable and auditable; broker pipeline estimates are not. Use both, but anchor the model to the data."
+          }
+        ],
+        "takeaway": "Sublease availability is functional competition even though it is off-balance-sheet for landlords. When total absorption is negative but direct absorption is positive, the market is substituting sublease for direct — a bearish signal masked by the headline vacancy figure. Underwrite lease-up to total availability, not just direct vacancy.",
+        "tips": [
+          "Total availability = direct vacant + sublease available. Use this, not just direct vacancy, to size your competition.",
+          "Positive direct absorption in a negative total absorption market usually means sublease is winning demand, not that demand is growing.",
+          "A 20% discount to market helps compete with sublease but does not address shorter-term flexibility or furnished-suite advantages."
+        ]
+      }
+    },
+    {
+      "number": 104,
+      "id": "sit:lease-econ-retail-anchor-recapture",
+      "type": "situational",
+      "title": "Does the anchor recapture pencil?",
+      "meta": "Situational · lease-econ · intermediate · retail · assetManagement",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You manage a 250,000 SF grocery-anchored center. Your anchor tenant occupies 48,000 SF at $8.00/SF NNN with 10 years remaining on its lease. Market rent for comparable anchor space is $14.00/SF NNN. You're evaluating a voluntary buyout and recapture of the anchor space. Estimated downtime to find and build out a replacement: 9 months. TI budget for the re-leasing: $25/SF. Your stabilized NOI discount rate is 8.0%."
+        },
+        {
+          "kind": "data",
+          "points": [
+            {
+              "label": "In-place anchor rent",
+              "value": "$8.00/SF NNN × 48,000 SF = $384,000/yr"
+            },
+            {
+              "label": "Market rent",
+              "value": "$14.00/SF NNN × 48,000 SF = $672,000/yr"
+            },
+            {
+              "label": "Annual rent spread",
+              "value": "$288,000/yr"
+            },
+            {
+              "label": "Remaining lease term",
+              "value": "10 years"
+            },
+            {
+              "label": "Estimated downtime",
+              "value": "9 months"
+            },
+            {
+              "label": "TI at re-leasing",
+              "value": "$25/SF × 48,000 SF = $1,200,000"
+            },
+            {
+              "label": "Discount rate",
+              "value": "8.0%"
+            }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "What is the most rigorous framework for deciding whether to recapture?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Compare the NPV of the rent spread ($288,000/yr for 10 years at 8%) to the total recapture cost (9 months of lost income + $1.2M TI), net of any buyout payment received from the tenant.",
+            "isBest": true,
+            "explanation": "NPV of $288,000/yr annuity at 8% for 10 years ≈ $1,932,000 (factor ≈ 6.71). Recapture cost: 9 months of lost in-place rent ($384,000 × 9/12 = $288,000) + $1,200,000 TI = $1,488,000. On these numbers the recapture pencils before the buyout cost — but just barely. Any tenant buyout payment above ~$444,000 flips the NPV negative. This framework forces you to value the rent spread explicitly, which is the right discipline. Key risk: achieving market rent on re-leasing and executing within the 9-month downtime assumption."
+          },
+          {
+            "label": "Prioritize the anchor's credit quality over the rent spread — a national grocery credit at $8/SF is strategically valuable even below market.",
+            "isBest": false,
+            "explanation": "Credit quality is real value for grocery-anchored centers — it drives foot traffic, inline tenant demand, and lender comfort. But $6/SF below market on 48,000 SF is $288,000/yr of economic leakage; over 10 years at 8% that's ~$1.9M of NPV leakage. 'Strategically valuable' doesn't mean 'free' — you need to quantify the credit premium and compare it to the rent gap, not dismiss the math entirely."
+          },
+          {
+            "label": "Look for comparable anchor recaptures at peer properties — precedent matters more than internal NPV math.",
+            "isBest": false,
+            "explanation": "Precedent is useful context but not a substitute for deal-specific economics. Every recapture has a different rent gap, downtime estimate, TI budget, tenant pipeline, and buyout cost. What worked at a comparable center may not be justified here — and vice versa. Run the math first, then use comps to validate your assumptions."
+          },
+          {
+            "label": "The $1.2M TI cost is the primary hurdle — if you can negotiate TI below that level, recapture makes sense.",
+            "isBest": false,
+            "explanation": "TI is one component of recapture cost, not the only one. Downtime (9 months × $384,000/yr lost in-place rent = $288,000) and any buyout payment to the anchor are equally material. Optimizing only on TI misses the full picture and could lead you to a deal where low TI is more than offset by a large buyout or extended downtime."
+          }
+        ],
+        "takeaway": "Anchor recapture is a lease NPV trade-off: the present value of the rent spread improvement must exceed the present value of recapture costs (downtime, TI, buyout payment). Run the math explicitly rather than relying on rules of thumb or credit-quality heuristics. The credit value of a national anchor is real but it shows up in inline tenant demand and borrowing costs, not as justification for ignoring a $288,000/yr rent gap.",
+        "tips": [
+          "PV of annuity = PMT × [1 − (1 + r)^−n] / r. At 8% for 10 years: factor ≈ 6.71. $288,000 × 6.71 ≈ $1,932,000.",
+          "Downtime cost = months vacant × (market rent − in-place rent) per month × SF. You lose the spread, not just the in-place rent.",
+          "If the anchor has options to renew at the same below-market rate, the NPV leakage extends far beyond 10 years — model that scenario."
+        ]
+      }
+    },
+    {
+      "number": 105,
+      "id": "sit:lease-econ-mf-reno-ner",
+      "type": "situational",
+      "title": "What's the NER on the renovated unit?",
+      "meta": "Situational · lease-econ · beginner · multifamily · acquisitions/assetManagement",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You're executing a value-add multifamily renovation program. Renovated units are listed at $2,100/month with one free month on a 13-month lease (the first month is rent-free). Your renovation cost per unit is $12,000. The prior unrenovated tenant was paying $1,650/month. You want to evaluate the actual economics of the renovation program before committing additional capital."
+        },
+        {
+          "kind": "data",
+          "points": [
+            {
+              "label": "Gross asking rent (post-reno)",
+              "value": "$2,100/month"
+            },
+            {
+              "label": "Concession",
+              "value": "1 month free on a 13-month lease"
+            },
+            {
+              "label": "Prior (unrenovated) rent",
+              "value": "$1,650/month"
+            },
+            {
+              "label": "Renovation cost per unit",
+              "value": "$12,000"
+            }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "What is the net effective rent (NER) on the renovated unit, and does the renovation make economic sense?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "NER ≈ $1,938/month; incremental NER over prior rent ≈ $288/month; simple payback ≈ 3.5 years — the program makes sense on a multi-cycle hold.",
+            "isBest": true,
+            "explanation": "NER = (12 paid months × $2,100) ÷ 13 total months = $25,200 ÷ 13 = $1,938/month. Incremental NER: $1,938 − $1,650 = $288/month. Annual incremental income: $288 × 12 = $3,456. Simple payback: $12,000 ÷ $3,456 ≈ 3.5 years. On a 5–7 year hold with multiple lease cycles, the renovation earns back its cost and compounds into cap rate compression at exit. Key risk: if concessions persist across multiple lease cycles, each renewal resets NER below what the gross rent implies."
+          },
+          {
+            "label": "NER = $2,100/month — the free month is a one-time marketing cost, not a recurring economic concession.",
+            "isBest": false,
+            "explanation": "Free-month concessions are standard in lease-up but are an economic discount, not a marketing line item. Using gross rent as NER overstates actual income and will produce a stabilized NOI that is never achieved in practice. Lenders and buyers underwrite to NER, not gross rent — building a model on gross rent will create a gap at refinancing or sale."
+          },
+          {
+            "label": "NER = $1,650/month — the renovation hasn't created real value until occupancy improves submarket-wide.",
+            "isBest": false,
+            "explanation": "This ignores the actual rent increase achieved. If a tenant signed at $2,100 with one free month — NER $1,938 — that is demonstrably higher than $1,650. The renovation has created rent premium at the unit level regardless of submarket-wide occupancy trends."
+          },
+          {
+            "label": "NER ≈ $2,008/month — subtract the amortized renovation cost ($12,000 ÷ 13 months = $923/month) from the gross rent.",
+            "isBest": false,
+            "explanation": "This confuses two different concepts. Renovation cost is a landlord capital expenditure that impacts unlevered yield on cost, not a monthly rent reduction. NER is calculated from lease economics alone (paid months × rent ÷ total months). Amortizing capex into the rent would make nearly every value-add renovation appear economically unjustified — that is not how the industry measures renovation economics."
+          }
+        ],
+        "takeaway": "Net effective rent = (paid months × monthly rent) ÷ total lease months. It is the only economically honest rent figure for leases with concessions. For value-add programs, pair NER with simple payback (capex ÷ annual incremental NER) to evaluate each renovation vintage. Concessions that persist cycle-over-cycle are a warning sign that the rent premium is not sustainable.",
+        "tips": [
+          "Quick NER formula: gross rent × (paid months ÷ total months). For 1 free / 13 total: × (12/13) = × 0.923.",
+          "Always distinguish gross-to-net spread in your rent roll — a building full of concessions looks stabilized but is not generating stabilized NOI.",
+          "Payback period < lease term is the minimum bar; target < half the lease term for a strong renovation program."
+        ]
+      }
+    },
+    {
+      "number": 106,
+      "id": "sit:comp-selection-mf-vintage-mismatch",
+      "type": "situational",
+      "title": "Which comps belong in the cap rate range?",
+      "meta": "Situational · comp-selection · intermediate · multifamily · acquisitions",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You're pricing a 120-unit, 2-story garden-style multifamily asset built in 1993 in a secondary market. Your broker provides five comparable sales to support pricing."
+        },
+        {
+          "kind": "data",
+          "points": [
+            {
+              "label": "Comp A",
+              "value": "Same submarket · 2018 vintage mid-rise (5-story, 200 units) · traded 3 mos ago · 4.75% cap"
+            },
+            {
+              "label": "Comp B",
+              "value": "Same submarket · 1988 vintage garden (2-story, 90 units) · traded 6 mos ago · 5.50% cap"
+            },
+            {
+              "label": "Comp C",
+              "value": "Same submarket · 1995 vintage garden (2-story, 150 units) · traded 22 mos ago · 4.90% cap"
+            },
+            {
+              "label": "Comp D",
+              "value": "Adjacent metro · 1992 vintage garden (2-story, 130 units) · traded 4 mos ago · 5.75% cap"
+            },
+            {
+              "label": "Comp E",
+              "value": "Same submarket · 1998 vintage garden (2-story, 110 units) · traded 9 mos ago · 5.25% cap"
+            }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "What is the most defensible approach to setting the cap rate range for your subject property?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Use Comps B and E as primary anchors (same submarket, garden profile, ≤12 months); note Comp C is stale; discard Comp A (mid-rise premium) and Comp D (different metro). Indicated range: ~5.25–5.50%.",
+            "isBest": true,
+            "explanation": "Comp A is a 2018 mid-rise — it commands a significant vintage and product-type premium that would pull your cap rate artificially tight. Comp D is a different metro where supply/demand, renter demographics, and institutional capital flows differ. Comp C is 22 months stale — in most rate environments that is a different underwriting period. Comps B and E are the right comparables: same submarket, same story count, similar vintage, recent. They bracket a 5.25–5.50% range that is defensible to a seller, a lender, and an IC."
+          },
+          {
+            "label": "Average all five comps to 5.23% and use that as the midpoint.",
+            "isBest": false,
+            "explanation": "Averaging unfiltered comps includes a mid-rise, an off-market trade, and a stale pre-rate-hike sale — all of which compress the average below what your product type and vintage would actually trade at. A 5.23% midpoint would either cause you to underbid vs. comparable assets or set you up for a cap rate surprise at exit."
+          },
+          {
+            "label": "Use Comps A, B, and E — exclude C (stale) and D (different metro); average ~5.17%.",
+            "isBest": false,
+            "explanation": "Keeping Comp A introduces a product-type mismatch that pulls the average ~40 bps tighter than the garden-style comps alone. A 2018 mid-rise trades at a premium due to modern amenities, energy efficiency, and institutional capital preference for newer vintage — none of which apply to a 1993 garden-style asset. The 'same submarket, recent' filter alone is insufficient; vintage and building type must also be comparable."
+          },
+          {
+            "label": "Use only Comp E as the single anchor — it's the closest match on size and vintage.",
+            "isBest": false,
+            "explanation": "A single-comp anchor is too thin for pricing. One trade may reflect idiosyncratic factors (seller distress, off-market negotiation, unique tenant profile). Three defensible comps with minor documented adjustments is a stronger analytical foundation than one 'perfect' comp. Use Comp E as the primary anchor but bracket it with Comp B."
+          }
+        ],
+        "takeaway": "Comp filtering requires matching on three axes simultaneously: geography (same submarket), product type (same story count and vintage era), and recency (≤12 months in a dynamic rate environment). Failing any one axis requires either discarding the comp or making a documented adjustment. A tighter, well-filtered comp set is more credible than a broad set with a footnote.",
+        "tips": [
+          "Mid-rise vs. garden is not a minor adjustment — it is a different buyer pool and a different cap rate tier.",
+          "22-month-old comps in a period of rate movement need a defensible time adjustment or should be discarded.",
+          "Document every excluded comp and the reason — the IC will ask."
+        ]
+      }
+    },
+    {
+      "number": 107,
+      "id": "sit:comp-selection-retail-anchor-mix",
+      "type": "situational",
+      "title": "What cap set supports a grocery-anchored deal?",
+      "meta": "Situational · comp-selection · intermediate · retail · acquisitions",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You're pricing a 95,000 SF grocery-anchored strip center in a first-ring suburb. The listing broker submits six comparable sales to support the ask."
+        },
+        {
+          "kind": "data",
+          "points": [
+            {
+              "label": "Comp 1",
+              "value": "Regional mall (1M SF enclosed) · same metro · traded 6 mos ago · 7.50% cap"
+            },
+            {
+              "label": "Comp 2",
+              "value": "Grocery-anchored strip (100K SF) · adjacent suburb · traded 4 mos ago · 5.75% cap"
+            },
+            {
+              "label": "Comp 3",
+              "value": "Grocery-anchored strip (85K SF) · same suburb · traded 14 mos ago · 5.25% cap"
+            },
+            {
+              "label": "Comp 4",
+              "value": "Unanchored strip (30K SF) · same submarket · traded 2 mos ago · 6.50% cap"
+            },
+            {
+              "label": "Comp 5",
+              "value": "Grocery-anchored center (110K SF) · rural market (30 mi away) · traded 5 mos ago · 6.25% cap"
+            },
+            {
+              "label": "Comp 6",
+              "value": "Grocery-anchored strip (98K SF) · same suburb · traded 7 mos ago · 5.90% cap"
+            }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "Which comps should anchor your cap rate range, and what range do they support?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Comps 2 and 6 are the primary anchors — both are grocery-anchored, same suburb/metro, within 12 months, similar size. Range: 5.75–5.90%. Comp 3 is directionally useful but stale; Comps 1, 4, and 5 should be excluded.",
+            "isBest": true,
+            "explanation": "Comp 1 (regional mall) is a different property type — enclosed malls have structurally different risk profiles, tenant mixes, and investor bases. Comp 4 (unanchored strip) lacks the anchor credit that drives grocery-anchored pricing; it trades at a wider cap for a fundamental reason. Comp 5 is a rural market where grocery traffic and household income demographics differ from first-ring suburban. Comp 3 is 14 months old, which in a period of rate movement represents a different underwriting environment. Comps 2 and 6 are the cleanest match: same product type, same market tier, recent. The 5.75–5.90% range is tight and defensible."
+          },
+          {
+            "label": "Average all six comps to 6.19% and use that as the midpoint.",
+            "isBest": false,
+            "explanation": "Averaging includes a regional mall, an unanchored strip, and a rural market — all of which trade at wider caps for reasons unrelated to your subject's risk profile. A 6.19% average is ~30 bps wide of the defensible grocery-anchored comp set and would cause you to overbid on a deal where the broker already knows the right range is tighter."
+          },
+          {
+            "label": "Comps 2, 3, and 6 — all grocery-anchored in the suburb; time-adjust Comp 3 by +25 bps/year.",
+            "isBest": false,
+            "explanation": "Time adjustments can be applied, but they introduce subjectivity that is hard to defend without a documented rate-change analysis. A 14-month gap may span a period of significant rate movement, making the adjustment magnitude uncertain. Better practice: use Comps 2 and 6 as primary anchors and cite Comp 3 as corroboration with a noted staleness caveat, rather than engineering a time adjustment."
+          },
+          {
+            "label": "Comps 2, 5, and 6 — same product type and recency are the only filters that matter.",
+            "isBest": false,
+            "explanation": "Comp 5 is a rural market where grocery-anchored centers trade at higher caps due to lower income demographics, thinner buyer pools, and lower liquidity. Including it pulls your range wide by ~35 bps and misrepresents the first-ring suburban comp set. Geography is a critical filter for retail, where trade area demographics directly drive anchor sales performance and investor appetite."
+          }
+        ],
+        "takeaway": "For grocery-anchored pricing, the comp filter must match on: (1) same anchor type (not just 'anchored'), (2) same market tier (urban/suburban/rural), and (3) recency. Enclosed malls, unanchored strips, and rural grocers all trade at different caps for fundamental reasons — and brokers know this. Letting a broker's comp set drift across product types is how cap rates get compressed on paper while the market says otherwise.",
+        "tips": [
+          "Regional malls and grocery-anchored strips are different product types — different investor pools, different risk, different cap rates.",
+          "Rural vs. suburban grocery: different household incomes, different anchor sales PSF, different cap rates. Geography matters.",
+          "When the broker includes Comp 1 (the mall at 7.50%), they are hoping you average it in to widen the range. Don't."
+        ]
+      }
+    },
+    {
+      "number": 108,
+      "id": "sit:sensitivity-office-dscr-rollover",
+      "type": "situational",
+      "title": "Does the lease rollover flip the DSCR?",
+      "meta": "Situational · sensitivity · intermediate · office · mortgageUw/acquisitions",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You're sizing a loan on a 120,000 SF suburban office building. The anchor tenant occupies 80,000 SF (67% of NRA) at $28/SF gross, with the lease expiring in 18 months. Market rent for comparable space has declined to $22/SF gross. In-place NOI is $1,400,000; if the anchor vacates and the space sits dark for 12 months before re-leasing, stabilized NOI drops to $560,000. You are underwriting a $14,000,000 interest-only loan at 6.50%."
+        },
+        {
+          "kind": "data",
+          "points": [
+            {
+              "label": "NOI (anchor renews)",
+              "value": "$1,400,000"
+            },
+            {
+              "label": "NOI (anchor vacates, 12-month dark period)",
+              "value": "$560,000"
+            },
+            {
+              "label": "Proposed loan",
+              "value": "$14,000,000 at 6.50% I/O"
+            },
+            {
+              "label": "Annual debt service",
+              "value": "$14,000,000 × 6.50% = $910,000"
+            },
+            {
+              "label": "DSCR covenant",
+              "value": "1.25×"
+            }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "What does the DSCR sensitivity analysis tell you about the risk profile of this loan?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "In-place DSCR = 1.54× (passes); dark-period DSCR = 0.62× (fails badly) — the deal is binary on the anchor renewal. This is effectively a single-tenant credit risk; size to the worst case or require a cash reserve.",
+            "isBest": true,
+            "explanation": "In-place: $1,400,000 ÷ $910,000 = 1.54×. Dark period: $560,000 ÷ $910,000 = 0.62×. The spread between scenarios is 0.92× — a 60% DSCR swing depending on one tenant's renewal decision. The annual shortfall in the dark period is $910,000 − $560,000 = $350,000; an 18-month reserve ($525,000) buys time for re-leasing but does not solve the concentration risk. The lender's real decision: how confident am I in the anchor renewal? If uncertain, the maximum loan sized to the vacancy scenario is $560,000 ÷ 1.25 = $448,000 minimum NOI → max loan ≈ $6.9M — less than half the proposed amount."
+          },
+          {
+            "label": "DSCR is 1.54× in-place; since the loan passes the covenant, underwrite to in-place and treat renewal as a sensitivity scenario.",
+            "isBest": false,
+            "explanation": "With 18 months to expiration, the anchor lease is a near-term binary event, not a tail risk. Underwriting to in-place with the vacancy as a 'sensitivity' implicitly assumes renewal is the base case — but at $28/SF vs. $22/SF market, the tenant has clear incentive to renegotiate or relocate. A loan that clears the covenant in-place but collapses to 0.62× on vacancy is not a passing loan — it is a loan waiting for a default trigger."
+          },
+          {
+            "label": "Average in-place and dark-period NOI ($980,000) → DSCR 1.08× — just below threshold; negotiate a slightly smaller loan amount.",
+            "isBest": false,
+            "explanation": "Averaging two binary scenarios is not a probability-weighted underwrite — it is arithmetic without judgment. Even if you weight renewal at 60% and vacancy at 40%, expected DSCR is 0.6 × 1.54 + 0.4 × 0.62 = 1.17× — still below the 1.25× covenant. Averaging masks the binary nature of the risk rather than addressing it."
+          },
+          {
+            "label": "DSCR is a lagging indicator; use a higher cap rate to price in rollover risk instead of running a DSCR stress.",
+            "isBest": false,
+            "explanation": "Cap rate and DSCR are complementary tools, not substitutes. Cap rate adjustments address value; DSCR addresses debt service coverage. A loan can be underwritten at a wide cap and still breach DSCR covenant in the vacancy scenario. For a lender, DSCR is a hard covenant constraint — you must run both analyses."
+          }
+        ],
+        "takeaway": "Single-tenant concentration in office turns a DSCR analysis into a binary scenario, not a cash flow range. When one tenant drives 67% of NOI and their lease expires within the loan term, you are underwriting a renewal decision, not a stabilized income stream. Size the loan to the vacancy scenario, structure a reserve, or require a renewal commitment before close — do not lend against in-place NOI on a binary credit event.",
+        "tips": [
+          "DSCR = NOI ÷ annual debt service. I/O debt service = loan amount × rate. Always run in-place and worst-case side by side.",
+          "Breakeven NOI for a given DSCR covenant: min NOI = debt service × required DSCR. Solve for this first.",
+          "Vacancy scenario NOI quick check: in-place NOI × (1 − anchor's % of NRA). Run this before full modeling."
+        ]
+      }
+    },
+    {
+      "number": 109,
+      "id": "sit:sensitivity-industrial-cap-vs-rent",
+      "type": "situational",
+      "title": "What hurts more — cap expansion or rent deceleration?",
+      "meta": "Situational · sensitivity · intermediate · industrial · acquisitions",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You're bidding $42,000,000 on a 350,000 SF Class-A industrial asset. In-place NOI is $2,520,000 (6.0% going-in cap). Your base case assumes 3.0% annual rent growth and a 6.25% exit cap at Year 5. You run two independent downside scenarios to stress-test exit value."
+        },
+        {
+          "kind": "data",
+          "points": [
+            {
+              "label": "Purchase price",
+              "value": "$42,000,000"
+            },
+            {
+              "label": "In-place NOI",
+              "value": "$2,520,000 (6.0% going-in cap)"
+            },
+            {
+              "label": "Base case",
+              "value": "3.0% rent growth · 6.25% exit cap at Year 5"
+            },
+            {
+              "label": "Downside A",
+              "value": "Exit cap widens to 6.75% (+50 bps) · rent growth unchanged at 3.0%"
+            },
+            {
+              "label": "Downside B",
+              "value": "Rent growth slows to 1.0%/yr · exit cap unchanged at 6.25%"
+            }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "Which downside scenario produces the larger reduction in Year-5 exit value, and what does that tell you about where to focus diligence?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Downside B (rent deceleration) has a larger impact — slowing growth from 3% to 1% reduces Year-5 NOI by ~$272,000 and shrinks exit value by ~$4.4M. Downside A (cap expansion) reduces exit value by ~$3.5M. Diligence should prioritize rent growth sustainability: lease structure, submarket rent trajectory, and rollover probability.",
+            "isBest": true,
+            "explanation": "Base Year-5 NOI at 3%: $2,520,000 × (1.03)^5 ≈ $2,921,000. Exit at 6.25%: $2,921,000 ÷ 0.0625 = $46,736,000. Downside A (6.75% cap, same NOI): $2,921,000 ÷ 0.0675 = $43,274,000 → value impact $3,462,000. Downside B (1% growth, same cap): Year-5 NOI = $2,520,000 × (1.01)^5 ≈ $2,649,000; exit = $2,649,000 ÷ 0.0625 = $42,384,000 → value impact $4,352,000. Rent deceleration wins because it compounds over 5 years while cap expansion is a one-time denominator change. This result surprises analysts who default to cap rate as the primary exit sensitivity."
+          },
+          {
+            "label": "Downside A (cap expansion) has a larger impact — cap rate is the primary driver of exit value and always dominates rent growth assumptions.",
+            "isBest": false,
+            "explanation": "This is the intuitive answer but it is wrong here. Cap rate sensitivity is proportional to Year-5 NOI — and rent growth compounds the NOI base significantly over 5 years. A 50-bps cap move on $2.92M NOI reduces exit value by $3.5M; a 2% growth reduction produces lower NOI that amplifies into $4.4M of value impact at the same cap. The compounding effect of rent growth over a 5-year hold is routinely underestimated relative to cap rate movement."
+          },
+          {
+            "label": "They are approximately equal — industrial is a supply-constrained asset class where both drivers are tightly correlated.",
+            "isBest": false,
+            "explanation": "The correlation argument is interesting but does not change the math. In this specific scenario, the two downside impacts are not equivalent ($4.4M vs. $3.5M). Running actual numbers rather than applying a rule of thumb is the entire point of sensitivity analysis — and the answer is directionally different from the intuition."
+          },
+          {
+            "label": "You cannot compare them without knowing the leverage — debt amplifies cap rate sensitivity more than rent growth.",
+            "isBest": false,
+            "explanation": "Leverage amplifies both sensitivities proportionally — it does not selectively amplify cap rates. An unlevered exit-value sensitivity is the correct starting point; equity sensitivities are derived from it afterward. The question asks about exit value impact, not equity return, so leverage is a separate analytical layer, not a prerequisite for comparing the two downside scenarios."
+          }
+        ],
+        "takeaway": "Cap rate sensitivity is not always the dominant exit-value driver. When rent growth compounds over a multi-year hold, the NOI at exit can be more sensitive to the rent growth assumption than to a moderate cap rate move — particularly when the cap band is tight (25–50 bps) but the growth differential is material (2%+). Always run both sensitivities numerically before defaulting to the intuitive answer.",
+        "tips": [
+          "Year-5 NOI at g% growth: NOI₀ × (1 + g)^5. Quick mental check: (1.03)^5 ≈ 1.159 vs (1.01)^5 ≈ 1.051.",
+          "Cap rate value impact: ΔV = Year-5 NOI × (1/c_base − 1/c_stress). Isolates the denominator effect cleanly.",
+          "When cap sensitivity and growth sensitivity are within $1M of each other, both are material — stress them together in a 2×2 matrix."
+        ]
+      }
+    },
+    {
+      "number": 110,
+      "id": "sit:hotel-revpar-adr-divergence",
+      "type": "situational",
+      "title": "Why is RevPAR up but occupancy down?",
+      "meta": "Situational · diagnostic · intermediate · hotel · assetManagement/acquisitions",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You manage a 200-key select-service hotel. Year-over-year, RevPAR increased 6.4% ($105 to $112), driven entirely by ADR growth ($148 to $160, +8.1%). Occupancy slipped one point from 71% to 70%. The competitive set averaged ADR of $155 at 73% occupancy. Your RevPAR Index vs. the comp set improved year-over-year."
+        },
+        {
+          "kind": "data",
+          "points": [
+            {
+              "label": "Your ADR (YoY)",
+              "value": "$148 → $160 (+8.1%)"
+            },
+            {
+              "label": "Your occupancy (YoY)",
+              "value": "71% → 70% (–1 pt)"
+            },
+            {
+              "label": "Your RevPAR (YoY)",
+              "value": "$105 → $112 (+6.4%)"
+            },
+            {
+              "label": "Comp set",
+              "value": "ADR $155 · Occupancy 73%"
+            },
+            {
+              "label": "RevPAR Index vs. comp set",
+              "value": "Improving YoY"
+            }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "What is the most likely explanation for this performance pattern, and is it a concern?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "You are leading the comp set on rate ($160 vs $155) but trailing on occupancy (70% vs 73%) — a deliberate rate-over-volume trade-off. The improving RevPAR Index confirms you are gaining fair share in revenue terms. Monitor for rate elasticity: if occupancy continues to slip while ADR holds, you may be above the market-clearing price for your quality tier.",
+            "isBest": true,
+            "explanation": "RevPAR = ADR × Occupancy. Your ADR premium ($5 over the comp set) is generating higher RevPAR but at the cost of 3 points of occupancy vs. competitors. The improving RevPAR Index confirms you are outperforming in revenue terms — a positive signal. However, a 3-point occupancy gap vs. the comp set is meaningful: some rate-sensitive demand is choosing competitors. This is not inherently a problem (some hotels deliberately sacrifice volume for rate), but it requires monitoring. If ADR growth flattens while occupancy continues declining, the pricing strategy may have reached its ceiling."
+          },
+          {
+            "label": "This is a warning sign — losing occupancy YoY while the comp set holds 73% signals deteriorating competitive position regardless of ADR.",
+            "isBest": false,
+            "explanation": "Losing 1 occupancy point is not inherently a warning sign when ADR is up 8.1% and RevPAR Index is improving. If you were pricing below the comp set and still losing occupancy, that would be a serious concern. Here, the rate premium is the deliberate cause of the occupancy gap, and the improving RevPAR Index confirms you are winning in revenue terms. The correct concern is the occupancy trajectory over multiple periods, not a single-point YoY dip."
+          },
+          {
+            "label": "This is uniformly positive — RevPAR is up 6.4% and RevPAR Index is improving; ADR and occupancy are secondary metrics.",
+            "isBest": false,
+            "explanation": "RevPAR is the summary metric but not the only one that matters for operational and capital decisions. The ADR vs. occupancy composition of RevPAR matters for cost structure (higher occupancy drives higher variable costs), customer mix, and future pricing power. A 6.4% RevPAR gain driven entirely by rate is sustainable only if the product supports the premium — ignoring occupancy trends could mask a gradual loss of transient volume."
+          },
+          {
+            "label": "The ADR premium suggests a recent renovation elevated the product quality — attribute this to value creation and report it as such.",
+            "isBest": false,
+            "explanation": "The scenario provides no evidence of a renovation — inferring one from ADR data alone is speculative. ADR can increase due to revenue management strategy, local market demand growth, reduced competitive supply, or a mix shift toward higher-rated corporate demand. Attributing performance to a renovation without operational evidence is narrative substituting for analysis."
+          }
+        ],
+        "takeaway": "RevPAR improvement driven by ADR while occupancy trails the comp set signals a deliberate rate-over-volume strategy, not competitive deterioration — provided RevPAR Index is improving. The key diagnostic is the occupancy gap vs. the comp set over multiple periods: a widening gap at constant ADR premium suggests the hotel has exceeded the market-clearing price for its quality tier and should consider tactical discounting to recover volume.",
+        "tips": [
+          "RevPAR = ADR × Occupancy. RevPAR Index = Your RevPAR ÷ Comp Set RevPAR × 100. Above 100 means you are outperforming the set.",
+          "Rate-led RevPAR growth is generally higher quality than volume-led growth (fewer rooms, same revenue, lower variable costs).",
+          "Watch ADR Index and Occupancy Index separately — rising ADR Index alongside a falling Occupancy Index is the rate-elasticity warning signal."
+        ]
+      }
     }
   ]
 }
