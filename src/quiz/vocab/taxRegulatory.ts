@@ -162,4 +162,36 @@ export const TAX_REGULATORY_TERMS: VocabTerm[] = [
     ],
     reverseDistractorIds: ['section-1031', 'reit', 'oz'],
   },
+  {
+    id: 'passive-activity-loss',
+    term: 'Passive Activity Loss (PAL)',
+    category: 'tax-regulatory',
+    difficulty: 'advanced',
+    shortDef:
+      'Tax loss from passive real estate investments can only offset passive income — not wages or portfolio income — unless you qualify as a real estate professional.',
+    longDef:
+      'IRS Sec 469: losses from passive activities (rental real estate by default) can only offset passive income. They accumulate as suspended losses, released only when the passive activity is sold. Exception: "real estate professionals" (750+ hrs/yr in RE and more than 50% of working time) can deduct losses against ordinary income. Most limited partners are passive; active GPs may qualify as RE professionals. Critical for after-tax IRR modeling.',
+    distractors: [
+      'Passive loss allowed on all income types for LP investors.',
+      'PAL refers to portfolio asset losses on stock and bonds.',
+      'Losses from ground leases, treated as active business income.',
+    ],
+    reverseDistractorIds: ['recapture', 'cost-seg', 'reit'],
+  },
+  {
+    id: 'qof',
+    term: 'QOF (Qualified Opportunity Fund)',
+    category: 'tax-regulatory',
+    difficulty: 'advanced',
+    shortDef:
+      'Investment vehicle holding Opportunity Zone property — allows investors to defer and potentially eliminate cap-gains tax on OZ-investment appreciation.',
+    longDef:
+      'A QOF must invest 90% of its assets in Qualified Opportunity Zone Property (QOZP). Investors contribute capital-gain proceeds within 180 days. The fund structure can be a partnership or corporation. Key benefit: gains accrued *inside* the QOF after the investment date are permanently excluded from tax if held 10+ years (the "step-up to FMV" at exit). Distinct from the OZ designation itself (a census tract) — the QOF is the investment vehicle.',
+    distractors: [
+      'Qualified Opportunity Financing — a form of mezzanine debt for distressed deals.',
+      'Quantitative Overlay Fund — a hedge fund strategy using algorithmic real estate selection.',
+      'Qualified Owner Fund — trust structure for family real estate transfers.',
+    ],
+    reverseDistractorIds: ['oz', 'section-1031', 'dst'],
+  },
 ];

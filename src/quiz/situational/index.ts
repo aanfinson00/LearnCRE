@@ -76,6 +76,14 @@ import { riskAdjustedReturnFramework } from './riskAdjustedReturnFramework';
 import { hotelRevparDivergence } from './hotelRevparDivergence';
 import { retailPercentageRentClause } from './retailPercentageRentClause';
 import { industrialTruckCourtBid } from './industrialTruckCourtBid';
+import { compOfficeLeaseStructure } from './compOfficeLeaseStructure';
+import { compFlexVsBulk } from './compFlexVsBulk';
+import { compDistressedSales } from './compDistressedSales';
+import { absorptionSupplyDemandRead } from './absorptionSupplyDemandRead';
+import { absorptionNegativeOffice } from './absorptionNegativeOffice';
+import { absorptionRetailHeadwinds } from './absorptionRetailHeadwinds';
+import { singleTenantCreditRisk } from './singleTenantCreditRisk';
+import { leaseExpiryCliff } from './leaseExpiryCliff';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -149,6 +157,14 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   hotelRevparDivergence,
   retailPercentageRentClause,
   industrialTruckCourtBid,
+  compOfficeLeaseStructure,
+  compFlexVsBulk,
+  compDistressedSales,
+  absorptionSupplyDemandRead,
+  absorptionNegativeOffice,
+  absorptionRetailHeadwinds,
+  singleTenantCreditRisk,
+  leaseExpiryCliff,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {
