@@ -76,6 +76,16 @@ import { riskAdjustedReturnFramework } from './riskAdjustedReturnFramework';
 import { hotelRevparDivergence } from './hotelRevparDivergence';
 import { retailPercentageRentClause } from './retailPercentageRentClause';
 import { industrialTruckCourtBid } from './industrialTruckCourtBid';
+import { absorptionRetailCorridor } from './absorptionRetailCorridor';
+import { absorptionOfficePipeline } from './absorptionOfficePipeline';
+import { absorptionConcessionSignal } from './absorptionConcessionSignal';
+import { absorptionLeaseupPhasing } from './absorptionLeaseupPhasing';
+import { compDistressedSale } from './compDistressedSale';
+import { compGeographyTier } from './compGeographyTier';
+import { sensitivityRentDeclineDscr } from './sensitivityRentDeclineDscr';
+import { sensitivityAssumptionRanking } from './sensitivityAssumptionRanking';
+import { leaseNetEffectiveRentPricing } from './leaseNetEffectiveRentPricing';
+import { leaseAbatementTrap } from './leaseAbatementTrap';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -149,6 +159,16 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   hotelRevparDivergence,
   retailPercentageRentClause,
   industrialTruckCourtBid,
+  absorptionRetailCorridor,
+  absorptionOfficePipeline,
+  absorptionConcessionSignal,
+  absorptionLeaseupPhasing,
+  compDistressedSale,
+  compGeographyTier,
+  sensitivityRentDeclineDscr,
+  sensitivityAssumptionRanking,
+  leaseNetEffectiveRentPricing,
+  leaseAbatementTrap,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {
