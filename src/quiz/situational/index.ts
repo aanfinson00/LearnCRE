@@ -76,6 +76,16 @@ import { riskAdjustedReturnFramework } from './riskAdjustedReturnFramework';
 import { hotelRevparDivergence } from './hotelRevparDivergence';
 import { retailPercentageRentClause } from './retailPercentageRentClause';
 import { industrialTruckCourtBid } from './industrialTruckCourtBid';
+import { absorptionSubleaseOverhang } from './absorptionSubleaseOverhang';
+import { absorptionDecelerating } from './absorptionDecelerating';
+import { absorptionCaptureRate } from './absorptionCaptureRate';
+import { absorptionIndustrialOverbuilt } from './absorptionIndustrialOverbuilt';
+import { compDistressedVsArmLength } from './compDistressedVsArmLength';
+import { compPortfolioVsSingleAsset } from './compPortfolioVsSingleAsset';
+import { compStaleDateBridge } from './compStaleDateBridge';
+import { diagnosticOpexFlat } from './diagnosticOpexFlat';
+import { diagnosticVacancyTooLow } from './diagnosticVacancyTooLow';
+import { sndaMechanics } from './sndaMechanics';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -149,6 +159,16 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   hotelRevparDivergence,
   retailPercentageRentClause,
   industrialTruckCourtBid,
+  absorptionSubleaseOverhang,
+  absorptionDecelerating,
+  absorptionCaptureRate,
+  absorptionIndustrialOverbuilt,
+  compDistressedVsArmLength,
+  compPortfolioVsSingleAsset,
+  compStaleDateBridge,
+  diagnosticOpexFlat,
+  diagnosticVacancyTooLow,
+  sndaMechanics,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {
