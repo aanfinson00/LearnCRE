@@ -76,6 +76,17 @@ import { riskAdjustedReturnFramework } from './riskAdjustedReturnFramework';
 import { hotelRevparDivergence } from './hotelRevparDivergence';
 import { retailPercentageRentClause } from './retailPercentageRentClause';
 import { industrialTruckCourtBid } from './industrialTruckCourtBid';
+import { macroRateShockCap } from './macroRateShockCap';
+import { macroCyclePositioning } from './macroCyclePositioning';
+import { hotelFandBDrag } from './hotelFandBDrag';
+import { retailAnchorDark } from './retailAnchorDark';
+import { retailCoTenancyClause } from './retailCoTenancyClause';
+import { industrialLastMilePremium } from './industrialLastMilePremium';
+import { multifamilyValueAddCapex } from './multifamilyValueAddCapex';
+import { developmentPreLeasing } from './developmentPreLeasing';
+import { ethicsRelatedPartyTransaction } from './ethicsRelatedPartyTransaction';
+import { bridgeLoanExitRisk } from './bridgeLoanExitRisk';
+import { taxOnExchangeRisk } from './taxOnExchangeRisk';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -149,6 +160,17 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   hotelRevparDivergence,
   retailPercentageRentClause,
   industrialTruckCourtBid,
+  macroRateShockCap,
+  macroCyclePositioning,
+  hotelFandBDrag,
+  retailAnchorDark,
+  retailCoTenancyClause,
+  industrialLastMilePremium,
+  multifamilyValueAddCapex,
+  developmentPreLeasing,
+  ethicsRelatedPartyTransaction,
+  bridgeLoanExitRisk,
+  taxOnExchangeRisk,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {
