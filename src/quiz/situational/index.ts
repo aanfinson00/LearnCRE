@@ -76,6 +76,17 @@ import { riskAdjustedReturnFramework } from './riskAdjustedReturnFramework';
 import { hotelRevparDivergence } from './hotelRevparDivergence';
 import { retailPercentageRentClause } from './retailPercentageRentClause';
 import { industrialTruckCourtBid } from './industrialTruckCourtBid';
+import { industrialSupplyAbsorption } from './industrialSupplyAbsorption';
+import { officeLeaseUpAbsorption } from './officeLeaseUpAbsorption';
+import { multifamilyAbsorptionSeasonality } from './multifamilyAbsorptionSeasonality';
+import { hotelGopMarginCompress } from './hotelGopMarginCompress';
+import { hotelPipDiligence } from './hotelPipDiligence';
+import { retailAnchorDarkening } from './retailAnchorDarkening';
+import { retailOccupancyCostRatio } from './retailOccupancyCostRatio';
+import { floatingRateSensitivity } from './floatingRateSensitivity';
+import { vacancySensitivityOnIrr } from './vacancySensitivityOnIrr';
+import { distressedCompAdjustment } from './distressedCompAdjustment';
+import { nnnVsGrossLeaseBeginner } from './nnnVsGrossLeaseBeginner';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -149,6 +160,17 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   hotelRevparDivergence,
   retailPercentageRentClause,
   industrialTruckCourtBid,
+  industrialSupplyAbsorption,
+  officeLeaseUpAbsorption,
+  multifamilyAbsorptionSeasonality,
+  hotelGopMarginCompress,
+  hotelPipDiligence,
+  retailAnchorDarkening,
+  retailOccupancyCostRatio,
+  floatingRateSensitivity,
+  vacancySensitivityOnIrr,
+  distressedCompAdjustment,
+  nnnVsGrossLeaseBeginner,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {
