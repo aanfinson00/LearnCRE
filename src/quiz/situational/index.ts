@@ -76,6 +76,16 @@ import { riskAdjustedReturnFramework } from './riskAdjustedReturnFramework';
 import { hotelRevparDivergence } from './hotelRevparDivergence';
 import { retailPercentageRentClause } from './retailPercentageRentClause';
 import { industrialTruckCourtBid } from './industrialTruckCourtBid';
+import { absorptionOfficeSubleaseShadow } from './absorptionOfficeSubleaseShadow';
+import { absorptionRetailAnchorBackfill } from './absorptionRetailAnchorBackfill';
+import { absorptionIndustrialSpecPipeline } from './absorptionIndustrialSpecPipeline';
+import { absorptionMultifamilyConcessionBurn } from './absorptionMultifamilyConcessionBurn';
+import { compSelectionAskingVsClosed } from './compSelectionAskingVsClosed';
+import { compSelectionOffMarketOutlier } from './compSelectionOffMarketOutlier';
+import { compSelectionRenovationAdjustment } from './compSelectionRenovationAdjustment';
+import { leaseEconFreeRentEffectiveRent } from './leaseEconFreeRentEffectiveRent';
+import { leaseEconExpenseStopBreakeven } from './leaseEconExpenseStopBreakeven';
+import { sensitivityInterestRateDscrBreakeven } from './sensitivityInterestRateDscrBreakeven';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -149,6 +159,16 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   hotelRevparDivergence,
   retailPercentageRentClause,
   industrialTruckCourtBid,
+  absorptionOfficeSubleaseShadow,
+  absorptionRetailAnchorBackfill,
+  absorptionIndustrialSpecPipeline,
+  absorptionMultifamilyConcessionBurn,
+  compSelectionAskingVsClosed,
+  compSelectionOffMarketOutlier,
+  compSelectionRenovationAdjustment,
+  leaseEconFreeRentEffectiveRent,
+  leaseEconExpenseStopBreakeven,
+  sensitivityInterestRateDscrBreakeven,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {
