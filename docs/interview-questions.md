@@ -26,7 +26,7 @@ in a future PR.
 
 ---
 
-## Acquisitions (12)
+## Acquisitions (13)
 
 ### Q: How do you compute cap rate, and what's a typical going-in cap range for stabilized industrial in a tier-1 market today?
 - **Role:** acquisitions · **Difficulty:** beginner
@@ -88,9 +88,14 @@ in a future PR.
 - **Why:** single-tenant pricing nuance.
 - **Maps to:** `tenant-credit-pricing` situational.
 
+### Q: GAP — You underwrote a big-box industrial acquisition assuming a 3-year rollover to market rent 20% above in-place. Market rent growth comes in at only half that. Walk me through how your levered IRR moves and which lever you'd pull to protect the deal.
+- **Role:** acquisitions · **Difficulty:** intermediate
+- **Why:** `sensitivity` is one of our thinnest tags (2 of 71 situationals, both `mixed` asset class) and industrial is underrepresented (4 of 71) — this pairs rent-roll sensitivity with an asset class that has none.
+- **Maps to:** **GAP — propose `industrial-rent-bump-sensitivity` situational (asset class: industrial) + existing `rentRollChange`/`leveredIrr` quiz templates.**
+
 ---
 
-## Asset Management (10)
+## Asset Management (11)
 
 ### Q: Year-3 NOI came in 8% below pro forma. Where do you look first?
 - **Role:** assetManagement · **Difficulty:** intermediate
@@ -142,9 +147,14 @@ in a future PR.
 - **Why:** capex discipline; common pitfall is using the OM number unchanged.
 - **Maps to:** **GAP — propose `capex-reserve-discipline` situational + `capexReserveSizing` quiz template**.
 
+### Q: GAP — You're benchmarking a power-center retail asset against two "comps" — one anchored by a different grocer, one that just lost its anchor tenant. How do you choose and adjust your comp set before drawing conclusions about your asset's NOI performance?
+- **Role:** assetManagement · **Difficulty:** intermediate
+- **Why:** `comp-selection` is one of our thinnest tags (2 of 71 situationals) and retail is one of our thinnest asset classes (2 of 71) — this closes both gaps at once, and tenant-mix adjustment is a real comp-set pitfall.
+- **Maps to:** **GAP — propose `retail-comp-selection-anchor-mix` situational (asset class: retail).**
+
 ---
 
-## Mortgage Underwriting (10)
+## Mortgage Underwriting (11)
 
 ### Q: What's the formula for DSCR? What's a healthy threshold?
 - **Role:** mortgageUw · **Difficulty:** beginner
@@ -181,6 +191,11 @@ in a future PR.
 - **Why:** stack-conservatism reasoning.
 - **Maps to:** `sponsor-proforma-aggressive` situational.
 
+### Q: GAP — A hotel borrower wants permanent financing on a property where 60% of NOI is generated in Q2-Q3. How do you size the DSCR covenant and amortization so a normal off-season doesn't trip a technical default?
+- **Role:** mortgageUw · **Difficulty:** advanced
+- **Why:** hotel debt has none of the asset-class content depth of multifamily/office (1 situational vs 15) — seasonality-adjusted DSCR sizing is a real gap for lenders and life-co underwriters.
+- **Maps to:** **GAP — propose `hotel-seasonal-dscr-sizing` situational (asset class: hotel).**
+
 ### Q: What's the loan constant for a 30-yr amort at 6%? At 7%? At 8%?
 - **Role:** mortgageUw · **Difficulty:** intermediate
 - **Why:** memorization check; loan constants are the bridge from rate to DS.
@@ -198,7 +213,7 @@ in a future PR.
 
 ---
 
-## Portfolio Management (8)
+## Portfolio Management (9)
 
 ### Q: Your fund is 40% office vs 25% target. Which assets do you sell first to rebalance?
 - **Role:** portfolioMgmt · **Difficulty:** advanced
@@ -240,9 +255,14 @@ in a future PR.
 - **Why:** EM↔IRR translation; common filter.
 - **Maps to:** `equityMultiple` quiz template + `irrSimple` quiz template + `EquityMultipleViz`.
 
+### Q: GAP — Your fund holds three hotels in the same metro under three different brand flags. One is underperforming its comp set by 15 points of RevPAR Index. Do you sell it, reflag it, or hold and fix operations? Walk me through the framework.
+- **Role:** portfolioMgmt · **Difficulty:** advanced
+- **Why:** hotel is our thinnest asset class (1 of 71 situationals) and has zero portfolio-level content — this pairs a hold/sell/reflag decision framework with the asset class that needs it most.
+- **Maps to:** **GAP — propose `hotel-portfolio-hold-reflag-sell` situational (asset class: hotel).**
+
 ---
 
-## Development (7)
+## Development (11)
 
 ### Q: Land cost $8M, hard cost $38M, soft $7M, 5% contingency. What's TPC and what's the yield-on-cost on $4.5M stabilized NOI?
 - **Role:** development · **Difficulty:** intermediate
@@ -279,9 +299,29 @@ in a future PR.
 - **Why:** ground-lease economics; common at urban infill developers.
 - **Maps to:** **GAP — propose `groundLeaseVsFee` situational**.
 
+### Q: GAP — You're underwriting a select-service hotel development: land $6M, hard cost $28M, soft cost $6M, FF&E $3M, 8% contingency, stabilized NOI of $3.4M. What's your TPC and yield-on-cost, and how does that compare to buying a stabilized hotel trading at a 7% cap?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** hotel is our thinnest asset class overall (1 of 71 situationals, 0 in development) and FF&E as a distinct TPC line item is a hotel-specific trap most dev-cost templates don't test.
+- **Maps to:** **GAP — propose `hotel-development-ffe-tpc` situational (asset class: hotel).**
+
+### Q: GAP — You're evaluating a spec (non-build-to-suit) industrial development, and 18 months of speculative supply is already under construction in your submarket. How do you underwrite lease-up risk and absorption timing before you break ground?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** `absorption` is our single thinnest tag (1 of 71 situationals) and industrial development content is limited — spec vs build-to-suit risk is a real distinguishing question at industrial developers.
+- **Maps to:** **GAP — propose `industrial-spec-absorption-risk` situational (asset class: industrial).**
+
+### Q: GAP — A ground-up grocery-anchored retail development won't get construction financing until the anchor is pre-leased. The anchor wants a $2M TI allowance and a 10-year term at below-market rent. How do you evaluate whether that anchor lease still clears your development return hurdle?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** retail has almost no development-side content (2 of 71 situationals total, 0 in development) and lender pre-leasing requirements are a common real-world gate.
+- **Maps to:** **GAP — propose `retail-anchor-preleasing-tradeoff` situational (asset class: retail).**
+
+### Q: GAP — A build-to-suit industrial developer is negotiating a lease with a credit tenant who wants 2% annual bumps instead of the developer's preferred 3%. How does that 100 bps difference flow through to your yield-on-cost, and does it change how much construction debt you can size against the lease?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** `lease-econ` is one of our thinnest tags (2 of 71 situationals, both retail) — this brings lease-economics reasoning into development/mortgageUw territory where it's currently unaddressed.
+- **Maps to:** **GAP — propose `bts-lease-bump-yield-impact` situational (asset class: industrial).**
+
 ---
 
-## Cross-cutting / market awareness (5)
+## Cross-cutting / market awareness (7)
 
 These appear across all roles — they're filters at first-round interviews
 regardless of position.
@@ -311,23 +351,47 @@ regardless of position.
 - **Why:** distressed underwriting; increasingly relevant 2024+.
 - **Maps to:** **GAP — propose `walk-distressed-1` walkthrough**.
 
+### Q: GAP — How do you think about basis risk between floating-rate debt and a fixed-rate underwriting assumption when rates are volatile?
+- **Role:** all · **Difficulty:** intermediate
+- **Why:** Cross-cutting is our thinnest section (5 questions) despite being asked at every seniority level; rate-basis risk sits between acquisitions and mortgage underwriting and isn't owned by either template set today.
+- **Maps to:** **GAP — propose `rate-basis-risk-framework` situational.**
+
+### Q: GAP — Two "comparable" sales closed within a month of each other in the same submarket at a 150 bps cap-rate spread. How do you decide which one is actually more relevant to your subject deal?
+- **Role:** all · **Difficulty:** intermediate
+- **Why:** `comp-selection` is one of our thinnest tags (2 of 71 situationals) and reconciling conflicting comps is asked across acquisitions, asset management, and portfolio roles alike.
+- **Maps to:** **GAP — propose `comp-selection-conflicting-comps` situational.**
+
 ---
 
 ## Summary statistics
 
-- **Total questions in this doc:** 52
-- **Mapped to existing content:** 41 (78%)
-- **Flagged as GAPs:** 8 (15%)
-- **Out of scope (time-sensitive / behavioral):** 4 (8%)
+- **Total questions in this doc:** 62
+- **Mapped to existing content:** 41 (66%)
+- **Flagged as GAPs:** 18 (29%)
+- **Out of scope (time-sensitive / behavioral):** 4 (6%)
 
-Top GAPs to address (ranked by interview frequency):
+**2026-07 coverage audit.** Cross-referencing `feedback/questions.json` (71
+shipped situational + longform items) against role and asset-class tags
+surfaced a skew that this doc's per-section counts didn't fully capture:
 
-1. `capexReserveSizing` quiz + `capex-reserve-discipline` situational (asset mgmt)
-2. `refiStressTest` quiz + `refi-cap-stress` situational (mortgage UW)
-3. `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz (portfolio mgmt)
-4. `constructionLoanSizing` quiz + `dev-ltc-vs-ltv` situational (development)
-5. `walk-distressed-1` walkthrough (cross-cutting)
+- **By asset class:** multifamily 15, office 10, mixed 9, industrial 4,
+  retail 2, **hotel 1**. Hotel/retail/industrial combined (7) are still
+  outnumbered 2-to-1 by multifamily alone.
+- **By role:** acquisitions 46 tags, assetManagement 34, portfolioMgmt 29,
+  mortgageUw 20, **development 10** — development is the thinnest role by a
+  wide margin, matching this doc's own Development section being its
+  shortest (7 questions, now 11).
+- **By topic tag:** `absorption` (1), `sensitivity` (2), `comp-selection`
+  (2), and `lease-econ` (2) are the four thinnest categories out of 12.
 
-These five gaps would lift mapped-to-content coverage from 78% → ~93% with
-~½ day of content work each, and they all surface from real interview-question
-patterns rather than top-down design guesses.
+The 10 questions added in this pass (marked `GAP` above, dated 2026-07-03)
+target that skew directly rather than adding more acquisitions/multifamily
+content on top of an already-deep pile.
+
+Top GAPs to address next (ranked by how much of the skew they close):
+
+1. `hotel-development-ffe-tpc` + `hotel-seasonal-dscr-sizing` + `hotel-portfolio-hold-reflag-sell` — hotel is the single thinnest asset class (1 situational) and had zero development/mortgageUw/portfolio coverage.
+2. `industrial-spec-absorption-risk` + `industrial-rent-bump-sensitivity` + `bts-lease-bump-yield-impact` — closes the `absorption` and `sensitivity` tag gaps while adding industrial-development content.
+3. `retail-anchor-preleasing-tradeoff` + `retail-comp-selection-anchor-mix` — retail's only 2 situationals are both acquisitions/assetManagement-side; these add development and comp-selection angles.
+4. `rate-basis-risk-framework` + `comp-selection-conflicting-comps` — Cross-cutting is the thinnest section overall (5, now 7) despite being asked at every seniority level.
+5. Older GAPs already shipped per `ROADMAP.md` (`capexReserveSizing`, `refiStressTest`, `feeDragOnIrr`, `constructionLoanSizing`, `walk-distressed-1`, `leaseUpReserve`, `groundLeaseVsFee`) still read as open above — a follow-up pass should update those five entries' `Maps to:` lines rather than adding new content.
