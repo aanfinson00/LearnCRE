@@ -331,3 +331,89 @@ Top GAPs to address (ranked by interview frequency):
 These five gaps would lift mapped-to-content coverage from 78% → ~93% with
 ~½ day of content work each, and they all surface from real interview-question
 patterns rather than top-down design guesses.
+
+---
+
+## Coverage gap analysis — 2026-07-10
+
+The five GAPs above are all shipped now (see ROADMAP "Interview-questions.md
+GAPs" + "Interview-questions GAPs round 2"). Re-auditing the *shipped* content
+base directly (not this doc) to find where the question bank is still thin:
+
+**By role** (situational / quiz template / longform counts):
+
+| role | situational | quiz template | longform |
+|---|---|---|---|
+| acquisitions | 40 | 60 | 6 |
+| assetManagement | 31 | 20 | 3 |
+| portfolioMgmt | 25 | 16 | 4 |
+| mortgageUw | 19 | 16 | 1 |
+| development | 9 | 10 | 1 |
+
+**By asset class** (situational only, 72 total): multifamily 11, office 9,
+mixed 8, industrial 3, retail 2, hotel 1.
+
+`development` is the thinnest role on every axis, and `hotel` / `retail` /
+`industrial` remain far behind `multifamily` / `office` on asset-class depth
+(consistent with the skew ROADMAP's "Question-base depth pass — Phase 1"
+flagged before it shipped 3 situationals — the skew is smaller now but not
+closed). `mortgageUw` longform is a single case. These are the areas with the
+fewest approved/shipped questions relative to the rest of the bank.
+
+Ten candidate phrasings targeting those gaps, in the same GAP format as
+above, for a future contributor to pick up:
+
+### Q: GAP — A rezoning contingency needs city approval before you can close on the land. How do you structure the PSA to protect your deposit?
+- **Role:** development · **Difficulty:** beginner
+- **Why:** development has zero beginner-tier content today; entitlement risk is the first thing a junior dev analyst has to reason about.
+- **Maps to:** **GAP — propose `entitlement-contingency-structuring` situational**.
+
+### Q: GAP — Your GC proposes phasing a 3-building shell delivery over 6 months instead of one single delivery. How does that change your draw schedule and interest carry?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** phased-delivery cash-flow timing is a common construction-lending nuance not yet covered.
+- **Maps to:** **GAP — propose `phased-delivery-draw-impact` situational**.
+
+### Q: GAP — Zoning caps you at 2.5 FAR and 1.1 parking spaces/unit; a nearby comp got a variance to a denser envelope with reduced parking. Do you underwrite to the variance or the by-right case?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** by-right vs. entitlement-upside underwriting discipline; easy to over-pay assuming a variance that isn't guaranteed.
+- **Maps to:** **GAP — propose `by-right-vs-variance-underwriting` situational**.
+
+### Q: GAP — Your construction loan's interest reserve was sized for a 24-month build; permitting delays push completion to month 30, and the reserve is drawn down by month 22. What are your options?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** interest-reserve shortfall is a real mid-construction crunch; tests lender/sponsor lever knowledge.
+- **Maps to:** **GAP — propose `interest-reserve-shortfall` situational**.
+
+### Q: GAP — What's the difference between ADR, occupancy, and RevPAR — and why can RevPAR hold flat while margins deteriorate?
+- **Role:** all (hotel) · **Difficulty:** beginner
+- **Why:** hotel has exactly one situational today and it's intermediate; this is the missing beginner on-ramp.
+- **Maps to:** **GAP — propose `hotel-revpar-margin-divergence` situational**.
+
+### Q: GAP — Your franchise agreement triggers a $4M PIP (property improvement plan) in year 3 of a 7-year hold that wasn't in the original capex budget. How does this change your return profile?
+- **Role:** assetManagement (hotel) · **Difficulty:** intermediate
+- **Why:** PIP surprises are one of the most common hotel-specific asset-management shocks; hotel asset class is still the thinnest (1 situational).
+- **Maps to:** **GAP — propose `hotel-pip-surprise` situational**.
+
+### Q: GAP — Your anchor tenant (30% of GLA) is vacating in 90 days, and inline shops have a co-tenancy clause letting them pay reduced rent if the anchor closes. What's the NOI impact, and how do you underwrite it?
+- **Role:** assetManagement (retail) · **Difficulty:** intermediate
+- **Why:** co-tenancy cascade is one of the most-tested retail-specific lease mechanics; retail asset class has only 2 situationals.
+- **Maps to:** **GAP — propose `co-tenancy-clause-trigger` situational**.
+
+### Q: GAP — Your industrial building has 24' clear height and a 130' truck court, built in 2005; new Class-A product nearby delivers with 36' clear and 185' courts. How much functional obsolescence do you underwrite, and how?
+- **Role:** acquisitions (industrial) · **Difficulty:** intermediate
+- **Why:** clear-height/truck-court spec obsolescence is a live industrial underwriting question as the modern spec bar keeps rising.
+- **Maps to:** **GAP — propose `industrial-clear-height-obsolescence` situational**.
+
+### Q: GAP — You're 18 months from maturity on a CMBS conduit loan with 4 years of yield maintenance remaining, and rates have fallen enough that refinancing early looks attractive. Walk through yield maintenance vs. defeasance cost and which one is cheaper.
+- **Role:** mortgageUw · **Difficulty:** advanced
+- **Why:** yield-maintenance-vs-defeasance is a classic CMBS-desk question; mortgageUw longform has only one case today.
+- **Maps to:** **GAP — propose `walk-defeasance-vs-ym-1` longform**.
+
+### Q: GAP — You have two loans cross-collateralized against a 3-property portfolio and want to sell one asset. What's a release price, and how is it typically calculated?
+- **Role:** portfolioMgmt · **Difficulty:** beginner
+- **Why:** portfolioMgmt content skews intermediate/advanced; this is a beginner-accessible mechanics question that comes up whenever a cross-collateralized portfolio needs a partial disposition.
+- **Maps to:** **GAP — propose `cross-collateral-release-price` situational**.
+
+These 10 are phrasing candidates only (no worked solutions yet) — the next
+step for each is the same as the process above: verify against a public
+source where possible, then build the mapped situational/longform and update
+this doc's `Maps to:` line.
