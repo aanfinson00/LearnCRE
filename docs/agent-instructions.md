@@ -167,6 +167,62 @@ batch):
 - Asset reposition sequence — vacate, renovate, re-lease
 - Reserve study — what one is and how it informs reserves
 
+*(Note: `capexReserveSizing` and `constructionLoanSizing` above are now
+shipped — see ROADMAP.md "Question-base depth pass — Phase 1" and
+"Interview-questions GAPs round 2". Leaving the lines above for history;
+don't re-draft these.)*
+
+---
+
+## Coverage gap watch — 2026-07-11
+
+Periodic tally of `roles` tags across `src/quiz/situational/*.ts` and
+`src/quiz/templates/*.ts` (excluding `index.ts`) to catch which audience
+is falling behind as new content ships:
+
+| role | situational cases | quiz templates |
+|---|---|---|
+| acquisitions | 40 | 60 |
+| assetManagement | 31 | 20 |
+| portfolioMgmt | 25 | 16 |
+| mortgageUw | 19 | 16 |
+| **development** | **9** | **10** |
+
+`development` is the thinnest role in both content types by a wide margin
+(ROADMAP's Phase-1 depth pass already flagged this same skew and queued
+Phases 2-4 to address it — those haven't landed yet). Asset-class tags on
+situational cases are similarly uneven: multifamily 11, office 9, mixed 8,
+industrial 3, retail 2, hotel 1.
+
+The existing `development` cases cluster tightly around construction-loan
+mechanics (draw process, LTC/LTV, LDs, retainage, change orders) and one
+ground-lease case. Land/entitlement-stage and exit/recap-stage content is
+essentially absent. Ten candidate question phrasings to fill that gap next
+(situational-case style, unbuilt — titles only, no answer keys yet):
+
+1. "Entitlement risk premium — how much extra return do you need for
+   unzoned land?"
+2. "Residual land value — what's left to pay for dirt after the rest of
+   the capital stack is underwritten?"
+3. "GMP vs. cost-plus — which contract structure actually protects the
+   developer here?"
+4. "Density bonus for affordable units — does the trade pencil?"
+5. "Phase I comes back with a rec — walk away or price the remediation
+   into the land basis?"
+6. "Off-site infrastructure costs — whose pro forma do they belong on?"
+7. "Pre-construction absorption study says the market's softer than
+   underwritten — do you still break ground?"
+8. "Construction loan maturing before stabilization — extend, refi, or
+   sell?"
+9. "Impact fees hit mid-permitting — who eats the increase, sponsor or
+   deal?"
+10. "Recapitalizing at stabilization — take out the construction lender
+    with permanent debt, or bring in a new JV equity partner?"
+
+Next agent picking up a "generate more development content" task: start
+here before brainstorming fresh, and cross-check against
+`docs/interview-questions.md` for any of these that already have a home.
+
 ---
 
 ## What to NOT do
