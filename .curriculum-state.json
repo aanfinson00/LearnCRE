@@ -27,6 +27,35 @@
       "status": "rejected",
       "title": "Building a CRE Investment Portfolio"
     },
+    "building-a-sources-and-uses-table-from-scratch-in-excel-2607": {
+      "category": "tools-workflow",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-12T00:00:00Z",
+      "graded_at": "2026-07-12T00:00:00Z",
+      "id": "building-a-sources-and-uses-table-from-scratch-in-excel-2607",
+      "key_numbers": [
+        "$25M purchase price",
+        "$750K closing costs",
+        "65% LTV senior debt",
+        "equity plug"
+      ],
+      "outline": "Teaches the discipline of constructing a sources & uses table before a model has any tabs built out: uses side first (purchase price, closing costs, capex reserve, financing costs), then sources sized to balance (senior debt at a target LTV, then equity as the plug), and why the plug should never be negative.",
+      "reasoning": "One of the first things every analyst is asked to build; universal across acquisitions, development, and mortgageUw roles. Very natural step-by-step fit (each row is a step, final step balances the table). Slightly lower novelty since sources & uses concepts are touched tangentially elsewhere (devLtcVsLtv), but never taught as the standalone modeling-discipline skill it actually is.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 19,
+      "scores": {
+        "foundational": 5,
+        "novelty": 4,
+        "reach": 5,
+        "walkthroughFit": 5
+      },
+      "status": "queued",
+      "title": "Building a Sources and Uses Table From Scratch in Excel"
+    },
     "construction-loan-fundamentals-99885": {
       "category": "capital-stack",
       "draft_quiz_path": null,
@@ -79,6 +108,59 @@
       "status": "refined",
       "title": "CRE Ethics & Professional Conduct"
     },
+    "data-center-underwriting-power-density-and-critical-load-pri": {
+      "category": "asset-class-deepdive",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-12T00:00:00Z",
+      "graded_at": "2026-07-12T00:00:00Z",
+      "id": "data-center-underwriting-power-density-and-critical-load-pri",
+      "key_numbers": [
+        "150W/SF density",
+        "$180/kW/month",
+        "N+1 redundancy",
+        "95% critical-load utilization"
+      ],
+      "outline": "Introduces the mental model that separates data centers from every other asset class: rent is priced per kW of critical IT load, not per SF, and power/cooling infrastructure (not square footage) is the actual scarce resource driving value.",
+      "reasoning": "Same rationale as the storage idea \u2014 explicitly named as an example in the category definition, currently unrepresented. High novelty (per-SF pricing models break down entirely). Reach is the lowest of the batch: genuinely niche and most relevant to a subset of industrial/infrastructure-focused analysts, so this is the idea most likely to need a second look before drafting.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 14,
+      "scores": {
+        "foundational": 3,
+        "novelty": 5,
+        "reach": 2,
+        "walkthroughFit": 4
+      },
+      "status": "rejected",
+      "title": "Data Center Underwriting: Power Density and Critical Load Pricing"
+    },
+    "debt-originator-vs-debt-underwriter-same-deal-different-job-": {
+      "category": "role-profile",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-12T00:00:00Z",
+      "graded_at": "2026-07-12T00:00:00Z",
+      "id": "debt-originator-vs-debt-underwriter-same-deal-different-job-",
+      "key_numbers": [],
+      "outline": "Contrasts the day-to-day of the two roles on the lending side of a deal that career switchers most often confuse: the originator sources the borrower relationship and negotiates terms, while the underwriter independently stress-tests the numbers and writes the credit memo that actually gets the loan approved.",
+      "reasoning": "The rejected 'Role of a CRE Analyst' idea was too generic to differentiate from existing role content; this one is specific and novel (nothing in the catalog distinguishes origination from underwriting on the debt side). Weaker walkthrough fit than the others since it's more compare/contrast than sequential math, which the outline should flag for the drafting stage.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 13,
+      "scores": {
+        "foundational": 3,
+        "novelty": 4,
+        "reach": 3,
+        "walkthroughFit": 3
+      },
+      "status": "rejected",
+      "title": "Debt Originator vs Debt Underwriter: Same Deal, Different Job"
+    },
     "due-diligence-for-commercial-leases-99886": {
       "category": "legal-document",
       "draft_quiz_path": "docs/CURRICULUM_DRAFTS/quiz-due-diligence-for-commercial-leases-99886.md",
@@ -102,6 +184,35 @@
       },
       "status": "refined",
       "title": "Due Diligence for Commercial Leases"
+    },
+    "entitlement-risk-and-carrying-cost-during-zoning-approval-26": {
+      "category": "development-lifecycle",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-12T00:00:00Z",
+      "graded_at": "2026-07-12T00:00:00Z",
+      "id": "entitlement-risk-and-carrying-cost-during-zoning-approval-26",
+      "key_numbers": [
+        "$2.0M land basis",
+        "18 months",
+        "7.5% cost of capital",
+        "60% approval probability"
+      ],
+      "outline": "Walks through how a developer prices entitlement risk before a shovel is in the ground: holding costs on raw land during a zoning/variance process, the odds-weighted value of an unentitled parcel, and how carrying cost erodes the land-basis-to-value spread the longer approval drags on.",
+      "reasoning": "Entitlement is the first gate in every ground-up deal and nothing in the existing catalog covers pre-construction carrying cost or approval-probability weighting (constructionCostOverrun/lenderDrawMechanics start post-closing). Fits cleanly as a 5-8 step walkthrough (holding cost accrual -> risk-weighted land value -> breakeven approval odds). Reach is narrower since it's development-specific, not universal across AM/portfolio roles.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 17,
+      "scores": {
+        "foundational": 4,
+        "novelty": 5,
+        "reach": 3,
+        "walkthroughFit": 5
+      },
+      "status": "queued",
+      "title": "Entitlement Risk and Carrying Cost During Zoning Approval"
     },
     "office-building-maintenance-reserves-99882": {
       "category": "asset-class-deepdive",
@@ -131,6 +242,35 @@
       "status": "rejected",
       "title": "Office Building Maintenance Reserves"
     },
+    "preferred-equity-vs-mezzanine-debt-where-each-sits-and-why-2": {
+      "category": "capital-stack",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-12T00:00:00Z",
+      "graded_at": "2026-07-12T00:00:00Z",
+      "id": "preferred-equity-vs-mezzanine-debt-where-each-sits-and-why-2",
+      "key_numbers": [
+        "12% mezz rate",
+        "11% pref current + accrual",
+        "65-80% LTV mezz layer",
+        "30-day cure period"
+      ],
+      "outline": "Compares two capital sources that both sit between senior debt and common equity but behave very differently \u2014 mezz is a loan secured by a pledge of equity interests with foreclosure remedies, while pref equity is an equity investment with a contractual return and control rights, not a lien. Walks through how sponsors choose between them based on speed-to-cure, cost, and control dilution.",
+      "reasoning": "This exact comparison is table-stakes capital-stack knowledge every analyst needs and is currently only implied, never taught directly (the rejected 'Understanding Mezzanine Debt' idea covered mezz alone with no pref-equity contrast, which is where the real conceptual confusion lives). Strong reach since capital stack literacy spans every role tier.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 17,
+      "scores": {
+        "foundational": 5,
+        "novelty": 4,
+        "reach": 4,
+        "walkthroughFit": 4
+      },
+      "status": "queued",
+      "title": "Preferred Equity vs Mezzanine Debt: Where Each Sits and Why"
+    },
     "property-valuation-during-economic-downturns-99884": {
       "category": "macro-cycle",
       "draft_quiz_path": "docs/CURRICULUM_DRAFTS/quiz-property-valuation-during-economic-downturns-99884.md",
@@ -157,6 +297,93 @@
       },
       "status": "refined",
       "title": "Property Valuation During Economic Downturns"
+    },
+    "reading-an-argus-cash-flow-export-what-each-line-actually-me": {
+      "category": "tools-workflow",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-12T00:00:00Z",
+      "graded_at": "2026-07-12T00:00:00Z",
+      "id": "reading-an-argus-cash-flow-export-what-each-line-actually-me",
+      "key_numbers": [
+        "PGR $2.4M",
+        "absorption & turnover vacancy 4%",
+        "general vacancy 5%",
+        "EGR $2.17M"
+      ],
+      "outline": "Demystifies the wall of rows in a standard Argus Enterprise cash flow export by mapping each line (potential gross revenue, absorption & turnover vacancy, general vacancy, effective gross revenue, operating expenses, NOI) back to the underwriting concepts analysts already know, so a new hire can navigate the tool without re-learning valuation from scratch.",
+      "reasoning": "The rejected 'Building a CRE Investment Portfolio' idea in this category missed the mark on what tools-workflow should mean; this one is squarely first-90-days material every analyst who touches Argus needs, and nothing in the existing catalog addresses the software layer at all. High walkthrough fit \u2014 each line item is naturally one step.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 18,
+      "scores": {
+        "foundational": 4,
+        "novelty": 5,
+        "reach": 4,
+        "walkthroughFit": 5
+      },
+      "status": "queued",
+      "title": "Reading an Argus Cash Flow Export: What Each Line Actually Means"
+    },
+    "recapitalizing-at-stabilization-construction-to-perm-takeout": {
+      "category": "development-lifecycle",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-12T00:00:00Z",
+      "graded_at": "2026-07-12T00:00:00Z",
+      "id": "recapitalizing-at-stabilization-construction-to-perm-takeout",
+      "key_numbers": [
+        "$40M construction loan balance",
+        "$3.2M stabilized NOI",
+        "1.25x DSCR",
+        "65% LTV"
+      ],
+      "outline": "Covers the mechanics of refinancing a construction loan into permanent debt once a project stabilizes: sizing the perm loan off trailing NOI and a term-lender DSCR/LTV test, comparing the takeout proceeds against the construction loan balance, and quantifying the equity that gets returned (or the gap that has to be re-funded).",
+      "reasoning": "Closes the loop on the development lifecycle (existing content stops at draws/change orders/liquidated damages; nothing walks the exit from construction debt into perm debt). Novel relative to devLtcVsLtv (which sizes the construction loan, not the takeout). Reach is dev/mortgageUw-specific rather than universal.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 15,
+      "scores": {
+        "foundational": 4,
+        "novelty": 4,
+        "reach": 3,
+        "walkthroughFit": 4
+      },
+      "status": "queued",
+      "title": "Recapitalizing at Stabilization: Construction-to-Perm Takeout Math"
+    },
+    "rescue-capital-pricing-a-bridge-to-bridge-recapitalization-2": {
+      "category": "capital-stack",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-12T00:00:00Z",
+      "graded_at": "2026-07-12T00:00:00Z",
+      "id": "rescue-capital-pricing-a-bridge-to-bridge-recapitalization-2",
+      "key_numbers": [
+        "$8M rescue capital",
+        "15% coupon",
+        "20% warrant coverage",
+        "50% promote dilution"
+      ],
+      "outline": "Covers how a sponsor facing a maturity default prices emergency capital from a new investor: the new money typically primes existing equity, demands a high current-pay coupon plus warrants/promote, and the walkthrough quantifies how much of the original sponsor's promote gets diluted to secure the rescue.",
+      "reasoning": "Distressed-workout content exists (distressedLoanWorkout, dscrRefiFailing) but nothing walks the sponsor side of sourcing and pricing rescue capital itself. Moderately specialized \u2014 most relevant to AM/portfolio roles in a down cycle rather than universal, hence a mid-range reach score.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 14,
+      "scores": {
+        "foundational": 3,
+        "novelty": 4,
+        "reach": 3,
+        "walkthroughFit": 4
+      },
+      "status": "rejected",
+      "title": "Rescue Capital: Pricing a Bridge-to-Bridge Recapitalization"
     },
     "retail-leasing-dynamics-99881": {
       "category": "asset-class-deepdive",
@@ -185,6 +412,35 @@
       },
       "status": "rejected",
       "title": "Retail Leasing Dynamics"
+    },
+    "self-storage-cap-rate-compression-and-the-climate-controlled": {
+      "category": "asset-class-deepdive",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-12T00:00:00Z",
+      "graded_at": "2026-07-12T00:00:00Z",
+      "id": "self-storage-cap-rate-compression-and-the-climate-controlled",
+      "key_numbers": [
+        "6.25% cap climate-controlled",
+        "7.0% cap drive-up",
+        "$14/SF climate",
+        "$9/SF drive-up"
+      ],
+      "outline": "Explains why self-storage trades tighter than its operational volatility would suggest \u2014 low capex intensity, month-to-month leases enabling rapid rate resets, and the premium climate-controlled/drive-up mix commands in cap rate and rent per SF versus non-climate product.",
+      "reasoning": "Self-storage is entirely absent from the catalog despite being one of the more distinct asset classes for cap-rate logic (opex efficiency + rate-reset speed vs. lease duration). Fully novel. Not table-stakes for every CRE professional the way office/multifamily fundamentals are, hence the moderate foundational/reach scores.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 15,
+      "scores": {
+        "foundational": 3,
+        "novelty": 5,
+        "reach": 3,
+        "walkthroughFit": 4
+      },
+      "status": "queued",
+      "title": "Self-Storage Cap Rate Compression and the Climate-Controlled Premium"
     },
     "the-role-of-a-cre-analyst-99883": {
       "category": "role-profile",
@@ -265,6 +521,34 @@
       },
       "status": "refined",
       "title": "Understanding REITs vs. Direct Ownership"
+    },
+    "what-a-portfolio-manager-actually-tracks-quarter-to-quarter-": {
+      "category": "role-profile",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-12T00:00:00Z",
+      "graded_at": "2026-07-12T00:00:00Z",
+      "id": "what-a-portfolio-manager-actually-tracks-quarter-to-quarter-",
+      "key_numbers": [
+        "92% occupancy vs 94% budget",
+        "1.35x DSCR vs 1.20x covenant",
+        "18% GLA rolling in 12mo"
+      ],
+      "outline": "Walks through the recurring quarterly checklist of a portfolio manager overseeing a multi-asset fund: rent roll and occupancy drift versus budget, covenant headroom across the debt stack, upcoming lease rollover concentration, and which of those triggers actually escalate to the investment committee.",
+      "reasoning": "Portfolio management is one of the five role tags used throughout the app's tags but has almost no dedicated role-profile content of its own. Good reach since every AM-adjacent analyst eventually needs this mental checklist, and it reuses metrics (DSCR, rollover concentration) the learner already has intuition for from other modes, aiding novelty-vs-groundedness balance.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 16,
+      "scores": {
+        "foundational": 4,
+        "novelty": 4,
+        "reach": 4,
+        "walkthroughFit": 4
+      },
+      "status": "queued",
+      "title": "What a Portfolio Manager Actually Tracks Quarter to Quarter"
     }
   },
   "log": [
@@ -323,6 +607,14 @@
     {
       "at": "2026-06-05T23:08:29Z",
       "msg": "refine: understanding-reits-vs-direct-ownership-99889 -> refined"
+    },
+    {
+      "at": "2026-07-12T00:00:00Z",
+      "msg": "generate: added 10 new ideas targeting 0-approved categories (asset-class-deepdive, development-lifecycle, capital-stack, role-profile, tools-workflow) (manual, Claude-authored \u2014 Ollama unavailable in this environment)"
+    },
+    {
+      "at": "2026-07-12T00:00:00Z",
+      "msg": "grade: processed 10 (manual, Claude-authored rubric scoring)"
     }
   ],
   "version": 1
