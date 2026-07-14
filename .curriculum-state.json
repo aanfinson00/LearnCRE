@@ -1,5 +1,33 @@
 {
   "ideas": {
+    "asset-manager-vs-property-manager-where-the-line-actually-fa": {
+      "category": "role-profile",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-14T08:10:38Z",
+      "graded_at": "2026-07-14T08:10:38Z",
+      "id": "asset-manager-vs-property-manager-where-the-line-actually-fa",
+      "key_numbers": [
+        "below-market renewal",
+        "6-month vacancy hold-out",
+        "NOI trade-off"
+      ],
+      "outline": "Uses one leasing decision \u2014 renew at below-market rent now vs hold out for a better tenant \u2014 to show which calls sit with the PM (day-to-day ops) versus the AM (strategic NOI/value trade-offs), and why misrouting that authority causes real value loss.",
+      "reasoning": "Role-profile's only entry so far was rejected for being a generic day-in-the-life description. This one hangs the role distinction on a single concrete, quantifiable decision, which is what the rubric rewards.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 16,
+      "scores": {
+        "foundational": 4,
+        "novelty": 4,
+        "reach": 4,
+        "walkthroughFit": 4
+      },
+      "status": "queued",
+      "title": "Asset Manager vs Property Manager: Where the Line Actually Falls"
+    },
     "building-a-cre-investment-portfolio-99887": {
       "category": "tools-workflow",
       "draft_quiz_path": null,
@@ -26,6 +54,34 @@
       },
       "status": "rejected",
       "title": "Building a CRE Investment Portfolio"
+    },
+    "certificate-of-occupancy-to-stabilization-runway": {
+      "category": "development-lifecycle",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-14T08:10:38Z",
+      "graded_at": "2026-07-14T08:10:38Z",
+      "id": "certificate-of-occupancy-to-stabilization-runway",
+      "key_numbers": [
+        "200 units",
+        "25 units/month absorption",
+        "2 months free rent"
+      ],
+      "outline": "Walks through the gap between construction completion (CO) and NOI stabilization: lease-up absorption pace, free-rent burn-off, and sizing the operating reserve needed to bridge negative or thin cash flow during that window.",
+      "reasoning": "Distinct from the shipped leaseUpReserve quiz kind \u2014 this is the narrative walkthrough of the CO-to-stabilization runway itself, not just the reserve-sizing formula. Closes another development-lifecycle gap.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 17,
+      "scores": {
+        "foundational": 4,
+        "novelty": 5,
+        "reach": 3,
+        "walkthroughFit": 5
+      },
+      "status": "queued",
+      "title": "Certificate of Occupancy to Stabilization Runway"
     },
     "construction-loan-fundamentals-99885": {
       "category": "capital-stack",
@@ -79,6 +135,90 @@
       "status": "refined",
       "title": "CRE Ethics & Professional Conduct"
     },
+    "data-center-underwriting-power-cost-per-kilowatt-as-the-cap-": {
+      "category": "asset-class-deepdive",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-14T08:10:38Z",
+      "graded_at": "2026-07-14T08:10:38Z",
+      "id": "data-center-underwriting-power-cost-per-kilowatt-as-the-cap-",
+      "key_numbers": [
+        "10MW facility",
+        "$150/kW-month",
+        "95% critical load factor"
+      ],
+      "outline": "Shows how data-center NOI underwriting hinges on power/critical-load pricing rather than rent per square foot, and why that shifts the cap-rate framework analysts already know for triple-net industrial onto a different driver.",
+      "reasoning": "Named explicitly in the category's own example list (docs/CURRICULUM.md categories) but never generated. Fills a named gap with a concrete, walkthrough-friendly compute chain.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 15,
+      "scores": {
+        "foundational": 3,
+        "novelty": 5,
+        "reach": 3,
+        "walkthroughFit": 4
+      },
+      "status": "queued",
+      "title": "Data Center Underwriting: Power Cost Per Kilowatt as the Cap Rate Driver"
+    },
+    "debt-broker-vs-direct-lender-who-actually-gets-paid-how": {
+      "category": "role-profile",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-14T08:10:38Z",
+      "graded_at": "2026-07-14T08:10:38Z",
+      "id": "debt-broker-vs-direct-lender-who-actually-gets-paid-how",
+      "key_numbers": [
+        "$30M loan",
+        "75 bps broker fee",
+        "spread income over 5-year term"
+      ],
+      "outline": "Contrasts the debt-broker fee model (basis-point placement fee paid at close by the borrower) against a direct balance-sheet lender's economics (spread income earned over the loan's life), using one $30M loan to show each side's payday.",
+      "reasoning": "Sharper than the prior rejected 'Role of a CRE Analyst' (too broad, no math hook) but still a narrower-reach role path; borderline below threshold this round.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 14,
+      "scores": {
+        "foundational": 3,
+        "novelty": 4,
+        "reach": 3,
+        "walkthroughFit": 4
+      },
+      "status": "rejected",
+      "title": "Debt Broker vs Direct Lender: Who Actually Gets Paid How"
+    },
+    "debt-fund-vs-bank-balance-sheet-pricing-the-same-loan-two-wa": {
+      "category": "capital-stack",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-14T08:10:38Z",
+      "graded_at": "2026-07-14T08:10:38Z",
+      "id": "debt-fund-vs-bank-balance-sheet-pricing-the-same-loan-two-wa",
+      "key_numbers": [
+        "$20M bridge loan",
+        "bank SOFR+275",
+        "debt fund SOFR+450"
+      ],
+      "outline": "Quotes one $20M bridge loan two ways \u2014 a bank (cheaper, tighter covenants, relationship-based) and a debt fund (wider spread, more leverage, faster close) \u2014 and quantifies the all-in cost delta a sponsor is paying for speed and leverage.",
+      "reasoning": "Useful lender-selection framing but narrower reach than the pref-vs-mezz idea and more descriptive than compute-heavy; below threshold on this pass.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 14,
+      "scores": {
+        "foundational": 3,
+        "novelty": 4,
+        "reach": 3,
+        "walkthroughFit": 4
+      },
+      "status": "rejected",
+      "title": "Debt Fund vs Bank Balance Sheet: Pricing the Same Loan Two Ways"
+    },
     "due-diligence-for-commercial-leases-99886": {
       "category": "legal-document",
       "draft_quiz_path": "docs/CURRICULUM_DRAFTS/quiz-due-diligence-for-commercial-leases-99886.md",
@@ -102,6 +242,62 @@
       },
       "status": "refined",
       "title": "Due Diligence for Commercial Leases"
+    },
+    "entitlement-risk-and-carrying-cost-math": {
+      "category": "development-lifecycle",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-14T08:10:38Z",
+      "graded_at": "2026-07-14T08:10:38Z",
+      "id": "entitlement-risk-and-carrying-cost-math",
+      "key_numbers": [
+        "$2M land basis",
+        "18 vs 36 month entitlement",
+        "8% cost of capital"
+      ],
+      "outline": "Quantifies the cost of holding raw land through an uncertain entitlement timeline \u2014 property tax, opportunity cost of capital, and extension fees \u2014 and shows how entitlement risk gets priced into land basis before a shovel goes in the ground.",
+      "reasoning": "Development-lifecycle has zero ideas on record despite being a named curriculum category. This is a clean, self-contained compute chain (carrying cost accrual over two timelines) that doesn't overlap any shipped content.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 17,
+      "scores": {
+        "foundational": 4,
+        "novelty": 5,
+        "reach": 3,
+        "walkthroughFit": 5
+      },
+      "status": "queued",
+      "title": "Entitlement Risk and Carrying Cost Math"
+    },
+    "first-90-days-building-your-own-comp-tracker-in-excel": {
+      "category": "tools-workflow",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-14T08:10:38Z",
+      "graded_at": "2026-07-14T08:10:38Z",
+      "id": "first-90-days-building-your-own-comp-tracker-in-excel",
+      "key_numbers": [
+        "10 fields per comp",
+        "sale comps tab",
+        "lease comps tab"
+      ],
+      "outline": "A practical workflow lesson on structuring a personal comps spreadsheet (sale comps + lease comps) an incoming analyst builds in their first week, covering which fields matter and how to keep it current as new comps close.",
+      "reasoning": "Solid onboarding content but overlaps in spirit with the shipped Excel formula-drill templates and the existing first-90-days example in the category description; not novel enough this round.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 12,
+      "scores": {
+        "foundational": 3,
+        "novelty": 3,
+        "reach": 3,
+        "walkthroughFit": 3
+      },
+      "status": "rejected",
+      "title": "First 90 Days: Building Your Own Comp Tracker in Excel"
     },
     "office-building-maintenance-reserves-99882": {
       "category": "asset-class-deepdive",
@@ -131,6 +327,34 @@
       "status": "rejected",
       "title": "Office Building Maintenance Reserves"
     },
+    "preferred-equity-vs-mezzanine-where-each-sits-and-why": {
+      "category": "capital-stack",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-14T08:10:38Z",
+      "graded_at": "2026-07-14T08:10:38Z",
+      "id": "preferred-equity-vs-mezzanine-where-each-sits-and-why",
+      "key_numbers": [
+        "$2M capital gap",
+        "mezz coupon 11-13%",
+        "pref coupon 9-11%"
+      ],
+      "outline": "Contrasts pref equity and mezzanine debt on foreclosure-remedy speed, current-pay vs accrual structure, and typical coupon spread, using one deal with a $2M gap between senior debt and sponsor equity to show which gap-filler a sponsor would actually pick.",
+      "reasoning": "Prior capital-stack submissions (Construction Loan Fundamentals, Understanding Mezzanine Debt) were rejected for being too generic or duplicating draw-mechanics content. This one is scoped to the selection decision between two specific instruments, not an overview of either.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 15,
+      "scores": {
+        "foundational": 4,
+        "novelty": 4,
+        "reach": 3,
+        "walkthroughFit": 4
+      },
+      "status": "queued",
+      "title": "Preferred Equity vs Mezzanine: Where Each Sits and Why"
+    },
     "property-valuation-during-economic-downturns-99884": {
       "category": "macro-cycle",
       "draft_quiz_path": "docs/CURRICULUM_DRAFTS/quiz-property-valuation-during-economic-downturns-99884.md",
@@ -157,6 +381,34 @@
       },
       "status": "refined",
       "title": "Property Valuation During Economic Downturns"
+    },
+    "reading-an-argus-cash-flow-export-without-owning-argus": {
+      "category": "tools-workflow",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-14T08:10:38Z",
+      "graded_at": "2026-07-14T08:10:38Z",
+      "id": "reading-an-argus-cash-flow-export-without-owning-argus",
+      "key_numbers": [
+        "12-column export",
+        "Recovery Income line",
+        "Absorption & Turnover Vacancy line"
+      ],
+      "outline": "Teaches an analyst who has never opened Argus how to read the standard cash-flow export they'll be handed in diligence, mapping Argus terms (Recovery Income, Absorption & Turnover Vacancy) to mental-math concepts already learned in the app.",
+      "reasoning": "Prior tools-workflow submission (Building a CRE Investment Portfolio) was rejected as a vague strategy topic. This is concrete tool literacy tied directly to a document a new analyst is handed in week one.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 16,
+      "scores": {
+        "foundational": 4,
+        "novelty": 5,
+        "reach": 4,
+        "walkthroughFit": 3
+      },
+      "status": "queued",
+      "title": "Reading an Argus Cash Flow Export Without Owning Argus"
     },
     "retail-leasing-dynamics-99881": {
       "category": "asset-class-deepdive",
@@ -185,6 +437,34 @@
       },
       "status": "rejected",
       "title": "Retail Leasing Dynamics"
+    },
+    "self-storage-cap-rate-compression-and-unit-economics-migrati": {
+      "category": "asset-class-deepdive",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-14T08:10:38Z",
+      "graded_at": "2026-07-14T08:10:38Z",
+      "id": "self-storage-cap-rate-compression-and-unit-economics-migrati",
+      "key_numbers": [
+        "9-10% cap (legacy)",
+        "5-6% cap (institutional)",
+        "35% opex ratio"
+      ],
+      "outline": "Explains why self-storage re-rated from a niche 9-10% cap asset class to institutional 5-6% pricing over a decade, grounded in the unit-level math (revenue per square foot, ~35% opex ratio) that drove the compression.",
+      "reasoning": "Prior asset-class-deepdive submissions (Office Building Maintenance Reserves, Retail Leasing Dynamics) were rejected as too vague or niche. This is sharply scoped to one asset class's repricing story with concrete before/after numbers.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 15,
+      "scores": {
+        "foundational": 3,
+        "novelty": 5,
+        "reach": 3,
+        "walkthroughFit": 4
+      },
+      "status": "queued",
+      "title": "Self-Storage Cap Rate Compression and Unit-Economics Migration"
     },
     "the-role-of-a-cre-analyst-99883": {
       "category": "role-profile",
@@ -323,6 +603,10 @@
     {
       "at": "2026-06-05T23:08:29Z",
       "msg": "refine: understanding-reits-vs-direct-ownership-99889 -> refined"
+    },
+    {
+      "at": "2026-07-14T08:10:38Z",
+      "msg": "generate+grade (manual, no Ollama available): added 10 ideas targeting under-approved categories (development-lifecycle, capital-stack, asset-class-deepdive, tools-workflow, role-profile) \u2014 7 queued / 3 rejected"
     }
   ],
   "version": 1
