@@ -1,5 +1,56 @@
 {
   "ideas": {
+    "acquisitions-analyst-vs-asset-manager-same-deal-different-jo": {
+      "category": "role-profile",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-15T08:10:48Z",
+      "graded_at": "2026-07-15T08:10:48Z",
+      "id": "acquisitions-analyst-vs-asset-manager-same-deal-different-jo",
+      "key_numbers": [],
+      "outline": "Contrasts the acquisitions analyst's underwriting-to-close focus with the asset manager's hold-period execution focus on the same asset, showing where the handoff happens.",
+      "reasoning": "High reach and foundational value for career-switchers deciding a track, but almost no numeric content so walkthrough fit is weak. (Manually authored + self-graded by Claude; Ollama daemon unavailable in this environment.)",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 14,
+      "scores": {
+        "foundational": 4,
+        "novelty": 4,
+        "reach": 4,
+        "walkthroughFit": 2
+      },
+      "status": "rejected",
+      "title": "Acquisitions Analyst vs. Asset Manager: Same Deal, Different Job"
+    },
+    "agency-debt-vs-cmbs-picking-a-lender-type-for-a-multifamily-": {
+      "category": "capital-stack",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-15T08:10:48Z",
+      "graded_at": "2026-07-15T08:10:48Z",
+      "id": "agency-debt-vs-cmbs-picking-a-lender-type-for-a-multifamily-",
+      "key_numbers": [
+        "75% LTV",
+        "1.25x DSCR"
+      ],
+      "outline": "Walks through the tradeoffs between Fannie/Freddie agency execution and CMBS conduit debt for a stabilized multifamily refinance -- rate, leverage, prepayment, and reserves.",
+      "reasoning": "Some overlap with the existing DSCR loan-sizing walkthrough, but the lender-type decision framework itself is net-new and highly practical. (Manually authored + self-graded by Claude; Ollama daemon unavailable in this environment.)",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 16,
+      "scores": {
+        "foundational": 5,
+        "novelty": 3,
+        "reach": 4,
+        "walkthroughFit": 4
+      },
+      "status": "queued",
+      "title": "Agency Debt vs. CMBS: Picking a Lender Type for a Multifamily Refi"
+    },
     "building-a-cre-investment-portfolio-99887": {
       "category": "tools-workflow",
       "draft_quiz_path": null,
@@ -26,6 +77,33 @@
       },
       "status": "rejected",
       "title": "Building a CRE Investment Portfolio"
+    },
+    "construction-draw-schedules-how-lenders-release-money-as-you": {
+      "category": "development-lifecycle",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-15T08:10:48Z",
+      "graded_at": "2026-07-15T08:10:48Z",
+      "id": "construction-draw-schedules-how-lenders-release-money-as-you",
+      "key_numbers": [
+        "10% retainage",
+        "$2M draw"
+      ],
+      "outline": "Explains how a construction-loan draw schedule works: retainage, inspection-based releases, and how a GC's pay application ties to the draw request.",
+      "reasoning": "Directly fills the development-lifecycle gap with a concrete, numeric draw-math walkthrough that doesn't overlap existing content. (Manually authored + self-graded by Claude; Ollama daemon unavailable in this environment.)",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 15,
+      "scores": {
+        "foundational": 4,
+        "novelty": 4,
+        "reach": 3,
+        "walkthroughFit": 4
+      },
+      "status": "queued",
+      "title": "Construction Draw Schedules: How Lenders Release Money as You Build"
     },
     "construction-loan-fundamentals-99885": {
       "category": "capital-stack",
@@ -79,6 +157,61 @@
       "status": "refined",
       "title": "CRE Ethics & Professional Conduct"
     },
+    "data-center-underwriting-101-power-not-square-footage-30483": {
+      "category": "asset-class-deepdive",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-15T08:10:48Z",
+      "graded_at": "2026-07-15T08:10:48Z",
+      "id": "data-center-underwriting-101-power-not-square-footage-30483",
+      "key_numbers": [
+        "$12M/MW",
+        "1.4 PUE"
+      ],
+      "outline": "Introduces the mental-model shift in data-center underwriting -- pricing per critical MW instead of per SF, PUE, and why power availability drives value more than land.",
+      "reasoning": "High novelty (asset class not covered anywhere in the app) but narrow reach -- niche subsector most learners won't touch early in their career. (Manually authored + self-graded by Claude; Ollama daemon unavailable in this environment.)",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 14,
+      "scores": {
+        "foundational": 3,
+        "novelty": 5,
+        "reach": 2,
+        "walkthroughFit": 4
+      },
+      "status": "rejected",
+      "title": "Data Center Underwriting 101: Power, Not Square Footage"
+    },
+    "development-pro-forma-land-basis-to-stabilized-value-30480": {
+      "category": "development-lifecycle",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-15T08:10:48Z",
+      "graded_at": "2026-07-15T08:10:48Z",
+      "id": "development-pro-forma-land-basis-to-stabilized-value-30480",
+      "key_numbers": [
+        "$3.5M land",
+        "$18M total cost",
+        "6.5% yield-on-cost"
+      ],
+      "outline": "Walks a learner through building a development pro forma from raw land basis through hard/soft costs and construction-loan draws to stabilized value, showing how each line item compounds into total project cost and margin.",
+      "reasoning": "Development-lifecycle has zero existing walkthroughs or situational cases; this is the category's on-ramp concept and chains naturally into 5-8 numeric steps. (Manually authored + self-graded by Claude; Ollama daemon unavailable in this environment.)",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 17,
+      "scores": {
+        "foundational": 5,
+        "novelty": 4,
+        "reach": 3,
+        "walkthroughFit": 5
+      },
+      "status": "queued",
+      "title": "Development Pro Forma: Land Basis to Stabilized Value"
+    },
     "due-diligence-for-commercial-leases-99886": {
       "category": "legal-document",
       "draft_quiz_path": "docs/CURRICULUM_DRAFTS/quiz-due-diligence-for-commercial-leases-99886.md",
@@ -102,6 +235,60 @@
       },
       "status": "refined",
       "title": "Due Diligence for Commercial Leases"
+    },
+    "entitlement-risk-what-changes-between-raw-land-and-shovel-re": {
+      "category": "development-lifecycle",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-15T08:10:48Z",
+      "graded_at": "2026-07-15T08:10:48Z",
+      "id": "entitlement-risk-what-changes-between-raw-land-and-shovel-re",
+      "key_numbers": [
+        "18 months",
+        "40% discount"
+      ],
+      "outline": "Explains the entitlement process (zoning, variances, permits) and how entitlement risk gets priced into land value, comparing raw-land basis to shovel-ready basis.",
+      "reasoning": "Important context for development but more narrative than numeric; weaker walkthrough fit than a pure pro-forma build. (Manually authored + self-graded by Claude; Ollama daemon unavailable in this environment.)",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 13,
+      "scores": {
+        "foundational": 3,
+        "novelty": 4,
+        "reach": 3,
+        "walkthroughFit": 3
+      },
+      "status": "rejected",
+      "title": "Entitlement Risk: What Changes Between Raw Land and Shovel-Ready"
+    },
+    "mezzanine-vs-preferred-equity-where-each-sits-and-what-each-": {
+      "category": "capital-stack",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-15T08:10:48Z",
+      "graded_at": "2026-07-15T08:10:48Z",
+      "id": "mezzanine-vs-preferred-equity-where-each-sits-and-what-each-",
+      "key_numbers": [
+        "65-80% LTV mezz",
+        "12-16% pref"
+      ],
+      "outline": "Compares mezzanine debt and preferred equity positions in the capital stack -- priority, remedies on default, and typical pricing spread over senior debt.",
+      "reasoning": "Capital-stack category currently has zero approved ideas despite two rejected attempts; this is table-stakes vocabulary with a clean numeric spread comparison. (Manually authored + self-graded by Claude; Ollama daemon unavailable in this environment.)",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 17,
+      "scores": {
+        "foundational": 5,
+        "novelty": 4,
+        "reach": 4,
+        "walkthroughFit": 4
+      },
+      "status": "queued",
+      "title": "Mezzanine vs. Preferred Equity: Where Each Sits and What Each Costs"
     },
     "office-building-maintenance-reserves-99882": {
       "category": "asset-class-deepdive",
@@ -158,6 +345,33 @@
       "status": "refined",
       "title": "Property Valuation During Economic Downturns"
     },
+    "reading-a-costar-comp-set-without-getting-fooled-by-stale-li": {
+      "category": "tools-workflow",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-15T08:10:48Z",
+      "graded_at": "2026-07-15T08:10:48Z",
+      "id": "reading-a-costar-comp-set-without-getting-fooled-by-stale-li",
+      "key_numbers": [
+        "90 days",
+        "10% adjustment"
+      ],
+      "outline": "Teaches how to sanity-check a CoStar/CompStak comp set -- filtering true closed comps from asking-price listings, and adjusting for time and condition.",
+      "reasoning": "Tools-workflow has one rejected idea and nothing approved; this is a daily-use analyst skill with a concrete adjustment calculation. (Manually authored + self-graded by Claude; Ollama daemon unavailable in this environment.)",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 15,
+      "scores": {
+        "foundational": 4,
+        "novelty": 4,
+        "reach": 4,
+        "walkthroughFit": 3
+      },
+      "status": "queued",
+      "title": "Reading a CoStar Comp Set Without Getting Fooled by Stale Listings"
+    },
     "retail-leasing-dynamics-99881": {
       "category": "asset-class-deepdive",
       "draft_quiz_path": null,
@@ -185,6 +399,33 @@
       },
       "status": "rejected",
       "title": "Retail Leasing Dynamics"
+    },
+    "self-storage-cap-rate-compression-why-the-garage-business-go": {
+      "category": "asset-class-deepdive",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-15T08:10:48Z",
+      "graded_at": "2026-07-15T08:10:48Z",
+      "id": "self-storage-cap-rate-compression-why-the-garage-business-go",
+      "key_numbers": [
+        "80% NOI margin",
+        "150bps compression"
+      ],
+      "outline": "Explains why storage cap rates compressed over the last cycle (low capex, month-to-month leases, REIT consolidation) and how storage NOI margins compare to other asset classes.",
+      "reasoning": "Good novelty, but more of a market-history narrative than a step-chained calculation; reach is limited to acquisitions-facing roles. (Manually authored + self-graded by Claude; Ollama daemon unavailable in this environment.)",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 12,
+      "scores": {
+        "foundational": 3,
+        "novelty": 4,
+        "reach": 2,
+        "walkthroughFit": 3
+      },
+      "status": "rejected",
+      "title": "Self-Storage Cap Rate Compression: Why the 'Garage Business' Got Institutional"
     },
     "the-role-of-a-cre-analyst-99883": {
       "category": "role-profile",
@@ -265,6 +506,32 @@
       },
       "status": "refined",
       "title": "Understanding REITs vs. Direct Ownership"
+    },
+    "what-a-debt-broker-actually-does-and-how-they-get-paid-30487": {
+      "category": "role-profile",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-15T08:10:48Z",
+      "graded_at": "2026-07-15T08:10:48Z",
+      "id": "what-a-debt-broker-actually-does-and-how-they-get-paid-30487",
+      "key_numbers": [
+        "50-100bps fee"
+      ],
+      "outline": "Explains the debt broker's role sourcing and placing loans, the fee structure (bps on loan amount), and how their incentives differ from a direct lender's.",
+      "reasoning": "Role-profile category has one rejected idea and nothing approved; this fills the gap but is prose-heavy with a thin numeric core. (Manually authored + self-graded by Claude; Ollama daemon unavailable in this environment.)",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 12,
+      "scores": {
+        "foundational": 3,
+        "novelty": 4,
+        "reach": 3,
+        "walkthroughFit": 2
+      },
+      "status": "rejected",
+      "title": "What a Debt Broker Actually Does (and How They Get Paid)"
     }
   },
   "log": [
@@ -323,6 +590,10 @@
     {
       "at": "2026-06-05T23:08:29Z",
       "msg": "refine: understanding-reits-vs-direct-ownership-99889 -> refined"
+    },
+    {
+      "at": "2026-07-15T08:10:48Z",
+      "msg": "manual-generate: added 10 ideas targeting under-approved categories (development-lifecycle, asset-class-deepdive, capital-stack, role-profile, tools-workflow); 5 queued, 5 rejected"
     }
   ],
   "version": 1
