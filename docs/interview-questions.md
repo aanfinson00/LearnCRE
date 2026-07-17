@@ -331,3 +331,78 @@ Top GAPs to address (ranked by interview frequency):
 These five gaps would lift mapped-to-content coverage from 78% → ~93% with
 ~½ day of content work each, and they all surface from real interview-question
 patterns rather than top-down design guesses.
+
+---
+
+## Question-base depth pass — Phase 2 candidates (proposed)
+
+ROADMAP's "Question-base depth pass — Phase 1" audit found the live question
+bank (`feedback/questions.json`, 100 questions) skewed hard toward a few
+asset classes, roles, and difficulty levels, and queued Phases 2-4 to close
+the gap. Re-running that audit today (situational + longform + walkthrough
+entries, tagging by substring match on `meta`) shows the skew is still wide:
+
+| Asset class  | Count |     | Role            | Count |     | Difficulty   | Count |
+|--------------|------:|-----|------------------|------:|-----|--------------|------:|
+| multifamily  |    15 |     | acquisitions     |    50 |     | advanced     |    39 |
+| office       |    10 |     | assetManagement  |    36 |     | intermediate |    37 |
+| mixed        |     9 |     | portfolioMgmt    |    30 |     | beginner     |     4 |
+| industrial   |     4 |     | mortgageUw       |    21 |     |              |       |
+| retail       |     2 |     | development      |    11 |     |              |       |
+| **hotel**    | **1** |     |                  |       |     |              |       |
+
+The 10 phrasings below are new proposals (not yet mapped to shipped content)
+deliberately weighted toward the thinnest cells above — hotel, retail,
+industrial, development, mortgage UW, and beginner difficulty — to give a
+future content pass a running start. Same review flow as the rest of this
+doc: verify against a public source, then propose `Maps to:` content.
+
+### Q: You're underwriting a limited-service hotel at a 9% cap versus a 6% cap for stabilized multifamily in the same submarket — is that apples-to-apples? Why or why not?
+- **Role:** acquisitions · **Difficulty:** beginner
+- **Why:** hotel cap rates price operating risk (RevPAR volatility, no leases), not just real estate risk — a common first-round confusion for candidates coming from multifamily/office backgrounds.
+- **Maps to:** **GAP — propose `hotel-cap-rate-comparability` situational**.
+
+### Q: RevPAR is up 6% year-over-year but GOP margin compressed 300bps over the same period. What's your first diagnostic move?
+- **Role:** assetManagement · **Difficulty:** intermediate
+- **Why:** tests whether a candidate separates top-line (RevPAR) from operating efficiency (GOP margin) instead of treating hotel performance as one number.
+- **Maps to:** **GAP — propose `hotel-revpar-gop-divergence` situational** (extends existing `revparFromAdrOcc` / `gopMargin` quiz templates).
+
+### Q: A big-box anchor pays $8/SF in-place versus $14/SF market, on a lease expiring in 18 months, with a co-tenancy clause tied to overall center occupancy. How does that clause change your mark-to-market assumption?
+- **Role:** acquisitions · **Difficulty:** intermediate
+- **Why:** co-tenancy risk means the mark-to-market upside isn't "free" the way it would be without the clause — losing the anchor can trigger other tenants' rent relief or kick-out rights.
+- **Maps to:** **GAP — propose `retail-cotenancy-mark-to-market` situational** (extends `mark-to-market-upside`).
+
+### Q: Walk me through the difference between a percentage-rent breakpoint and a natural breakpoint — why would a landlord prefer one over the other?
+- **Role:** assetManagement · **Difficulty:** beginner
+- **Why:** foundational retail-lease vocabulary that beginner-level candidates are expected to know before the percentage-rent math questions.
+- **Maps to:** **GAP — propose short vocabulary situational**, pairs with existing `percentageRentBreakpoint` quiz template.
+
+### Q: You're comparing two industrial development sites — one with 32' clear height and a smaller footprint, one with 36' clear height and a larger footprint but a longer entitlement timeline. How do you frame that tradeoff for your investment committee?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** forces a candidate to weigh a physical-spec premium against time-value-of-money and entitlement risk, not just pick "bigger is better."
+- **Maps to:** **GAP — propose `industrial-clear-height-entitlement-tradeoff` situational** (extends `clearHeightPremium` quiz template).
+
+### Q: Why does a bigger truck court and more dock doors per square foot command a rent premium in industrial, even holding clear height constant?
+- **Role:** acquisitions · **Difficulty:** beginner
+- **Why:** entry-level physical-spec reasoning for logistics/industrial — a common opening filter question distinct from the clear-height question above.
+- **Maps to:** **GAP — propose short situational**, pairs with existing `truckCountPerSf` quiz template.
+
+### Q: Your construction lender sized the loan off 65% LTC, but your total project cost estimate has grown 8% since the appraisal was ordered. How does that shift the sponsor's required equity, and what do you flag to the lender?
+- **Role:** development / mortgageUw · **Difficulty:** intermediate
+- **Why:** tests the mechanical link between cost creep and equity sizing, plus the judgment call of when a lender needs to be looped back in.
+- **Maps to:** **GAP — propose `construction-ltc-cost-growth` situational** (extends `constructionLoanSizing` quiz template).
+
+### Q: What's the difference between a preliminary / rough-order-of-magnitude budget and a GMP (guaranteed maximum price) contract, and why does an underwriter care which one a deal is using?
+- **Role:** development · **Difficulty:** beginner
+- **Why:** foundational development vocabulary; a candidate who can't distinguish budget confidence levels will misjudge cost-overrun risk in every later question.
+- **Maps to:** **GAP — propose short vocabulary situational**.
+
+### Q: A borrower's DSCR comes in at 1.15x on your base case, but the lender's minimum is 1.25x. What are the most common levers to close that gap without walking away from the deal?
+- **Role:** mortgageUw · **Difficulty:** beginner
+- **Why:** entry-level mortgage-UW question — tests whether a candidate knows the standard toolkit (paydown, rate buydown, interest-only period, additional reserves) before the advanced stress-test questions.
+- **Maps to:** **GAP — propose `dscr-shortfall-levers` situational** (extends `dscrTestPasses` / `dscrSensitivityRate` quiz templates).
+
+### Q: You're stress-testing a portfolio of five loans maturing in the next 18 months against a 150bps higher refi-rate environment. Two loans fail a 1.20x DSCR test at the stressed rate. How do you prioritize which one to address first?
+- **Role:** mortgageUw / portfolioMgmt · **Difficulty:** advanced
+- **Why:** combines the existing single-loan refi-stress GAP with portfolio-level prioritization — a natural advanced follow-up once `refiStressTest` ships.
+- **Maps to:** **GAP — propose `portfolio-refi-stress-prioritization` situational** (extends `refiStressTest` quiz template).
