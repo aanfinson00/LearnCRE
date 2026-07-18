@@ -169,6 +169,59 @@ batch):
 
 ---
 
+## Question-bank category balance — gaps as of 2026-07-18
+
+Snapshot of `src/quiz/situational/*.ts` + `src/quiz/templates/*.ts` (139 files
+with a parseable `category`), counted by tag:
+
+- **By category:** valuation 41, returns 27, deal-process 21,
+  document-literacy 13, investment-thesis 9, diagnostic 7, pricing 7, risk 7,
+  **lease-econ 2, sensitivity 2, comp-selection 2, absorption 1**
+- **By asset class:** multifamily 11, office 9, mixed 8, industrial 3,
+  retail 2, **hotel 1**
+- **By role:** acquisitions 100, assetManagement 51, portfolioMgmt 41,
+  mortgageUw 35, **development 19**
+- **By difficulty:** advanced 34, intermediate 33, **beginner 4**
+
+`absorption`, `comp-selection`, `sensitivity`, and `lease-econ` are the
+thinnest categories by an order of magnitude versus `valuation`/`returns`;
+`hotel`/`retail`/`industrial` are underrepresented asset classes; `development`
+is the weakest role tag; `beginner` is the weakest difficulty tier. The 10
+phrasings below target those gaps — each aimed at 2+ of the underrepresented
+dimensions above. Not yet built; treat as backlog for the next situational-case
+batch (follow the `SituationalCase` shape and registration steps above).
+
+1. *(absorption · hotel · development)* "How many months to stabilize after a
+   flagged rebrand?" — post-PIP renovation ramp-up to stabilized RevPAR.
+2. *(absorption · industrial · development)* "Will pre-leasing hit 50% before
+   the shell delivers?" — spec industrial pre-leasing pace vs. construction
+   timeline.
+3. *(absorption · retail · development)* "Is the anchor's opening date driving
+   your inline lease-up?" — co-tenancy clauses pegging inline shop absorption
+   to the anchor's grand opening.
+4. *(comp-selection · retail · acquisitions)* "Does this power-center comp
+   actually belong in your set?" — anchored vs. unanchored retail comp
+   vetting.
+5. *(comp-selection · hotel · acquisitions)* "Should you throw out the resort
+   comp?" — leisure/resort comp vs. an urban select-service subject.
+6. *(comp-selection · beginner · acquisitions/assetManagement)* "Same
+   building, different year built — still a comp?" — foundational vintage/
+   condition adjustment case for the beginner tier.
+7. *(sensitivity · industrial · mortgageUw)* "How much rent growth is baked
+   into that debt yield?" — spec industrial loan sizing sensitivity to
+   assumed rent growth.
+8. *(sensitivity · retail · portfolioMgmt)* "What if the anchor doesn't
+   renew?" — portfolio-level NOI/value sensitivity to a single anchor's
+   renewal probability.
+9. *(lease-econ · industrial · assetManagement)* "Who pays for the dock
+   doors — you or the tenant?" — TI/capex responsibility split on
+   industrial-specific improvements (dock doors, clear height, trailer
+   court).
+10. *(lease-econ · hotel · development)* "Does the ground-lease escalator eat
+    your upside?" — hotel ground-lease rent escalation vs. RevPAR growth.
+
+---
+
 ## What to NOT do
 
 - **Don't invent new file structures.** If situational cases live in
