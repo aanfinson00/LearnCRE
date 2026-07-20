@@ -169,6 +169,66 @@ batch):
 
 ---
 
+## Coverage gap scan — 2026-07-20
+
+Counted `category` / `roles` / `assetClass` across all 71 shipped files in
+`src/quiz/situational/`. Skewed hard toward deal-process (21) and
+document-literacy (13); acquisitions (40 role-tags) and multifamily (11)
+dominate. Thinnest areas:
+
+- **Category:** absorption (1), comp-selection (2), lease-econ (2),
+  sensitivity (2) — vs. deal-process (21), document-literacy (13)
+- **Role:** development (9), mortgageUw (19) — vs. acquisitions (40)
+- **Asset class:** hotel (1), retail (2), industrial (3) — vs. multifamily
+  (11), office (9)
+
+10 candidate phrasings queued for the next content batch — pick the closest
+existing pattern in `src/quiz/situational/`, don't invent a new shape:
+
+1. **Absorption · development · industrial** — "Will the spec building lease
+   up before the loan matures?" Ask: given the trailing absorption pace and
+   the loan's maturity date, does the sponsor make the lease-up covenant, or
+   does this need a maturity extension?
+2. **Absorption · acquisitions · retail** — "Is this power center absorbing
+   the shadow-anchor space fast enough?" Ask: at the current leasing
+   velocity, how many quarters until the vacated anchor box backfills, and
+   does that change your going-in NOI assumption?
+3. **Comp-selection · acquisitions · office** — "Which comp set actually
+   applies here?" Ask: given the subject's vintage, class, and tenancy,
+   which of these four "comparable" trades should you throw out, and why?
+4. **Comp-selection · portfolioMgmt · multifamily** — "Are these
+   garden-style comps even comparable to a mid-rise?" Ask: the broker's comp
+   set mixes garden-style and mid-rise product — which comps distort the
+   cap-rate conclusion, and what's the right adjustment?
+5. **Lease-econ · assetManagement · retail** — "Does the percentage-rent
+   clause actually kick in?" Ask: given the tenant's reported sales and the
+   lease's breakpoint structure, is percentage rent triggered this year, and
+   how much?
+6. **Lease-econ · acquisitions · office** — "Free rent or a lower face
+   rate — which is the better deal for the landlord?" Ask: comparing net
+   effective rent across two competing lease proposals with different
+   free-rent and escalation structures, which actually nets the landlord
+   more over the term?
+7. **Sensitivity · mortgageUw · hotel** — "How much RevPAR softness can this
+   deal absorb before it trips the DSCR covenant?" Ask: holding the loan
+   constant, what's the maximum RevPAR decline before trailing-twelve DSCR
+   breaches the 1.20x covenant?
+8. **Sensitivity · development · mixed** — "What's the swing factor in this
+   pro forma — construction cost or exit cap?" Ask: running a two-way
+   sensitivity on hard-cost overruns vs. a 50bps exit-cap expansion, which
+   variable moves the development margin more?
+9. **Development · industrial** — "Is the spec-vs-build-to-suit call
+   actually about yield-on-cost?" Ask: given the land basis, shell cost, and
+   quoted market rent, does spec development clear your minimum
+   yield-on-cost hurdle, or do you need a pre-lease first?
+10. **Document-literacy · mortgageUw · hotel** — "What does the franchise
+    agreement's PIP clause actually obligate the borrower to spend?" Ask:
+    reading this franchise-agreement excerpt on the Property Improvement
+    Plan, how should the lender's underwriting treat the PIP obligation — a
+    closing reserve, a covenant, or neither?
+
+---
+
 ## What to NOT do
 
 - **Don't invent new file structures.** If situational cases live in
