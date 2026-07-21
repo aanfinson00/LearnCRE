@@ -169,6 +169,79 @@ batch):
 
 ---
 
+## Situational-case category gaps (added 2026-07-21)
+
+`src/quiz/situational/index.ts` skews heavily toward a handful of
+categories. Counted straight from `category: '...'` across
+`src/quiz/situational/*.ts`:
+
+| category | count |
+|---|---|
+| deal-process | 21 |
+| document-literacy | 13 |
+| investment-thesis | 9 |
+| risk | 7 |
+| pricing | 7 |
+| diagnostic | 7 |
+| **sensitivity** | **2** |
+| **lease-econ** | **2** |
+| **comp-selection** | **2** |
+| **absorption** | **1** |
+
+The four bolded categories are the thinnest by a wide margin — `absorption`
+in particular has exactly one case (`absorption-timing.ts`). Existing
+coverage in each, so new phrasings don't duplicate:
+- `absorption`: absorption-timing (lease-up pace vs. pro forma)
+- `comp-selection`: comp-set-vetting, comp-vintage-adjustment
+- `lease-econ`: lease-structure-nnn-vs-gross, ti-vs-rent-giveback
+- `sensitivity`: going-in-vs-exit-cap-spread, exit-cap-conservatism
+
+Ten candidate phrasings below to round these out — titles + one-line
+premise, matching the existing `SituationalCase.title`/`scenario` voice.
+These are **not yet built**; the next content batch should pick a subset,
+follow the `SituationalCase` shape (§ "What 'well-formed content' means in
+this repo" above), and register in `src/quiz/situational/index.ts`.
+
+**absorption**
+1. "Six months into a 24-month lease-up, pre-leasing is behind the pro
+   forma curve — do you push rent, add concessions, or hold and wait?"
+   *(ground-up multifamily · development / acquisitions)*
+2. "Two competing lease-ups opened in the same submarket the same
+   quarter — how do you read your absorption pace against a diluted
+   comp set?" *(spec industrial · development / assetManagement)*
+3. "Net effective rent is sliding two months into lease-up because
+   concessions keep creeping up — is that a pricing problem or a demand
+   problem?" *(multifamily · assetManagement / acquisitions)*
+
+**comp-selection**
+4. "One comp just traded 150 bps tighter than everything else in the
+   set and it's 15 years older than the subject — do you include it?"
+   *(office/industrial · acquisitions)*
+5. "Your closest geographic comp is a different asset class entirely —
+   how much weight, if any, does it get in the set?" *(retail vs.
+   mixed-use · acquisitions)*
+6. "The only recent trade in your submarket was part of a portfolio
+   deal — is it usable as a single-asset comp?" *(multifamily ·
+   acquisitions / mortgageUw)*
+
+**lease-econ**
+7. "A tenant wants a lower base rent in exchange for absorbing their
+   own CAM increases — how do you evaluate that trade?" *(office/retail
+   · acquisitions / assetManagement)*
+8. "Percentage rent kicks in at a breakpoint the tenant's sales already
+   clear on day one — did the landlord underprice the lease?" *(retail
+   · assetManagement / acquisitions)*
+
+**sensitivity**
+9. "Your model shows the deal is more sensitive to exit cap than to
+   rent growth — what does that tell you about how it should be
+   underwritten?" *(cross-asset-class · acquisitions / portfolioMgmt)*
+10. "A 50 bps move in exit cap wipes out your entire equity-multiple
+    cushion — is the deal too thin, or is the rest of the model too
+    conservative?" *(office · acquisitions / portfolioMgmt)*
+
+---
+
 ## What to NOT do
 
 - **Don't invent new file structures.** If situational cases live in
