@@ -1,5 +1,82 @@
 {
   "ideas": {
+    "argus-vs-a-back-of-envelope-model-when-each-is-the-right-too": {
+      "category": "tools-workflow",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-24T08:09:48Z",
+      "graded_at": "2026-07-24T08:09:48Z",
+      "id": "argus-vs-a-back-of-envelope-model-when-each-is-the-right-too",
+      "key_numbers": [],
+      "outline": "Compares Argus Enterprise's cash-flow-engine approach to a lightweight Excel back-of-envelope model, framing when the fidelity of Argus is worth the setup time versus when a quick model answers the question just as well.",
+      "reasoning": "Self-graded by Claude (Ollama unavailable) targeting a category with fewer approved ideas than the rest of the bank.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 15,
+      "scores": {
+        "foundational": 4,
+        "novelty": 4,
+        "reach": 4,
+        "walkthroughFit": 3
+      },
+      "status": "queued",
+      "title": "Argus vs. a Back-of-Envelope Model: When Each Is the Right Tool"
+    },
+    "asset-management-vs-portfolio-management-where-the-job-actua": {
+      "category": "role-profile",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-24T08:09:48Z",
+      "graded_at": "2026-07-24T08:09:48Z",
+      "id": "asset-management-vs-portfolio-management-where-the-job-actua",
+      "key_numbers": [],
+      "outline": "Distinguishes the asset manager's single-property, operations-and-value-creation mandate from the portfolio manager's cross-asset allocation and fund-level risk mandate, with a day-in-the-life contrast.",
+      "reasoning": "Self-graded by Claude (Ollama unavailable) targeting a category with fewer approved ideas than the rest of the bank.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 16,
+      "scores": {
+        "foundational": 4,
+        "novelty": 4,
+        "reach": 5,
+        "walkthroughFit": 3
+      },
+      "status": "queued",
+      "title": "Asset Management vs. Portfolio Management: Where the Job Actually Splits"
+    },
+    "blending-the-cost-of-capital-across-a-layered-stack-05884": {
+      "category": "capital-stack",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-24T08:09:48Z",
+      "graded_at": "2026-07-24T08:09:48Z",
+      "id": "blending-the-cost-of-capital-across-a-layered-stack-05884",
+      "key_numbers": [
+        "4.5%",
+        "9%",
+        "13%",
+        "18% target"
+      ],
+      "outline": "Builds a weighted-average cost of capital calculation across senior debt, mezz, preferred equity, and common equity, showing how leverage layering changes the blended hurdle a deal must clear.",
+      "reasoning": "Self-graded by Claude (Ollama unavailable) targeting a category with fewer approved ideas than the rest of the bank.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 18,
+      "scores": {
+        "foundational": 5,
+        "novelty": 4,
+        "reach": 4,
+        "walkthroughFit": 5
+      },
+      "status": "queued",
+      "title": "Blending the Cost of Capital Across a Layered Stack"
+    },
     "building-a-cre-investment-portfolio-99887": {
       "category": "tools-workflow",
       "draft_quiz_path": null,
@@ -79,6 +156,34 @@
       "status": "refined",
       "title": "CRE Ethics & Professional Conduct"
     },
+    "data-center-underwriting-what-s-different-from-a-warehouse-0": {
+      "category": "asset-class-deepdive",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-24T08:09:48Z",
+      "graded_at": "2026-07-24T08:09:48Z",
+      "id": "data-center-underwriting-what-s-different-from-a-warehouse-0",
+      "key_numbers": [
+        "150W/SF",
+        "N+1",
+        "$500/SF shell cost"
+      ],
+      "outline": "Explains the underwriting deltas specific to data centers versus standard industrial: power density and redundancy costs, hyperscale tenant credit, and how shell vs. powered-shell vs. turnkey leases change the rent-basis math.",
+      "reasoning": "Self-graded by Claude (Ollama unavailable) targeting a category with fewer approved ideas than the rest of the bank.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 15,
+      "scores": {
+        "foundational": 3,
+        "novelty": 5,
+        "reach": 3,
+        "walkthroughFit": 4
+      },
+      "status": "queued",
+      "title": "Data Center Underwriting: What's Different From a Warehouse"
+    },
     "due-diligence-for-commercial-leases-99886": {
       "category": "legal-document",
       "draft_quiz_path": "docs/CURRICULUM_DRAFTS/quiz-due-diligence-for-commercial-leases-99886.md",
@@ -102,6 +207,34 @@
       },
       "status": "refined",
       "title": "Due Diligence for Commercial Leases"
+    },
+    "from-land-basis-to-total-development-cost-05880": {
+      "category": "development-lifecycle",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-24T08:09:48Z",
+      "graded_at": "2026-07-24T08:09:48Z",
+      "id": "from-land-basis-to-total-development-cost-05880",
+      "key_numbers": [
+        "$2.5M land",
+        "18 mo entitlement",
+        "8% carry rate"
+      ],
+      "outline": "Walks through how raw land cost becomes land basis after entitlement carry (interest, taxes, legal, soft costs) is capitalized, then how land basis rolls into total development cost (TDC) alongside hard costs and fees.",
+      "reasoning": "Self-graded by Claude (Ollama unavailable) targeting a category with fewer approved ideas than the rest of the bank.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 19,
+      "scores": {
+        "foundational": 5,
+        "novelty": 5,
+        "reach": 4,
+        "walkthroughFit": 5
+      },
+      "status": "queued",
+      "title": "From Land Basis to Total Development Cost"
     },
     "office-building-maintenance-reserves-99882": {
       "category": "asset-class-deepdive",
@@ -130,6 +263,34 @@
       },
       "status": "rejected",
       "title": "Office Building Maintenance Reserves"
+    },
+    "preferred-equity-vs-mezzanine-debt-where-each-sits-in-the-st": {
+      "category": "capital-stack",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-24T08:09:48Z",
+      "graded_at": "2026-07-24T08:09:48Z",
+      "id": "preferred-equity-vs-mezzanine-debt-where-each-sits-in-the-st",
+      "key_numbers": [
+        "70% LTV",
+        "85% LTC",
+        "11% pref"
+      ],
+      "outline": "Contrasts pref equity and mezz debt on payment priority, foreclosure/UCC remedies, and pricing, using a shared capital stack example so a learner can see why a sponsor picks one over the other.",
+      "reasoning": "Self-graded by Claude (Ollama unavailable) targeting a category with fewer approved ideas than the rest of the bank.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 16,
+      "scores": {
+        "foundational": 5,
+        "novelty": 3,
+        "reach": 4,
+        "walkthroughFit": 4
+      },
+      "status": "queued",
+      "title": "Preferred Equity vs. Mezzanine Debt: Where Each Sits in the Stack"
     },
     "property-valuation-during-economic-downturns-99884": {
       "category": "macro-cycle",
@@ -186,6 +347,34 @@
       "status": "rejected",
       "title": "Retail Leasing Dynamics"
     },
+    "sizing-contingency-across-the-development-timeline-05881": {
+      "category": "development-lifecycle",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-24T08:09:48Z",
+      "graded_at": "2026-07-24T08:09:48Z",
+      "id": "sizing-contingency-across-the-development-timeline-05881",
+      "key_numbers": [
+        "10%",
+        "3%",
+        "$40M budget"
+      ],
+      "outline": "Covers why contingency reserves shrink as a % of remaining budget from pre-construction (10-15%) to substantial completion (2-3%), and how to size a draw-by-draw contingency schedule.",
+      "reasoning": "Self-graded by Claude (Ollama unavailable) targeting a category with fewer approved ideas than the rest of the bank.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 17,
+      "scores": {
+        "foundational": 4,
+        "novelty": 5,
+        "reach": 3,
+        "walkthroughFit": 5
+      },
+      "status": "queued",
+      "title": "Sizing Contingency Across the Development Timeline"
+    },
     "the-role-of-a-cre-analyst-99883": {
       "category": "role-profile",
       "draft_quiz_path": null,
@@ -209,6 +398,34 @@
       },
       "status": "rejected",
       "title": "The Role of a CRE Analyst"
+    },
+    "the-stabilization-to-recap-decision-refinance-sell-or-hold-0": {
+      "category": "development-lifecycle",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-24T08:09:48Z",
+      "graded_at": "2026-07-24T08:09:48Z",
+      "id": "the-stabilization-to-recap-decision-refinance-sell-or-hold-0",
+      "key_numbers": [
+        "1.25x DSCR",
+        "5.5% exit cap",
+        "65% LTV"
+      ],
+      "outline": "Frames the capital-event decision a developer faces at stabilization: cash-out refi at a permanent-loan DSCR, a sale at a market exit cap, or holding through a longer value-add runway, comparing levered IRR across paths.",
+      "reasoning": "Self-graded by Claude (Ollama unavailable) targeting a category with fewer approved ideas than the rest of the bank.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 17,
+      "scores": {
+        "foundational": 5,
+        "novelty": 4,
+        "reach": 4,
+        "walkthroughFit": 4
+      },
+      "status": "queued",
+      "title": "The Stabilization-to-Recap Decision: Refinance, Sell, or Hold"
     },
     "understanding-mezzanine-debt-99880": {
       "category": "capital-stack",
@@ -265,6 +482,62 @@
       },
       "status": "refined",
       "title": "Understanding REITs vs. Direct Ownership"
+    },
+    "what-a-debt-broker-gets-paid-and-when-05888": {
+      "category": "role-profile",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-24T08:09:48Z",
+      "graded_at": "2026-07-24T08:09:48Z",
+      "id": "what-a-debt-broker-gets-paid-and-when-05888",
+      "key_numbers": [
+        "1%",
+        "$25M loan",
+        "50 bps retainer"
+      ],
+      "outline": "Walks through mortgage/debt broker fee mechanics \u2014 points on loan proceeds, retainer vs. success-fee structures, and the typical fee compression from smaller balance loans to large institutional placements.",
+      "reasoning": "Self-graded by Claude (Ollama unavailable) targeting a category with fewer approved ideas than the rest of the bank.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 17,
+      "scores": {
+        "foundational": 4,
+        "novelty": 5,
+        "reach": 3,
+        "walkthroughFit": 5
+      },
+      "status": "queued",
+      "title": "What a Debt Broker Gets Paid, and When"
+    },
+    "why-industrial-cap-rates-compressed-faster-than-office-05885": {
+      "category": "asset-class-deepdive",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-24T08:09:48Z",
+      "graded_at": "2026-07-24T08:09:48Z",
+      "id": "why-industrial-cap-rates-compressed-faster-than-office-05885",
+      "key_numbers": [
+        "150 bps",
+        "2015-2021",
+        "6.5% to 4.0%"
+      ],
+      "outline": "Compares the post-2015 industrial cap-rate compression cycle against office, tying the divergence to e-commerce-driven demand, lease duration, and capex intensity differences between the two asset classes.",
+      "reasoning": "Self-graded by Claude (Ollama unavailable) targeting a category with fewer approved ideas than the rest of the bank.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 16,
+      "scores": {
+        "foundational": 4,
+        "novelty": 4,
+        "reach": 4,
+        "walkthroughFit": 4
+      },
+      "status": "queued",
+      "title": "Why Industrial Cap Rates Compressed Faster Than Office"
     }
   },
   "log": [
@@ -323,6 +596,14 @@
     {
       "at": "2026-06-05T23:08:29Z",
       "msg": "refine: understanding-reits-vs-direct-ownership-99889 -> refined"
+    },
+    {
+      "at": "2026-07-24T08:09:48Z",
+      "msg": "generate: added 10 new ideas (requested 10, manual \u2014 Ollama unavailable)"
+    },
+    {
+      "at": "2026-07-24T08:09:48Z",
+      "msg": "grade: processed 10 (self-graded by Claude, Ollama unavailable)"
     }
   ],
   "version": 1
