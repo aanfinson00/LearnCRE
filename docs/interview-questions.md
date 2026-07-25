@@ -198,7 +198,7 @@ in a future PR.
 
 ---
 
-## Portfolio Management (8)
+## Portfolio Management (12)
 
 ### Q: Your fund is 40% office vs 25% target. Which assets do you sell first to rebalance?
 - **Role:** portfolioMgmt · **Difficulty:** advanced
@@ -240,9 +240,29 @@ in a future PR.
 - **Why:** EM↔IRR translation; common filter.
 - **Maps to:** `equityMultiple` quiz template + `irrSimple` quiz template + `EquityMultipleViz`.
 
+### Q: Your fund benchmarks against NCREIF ODCE and you're underperforming by 150 bps net of fees over a trailing 3-year window. How do you diagnose whether that's a manager problem or a vintage-year/allocation problem?
+- **Role:** portfolioMgmt · **Difficulty:** advanced
+- **Why:** benchmark attribution — separating true manager skill from market/vintage effects; common at fund-of-funds and consultant interviews.
+- **Maps to:** **GAP — propose `benchmark-attribution-vintage-vs-manager` situational**.
+
+### Q: A fund is 3 years into a 5-year investment period and only 60% deployed. LPs are asking about the undeployed-capital drag on IRR. How do you explain it, and what are the fund's options?
+- **Role:** portfolioMgmt · **Difficulty:** intermediate
+- **Why:** deployment-pace / J-curve reasoning during an open investment period — distinct from the fee-drag case already shipped, which assumes a closed, fully-invested book.
+- **Maps to:** **GAP — propose `deployment-pace-lp-communication` situational**.
+
+### Q: A secondary buyer offers to acquire your LPs' stakes in a 7-year-old fund at a 15% discount to NAV via a GP-led continuation vehicle. Why would a GP propose this, and what should LPs evaluate before rolling versus cashing out?
+- **Role:** portfolioMgmt · **Difficulty:** advanced
+- **Why:** continuation-vehicle / secondaries literacy is increasingly asked as funds age past their original hold horizons.
+- **Maps to:** **GAP — propose `gp-led-continuation-vehicle` situational**.
+
+### Q: How would you set portfolio-level leverage limits (e.g., max blended LTV) differently for a core fund versus a value-add fund, and why?
+- **Role:** portfolioMgmt · **Difficulty:** intermediate
+- **Why:** strategy-appropriate leverage discipline; tests whether the candidate ties leverage to risk profile rather than reciting a single number.
+- **Maps to:** **GAP — propose `leverage-limits-by-strategy` situational**.
+
 ---
 
-## Development (7)
+## Development (12)
 
 ### Q: Land cost $8M, hard cost $38M, soft $7M, 5% contingency. What's TPC and what's the yield-on-cost on $4.5M stabilized NOI?
 - **Role:** development · **Difficulty:** intermediate
@@ -279,9 +299,34 @@ in a future PR.
 - **Why:** ground-lease economics; common at urban infill developers.
 - **Maps to:** **GAP — propose `groundLeaseVsFee` situational**.
 
+### Q: A ground-up multifamily deal needs 65% pre-leased before your construction lender will fund the perm takeout. You're at 40% pre-leased with 6 months left before your rate lock expires. What levers do you pull?
+- **Role:** development, mortgageUw · **Difficulty:** advanced
+- **Why:** pre-leasing covenant pressure at the construction-to-perm transition; a common late-cycle stress question.
+- **Maps to:** **GAP — propose `preleasing-covenant-crunch` situational**.
+
+### Q: Your entitlement process just added 8 months and a $1.2M impact-fee increase to a 300-unit deal. How do you re-underwrite, and at what point do you walk?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** entitlement risk is one of the most common development-specific probes and rarely gets modeled explicitly elsewhere in the app.
+- **Maps to:** **GAP — propose `entitlement-delay-repricing` situational**.
+
+### Q: How do you decide between a GMP (guaranteed maximum price) contract and a cost-plus contract with your GC on a ground-up deal?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** contract-structure tradeoff; tests understanding of who bears cost-overrun risk.
+- **Maps to:** **GAP — propose `gmp-vs-cost-plus` situational**.
+
+### Q: Your dev deal pencils to a 6.0% yield on cost against a 5.0% market cap — a 100 bps spread. Is that enough given where construction and permanent debt are priced today?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** goes beyond the raw devSpread calculation to test how much spread is "enough" once financing cost is in the picture.
+- **Maps to:** `devSpread` quiz template (spread math) + **GAP — propose `dev-spread-threshold-judgment` situational** (rate-environment framing).
+
+### Q: You're comparing build-to-core (hold post-stabilization) against build-to-sell (sell at stabilization). What changes in your underwriting between the two exit strategies?
+- **Role:** development, portfolioMgmt · **Difficulty:** advanced
+- **Why:** exit-strategy framing tests whether the candidate models the full lifecycle instead of stopping at stabilization.
+- **Maps to:** **GAP — propose `build-to-core-vs-sell` situational**.
+
 ---
 
-## Cross-cutting / market awareness (5)
+## Cross-cutting / market awareness (6)
 
 These appear across all roles — they're filters at first-round interviews
 regardless of position.
@@ -311,23 +356,47 @@ regardless of position.
 - **Why:** distressed underwriting; increasingly relevant 2024+.
 - **Maps to:** **GAP — propose `walk-distressed-1` walkthrough**.
 
+### Q: Rates rise 150 bps between your term sheet and closing. Walk me through every line of the deal that changes and how you'd re-trade or re-underwrite.
+- **Role:** all · **Difficulty:** intermediate
+- **Why:** durable, non-time-sensitive rate-shock reasoning that spans every role (acquisitions re-trades, mortgage UW re-sizes debt, portfolio mgmt re-checks fund-level leverage) — unlike the other cross-cutting items above, this doesn't age out with the news cycle.
+- **Maps to:** **GAP — propose `rate-shock-between-loi-and-close` situational**.
+
 ---
 
 ## Summary statistics
 
-- **Total questions in this doc:** 52
-- **Mapped to existing content:** 41 (78%)
-- **Flagged as GAPs:** 8 (15%)
-- **Out of scope (time-sensitive / behavioral):** 4 (8%)
+- **Total questions in this doc:** 62
+- **Mapped to existing content:** 41 (66%)
+- **Flagged as GAPs:** 18 (29%)
+- **Out of scope (time-sensitive / behavioral):** 4 (6%)
 
-Top GAPs to address (ranked by interview frequency):
+*(Note: the five GAPs previously listed here — `capexReserveSizing`,
+`refiStressTest`, `fund-vs-deal-irr-gap` + `feeDragOnIrr`,
+`constructionLoanSizing` + `dev-ltc-vs-ltv`, and `walk-distressed-1` — have
+since shipped and are now mapped above. Replacing with the current
+frontier.)*
 
-1. `capexReserveSizing` quiz + `capex-reserve-discipline` situational (asset mgmt)
-2. `refiStressTest` quiz + `refi-cap-stress` situational (mortgage UW)
-3. `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz (portfolio mgmt)
-4. `constructionLoanSizing` quiz + `dev-ltc-vs-ltv` situational (development)
-5. `walk-distressed-1` walkthrough (cross-cutting)
+**Coverage-gap audit (2026-07-25).** Counting entries per role, Development
+(7) and Portfolio Management (8) were the two thinnest categories relative to
+Acquisitions (12) / Asset Management (10) / Mortgage Underwriting (10). A
+code-level check of `src/quiz/situational/` and `src/quiz/templates/`
+role tags confirmed the same skew: Development situationals cluster almost
+entirely around construction-draw mechanics, and Portfolio Management
+situationals cluster around waterfall mechanics — both underrepresented on
+the strategic/judgment side (entitlement risk, exit-strategy choice, contract
+structure, benchmark attribution, deployment pacing, secondaries, leverage
+policy). This pass added 10 new candidate phrasings: 5 Development, 4
+Portfolio Management, 1 durable Cross-cutting item (rate-shock re-trade,
+added because the other 4 Cross-cutting entries are explicitly time-sensitive
+or behavioral and shouldn't be the template for future content there).
 
-These five gaps would lift mapped-to-content coverage from 78% → ~93% with
-~½ day of content work each, and they all surface from real interview-question
-patterns rather than top-down design guesses.
+Top GAPs to address next (ranked by interview frequency / build cost):
+
+1. `preleasing-covenant-crunch` situational (development / mortgage UW)
+2. `benchmark-attribution-vintage-vs-manager` situational (portfolio mgmt)
+3. `entitlement-delay-repricing` situational (development)
+4. `deployment-pace-lp-communication` situational (portfolio mgmt)
+5. `rate-shock-between-loi-and-close` situational (cross-cutting)
+
+These five would lift mapped-to-content coverage from 66% → ~74% with
+~½ day of content work each.
