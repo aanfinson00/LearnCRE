@@ -137,10 +137,10 @@ in a future PR.
 - **Why:** tax-deferral vs redeployment-opportunity tradeoff.
 - **Maps to:** `tax-vs-irr-tradeoff` situational + `refi-vs-sell` situational.
 
-### Q: GAP — How do you set a capex reserve on a stabilized asset, and what gets included vs excluded?
+### Q: How do you set a capex reserve on a stabilized asset, and what gets included vs excluded?
 - **Role:** assetManagement · **Difficulty:** intermediate
 - **Why:** capex discipline; common pitfall is using the OM number unchanged.
-- **Maps to:** **GAP — propose `capex-reserve-discipline` situational + `capexReserveSizing` quiz template**.
+- **Maps to:** `capex-reserve-discipline` situational + `capexReserveSizing` quiz template.
 
 ---
 
@@ -191,10 +191,10 @@ in a future PR.
 - **Why:** distinction-tested often as a filter for understanding leverage.
 - **Maps to:** `cashOnCash` quiz template + `CashOnCashViz`.
 
-### Q: GAP — How do you stress-test a permanent loan for refi at maturity? What's a reasonable stressed cap rate vs. today's?
+### Q: How do you stress-test a permanent loan for refi at maturity? What's a reasonable stressed cap rate vs. today's?
 - **Role:** mortgageUw · **Difficulty:** advanced
 - **Why:** refi-risk underwriting; common at life cos and debt funds.
-- **Maps to:** **GAP — propose `refiStressTest` quiz template + `refi-cap-stress` situational**.
+- **Maps to:** `refiStressTest` quiz template + `refi-cap-stress` situational.
 
 ---
 
@@ -213,7 +213,7 @@ in a future PR.
 ### Q: Fund-level IRR is 14%, deal-level is 16%. Why the gap?
 - **Role:** portfolioMgmt · **Difficulty:** intermediate
 - **Why:** fees, J-curve, undeployed capital — common gotcha.
-- **Maps to:** **GAP — propose `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz template**.
+- **Maps to:** `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz template.
 
 ### Q: Compute portfolio-weighted NOI per unit across 4 assets of different sizes.
 - **Role:** portfolioMgmt · **Difficulty:** beginner
@@ -223,17 +223,17 @@ in a future PR.
 ### Q: How do you allocate capital across 5 deals when only 3 will close? What weighting matters?
 - **Role:** portfolioMgmt · **Difficulty:** advanced
 - **Why:** capital-allocation reasoning; common at closed-end fund GPs.
-- **Maps to:** **GAP — propose `capital-allocation-priority` situational**.
+- **Maps to:** `capital-allocation-priority` situational.
 
-### Q: When does a sponsor pay carry, and what's a typical 2-tier waterfall?
+### Q: When does a sponsor pay carry, and what's a typical 3-tier American waterfall?
 - **Role:** portfolioMgmt · **Difficulty:** intermediate
-- **Why:** waterfall basics; explicitly out of scope per ROADMAP — flag for future.
-- **Maps to:** **GAP — propose `1-tier-promote-walk` walkthrough (deferred per ROADMAP)**.
+- **Why:** waterfall basics.
+- **Maps to:** `waterfallSimpleSplit` quiz template + `walk-waterfall-1` walkthrough (pref → ROC → catch-up → promote). Multi-tier variants beyond this stay out of pedagogical scope per ROADMAP.
 
-### Q: GAP — How do you measure risk-adjusted returns across a fund's holdings? What's a defensible Sharpe-equivalent for CRE?
+### Q: How do you measure risk-adjusted returns across a fund's holdings? What's a defensible Sharpe-equivalent for CRE?
 - **Role:** portfolioMgmt · **Difficulty:** advanced
 - **Why:** risk-quantification; underbuilt in our content.
-- **Maps to:** **GAP — propose `risk-adjusted-return-framework` situational**.
+- **Maps to:** `risk-adjusted-return-framework` situational.
 
 ### Q: Deal returned 1.4x EM in 5 years. Translate to IRR — and explain why EM and IRR can diverge.
 - **Role:** portfolioMgmt · **Difficulty:** beginner
@@ -267,19 +267,78 @@ in a future PR.
 ### Q: Construction loan sizing on a $50M TPC dev with 65% LTC. What's the equity check?
 - **Role:** development · **Difficulty:** intermediate
 - **Why:** LTC-vs-LTV distinction; common at debt funds + GC-side.
-- **Maps to:** **GAP — propose `constructionLoanSizing` quiz template + `dev-ltc-vs-ltv` situational**.
+- **Maps to:** `constructionLoanSizing` quiz template + `dev-ltc-vs-ltv` situational.
 
-### Q: GAP — How do you size a lease-up reserve on a development that stabilizes year 2-3?
+### Q: How do you size a lease-up reserve on a development that stabilizes year 2-3?
 - **Role:** development · **Difficulty:** intermediate
 - **Why:** lease-up risk pricing; common in development-side underwriting.
-- **Maps to:** **GAP — propose `leaseUpReserve` quiz template**.
+- **Maps to:** `leaseUpReserve` quiz template.
 
 ### Q: Ground lease vs fee-simple on a development site — what changes in your underwriting?
 - **Role:** development · **Difficulty:** advanced
 - **Why:** ground-lease economics; common at urban infill developers.
-- **Maps to:** **GAP — propose `groundLeaseVsFee` situational**.
+- **Maps to:** `groundLeaseVsFee` situational.
 
 ---
+
+## Proposed additions — 2026-07-26 vet pass
+
+Development remains the smallest content area by volume (22 role-tagged
+situational/quiz items vs. 41-118 for the other four roles), even after the
+prior round of GAPs above closed out. These 10 are new candidate phrasings —
+not yet built — proposed to keep narrowing that gap. Each needs a full
+situational/quiz-template build (math, choices, explanations) before it ships;
+treat these as the framing pass, not final content.
+
+### Q: GAP — Entitlement isn't final yet, but your investment committee wants a bid in 2 weeks. How do you price the rezoning risk into your offer?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** entitlement timeline risk is one of the most common development-underwriting blind spots; candidates often ignore carrying-cost and hard-cost-escalation exposure while waiting on approvals.
+- **Maps to:** **GAP — propose `entitlement-timeline-risk` situational**.
+
+### Q: GAP — Your GC wants a GMP contract with a 10% contingency; a competing bid is cost-plus with no cap. Which do you take, and why?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** GMP vs cost-plus is a standard construction-contracting question — tests whether the candidate understands who bears cost-overrun risk under each structure.
+- **Maps to:** **GAP — propose `gmp-vs-cost-plus` situational**.
+
+### Q: GAP — How large an interest reserve do you carry on an 18-month construction loan, and what happens if the project runs long and it's exhausted?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** interest-reserve sizing is a frequent construction-loan-sizing follow-up; the "what if it runs out" half tests whether the candidate knows the sponsor has to fund debt service out of pocket.
+- **Maps to:** **GAP — propose `interestReserveSizing` quiz template**.
+
+### Q: GAP — The city will grant you an extra 2 stories if 20% of units are income-restricted. Walk me through how you'd decide whether to take the density bonus.
+- **Role:** development · **Difficulty:** advanced
+- **Why:** density-bonus / affordable set-aside tradeoffs are increasingly common in gateway markets; tests whether a candidate can net incremental yield against restricted-unit rent loss.
+- **Maps to:** **GAP — propose `density-bonus-tradeoff` situational**.
+
+### Q: GAP — Impact fees just came in $1.2M higher than your pro forma assumed. Where does that land in your cost stack, and does it change your go/no-go?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** impact fees / exactions are an easy-to-underestimate TPC line item; tests whether the candidate re-runs yield-on-cost off the revised basis rather than treating it as a rounding error.
+- **Maps to:** **GAP — propose `impact-fee-cost-shock` situational**.
+
+### Q: GAP — Your construction lender requires 50% pre-leasing to fund. You're at 35% with 4 months to your outside closing date. What are your options?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** pre-leasing (or pre-sale) thresholds are a standard construction-loan condition; tests whether the candidate can name real levers (rent concessions, recourse guaranty, mezz bridge, timeline extension) instead of just restating the problem.
+- **Maps to:** **GAP — propose `pre-leasing-threshold-shortfall` situational**.
+
+### Q: GAP — Phase I comes back clean but Phase II finds contaminated soil with a $600k remediation estimate. Does the deal still pencil?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** environmental remediation cost shocks are a common late-diligence surprise; tests whether the candidate treats it as a basis adjustment (re-run yield on cost) rather than a binary kill switch.
+- **Maps to:** **GAP — propose `environmental-remediation-cost` situational**.
+
+### Q: GAP — Your GC just defaulted mid-construction at 60% complete. What does the payment and performance bond actually get you, and what happens to the project timeline?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** GC default is a rare-but-high-stakes scenario that tests whether a candidate understands what a P&P bond does and doesn't cover (cost to complete vs. delay damages).
+- **Maps to:** **GAP — propose `gc-default-bond-claim` situational**.
+
+### Q: GAP — You want to control a parcel through a 2-year entitlement process without buying it outright. What structure do you use, and what does the seller want in return?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** land options / control-without-owning structures are a core land-banking concept; tests whether the candidate can explain option fees, extension payments, and why sellers accept them.
+- **Maps to:** **GAP — propose `land-option-control` situational**.
+
+### Q: GAP — Modular construction quotes 4 months faster than stick-built but at an 8% hard-cost premium. How do you decide which one wins on yield-on-cost?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** modular/prefab tradeoffs are an increasingly common development question; tests whether the candidate can trade schedule (carry cost, earlier stabilization, faster exit) against a hard-cost premium quantitatively rather than qualitatively.
+- **Maps to:** **GAP — propose `modular-vs-stickbuilt-tradeoff` situational**.
 
 ## Cross-cutting / market awareness (5)
 
@@ -306,28 +365,47 @@ regardless of position.
 - **Why:** sector-thesis prompt.
 - **Maps to:** **OUT OF SCOPE — explicitly time-sensitive**.
 
-### Q: GAP — Walk me through a distressed deal: half-vacant, basis below replacement, equity wiped — does it pencil?
+### Q: Walk me through a distressed deal: half-vacant, basis below replacement, equity wiped — does it pencil?
 - **Role:** all · **Difficulty:** advanced
 - **Why:** distressed underwriting; increasingly relevant 2024+.
-- **Maps to:** **GAP — propose `walk-distressed-1` walkthrough**.
+- **Maps to:** `walk-distressed-1` walkthrough.
 
 ---
 
 ## Summary statistics
 
-- **Total questions in this doc:** 52
-- **Mapped to existing content:** 41 (78%)
-- **Flagged as GAPs:** 8 (15%)
-- **Out of scope (time-sensitive / behavioral):** 4 (8%)
+_Updated 2026-07-26 — the 8 GAPs originally flagged below have all since
+shipped; this doc had drifted stale relative to the codebase. Corrected here._
 
-Top GAPs to address (ranked by interview frequency):
+- **Total questions in this doc:** 52 original + 10 newly proposed (development) = 62
+- **Mapped to existing content:** 48 of 52 original (92%)
+- **Out of scope (time-sensitive / behavioral):** 4 of 52 original (8%)
+- **Newly flagged GAPs (2026-07-26 pass):** 10, all `development` — see
+  "Proposed additions" above
 
-1. `capexReserveSizing` quiz + `capex-reserve-discipline` situational (asset mgmt)
-2. `refiStressTest` quiz + `refi-cap-stress` situational (mortgage UW)
-3. `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz (portfolio mgmt)
-4. `constructionLoanSizing` quiz + `dev-ltc-vs-ltv` situational (development)
-5. `walk-distressed-1` walkthrough (cross-cutting)
+All 8 GAPs from the prior pass are now built:
+`capex-reserve-discipline` + `capexReserveSizing` (asset mgmt);
+`refi-cap-stress` + `refiStressTest` (mortgage UW);
+`fund-vs-deal-irr-gap` + `feeDragOnIrr`, `capital-allocation-priority`,
+`risk-adjusted-return-framework` (portfolio mgmt);
+`dev-ltc-vs-ltv` + `constructionLoanSizing`, `leaseUpReserve`,
+`groundLeaseVsFee` (development); `walk-distressed-1` (cross-cutting).
 
-These five gaps would lift mapped-to-content coverage from 78% → ~93% with
-~½ day of content work each, and they all surface from real interview-question
-patterns rather than top-down design guesses.
+**Why the new pass targets development only.** Cross-checking actual
+role-tagged content in `src/quiz/situational/*.ts` + `src/quiz/templates/*.ts`
+(counting each file's `roles` array) gives:
+
+| Role | Situational | Quiz templates | Total |
+|---|---|---|---|
+| acquisitions | 40 | 78 | 118 |
+| assetManagement | 31 | 30 | 61 |
+| portfolioMgmt | 25 | 25 | 50 |
+| mortgageUw | 19 | 22 | 41 |
+| development | 9 | 13 | **22** |
+
+Development is the thinnest area by a wide margin — roughly a fifth of
+acquisitions' volume — even after its prior-round GAPs closed. The 10 new
+candidate phrasings above target that gap specifically (entitlement risk,
+GMP vs cost-plus, interest reserve sizing, density bonus, impact fees,
+pre-leasing thresholds, environmental remediation, GC default/bonding, land
+options, modular vs stick-built).
