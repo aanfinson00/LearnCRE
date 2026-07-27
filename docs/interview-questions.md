@@ -198,7 +198,7 @@ in a future PR.
 
 ---
 
-## Portfolio Management (8)
+## Portfolio Management (11)
 
 ### Q: Your fund is 40% office vs 25% target. Which assets do you sell first to rebalance?
 - **Role:** portfolioMgmt · **Difficulty:** advanced
@@ -240,9 +240,24 @@ in a future PR.
 - **Why:** EM↔IRR translation; common filter.
 - **Maps to:** `equityMultiple` quiz template + `irrSimple` quiz template + `EquityMultipleViz`.
 
+### Q: Deal pays a 9% pref, compounding annually, on $10M of LP capital held 3 years. What's the pref actually owed at exit?
+- **Role:** portfolioMgmt · **Difficulty:** intermediate
+- **Why:** compounding vs. simple pref is a frequent trap — candidates often apply the rate linearly instead of compounding it year over year.
+- **Maps to:** `prefAccrual` quiz template.
+
+### Q: Above an 8% pref, the waterfall splits residual cash 75/25 LP/GP. There's $1.2M of residual cash available this year — what's the GP's take?
+- **Role:** portfolioMgmt · **Difficulty:** beginner
+- **Why:** basic above-the-pref split math; the building block before catch-up tiers and multi-tier waterfalls.
+- **Maps to:** `waterfallSimpleSplit` quiz template.
+
+### Q: The waterfall gives the GP a 100% catch-up until they've received 20% of total profit above pref. If $400k of pref has been paid to the LP so far, how big is the GP's catch-up?
+- **Role:** portfolioMgmt · **Difficulty:** advanced
+- **Why:** catch-up-multiplier math is the part of waterfall modeling most candidates can describe conceptually but can't compute on the spot.
+- **Maps to:** `gpCatchUp` quiz template.
+
 ---
 
-## Development (7)
+## Development (11)
 
 ### Q: Land cost $8M, hard cost $38M, soft $7M, 5% contingency. What's TPC and what's the yield-on-cost on $4.5M stabilized NOI?
 - **Role:** development · **Difficulty:** intermediate
@@ -279,9 +294,29 @@ in a future PR.
 - **Why:** ground-lease economics; common at urban infill developers.
 - **Maps to:** **GAP — propose `groundLeaseVsFee` situational**.
 
+### Q: You're 60% through a $40M construction budget with $24M incurred. Is the project on track, and what else would you check beyond the dollar percentage?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** "percent complete by dollars" vs. "percent physically complete" is a common lender/GC-side gotcha — the two can diverge a lot.
+- **Maps to:** `costToComplete` quiz template.
+
+### Q: GC requests an $850k draw. You have $200k of committed equity left uncalled. How much of this draw comes from the lender vs. the remaining equity?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** equity-first draw sequencing; tests whether candidates default to a flat lender/equity split instead of drawing remaining equity first.
+- **Maps to:** `drawAllocation` quiz template.
+
+### Q: Lender holds 10% retainage on every draw. After $6.2M of cumulative draws, how much has been held back — and when does it get released?
+- **Role:** development · **Difficulty:** beginner
+- **Why:** retainage is held against EACH draw, not just netted off the final one — a common miscalculation.
+- **Maps to:** `retainageRunning` quiz template.
+
+### Q: You've got a $2M contingency line and $650k of approved change orders so far. How much cushion is left, and at what burn rate would you flag it to the lender?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** contingency burn-rate discipline; tests whether candidates track remaining % as well as remaining $.
+- **Maps to:** `contingencyDrawDown` quiz template.
+
 ---
 
-## Cross-cutting / market awareness (5)
+## Cross-cutting / market awareness (8)
 
 These appear across all roles — they're filters at first-round interviews
 regardless of position.
@@ -311,14 +346,29 @@ regardless of position.
 - **Why:** distressed underwriting; increasingly relevant 2024+.
 - **Maps to:** **GAP — propose `walk-distressed-1` walkthrough**.
 
+### Q: A multifamily asset is priced at $18M with $2.1M of gross potential rent. Is an 8.6x GRM cheap or expensive — and what does it not tell you?
+- **Role:** all · **Difficulty:** beginner
+- **Why:** GRM shows up as a quick screening question across roles precisely because it ignores expenses — tests whether candidates flag that blind spot.
+- **Maps to:** `grossRentMultiplier` quiz template.
+
+### Q: An asset was worth $8M five years ago and is worth $13M today. What's the CAGR, and how would you sanity-check it against market rent growth?
+- **Role:** all · **Difficulty:** beginner
+- **Why:** CAGR is the most common "back of the envelope" growth-rate ask across every seat, from acquisitions to portfolio management.
+- **Maps to:** `cagr` quiz template.
+
+### Q: You're underwriting a 5-year hold. Year-5 NOI is projected at $3.4M and you're using a 5.5% exit cap. Walk me through your exit value — and why the exit cap usually isn't the same as your going-in cap.
+- **Role:** all · **Difficulty:** intermediate
+- **Why:** reversion-value mechanics plus cap-rate-spread reasoning shows up as the back half of nearly every IRR walkthrough, regardless of seat.
+- **Maps to:** `reversionValue` quiz template.
+
 ---
 
 ## Summary statistics
 
-- **Total questions in this doc:** 52
-- **Mapped to existing content:** 41 (78%)
-- **Flagged as GAPs:** 8 (15%)
-- **Out of scope (time-sensitive / behavioral):** 4 (8%)
+- **Total questions in this doc:** 62
+- **Mapped to existing content:** 48 (77%)
+- **Flagged as GAPs:** 10 (16%)
+- **Out of scope (time-sensitive / behavioral):** 4 (6%)
 
 Top GAPs to address (ranked by interview frequency):
 
