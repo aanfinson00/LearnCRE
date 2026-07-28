@@ -1,5 +1,61 @@
 {
   "ideas": {
+    "appraiser-s-toolkit-the-three-approaches-to-value-reconciled-20260": {
+      "category": "role-profile",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-28T08:12:26Z",
+      "graded_at": "2026-07-28T08:12:26Z",
+      "id": "appraiser-s-toolkit-the-three-approaches-to-value-reconciled-20260",
+      "key_numbers": [
+        "$10.2M",
+        "$9.8M",
+        "$11.5M"
+      ],
+      "outline": "Walks through how an MAI appraiser reconciles the income, sales-comparison, and cost approaches into a single opinion of value, and why the income approach usually gets the most weight for stabilized income property. Learners perform a simple weighted reconciliation across the three approaches.",
+      "reasoning": "Second role-profile entry; the appraisal career path and reconciliation method is untouched by existing content.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 16,
+      "scores": {
+        "foundational": 4,
+        "novelty": 4,
+        "reach": 4,
+        "walkthroughFit": 4
+      },
+      "status": "queued",
+      "title": "Appraiser's Toolkit: The Three Approaches to Value, Reconciled"
+    },
+    "argus-enterprise-mental-model-rent-roll-to-cash-flow-in-five-steps": {
+      "category": "tools-workflow",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-28T08:12:26Z",
+      "graded_at": "2026-07-28T08:12:26Z",
+      "id": "argus-enterprise-mental-model-rent-roll-to-cash-flow-in-five-steps",
+      "key_numbers": [
+        "$500k",
+        "3%",
+        "10 years"
+      ],
+      "outline": "Demystifies what Argus Enterprise is actually doing under the hood \u2014 turning a rent roll and lease assumptions into a discounted cash flow \u2014 so learners can sanity-check software output by hand. Learners rebuild a simplified single-tenant cash flow that mirrors what Argus would produce.",
+      "reasoning": "tools-workflow's one existing idea (portfolio building) was rejected as too vague; Argus is the single most-requested 'what does the software actually do' gap.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 17,
+      "scores": {
+        "foundational": 4,
+        "novelty": 4,
+        "reach": 4,
+        "walkthroughFit": 5
+      },
+      "status": "queued",
+      "title": "Argus Enterprise Mental Model: Rent Roll to Cash Flow in Five Steps"
+    },
     "building-a-cre-investment-portfolio-99887": {
       "category": "tools-workflow",
       "draft_quiz_path": null,
@@ -26,6 +82,34 @@
       },
       "status": "rejected",
       "title": "Building a CRE Investment Portfolio"
+    },
+    "construction-draw-schedule-reading-an-aia-g702-g703-pay-applicatio": {
+      "category": "development-lifecycle",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-28T08:12:26Z",
+      "graded_at": "2026-07-28T08:12:26Z",
+      "id": "construction-draw-schedule-reading-an-aia-g702-g703-pay-applicatio",
+      "key_numbers": [
+        "10%",
+        "$1.2M",
+        "92%"
+      ],
+      "outline": "Teaches how a GC's monthly draw request ties to percent-complete, retainage held back, and the lender's inspecting architect sign-off before funds release. Learners compute the net draw amount after retainage and see why draws lag actual progress.",
+      "reasoning": "Second entry for the empty development-lifecycle category; draw mechanics are a concrete, self-contained mental-math lesson every development/AM role touches.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 17,
+      "scores": {
+        "foundational": 4,
+        "novelty": 5,
+        "reach": 3,
+        "walkthroughFit": 5
+      },
+      "status": "queued",
+      "title": "Construction Draw Schedule: Reading an AIA G702/G703 Pay Application"
     },
     "construction-loan-fundamentals-99885": {
       "category": "capital-stack",
@@ -55,6 +139,30 @@
       "status": "rejected",
       "title": "Construction Loan Fundamentals"
     },
+    "costar-vs-rca-which-comp-source-answers-which-question-2026072810": {
+      "category": "tools-workflow",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-28T08:12:26Z",
+      "graded_at": "2026-07-28T08:12:26Z",
+      "id": "costar-vs-rca-which-comp-source-answers-which-question-2026072810",
+      "key_numbers": [],
+      "outline": "Explains the practical difference between CoStar (leasing/vacancy/asking-rent data) and RCA (closed sales/pricing data) so analysts know which platform to pull from for a given underwriting question. Learners work through a scenario choosing the right data source for a rent comp versus a cap-rate comp.",
+      "reasoning": "Second tools-workflow entry; a very common first-90-days confusion (which data source for which question) with no existing coverage.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 15,
+      "scores": {
+        "foundational": 3,
+        "novelty": 5,
+        "reach": 4,
+        "walkthroughFit": 3
+      },
+      "status": "queued",
+      "title": "CoStar vs. RCA: Which Comp Source Answers Which Question"
+    },
     "cre-ethics-professional-conduct-99888": {
       "category": "trust-relationships",
       "draft_quiz_path": "docs/CURRICULUM_DRAFTS/quiz-cre-ethics-professional-conduct-99888.md",
@@ -79,6 +187,34 @@
       "status": "refined",
       "title": "CRE Ethics & Professional Conduct"
     },
+    "debt-broker-compensation-points-spread-and-placement-fees-20260728": {
+      "category": "role-profile",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-28T08:12:26Z",
+      "graded_at": "2026-07-28T08:12:26Z",
+      "id": "debt-broker-compensation-points-spread-and-placement-fees-20260728",
+      "key_numbers": [
+        "1%",
+        "$20M",
+        "50 bps"
+      ],
+      "outline": "Breaks down how a mortgage/debt broker gets paid on a placed loan \u2014 origination points versus a yield-spread markup versus a flat placement fee \u2014 and how loan size changes which model the broker prefers. Learners compute a broker's fee on a sample loan under two different fee structures.",
+      "reasoning": "role-profile's one existing idea (CRE analyst role) was rejected as a near-duplicate of shipped content; debt-broker comp is a distinct, unshipped role.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 15,
+      "scores": {
+        "foundational": 3,
+        "novelty": 5,
+        "reach": 3,
+        "walkthroughFit": 4
+      },
+      "status": "queued",
+      "title": "Debt Broker Compensation: Points, Spread, and Placement Fees"
+    },
     "due-diligence-for-commercial-leases-99886": {
       "category": "legal-document",
       "draft_quiz_path": "docs/CURRICULUM_DRAFTS/quiz-due-diligence-for-commercial-leases-99886.md",
@@ -102,6 +238,90 @@
       },
       "status": "refined",
       "title": "Due Diligence for Commercial Leases"
+    },
+    "entitlement-path-zoning-variance-vs-by-right-development-timeline-": {
+      "category": "development-lifecycle",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-28T08:12:26Z",
+      "graded_at": "2026-07-28T08:12:26Z",
+      "id": "entitlement-path-zoning-variance-vs-by-right-development-timeline-",
+      "key_numbers": [
+        "18 months",
+        "6 months",
+        "$250k"
+      ],
+      "outline": "Walks through how a parcel moves from raw land to shovel-ready, contrasting a rezoning/variance path against an as-of-right path, and how each adds months and risk to the schedule. Learners see why sponsors pay a premium for by-right sites and discount raw land that still needs entitlement.",
+      "reasoning": "Zero ideas exist in development-lifecycle; entitlement risk is a universal gate every deal passes through, and it maps cleanly to a step-by-step timeline lesson.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 18,
+      "scores": {
+        "foundational": 4,
+        "novelty": 5,
+        "reach": 4,
+        "walkthroughFit": 5
+      },
+      "status": "queued",
+      "title": "Entitlement Path: Zoning Variance vs. By-Right Development Timeline"
+    },
+    "european-vs-american-waterfall-when-the-gp-actually-gets-promoted-": {
+      "category": "capital-stack",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-28T08:12:26Z",
+      "graded_at": "2026-07-28T08:12:26Z",
+      "id": "european-vs-american-waterfall-when-the-gp-actually-gets-promoted-",
+      "key_numbers": [
+        "8%",
+        "20%",
+        "2 deals"
+      ],
+      "outline": "Compares deal-by-deal (American) promote calculation to whole-fund (European) with a clawback, using a simple two-property fund example. Learners see how identical underlying returns can pay the GP at very different times depending on waterfall type.",
+      "reasoning": "Second capital-stack entry; waterfall timing is a frequent point of confusion not covered by the two prior rejected ideas (mezz basics, construction loans).",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 16,
+      "scores": {
+        "foundational": 4,
+        "novelty": 5,
+        "reach": 3,
+        "walkthroughFit": 4
+      },
+      "status": "queued",
+      "title": "European vs. American Waterfall: When the GP Actually Gets Promoted"
+    },
+    "life-sciences-lab-space-why-cap-rates-diverge-from-office-20260728": {
+      "category": "asset-class-deepdive",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-28T08:12:26Z",
+      "graded_at": "2026-07-28T08:12:26Z",
+      "id": "life-sciences-lab-space-why-cap-rates-diverge-from-office-20260728",
+      "key_numbers": [
+        "$150/sf",
+        "$45/sf",
+        "5.25%"
+      ],
+      "outline": "Explains the underwriting differences between lab/life-science space and traditional office \u2014 tenant improvement costs, mechanical infrastructure, lease duration \u2014 and why investors have priced lab space at tighter cap rates. Learners see how TI allowance per square foot changes the effective yield.",
+      "reasoning": "Second asset-class-deepdive entry; lab/life-science is a growing niche with no existing coverage in this category.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 15,
+      "scores": {
+        "foundational": 3,
+        "novelty": 5,
+        "reach": 3,
+        "walkthroughFit": 4
+      },
+      "status": "queued",
+      "title": "Life Sciences Lab Space: Why Cap Rates Diverge From Office"
     },
     "office-building-maintenance-reserves-99882": {
       "category": "asset-class-deepdive",
@@ -130,6 +350,34 @@
       },
       "status": "rejected",
       "title": "Office Building Maintenance Reserves"
+    },
+    "preferred-equity-vs-mezzanine-debt-where-each-sits-in-the-stack-20": {
+      "category": "capital-stack",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-28T08:12:26Z",
+      "graded_at": "2026-07-28T08:12:26Z",
+      "id": "preferred-equity-vs-mezzanine-debt-where-each-sits-in-the-stack-20",
+      "key_numbers": [
+        "65%",
+        "80%",
+        "9%"
+      ],
+      "outline": "Clarifies the practical difference between pref equity and mezz debt occupying the same leverage point, covering cure rights, current-pay vs. accrual, and what happens on default. Learners see why a sponsor picks one over the other for the same slot.",
+      "reasoning": "capital-stack has two rejected ideas and zero approved; this fills the gap with a distinction (pref vs. mezz) analysts are actually tested on.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 17,
+      "scores": {
+        "foundational": 4,
+        "novelty": 5,
+        "reach": 4,
+        "walkthroughFit": 4
+      },
+      "status": "queued",
+      "title": "Preferred Equity vs. Mezzanine Debt: Where Each Sits in the Stack"
     },
     "property-valuation-during-economic-downturns-99884": {
       "category": "macro-cycle",
@@ -185,6 +433,34 @@
       },
       "status": "rejected",
       "title": "Retail Leasing Dynamics"
+    },
+    "self-storage-underwriting-climate-controlled-premium-and-drive-up-": {
+      "category": "asset-class-deepdive",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-07-28T08:12:26Z",
+      "graded_at": "2026-07-28T08:12:26Z",
+      "id": "self-storage-underwriting-climate-controlled-premium-and-drive-up-",
+      "key_numbers": [
+        "70%",
+        "$1.35/sf",
+        "$0.95/sf"
+      ],
+      "outline": "Shows how self-storage NOI is driven by unit-mix (climate-controlled vs. drive-up) and achieved-rent-to-asking-rent ratio rather than raw square footage. Learners compute blended revenue per square foot across a mixed-unit-type facility.",
+      "reasoning": "asset-class-deepdive has two rejected ideas (office reserves, retail leasing) and zero approved; self-storage is a distinct asset class not yet attempted.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 15,
+      "scores": {
+        "foundational": 3,
+        "novelty": 5,
+        "reach": 3,
+        "walkthroughFit": 4
+      },
+      "status": "queued",
+      "title": "Self-Storage Underwriting: Climate-Controlled Premium and Drive-Up Mix"
     },
     "the-role-of-a-cre-analyst-99883": {
       "category": "role-profile",
@@ -323,6 +599,10 @@
     {
       "at": "2026-06-05T23:08:29Z",
       "msg": "refine: understanding-reits-vs-direct-ownership-99889 -> refined"
+    },
+    {
+      "at": "2026-07-28T08:12:26Z",
+      "msg": "manual: added 10 self-graded ideas targeting under-approved categories (development-lifecycle x2, capital-stack x2, asset-class-deepdive x2, role-profile x2, tools-workflow x2) \u2014 Ollama unreachable in this environment, graded by Claude directly"
     }
   ],
   "version": 1
