@@ -167,6 +167,57 @@ batch):
 - Asset reposition sequence — vacate, renovate, re-lease
 - Reserve study — what one is and how it informs reserves
 
+### Category-balance gaps (situational case counts)
+
+Case counts by `category` in `src/quiz/situational/` (as of 2026-08-01):
+deal-process 21, document-literacy 13, investment-thesis 9, risk 7, pricing 7,
+diagnostic 7, **sensitivity 2, lease-econ 2, comp-selection 2, absorption 1**.
+The bolded four are thin relative to the rest of the bank and should be
+prioritized in upcoming batches over adding more deal-process content.
+
+Draft phrasings below are scenario seeds only — not full cases. Whoever
+writes the case still needs to build a real data grid, verify the math,
+write 3-4 options with exactly one `isBest: true`, and follow every rule in
+"What 'well-formed content' means in this repo" above.
+
+**absorption** (1 existing case: `absorption-timing`)
+1. "Pre-leasing has stalled at 40% with six months to delivery — do you
+   still hit breakeven occupancy on schedule?" (ground-up multifamily,
+   compare pre-leasing velocity against the debt-service breakeven date)
+2. "Two competing lease-ups just cut concessions — does your absorption
+   pace assumption still hold?" (submarket supply shock forces a re-forecast
+   of monthly net absorption)
+3. "Retail anchor just signed but shop space is empty — how do you weight
+   blended absorption for the pro forma?" (mixed-tenant absorption pacing,
+   anchor vs. inline shop space)
+
+**comp-selection** (2 existing: `comp-set-vetting`, `comp-vintage-adjustment`)
+4. "One comp traded 30% above the rest of the set — include it or drop it?"
+   (outlier-comp screening; distressed-seller or related-party sale distorts
+   the set)
+5. "Your closest comp is a cross-town submarket with better schools — same
+   comp set or separate tier?" (submarket-boundary judgment call, when
+   proximity isn't the same as comparability)
+
+**lease-econ** (2 existing: `lease-structure-nnn-vs-gross`, `ti-vs-rent-give-back`)
+6. "Tenant wants a 3% annual bump instead of CPI — which is worth more to
+   the landlord over a 10-year term?" (fixed-escalation vs. CPI-linked
+   rent, PV comparison under different inflation scenarios)
+7. "Percentage rent kicks in at a $2M sales breakpoint — is that breakpoint
+   set right?" (natural vs. artificial breakpoint math, retail percentage
+   rent structuring)
+
+**sensitivity** (2 existing: `cap-spread`, `exit-cap-conservatism`)
+8. "Exit cap held flat but hold period stretched two years — does the deal
+   still clear your return hurdle?" (hold-period sensitivity vs. cap-rate
+   sensitivity, isolating which lever actually breaks the deal)
+9. "Rent growth assumption drops from 3% to 1.5% — which return metric
+   moves the most?" (compare IRR, equity multiple, and cash-on-cash
+   sensitivity to a single flexed input)
+10. "Debt costs rise 150 bps mid-underwriting — do you re-trade or hold
+    price?" (rate-sensitivity walkthrough: refinance vs. floating-rate
+    exposure and its effect on required going-in cap rate)
+
 ---
 
 ## What to NOT do
