@@ -1,5 +1,27 @@
 {
   "ideas": {
+    "agency-debt-vs-cmbs-choosing-the-right-execution-0802g": {
+      "category": "capital-stack",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-02T00:00:00Z",
+      "graded_at": null,
+      "id": "agency-debt-vs-cmbs-choosing-the-right-execution-0802g",
+      "key_numbers": [
+        "80% LTV",
+        "1.25x DSCR"
+      ],
+      "outline": "Compares agency multifamily loans (Fannie/Freddie) to CMBS conduit execution \u2014 rate, leverage, prepayment penalty structure, and when a borrower would pick one over the other.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Agency Debt vs. CMBS: Choosing the Right Execution"
+    },
     "building-a-cre-investment-portfolio-99887": {
       "category": "tools-workflow",
       "draft_quiz_path": null,
@@ -55,6 +77,28 @@
       "status": "rejected",
       "title": "Construction Loan Fundamentals"
     },
+    "costar-vs-rca-picking-the-right-comp-data-source-0802j": {
+      "category": "tools-workflow",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-02T00:00:00Z",
+      "graded_at": null,
+      "id": "costar-vs-rca-picking-the-right-comp-data-source-0802j",
+      "key_numbers": [
+        "50 comps",
+        "6-month lookback"
+      ],
+      "outline": "Walks through when an analyst should pull comps from CoStar versus RCA \u2014 lease comps vs. sale-comp/cap-rate trade data, coverage differences, and how to sanity-check one source against the other.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "CoStar vs. RCA: Picking the Right Comp Data Source"
+    },
     "cre-ethics-professional-conduct-99888": {
       "category": "trust-relationships",
       "draft_quiz_path": "docs/CURRICULUM_DRAFTS/quiz-cre-ethics-professional-conduct-99888.md",
@@ -79,6 +123,52 @@
       "status": "refined",
       "title": "CRE Ethics & Professional Conduct"
     },
+    "data-center-underwriting-basics-0802e": {
+      "category": "asset-class-deepdive",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-02T00:00:00Z",
+      "graded_at": null,
+      "id": "data-center-underwriting-basics-0802e",
+      "key_numbers": [
+        "150 kW",
+        "1.3 PUE",
+        "15-year lease"
+      ],
+      "outline": "Introduces what makes data-center underwriting different from typical industrial \u2014 power density (kW/rack), PUE, and the long-term triple-net leases tied to hyperscale tenants.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Data Center Underwriting Basics"
+    },
+    "debt-broker-compensation-and-deal-flow-0802i": {
+      "category": "role-profile",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-02T00:00:00Z",
+      "graded_at": null,
+      "id": "debt-broker-compensation-and-deal-flow-0802i",
+      "key_numbers": [
+        "1% placement fee",
+        "$20M loan",
+        "3 lender quotes"
+      ],
+      "outline": "Describes how commercial mortgage/debt brokers get paid (placement fee as % of loan amount), how they source lender relationships, and how their incentives differ from a direct lender's.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Debt Broker Compensation and Deal Flow"
+    },
     "due-diligence-for-commercial-leases-99886": {
       "category": "legal-document",
       "draft_quiz_path": "docs/CURRICULUM_DRAFTS/quiz-due-diligence-for-commercial-leases-99886.md",
@@ -102,6 +192,98 @@
       },
       "status": "refined",
       "title": "Due Diligence for Commercial Leases"
+    },
+    "entitlement-risk-and-land-basis-0802c": {
+      "category": "development-lifecycle",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-02T00:00:00Z",
+      "graded_at": null,
+      "id": "entitlement-risk-and-land-basis-0802c",
+      "key_numbers": [
+        "$500k option",
+        "24 months",
+        "3x basis"
+      ],
+      "outline": "Covers how zoning and entitlement risk get priced into raw land purchases \u2014 option payments, contingent takedowns, and how basis changes once entitlements are secured.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Entitlement Risk and Land Basis"
+    },
+    "from-raw-land-to-recap-the-development-timeline-0802a": {
+      "category": "development-lifecycle",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-02T00:00:00Z",
+      "graded_at": null,
+      "id": "from-raw-land-to-recap-the-development-timeline-0802a",
+      "key_numbers": [
+        "18 months",
+        "65% LTC",
+        "90% occupancy"
+      ],
+      "outline": "Walks through the full development lifecycle from entitlement through recapitalization \u2014 what happens at each stage (land basis, capital stack formation, construction draws, lease-up, stabilization, recap/exit) and what an analyst needs to track at each handoff.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "From Raw Land to Recap: The Development Timeline"
+    },
+    "hotel-revpar-and-the-uniform-system-of-accounts-0802f": {
+      "category": "asset-class-deepdive",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-02T00:00:00Z",
+      "graded_at": null,
+      "id": "hotel-revpar-and-the-uniform-system-of-accounts-0802f",
+      "key_numbers": [
+        "$150 ADR",
+        "72% occupancy",
+        "$108 RevPAR"
+      ],
+      "outline": "Teaches how hotel valuation departs from other asset classes \u2014 RevPAR as the core operating metric, the ADR \u00d7 occupancy decomposition, and why USALI-based NOI differs from a typical proforma.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Hotel RevPAR and the Uniform System of Accounts"
+    },
+    "lease-up-to-stabilization-what-changes-in-the-underwriting-0802d": {
+      "category": "development-lifecycle",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-02T00:00:00Z",
+      "graded_at": null,
+      "id": "lease-up-to-stabilization-what-changes-in-the-underwriting-0802d",
+      "key_numbers": [
+        "1.25x DSCR",
+        "90% occupancy",
+        "3 consecutive months"
+      ],
+      "outline": "Explains the underwriting shift from a construction loan to a permanent/mini-perm loan once a project stabilizes \u2014 the DSCR test, trailing NOI requirement, and rate-lock timing.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Lease-Up to Stabilization: What Changes in the Underwriting"
     },
     "office-building-maintenance-reserves-99882": {
       "category": "asset-class-deepdive",
@@ -131,6 +313,29 @@
       "status": "rejected",
       "title": "Office Building Maintenance Reserves"
     },
+    "open-end-vs-closed-end-funds-in-cre-0802h": {
+      "category": "capital-stack",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-02T00:00:00Z",
+      "graded_at": null,
+      "id": "open-end-vs-closed-end-funds-in-cre-0802h",
+      "key_numbers": [
+        "10-year fund life",
+        "quarterly redemption",
+        "8% preferred return"
+      ],
+      "outline": "Explains the structural difference between open-end (evergreen, NAV-priced, redemption queues) and closed-end (fixed life, capital calls, distribution waterfall) CRE fund vehicles.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Open-End vs. Closed-End Funds in CRE"
+    },
     "property-valuation-during-economic-downturns-99884": {
       "category": "macro-cycle",
       "draft_quiz_path": "docs/CURRICULUM_DRAFTS/quiz-property-valuation-during-economic-downturns-99884.md",
@@ -157,6 +362,29 @@
       },
       "status": "refined",
       "title": "Property Valuation During Economic Downturns"
+    },
+    "reading-a-construction-draw-schedule-0802b": {
+      "category": "development-lifecycle",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-02T00:00:00Z",
+      "graded_at": null,
+      "id": "reading-a-construction-draw-schedule-0802b",
+      "key_numbers": [
+        "10% retainage",
+        "$2M draw",
+        "5% interest reserve"
+      ],
+      "outline": "Explains how construction loan draws work in practice \u2014 the draw request, lender inspection/retainage holdback, and how a delayed draw affects the project's interest reserve and schedule.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Reading a Construction Draw Schedule"
     },
     "retail-leasing-dynamics-99881": {
       "category": "asset-class-deepdive",
@@ -323,6 +551,10 @@
     {
       "at": "2026-06-05T23:08:29Z",
       "msg": "refine: understanding-reits-vs-direct-ownership-99889 -> refined"
+    },
+    {
+      "at": "2026-08-02T00:00:00Z",
+      "msg": "manual: added 10 new pending ideas targeting under-approved categories (development-lifecycle: 4, asset-class-deepdive: 2, capital-stack: 2, role-profile: 1, tools-workflow: 1) \u2014 awaiting grade"
     }
   ],
   "version": 1
