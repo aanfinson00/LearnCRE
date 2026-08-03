@@ -242,7 +242,7 @@ in a future PR.
 
 ---
 
-## Development (7)
+## Development (17)
 
 ### Q: Land cost $8M, hard cost $38M, soft $7M, 5% contingency. What's TPC and what's the yield-on-cost on $4.5M stabilized NOI?
 - **Role:** development · **Difficulty:** intermediate
@@ -278,6 +278,56 @@ in a future PR.
 - **Role:** development · **Difficulty:** advanced
 - **Why:** ground-lease economics; common at urban infill developers.
 - **Maps to:** **GAP — propose `groundLeaseVsFee` situational**.
+
+### Q: GAP — GC offers a Guaranteed Maximum Price (GMP) contract vs. cost-plus. Which do you push for, and what does the GC price into the GMP number?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** risk-transfer discipline; candidates who've only seen pro formas miss that GMP isn't free — the contingency the GC carries shows up as a higher hard-cost number.
+- **Maps to:** **GAP — propose `gmp-vs-cost-plus` situational**.
+
+### Q: GAP — Deal only pencils if a rezoning from industrial to mixed-use goes through in 18 months. How do you underwrite the entitlement risk?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** tests whether a candidate prices optionality (option-like acquisition structure, kill-fee deposits) instead of treating entitlement as a formality.
+- **Maps to:** **GAP — propose `entitlement-risk-underwriting` situational**.
+
+### Q: GAP — Mid-construction, your GC submits a $400k change order for unforeseen soil conditions. Walk me through how you evaluate it before signing off.
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** change-order discipline is where budgets quietly blow out; tests whether the candidate checks contract basis (allowance vs. true unforeseen condition) before hitting contingency.
+- **Maps to:** **GAP — propose `change-order-evaluation` situational**.
+
+### Q: GAP — A jurisdiction charges $18k/unit in impact fees plus a $2M off-site road-widening requirement. How does this change your land basis and go/no-go?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** impact-fee and off-site-cost math is a common underwriting trap — candidates often price the vertical build and forget the horizontal/entitlement costs.
+- **Maps to:** **GAP — propose `impactFeesAndOffsites` quiz template**.
+
+### Q: GAP — You're underwriting a 3-phase master-planned project where Phase 1 must stabilize before the lender releases Phase 2 land draws. How do you sequence capital and de-risk the plan?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** phasing discipline; distinguishes candidates who can reason about capital sequencing from those who only know single-phase deals.
+- **Maps to:** **GAP — propose `multi-phase-sequencing` situational**.
+
+### Q: GAP — What's a typical GP/LP promote structure on a ground-up development JV, and how does it differ from an acquisition-deal waterfall?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** development promotes often layer in a development fee + a higher promote given the added execution risk; tests whether the candidate can articulate that spread.
+- **Maps to:** **GAP — propose `dev-jv-promote-structure` situational**.
+
+### Q: GAP — Build-to-suit for a credit tenant vs. speculative development on the same site. How does your underwriting — and your lender's — differ between the two?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** tests understanding of pre-leasing as a risk-transfer mechanism (lease-up risk, financeability, exit cap) vs. spec risk.
+- **Maps to:** **GAP — propose `build-to-suit-vs-spec` situational**.
+
+### Q: GAP — Zoning caps you at 1.5 parking spaces/unit but your market comps need 1.8 to lease well. How does this constraint flow through your unit count and pro forma?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** parking-ratio constraints quietly cap achievable density/yield; a common real-world feasibility trap candidates gloss over.
+- **Maps to:** **GAP — propose `parking-ratio-constraint` situational**.
+
+### Q: GAP — At what point in a development's timeline do you decide sell-at-stabilization (forward sale) vs. hold through lease-up, and what data changes your answer?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** exit-timing judgment; tests whether the candidate can weigh forward-sale price certainty against lease-up-upside risk.
+- **Maps to:** **GAP — propose `dev-exit-timing` situational**.
+
+### Q: GAP — Your project moves into a jurisdiction requiring prevailing wage on the GC contract mid-bid. How much does that move hard costs, and does the deal still pencil?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** labor-cost/jurisdiction risk is a real underwriting variable (prevailing-wage jobs commonly run 15-25% higher on labor) that candidates rarely price explicitly.
+- **Maps to:** **GAP — propose `prevailing-wage-cost-impact` situational**.
 
 ---
 
@@ -315,10 +365,16 @@ regardless of position.
 
 ## Summary statistics
 
-- **Total questions in this doc:** 52
-- **Mapped to existing content:** 41 (78%)
-- **Flagged as GAPs:** 8 (15%)
-- **Out of scope (time-sensitive / behavioral):** 4 (8%)
+- **Total questions in this doc:** 62
+- **Mapped to existing content:** 38 (61%)
+- **Flagged as GAPs:** 20 (32%)
+- **Out of scope (time-sensitive / behavioral):** 4 (6%)
+
+_Note: several pre-existing `Maps to: GAP` entries (e.g. `capexReserveSizing`,
+`refiStressTest`, `leaseUpReserve`, `groundLeaseVsFee`, `constructionLoanSizing`)
+have shipped per `ROADMAP.md` but weren't flipped to mapped here — the count
+above reflects this doc's markers as-written, not verified shipped status.
+A follow-up pass should reconcile the two._
 
 Top GAPs to address (ranked by interview frequency):
 
@@ -331,3 +387,25 @@ Top GAPs to address (ranked by interview frequency):
 These five gaps would lift mapped-to-content coverage from 78% → ~93% with
 ~½ day of content work each, and they all surface from real interview-question
 patterns rather than top-down design guesses.
+
+### 2026-08-03 batch: Development role coverage
+
+A source-level audit of `role`/`roles` tags across the three catalog layers
+found Development is the most under-built role in the shipped question bank,
+well behind every other role:
+
+| Role | Situational | Quiz templates | Longform |
+|---|---|---|---|
+| acquisitions | 40 | 60 | 6 |
+| assetManagement | 31 | 20 | 3 |
+| portfolioMgmt | 25 | 16 | 4 |
+| mortgageUw | 19 | 16 | 1 |
+| **development** | **9** | **10** | **1** |
+
+The 10 new `GAP` entries added to the Development section above (GMP vs.
+cost-plus, entitlement risk, change-order evaluation, impact fees / off-sites,
+multi-phase sequencing, dev JV promote structure, build-to-suit vs. spec,
+parking-ratio constraints, dev exit timing) target that gap specifically —
+topics not already covered by the existing 7 Development entries or by
+`docs/CURRICULUM.md`'s `development-lifecycle` category. None have shipped
+content yet; treat them as candidate phrasings to vet, not finished specs.
