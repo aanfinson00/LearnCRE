@@ -1,5 +1,28 @@
 {
   "ideas": {
+    "appraiser-vs-underwriter-same-asset-different-cap--081107": {
+      "category": "role-profile",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-04T08:11:35Z",
+      "graded_at": null,
+      "id": "appraiser-vs-underwriter-same-asset-different-cap--081107",
+      "key_numbers": [
+        "6.0% vs 6.5% cap",
+        "$50M appraised value",
+        "3 valuation approaches"
+      ],
+      "outline": "Explains why an MAI appraisal's concluded cap rate and value can legitimately diverge from a lender's or buyer's underwritten number, and where each professional's incentives and mandate allow that gap to exist.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Appraiser vs Underwriter: Same Asset, Different Cap Rate \u2014 Reading the MAI Report"
+    },
     "building-a-cre-investment-portfolio-99887": {
       "category": "tools-workflow",
       "draft_quiz_path": null,
@@ -26,6 +49,29 @@
       },
       "status": "rejected",
       "title": "Building a CRE Investment Portfolio"
+    },
+    "construction-draw-mechanics-retainage-lien-waivers-081103": {
+      "category": "development-lifecycle",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-04T08:11:35Z",
+      "graded_at": null,
+      "id": "construction-draw-mechanics-retainage-lien-waivers-081103",
+      "key_numbers": [
+        "10% retainage",
+        "$1.2M draw request",
+        "30-day funding cycle"
+      ],
+      "outline": "Walks through how a GC's monthly draw request flows to funding \u2014 retainage percentage held back, conditional vs unconditional lien waivers required at each draw, and the inspector sign-off gate before the lender releases funds.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Construction Draw Mechanics: Retainage, Lien Waivers, and the Draw Schedule Walk"
     },
     "construction-loan-fundamentals-99885": {
       "category": "capital-stack",
@@ -55,6 +101,25 @@
       "status": "rejected",
       "title": "Construction Loan Fundamentals"
     },
+    "costar-vs-rca-which-comp-source-wins-for-which-que-081108": {
+      "category": "tools-workflow",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-04T08:11:35Z",
+      "graded_at": null,
+      "id": "costar-vs-rca-which-comp-source-wins-for-which-que-081108",
+      "key_numbers": [],
+      "outline": "Gives a practical decision tree for when to pull comps from CoStar (leasing activity, inventory, availability) versus RCA (closed sales pricing, cap rates), and how to reconcile the two when they disagree.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "CoStar vs RCA: Which Comp Source Wins for Which Question"
+    },
     "cre-ethics-professional-conduct-99888": {
       "category": "trust-relationships",
       "draft_quiz_path": "docs/CURRICULUM_DRAFTS/quiz-cre-ethics-professional-conduct-99888.md",
@@ -79,6 +144,52 @@
       "status": "refined",
       "title": "CRE Ethics & Professional Conduct"
     },
+    "data-center-underwriting-power-density-as-the-new--081100": {
+      "category": "asset-class-deepdive",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-04T08:11:35Z",
+      "graded_at": null,
+      "id": "data-center-underwriting-power-density-as-the-new--081100",
+      "key_numbers": [
+        "150W/SF",
+        "1.3 PUE",
+        "$15M/MW"
+      ],
+      "outline": "Explains why data centers underwrite off critical IT load (MW) and power availability rather than per-SF rent, covering PUE, power cost pass-throughs, and how power-constrained submarkets command a scarcity premium over traditional asset classes.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Data Center Underwriting: Power Density as the New Cap Rate Driver"
+    },
+    "debt-broker-comp-how-a-mortgage-banker-gets-paid-o-081106": {
+      "category": "role-profile",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-04T08:11:35Z",
+      "graded_at": null,
+      "id": "debt-broker-comp-how-a-mortgage-banker-gets-paid-o-081106",
+      "key_numbers": [
+        "1.0% origination fee",
+        "$200K commission",
+        "25 bps servicing-released premium"
+      ],
+      "outline": "Breaks down origination fee percentages, the correspondent vs broker distinction, and servicing-released premiums to show how a debt broker's comp structure differs from an acquisitions analyst's salary-plus-bonus model.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Debt Broker Comp: How a Mortgage Banker Gets Paid on a $20M Loan"
+    },
     "due-diligence-for-commercial-leases-99886": {
       "category": "legal-document",
       "draft_quiz_path": "docs/CURRICULUM_DRAFTS/quiz-due-diligence-for-commercial-leases-99886.md",
@@ -102,6 +213,29 @@
       },
       "status": "refined",
       "title": "Due Diligence for Commercial Leases"
+    },
+    "entitlement-risk-pricing-land-basis-before-zoning--081102": {
+      "category": "development-lifecycle",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-04T08:11:35Z",
+      "graded_at": null,
+      "id": "entitlement-risk-pricing-land-basis-before-zoning--081102",
+      "key_numbers": [
+        "40% pre-entitlement discount",
+        "18-month approval window",
+        "$2M land basis"
+      ],
+      "outline": "Walks through how raw land is priced pre- vs post-entitlement using an option-value framing, and the typical basis discount a developer or land banker applies to compensate for approval timeline and denial risk.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Entitlement Risk: Pricing Land Basis Before Zoning Is Locked"
     },
     "office-building-maintenance-reserves-99882": {
       "category": "asset-class-deepdive",
@@ -130,6 +264,52 @@
       },
       "status": "rejected",
       "title": "Office Building Maintenance Reserves"
+    },
+    "open-end-vs-closed-end-funds-why-redemption-queues-081105": {
+      "category": "capital-stack",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-04T08:11:35Z",
+      "graded_at": null,
+      "id": "open-end-vs-closed-end-funds-why-redemption-queues-081105",
+      "key_numbers": [
+        "25% redemption queue",
+        "quarterly NAV mark",
+        "10-year fund life"
+      ],
+      "outline": "Explains NAV-based redemption mechanics in open-end core funds, why gating and redemption queues form during a downturn, and why closed-end, fixed-life funds don't face the same liquidity mismatch.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Open-End vs Closed-End Funds: Why Redemption Queues Break in a Downturn"
+    },
+    "preferred-equity-vs-mezzanine-debt-where-the-line--081104": {
+      "category": "capital-stack",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-04T08:11:35Z",
+      "graded_at": null,
+      "id": "preferred-equity-vs-mezzanine-debt-where-the-line--081104",
+      "key_numbers": [
+        "65-80% LTV",
+        "12-15% pref return",
+        "85% LTC"
+      ],
+      "outline": "Contrasts pref equity and mezz debt on the structural mechanics that actually matter to a sponsor choosing between them \u2014 foreclosure/UCC remedies, cash-flow sweep vs hard coupon, and cure rights \u2014 rather than just definitions.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Preferred Equity vs Mezzanine Debt: Where the Line Actually Sits"
     },
     "property-valuation-during-economic-downturns-99884": {
       "category": "macro-cycle",
@@ -185,6 +365,52 @@
       },
       "status": "rejected",
       "title": "Retail Leasing Dynamics"
+    },
+    "self-storage-cap-rate-compression-why-it-prices-ti-081101": {
+      "category": "asset-class-deepdive",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-04T08:11:35Z",
+      "graded_at": null,
+      "id": "self-storage-cap-rate-compression-why-it-prices-ti-081101",
+      "key_numbers": [
+        "5.0% cap",
+        "70% NOI margin",
+        "12% annual churn"
+      ],
+      "outline": "Covers the structural drivers behind self-storage cap rate compression cycles \u2014 low opex ratio, month-to-month renewal stickiness, and REIT roll-up demand \u2014 and where storage caps sit relative to multifamily and industrial across a rate cycle.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Self-Storage Cap Rate Compression: Why It Prices Tighter Than Multifamily"
+    },
+    "the-first-90-days-excel-discipline-build-errors-th-081109": {
+      "category": "tools-workflow",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-04T08:11:35Z",
+      "graded_at": null,
+      "id": "the-first-90-days-excel-discipline-build-errors-th-081109",
+      "key_numbers": [
+        "3 common sign errors",
+        "1-tab discipline",
+        "0 hardcoded cells"
+      ],
+      "outline": "Covers the specific modeling habits \u2014 hardcoding vs formula linking, circular references in debt sizing, and inconsistent sign conventions \u2014 that separate a clean, defensible model from one that gets an analyst's work thrown out.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "The First-90-Days Excel Discipline: Build Errors That Get New Analysts Fired"
     },
     "the-role-of-a-cre-analyst-99883": {
       "category": "role-profile",
@@ -323,6 +549,10 @@
     {
       "at": "2026-06-05T23:08:29Z",
       "msg": "refine: understanding-reits-vs-direct-ownership-99889 -> refined"
+    },
+    {
+      "at": "2026-08-04T08:11:35Z",
+      "msg": "manual: added 10 new ideas targeting zero-approved categories (asset-class-deepdive, development-lifecycle, capital-stack, role-profile, tools-workflow) \u2014 scheduled question-bank-gap review"
     }
   ],
   "version": 1
