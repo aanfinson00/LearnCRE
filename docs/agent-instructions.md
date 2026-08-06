@@ -169,6 +169,63 @@ batch):
 
 ---
 
+## Coverage gap scan (2026-08-06)
+
+Auto-generated pass over `src/quiz/situational/*.ts` and `src/quiz/templates/*.ts`
+role tags, run to find which areas of the question bank are thinnest and worth
+prioritizing on the next content batch. Method: count files by `roles: [...]`
+tag (situational) and by `roles: [...]` tag (templates); count situational
+files by `category`.
+
+**Role coverage (situational cases, 71 total):**
+acquisitions 40 · assetManagement 31 · portfolioMgmt 25 · mortgageUw 19 ·
+**development 9** ← thinnest by a wide margin (less than half of the next
+smallest role).
+
+**Role coverage (quiz templates, 68 total):**
+acquisitions 60 · assetManagement 20 · mortgageUw 16 · portfolioMgmt 16 ·
+**development 10** ← same pattern, development is the smallest role bucket
+in both content types.
+
+**Category coverage (situational cases):** deal-process 21 · document-literacy
+13 · investment-thesis 9 · risk 7 · pricing 7 · diagnostic 7 · sensitivity 2 ·
+lease-econ 2 · comp-selection 2 · **absorption 1** ← thinnest category
+overall (only `absorptionTiming.ts`, tagged all-roles).
+
+Net: **development-role situational cases are the clearest gap** — existing
+9 skew toward construction-loan mechanics (LTC/LTV, draws, retainage,
+change orders, cost overruns) that templates already cover numerically; the
+*judgment/process* side of development is underrepresented. Candidate
+phrasings for the next batch (title only — scenario, options, and answer
+math still need to be written and vetted per the spec above before these
+ship as real `SituationalCase` files):
+
+1. "Interest reserve sizing — does the construction loan actually cover the
+   lease-up gap?" *(risk · development)*
+2. "GMP vs cost-plus — which contract structure protects the sponsor on
+   this scope?" *(deal-process · development)*
+3. "Pre-leasing covenant — has the deal cleared the lender's funding
+   trigger?" *(deal-process · development)*
+4. "Mini-perm conversion — does the project actually qualify to roll off
+   the construction loan?" *(deal-process · development)*
+5. "The Phase I flags a REC — how does this change the go/no-go?" *(risk /
+   document-literacy · development)*
+6. "Off-site infrastructure cost — whose budget line does it belong in?"
+   *(deal-process · development)*
+7. "Entitlement risk — how much of the basis is speculative before zoning
+   is approved?" *(risk · development)*
+8. "Development spread — is the gap between yield-on-cost and stabilized
+   cap wide enough to justify the risk?" *(investment-thesis · development)*
+9. "GC payment bond — does it actually protect against this default
+   scenario?" *(document-literacy · development)*
+10. "Absorption assumption in the pro forma — is the lease-up pace
+    realistic for this submarket?" *(absorption · development)*
+
+`absorption` is also worth a second, non-development case given it's the
+single thinnest category bank-wide (1 case covering all 5 roles).
+
+---
+
 ## What to NOT do
 
 - **Don't invent new file structures.** If situational cases live in
