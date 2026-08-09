@@ -242,7 +242,9 @@ in a future PR.
 
 ---
 
-## Development (7)
+## Development (17)
+
+*2026-08-09 note: this was the thinnest section relative to actual in-app coverage — only 22 development-tagged content items vs. 38-114 for the other roles — so it's the first target for expansion. Also caught 3 stale GAP flags below where content had already shipped since the doc was last synced. Added 10 new candidate question phrasings (still GAPs — proposed framings only, not yet drafted into full situationals) to seed the next content batch.*
 
 ### Q: Land cost $8M, hard cost $38M, soft $7M, 5% contingency. What's TPC and what's the yield-on-cost on $4.5M stabilized NOI?
 - **Role:** development · **Difficulty:** intermediate
@@ -267,17 +269,67 @@ in a future PR.
 ### Q: Construction loan sizing on a $50M TPC dev with 65% LTC. What's the equity check?
 - **Role:** development · **Difficulty:** intermediate
 - **Why:** LTC-vs-LTV distinction; common at debt funds + GC-side.
-- **Maps to:** **GAP — propose `constructionLoanSizing` quiz template + `dev-ltc-vs-ltv` situational**.
+- **Maps to:** `constructionLoanSizing` quiz template + `dev-ltc-vs-ltv` situational. *(2026-08-09: content shipped since this doc was last synced — was flagged GAP, now built.)*
 
 ### Q: GAP — How do you size a lease-up reserve on a development that stabilizes year 2-3?
 - **Role:** development · **Difficulty:** intermediate
 - **Why:** lease-up risk pricing; common in development-side underwriting.
-- **Maps to:** **GAP — propose `leaseUpReserve` quiz template**.
+- **Maps to:** `leaseUpReserve` quiz template. *(2026-08-09: content shipped since this doc was last synced — was flagged GAP, now built.)*
 
 ### Q: Ground lease vs fee-simple on a development site — what changes in your underwriting?
 - **Role:** development · **Difficulty:** advanced
 - **Why:** ground-lease economics; common at urban infill developers.
-- **Maps to:** **GAP — propose `groundLeaseVsFee` situational**.
+- **Maps to:** `groundLeaseVsFee` situational. *(2026-08-09: content shipped since this doc was last synced — was flagged GAP, now built.)*
+
+### Q: What's the difference between hard costs and soft costs on a ground-up budget, and which soft-cost lines get missed most often in a first-pass estimate?
+- **Role:** development · **Difficulty:** beginner
+- **Why:** opening filter for development-side roles; soft-cost blind spots (FF&E, marketing/lease-up commissions, developer fee, insurance during construction, extended interest reserve) are the most common first-pass budget miss.
+- **Maps to:** **GAP — propose `hard-vs-soft-cost-classification` situational**, ties to `walk-dev-feasibility-1` Step 2.
+
+### Q: Your GC offers a choice between a GMP (guaranteed maximum price) contract and cost-plus-fee with no cap. Which do you push for, and how does the choice change your contingency sizing?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** contract-structure reasoning; candidates often default to "GMP is always better" without pricing the fee premium GCs charge for taking on price risk.
+- **Maps to:** **GAP — propose `gmp-vs-cost-plus` situational**.
+
+### Q: The municipality is charging $18k/unit in impact fees plus requiring a $2M off-site infrastructure improvement as a condition of approval. How does this move your TPC and your yield-on-cost target?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** entitlement-condition cost creep; a common way deals that penciled at application stage stop penciling by permit.
+- **Maps to:** **GAP — propose `impact-fee-tpc-impact` situational**, ties to `yieldOnCost` quiz template.
+
+### Q: Your GC's surety won't bond a project above $40M without additional collateral, and the project is $55M. What are your options as the developer?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** bonding-capacity constraint; underappreciated gate on GC selection for larger deals.
+- **Maps to:** **GAP — propose `performance-bond-capacity` situational**.
+
+### Q: A site needs a zoning variance before it can break ground. The process typically runs 9-14 months and isn't guaranteed. How do you structure the land purchase to price that risk — option, phased closing, or cash at risk?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** entitlement-risk allocation; tests whether a candidate reaches for optionality instead of just discounting the bid.
+- **Maps to:** **GAP — propose `entitlement-risk-option-structure` situational**.
+
+### Q: Phase I comes back clean but Phase II finds contamination requiring $1.5M of remediation before vertical construction can start, discovered after you're under a hard-money deposit. Walk through your options.
+- **Role:** development · **Difficulty:** advanced
+- **Why:** environmental-diligence discipline; tests PSA contingency awareness alongside the cost impact.
+- **Maps to:** **GAP — propose `environmental-remediation-budget` situational**.
+
+### Q: Your construction loan requires 50% pre-leasing before the lender funds the final draw. You're at 35% pre-leased with 4 months until the loan matures. What are your options?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** pre-leasing-covenant stress; common late-cycle question as lease-up timelines slip.
+- **Maps to:** **GAP — propose `preleasing-covenant-shortfall` situational**.
+
+### Q: The jurisdiction offers a 20% density bonus if you set aside 15% of units as affordable at 60% AMI. Walk through how you'd model whether to take it.
+- **Role:** development · **Difficulty:** advanced
+- **Why:** density-bonus tradeoff; increasingly common in gateway-metro multifamily development underwriting.
+- **Maps to:** **GAP — propose `density-bonus-tradeoff` situational**.
+
+### Q: You're underwriting a deal with a 10-year PILOT (payment in lieu of taxes) that steps up to full assessment in year 11. How does that change your going-in vs. exit cap assumptions?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** tax-abatement-cliff reasoning; a common trap is holding the exit cap flat and missing the reassessment hit to NOI at sale.
+- **Maps to:** **GAP — propose `pilot-abatement-cliff` situational**, ties to `taxReassessment` quiz template.
+
+### Q: Halfway through entitlement, the for-sale condo market softens and rental comps look stronger than the condo pro forma. What does it take to re-underwrite as a rental hold, and what sunk costs get written off?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** highest-and-best-use pivot mid-deal; tests separating sunk entitlement/design cost from the go-forward decision.
+- **Maps to:** **GAP — propose `condo-to-rental-pivot` situational**.
 
 ---
 
@@ -315,19 +367,35 @@ regardless of position.
 
 ## Summary statistics
 
-- **Total questions in this doc:** 52
-- **Mapped to existing content:** 41 (78%)
-- **Flagged as GAPs:** 8 (15%)
-- **Out of scope (time-sensitive / behavioral):** 4 (8%)
+*Updated 2026-08-09 — added 10 new Development phrasings and corrected 3 stale GAP flags (content had shipped since the doc was last synced). See counts by section above; Development and Portfolio Management remain the thinnest sections and are the next candidates for a similar pass.*
 
-Top GAPs to address (ranked by interview frequency):
+- **Total questions in this doc:** 62
+- **Mapped to existing content:** 38 (61%)
+- **Flagged as GAPs:** 20 (32%)
+- **Out of scope (time-sensitive / behavioral):** 4 (6%)
 
-1. `capexReserveSizing` quiz + `capex-reserve-discipline` situational (asset mgmt)
-2. `refiStressTest` quiz + `refi-cap-stress` situational (mortgage UW)
-3. `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz (portfolio mgmt)
-4. `constructionLoanSizing` quiz + `dev-ltc-vs-ltv` situational (development)
+Note: the mapped% dropped from the prior 78% not because coverage regressed,
+but because this pass added 10 deliberately-unbuilt candidate phrasings
+(new GAPs) for the thinnest section rather than only auditing what already
+exists. Several previously-tracked GAPs were also discovered to already be
+built (`constructionLoanSizing`, `leaseUpReserve`, `groundLeaseVsFee`,
+`refiStressTest`, `capexReserveSizing`, `feeDragOnIrr`,
+`fund-vs-deal-irr-gap`, `capital-allocation-priority`,
+`risk-adjusted-return-framework` all now exist in `src/quiz/`) — only the
+Development section's 3 were corrected in this pass; the mortgage/asset-mgmt/
+portfolio sections likely need the same staleness sweep in a follow-up.
+
+Top GAPs to address (ranked by interview frequency / section thinness):
+
+1. `hard-vs-soft-cost-classification` situational (development)
+2. `gmp-vs-cost-plus` situational (development)
+3. `entitlement-risk-option-structure` situational (development)
+4. `preleasing-covenant-shortfall` situational (development)
 5. `walk-distressed-1` walkthrough (cross-cutting)
 
-These five gaps would lift mapped-to-content coverage from 78% → ~93% with
-~½ day of content work each, and they all surface from real interview-question
-patterns rather than top-down design guesses.
+Development now carries the largest single batch of open GAPs (10) of any
+section — by design, since it's also the section with the fewest built
+content items (22 development-tagged templates/situationals/walkthroughs,
+vs. 38-114 for the other roles). Portfolio Management (48 content items,
+4/8 doc entries still mapped) is the next-thinnest area and is a reasonable
+target for the same treatment in a future pass.
