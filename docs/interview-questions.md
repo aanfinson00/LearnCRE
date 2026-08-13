@@ -26,7 +26,7 @@ in a future PR.
 
 ---
 
-## Acquisitions (12)
+## Acquisitions (15)
 
 ### Q: How do you compute cap rate, and what's a typical going-in cap range for stabilized industrial in a tier-1 market today?
 - **Role:** acquisitions · **Difficulty:** beginner
@@ -88,9 +88,24 @@ in a future PR.
 - **Why:** single-tenant pricing nuance.
 - **Maps to:** `tenant-credit-pricing` situational.
 
+### Q: A limited-service hotel is quoted at a 300 bps wider cap than full-service comps in the same submarket — real discount or real risk?
+- **Role:** acquisitions · **Difficulty:** intermediate
+- **Why:** hotel is the thinnest asset class in our situational bank (1 case vs 11 for multifamily) — pricing-spread reasoning is the natural next hotel case.
+- **Maps to:** **GAP — propose `hotel-limited-service-premium-cap` situational**.
+
+### Q: Your retail comp set mixes power-center anchors and unanchored strip centers — how do you screen it before you trust the blended cap?
+- **Role:** acquisitions · **Difficulty:** beginner
+- **Why:** retail sits at 2 situationals vs 9-11 for office/multifamily, and comp-selection (2 cases total) is one of the thinnest categories in the bank.
+- **Maps to:** **GAP — propose `retail-comp-set-screening` situational**.
+
+### Q: A 2M-SF industrial submarket just added 400k SF of spec supply — how long until it re-tightens, and does your acquisition timeline survive it?
+- **Role:** acquisitions · **Difficulty:** intermediate
+- **Why:** industrial has only 3 situationals, and absorption (1 case) is the single thinnest category in the whole bank.
+- **Maps to:** **GAP — propose `industrial-spec-supply-absorption` situational**.
+
 ---
 
-## Asset Management (10)
+## Asset Management (13)
 
 ### Q: Year-3 NOI came in 8% below pro forma. Where do you look first?
 - **Role:** assetManagement · **Difficulty:** intermediate
@@ -142,9 +157,24 @@ in a future PR.
 - **Why:** capex discipline; common pitfall is using the OM number unchanged.
 - **Maps to:** **GAP — propose `capex-reserve-discipline` situational + `capexReserveSizing` quiz template**.
 
+### Q: RevPAR is holding flat year-over-year but GOP margin has dropped 300 bps — where's the leak?
+- **Role:** assetManagement · **Difficulty:** intermediate
+- **Why:** the one hotel situational we have is a demand-side (RevPAR Index) case; this is the operating-margin lens, and hotel remains our thinnest asset class overall.
+- **Maps to:** **GAP — propose `hotel-gop-margin-leak` situational**.
+
+### Q: A big-box anchor's co-tenancy clause just tripped — what actually happens to the shop-space rent roll?
+- **Role:** assetManagement · **Difficulty:** intermediate
+- **Why:** retail-specific lease mechanic; lease-econ (2 cases) is one of the thinnest categories and retail is under-covered relative to office/multifamily.
+- **Maps to:** **GAP — propose `retail-cotenancy-trigger` situational**.
+
+### Q: The same 50 bps of cap-rate movement hits a hotel, a single-tenant industrial box, and an anchored retail center differently — walk through why.
+- **Role:** assetManagement · **Difficulty:** advanced
+- **Why:** cross-asset-class sensitivity reasoning; sensitivity (2 cases) is a thin category and this doubles as coverage for hotel/retail/industrial in one case.
+- **Maps to:** **GAP — propose `cross-asset-cap-sensitivity-comparison` situational**.
+
 ---
 
-## Mortgage Underwriting (10)
+## Mortgage Underwriting (11)
 
 ### Q: What's the formula for DSCR? What's a healthy threshold?
 - **Role:** mortgageUw · **Difficulty:** beginner
@@ -196,9 +226,14 @@ in a future PR.
 - **Why:** refi-risk underwriting; common at life cos and debt funds.
 - **Maps to:** **GAP — propose `refiStressTest` quiz template + `refi-cap-stress` situational**.
 
+### Q: Your construction cost comps are all pre-rate-hike closings — how do you adjust the basis for today's GMP market before you size the perm takeout?
+- **Role:** mortgageUw · **Difficulty:** advanced
+- **Why:** development is our smallest role section (7 questions) and comp-selection is one of the thinnest categories bank-wide; this bridges both.
+- **Maps to:** **GAP — propose `dev-construction-comp-inflation-adjustment` situational**.
+
 ---
 
-## Portfolio Management (8)
+## Portfolio Management (9)
 
 ### Q: Your fund is 40% office vs 25% target. Which assets do you sell first to rebalance?
 - **Role:** portfolioMgmt · **Difficulty:** advanced
@@ -240,9 +275,14 @@ in a future PR.
 - **Why:** EM↔IRR translation; common filter.
 - **Maps to:** `equityMultiple` quiz template + `irrSimple` quiz template + `EquityMultipleViz`.
 
+### Q: A ground-up deal's pre-leasing anchor wants a 90-day early-termination right in exchange for signing now — how do you price that option into the fund's return?
+- **Role:** portfolioMgmt · **Difficulty:** advanced
+- **Why:** development is our smallest role section and lease-econ is one of the thinnest categories bank-wide; this closes both gaps at once.
+- **Maps to:** **GAP — propose `dev-preleasing-option-pricing` situational**.
+
 ---
 
-## Development (7)
+## Development (9)
 
 ### Q: Land cost $8M, hard cost $38M, soft $7M, 5% contingency. What's TPC and what's the yield-on-cost on $4.5M stabilized NOI?
 - **Role:** development · **Difficulty:** intermediate
@@ -278,6 +318,16 @@ in a future PR.
 - **Role:** development · **Difficulty:** advanced
 - **Why:** ground-lease economics; common at urban infill developers.
 - **Maps to:** **GAP — propose `groundLeaseVsFee` situational**.
+
+### Q: Your hotel pro forma assumes 72% stabilized occupancy — how much does a 5-point miss move yield on cost?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** development is our smallest role section, hotel is our thinnest asset class, and sensitivity is one of the thinnest categories — one case, three gaps.
+- **Maps to:** **GAP — propose `hotel-occupancy-sensitivity-dev` situational**.
+
+### Q: Clear height goes from 32' to 36' on the same footprint and land basis — how much of the construction cost premium actually shows up in achievable rent?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** industrial has only 3 situationals and none pair the physical-spec premium with a development-side cost/rent tradeoff (the existing `industrial-truck-court-bid` case is acquisitions-side).
+- **Maps to:** **GAP — propose `industrial-clear-height-premium-underwriting` situational**.
 
 ---
 
@@ -315,12 +365,14 @@ regardless of position.
 
 ## Summary statistics
 
-- **Total questions in this doc:** 52
-- **Mapped to existing content:** 41 (78%)
-- **Flagged as GAPs:** 8 (15%)
-- **Out of scope (time-sensitive / behavioral):** 4 (8%)
+_Recount as of 2026-08-13, after the asset-class/category depth pass below._
 
-Top GAPs to address (ranked by interview frequency):
+- **Total questions in this doc:** 62
+- **Mapped to existing content:** 38 (61%)
+- **Flagged as GAPs:** 20 (32%)
+- **Out of scope (time-sensitive / behavioral):** 4 (6%)
+
+Top legacy GAPs to address (ranked by interview frequency):
 
 1. `capexReserveSizing` quiz + `capex-reserve-discipline` situational (asset mgmt)
 2. `refiStressTest` quiz + `refi-cap-stress` situational (mortgage UW)
@@ -328,6 +380,30 @@ Top GAPs to address (ranked by interview frequency):
 4. `constructionLoanSizing` quiz + `dev-ltc-vs-ltv` situational (development)
 5. `walk-distressed-1` walkthrough (cross-cutting)
 
-These five gaps would lift mapped-to-content coverage from 78% → ~93% with
-~½ day of content work each, and they all surface from real interview-question
-patterns rather than top-down design guesses.
+Several of these have already shipped per `ROADMAP.md`'s "Question-base depth
+pass — Phase 1" note — this doc's `Maps to:` lines haven't all been swept to
+match yet; verify against `src/quiz/situational/index.ts` before re-proposing.
+
+### 2026-08-13 audit — approved-question distribution is still skewed
+
+A fresh count of `src/quiz/situational/*.ts` (72 cases) shows the same skew
+Phase 1 flagged, only partly closed:
+
+- **By asset class:** multifamily 11 · office 9 · mixed 8 · industrial 3 ·
+  retail 2 · **hotel 1** — hotel/retail/industrial remain the thinnest
+  asset classes by a wide margin.
+- **By role:** acquisitions 40 · assetManagement 31 · portfolioMgmt 25 ·
+  mortgageUw 19 · **development 9** — development is the lightest role
+  even after Phase 1's ground-lease and LTC/LTV additions.
+- **By category:** deal-process 21 · document-literacy 13 ·
+  investment-thesis 9 · risk 7 · pricing 7 · diagnostic 7 · **sensitivity 2 ·
+  lease-econ 2 · comp-selection 2 · absorption 1** — these four categories
+  are the thinnest in the bank.
+
+The 10 questions added in this pass (hotel ×3, retail ×2, industrial ×2,
+development ×2, plus a cross-asset sensitivity case) target exactly this
+gap — each is tagged in its `Why:` line with which axis (asset class /
+role / category) it addresses, several on more than one axis at once.
+Next pass: turn these 10 `GAP` phrasings into real `SituationalCase`
+entries, prioritizing hotel and absorption/comp-selection/sensitivity
+since those are the single thinnest bucket on their respective axis.
