@@ -136,7 +136,8 @@ From recent conversation, the user wants more content on the **deal lifecycle
 from cradle to grave** — operational, back-office, post-close work that's
 distinct from the underwriting/valuation focus the bank initially targeted.
 
-Already covered in `category: 'deal-process'`:
+Already covered in `category: 'deal-process'` (now the largest category at
+21 cases — no longer a gap, see census below):
 - capital-call-mechanics
 - closing-prorations
 - construction-cost-overrun
@@ -145,27 +146,91 @@ Already covered in `category: 'deal-process'`:
 - balance-sheet-refi-impact
 - budget-vs-actual-variance
 - distribution-waterfall-1tier
+- closing-checklist-sequence, covenant-testing-cadence,
+  cost-segregation-basics, tenant-improvement-approval, and the six
+  waterfall/DSCR/LPA-mechanics families added since — the "adjacent
+  deal-lifecycle" gap list from the prior pass is fully closed.
 
-GAPs surfaced from `docs/interview-questions.md` (still open for content):
-- capexReserveSizing quiz template (asset mgmt)
-- refiStressTest quiz template (mortgage UW)
-- feeDragOnIrr quiz template (portfolio mgmt)
-- constructionLoanSizing quiz template (development)
-- walk-distressed-1 walkthrough (cross-cutting)
+Previously-listed template gaps are shipped: `capexReserveSizing`,
+`refiStressTest`, `feeDragOnIrr`, `constructionLoanSizing` (all in
+`src/quiz/templates/`) and `walk-distressed-1` (in `src/quiz/walkthroughs.ts`)
+all exist in the repo now. Don't regenerate them.
 
-Adjacent deal-lifecycle topics not yet covered (good candidates for next
-batch):
-- Closing checklist + due-diligence sequence (acquisitions process)
-- Insurance program — master policy, builder's risk, GL, umbrella
-- Loan covenant testing cadence (monthly DSCR / debt-yield certification)
-- Year-end audit + K-1 timeline
-- Property tax appeal process and economics
-- Lease abstract + critical-date tracking
-- Capex draw approval (funder, contractor, owner sign-off chain)
-- Sponsor-LP communications cadence (monthly distrib, quarterly report,
-  annual meeting)
-- Asset reposition sequence — vacate, renovate, re-lease
-- Reserve study — what one is and how it informs reserves
+### Coverage census — situational bank, as of 2026-08-16
+
+71 situational cases in `src/quiz/situational/`. Tallied by `category`,
+`roles`, and `assetClass`:
+
+| category | count | | roles | count | | assetClass | count |
+|---|---|---|---|---|---|---|---|
+| deal-process | 21 | | acquisitions | 40 | | multifamily | 11 |
+| document-literacy | 13 | | assetManagement | 31 | | office | 9 |
+| investment-thesis | 9 | | portfolioMgmt | 25 | | mixed | 8 |
+| risk | 7 | | mortgageUw | 19 | | industrial | 3 |
+| pricing | 7 | | development | 9 | | retail | 2 |
+| diagnostic | 7 | | | | | hotel | 1 |
+| sensitivity | 2 | | | | | | |
+| lease-econ | 2 | | | | | | |
+| comp-selection | 2 | | | | | | |
+| absorption | 1 | | | | | | |
+
+**Thinnest areas (fewest approved/shipped questions):** `absorption` (1
+case — `absorptionTiming.ts`, multifamily only), `lease-econ` (2 —
+NNN/gross and TI-vs-rent-giveback), `comp-selection` (2 — comp vetting and
+vintage adjustment), `sensitivity` (2 — both `roles: ['acquisitions']` and
+`assetClass: 'mixed'`, so no mortgageUw/portfolioMgmt or single-asset-class
+sensitivity case exists yet). By role, `development` (9) is the thinnest.
+By asset class, `hotel` (1), `retail` (2), and `industrial` (3) trail
+`multifamily`/`office` by 3–10x.
+
+### 10 candidate phrasings for the next batch
+
+Drafted to target the thin cells above — new `id`s, checked against
+existing titles/ids in `src/quiz/situational/` for no collision. Titles
+only; each still needs the full `SituationalCase` shape (scenario, data,
+4 options with exactly one `isBest`, takeaway, tips) per the spec above
+before it ships.
+
+1. **[absorption · industrial · development]** "Does pre-leasing velocity
+   clear the spec-development go/no-go threshold?" — spec industrial
+   building underwriting a pre-leasing hurdle before breaking ground.
+2. **[absorption · retail · acquisitions/assetManagement]** "How many
+   quarters until this power center's anchor vacancy backfills?" —
+   junior-anchor dark-box absorption math distinct from #2's multifamily
+   lease-up case already in the bank.
+3. **[comp-selection · hotel · acquisitions]** "Should the comp set
+   include a limited-service flag conversion two exits down?" — brand/flag
+   comparability judgment call, not just distance/vintage.
+4. **[comp-selection · office · acquisitions/mortgageUw]** "The appraiser
+   dropped your best comp for being 'too far' — is that defensible?" —
+   when to push back on an appraisal's comp exclusions.
+5. **[lease-econ · industrial · acquisitions/assetManagement]** "Free rent
+   vs. a lower face rate — which one actually nets more NPV to the
+   landlord?" — effective-rent-to-NPV mechanics, a fresh angle from the
+   existing NNN/gross and TI cases.
+6. **[lease-econ · retail · assetManagement]** "Co-tenancy clause just
+   triggered — what does the rent actually do?" — reading a co-tenancy
+   kickout/rent-reduction clause, a document-literacy-adjacent lease-econ
+   gap with zero retail lease-econ cases today.
+7. **[sensitivity · mortgageUw · office]** "Your DSCR covenant cushion —
+   which single variable eats it first if rates don't come down?" — first
+   non-acquisitions, single-asset-class sensitivity case.
+8. **[sensitivity · portfolioMgmt · multifamily]** "Which input move
+   breaks this deal's IRR fastest — exit cap, rent growth, or opex?" —
+   tornado-chart-style ranking exercise, portfolioMgmt angle.
+9. **[comp-selection · development · mixed]** "Land comp is priced
+   $/buildable-SF, your deal pencils $/unit — how do you reconcile the
+   basis?" — land-comp normalization, first comp-selection case tagged
+   development.
+10. **[absorption · multifamily · development/assetManagement]**
+    "Concession creep during lease-up — is the trade rent number still
+    real?" — net-effective-rent-under-concessions distinct from #1's
+    committee-timeline framing.
+
+Next pass: pick 2–3 of the above, write the full case per the "well-formed
+content" spec, register in `src/quiz/situational/index.ts`, run
+`npm run build && npx vitest run`, then re-run this census to confirm the
+thin cells actually moved before drafting the next 10.
 
 ---
 
