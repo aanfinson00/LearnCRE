@@ -242,7 +242,7 @@ in a future PR.
 
 ---
 
-## Development (7)
+## Development (17)
 
 ### Q: Land cost $8M, hard cost $38M, soft $7M, 5% contingency. What's TPC and what's the yield-on-cost on $4.5M stabilized NOI?
 - **Role:** development · **Difficulty:** intermediate
@@ -267,7 +267,7 @@ in a future PR.
 ### Q: Construction loan sizing on a $50M TPC dev with 65% LTC. What's the equity check?
 - **Role:** development · **Difficulty:** intermediate
 - **Why:** LTC-vs-LTV distinction; common at debt funds + GC-side.
-- **Maps to:** **GAP — propose `constructionLoanSizing` quiz template + `dev-ltc-vs-ltv` situational**.
+- **Maps to:** `constructionLoanSizing` Excel modeling-test template. *(Corrected 2026-08-17: this was flagged GAP but the template already ships — `src/excel/modelingTest/templates/constructionLoanSizing.ts`.)*
 
 ### Q: GAP — How do you size a lease-up reserve on a development that stabilizes year 2-3?
 - **Role:** development · **Difficulty:** intermediate
@@ -277,7 +277,57 @@ in a future PR.
 ### Q: Ground lease vs fee-simple on a development site — what changes in your underwriting?
 - **Role:** development · **Difficulty:** advanced
 - **Why:** ground-lease economics; common at urban infill developers.
-- **Maps to:** **GAP — propose `groundLeaseVsFee` situational**.
+- **Maps to:** `ground-lease-vs-fee` situational (question bank #31). *(Corrected 2026-08-17: this was flagged GAP but the situational already ships — `src/quiz/situational/groundLeaseVsFee.ts`.)*
+
+### Q: Site is under a rezoning/rezone-contingent purchase option, not yet entitled. How do you underwrite the land bid?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** entitlement risk is priced very differently from construction risk — most candidates conflate the two; common at land-banking and merchant-builder shops.
+- **Maps to:** **GAP — propose `entitlement-risk-land-bid` situational**.
+
+### Q: GC wants a GMP contract; you're weighing it against cost-plus with a fee cap. Which do you push for, and why?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** contract-type selection (not overrun handling, which is already covered) — tests whether the candidate understands what risk transfer actually costs in GMP contingency pricing.
+- **Maps to:** **GAP — propose `gmp-vs-cost-plus-contract` situational**.
+
+### Q: The developer fee is 4% of TPC. Is that a cost line, or is it also a return lever for the sponsor?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** developer-fee mechanics are frequently misunderstood as pure cost when they also function as promote-adjacent sponsor economics.
+- **Maps to:** **GAP — propose `developer-fee-mechanics` situational**.
+
+### Q: Impact fees and offsite infrastructure costs came in $1.5M above the pro forma late in entitlement. Where does that go in your budget?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** municipal exactions are a common late-stage budget surprise that candidates often don't distinguish from hard-cost overruns.
+- **Maps to:** **GAP — propose `impact-fee-budget-surprise` situational**.
+
+### Q: Your construction loan requires 60% pre-leased before funding draws past foundation. You're at 45% with 6 months of absorption runway left. What do you do?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** pre-leasing/pre-sale covenants gate real capital events; tests whether the candidate can plan around a funding trigger, not just calculate absorption.
+- **Maps to:** **GAP — propose `pre-leasing-funding-threshold` situational**.
+
+### Q: Your construction loan matures in 4 months. What does the lender actually require to convert to the permanent loan, and what happens if you miss the test?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** construction-to-perm conversion (DSCR/debt-yield tests, extension options, springing recourse) is distinct from origination and rarely drilled directly.
+- **Maps to:** **GAP — propose `construction-to-perm-conversion` situational**.
+
+### Q: A zoning update caps you at 1.1 parking spaces/unit instead of the 1.5 you underwrote. How does that flow through your unit count and yield-on-cost?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** density/FAR/parking constraints directly compress buildable GSF and NRSF — a concrete, calculable version of "zoning risk."
+- **Maps to:** **GAP — propose `parking-density-constraint` situational + quiz template**.
+
+### Q: Phase II environmental comes back with $600k of remediation on a $9M land parcel. Walk through how that changes your bid.
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** environmental risk pricing on raw land is a common diligence gate that's rarely tested outside of a checklist question.
+- **Maps to:** **GAP — propose `environmental-remediation-bid-adjustment` situational**.
+
+### Q: A 10-year property-tax abatement (PILOT) is attached to the site. How does that change your underwriting versus paying full assessed-value tax from year 1?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** abatement cliffs (the "tax bomb" at expiration) are a frequent modeling trap — NOI looks great years 1-10, then compresses hard.
+- **Maps to:** **GAP — propose `tax-abatement-cliff` situational**.
+
+### Q: Same site, same TPC — build-to-core (hold at stabilization) vs. merchant-build (sell at delivery/lease-up). How does exit strategy change your target yield-on-cost?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** exit strategy set *at underwriting* changes the required development spread — merchant-builders price for a quick condo-style sale to a core buyer and need a wider cushion than a build-to-core sponsor rolling into a perm loan; candidates often treat yield-on-cost thresholds as fixed rather than strategy-dependent.
+- **Maps to:** **GAP — propose `build-to-core-vs-merchant-build` situational**.
 
 ---
 
@@ -315,19 +365,42 @@ regardless of position.
 
 ## Summary statistics
 
-- **Total questions in this doc:** 52
-- **Mapped to existing content:** 41 (78%)
-- **Flagged as GAPs:** 8 (15%)
-- **Out of scope (time-sensitive / behavioral):** 4 (8%)
+- **Total questions in this doc:** 62
+- **Mapped to existing content:** 40 (65%)
+- **Flagged as GAPs:** 18 (29%)
+- **Out of scope (time-sensitive / behavioral):** 4 (6%)
+
+*(Updated 2026-08-17: added 10 draft phrasings for Development, currently the
+thinnest role area in the live question bank — 11 of 100 questions in
+`feedback/questions.json`, vs. 50 for acquisitions, 36 for asset management,
+30 for portfolio management, and 21 for mortgage underwriting. Also corrected
+two stale GAP flags — `constructionLoanSizing` and `groundLeaseVsFee` had
+already shipped.)*
 
 Top GAPs to address (ranked by interview frequency):
 
 1. `capexReserveSizing` quiz + `capex-reserve-discipline` situational (asset mgmt)
 2. `refiStressTest` quiz + `refi-cap-stress` situational (mortgage UW)
 3. `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz (portfolio mgmt)
-4. `constructionLoanSizing` quiz + `dev-ltc-vs-ltv` situational (development)
+4. `leaseUpReserve` quiz template (development)
 5. `walk-distressed-1` walkthrough (cross-cutting)
 
-These five gaps would lift mapped-to-content coverage from 78% → ~93% with
-~½ day of content work each, and they all surface from real interview-question
-patterns rather than top-down design guesses.
+Development is now the most gap-heavy section proportionally (11 of 17
+questions unmapped) despite being the smallest — it's the next area worth a
+dedicated content push. Priority order within the 10 new draft phrasings,
+by how often each pattern shows up in real interview loops:
+
+1. `pre-leasing-funding-threshold` — construction-loan funding covenants
+2. `construction-to-perm-conversion` — maturity/conversion test mechanics
+3. `gmp-vs-cost-plus-contract` — GC contract-type selection
+4. `entitlement-risk-land-bid` — pricing pre-entitlement land
+5. `tax-abatement-cliff` — PILOT/abatement expiration modeling trap
+6. `build-to-core-vs-merchant-build` — exit strategy sets the yield-on-cost bar
+7. `parking-density-constraint` — zoning caps flowing into yield-on-cost
+8. `developer-fee-mechanics` — fee-as-cost vs fee-as-return-lever
+9. `impact-fee-budget-surprise` — late-stage municipal exaction costs
+10. `environmental-remediation-bid-adjustment` — Phase II pricing
+
+(`leaseUpReserve` — lease-up reserve sizing — was already flagged as a GAP
+before this pass and remains open; not counted among the 10 new phrasings
+above.)
