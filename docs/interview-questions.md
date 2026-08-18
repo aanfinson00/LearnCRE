@@ -242,7 +242,7 @@ in a future PR.
 
 ---
 
-## Development (7)
+## Development (17)
 
 ### Q: Land cost $8M, hard cost $38M, soft $7M, 5% contingency. What's TPC and what's the yield-on-cost on $4.5M stabilized NOI?
 - **Role:** development · **Difficulty:** intermediate
@@ -278,6 +278,51 @@ in a future PR.
 - **Role:** development · **Difficulty:** advanced
 - **Why:** ground-lease economics; common at urban infill developers.
 - **Maps to:** **GAP — propose `groundLeaseVsFee` situational**.
+
+### Q: GAP — Site isn't entitled yet — how do you underwrite entitlement risk, and what's a defensible basis discount for a by-right vs. a rezoning play?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** entitlement timeline/risk is the first fork in any land deal and a frequent gap between analyst answers and how developers actually price it.
+- **Maps to:** **GAP — propose `entitlementRiskDiscount` situational**.
+
+### Q: GAP — GC wants a GMP contract; you're weighing it against cost-plus with a fee cap. Which protects the developer's basis better, and why?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** contract-structure question that tests understanding of who bears cost-overrun risk before it happens (contrast to the existing overrun/change-order cases, which test what happens after).
+- **Maps to:** **GAP — propose `gmpVsCostPlusContract` situational**.
+
+### Q: GAP — Construction lender wants 60% pre-leasing before closing. Deal is at 40% with strong LOIs on another 15%. Do you close, wait, or restructure?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** pre-leasing covenants are the single most common construction-loan gating item; tests reading a covenant as a go/no-go decision, not just a number.
+- **Maps to:** **GAP — propose `preLeasingCovenantGate` situational**.
+
+### Q: GAP — Stabilized value is $60M at a 5.5% exit cap. Hard + soft costs run $42M. Back into the residual land value and defend your land bid.
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** land residual is the core land-bid discipline; distinct from the existing land-cost-%-TPC sanity check, which runs the ratio the other direction.
+- **Maps to:** **GAP — propose `landResidualValuation` situational**.
+
+### Q: GAP — How do you size the interest reserve on a construction loan, and what happens to your equity check if the draw schedule slips six months?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** interest reserve is a standard construction-loan line item candidates routinely forget to size, and it interacts directly with schedule risk.
+- **Maps to:** **GAP — propose `interestReserveSizing` quiz template**.
+
+### Q: GAP — Same site, same budget — one deal is spec, the other is build-to-suit with a credit tenant pre-lease. How does each change your lender's terms and your required return?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** spec-vs-BTS is a core risk-classification question that shapes both debt terms and equity hurdle before a shovel goes in the ground.
+- **Maps to:** **GAP — propose `specVsBuildToSuit` situational**.
+
+### Q: GAP — Developer earns a 4% development fee plus a promote once the deal hits an 18% IRR hurdle. Walk through when each piece of GP compensation actually gets paid.
+- **Role:** development · **Difficulty:** advanced
+- **Why:** development-fee-vs-promote timing is a frequent trip-up — candidates conflate fee income (paid during construction) with promote (paid at exit, hurdle-gated).
+- **Maps to:** **GAP — propose `developmentFeeVsPromote` situational**.
+
+### Q: GAP — Municipality offers a 10-year PILOT abating 75% of property tax. How does that flow through your proforma NOI and exit value, and what happens in year 11?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** tax-abatement cliffs are a classic underwriting trap — the NOI (and therefore value) can look strong for years and then step down hard at PILOT expiration.
+- **Maps to:** **GAP — propose `pilotAbatementCliff` situational**.
+
+### Q: GAP — Three-phase project; Phase 1 stabilizes and you want to refinance out and release it from the construction loan's cross-collateralization before Phase 3 breaks ground. What does the lender need to see?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** multi-phase capital stacking and release provisions are common at larger developers/debt funds and rarely drilled elsewhere in the bank.
+- **Maps to:** **GAP — propose `phasedCapStackRelease` situational**.
 
 ---
 
@@ -315,10 +360,19 @@ regardless of position.
 
 ## Summary statistics
 
-- **Total questions in this doc:** 52
-- **Mapped to existing content:** 41 (78%)
-- **Flagged as GAPs:** 8 (15%)
-- **Out of scope (time-sensitive / behavioral):** 4 (8%)
+_Refreshed 2026-08-18: role-distribution audit (`roles` tag across
+`src/quiz/situational/`) showed `development` at 9 tagged cases — the
+thinnest of the five roles (acquisitions 40, assetManagement 31,
+portfolioMgmt 25, mortgageUw 19, development 9) — and this doc's own
+Development section was the shortest role bucket (7, vs. 8–12 elsewhere).
+The 10 new GAP entries below target that gap; none duplicate an existing
+Development case (construction contracting, loan gating, land economics,
+fee/promote timing, and tax-abatement/phasing mechanics were all unaddressed)._
+
+- **Total questions in this doc:** 62
+- **Mapped to existing content:** 41 (66%)
+- **Flagged as GAPs:** 18 (29%)
+- **Out of scope (time-sensitive / behavioral):** 4 (6%)
 
 Top GAPs to address (ranked by interview frequency):
 
@@ -327,6 +381,18 @@ Top GAPs to address (ranked by interview frequency):
 3. `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz (portfolio mgmt)
 4. `constructionLoanSizing` quiz + `dev-ltc-vs-ltv` situational (development)
 5. `walk-distressed-1` walkthrough (cross-cutting)
+
+Newest batch (development depth pass, 2026-08-18), roughly in priority order:
+
+6. `preLeasingCovenantGate` situational — construction-loan pre-leasing gate decision
+7. `landResidualValuation` situational — back into max land bid from stabilized value
+8. `gmpVsCostPlusContract` situational — construction-contract risk allocation
+9. `entitlementRiskDiscount` situational — pricing basis for unentitled land
+10. `specVsBuildToSuit` situational — risk classification and lender/equity impact
+11. `interestReserveSizing` quiz template — construction interest-reserve sizing + schedule slip
+12. `developmentFeeVsPromote` situational — GP fee vs. promote payment timing
+13. `pilotAbatementCliff` situational — tax-abatement step-down at PILOT expiration
+14. `phasedCapStackRelease` situational — multi-phase cross-collateralization release
 
 These five gaps would lift mapped-to-content coverage from 78% → ~93% with
 ~½ day of content work each, and they all surface from real interview-question
