@@ -242,7 +242,7 @@ in a future PR.
 
 ---
 
-## Development (7)
+## Development (17)
 
 ### Q: Land cost $8M, hard cost $38M, soft $7M, 5% contingency. What's TPC and what's the yield-on-cost on $4.5M stabilized NOI?
 - **Role:** development · **Difficulty:** intermediate
@@ -278,6 +278,56 @@ in a future PR.
 - **Role:** development · **Difficulty:** advanced
 - **Why:** ground-lease economics; common at urban infill developers.
 - **Maps to:** **GAP — propose `groundLeaseVsFee` situational**.
+
+### Q: Your site needs a zoning variance that typically takes 9–12 months. How do you structure the deal to protect your deposit while entitlement is pending?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** entitlement-contingency structuring; underbuilt in our content relative to construction-phase risk.
+- **Maps to:** **GAP — propose `entitlement-contingency-structuring` situational**.
+
+### Q: You're comparing a GMP (guaranteed maximum price) contract to a design-build contract for a $60M vertical. Walk me through the risk-allocation difference.
+- **Role:** development · **Difficulty:** advanced
+- **Why:** contract-structure risk allocation; frequently tested for development and construction-adjacent roles.
+- **Maps to:** **GAP — propose `gmp-vs-design-build` situational**.
+
+### Q: A municipality offers a 10-year, 75% property-tax abatement (PILOT) on your $40M development. How does that change your underwritten yield-on-cost, and what happens in year 11?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** tax-abatement cliff risk; a common trap in urban infill underwriting.
+- **Maps to:** **GAP — propose `pilotAbatementCliff` quiz template + `pilot-tax-abatement-cliff` situational**.
+
+### Q: Your construction lender requires 50% pre-leasing before closing the loan. You're at 35% with three LOIs outstanding. What are your options?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** pre-leasing covenants are a common gating item on spec and mixed-use development debt.
+- **Maps to:** **GAP — propose `pre-leasing-covenant-gate` situational**.
+
+### Q: Impact fees just increased 20% mid-entitlement on your project. Walk me through how that flows through TPC and your return metrics.
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** fee-escalation math; tests whether a candidate treats impact fees as hard cost or a separate line.
+- **Maps to:** **GAP — propose `impactFeeEscalation` quiz template**.
+
+### Q: You're underwriting a podium product with a 1.5 parking ratio required by code vs. the 1.0 that market actually needs. How do you quantify the cost of the excess parking?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** parking-ratio cost tradeoff; frequent in multifamily development feasibility.
+- **Maps to:** **GAP — propose `parking-ratio-cost-drag` situational**.
+
+### Q: Mezz debt is layered into the construction stack at 80% total LTC (65% senior + 15% mezz) at a blended 9.5% cost. When does mezz actually make the deal work vs. just add risk?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** mezzanine-in-the-construction-stack reasoning, distinct from our existing perm-loan mezz content.
+- **Maps to:** **GAP — propose `mezz-in-construction-stack` situational**.
+
+### Q: Your GC comes back with a GMP that's 12% over your budgeted hard cost, driven mostly by steel and labor escalation. Walk me through your options before you re-trade the deal.
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** pre-closing cost-escalation response; distinct from our existing mid-construction cost-overrun case.
+- **Maps to:** **GAP — propose `pre-closing-gmp-escalation` situational**.
+
+### Q: Rates move +150 bps between your construction loan commitment and closing, six months out. Walk me through what changes in your capital stack and your go/no-go decision.
+- **Role:** development · **Difficulty:** advanced
+- **Why:** rate-move-during-entitlement risk; a real pattern candidates should be able to reason through live.
+- **Maps to:** **GAP — propose `rate-move-commit-to-close` situational**.
+
+### Q: Two-phase development — Phase 1 (200 units) delivers year 2, Phase 2 (150 units) year 4. How do you allocate shared infrastructure cost between phases, and how does that affect each phase's standalone yield-on-cost?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** multi-phase cost allocation; a common trap is loading all shared infrastructure cost onto Phase 1.
+- **Maps to:** **GAP — propose `phased-infrastructure-cost-allocation` situational**.
 
 ---
 
@@ -315,10 +365,23 @@ regardless of position.
 
 ## Summary statistics
 
-- **Total questions in this doc:** 52
-- **Mapped to existing content:** 41 (78%)
-- **Flagged as GAPs:** 8 (15%)
-- **Out of scope (time-sensitive / behavioral):** 4 (8%)
+- **Total questions in this doc:** 62
+- **Mapped to existing content:** 41 (66%)
+- **Flagged as GAPs:** 18 (29%)
+- **Out of scope (time-sensitive / behavioral):** 4 (6%)
+
+Development was the smallest role section (7 questions vs. 12 for
+Acquisitions) and had the fewest role-tagged entries across every content
+pool in the repo — situational cases (9 vs. 40 for acquisitions), quiz
+templates (10 vs. 60), and mock-interview prompts (0 vs. 4). The ten new
+`### Q:` entries added above target that gap with fresh phrasings — pending
+review, not yet mapped to content.
+
+Note: `capexReserveSizing`, `refiStressTest`, `fund-vs-deal-irr-gap`, and
+`constructionLoanSizing` (items 1–4 below, previously listed as the top
+gaps) have since landed in the codebase but this doc's per-question
+`Maps to:` lines haven't been swept to reflect that — flagging for a future
+pass rather than rewriting here.
 
 Top GAPs to address (ranked by interview frequency):
 
