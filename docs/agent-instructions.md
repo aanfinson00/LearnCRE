@@ -169,6 +169,81 @@ batch):
 
 ---
 
+## Category-balance gaps (situational cases) — 2026-08-20
+
+Counted `category:` across `src/quiz/situational/*.ts` (66 shipped cases).
+Coverage is lopsided:
+
+| category | cases | |
+|---|---|---|
+| deal-process | 21 | ██████████████████████ |
+| document-literacy | 13 | ██████████████ |
+| investment-thesis | 9 | ██████████ |
+| diagnostic | 7 | ████████ |
+| pricing | 7 | ████████ |
+| risk | 7 | ████████ |
+| comp-selection | 2 | ██ |
+| lease-econ | 2 | ██ |
+| sensitivity | 2 | ██ |
+| absorption | 1 | █ |
+
+`absorption` is the standout gap (one case, `absorptionTiming.ts`, covers only
+the lease-up-timing formula). `comp-selection`, `lease-econ`, and
+`sensitivity` are the next-thinnest. The 10 phrasings below are titled and
+scoped like existing cases — the next agent picking up a "generate more
+content" task should draft these into full `SituationalCase` files (scenario,
+data grid, 3–4 options with one `isBest`, takeaway, tips) and register them in
+`src/quiz/situational/index.ts`.
+
+**absorption** (4 — biggest gap):
+1. "Your lease-up is beating pro forma — do you raise rents or protect
+   velocity?" — multifamily/industrial · intermediate ·
+   acquisitions/assetManagement. Pushing asking rents mid-lease-up risks
+   stalling absorption just as a debt-service covenant test approaches.
+2. "Two submarkets show the same vacancy rate — which one is actually
+   absorbing faster?" — office/industrial · beginner/intermediate ·
+   acquisitions. A static point-in-time vacancy snapshot vs. trailing
+   12-month net absorption trend tell different stories.
+3. "Shadow supply just hit the listings — does your absorption timeline
+   still hold?" — office · intermediate · acquisitions/assetManagement.
+   Sublease space adds effective inventory without a certificate of
+   occupancy or a line in the delivery pipeline.
+4. "Concessions just jumped to 2 months free — is absorption really
+   accelerating?" — multifamily · intermediate ·
+   assetManagement/acquisitions. Headline leasing pace looks strong; net
+   effective rent is quietly falling.
+
+**comp-selection** (2):
+5. "The best comp is a portfolio sale allocated across four buildings — how
+   do you use it?" — industrial · intermediate · acquisitions. Allocated
+   per-asset pricing in a multi-property trade can distort a single-asset
+   cap rate.
+6. "One of your comps is a sale-leaseback — does it belong in the cap-rate
+   set?" — net-lease/office · intermediate ·
+   acquisitions/portfolioMgmt. SLB pricing reflects tenant credit and lease
+   term more than real estate fundamentals.
+
+**lease-econ** (2):
+7. "Free rent up front vs. a lower face rate — which actually costs the
+   landlord more?" — office · beginner/intermediate ·
+   acquisitions/assetManagement. Two concession structures land on the same
+   headline rent but different NER paths.
+8. "The tenant is asking for a co-tenancy clause — what economic risk are
+   you actually taking on?" — retail · intermediate ·
+   assetManagement/acquisitions. Co-tenancy triggers (rent reduction /
+   kick-out rights) tied to anchor occupancy.
+
+**sensitivity** (2):
+9. "Rates move 100 bps at refi — does the deal still clear your minimum
+   return?" — multifamily/office · intermediate · mortgageUw/acquisitions.
+   One-way sensitivity on exit/refi rate against DSCR and levered IRR.
+10. "Which assumption actually moves your IRR more — rent growth or exit
+    cap?" — cross-asset-class · intermediate/advanced ·
+    acquisitions/portfolioMgmt. A tornado-style two-lever comparison to
+    prioritize diligence time.
+
+---
+
 ## What to NOT do
 
 - **Don't invent new file structures.** If situational cases live in
