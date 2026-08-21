@@ -1,5 +1,28 @@
 {
   "ideas": {
+    "asset-manager-vs-property-manager-where-the-line-is-08219": {
+      "category": "role-profile",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-21T08:09:26Z",
+      "graded_at": null,
+      "id": "asset-manager-vs-property-manager-where-the-line-is-08219",
+      "key_numbers": [
+        "$50k PM authority",
+        "$250k AM authority",
+        "lender consent above threshold"
+      ],
+      "outline": "Clarifies the division of responsibility between an asset manager (capital decisions, budget approval, lender/investor relationship) and a property manager (day-to-day operations, tenant relations, work orders) using a concrete TI-approval example.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Asset Manager vs. Property Manager: Where the Line Is"
+    },
     "building-a-cre-investment-portfolio-99887": {
       "category": "tools-workflow",
       "draft_quiz_path": null,
@@ -26,6 +49,29 @@
       },
       "status": "rejected",
       "title": "Building a CRE Investment Portfolio"
+    },
+    "building-an-excel-waterfall-model-step-by-step-08213": {
+      "category": "tools-workflow",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-21T08:09:26Z",
+      "graded_at": null,
+      "id": "building-an-excel-waterfall-model-step-by-step-08213",
+      "key_numbers": [
+        "8% pref",
+        "50% catch-up",
+        "20% carry"
+      ],
+      "outline": "Walks through structuring a promote waterfall in Excel from scratch: pref return hurdle, GP catch-up, and carried-interest tiers, plus common formula pitfalls (circular IRR references, mixing pre/post-fee cash flows).",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Building an Excel Waterfall Model Step by Step"
     },
     "construction-loan-fundamentals-99885": {
       "category": "capital-stack",
@@ -103,6 +149,121 @@
       "status": "refined",
       "title": "Due Diligence for Commercial Leases"
     },
+    "entitlement-risk-what-can-kill-a-deal-before-groundbreaking-": {
+      "category": "development-lifecycle",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-21T08:09:26Z",
+      "graded_at": null,
+      "id": "entitlement-risk-what-can-kill-a-deal-before-groundbreaking-",
+      "key_numbers": [
+        "18 months",
+        "30% discount",
+        "$2M land basis"
+      ],
+      "outline": "Walks through the entitlement process (zoning approval, variances, community/planning-board review) and why unentitled land trades at a steep discount to entitled land. Covers how sponsors price entitlement risk into land basis and timeline contingency.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Entitlement Risk: What Can Kill a Deal Before Groundbreaking"
+    },
+    "from-land-basis-to-vertical-cost-building-a-development-budg": {
+      "category": "development-lifecycle",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-21T08:09:26Z",
+      "graded_at": null,
+      "id": "from-land-basis-to-vertical-cost-building-a-development-budg",
+      "key_numbers": [
+        "$180/SF hard cost",
+        "12% soft costs",
+        "5% contingency"
+      ],
+      "outline": "Breaks a ground-up development budget into its stack: land basis, hard costs, soft costs, contingency, and financing/carry costs. Shows how each line item rolls up into total cost per unit or per SF and why contingency sizing matters.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "From Land Basis to Vertical Cost: Building a Development Budget"
+    },
+    "how-debt-yield-caps-loan-proceeds-08215": {
+      "category": "capital-stack",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-21T08:09:26Z",
+      "graded_at": null,
+      "id": "how-debt-yield-caps-loan-proceeds-08215",
+      "key_numbers": [
+        "10% debt yield",
+        "$1M NOI",
+        "$10M max loan"
+      ],
+      "outline": "Explains debt yield (NOI / loan amount) as a lender's floor-level risk metric, distinct from DSCR and LTV, and walks through a scenario where debt yield \u2014 not DSCR or LTV \u2014 becomes the binding constraint on maximum loan proceeds.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "How Debt Yield Caps Loan Proceeds"
+    },
+    "industrial-clear-height-and-why-it-drives-rent-08216": {
+      "category": "asset-class-deepdive",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-21T08:09:26Z",
+      "graded_at": null,
+      "id": "industrial-clear-height-and-why-it-drives-rent-08216",
+      "key_numbers": [
+        "36 ft clear height",
+        "1 door per 10k SF",
+        "$0.50/SF premium"
+      ],
+      "outline": "Explains why clear height, column spacing, and dock-door ratios matter to industrial/logistics tenants, and how these functional specs translate into rent premiums or functional obsolescence for older buildings.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Industrial Clear Height and Why It Drives Rent"
+    },
+    "multifamily-loss-to-lease-what-it-signals-08217": {
+      "category": "asset-class-deepdive",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-21T08:09:26Z",
+      "graded_at": null,
+      "id": "multifamily-loss-to-lease-what-it-signals-08217",
+      "key_numbers": [
+        "$1,450 in-place",
+        "$1,600 market",
+        "8% loss-to-lease"
+      ],
+      "outline": "Teaches how to read loss-to-lease (the gap between in-place rent and current market/asking rent across a rent roll) as a mark-to-market upside signal, and how it differs from vacancy loss in an operating statement.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Multifamily Loss-to-Lease: What It Signals"
+    },
     "office-building-maintenance-reserves-99882": {
       "category": "asset-class-deepdive",
       "draft_quiz_path": null,
@@ -131,6 +292,29 @@
       "status": "rejected",
       "title": "Office Building Maintenance Reserves"
     },
+    "preferred-equity-vs-mezzanine-debt-where-each-one-sits-08214": {
+      "category": "capital-stack",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-21T08:09:26Z",
+      "graded_at": null,
+      "id": "preferred-equity-vs-mezzanine-debt-where-each-one-sits-08214",
+      "key_numbers": [
+        "9-11% pref equity",
+        "11-14% mezz",
+        "75-85% LTV attach point"
+      ],
+      "outline": "Compares structural position, cost of capital, and control/remedy rights of preferred equity versus mezzanine debt in the capital stack, and the deal circumstances that push a sponsor toward one over the other.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Preferred Equity vs. Mezzanine Debt: Where Each One Sits"
+    },
     "property-valuation-during-economic-downturns-99884": {
       "category": "macro-cycle",
       "draft_quiz_path": "docs/CURRICULUM_DRAFTS/quiz-property-valuation-during-economic-downturns-99884.md",
@@ -157,6 +341,29 @@
       },
       "status": "refined",
       "title": "Property Valuation During Economic Downturns"
+    },
+    "reading-a-costar-comp-set-without-getting-fooled-08212": {
+      "category": "tools-workflow",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-21T08:09:26Z",
+      "graded_at": null,
+      "id": "reading-a-costar-comp-set-without-getting-fooled-08212",
+      "key_numbers": [
+        "$28/SF face rent",
+        "3 months free",
+        "NNN vs gross"
+      ],
+      "outline": "Teaches how to sanity-check comp data pulled from CoStar or CompStak before it enters an underwriting model: verifying lease structure (NNN vs. gross), confirming rent basis, and backing out concessions that inflate face rent.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Reading a CoStar Comp Set Without Getting Fooled"
     },
     "retail-leasing-dynamics-99881": {
       "category": "asset-class-deepdive",
@@ -265,6 +472,29 @@
       },
       "status": "refined",
       "title": "Understanding REITs vs. Direct Ownership"
+    },
+    "what-a-debt-broker-actually-does-day-to-day-08218": {
+      "category": "role-profile",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-21T08:09:26Z",
+      "graded_at": null,
+      "id": "what-a-debt-broker-actually-does-day-to-day-08218",
+      "key_numbers": [
+        "1% origination fee",
+        "6-8 lenders canvassed",
+        "45-day process"
+      ],
+      "outline": "Walks through a debt broker's workflow \u2014 sourcing lender relationships, structuring a term sheet, running a competitive process across multiple lenders \u2014 and how their compensation (points, spread) differs from an equity-side acquisitions analyst.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "What a Debt Broker Actually Does Day to Day"
     }
   },
   "log": [
@@ -323,6 +553,10 @@
     {
       "at": "2026-06-05T23:08:29Z",
       "msg": "refine: understanding-reits-vs-direct-ownership-99889 -> refined"
+    },
+    {
+      "at": "2026-08-21T08:09:26Z",
+      "msg": "generate: added 10 new ideas (manual \u2014 targeted at under-approved categories: development-lifecycle, tools-workflow, capital-stack, asset-class-deepdive, role-profile)"
     }
   ],
   "version": 1
