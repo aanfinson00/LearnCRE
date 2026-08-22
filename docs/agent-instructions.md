@@ -169,6 +169,68 @@ batch):
 
 ---
 
+## Coverage gap analysis — 2026-08-22 (automated)
+
+Counted every `src/quiz/situational/*.ts` case (71 total) by tag to find
+which slices of the bank are thinnest. Numbers below are case counts, not
+"approved" status (this repo has no live approval-tracking DB reachable from
+this session — the closest analog, the `question_submissions` Supabase
+table, tracks community-submitted questions, not the built-in bank).
+
+**By `assetClass`** (34 of 71 cases carry one; the rest are asset-agnostic
+mechanics — waterfall, DSCR, LPA, construction):
+- multifamily 11 · office 9 · mixed 8 · industrial 3 · **retail 2** · **hotel 1**
+
+**By `roles`** (cases can carry more than one):
+- acquisitions 40 · assetManagement 31 · portfolioMgmt 25 · mortgageUw 19 · **development 9**
+
+**By `category`**:
+- deal-process 21 · document-literacy 13 · investment-thesis 9 · diagnostic 7 ·
+  pricing 7 · risk 7 · **lease-econ 2** · **sensitivity 2** · **comp-selection 2** ·
+  **absorption 1**
+
+**By `difficulty`**:
+- advanced 34 · intermediate 33 · **beginner 4**
+
+Hotel, retail, and industrial asset classes; the `development` role; the
+`absorption` / `sensitivity` / `comp-selection` / `lease-econ` categories;
+and `beginner` difficulty are all underrepresented relative to the rest of
+the bank. Ten candidate phrasings below stack these gaps — not built out as
+full `SituationalCase` files yet, just titles + framing for a future pass
+(see workflow above) to flesh into scenario / options / takeaway / tips:
+
+1. **"Hotel: the management fee is 3% of gross revenue — how does that
+   change your NOI math vs. a net-lease asset?"** — *lease-econ, beginner,
+   hotel, acquisitions/assetManagement.* Contrast a revenue-based fee
+   structure against fixed/net leases beginners are used to.
+2. **"Hotel: how much does a 5-point drop in RevPAR growth move your
+   stabilized value?"** — *sensitivity, intermediate, hotel,
+   development/acquisitions.*
+3. **"Retail: which of these five grocery-anchored comps should you
+   actually average?"** — *comp-selection, beginner, retail, acquisitions.*
+4. **"Retail: how long until this power center backfills its anchor
+   vacancy?"** — *absorption, intermediate, retail,
+   acquisitions/assetManagement.*
+5. **"Industrial: how much does a 6-month entitlement delay cost your
+   development yield?"** — *sensitivity, intermediate, industrial,
+   development.*
+6. **"Industrial: your tenant pays base rent plus real estate taxes only —
+   is that NNN?"** — *lease-econ, beginner, industrial,
+   acquisitions/assetManagement.*
+7. **"You're told the deal 'pencils at a 150 bps development spread' — what
+   does that actually mean?"** — *diagnostic, beginner, development, mixed.*
+8. **"Which land comps should anchor your basis, and which should you throw
+   out?"** — *comp-selection, intermediate, development/acquisitions,
+   mixed.*
+9. **"Hotel: how many quarters until a newly-renovated property recaptures
+   its pre-renovation RevPAR index?"** — *absorption, intermediate, hotel,
+   assetManagement.*
+10. **"Retail: how much does a 10% co-tenancy rent reduction trigger move
+    your projected NOI?"** — *sensitivity, advanced, retail,
+    assetManagement/acquisitions.*
+
+---
+
 ## What to NOT do
 
 - **Don't invent new file structures.** If situational cases live in
