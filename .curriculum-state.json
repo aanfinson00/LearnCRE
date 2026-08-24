@@ -1,5 +1,97 @@
 {
   "ideas": {
+    "a-day-in-the-life-of-a-debt-broker-how-the-comp-actually-wor": {
+      "category": "role-profile",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-24T08:10:15Z",
+      "graded_at": null,
+      "id": "a-day-in-the-life-of-a-debt-broker-how-the-comp-actually-wor",
+      "key_numbers": [
+        "1% origination fee",
+        "$25M loan",
+        "5 lender term sheets"
+      ],
+      "outline": "Walks through what a mortgage/debt broker actually does day-to-day \u2014 sourcing lenders, running a competitive process, structuring the quote sheet \u2014 and how origination fees are actually earned and split.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "A Day in the Life of a Debt Broker: How the Comp Actually Works"
+    },
+    "agency-debt-vs-cmbs-picking-the-right-permanent-loan-90154": {
+      "category": "capital-stack",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-24T08:10:15Z",
+      "graded_at": null,
+      "id": "agency-debt-vs-cmbs-picking-the-right-permanent-loan-90154",
+      "key_numbers": [
+        "75% LTV",
+        "1.25x DSCR",
+        "10-year term"
+      ],
+      "outline": "Compares Fannie/Freddie agency execution against conduit CMBS on rate, leverage, prepayment penalty structure, and servicing flexibility, and explains which deal profiles favor each source.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Agency Debt vs. CMBS: Picking the Right Permanent Loan"
+    },
+    "argus-vs-excel-when-each-tool-actually-earns-its-keep-90159": {
+      "category": "tools-workflow",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-24T08:10:15Z",
+      "graded_at": null,
+      "id": "argus-vs-excel-when-each-tool-actually-earns-its-keep-90159",
+      "key_numbers": [
+        "10 tenants",
+        "12-year hold",
+        "2 models cross-checked"
+      ],
+      "outline": "Compares Argus Enterprise and a from-scratch Excel model for cash-flow modeling \u2014 where Argus's lease-by-lease engine pays for itself versus where a lean Excel model is faster and more transparent for a quick underwrite.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Argus vs. Excel: When Each Tool Actually Earns Its Keep"
+    },
+    "asset-management-vs-property-management-where-the-line-actua": {
+      "category": "role-profile",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-24T08:10:15Z",
+      "graded_at": null,
+      "id": "asset-management-vs-property-management-where-the-line-actua",
+      "key_numbers": [
+        "3% PM fee",
+        "quarterly AM report",
+        "annual budget cycle"
+      ],
+      "outline": "Clarifies the split between asset management (capital decisions, investor reporting, strategy) and property management (day-to-day operations, tenant relations, NOI execution), and where the two roles collide on a live deal.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Asset Management vs. Property Management: Where the Line Actually Falls"
+    },
     "building-a-cre-investment-portfolio-99887": {
       "category": "tools-workflow",
       "draft_quiz_path": null,
@@ -103,6 +195,98 @@
       "status": "refined",
       "title": "Due Diligence for Commercial Leases"
     },
+    "entitlement-risk-what-kills-a-deal-before-groundbreaking-901": {
+      "category": "development-lifecycle",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-24T08:10:15Z",
+      "graded_at": null,
+      "id": "entitlement-risk-what-kills-a-deal-before-groundbreaking-901",
+      "key_numbers": [
+        "18 months",
+        "$2M soft costs",
+        "40% approval odds"
+      ],
+      "outline": "Walks through the entitlement gauntlet \u2014 zoning, variances, community opposition, environmental review \u2014 and how each stage converts soft cost into hard risk. Frames why land basis is discounted for entitlement uncertainty and how developers price the option to walk away.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Entitlement Risk: What Kills a Deal Before Groundbreaking"
+    },
+    "industrial-clear-height-and-why-it-drives-rent-90155": {
+      "category": "asset-class-deepdive",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-24T08:10:15Z",
+      "graded_at": null,
+      "id": "industrial-clear-height-and-why-it-drives-rent-90155",
+      "key_numbers": [
+        "24'",
+        "36'",
+        "$0.85/SF NNN"
+      ],
+      "outline": "Explains why clear height, column spacing, and dock ratios move industrial rents and cap rates more than square footage alone, using a side-by-side of a 24' and a 36' clear building on the same site.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Industrial Clear Height and Why It Drives Rent"
+    },
+    "land-basis-to-vertical-how-the-capital-stack-shifts-across-a": {
+      "category": "development-lifecycle",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-24T08:10:15Z",
+      "graded_at": null,
+      "id": "land-basis-to-vertical-how-the-capital-stack-shifts-across-a",
+      "key_numbers": [
+        "70% LTC",
+        "$8M land basis",
+        "3 draw periods"
+      ],
+      "outline": "Traces how the mix of equity, mezz, and construction debt changes as a project moves from raw land through entitlement, vertical construction, and lease-up, and why the same deal is underwritten completely differently at each stage.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Land Basis to Vertical: How the Capital Stack Shifts Across a Development Timeline"
+    },
+    "lease-up-velocity-and-the-stabilization-clock-90151": {
+      "category": "development-lifecycle",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-24T08:10:15Z",
+      "graded_at": null,
+      "id": "lease-up-velocity-and-the-stabilization-clock-90151",
+      "key_numbers": [
+        "300 units",
+        "25 leases/month",
+        "90% stabilized"
+      ],
+      "outline": "Covers how a newly delivered project moves from certificate of occupancy to stabilized occupancy, and why absorption pace (not just rent) determines when permanent debt can refinance out construction debt. Ties lease-up velocity to interest carry and the developer's exit timing.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Lease-Up Velocity and the Stabilization Clock"
+    },
     "office-building-maintenance-reserves-99882": {
       "category": "asset-class-deepdive",
       "draft_quiz_path": null,
@@ -130,6 +314,29 @@
       },
       "status": "rejected",
       "title": "Office Building Maintenance Reserves"
+    },
+    "preferred-equity-vs-mezzanine-debt-where-the-waterfall-actua": {
+      "category": "capital-stack",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-24T08:10:15Z",
+      "graded_at": null,
+      "id": "preferred-equity-vs-mezzanine-debt-where-the-waterfall-actua",
+      "key_numbers": [
+        "12% pref",
+        "9% mezz coupon",
+        "75% LTV"
+      ],
+      "outline": "Contrasts preferred equity and mezzanine debt in a capital stack \u2014 control rights, cure periods, and how each behaves in a default versus a shortfall. Shows why sponsors pick one over the other even at similar pricing.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Preferred Equity vs. Mezzanine Debt: Where the Waterfall Actually Breaks"
     },
     "property-valuation-during-economic-downturns-99884": {
       "category": "macro-cycle",
@@ -185,6 +392,29 @@
       },
       "status": "rejected",
       "title": "Retail Leasing Dynamics"
+    },
+    "self-storage-cap-rate-compression-what-changed-since-2015-90": {
+      "category": "asset-class-deepdive",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-08-24T08:10:15Z",
+      "graded_at": null,
+      "id": "self-storage-cap-rate-compression-what-changed-since-2015-90",
+      "key_numbers": [
+        "8.5% (2015)",
+        "5.75% (2023)",
+        "$65/SF replacement cost"
+      ],
+      "outline": "Traces how self-storage went from a niche, high-cap asset class to institutionally priced product, and what drove the compression \u2014 REIT consolidation, data-driven revenue management, low capex intensity.",
+      "reasoning": null,
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": null,
+      "scores": null,
+      "status": "pending",
+      "title": "Self-Storage Cap Rate Compression: What Changed Since 2015"
     },
     "the-role-of-a-cre-analyst-99883": {
       "category": "role-profile",
@@ -323,6 +553,10 @@
     {
       "at": "2026-06-05T23:08:29Z",
       "msg": "refine: understanding-reits-vs-direct-ownership-99889 -> refined"
+    },
+    {
+      "at": "2026-08-24T08:10:15Z",
+      "msg": "generate: added 10 new ideas (requested 10, hand-curated to backfill low-approval categories: development-lifecycle, capital-stack, asset-class-deepdive, role-profile, tools-workflow)"
     }
   ],
   "version": 1
