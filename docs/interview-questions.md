@@ -137,10 +137,10 @@ in a future PR.
 - **Why:** tax-deferral vs redeployment-opportunity tradeoff.
 - **Maps to:** `tax-vs-irr-tradeoff` situational + `refi-vs-sell` situational.
 
-### Q: GAP — How do you set a capex reserve on a stabilized asset, and what gets included vs excluded?
+### Q: How do you set a capex reserve on a stabilized asset, and what gets included vs excluded?
 - **Role:** assetManagement · **Difficulty:** intermediate
 - **Why:** capex discipline; common pitfall is using the OM number unchanged.
-- **Maps to:** **GAP — propose `capex-reserve-discipline` situational + `capexReserveSizing` quiz template**.
+- **Maps to:** `capex-reserve-discipline` situational + `capexReserveSizing` quiz template *(shipped — was flagged GAP, now closed)*.
 
 ---
 
@@ -191,14 +191,14 @@ in a future PR.
 - **Why:** distinction-tested often as a filter for understanding leverage.
 - **Maps to:** `cashOnCash` quiz template + `CashOnCashViz`.
 
-### Q: GAP — How do you stress-test a permanent loan for refi at maturity? What's a reasonable stressed cap rate vs. today's?
+### Q: How do you stress-test a permanent loan for refi at maturity? What's a reasonable stressed cap rate vs. today's?
 - **Role:** mortgageUw · **Difficulty:** advanced
 - **Why:** refi-risk underwriting; common at life cos and debt funds.
-- **Maps to:** **GAP — propose `refiStressTest` quiz template + `refi-cap-stress` situational**.
+- **Maps to:** `refiStressTest` quiz template + `refi-cap-stress` situational *(shipped — was flagged GAP, now closed)*.
 
 ---
 
-## Portfolio Management (8)
+## Portfolio Management (12)
 
 ### Q: Your fund is 40% office vs 25% target. Which assets do you sell first to rebalance?
 - **Role:** portfolioMgmt · **Difficulty:** advanced
@@ -213,7 +213,7 @@ in a future PR.
 ### Q: Fund-level IRR is 14%, deal-level is 16%. Why the gap?
 - **Role:** portfolioMgmt · **Difficulty:** intermediate
 - **Why:** fees, J-curve, undeployed capital — common gotcha.
-- **Maps to:** **GAP — propose `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz template**.
+- **Maps to:** `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz template *(shipped — was flagged GAP, now closed)*.
 
 ### Q: Compute portfolio-weighted NOI per unit across 4 assets of different sizes.
 - **Role:** portfolioMgmt · **Difficulty:** beginner
@@ -223,26 +223,46 @@ in a future PR.
 ### Q: How do you allocate capital across 5 deals when only 3 will close? What weighting matters?
 - **Role:** portfolioMgmt · **Difficulty:** advanced
 - **Why:** capital-allocation reasoning; common at closed-end fund GPs.
-- **Maps to:** **GAP — propose `capital-allocation-priority` situational**.
+- **Maps to:** `capital-allocation-priority` situational *(shipped — was flagged GAP, now closed)*.
 
 ### Q: When does a sponsor pay carry, and what's a typical 2-tier waterfall?
 - **Role:** portfolioMgmt · **Difficulty:** intermediate
 - **Why:** waterfall basics; explicitly out of scope per ROADMAP — flag for future.
-- **Maps to:** **GAP — propose `1-tier-promote-walk` walkthrough (deferred per ROADMAP)**.
+- **Maps to:** **GAP — propose `1-tier-promote-walk` walkthrough (deferred per ROADMAP)**. Note: a 3-tier American waterfall walkthrough (`walk-waterfall-1`) has since shipped despite the ROADMAP's multi-tier-out-of-scope note — worth reconciling, but it doesn't cover the simple 1-tier case this question is asking for.
 
-### Q: GAP — How do you measure risk-adjusted returns across a fund's holdings? What's a defensible Sharpe-equivalent for CRE?
+### Q: How do you measure risk-adjusted returns across a fund's holdings? What's a defensible Sharpe-equivalent for CRE?
 - **Role:** portfolioMgmt · **Difficulty:** advanced
 - **Why:** risk-quantification; underbuilt in our content.
-- **Maps to:** **GAP — propose `risk-adjusted-return-framework` situational**.
+- **Maps to:** `risk-adjusted-return-framework` situational *(shipped — was flagged GAP, now closed)*.
 
 ### Q: Deal returned 1.4x EM in 5 years. Translate to IRR — and explain why EM and IRR can diverge.
 - **Role:** portfolioMgmt · **Difficulty:** beginner
 - **Why:** EM↔IRR translation; common filter.
 - **Maps to:** `equityMultiple` quiz template + `irrSimple` quiz template + `EquityMultipleViz`.
 
+### Q: A 1-tier waterfall pays an 8% pref, then return of capital, then an 80/20 residual split. Walk me through how $35M of sale proceeds actually gets split between LP and GP.
+- **Role:** portfolioMgmt · **Difficulty:** intermediate
+- **Why:** the mechanical waterfall-sequencing question — tests whether the candidate distributes in the right order (pref accrual first, capital return second, residual split last) rather than just applying 80/20 to the whole pot.
+- **Maps to:** `distribution-waterfall-1tier` situational.
+
+### Q: European vs American waterfall — which structure is better for the LP, and why does it actually matter?
+- **Role:** portfolioMgmt · **Difficulty:** intermediate
+- **Why:** deal-level vs fund-level promote timing; a frequent GP/LP-alignment question at fund-of-funds and institutional LP shops.
+- **Maps to:** `waterfall-european-vs-american` situational.
+
+### Q: Full catch-up vs 50/50 catch-up in the promote structure — which pays the GP more during the catch-up tier itself, and by roughly how much?
+- **Role:** portfolioMgmt · **Difficulty:** intermediate
+- **Why:** catch-up mechanics are one of the most-misunderstood waterfall levers; candidates often can't quantify the dollar difference.
+- **Maps to:** `waterfall-catchup-mechanics` situational.
+
+### Q: Under a typical LPA clawback provision, when does the GP actually have to return promote dollars already received?
+- **Role:** portfolioMgmt · **Difficulty:** advanced
+- **Why:** clawback triggers (early-deal outperformance followed by later underperformance) are a real diligence question LPs ask GPs directly.
+- **Maps to:** `waterfall-clawback-mechanics` situational.
+
 ---
 
-## Development (7)
+## Development (13)
 
 ### Q: Land cost $8M, hard cost $38M, soft $7M, 5% contingency. What's TPC and what's the yield-on-cost on $4.5M stabilized NOI?
 - **Role:** development · **Difficulty:** intermediate
@@ -267,17 +287,47 @@ in a future PR.
 ### Q: Construction loan sizing on a $50M TPC dev with 65% LTC. What's the equity check?
 - **Role:** development · **Difficulty:** intermediate
 - **Why:** LTC-vs-LTV distinction; common at debt funds + GC-side.
-- **Maps to:** **GAP — propose `constructionLoanSizing` quiz template + `dev-ltc-vs-ltv` situational**.
+- **Maps to:** `constructionLoanSizing` quiz template + `dev-ltc-vs-ltv` situational *(shipped — was flagged GAP, now closed)*.
 
-### Q: GAP — How do you size a lease-up reserve on a development that stabilizes year 2-3?
+### Q: How do you size a lease-up reserve on a development that stabilizes year 2-3?
 - **Role:** development · **Difficulty:** intermediate
 - **Why:** lease-up risk pricing; common in development-side underwriting.
-- **Maps to:** **GAP — propose `leaseUpReserve` quiz template**.
+- **Maps to:** `leaseUpReserve` quiz template *(shipped — was flagged GAP, now closed)*.
 
 ### Q: Ground lease vs fee-simple on a development site — what changes in your underwriting?
 - **Role:** development · **Difficulty:** advanced
 - **Why:** ground-lease economics; common at urban infill developers.
-- **Maps to:** **GAP — propose `groundLeaseVsFee` situational**.
+- **Maps to:** `ground-lease-vs-fee` situational *(shipped — was flagged GAP, now closed)*.
+
+### Q: A change order comes in mid-construction. Walk me through who actually pays for the cost variance and how that gets priced.
+- **Role:** development · **Difficulty:** advanced
+- **Why:** change-order pricing mechanics (unit-price vs T&M vs lump-sum, markup caps) are a real document-reading test on the GMP contract, not just a math problem.
+- **Maps to:** `construction-change-order-pricing` situational.
+
+### Q: The project is 90 days past Substantial Completion. Under a typical liquidated-damages clause, what does the owner actually recover?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** tests whether the candidate reads the LD clause systematically — excused vs unexcused days, the per-day rate, the cap, and whether consequential damages are waived — rather than assuming the owner is made whole.
+- **Maps to:** `construction-liquidated-damages` situational.
+
+### Q: How much retainage gets released to the contractor at Substantial Completion, and what triggers release of the rest?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** retainage-release mechanics (punch list, lien waivers, final retainage) are a common gap for candidates who've only underwritten stabilized deals.
+- **Maps to:** `construction-retainage-release-trigger` situational.
+
+### Q: Lender proposes equity-first construction funding; sponsor wants pari-passu draws. Which structure does each side actually prefer, and what's the dollar impact on the sponsor over the build period?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** draw-sequencing negotiation is a real term-sheet lever candidates rarely think through past "the lender wants equity first."
+- **Maps to:** `construction-equity-first-vs-paripassu` situational.
+
+### Q: A $2M cost overrun hits mid-construction and the loan is already at its LTC ceiling. Where does the money actually come from?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** overrun-funding waterfall (contingency → sponsor cash equity → additional capital call → renegotiated loan) is the practical follow-up to every feasibility walkthrough.
+- **Maps to:** `construction-cost-overrun` situational.
+
+### Q: Walk me through what a construction lender actually requires in a monthly draw package before releasing funds.
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** draw-package mechanics (AIA G702/G703, lien waivers, inspector sign-off, retainage held-back) are the operational side of development that pure feasibility math skips.
+- **Maps to:** `lender-draw-mechanics` situational.
 
 ---
 
@@ -306,28 +356,64 @@ regardless of position.
 - **Why:** sector-thesis prompt.
 - **Maps to:** **OUT OF SCOPE — explicitly time-sensitive**.
 
-### Q: GAP — Walk me through a distressed deal: half-vacant, basis below replacement, equity wiped — does it pencil?
+### Q: Walk me through a distressed deal: half-vacant, basis below replacement, equity wiped — does it pencil?
 - **Role:** all · **Difficulty:** advanced
 - **Why:** distressed underwriting; increasingly relevant 2024+.
-- **Maps to:** **GAP — propose `walk-distressed-1` walkthrough**.
+- **Maps to:** `walk-distressed-1` walkthrough *(shipped — was flagged GAP, now closed)*.
 
 ---
 
 ## Summary statistics
 
-- **Total questions in this doc:** 52
-- **Mapped to existing content:** 41 (78%)
-- **Flagged as GAPs:** 8 (15%)
-- **Out of scope (time-sensitive / behavioral):** 4 (8%)
+- **Total questions in this doc:** 62 *(+10 this pass — see "Coverage audit" below)*
+- **Mapped to existing content:** 61 (98%)
+- **Flagged as GAPs:** 1 (2%) — `1-tier-promote-walk` walkthrough (portfolio mgmt)
+- **Out of scope (time-sensitive / behavioral):** 4 (6%)
 
-Top GAPs to address (ranked by interview frequency):
+Every GAP flagged in the original 52-question pass has since shipped as real
+content (confirmed against the source files, not just the ROADMAP claim) —
+this pass corrected the stale `**GAP — propose ...**` labels to point at the
+now-existing `id`s. One GAP remains open: a genuine 1-tier promote walkthrough
+(the shipped `walk-waterfall-1` is a 3-tier American structure, which doesn't
+answer the simple-carry question a first-round interview asks).
 
-1. `capexReserveSizing` quiz + `capex-reserve-discipline` situational (asset mgmt)
-2. `refiStressTest` quiz + `refi-cap-stress` situational (mortgage UW)
-3. `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz (portfolio mgmt)
-4. `constructionLoanSizing` quiz + `dev-ltc-vs-ltv` situational (development)
-5. `walk-distressed-1` walkthrough (cross-cutting)
+### Coverage audit — 2026-08-25
 
-These five gaps would lift mapped-to-content coverage from 78% → ~93% with
-~½ day of content work each, and they all surface from real interview-question
-patterns rather than top-down design guesses.
+Per-category question counts before this pass, ranked lowest first — the two
+categories below the 10-question median (`Development`, `Portfolio
+Management`) got 10 new questions between them, mapped to situational
+content that already ships but wasn't yet catalogued here:
+
+| Category | Before | Added | After |
+|---|---|---|---|
+| Cross-cutting / market awareness | 5 | 0 *(capped — see note)* | 5 |
+| Development | 7 | +6 | 13 |
+| Portfolio Management | 8 | +4 | 12 |
+| Asset Management | 10 | 0 | 10 |
+| Mortgage Underwriting | 10 | 0 | 10 |
+| Acquisitions | 12 | 0 | 12 |
+
+Cross-cutting stays at 5 by design — 4 of its 5 entries are explicitly
+out-of-scope (too time-sensitive / behavioral for a content app to maintain),
+so it isn't a real growth lane the way the other five categories are.
+
+New Development entries (all map to shipped, previously-uncatalogued
+situational cases): `construction-change-order-pricing`,
+`construction-liquidated-damages`, `construction-retainage-release-trigger`,
+`construction-equity-first-vs-paripassu`, `construction-cost-overrun`,
+`lender-draw-mechanics`.
+
+New Portfolio Management entries (shipped waterfall/promote-mechanics
+situational cases): `distribution-waterfall-1tier`,
+`waterfall-european-vs-american`, `waterfall-catchup-mechanics`,
+`waterfall-clawback-mechanics`.
+
+Mortgage UW and Asset Management are next in line if another depth pass is
+wanted — both sit at 10, and Mortgage UW in particular still has unmapped
+document-literacy content (`dscr-cash-trap-trigger`) that could seed a
+similar batch. Portfolio Mgmt also still has unmapped LPA-mechanics content
+(`lpa-capital-call-default`, `lpa-contribution-ratios`,
+`lpa-cost-overrun-sharing`, `lpa-initial-vs-additional-capital`,
+`cost-segregation-basics`, `waterfall-irr-vs-moic-hurdle`,
+`waterfall-key-person-event`, `waterfall-pref-compound-vs-simple`) for a
+follow-up batch beyond this pass's 4.
