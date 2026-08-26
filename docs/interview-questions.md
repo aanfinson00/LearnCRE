@@ -242,7 +242,7 @@ in a future PR.
 
 ---
 
-## Development (7)
+## Development (17)
 
 ### Q: Land cost $8M, hard cost $38M, soft $7M, 5% contingency. What's TPC and what's the yield-on-cost on $4.5M stabilized NOI?
 - **Role:** development · **Difficulty:** intermediate
@@ -278,6 +278,62 @@ in a future PR.
 - **Role:** development · **Difficulty:** advanced
 - **Why:** ground-lease economics; common at urban infill developers.
 - **Maps to:** **GAP — propose `groundLeaseVsFee` situational**.
+
+<!-- Development is the most under-covered role in the situational bank (11 of
+100 published questions touch it, vs. 50 for acquisitions — see
+QUESTION_REVIEW.md tagging). The 10 candidates below were added 2026-08-26 to
+close that gap; none are built yet, all need Source: verification before
+they graduate out of GAP status. -->
+
+### Q: GAP — Owner signs a GMP contract with a $2M contingency; overage above the GMP is the GC's responsibility except for owner-directed changes. A $1.5M change order comes in mid-construction. Who pays, and does it eat the GC's contingency or the owner's budget?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** GMP vs cost-plus risk allocation; a document-literacy gap most candidates only learn on the job.
+- **Maps to:** **GAP — propose `gmp-contingency-allocation` situational**.
+
+### Q: GAP — Land trades at $8M "as-is" while entitled comps for the same buildable SF trade at $14M. Walk through how you price entitlement risk into the bid and what contingencies you'd negotiate into the PSA.
+- **Role:** development · **Difficulty:** advanced
+- **Why:** entitlement-risk pricing; a land-basis question distinct from the feasibility/TPC math already covered.
+- **Maps to:** **GAP — propose `entitlement-risk-pricing` situational**.
+
+### Q: GAP — Your construction lender requires 50% pre-leased before funding the final draw on a spec industrial building. You're at 35% pre-leased with 60 days to closing. What are your options?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** pre-leasing covenants are a common spec-development funding gate; tests lender-negotiation instincts.
+- **Maps to:** **GAP — propose `pre-leasing-covenant-shortfall` situational**.
+
+### Q: GAP — A jurisdiction charges $18,000/unit in development impact fees but offers a 10-year PILOT abatement in exchange for 15% affordable units. How do you model that trade-off in your pro forma?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** impact fees / tax-abatement tradeoffs; jurisdiction-specific nuance candidates rarely rehearse.
+- **Maps to:** **GAP — propose `impact-fee-pilot-tradeoff` situational**.
+
+### Q: GAP — A 3-phase master-planned project shares horizontal infrastructure costs (roads, utilities) across all three phases. How do you allocate that shared cost when only Phase 1 is underwritten today?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** vertical-vs-horizontal cost allocation on phased/master-planned deals; distinct from the single-phase TPC build already covered.
+- **Maps to:** **GAP — propose `phased-development-cost-allocation` situational**.
+
+### Q: GAP — A branded hotel development requires a $3.5M PIP-equivalent FF&E buildout as a condition of franchise approval. How does that flow through TPC and yield-on-cost versus a standard commercial build?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** hotel-specific development cost; also closes the situational bank's near-zero hotel coverage (1 of 100 questions).
+- **Maps to:** **GAP — propose `hotel-pip-development-cost` situational**.
+
+### Q: GAP — Ground-up shopping center: the junior anchor's lease has a co-tenancy clause tied to the lead anchor opening by a set date. The lead anchor's opening slips 6 months. What's exposed?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** co-tenancy/kick-out risk on ground-up retail; also closes the bank's thin retail coverage (2 of 100 questions).
+- **Maps to:** **GAP — propose `co-tenancy-development-risk` situational**.
+
+### Q: GAP — Your construction budget assumes a 22-month draw schedule at an average 60% drawn balance. How do you size the interest reserve, and what happens to it if the schedule slips 4 months?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** interest-reserve sizing during construction — distinct from the post-completion lease-up reserve already flagged as a GAP above.
+- **Maps to:** **GAP — propose `interestReserveSizing` quiz template + `interest-reserve-slippage` situational**.
+
+### Q: GAP — A GC defaults mid-construction with the project 70% complete. Walk through the construction lender's options and how each affects the developer's remaining equity.
+- **Role:** development · **Difficulty:** advanced
+- **Why:** GC default / lender step-in; distressed-construction scenario distinct from the general distressed-deal GAP under Cross-cutting.
+- **Maps to:** **GAP — propose `gc-default-lender-stepin` situational**.
+
+### Q: GAP — Same site, two options: surface parking at $3,500/space vs. structured parking at $28,000/space to hit a higher unit count. How do you decide which pencils?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** parking-cost premium vs density tradeoff; a common early feasibility fork candidates are rarely walked through explicitly.
+- **Maps to:** **GAP — propose `parking-premium-density-tradeoff` situational**.
 
 ---
 
@@ -315,10 +371,10 @@ regardless of position.
 
 ## Summary statistics
 
-- **Total questions in this doc:** 52
-- **Mapped to existing content:** 41 (78%)
-- **Flagged as GAPs:** 8 (15%)
-- **Out of scope (time-sensitive / behavioral):** 4 (8%)
+- **Total questions in this doc:** 62
+- **Mapped to existing content:** 41 (66%)
+- **Flagged as GAPs:** 18 (29%)
+- **Out of scope (time-sensitive / behavioral):** 4 (6%)
 
 Top GAPs to address (ranked by interview frequency):
 
@@ -331,3 +387,17 @@ Top GAPs to address (ranked by interview frequency):
 These five gaps would lift mapped-to-content coverage from 78% → ~93% with
 ~½ day of content work each, and they all surface from real interview-question
 patterns rather than top-down design guesses.
+
+**2026-08-26 coverage pass.** Cross-referencing the published 100-question
+situational bank (`feedback/questions.json`) against role tags shows
+Development is the most under-served role — only 11 of 100 published
+questions touch it, versus 50 for acquisitions, 36 for asset management, 30
+for portfolio management, and 21 for mortgage underwriting. Asset-class
+tagging shows the same skew one level down: multifamily appears in 15
+questions and office in 10, but industrial in only 4, retail in 2, and hotel
+in just 1. The 10 new GAP entries added to the Development section above
+target that double gap — they're new candidate phrasings only, not yet
+built, and two of them (`hotel-pip-development-cost`,
+`co-tenancy-development-risk`) double as the first meaningful hotel/retail
+additions to the bank. All still need `Source:` verification per the
+honesty note at the top of this file before they graduate out of GAP status.
