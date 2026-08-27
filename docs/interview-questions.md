@@ -26,6 +26,42 @@ in a future PR.
 
 ---
 
+## Coverage-gap analysis (2026-08-27)
+
+Every `GAP` flagged in the previous pass of this doc has since shipped —
+`capex-reserve-discipline`, `refiStressTest`/`refi-cap-stress`,
+`fund-vs-deal-irr-gap`/`feeDragOnIrr`, `capital-allocation-priority`,
+`walk-waterfall-1` (covers the deferred promote/waterfall walk),
+`risk-adjusted-return-framework`, `constructionLoanSizing`/`dev-ltc-vs-ltv`,
+`leaseUpReserve`, `ground-lease-vs-fee`, and `walk-distressed-1` all now exist
+in `src/quiz/`. Those entries below are marked *(Built since last pass)*
+instead of being re-flagged.
+
+To find where the bank is genuinely thin *now*, rather than re-guess from
+this doc's own (now-stale) GAP list, we counted `roles:` tags across every
+content type currently shipped — situational cases, quiz templates, longform
+cases, and walkthroughs:
+
+| Role | Situational | Templates | Longform | Walkthroughs | Mock prose | **Total** |
+|---|---|---|---|---|---|---|
+| acquisitions | 40 | 60 | 6 | 8 | 1 | **115** |
+| assetManagement | 31 | 20 | 3 | 4 | 1 | **59** |
+| portfolioMgmt | 25 | 16 | 4 | 3 | 0 | **48** |
+| mortgageUw | 19 | 16 | 1 | 2 | 2 | **40** |
+| development | 9 | 10 | 1 | 2 | 0 | **22** |
+
+**development is the least-covered role by a wide margin** — roughly a fifth
+of acquisitions' coverage and about half of the next-thinnest role
+(mortgageUw). Six new candidate phrasings below target development
+specifically (highest-and-best-use/entitlement risk, pre-leasing covenants,
+TIF/PILOT incentives, phasing, parking-ratio tradeoffs, and mid-build cost
+escalation — none of which exist in the bank today). Four more target
+mortgageUw, the second-thinnest role, covering subordinate-debt structuring,
+rate-cap sizing, prepayment penalties, and CMBS special-servicing triggers.
+All ten are flagged `GAP` — phrasings only, not yet built or source-verified.
+
+---
+
 ## Acquisitions (12)
 
 ### Q: How do you compute cap rate, and what's a typical going-in cap range for stabilized industrial in a tier-1 market today?
@@ -137,14 +173,14 @@ in a future PR.
 - **Why:** tax-deferral vs redeployment-opportunity tradeoff.
 - **Maps to:** `tax-vs-irr-tradeoff` situational + `refi-vs-sell` situational.
 
-### Q: GAP — How do you set a capex reserve on a stabilized asset, and what gets included vs excluded?
+### Q: How do you set a capex reserve on a stabilized asset, and what gets included vs excluded?
 - **Role:** assetManagement · **Difficulty:** intermediate
 - **Why:** capex discipline; common pitfall is using the OM number unchanged.
-- **Maps to:** **GAP — propose `capex-reserve-discipline` situational + `capexReserveSizing` quiz template**.
+- **Maps to:** `capex-reserve-discipline` situational + `capexReserveSizing` quiz template. *(Built since last pass — was flagged GAP.)*
 
 ---
 
-## Mortgage Underwriting (10)
+## Mortgage Underwriting (14)
 
 ### Q: What's the formula for DSCR? What's a healthy threshold?
 - **Role:** mortgageUw · **Difficulty:** beginner
@@ -191,10 +227,30 @@ in a future PR.
 - **Why:** distinction-tested often as a filter for understanding leverage.
 - **Maps to:** `cashOnCash` quiz template + `CashOnCashViz`.
 
-### Q: GAP — How do you stress-test a permanent loan for refi at maturity? What's a reasonable stressed cap rate vs. today's?
+### Q: How do you stress-test a permanent loan for refi at maturity? What's a reasonable stressed cap rate vs. today's?
 - **Role:** mortgageUw · **Difficulty:** advanced
 - **Why:** refi-risk underwriting; common at life cos and debt funds.
-- **Maps to:** **GAP — propose `refiStressTest` quiz template + `refi-cap-stress` situational**.
+- **Maps to:** `refiStressTest` quiz template + `refi-cap-stress` situational. *(Built since last pass — was flagged GAP.)*
+
+### Q: GAP — Senior debt covers 65% LTV. Sponsor wants to add a 15% mezzanine tranche at a 12% pay rate to reach 80% total leverage. As the senior lender, what do you require in the intercreditor agreement?
+- **Role:** mortgageUw · **Difficulty:** advanced
+- **Why:** mezz/pref-equity stacking and intercreditor terms (cure rights, standstill periods, control-of-workout) are a staple debt-fund and life-co interview topic; the bank has no subordinate-debt-structuring content.
+- **Maps to:** **GAP — propose `mezz-intercreditor-terms` situational**.
+
+### Q: GAP — Floating-rate bridge loan at SOFR+300; loan docs require a rate cap struck at 5.5% SOFR for the full term, and SOFR is currently 5.0%. How do you size the cap cost, and what happens to DSCR if SOFR strikes through the cap?
+- **Role:** mortgageUw · **Difficulty:** intermediate
+- **Why:** rate-cap sizing and replacement-cap risk became one of the most-asked underwriting questions once floating-rate bridge lending scaled post-2021; not represented in our bank.
+- **Maps to:** **GAP — propose `rate-cap-sizing` situational + `rateCapCost` quiz template**.
+
+### Q: GAP — Borrower wants to refinance 3 years into a 10-year fixed-rate CMBS loan. What's the difference between a yield-maintenance and a defeasance prepayment penalty, and which is more expensive here?
+- **Role:** mortgageUw · **Difficulty:** intermediate
+- **Why:** prepayment-penalty mechanics are a standard fixed-rate and CMBS debt-desk question; nothing in the bank currently tests yield maintenance vs. defeasance.
+- **Maps to:** **GAP — propose `yield-maintenance-vs-defeasance` situational**.
+
+### Q: GAP — A CMBS loan misses its DSCR covenant for two consecutive quarters. Does it go straight to default, or does something else happen first?
+- **Role:** mortgageUw · **Difficulty:** advanced
+- **Why:** distinguishes a cash-management/lockbox trigger and special-servicing transfer from an actual payment default — commonly tested, and adjacent to but distinct from our existing `dscr-cash-trap-trigger` case (which covers the cash-trap mechanic, not the servicing-transfer pathway).
+- **Maps to:** **GAP — propose `special-servicing-transfer-trigger` situational**.
 
 ---
 
@@ -213,7 +269,7 @@ in a future PR.
 ### Q: Fund-level IRR is 14%, deal-level is 16%. Why the gap?
 - **Role:** portfolioMgmt · **Difficulty:** intermediate
 - **Why:** fees, J-curve, undeployed capital — common gotcha.
-- **Maps to:** **GAP — propose `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz template**.
+- **Maps to:** `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz template. *(Built since last pass — was flagged GAP.)*
 
 ### Q: Compute portfolio-weighted NOI per unit across 4 assets of different sizes.
 - **Role:** portfolioMgmt · **Difficulty:** beginner
@@ -223,17 +279,17 @@ in a future PR.
 ### Q: How do you allocate capital across 5 deals when only 3 will close? What weighting matters?
 - **Role:** portfolioMgmt · **Difficulty:** advanced
 - **Why:** capital-allocation reasoning; common at closed-end fund GPs.
-- **Maps to:** **GAP — propose `capital-allocation-priority` situational**.
+- **Maps to:** `capital-allocation-priority` situational. *(Built since last pass — was flagged GAP.)*
 
 ### Q: When does a sponsor pay carry, and what's a typical 2-tier waterfall?
 - **Role:** portfolioMgmt · **Difficulty:** intermediate
 - **Why:** waterfall basics; explicitly out of scope per ROADMAP — flag for future.
-- **Maps to:** **GAP — propose `1-tier-promote-walk` walkthrough (deferred per ROADMAP)**.
+- **Maps to:** `walk-waterfall-1` walkthrough (+ the `waterfall*` situational family). *(Built since last pass — the deferred-per-ROADMAP note no longer applies.)*
 
-### Q: GAP — How do you measure risk-adjusted returns across a fund's holdings? What's a defensible Sharpe-equivalent for CRE?
+### Q: How do you measure risk-adjusted returns across a fund's holdings? What's a defensible Sharpe-equivalent for CRE?
 - **Role:** portfolioMgmt · **Difficulty:** advanced
 - **Why:** risk-quantification; underbuilt in our content.
-- **Maps to:** **GAP — propose `risk-adjusted-return-framework` situational**.
+- **Maps to:** `risk-adjusted-return-framework` situational. *(Built since last pass — was flagged GAP.)*
 
 ### Q: Deal returned 1.4x EM in 5 years. Translate to IRR — and explain why EM and IRR can diverge.
 - **Role:** portfolioMgmt · **Difficulty:** beginner
@@ -242,7 +298,7 @@ in a future PR.
 
 ---
 
-## Development (7)
+## Development (13)
 
 ### Q: Land cost $8M, hard cost $38M, soft $7M, 5% contingency. What's TPC and what's the yield-on-cost on $4.5M stabilized NOI?
 - **Role:** development · **Difficulty:** intermediate
@@ -267,17 +323,47 @@ in a future PR.
 ### Q: Construction loan sizing on a $50M TPC dev with 65% LTC. What's the equity check?
 - **Role:** development · **Difficulty:** intermediate
 - **Why:** LTC-vs-LTV distinction; common at debt funds + GC-side.
-- **Maps to:** **GAP — propose `constructionLoanSizing` quiz template + `dev-ltc-vs-ltv` situational**.
+- **Maps to:** `constructionLoanSizing` quiz template + `dev-ltc-vs-ltv` situational. *(Built since last pass — was flagged GAP.)*
 
-### Q: GAP — How do you size a lease-up reserve on a development that stabilizes year 2-3?
+### Q: How do you size a lease-up reserve on a development that stabilizes year 2-3?
 - **Role:** development · **Difficulty:** intermediate
 - **Why:** lease-up risk pricing; common in development-side underwriting.
-- **Maps to:** **GAP — propose `leaseUpReserve` quiz template**.
+- **Maps to:** `leaseUpReserve` quiz template. *(Built since last pass — was flagged GAP.)*
 
 ### Q: Ground lease vs fee-simple on a development site — what changes in your underwriting?
 - **Role:** development · **Difficulty:** advanced
 - **Why:** ground-lease economics; common at urban infill developers.
-- **Maps to:** **GAP — propose `groundLeaseVsFee` situational**.
+- **Maps to:** `ground-lease-vs-fee` situational. *(Built since last pass — was flagged GAP.)*
+
+### Q: GAP — You control a 5-acre urban infill site currently zoned for low-rise retail. As-is value is $8M; rezoned to multifamily, the appraised residual land value is $14M. How do you underwrite the rezoning risk in your bid?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** highest-and-best-use analysis and entitlement-risk discounting is a core development-underwriting skill and is completely absent from our content — development has the thinnest coverage of the six roles (see coverage-gap analysis above).
+- **Maps to:** **GAP — propose `highest-and-best-use-rezoning` situational**.
+
+### Q: GAP — Your construction lender requires 50% pre-leasing before the first draw. You're at 30% pre-leased with 4 months left before your rate lock expires. What are your options?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** pre-leasing covenants are one of the most common construction-loan gating items in real interviews and aren't tested anywhere in our bank.
+- **Maps to:** **GAP — propose `preleasing-covenant-shortfall` situational + `preleasingCoverageGap` quiz template**.
+
+### Q: GAP — A municipality offers a 10-year TIF rebate worth $3M against your $40M vertical construction cost, in exchange for 15% affordable units. How does that change your feasibility math?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** public-private financing tools (TIF, PILOT, impact-fee waivers) come up often in urban infill and affordable-adjacent development interviews and are entirely absent from our content.
+- **Maps to:** **GAP — propose `tif-incentive-feasibility` situational**.
+
+### Q: GAP — You're developing 500 units in three ~165-unit phases over 4 years instead of building all at once. How does phasing change your capital stack and your risk profile?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** phasing trades construction-cost efficiency against market-timing and re-underwriting risk between phases — a common senior-level development prompt.
+- **Maps to:** **GAP — propose `phased-development-capital-stack` situational**.
+
+### Q: GAP — Zoning allows 1.5 parking spaces/unit surface-parked, or 1.0 space/unit with a $35k/space structured deck. How do you decide?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** parking-ratio-vs-density tradeoffs move yield-on-cost directly and are a frequent junior-development technical question; untested in our bank.
+- **Maps to:** **GAP — propose `parking-ratio-density-tradeoff` situational**.
+
+### Q: GAP — Steel and lumber costs are up 20% since your pro forma was underwritten and you're 60% through vertical construction. How do you re-underwrite the remaining budget and protect your return?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** cost-escalation stress-testing has been a near-universal development interview question since 2021-22; extends our existing `contingencyDrawDown` template into a full situational rather than a single-step calc.
+- **Maps to:** **GAP — propose `cost-escalation-midbuild` situational**.
 
 ---
 
@@ -306,28 +392,44 @@ regardless of position.
 - **Why:** sector-thesis prompt.
 - **Maps to:** **OUT OF SCOPE — explicitly time-sensitive**.
 
-### Q: GAP — Walk me through a distressed deal: half-vacant, basis below replacement, equity wiped — does it pencil?
+### Q: Walk me through a distressed deal: half-vacant, basis below replacement, equity wiped — does it pencil?
 - **Role:** all · **Difficulty:** advanced
 - **Why:** distressed underwriting; increasingly relevant 2024+.
-- **Maps to:** **GAP — propose `walk-distressed-1` walkthrough**.
+- **Maps to:** `walk-distressed-1` walkthrough. *(Built since last pass — was flagged GAP.)*
 
 ---
 
 ## Summary statistics
 
-- **Total questions in this doc:** 52
-- **Mapped to existing content:** 41 (78%)
-- **Flagged as GAPs:** 8 (15%)
-- **Out of scope (time-sensitive / behavioral):** 4 (8%)
+_Updated 2026-08-27 — all 10 GAPs from the prior pass have shipped; stats
+below reflect that plus the 10 new candidate phrasings added this pass._
+
+- **Total questions in this doc:** 62
+- **Mapped to existing content:** 48 (77%)
+- **Flagged as GAPs:** 10 (16%)
+- **Out of scope (time-sensitive / behavioral):** 4 (6%)
+
+By role, mapped-to-content rate: acquisitions 12/12 (100%), asset management
+10/10 (100%), portfolio management 8/8 (100%), mortgage underwriting 10/14
+(71%), development 7/13 (54%). Development and mortgage underwriting are the
+two roles carrying every open GAP in this doc, consistent with them being the
+two thinnest-covered roles by shipped-content volume (see coverage-gap
+analysis above).
 
 Top GAPs to address (ranked by interview frequency):
 
-1. `capexReserveSizing` quiz + `capex-reserve-discipline` situational (asset mgmt)
-2. `refiStressTest` quiz + `refi-cap-stress` situational (mortgage UW)
-3. `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz (portfolio mgmt)
-4. `constructionLoanSizing` quiz + `dev-ltc-vs-ltv` situational (development)
-5. `walk-distressed-1` walkthrough (cross-cutting)
+1. `preleasing-covenant-shortfall` situational + `preleasingCoverageGap` quiz (development)
+2. `cost-escalation-midbuild` situational (development)
+3. `rate-cap-sizing` situational + `rateCapCost` quiz (mortgage UW)
+4. `mezz-intercreditor-terms` situational (mortgage UW)
+5. `highest-and-best-use-rezoning` situational (development)
+6. `yield-maintenance-vs-defeasance` situational (mortgage UW)
+7. `special-servicing-transfer-trigger` situational (mortgage UW)
+8. `phased-development-capital-stack` situational (development)
+9. `parking-ratio-density-tradeoff` situational (development)
+10. `tif-incentive-feasibility` situational (development)
 
-These five gaps would lift mapped-to-content coverage from 78% → ~93% with
-~½ day of content work each, and they all surface from real interview-question
-patterns rather than top-down design guesses.
+These ten gaps would lift mapped-to-content coverage from 77% → ~94% with
+~½ day of content work each, and — like the prior batch — they all surface
+from real interview-question patterns in development and mortgage
+underwriting rather than top-down design guesses.
