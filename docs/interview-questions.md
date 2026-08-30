@@ -242,7 +242,7 @@ in a future PR.
 
 ---
 
-## Development (7)
+## Development (17)
 
 ### Q: Land cost $8M, hard cost $38M, soft $7M, 5% contingency. What's TPC and what's the yield-on-cost on $4.5M stabilized NOI?
 - **Role:** development · **Difficulty:** intermediate
@@ -267,17 +267,77 @@ in a future PR.
 ### Q: Construction loan sizing on a $50M TPC dev with 65% LTC. What's the equity check?
 - **Role:** development · **Difficulty:** intermediate
 - **Why:** LTC-vs-LTV distinction; common at debt funds + GC-side.
-- **Maps to:** **GAP — propose `constructionLoanSizing` quiz template + `dev-ltc-vs-ltv` situational**.
+- **Maps to:** `constructionLoanSizing` quiz template + `dev-ltc-vs-ltv` situational.
 
-### Q: GAP — How do you size a lease-up reserve on a development that stabilizes year 2-3?
+### Q: How do you size a lease-up reserve on a development that stabilizes year 2-3?
 - **Role:** development · **Difficulty:** intermediate
 - **Why:** lease-up risk pricing; common in development-side underwriting.
-- **Maps to:** **GAP — propose `leaseUpReserve` quiz template**.
+- **Maps to:** `leaseUpReserve` quiz template.
 
 ### Q: Ground lease vs fee-simple on a development site — what changes in your underwriting?
 - **Role:** development · **Difficulty:** advanced
 - **Why:** ground-lease economics; common at urban infill developers.
-- **Maps to:** **GAP — propose `groundLeaseVsFee` situational**.
+- **Maps to:** `groundLeaseVsFee` situational.
+
+<!-- 2026-08-30: content-audit pass — Development is the lowest-coverage role in the
+     shipped question bank (~19-22 role-tagged items vs. 100 for acquisitions, 51 for
+     asset mgmt, 41 for portfolio mgmt, 35 for mortgage UW, counting situational +
+     quiz-template + walkthrough + longform roles arrays). The three GAP flags above
+     were stale — all three now map to shipped content. Added below: 10 new candidate
+     phrasings on development sub-topics with no existing coverage (entitlement risk,
+     contract structure, loan covenants, developer economics, land strategy, GC risk
+     transfer, product-type risk, site selection, force majeure, phasing) to prioritize
+     for the next content pass. -->
+
+### Q: You're underwriting a site that needs a zoning variance to hit the density in your pro forma. How do you price entitlement risk and timeline into your land basis?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** entitlement risk is the single biggest driver of pre-development basis blowing up, and it's untested in our current content.
+- **Maps to:** **GAP — propose `entitlement-risk-pricing` situational**.
+
+### Q: Walk me through the difference between a GMP (guaranteed maximum price) and a cost-plus construction contract. Which do you push for as a developer, and why?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** contract-structure literacy is a table-stakes filter question for anyone construction-adjacent; we have draw/retainage/change-order mechanics but nothing on the contract type itself.
+- **Maps to:** **GAP — propose `gmp-vs-cost-plus-contract` situational**.
+
+### Q: Your construction lender requires 40% pre-leasing to fund. You're at 25% with two LOIs outstanding and a rate lock expiring. What are your options?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** pre-leasing covenants are a common real-world crunch point that combines loan mechanics with leasing/timing judgment.
+- **Maps to:** **GAP — propose `pre-leasing-covenant-shortfall` situational**.
+
+### Q: When does a developer actually earn its development fee, and how is it typically sized — percent of TPC or a fixed number? What happens to that fee inside a JV waterfall?
+- **Role:** development · **Difficulty:** beginner
+- **Why:** developer-fee mechanics are asked in nearly every development-seat interview and we have no content on developer economics specifically (only project-level returns).
+- **Maps to:** **GAP — propose `developer-fee-structure` situational**.
+
+### Q: What's the advantage of an option contract on land versus buying it outright before entitlements are secured?
+- **Role:** development · **Difficulty:** beginner
+- **Why:** land strategy / at-risk capital sequencing is a common "how would you structure this" opener before the math even starts.
+- **Maps to:** **GAP — propose `land-option-vs-purchase` situational**.
+
+### Q: Why does a construction lender require payment and performance bonds from your GC, and what does each actually protect against?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** bonding is a risk-transfer mechanic that shows up in every construction loan closing checklist but isn't covered anywhere in our lender-facing content.
+- **Maps to:** **GAP — propose `gc-bonding-requirements` situational**.
+
+### Q: How does the risk profile of a build-to-suit development differ from spec development, and how should that show up in your required return?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** product-type risk differentiation is a common underwriting-judgment question distinct from our existing feasibility/spread math.
+- **Maps to:** **GAP — propose `build-to-suit-vs-spec` situational**.
+
+### Q: You're evaluating a vacant infill parcel zoned for either multifamily or self-storage. Walk me through how you'd decide the highest and best use.
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** highest-and-best-use framing is a classic site-selection question with no direct analog in our current feasibility content.
+- **Maps to:** **GAP — propose `highest-and-best-use` situational**.
+
+### Q: A hurricane delays your project 3 months. Your construction loan has a fixed maturity with no force-majeure carve-out, but your GC contract does. What's your exposure?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** force-majeure / delay-claim exposure tests whether a candidate understands that loan docs and construction contracts don't automatically align — increasingly relevant post-2020s weather + supply-chain shocks.
+- **Maps to:** **GAP — propose `force-majeure-delay-exposure` situational**.
+
+### Q: You're phasing a mixed-use project — retail podium first vs. residential tower first. What drives that sequencing decision, and how does structured parking cost factor in?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** phasing/sequencing judgment on mixed-use is a common senior-development question that combines cost structure with market-timing risk.
+- **Maps to:** **GAP — propose `mixed-use-phasing-sequencing` situational**.
 
 ---
 
@@ -306,28 +366,42 @@ regardless of position.
 - **Why:** sector-thesis prompt.
 - **Maps to:** **OUT OF SCOPE — explicitly time-sensitive**.
 
-### Q: GAP — Walk me through a distressed deal: half-vacant, basis below replacement, equity wiped — does it pencil?
+### Q: Walk me through a distressed deal: half-vacant, basis below replacement, equity wiped — does it pencil?
 - **Role:** all · **Difficulty:** advanced
 - **Why:** distressed underwriting; increasingly relevant 2024+.
-- **Maps to:** **GAP — propose `walk-distressed-1` walkthrough**.
+- **Maps to:** `walk-distressed-1` walkthrough.
 
 ---
 
 ## Summary statistics
 
-- **Total questions in this doc:** 52
-- **Mapped to existing content:** 41 (78%)
-- **Flagged as GAPs:** 8 (15%)
-- **Out of scope (time-sensitive / behavioral):** 4 (8%)
+- **Total questions in this doc:** 62
+- **Mapped to existing content:** 42 (68%)
+- **Flagged as GAPs:** 16 (26%)
+- **Out of scope (time-sensitive / behavioral):** 4 (6%)
 
-Top GAPs to address (ranked by interview frequency):
+**2026-08-30 content-audit note:** a role-tag count across the shipped question
+bank (situational + quiz-template + walkthrough + longform `roles` arrays) shows
+**development is the lowest-coverage role** — roughly 19–22 role-tagged items vs.
+100 for acquisitions, 51 for asset management, 41 for portfolio management, and
+35 for mortgage underwriting. Several `GAP` flags below (asset mgmt, mortgage UW,
+portfolio mgmt, and three that were in development) turned out to be stale —
+content had already shipped without this doc being updated. The three stale
+development flags were corrected, and 10 new candidate phrasings were added to
+the Development section to prioritize for the next content pass (entitlement
+risk, contract structure, loan covenants, developer economics, land strategy, GC
+risk transfer, product-type risk, site selection, force majeure, phasing). The
+other sections' `GAP` flags were not re-verified in this pass and may also be
+partially stale — worth a follow-up sweep.
 
-1. `capexReserveSizing` quiz + `capex-reserve-discipline` situational (asset mgmt)
-2. `refiStressTest` quiz + `refi-cap-stress` situational (mortgage UW)
-3. `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz (portfolio mgmt)
-4. `constructionLoanSizing` quiz + `dev-ltc-vs-ltv` situational (development)
-5. `walk-distressed-1` walkthrough (cross-cutting)
+Top GAPs to address next (development, ranked by interview frequency):
 
-These five gaps would lift mapped-to-content coverage from 78% → ~93% with
-~½ day of content work each, and they all surface from real interview-question
-patterns rather than top-down design guesses.
+1. `entitlement-risk-pricing` situational — zoning variance / density risk into land basis
+2. `gmp-vs-cost-plus-contract` situational — construction contract structure
+3. `pre-leasing-covenant-shortfall` situational — construction loan pre-leasing covenants
+4. `developer-fee-structure` situational — developer fee sizing + JV waterfall treatment
+5. `gc-bonding-requirements` situational — payment/performance bond mechanics
+
+These five would meaningfully close the development coverage gap relative to
+the other four roles, and all ten new phrasings surface from real
+interview-question patterns rather than top-down design guesses.
