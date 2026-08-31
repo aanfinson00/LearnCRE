@@ -242,7 +242,7 @@ in a future PR.
 
 ---
 
-## Development (7)
+## Development (12)
 
 ### Q: Land cost $8M, hard cost $38M, soft $7M, 5% contingency. What's TPC and what's the yield-on-cost on $4.5M stabilized NOI?
 - **Role:** development · **Difficulty:** intermediate
@@ -278,6 +278,64 @@ in a future PR.
 - **Role:** development · **Difficulty:** advanced
 - **Why:** ground-lease economics; common at urban infill developers.
 - **Maps to:** **GAP — propose `groundLeaseVsFee` situational**.
+
+### Q: The sponsor contributed the land at a $12M book value, but a fresh appraisal pegs raw land at $9M today. How does that gap flow through the promote and the LP's basis?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** land-basis-vs-market-value trap; tests whether candidates conflate book basis with true cost.
+- **Maps to:** **GAP — propose `land-basis-contribution-markdown` situational**.
+
+### Q: Your development agreement pays a 4% fee on TPC, half at closing and half at stabilization. How does that split change the sponsor's at-risk capital and the deal's effective promote hurdle?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** dev-fee timing is a common lever candidates gloss over when they price "skin in the game."
+- **Maps to:** **GAP — propose `dev-fee-timing-and-promote` situational** (pairs with the existing `feeDragOnIrr` quiz template).
+
+### Q: A site needs a zoning variance; comparable approvals in this jurisdiction have taken anywhere from 9 to 24 months. How do you price that timeline uncertainty into your bid?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** entitlement risk is the single biggest development-specific unknown most candidates never quantify.
+- **Maps to:** **GAP — propose `entitlement-timeline-risk` situational**.
+
+### Q: Your 300-unit lease-up is delivering into a submarket with two competing projects finishing within 60 days of yours. How does that change your absorption assumption and your lease-up reserve?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** competitive-supply drag on lease-up is distinct from generic absorption pacing — most candidates only model their own building.
+- **Maps to:** **GAP — propose `competitive-delivery-absorption-drag` situational** (extends `absorption-timing`).
+
+### Q: You've spent $1.2M in pre-development soft costs (design, entitlement, legal) on a deal that ultimately doesn't get a construction loan commitment. How do you account for that sunk cost across your pipeline, and how do you price "go/no-go" risk into future deals?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** pre-development capital-at-risk is real developer economics that rarely shows up in quiz-style prep.
+- **Maps to:** **GAP — propose `pre-development-sunk-cost-risk` situational**.
+
+---
+
+## Asset-class depth — Hotel & Retail (5)
+
+Catalog audit (2026-08-31): situational coverage skews heavily toward
+multifamily (11) and office (9), with hotel (1) and retail (2) the
+thinnest asset classes in the bank. These five target that gap directly.
+
+### Q: Your franchise agreement requires a $2.5M Property Improvement Plan (PIP) within 18 months of acquisition, on top of the standard 4%-of-revenue FF&E reserve. How do you underwrite that into your basis and your year-1 returns?
+- **Role:** acquisitions / assetManagement · **Difficulty:** advanced · **Asset class:** hotel
+- **Why:** brand-mandated PIP capex is a hotel-specific trap that doesn't show up in other asset classes.
+- **Maps to:** **GAP — propose `hotel-pip-capex-underwriting` situational**.
+
+### Q: Trailing GOP margin came in at 32% against a 38% comp-set average at similar RevPAR. Where do you look first — rate, labor, or overhead?
+- **Role:** assetManagement · **Difficulty:** intermediate · **Asset class:** hotel
+- **Why:** classic hotel operating-diagnostic; tests whether the candidate separates top-line (RevPAR) from operating efficiency (GOP).
+- **Maps to:** **GAP — propose `hotel-gop-margin-diagnostic` situational** (pairs with the existing `gopMargin` quiz template).
+
+### Q: Shoulder-season occupancy is soft, but you have room to raise ADR in peak months. Walk through how you'd model blended RevPAR and whether a rate push or an occupancy push is the better lever this year.
+- **Role:** assetManagement · **Difficulty:** intermediate · **Asset class:** hotel
+- **Why:** ADR-vs-occupancy tradeoff is the hotel analogue of the office rent-vs-concession tradeoff — a common revenue-management question.
+- **Maps to:** **GAP — propose `hotel-seasonal-revpar-lever` situational** (pairs with the existing `revparFromAdrOcc` quiz template).
+
+### Q: Your grocery anchor's lease has a co-tenancy clause letting it cut rent to 50% (or terminate) if center occupancy drops below 70%. A junior box just went dark. What's your first move?
+- **Role:** assetManagement / acquisitions · **Difficulty:** advanced · **Asset class:** retail
+- **Why:** co-tenancy triggers are the retail-specific document-literacy trap most candidates have never actually read in a lease.
+- **Maps to:** **GAP — propose `retail-anchor-cotenancy-trigger` situational**.
+
+### Q: A big-box tenant "goes dark" — keeps paying rent but stops operating. Does that violate the lease, and how does it affect the center's co-tenancy exposure and your exit marketing?
+- **Role:** acquisitions / assetManagement · **Difficulty:** advanced · **Asset class:** retail
+- **Why:** dark-store risk is distinct from a default — tests whether candidates know a paying-but-dark tenant is still a leasing problem.
+- **Maps to:** **GAP — propose `retail-dark-store-risk` situational**.
 
 ---
 
@@ -315,10 +373,10 @@ regardless of position.
 
 ## Summary statistics
 
-- **Total questions in this doc:** 52
-- **Mapped to existing content:** 41 (78%)
-- **Flagged as GAPs:** 8 (15%)
-- **Out of scope (time-sensitive / behavioral):** 4 (8%)
+- **Total questions in this doc:** 62
+- **Mapped to existing content:** 41 (66%)
+- **Flagged as GAPs:** 18 (29%)
+- **Out of scope (time-sensitive / behavioral):** 4 (6%)
 
 Top GAPs to address (ranked by interview frequency):
 
@@ -327,6 +385,15 @@ Top GAPs to address (ranked by interview frequency):
 3. `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz (portfolio mgmt)
 4. `constructionLoanSizing` quiz + `dev-ltc-vs-ltv` situational (development)
 5. `walk-distressed-1` walkthrough (cross-cutting)
+
+**2026-08-31 depth pass — added 10.** A catalog audit (see
+`git log` / ROADMAP "Question-base depth pass") found the live content skew
+still runs heavily toward `acquisitions` (40 of 95 situational-role tags) and
+`multifamily`/`office` (20 of 34 situational assetClass tags), with
+`development` the thinnest role across every content type (situational,
+longform, *and* walkthroughs) and `hotel`/`retail` the thinnest asset
+classes. The 5 new Development questions and 5 new Hotel & Retail questions
+above target that gap directly — none are mapped yet, all are net-new GAPs.
 
 These five gaps would lift mapped-to-content coverage from 78% → ~93% with
 ~½ day of content work each, and they all surface from real interview-question
