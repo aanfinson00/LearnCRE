@@ -146,12 +146,25 @@ Already covered in `category: 'deal-process'`:
 - budget-vs-actual-variance
 - distribution-waterfall-1tier
 
-GAPs surfaced from `docs/interview-questions.md` (still open for content):
-- capexReserveSizing quiz template (asset mgmt)
-- refiStressTest quiz template (mortgage UW)
-- feeDragOnIrr quiz template (portfolio mgmt)
-- constructionLoanSizing quiz template (development)
-- walk-distressed-1 walkthrough (cross-cutting)
+GAPs surfaced from `docs/interview-questions.md`'s original pass have all
+since shipped (capexReserveSizing, refiStressTest, feeDragOnIrr,
+constructionLoanSizing, walk-distressed-1, and others). A 2026-09-01
+coverage audit of `src/quiz/situational/` + `src/quiz/templates/` (grouped
+by `roles` tag) found **development is now the thinnest role in the bank**
+by a wide margin — 9/71 situational cases and 10/68 quiz templates, versus
+19–40 and 16–60 for the other four roles. Ten new candidate phrasings for
+development are logged in `docs/interview-questions.md`'s Development
+section (still open for content):
+- entitlement-carry-risk situational
+- gmp-vs-cost-plus situational
+- pre-leasing-covenant-shortfall situational
+- performance-bond-default situational
+- value-engineering-tradeoff situational
+- densityBonusYieldOnCost quiz template + density-bonus-tradeoff situational
+- completion-guaranty-burnoff situational
+- delivery-method-tradeoff situational
+- phase-ii-remediation-retrade situational
+- tifBasisAdjustment quiz template + tif-reimbursement-basis situational
 
 Adjacent deal-lifecycle topics not yet covered (good candidates for next
 batch):
