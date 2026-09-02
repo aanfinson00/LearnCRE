@@ -198,7 +198,7 @@ in a future PR.
 
 ---
 
-## Portfolio Management (8)
+## Portfolio Management (13)
 
 ### Q: Your fund is 40% office vs 25% target. Which assets do you sell first to rebalance?
 - **Role:** portfolioMgmt · **Difficulty:** advanced
@@ -240,9 +240,34 @@ in a future PR.
 - **Why:** EM↔IRR translation; common filter.
 - **Maps to:** `equityMultiple` quiz template + `irrSimple` quiz template + `EquityMultipleViz`.
 
+### Q: A stabilized, low-growth asset is throwing off steady cash flow. Do you recycle that capital into a new acquisition, or hold it?
+- **Role:** portfolioMgmt · **Difficulty:** advanced
+- **Why:** capital-recycling discipline; common at open-end / evergreen funds where there's no forced hold-period exit.
+- **Maps to:** **GAP — propose `capital-recycling-decision` situational**.
+
+### Q: Your fund's weighted-average going-in cap rate has compressed 75 bps since acquisition while comps in the same submarkets have widened. What does that say about your marked NAV?
+- **Role:** portfolioMgmt · **Difficulty:** advanced
+- **Why:** appraisal-lag vs market-reality reasoning; a common gotcha for open-end fund NAV marks.
+- **Maps to:** **GAP — propose `nav-marking-lag` situational**.
+
+### Q: Half the portfolio's debt is floating-rate and reprices 200 bps higher next year. How do you stress-test the fund's aggregate debt service?
+- **Role:** portfolioMgmt · **Difficulty:** advanced
+- **Why:** portfolio-level rate-risk aggregation, distinct from the single-asset DSCR-sensitivity question already in the mortgage-UW section.
+- **Maps to:** **GAP — propose `portfolio-rate-stress` situational + `blendedDebtServiceStress` quiz template**.
+
+### Q: One LP in the fund is tax-exempt and one is a high-net-worth taxable investor. Does that change how you'd time or structure a disposition?
+- **Role:** portfolioMgmt · **Difficulty:** advanced
+- **Why:** LP-heterogeneity awareness; tests the idea that "optimal" exit timing isn't uniform across an investor base.
+- **Maps to:** **GAP — propose `lp-heterogeneity-disposition` situational**.
+
+### Q: Walk me through how a GP catch-up works after the preferred return clears, and why it matters for the LP's net IRR.
+- **Role:** portfolioMgmt · **Difficulty:** intermediate
+- **Why:** waterfall-mechanics phrasing distinct from the "when does a sponsor pay carry" framing already above; catch-up specifically is a frequent follow-up.
+- **Maps to:** `gpCatchUp` quiz template + `prefAccrual` quiz template.
+
 ---
 
-## Development (7)
+## Development (12)
 
 ### Q: Land cost $8M, hard cost $38M, soft $7M, 5% contingency. What's TPC and what's the yield-on-cost on $4.5M stabilized NOI?
 - **Role:** development · **Difficulty:** intermediate
@@ -278,6 +303,31 @@ in a future PR.
 - **Role:** development · **Difficulty:** advanced
 - **Why:** ground-lease economics; common at urban infill developers.
 - **Maps to:** **GAP — propose `groundLeaseVsFee` situational**.
+
+### Q: What line items would you expect in a development budget's soft-cost bucket, and which ones tend to get underestimated?
+- **Role:** development · **Difficulty:** beginner
+- **Why:** budget-literacy filter; frequent opener at development-side interviews, distinct from the hard-cost/TPC framing already above.
+- **Maps to:** `walk-dev-feasibility-1` walkthrough Step 2.
+
+### Q: You're 80% through construction, 70% of the loan is drawn, and the GC flags a 12% hard-cost overrun. Where does the money come from?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** alternate framing of the cost-overrun/capital-stack question — tests contingency-first discipline under time pressure.
+- **Maps to:** `construction-cost-overrun` situational (alternate phrasing).
+
+### Q: Your pro forma stabilizes at a 6% yield-on-cost, but rates have moved such that permanent debt now prices off a 6.5% cap. Does the deal still work?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** dev-spread-under-rate-drift reasoning — distinct from the static "yield on cost vs today's market cap" question already above.
+- **Maps to:** **GAP — propose `dev-spread-compression-timing` situational**.
+
+### Q: Comparing a forward-purchase agreement to a straight development deal on the same site — what changes in your risk profile and required return?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** forward-sale / risk-transfer structuring; common at institutional-scale developers and with JV capital partners.
+- **Maps to:** **GAP — propose `forward-purchase-vs-development` situational**.
+
+### Q: A JV equity partner wants a single development-to-perm loan instead of separate construction and permanent financing. What are the tradeoffs?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** financing-structure comparison; increasingly common as construction lending has tightened.
+- **Maps to:** **GAP — propose `dev-to-perm-vs-separate` situational**.
 
 ---
 
@@ -315,10 +365,27 @@ regardless of position.
 
 ## Summary statistics
 
-- **Total questions in this doc:** 52
-- **Mapped to existing content:** 41 (78%)
-- **Flagged as GAPs:** 8 (15%)
-- **Out of scope (time-sensitive / behavioral):** 4 (8%)
+- **Total questions in this doc:** 62
+- **Mapped to existing content:** 41 (66%)
+- **Flagged as GAPs:** 17 (27%)
+- **Out of scope (time-sensitive / behavioral):** 4 (6%)
+
+**Coverage by area (mapped-to-content ratio, lowest first):**
+
+| Area | Questions | Mapped | Ratio |
+| --- | --- | --- | --- |
+| Portfolio Management | 13 | 7 | 54% |
+| Development | 12 | 6 | 50% |
+| Asset Management | 10 | 9 | 90% |
+| Mortgage Underwriting | 10 | 9 | 90% |
+| Acquisitions | 12 | 12 | 100% |
+| Cross-cutting | 5 | 0 mapped / 4 intentionally out of scope | n/a |
+
+Portfolio Management and Development have the lowest share of questions
+mapped to existing content, so this pass added 10 new candidate phrasings
+there (5 each — see both sections above) to keep the bank growing where
+coverage is thinnest rather than piling onto the already-well-covered
+Acquisitions area.
 
 Top GAPs to address (ranked by interview frequency):
 
@@ -328,6 +395,9 @@ Top GAPs to address (ranked by interview frequency):
 4. `constructionLoanSizing` quiz + `dev-ltc-vs-ltv` situational (development)
 5. `walk-distressed-1` walkthrough (cross-cutting)
 
-These five gaps would lift mapped-to-content coverage from 78% → ~93% with
+These five gaps would lift mapped-to-content coverage meaningfully with
 ~½ day of content work each, and they all surface from real interview-question
-patterns rather than top-down design guesses.
+patterns rather than top-down design guesses. The 10 newly added Portfolio
+Management / Development phrasings (see above) are additional candidates
+surfaced by this pass — not yet ranked into the top-5, but worth folding into
+the next content-planning cycle for those two areas.
