@@ -242,7 +242,7 @@ in a future PR.
 
 ---
 
-## Development (7)
+## Development (17)
 
 ### Q: Land cost $8M, hard cost $38M, soft $7M, 5% contingency. What's TPC and what's the yield-on-cost on $4.5M stabilized NOI?
 - **Role:** development · **Difficulty:** intermediate
@@ -278,6 +278,56 @@ in a future PR.
 - **Role:** development · **Difficulty:** advanced
 - **Why:** ground-lease economics; common at urban infill developers.
 - **Maps to:** **GAP — propose `groundLeaseVsFee` situational**.
+
+### Q: GAP — GC is proposing a GMP contract at a 4% fee; the alternative is cost-plus with a 6% fee and a shared-savings clause. How does the contract type change what risk you're underwriting?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** GMP shifts cost overrun risk to the GC (at a price); cost-plus keeps it with the sponsor. Candidates who only compare the fee % miss the risk transfer.
+- **Maps to:** **GAP — propose `gmpVsCostPlus` situational**.
+
+### Q: GAP — Hard costs come in $3M over budget mid-construction and your $2M contingency is exhausted. Where does the next dollar come from, and what does it do to your levered IRR?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** contingency drawdown order (contingency → sponsor cash call → mezz/preferred equity → construction loan increase) is a common "walk me through what happens next" probe.
+- **Maps to:** **GAP — propose `contingencyExhaustionCascade` situational** (adjacent to the existing `contingencyDrawDown` template, but framed on what happens after contingency runs out, not just draw sequencing).
+
+### Q: GAP — Site A is entitled and shovel-ready at a $12M basis. Site B is the same size, un-entitled, and priced at $8M with an 18-month rezoning timeline. How do you underwrite the difference?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** entitlement risk pricing — tests whether a candidate discounts for approval risk and carry cost, not just basis-per-unit.
+- **Maps to:** **GAP — propose `entitlementRiskPricing` situational**.
+
+### Q: GAP — Your development fee is 4% of TPC on a $60M deal. Does that fee show up as income to the sponsor above the promote waterfall, or does it get netted into project cost first?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** development-fee mechanics and whether it's a return *of* capital vs a return *on* capital is frequently misunderstood; matters for GP economics.
+- **Maps to:** **GAP — propose `devFeeWaterfallTreatment` situational**.
+
+### Q: GAP — Your construction loan matures in 3 months. The permanent lender's term sheet requires a 1.25x DSCR test at conversion, and the property is trending to 1.15x at current leasing. What are your options?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** construction-to-perm conversion risk — a very live topic in a higher-rate environment; tests knowledge of extension options, mezz bridge, rate buydowns, and earnout structures.
+- **Maps to:** **GAP — propose `constructionToPermConversionRisk` situational**.
+
+### Q: GAP — Code requires 1.5 spaces/unit structured parking, adding $18k/unit to TPC. How much does that move your required rent, and at what parking ratio does the deal stop penciling?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** parking/podium cost is one of the biggest swing variables in urban multifamily TPC; tests whether a candidate can translate a cost input into a required-rent breakeven.
+- **Maps to:** **GAP — propose `parkingRatioTpcSensitivity` situational**.
+
+### Q: GAP — The jurisdiction's impact/tap fees for your submarket haven't been finalized and could land anywhere from $8k to $15k/unit. How do you handle that in your TPC and your bid?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** municipal fee uncertainty is a real and underrated line-item risk; tests whether a candidate builds a contingency band into TPC or just picks a point estimate.
+- **Maps to:** **GAP — propose `impactFeeUncertainty` situational**.
+
+### Q: GAP — On a stabilized acquisition, the promote hurdle is measured from day-one cash flow. On a ground-up development, there's no cash flow for 24+ months. How does the promote waterfall differ?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** development-JV waterfalls typically layer a preferred return that accrues (rather than pays currently) during construction/lease-up; tests whether a candidate understands accrual vs current-pay preferred return.
+- **Maps to:** **GAP — propose `devWaterfallAccrualVsCurrentPay` situational**.
+
+### Q: GAP — You underwrote a 5.0% exit cap at delivery, 24 months out. Cap rates have since moved out 75 bps, but market rents have grown 6%. Does the deal still pencil, and how do you stress-test that race during construction?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** rent growth vs. cap-rate-expansion race is the core exit risk on any multi-year development hold; tests whether a candidate can net the two rather than reasoning about only one.
+- **Maps to:** **GAP — propose `devExitCapVsRentGrowthRace` situational**.
+
+### Q: GAP — Two mid-rise multifamily deals have identical TPC and unit count. Deal A is a 12-month renovation-heavy value-add reposition; Deal B is a 24-month ground-up build. Why would a lender size the two very differently even at the same LTC?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** tests whether a candidate understands that construction/entitlement risk, draw schedule, and completion guaranty requirements — not just LTC — drive a lender's spread and structure between heavy-reposition and ground-up deals.
+- **Maps to:** **GAP — propose `groundUpVsRepoLenderRisk` situational**.
 
 ---
 
@@ -315,10 +365,15 @@ regardless of position.
 
 ## Summary statistics
 
-- **Total questions in this doc:** 52
-- **Mapped to existing content:** 41 (78%)
-- **Flagged as GAPs:** 8 (15%)
-- **Out of scope (time-sensitive / behavioral):** 4 (8%)
+- **Total questions in this doc:** 62
+- **Mapped to existing content:** 38 (61%)
+- **Flagged as GAPs:** 20 (32%)
+- **Out of scope (time-sensitive / behavioral):** 4 (6%)
+
+Development went from the smallest section in this doc (7 questions, tied
+for fewest `Maps to:` content of any role) to the largest, via 10 new
+phrasings added 2026-09-04 to close the gap — see "Development coverage
+pass" below.
 
 Top GAPs to address (ranked by interview frequency):
 
@@ -331,3 +386,20 @@ Top GAPs to address (ranked by interview frequency):
 These five gaps would lift mapped-to-content coverage from 78% → ~93% with
 ~½ day of content work each, and they all surface from real interview-question
 patterns rather than top-down design guesses.
+
+### Development coverage pass (2026-09-04)
+
+Automated review of the shipped question bank (`feedback/questions.json`)
+and this doc found Development the most underrepresented role across both:
+10 of 100 shipped questions (vs. 46 for acquisitions, 34 for asset
+management, 29 for portfolio management) and only 7 of 52 entries in this
+doc (fewest of any role section, with 3 already flagged GAP). Added 10 new
+candidate phrasings above spanning capital-stack risk (GC contract type,
+contingency exhaustion, construction-to-perm conversion, impact-fee
+uncertainty), deal structuring (entitlement risk pricing, dev-fee
+treatment, JV promote accrual during construction), and market risk
+(parking-ratio TPC sensitivity, exit-cap-vs-rent-growth race) — chosen to
+avoid overlap with the 7 existing Development entries. All 10 are GAPs
+(phrasing only, no template/situational built yet); a future pass should
+prioritize building content for whichever of these come up most in real
+interview reports, same as the existing top-GAPs list above.
