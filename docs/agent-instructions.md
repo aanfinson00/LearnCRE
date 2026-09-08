@@ -155,9 +155,7 @@ GAPs surfaced from `docs/interview-questions.md` (still open for content):
 
 Adjacent deal-lifecycle topics not yet covered (good candidates for next
 batch):
-- Closing checklist + due-diligence sequence (acquisitions process)
 - Insurance program — master policy, builder's risk, GL, umbrella
-- Loan covenant testing cadence (monthly DSCR / debt-yield certification)
 - Year-end audit + K-1 timeline
 - Property tax appeal process and economics
 - Lease abstract + critical-date tracking
@@ -166,6 +164,67 @@ batch):
   annual meeting)
 - Asset reposition sequence — vacate, renovate, re-lease
 - Reserve study — what one is and how it informs reserves
+
+(Closing checklist + due-diligence sequence and loan covenant testing
+cadence, both listed here previously, now ship as `closing-checklist-
+sequence` and `covenant-testing-cadence` — pruned 2026-09-08.)
+
+---
+
+## Gap analysis — 2026-09-08 (situational bank, 71 cases)
+
+Tallied `category` / `assetClass` / `difficulty` / `roles` across every file
+in `src/quiz/situational/`. The community submission pipeline
+(`question_submissions`, reviewed at `/admin/submissions`) is the other
+place "approved" content originates, but its Supabase project isn't
+reachable from this environment — this pass uses the shipped/reviewed bank
+(the 100-question set in `QUESTION_REVIEW.md` / `feedback/questions.json`)
+as the proxy for "approved," since every case there has already been through
+the human review pass.
+
+**Thinnest categories:** absorption (1 case), comp-selection (2),
+lease-econ (2), sensitivity (2) — vs. deal-process (21), document-literacy
+(13), investment-thesis (9) at the other end.
+
+**Thinnest asset classes:** hotel (1), retail (2), industrial (3) — vs.
+multifamily (11), office (9).
+
+**Thinnest cut otherwise:** beginner difficulty (4 cases vs. 33
+intermediate / 34 advanced) and the `development` role tag (9 vs. 40 on
+`acquisitions`).
+
+### 10 new question phrasings to fill the gaps
+
+Titles only — full `SituationalCase` implementation (scenario, data grid,
+4 options with one `isBest`, takeaway, tips) still needed before these can
+ship, per the workflow above.
+
+1. "Why is this hotel trading at a cap rate below its RevPAR comps?"
+   — *comp-selection · hotel · intermediate · acquisitions*
+2. "How much does a 5-point occupancy swing move this hotel's value?"
+   — *sensitivity · hotel · intermediate · assetManagement, acquisitions*
+3. "How long until this power center backfills its anchor vacancy?"
+   — *absorption · retail · intermediate · acquisitions, development*
+4. "Is the co-tenancy clause about to blow up this rent roll?"
+   — *lease-econ · retail · advanced · assetManagement*
+5. "Which industrial comps actually belong in this clear-height-adjusted
+   set?" — *comp-selection · industrial · beginner · acquisitions*
+6. "How sensitive is this bulk-industrial deal to a 50bp move in exit cap?"
+   — *sensitivity · industrial · intermediate · acquisitions, portfolioMgmt*
+7. "Why did the GC's draw request get short-paid?"
+   — *deal-process · (no assetClass) · beginner · development*
+8. "Is 18 months of positive absorption enough to justify this lease-up
+   pro forma?" — *absorption · office · intermediate · acquisitions,
+   development*
+9. "Does the concession package actually save the deal's effective rent?"
+   — *lease-econ · multifamily · beginner · assetManagement, acquisitions*
+10. "How much RevPAR cushion is left before this hotel trips its
+    debt-yield covenant?" — *sensitivity · hotel · advanced · mortgageUw*
+
+Together these add 3 hotel / 2 retail / 2 industrial cases, 2 more each
+of absorption / comp-selection / lease-econ / sensitivity, 2 more beginner-
+difficulty cases, and 2 more `development`-tagged cases — directly against
+the thinnest cuts above.
 
 ---
 
