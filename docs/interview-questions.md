@@ -26,7 +26,7 @@ in a future PR.
 
 ---
 
-## Acquisitions (12)
+## Acquisitions (13)
 
 ### Q: How do you compute cap rate, and what's a typical going-in cap range for stabilized industrial in a tier-1 market today?
 - **Role:** acquisitions · **Difficulty:** beginner
@@ -88,9 +88,14 @@ in a future PR.
 - **Why:** single-tenant pricing nuance.
 - **Maps to:** `tenant-credit-pricing` situational.
 
+### Q: GAP — A bulk-industrial submarket has absorbed 1.8M SF trailing four quarters against 2.4M SF of new deliveries, and the going-in cap on a stabilized asset there is 40 bps tighter than a submarket with flat absorption. How much of that spread is buyers pricing absorption momentum vs. asset quality?
+- **Role:** acquisitions · **Difficulty:** advanced
+- **Why:** industrial is the most cap-rate-competitive asset class right now and absorption-driven cap compression is a live underwriting question; industrial is also the most underrepresented asset class in our current situational catalog (3 of 71 cases).
+- **Maps to:** **GAP — propose `industrial-absorption-cap-rate-divergence` situational (asset class: industrial)**.
+
 ---
 
-## Asset Management (10)
+## Asset Management (13)
 
 ### Q: Year-3 NOI came in 8% below pro forma. Where do you look first?
 - **Role:** assetManagement · **Difficulty:** intermediate
@@ -137,10 +142,25 @@ in a future PR.
 - **Why:** tax-deferral vs redeployment-opportunity tradeoff.
 - **Maps to:** `tax-vs-irr-tradeoff` situational + `refi-vs-sell` situational.
 
-### Q: GAP — How do you set a capex reserve on a stabilized asset, and what gets included vs excluded?
+### Q: How do you set a capex reserve on a stabilized asset, and what gets included vs excluded?
 - **Role:** assetManagement · **Difficulty:** intermediate
 - **Why:** capex discipline; common pitfall is using the OM number unchanged.
-- **Maps to:** **GAP — propose `capex-reserve-discipline` situational + `capexReserveSizing` quiz template**.
+- **Maps to:** `capex-reserve-discipline` situational + `capexReserveSizing` quiz template. *(was flagged GAP — shipped in the Question-base depth pass, Phase 1.)*
+
+### Q: GAP — A grocery-anchored center's 45,000 SF junior-anchor box has sat dark for 18 months; comparable boxes in the trade area take 24-30 months to backfill at rents 15% below the prior tenant's. How do you model that absorption timeline in your NOI, and what's your downside case if it runs the full 30 months?
+- **Role:** assetManagement · **Difficulty:** intermediate
+- **Why:** big-box backfill absorption is a retail-specific diagnostic our catalog doesn't cover yet; retail is one of the three thinnest asset classes in the situational catalog (2 of 71 cases).
+- **Maps to:** **GAP — propose `retail-anchor-backfill-absorption` situational (asset class: retail)**.
+
+### Q: GAP — An anchor tenant at a strip center files bankruptcy and rejects its lease. Three in-line tenants have co-tenancy clauses tied to that anchor being open. How do you sequence backfill vs. co-tenancy exposure, and what absorption pace do you underwrite for the in-line spaces if the box sits vacant for a year?
+- **Role:** assetManagement · **Difficulty:** advanced
+- **Why:** co-tenancy domino risk is a retail-specific diagnostic that combines lease-clause literacy with absorption timing — a gap in both the retail and lease-econ/document-literacy coverage.
+- **Maps to:** **GAP — propose `retail-cotenancy-domino-risk` situational (asset class: retail)**.
+
+### Q: GAP — Three new hotels (450 keys combined) are set to open in your comp set over the next 18 months — a 22% supply increase — while your asset runs 68% occupancy today. Historical patterns show new supply takes 12-18 months to stabilize and depresses comp-set RevPAR 8-12% during ramp. How do you underwrite your hold-period RevPAR growth assumption against that absorption wave?
+- **Role:** assetManagement · **Difficulty:** advanced
+- **Why:** competitive new-supply absorption is the hotel-specific analogue of a lease-up case and hotel is the thinnest asset class in the situational catalog by far (1 of 71 cases).
+- **Maps to:** **GAP — propose `hotel-new-supply-absorption-wave` situational (asset class: hotel)**.
 
 ---
 
@@ -191,14 +211,14 @@ in a future PR.
 - **Why:** distinction-tested often as a filter for understanding leverage.
 - **Maps to:** `cashOnCash` quiz template + `CashOnCashViz`.
 
-### Q: GAP — How do you stress-test a permanent loan for refi at maturity? What's a reasonable stressed cap rate vs. today's?
+### Q: How do you stress-test a permanent loan for refi at maturity? What's a reasonable stressed cap rate vs. today's?
 - **Role:** mortgageUw · **Difficulty:** advanced
 - **Why:** refi-risk underwriting; common at life cos and debt funds.
-- **Maps to:** **GAP — propose `refiStressTest` quiz template + `refi-cap-stress` situational**.
+- **Maps to:** `refiStressTest` quiz template + `refi-cap-stress` situational. *(was flagged GAP — shipped.)*
 
 ---
 
-## Portfolio Management (8)
+## Portfolio Management (9)
 
 ### Q: Your fund is 40% office vs 25% target. Which assets do you sell first to rebalance?
 - **Role:** portfolioMgmt · **Difficulty:** advanced
@@ -213,7 +233,7 @@ in a future PR.
 ### Q: Fund-level IRR is 14%, deal-level is 16%. Why the gap?
 - **Role:** portfolioMgmt · **Difficulty:** intermediate
 - **Why:** fees, J-curve, undeployed capital — common gotcha.
-- **Maps to:** **GAP — propose `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz template**.
+- **Maps to:** `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz template. *(was flagged GAP — shipped.)*
 
 ### Q: Compute portfolio-weighted NOI per unit across 4 assets of different sizes.
 - **Role:** portfolioMgmt · **Difficulty:** beginner
@@ -223,26 +243,31 @@ in a future PR.
 ### Q: How do you allocate capital across 5 deals when only 3 will close? What weighting matters?
 - **Role:** portfolioMgmt · **Difficulty:** advanced
 - **Why:** capital-allocation reasoning; common at closed-end fund GPs.
-- **Maps to:** **GAP — propose `capital-allocation-priority` situational**.
+- **Maps to:** `capital-allocation-priority` situational. *(was flagged GAP — shipped.)*
 
 ### Q: When does a sponsor pay carry, and what's a typical 2-tier waterfall?
 - **Role:** portfolioMgmt · **Difficulty:** intermediate
-- **Why:** waterfall basics; explicitly out of scope per ROADMAP — flag for future.
-- **Maps to:** **GAP — propose `1-tier-promote-walk` walkthrough (deferred per ROADMAP)**.
+- **Why:** waterfall basics.
+- **Maps to:** `distribution-waterfall-1tier` situational (1-tier mechanics). Multi-tier promote walkthroughs remain **OUT OF SCOPE** per ROADMAP ("Multi-tier waterfalls... out of pedagogical scope").
 
-### Q: GAP — How do you measure risk-adjusted returns across a fund's holdings? What's a defensible Sharpe-equivalent for CRE?
+### Q: How do you measure risk-adjusted returns across a fund's holdings? What's a defensible Sharpe-equivalent for CRE?
 - **Role:** portfolioMgmt · **Difficulty:** advanced
 - **Why:** risk-quantification; underbuilt in our content.
-- **Maps to:** **GAP — propose `risk-adjusted-return-framework` situational**.
+- **Maps to:** `risk-adjusted-return-framework` situational. *(was flagged GAP — shipped.)*
 
 ### Q: Deal returned 1.4x EM in 5 years. Translate to IRR — and explain why EM and IRR can diverge.
 - **Role:** portfolioMgmt · **Difficulty:** beginner
 - **Why:** EM↔IRR translation; common filter.
 - **Maps to:** `equityMultiple` quiz template + `irrSimple` quiz template + `EquityMultipleViz`.
 
+### Q: GAP — You're underwriting rent growth for three multifamily assets in the same submarket. One appraiser's absorption comp set spans the whole metro (800 units/quarter); another restricts to a 3-mile radius, where the pipeline dwarfs local absorption (120 units/quarter against 900 units coming). Which comp set do you trust across the portfolio, and why?
+- **Role:** portfolioMgmt · **Difficulty:** advanced
+- **Why:** reconciling metro-wide vs. micro-radius absorption comps is a real portfolio-level underwriting disagreement, and `absorption` is the single thinnest category in the situational catalog (1 of 71 cases).
+- **Maps to:** **GAP — propose `portfolio-absorption-comp-radius` situational (asset class: multifamily)**.
+
 ---
 
-## Development (7)
+## Development (12)
 
 ### Q: Land cost $8M, hard cost $38M, soft $7M, 5% contingency. What's TPC and what's the yield-on-cost on $4.5M stabilized NOI?
 - **Role:** development · **Difficulty:** intermediate
@@ -267,17 +292,42 @@ in a future PR.
 ### Q: Construction loan sizing on a $50M TPC dev with 65% LTC. What's the equity check?
 - **Role:** development · **Difficulty:** intermediate
 - **Why:** LTC-vs-LTV distinction; common at debt funds + GC-side.
-- **Maps to:** **GAP — propose `constructionLoanSizing` quiz template + `dev-ltc-vs-ltv` situational**.
+- **Maps to:** `constructionLoanSizing` quiz template + `dev-ltc-vs-ltv` situational. *(was flagged GAP — shipped.)*
 
-### Q: GAP — How do you size a lease-up reserve on a development that stabilizes year 2-3?
+### Q: How do you size a lease-up reserve on a development that stabilizes year 2-3?
 - **Role:** development · **Difficulty:** intermediate
 - **Why:** lease-up risk pricing; common in development-side underwriting.
-- **Maps to:** **GAP — propose `leaseUpReserve` quiz template**.
+- **Maps to:** `leaseUpReserve` quiz template. *(was flagged GAP — shipped.)*
 
 ### Q: Ground lease vs fee-simple on a development site — what changes in your underwriting?
 - **Role:** development · **Difficulty:** advanced
 - **Why:** ground-lease economics; common at urban infill developers.
-- **Maps to:** **GAP — propose `groundLeaseVsFee` situational**.
+- **Maps to:** `groundLeaseVsFee` situational. *(was flagged GAP — shipped.)*
+
+### Q: GAP — You're deciding whether to build 500,000 SF of industrial spec or wait for a build-to-suit tenant. Trailing absorption in the submarket is decelerating but still net positive. At what absorption pace does spec development stop penciling against your return hurdle?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** spec-vs-BTS is the core development go/no-go decision for industrial, and industrial is one of the thinnest asset classes in the situational catalog (3 of 71 cases) — absorption is the variable that actually drives the decision.
+- **Maps to:** **GAP — propose `industrial-spec-vs-bts-absorption` situational (asset class: industrial)**.
+
+### Q: GAP — Your industrial portfolio spans small-bay infill and bulk distribution in the same metro. The metro-wide absorption comp set nets a healthy pace, but small-bay absorption alone is running well below it. Which comp set drives your leasing assumption on a small-bay acquisition, and why?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** small-bay and bulk industrial absorb on different cycles; mixing the comp sets is a common analyst mistake and industrial comp-selection cases don't exist yet in the catalog.
+- **Maps to:** **GAP — propose `industrial-small-bay-vs-bulk-absorption` situational (asset class: industrial)**.
+
+### Q: GAP — A power-center redevelopment is delivering 180,000 SF of new retail into a submarket at 90% occupied. Anchor pre-leasing covers a third of the space at delivery; in-line absorption has run 15,000 SF/quarter. How long until the submarket is back to 92% occupied, and how does anchor pre-leasing change the math vs. treating the whole delivery as unleased?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** retail lease-up math (anchor pre-leasing vs. in-line absorption pace) is untested; retail is one of the three thinnest asset classes in the catalog (2 of 71 cases).
+- **Maps to:** **GAP — propose `retail-power-center-preleasing-absorption` situational (asset class: retail)**.
+
+### Q: GAP — A newly opened 150-key select-service hotel posts 35% occupancy in month one against a comp-set stabilized occupancy of 72%. Historical ramp curves for this segment run +4-6 points/month through month 12, then flatten. How many months until the hotel is within 5 points of stabilized, and what would make you distrust a vendor's faster projected curve?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** hotel ramp-to-stabilization is the hotel-specific analogue of lease-up absorption and hotel is the single thinnest asset class in the situational catalog (1 of 71 cases).
+- **Maps to:** **GAP — propose `hotel-ramp-to-stabilization` situational (asset class: hotel)**.
+
+### Q: GAP — A 600-unit multifamily development is entitled as a single phase, but trailing submarket absorption is only 180 units/quarter against 1,400 units of announced competitive pipeline. Should you phase the project, and what absorption pace would justify building all 600 units at once?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** phasing-vs-absorption is a core development go/no-go lever and development is the most underrepresented role in the situational catalog (9 of 71 cases carry a `development` role tag vs. 40 for acquisitions).
+- **Maps to:** **GAP — propose `multifamily-phasing-absorption-pace` situational (asset class: multifamily)**.
 
 ---
 
@@ -306,28 +356,62 @@ regardless of position.
 - **Why:** sector-thesis prompt.
 - **Maps to:** **OUT OF SCOPE — explicitly time-sensitive**.
 
-### Q: GAP — Walk me through a distressed deal: half-vacant, basis below replacement, equity wiped — does it pencil?
+### Q: Walk me through a distressed deal: half-vacant, basis below replacement, equity wiped — does it pencil?
 - **Role:** all · **Difficulty:** advanced
 - **Why:** distressed underwriting; increasingly relevant 2024+.
-- **Maps to:** **GAP — propose `walk-distressed-1` walkthrough**.
+- **Maps to:** `walk-distressed-1` walkthrough. *(was flagged GAP — shipped.)*
 
 ---
 
+## Coverage gap audit — 2026-09-12
+
+Cross-referenced this doc against the shipped `src/quiz/situational/` catalog
+(71 cases) to find which areas have the fewest **approved / shipped**
+questions relative to the rest of the catalog, rather than guessing top-down.
+Three skews stood out:
+
+| Dimension | Thinnest | Count | vs. largest |
+|---|---|---|---|
+| Category | `absorption` | 1 of 71 | `deal-process` at 21 |
+| Asset class | `hotel` | 1 of 71 | `multifamily` at 11 |
+| Asset class | `retail` | 2 of 71 | `multifamily` at 11 |
+| Asset class | `industrial` | 3 of 71 | `multifamily` at 11 |
+| Role | `development` | 9 of 71 | `acquisitions` at 40 |
+
+(Also found in the process: the five "Top GAPs" previously listed below had
+already shipped — see the `*(was flagged GAP — shipped.)*` notes inline
+above. Corrected rather than left stale.)
+
+The 10 phrasings below all sit in the `absorption` category and were
+distributed to double up on the other thin dimensions — 8 of 10 target
+hotel/retail/industrial, 6 of 10 tag a `development` role — so one content
+pass closes multiple gaps at once. They're new `### Q: GAP` entries added
+above under Acquisitions, Asset Management, Development, and Portfolio
+Management. Full list:
+
+1. `industrial-absorption-cap-rate-divergence` situational (acquisitions · industrial)
+2. `retail-anchor-backfill-absorption` situational (asset mgmt · retail)
+3. `retail-cotenancy-domino-risk` situational (asset mgmt · retail)
+4. `hotel-new-supply-absorption-wave` situational (asset mgmt · hotel)
+5. `industrial-spec-vs-bts-absorption` situational (development · industrial)
+6. `industrial-small-bay-vs-bulk-absorption` situational (development · industrial)
+7. `retail-power-center-preleasing-absorption` situational (development · retail)
+8. `hotel-ramp-to-stabilization` situational (development · hotel)
+9. `multifamily-phasing-absorption-pace` situational (development · multifamily)
+10. `portfolio-absorption-comp-radius` situational (portfolio mgmt · multifamily)
+
+These are phrasings/prompts for the vet queue, not yet implemented as full
+`SituationalCase` files (scenario data, 3-4 graded options, takeaway, tips)
+— that's the next step before they can ship.
+
 ## Summary statistics
 
-- **Total questions in this doc:** 52
-- **Mapped to existing content:** 41 (78%)
-- **Flagged as GAPs:** 8 (15%)
-- **Out of scope (time-sensitive / behavioral):** 4 (8%)
+- **Total questions in this doc:** 62
+- **Mapped to existing content:** 48 (77%)
+- **Flagged as GAPs (open):** 10 (16%)
+- **Out of scope (time-sensitive / behavioral):** 4 (6%)
 
-Top GAPs to address (ranked by interview frequency):
-
-1. `capexReserveSizing` quiz + `capex-reserve-discipline` situational (asset mgmt)
-2. `refiStressTest` quiz + `refi-cap-stress` situational (mortgage UW)
-3. `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz (portfolio mgmt)
-4. `constructionLoanSizing` quiz + `dev-ltc-vs-ltv` situational (development)
-5. `walk-distressed-1` walkthrough (cross-cutting)
-
-These five gaps would lift mapped-to-content coverage from 78% → ~93% with
-~½ day of content work each, and they all surface from real interview-question
-patterns rather than top-down design guesses.
+All 10 open GAPs are the absorption/hotel/retail/industrial/development
+phrasings from the coverage gap audit above — the prior "Top GAPs to
+address" list is now fully shipped (see inline `(was flagged GAP —
+shipped.)` notes) and has been retired from this section.
