@@ -26,7 +26,7 @@ in a future PR.
 
 ---
 
-## Acquisitions (12)
+## Acquisitions (14)
 
 ### Q: How do you compute cap rate, and what's a typical going-in cap range for stabilized industrial in a tier-1 market today?
 - **Role:** acquisitions · **Difficulty:** beginner
@@ -88,9 +88,19 @@ in a future PR.
 - **Why:** single-tenant pricing nuance.
 - **Maps to:** `tenant-credit-pricing` situational.
 
+### Q: Five industrial trade comps are in the same submarket and all traded within the last six months. Three have 28' clear height; two have 36'+ clear height. Do you average all five cap rates?
+- **Role:** acquisitions · **Difficulty:** beginner
+- **Why:** comp-vetting nuance most beginners miss — physical spec differences move cap rates as much as timing/geography do. `industrial` is one of the thinnest asset classes in the situational catalog (3 of 71 cases) and `comp-selection` one of the thinnest categories (2 of 71).
+- **Maps to:** **GAP — propose `clear-height-comp-adjustment` situational** (`comp-selection` · beginner · industrial). Complements the shipped `clearHeightPremium` quiz template, which computes the rent premium directly but doesn't test the comp-weighting judgment call.
+
+### Q: An industrial lease offers a choice: fixed 3%/year bumps, or CPI-linked bumps that have historically averaged 3.2% but are volatile. On a 10-year NNN lease, which structure is worth more to the landlord, and what risk are you trading away?
+- **Role:** acquisitions/assetManagement · **Difficulty:** intermediate
+- **Why:** escalation-structure tradeoff; `lease-econ` is one of the thinnest categories (2 of 71, both retail/office) and has no industrial example.
+- **Maps to:** **GAP — propose `fixed-vs-cpi-bumps` situational** (`lease-econ` · intermediate · industrial).
+
 ---
 
-## Asset Management (10)
+## Asset Management (12)
 
 ### Q: Year-3 NOI came in 8% below pro forma. Where do you look first?
 - **Role:** assetManagement · **Difficulty:** intermediate
@@ -137,14 +147,24 @@ in a future PR.
 - **Why:** tax-deferral vs redeployment-opportunity tradeoff.
 - **Maps to:** `tax-vs-irr-tradeoff` situational + `refi-vs-sell` situational.
 
-### Q: GAP — How do you set a capex reserve on a stabilized asset, and what gets included vs excluded?
+### Q: How do you set a capex reserve on a stabilized asset, and what gets included vs excluded?
 - **Role:** assetManagement · **Difficulty:** intermediate
 - **Why:** capex discipline; common pitfall is using the OM number unchanged.
-- **Maps to:** **GAP — propose `capex-reserve-discipline` situational + `capexReserveSizing` quiz template**.
+- **Maps to:** `capex-reserve-discipline` situational + `capexReserveSizing` quiz template. *(Shipped — corrected from stale GAP marker 2026-09-13.)*
+
+### Q: A big-box anchor's lease has a co-tenancy clause — if center occupancy drops below 70%, the anchor can pay reduced "alternate rent" or terminate. Two junior anchors just vacated, dropping the center to 65% occupied. What's your exposure, and what do you check first?
+- **Role:** assetManagement/portfolioMgmt · **Difficulty:** advanced
+- **Why:** co-tenancy is one of the most consequential clauses in retail lease admin and a frequent surprise for asset managers who haven't read the anchor leases closely. `retail` is one of the thinnest asset classes in the situational catalog (2 of 71 cases).
+- **Maps to:** **GAP — propose `retail-co-tenancy-clause` situational** (`document-literacy` · advanced · retail).
+
+### Q: A hotel's trailing-12 RevPAR is running 15% below its comp set average, but GOP margin is right on budget. Is that a pricing problem, a demand problem, or a budget problem — and what's the first number you'd pull to tell?
+- **Role:** assetManagement · **Difficulty:** beginner
+- **Why:** `hotel` is the single thinnest asset class in the situational catalog (1 of 71 cases) and `beginner` the thinnest difficulty tier (4 of 71). This is a simpler on-ramp ahead of the shipped intermediate `hotel-revpar-divergence` situational.
+- **Maps to:** **GAP — propose `revpar-vs-comp-first-look` situational** (`diagnostic` · beginner · hotel), a lead-in to the shipped `hotel-revpar-divergence` situational and `walk-hotel-revpar-1` walkthrough.
 
 ---
 
-## Mortgage Underwriting (10)
+## Mortgage Underwriting (12)
 
 ### Q: What's the formula for DSCR? What's a healthy threshold?
 - **Role:** mortgageUw · **Difficulty:** beginner
@@ -191,14 +211,24 @@ in a future PR.
 - **Why:** distinction-tested often as a filter for understanding leverage.
 - **Maps to:** `cashOnCash` quiz template + `CashOnCashViz`.
 
-### Q: GAP — How do you stress-test a permanent loan for refi at maturity? What's a reasonable stressed cap rate vs. today's?
+### Q: How do you stress-test a permanent loan for refi at maturity? What's a reasonable stressed cap rate vs. today's?
 - **Role:** mortgageUw · **Difficulty:** advanced
 - **Why:** refi-risk underwriting; common at life cos and debt funds.
-- **Maps to:** **GAP — propose `refiStressTest` quiz template + `refi-cap-stress` situational**.
+- **Maps to:** `refiStressTest` quiz template + `refi-cap-stress` situational. *(Shipped — corrected from stale GAP marker 2026-09-13.)*
+
+### Q: What's the difference between loan-to-cost and loan-to-value, and why might a construction lender size off LTC while the permanent lender sizes off LTV?
+- **Role:** mortgageUw/development · **Difficulty:** beginner
+- **Why:** foundational vocabulary most candidates fumble before they've done a real deal; `development` is the thinnest role in the situational catalog (9 of 71 cases, vs 40 for acquisitions) and `beginner` the thinnest difficulty (4 of 71).
+- **Maps to:** **GAP — propose `ltc-vs-ltv-basics` situational** (`risk` · beginner · development), a plain-language lead-in ahead of the shipped advanced `dev-ltc-vs-ltv` situational's numeric sizing exercise.
+
+### Q: Your office asset's DSCR is 1.35x today. 30% of the rent roll rolls in the next 18 months at a rate you can't predict. How would you stress the DSCR before your lender does?
+- **Role:** mortgageUw/assetManagement · **Difficulty:** intermediate
+- **Why:** rollover-driven DSCR risk; `sensitivity` is one of the thinnest categories in the catalog (2 of 71, both acquisitions-side cap-rate cases).
+- **Maps to:** **GAP — propose `dscr-rollover-sensitivity` situational** (`sensitivity` · intermediate · office).
 
 ---
 
-## Portfolio Management (8)
+## Portfolio Management (9)
 
 ### Q: Your fund is 40% office vs 25% target. Which assets do you sell first to rebalance?
 - **Role:** portfolioMgmt · **Difficulty:** advanced
@@ -213,7 +243,7 @@ in a future PR.
 ### Q: Fund-level IRR is 14%, deal-level is 16%. Why the gap?
 - **Role:** portfolioMgmt · **Difficulty:** intermediate
 - **Why:** fees, J-curve, undeployed capital — common gotcha.
-- **Maps to:** **GAP — propose `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz template**.
+- **Maps to:** `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz template. *(Shipped — corrected from stale GAP marker 2026-09-13.)*
 
 ### Q: Compute portfolio-weighted NOI per unit across 4 assets of different sizes.
 - **Role:** portfolioMgmt · **Difficulty:** beginner
@@ -223,26 +253,31 @@ in a future PR.
 ### Q: How do you allocate capital across 5 deals when only 3 will close? What weighting matters?
 - **Role:** portfolioMgmt · **Difficulty:** advanced
 - **Why:** capital-allocation reasoning; common at closed-end fund GPs.
-- **Maps to:** **GAP — propose `capital-allocation-priority` situational**.
+- **Maps to:** `capital-allocation-priority` situational. *(Shipped — corrected from stale GAP marker 2026-09-13.)*
 
-### Q: When does a sponsor pay carry, and what's a typical 2-tier waterfall?
+### Q: When does a sponsor pay carry, and what's a typical waterfall structure?
 - **Role:** portfolioMgmt · **Difficulty:** intermediate
-- **Why:** waterfall basics; explicitly out of scope per ROADMAP — flag for future.
-- **Maps to:** **GAP — propose `1-tier-promote-walk` walkthrough (deferred per ROADMAP)**.
+- **Why:** waterfall basics; previously flagged out-of-scope per an old ROADMAP note, since superseded.
+- **Maps to:** `distribution-waterfall-1tier` situational + `walk-waterfall-1` walkthrough, plus the deeper-cut `waterfall-european-vs-american`, `waterfall-catchup-mechanics`, `waterfall-irr-vs-moic-hurdle`, `waterfall-clawback-mechanics`, `waterfall-pref-compound-vs-simple`, and `waterfall-key-person-event` situational cases. *(Shipped — corrected from stale GAP marker 2026-09-13; this is now one of the best-covered topics in the bank.)*
 
-### Q: GAP — How do you measure risk-adjusted returns across a fund's holdings? What's a defensible Sharpe-equivalent for CRE?
+### Q: How do you measure risk-adjusted returns across a fund's holdings? What's a defensible Sharpe-equivalent for CRE?
 - **Role:** portfolioMgmt · **Difficulty:** advanced
 - **Why:** risk-quantification; underbuilt in our content.
-- **Maps to:** **GAP — propose `risk-adjusted-return-framework` situational**.
+- **Maps to:** `risk-adjusted-return-framework` situational. *(Shipped — corrected from stale GAP marker 2026-09-13.)*
 
 ### Q: Deal returned 1.4x EM in 5 years. Translate to IRR — and explain why EM and IRR can diverge.
 - **Role:** portfolioMgmt · **Difficulty:** beginner
 - **Why:** EM↔IRR translation; common filter.
 - **Maps to:** `equityMultiple` quiz template + `irrSimple` quiz template + `EquityMultipleViz`.
 
+### Q: Two of your fund's assets have identical cap rates and hold periods, but one is 90% leased to a single investment-grade tenant and the other is 90% leased across 40 diversified small tenants. Do they carry the same risk in your portfolio construction?
+- **Role:** portfolioMgmt · **Difficulty:** beginner
+- **Why:** tenant-concentration is a first-principles portfolio-construction idea most candidates haven't explicitly named; `beginner` is the thinnest difficulty tier in the catalog (4 of 71 cases).
+- **Maps to:** **GAP — propose `tenant-concentration-portfolio-risk` situational** (`investment-thesis` · beginner · portfolioMgmt).
+
 ---
 
-## Development (7)
+## Development (10)
 
 ### Q: Land cost $8M, hard cost $38M, soft $7M, 5% contingency. What's TPC and what's the yield-on-cost on $4.5M stabilized NOI?
 - **Role:** development · **Difficulty:** intermediate
@@ -267,17 +302,32 @@ in a future PR.
 ### Q: Construction loan sizing on a $50M TPC dev with 65% LTC. What's the equity check?
 - **Role:** development · **Difficulty:** intermediate
 - **Why:** LTC-vs-LTV distinction; common at debt funds + GC-side.
-- **Maps to:** **GAP — propose `constructionLoanSizing` quiz template + `dev-ltc-vs-ltv` situational**.
+- **Maps to:** `constructionLoanSizing` quiz template + `dev-ltc-vs-ltv` situational + `constructionLoanSizing` Excel template. *(Shipped — corrected from stale GAP marker 2026-09-13.)*
 
-### Q: GAP — How do you size a lease-up reserve on a development that stabilizes year 2-3?
+### Q: How do you size a lease-up reserve on a development that stabilizes year 2-3?
 - **Role:** development · **Difficulty:** intermediate
 - **Why:** lease-up risk pricing; common in development-side underwriting.
-- **Maps to:** **GAP — propose `leaseUpReserve` quiz template**.
+- **Maps to:** `leaseUpReserve` quiz template. *(Shipped — corrected from stale GAP marker 2026-09-13.)*
 
 ### Q: Ground lease vs fee-simple on a development site — what changes in your underwriting?
 - **Role:** development · **Difficulty:** advanced
 - **Why:** ground-lease economics; common at urban infill developers.
-- **Maps to:** **GAP — propose `groundLeaseVsFee` situational**.
+- **Maps to:** `ground-lease-vs-fee` situational. *(Shipped — corrected from stale GAP marker 2026-09-13.)*
+
+### Q: A 2M SF industrial submarket is 92% leased. 500k SF of new supply is delivering in two phases six months apart. Quarterly net absorption has averaged 120k SF. How do you frame the leasing risk on the spec building delivering in phase two?
+- **Role:** development/acquisitions · **Difficulty:** intermediate
+- **Why:** `absorption` is the single thinnest category in the situational catalog (1 of 71 cases — only the multifamily `absorption-timing` case) and has no industrial or phased-delivery example.
+- **Maps to:** **GAP — propose `phased-delivery-absorption` situational** (`absorption` · intermediate · industrial).
+
+### Q: You're underwriting a 250-unit lease-up. Your pro forma needs 20 units/month average velocity to hit stabilization on schedule. The first two months leased 12 and 15 units. Is the deal off track?
+- **Role:** development · **Difficulty:** beginner
+- **Why:** a simpler, earlier-stage companion to the shipped `absorption-timing` situational and `leaseUpReserve` quiz template; `beginner` is the thinnest difficulty tier (4 of 71 cases) and `development` the thinnest role (9 of 71).
+- **Maps to:** **GAP — propose `leaseup-velocity-checkpoint` situational** (`absorption` · beginner · multifamily).
+
+### Q: Your development pro forma underwrites a 5.25% exit cap on $50M of stabilized value. If cap rates widen 75 bps by delivery, how much value does that erase, and does the deal still clear your development-spread hurdle?
+- **Role:** development/acquisitions · **Difficulty:** intermediate
+- **Why:** exit-cap sensitivity is a standard go/no-go stress test on the dev side but the catalog's only two `sensitivity` cases are both acquisitions-side cap-rate spreads.
+- **Maps to:** **GAP — propose `dev-exit-cap-sensitivity` situational** (`sensitivity` · intermediate · development).
 
 ---
 
@@ -306,28 +356,64 @@ regardless of position.
 - **Why:** sector-thesis prompt.
 - **Maps to:** **OUT OF SCOPE — explicitly time-sensitive**.
 
-### Q: GAP — Walk me through a distressed deal: half-vacant, basis below replacement, equity wiped — does it pencil?
+### Q: Walk me through a distressed deal: half-vacant, basis below replacement, equity wiped — does it pencil?
 - **Role:** all · **Difficulty:** advanced
 - **Why:** distressed underwriting; increasingly relevant 2024+.
-- **Maps to:** **GAP — propose `walk-distressed-1` walkthrough**.
+- **Maps to:** `walk-distressed-1` walkthrough + `distressed-loan-workout` situational. *(Shipped — corrected from stale GAP marker 2026-09-13.)*
 
 ---
 
 ## Summary statistics
 
-- **Total questions in this doc:** 52
-- **Mapped to existing content:** 41 (78%)
-- **Flagged as GAPs:** 8 (15%)
-- **Out of scope (time-sensitive / behavioral):** 4 (8%)
+- **Total questions in this doc:** 62
+- **Mapped to existing content:** 48 (77%)
+- **Flagged as GAPs:** 10 (16%)
+- **Out of scope (time-sensitive / behavioral):** 4 (6%)
 
-Top GAPs to address (ranked by interview frequency):
+### 2026-09-13 coverage audit
 
-1. `capexReserveSizing` quiz + `capex-reserve-discipline` situational (asset mgmt)
-2. `refiStressTest` quiz + `refi-cap-stress` situational (mortgage UW)
-3. `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz (portfolio mgmt)
-4. `constructionLoanSizing` quiz + `dev-ltc-vs-ltv` situational (development)
-5. `walk-distressed-1` walkthrough (cross-cutting)
+Every GAP previously flagged in this doc (10 of them — the doc's own running
+count had drifted stale) turned out to already be shipped in
+`src/quiz/situational/`, `src/quiz/templates/`, or `src/quiz/walkthroughs.ts`:
+`capex-reserve-discipline`, `refi-cap-stress` / `refiStressTest`,
+`fund-vs-deal-irr-gap` / `feeDragOnIrr`, `capital-allocation-priority`,
+the waterfall walkthrough + situational cluster, `risk-adjusted-return-framework`,
+`dev-ltc-vs-ltv` / `constructionLoanSizing`, `leaseUpReserve`,
+`ground-lease-vs-fee`, and `walk-distressed-1`. All ten are now marked mapped
+above. None of this doc's questions are unmapped GAPs left over from that
+batch — the 10 GAPs listed below are new proposals from this audit.
 
-These five gaps would lift mapped-to-content coverage from 78% → ~93% with
-~½ day of content work each, and they all surface from real interview-question
-patterns rather than top-down design guesses.
+Cross-referencing this doc against the live `SITUATIONAL_CASES` catalog
+(71 cases) to find which dimensions have the fewest shipped questions
+relative to the rest of the catalog:
+
+- **Category:** `absorption` is thinnest (1 of 71) vs `deal-process` (21);
+  `comp-selection`, `sensitivity`, and `lease-econ` are next-thinnest (2 each).
+- **Asset class:** `hotel` (1), `retail` (2), `industrial` (3) vs
+  `multifamily` (11) and `office` (9); 37 cases are asset-class-agnostic.
+- **Role:** `development` (9) is thinnest vs `acquisitions` (40); every
+  development case also double-tags a second role.
+- **Difficulty:** `beginner` (4) is by far the thinnest tier vs
+  `intermediate` (33) and `advanced` (34) — the bank skews hard toward
+  intermediate/advanced and under-serves an easier on-ramp.
+
+New GAPs added this pass (ranked by how many thin dimensions each closes):
+
+1. `ltc-vs-ltv-basics` — beginner + development (mortgage UW)
+2. `leaseup-velocity-checkpoint` — beginner + absorption + development-adjacent (development)
+3. `revpar-vs-comp-first-look` — beginner + hotel (asset mgmt)
+4. `clear-height-comp-adjustment` — beginner + comp-selection + industrial (acquisitions)
+5. `tenant-concentration-portfolio-risk` — beginner (portfolio mgmt)
+6. `phased-delivery-absorption` — absorption + industrial + development (development)
+7. `dev-exit-cap-sensitivity` — sensitivity + development (development)
+8. `fixed-vs-cpi-bumps` — lease-econ + industrial (acquisitions)
+9. `dscr-rollover-sensitivity` — sensitivity (mortgage UW)
+10. `retail-co-tenancy-clause` — retail (asset mgmt)
+
+Six of the ten hit the `beginner` gap, four hit `development`, three hit
+`absorption`/`sensitivity` each, and four touch a thin asset class
+(hotel/retail/industrial) — deliberately stacked so a single implementation
+pass closes several coverage gaps at once rather than adding more depth to
+the already-strong `deal-process`/`document-literacy`/advanced/acquisitions
+areas. These are proposed phrasings for the vet queue, not yet implemented
+as `SituationalCase` files.
