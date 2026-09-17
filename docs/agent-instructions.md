@@ -169,6 +169,72 @@ batch):
 
 ---
 
+## Question-bank coverage gap: development role
+
+Role-tag counts across the live bank (`grep roles: src/quiz/situational/*.ts` and
+`src/quiz/templates/*.ts`, Sep 2026):
+
+| role             | situational cases | quiz templates |
+|------------------|-------------------:|----------------:|
+| acquisitions     | 40                 | 60              |
+| assetManagement  | 31                 | 20              |
+| portfolioMgmt    | 25                 | 16              |
+| mortgageUw       | 19                 | 16              |
+| **development**  | **9**              | **10**          |
+
+`development` is the thinnest role by a wide margin in both content types. The 9
+existing situational cases already cover construction-loan mechanics (draws,
+retainage, LDs, change orders, LTC vs LTV, equity-first vs pari-passu),
+absorption timing, and ground lease vs fee — so the next batch should target
+pre-construction / entitlement / delivery-risk topics that aren't touched yet,
+rather than adding more draw-mechanics variants.
+
+Ten candidate phrasings for the next situational-case batch (title + one-line
+scenario hook, in the existing review-sheet style — see `QUESTION_REVIEW.md`
+for the voice-memo pass these should go through before being built out with
+full options/explanations/takeaway):
+
+1. **"The city just changed the zoning — does the deal still pencil?"** — A
+   site is under contract as-of-right for 250 units; mid-due-diligence the
+   municipality downzones the parcel to 180 units before entitlements vest.
+2. **"Should you buy the option or the land?"** — Comparing a land purchase
+   option (refundable deposit, 18-month due-diligence window) against an
+   outright purchase at a discount, for a site still needing rezoning.
+3. **"The market study came back soft — do you still break ground?"** — A
+   third-party feasibility study shows absorption running below the
+   pro forma's assumed lease-up pace right before the construction loan closes.
+4. **"Your GC just walked off the job — now what?"** — A general contractor
+   defaults mid-construction; the case turns on payment/performance bond
+   mechanics and re-bid cost/schedule impact.
+5. **"GMP vs cost-plus — which contract do you sign?"** — Comparing a
+   guaranteed-maximum-price contract against cost-plus-with-a-fee for the
+   same scope, and what each does to the sponsor's contingency and upside.
+6. **"The Phase II came back dirty — do you still close?"** — A brownfield
+   site's environmental report finds contamination requiring remediation;
+   the case works through cost allocation and timeline impact.
+7. **"Impact fees just went up 40% — who eats it?"** — A municipality raises
+   development impact/exaction fees after the pro forma was underwritten but
+   before permits are pulled.
+8. **"You got a partial CO — can you start leasing?"** — A phased delivery
+   gets a certificate of occupancy for half the building while the other
+   half is still under construction; the case is about what can actually
+   generate revenue vs. what's still at risk.
+9. **"The JV promote kicks in on delivery, not stabilization — does that
+   matter?"** — A development joint-venture agreement defines the promote
+   hurdle off of a construction-completion date rather than a stabilized-NOI
+   date, and the case works through how that shifts sponsor incentives.
+10. **"Rates moved 150 bps since you locked the construction loan — what
+    breaks first?"** — A floating-rate construction loan without a rate cap
+    sees a large move mid-construction; the case is about which covenant
+    (interest reserve sizing, DSCR-on-conversion) fails first.
+
+None of these are built out yet (no `id`s reserved, no files created) — they're
+phrasings to vet in a voice-memo pass before a batch gets the full
+`SituationalCase` treatment (scenario, data grid, 3–4 options with exactly one
+`isBest`, explanations, takeaway, tips) per the spec above.
+
+---
+
 ## What to NOT do
 
 - **Don't invent new file structures.** If situational cases live in
