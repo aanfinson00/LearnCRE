@@ -144,7 +144,7 @@ in a future PR.
 
 ---
 
-## Mortgage Underwriting (10)
+## Mortgage Underwriting (15)
 
 ### Q: What's the formula for DSCR? What's a healthy threshold?
 - **Role:** mortgageUw · **Difficulty:** beginner
@@ -196,6 +196,26 @@ in a future PR.
 - **Why:** refi-risk underwriting; common at life cos and debt funds.
 - **Maps to:** **GAP — propose `refiStressTest` quiz template + `refi-cap-stress` situational**.
 
+### Q: GAP — Two lenders quote the same rate and amount; one gives 2 years interest-only then 30-yr am, the other is fully amortizing from day one. How does that change year-1 DSCR and refi risk at maturity?
+- **Role:** mortgageUw · **Difficulty:** intermediate
+- **Why:** IO-vs-amortizing tradeoff; candidates often don't connect the IO period to a bigger balloon and thinner refi coverage later.
+- **Maps to:** **GAP — propose `ioVsAmortizingDscr` quiz template + `io-period-refi-risk` situational**.
+
+### Q: GAP — The senior loan sizes to 60% LTV. The sponsor wants mezz debt layered on top to reach 75% total leverage. What changes about the risk and the blended cost of capital?
+- **Role:** mortgageUw · **Difficulty:** advanced
+- **Why:** capital-stack layering; common at debt funds and mezz/pref shops, tests whether candidates can blend two costs of capital and explain the subordination risk.
+- **Maps to:** **GAP — propose `blendedCostOfCapital` quiz template + `mezz-layering-risk` situational**.
+
+### Q: GAP — A borrower is taking a floating-rate bridge loan and the loan doc requires a rate cap. How do you size the cap strike, and what happens to DSCR if rates blow through it?
+- **Role:** mortgageUw · **Difficulty:** advanced
+- **Why:** floating-rate + hedging mechanics; increasingly common since the 2022+ rate shock pushed more bridge lending onto SOFR floaters.
+- **Maps to:** **GAP — propose `rateCapStrikeSizing` quiz template + `floating-rate-cap-blowthrough` situational**.
+
+### Q: GAP — You're underwriting an acquisition loan on a hotel. NOI is seasonal and the loan doc requires a 4% FF&E reserve off the top. How does that change DSCR testing vs. a stabilized multifamily loan?
+- **Role:** mortgageUw · **Difficulty:** intermediate
+- **Why:** hospitality-lending nuance (seasonality + mandatory reserve) that's easy to miss if all your DSCR reps are on stabilized multifamily/office.
+- **Maps to:** **GAP — propose `hotelDscrWithFfeReserve` quiz template + `hotel-seasonality-dscr-test` situational**.
+
 ---
 
 ## Portfolio Management (8)
@@ -242,7 +262,7 @@ in a future PR.
 
 ---
 
-## Development (7)
+## Development (12)
 
 ### Q: Land cost $8M, hard cost $38M, soft $7M, 5% contingency. What's TPC and what's the yield-on-cost on $4.5M stabilized NOI?
 - **Role:** development · **Difficulty:** intermediate
@@ -278,6 +298,31 @@ in a future PR.
 - **Role:** development · **Difficulty:** advanced
 - **Why:** ground-lease economics; common at urban infill developers.
 - **Maps to:** **GAP — propose `groundLeaseVsFee` situational**.
+
+### Q: GAP — Stabilized value pencils to $42M and total development cost excluding land is $30M. What's the residual land value, and what does it mean if that number comes out negative?
+- **Role:** development · **Difficulty:** beginner
+- **Why:** land residual is the first feasibility test every development analyst runs; candidates often don't know it's a subtraction, not a comp-based estimate.
+- **Maps to:** **GAP — propose `landResidualValue` quiz template + `land-residual-negative` situational**.
+
+### Q: GAP — Land is under contract with rezoning as a closing contingency. How do you price the entitlement risk into the land basis?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** entitlement risk is one of the biggest basis-of-price drivers in ground-up deals and is rarely drilled directly.
+- **Maps to:** **GAP — propose `entitlement-risk-pricing` situational**.
+
+### Q: GAP — Phase 1 of a 3-phase development is 60% leased at month 18 against a 75% pro forma target. Do you break ground on Phase 2?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** phase-gating discipline; tests whether candidates will let sunk enthusiasm override a lagging leasing signal.
+- **Maps to:** **GAP — propose `phase-gating-decision` situational**.
+
+### Q: GAP — You're underwriting ground-up hotel development under a national flag. Brand PIP requirements and FF&E funding hit hard starting year 5. How does that change the feasibility math versus a standard multifamily or office development?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** hospitality development has cost items (PIP, FF&E) with no analog in other asset classes — a common blind spot for generalist dev analysts.
+- **Maps to:** **GAP — propose `hotel-pip-feasibility-impact` situational**.
+
+### Q: GAP — A grocery-anchored retail developer can either carve off an outparcel and ground-lease it to a QSR tenant, or build and lease the pad themselves. How do you compare the two?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** outparcel monetization is a recurring retail-development decision; tests basis-vs-yield tradeoff reasoning on a smaller, self-contained deal.
+- **Maps to:** **GAP — propose `outparcel-ground-lease-vs-build` situational**.
 
 ---
 
@@ -315,10 +360,27 @@ regardless of position.
 
 ## Summary statistics
 
-- **Total questions in this doc:** 52
-- **Mapped to existing content:** 41 (78%)
-- **Flagged as GAPs:** 8 (15%)
-- **Out of scope (time-sensitive / behavioral):** 4 (8%)
+- **Total questions in this doc:** 62
+- **Mapped to existing content:** 41 (66%)
+- **Flagged as GAPs:** 18 (29%)
+- **Out of scope (time-sensitive / behavioral):** 4 (6%)
+
+**2026-09-18 coverage-gap sweep:** cross-referenced the live question bank
+(`feedback/questions.json`, 100 questions) against role tags and found
+`development` (11 questions) and `mortgageUw` (21) trailing `acquisitions`
+(50) and `assetManagement` (36) by a wide margin, with `hotel` and `retail`
+property types especially thin (1 and 2 questions respectively). Added 10
+new candidate `Q:` entries above — 5 in Development, 5 in Mortgage
+Underwriting, three of which are set in hotel/retail contexts — as
+proposed additions to close that gap. All 10 are flagged `GAP` and still
+need the usual verify-source-and-build pass before shipping.
+
+Also worth a follow-up pass: a couple of *pre-existing* GAP flags above
+(`capexReserveSizing`/`capex-reserve-discipline`, `refiStressTest`/
+`refi-cap-stress`) look like they've already shipped as quiz templates in
+`src/quiz/templates/` — this doc's `Maps to:` lines weren't updated when
+that content landed, so the GAP count above is likely a slight
+overstatement until someone reconciles it.
 
 Top GAPs to address (ranked by interview frequency):
 
