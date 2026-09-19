@@ -169,6 +169,85 @@ batch):
 
 ---
 
+## Coverage-gap audit — situational case categories (2026-09-19)
+
+Live-content count check (`grep -c "category: '<x>'" src/quiz/situational/*.ts`,
+72 situational cases total). Categories ranked by how thin they are:
+
+| category | count |
+|---|---|
+| `absorption` | 1 |
+| `comp-selection` | 2 |
+| `lease-econ` | 2 |
+| `sensitivity` | 2 |
+| `diagnostic` | 7 |
+| `pricing` | 7 |
+| `risk` | 7 |
+| `investment-thesis` | 9 |
+| `document-literacy` | 13 |
+| `deal-process` | 21 |
+
+`absorption` is a single case (`absorption-timing.ts`) carrying the entire
+category — the next four are tied at 2. These four are the priority for the
+next content batch, ahead of anything already well-stocked above.
+
+**10 candidate phrasings for the next batch** (title + one-line question
+stem; not yet built — no `id`, math, or options drafted). Match these against
+the existing pattern in the target category file before building (see
+`absorptionTiming.ts`, `compSetVetting.ts` / `compVintageAdjustment.ts`,
+`leaseStructureNnnVsGross.ts` / `tiVsRentGiveBack.ts`, `capSpread.ts` /
+`exitCapConservatism.ts` for the sibling cases in each category):
+
+`absorption` (4 — weakest category, 1 existing case):
+1. "Why is absorption decelerating even though rents are flat?" — diagnosing a
+   slowing lease-up pace in a submarket where face rents haven't moved yet.
+   Q: What best explains the slowdown?
+2. "How many months of negative absorption can this submarket take before
+   rents crack?" — an office submarket getting flooded with sublease space.
+   Q: At what point does negative absorption force a rent cut?
+3. "Does pre-leasing clear the covenant before the construction loan
+   matures?" — development case racing leasing velocity against a loan
+   maturity date. Q: Will the sponsor hit the 70% pre-leasing threshold
+   before maturity?
+4. "Two submarkets, same vacancy — which one absorbs first?" — comparing
+   absorption pace across a Class-A and a Class-B submarket with identical
+   headline vacancy. Q: Which submarket should you underwrite to lease up
+   faster, and why?
+
+`comp-selection` (2):
+5. "Should this land sale be in your comp set?" — a development site
+   evaluating whether a nearby assemblage/land trade belongs alongside
+   improved-property comps. Q: How should you treat the land comp?
+6. "This 'comp' traded 18 months ago — do you still use it?" — a comp set
+   going stale in a market where cap rates moved materially since the
+   trade date. Q: How should you adjust or weight the stale comp?
+
+`lease-econ` (2):
+7. "Free rent or a lower face rate — which actually costs the landlord
+   more?" — comparing NER impact of a concessions package vs. a straight
+   face-rate cut across different term lengths. Q: Which concession
+   structure preserves more NER for the landlord?
+8. "Should you accept the co-tenancy clause?" — a retail lease with a
+   co-tenancy trigger tied to anchor occupancy and a rent-abatement
+   remedy. Q: How should you evaluate the co-tenancy ask?
+
+`sensitivity` (2):
+9. "How much does a 25 bps move in exit cap actually cost you?" — walking
+   a sensitivity table showing levered IRR decay per 25 bps of exit-cap
+   expansion. Q: Roughly how much does levered IRR fall per 25 bps?
+10. "Which assumption is the deal most sensitive to — exit cap or rent
+    growth?" — a two-way sensitivity grid where the swing from one lever
+    dwarfs the other. Q: Which lever moves the IRR more, and what does
+    that imply about where to spend diligence time?
+
+Next agent picking this up: build these as full `SituationalCase` entries
+per the spec above (one option `isBest: true`, 3–4 options, `data` sidebar,
+`tips`, `takeaway`), register each in
+`src/quiz/situational/index.ts`, and re-run this category count to confirm
+the gap narrowed before picking the next batch.
+
+---
+
 ## What to NOT do
 
 - **Don't invent new file structures.** If situational cases live in
