@@ -1,5 +1,33 @@
 {
   "ideas": {
+    "argus-vs-excel-when-each-tool-actually-wins-999202": {
+      "category": "tools-workflow",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-09-20T08:09:29Z",
+      "graded_at": "2026-09-20T08:09:29Z",
+      "id": "argus-vs-excel-when-each-tool-actually-wins-999202",
+      "key_numbers": [
+        "15+ leases",
+        "5-year hold",
+        "3 rollover scenarios"
+      ],
+      "outline": "A decision framework for when a shop underwrites in Argus Enterprise versus a bespoke Excel model, keyed to lease-count complexity, rollover assumptions, and audit-trail requirements.",
+      "reasoning": "Manually curated to close a gap: this category had zero queued/accepted ideas in the knowledge base prior to this batch. Scored against the existing rubric dims.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 16,
+      "scores": {
+        "foundational": 4,
+        "novelty": 5,
+        "reach": 4,
+        "walkthroughFit": 3
+      },
+      "status": "queued",
+      "title": "Argus vs. Excel: When Each Tool Actually Wins"
+    },
     "building-a-cre-investment-portfolio-99887": {
       "category": "tools-workflow",
       "draft_quiz_path": null,
@@ -26,6 +54,35 @@
       },
       "status": "rejected",
       "title": "Building a CRE Investment Portfolio"
+    },
+    "building-a-defensible-sources-uses-table-999203": {
+      "category": "tools-workflow",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-09-20T08:09:29Z",
+      "graded_at": "2026-09-20T08:09:29Z",
+      "id": "building-a-defensible-sources-uses-table-999203",
+      "key_numbers": [
+        "65% senior LTC",
+        "10% mezz",
+        "25% equity",
+        "$45M total cap"
+      ],
+      "outline": "The standard sources-and-uses layout every closing binder needs, and how each line (senior debt, mezz, equity, closing costs, reserves) ties back to the loan agreement and the equity commitment letter.",
+      "reasoning": "Manually curated to close a gap: this category had zero queued/accepted ideas in the knowledge base prior to this batch. Scored against the existing rubric dims.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 19,
+      "scores": {
+        "foundational": 5,
+        "novelty": 4,
+        "reach": 5,
+        "walkthroughFit": 5
+      },
+      "status": "queued",
+      "title": "Building a Defensible Sources & Uses Table"
     },
     "construction-loan-fundamentals-99885": {
       "category": "capital-stack",
@@ -79,6 +136,63 @@
       "status": "refined",
       "title": "CRE Ethics & Professional Conduct"
     },
+    "data-center-underwriting-what-s-actually-different-999206": {
+      "category": "asset-class-deepdive",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-09-20T08:09:29Z",
+      "graded_at": "2026-09-20T08:09:29Z",
+      "id": "data-center-underwriting-what-s-actually-different-999206",
+      "key_numbers": [
+        "150 watts/SF",
+        "PUE 1.3",
+        "20-year NNN lease",
+        "5.5% cap"
+      ],
+      "outline": "Explains why data centers underwrite differently from traditional industrial \u2014 power density and PUE as the binding constraint instead of square footage, triple-net leases with power pass-throughs, and why cap rates diverge from big-box industrial despite similar lease terms.",
+      "reasoning": "Manually curated to close a gap: this category had zero queued/accepted ideas in the knowledge base prior to this batch. Scored against the existing rubric dims.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 15,
+      "scores": {
+        "foundational": 3,
+        "novelty": 5,
+        "reach": 3,
+        "walkthroughFit": 4
+      },
+      "status": "queued",
+      "title": "Data Center Underwriting: What's Actually Different"
+    },
+    "debt-broker-compensation-and-deal-flow-999208": {
+      "category": "role-profile",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-09-20T08:09:29Z",
+      "graded_at": "2026-09-20T08:09:29Z",
+      "id": "debt-broker-compensation-and-deal-flow-999208",
+      "key_numbers": [
+        "75 bps fee",
+        "$20M avg loan size",
+        "1-in-4 close rate"
+      ],
+      "outline": "How a mortgage/debt broker actually gets paid (bps on loan amount, paid at close, split with the shop), what a typical pipeline and close rate look like, and how that comp structure differs from principal-side (acquisitions/AM) salary-plus-carry.",
+      "reasoning": "Manually curated to close a gap: this category had zero queued/accepted ideas in the knowledge base prior to this batch. Scored against the existing rubric dims.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 15,
+      "scores": {
+        "foundational": 3,
+        "novelty": 5,
+        "reach": 3,
+        "walkthroughFit": 4
+      },
+      "status": "queued",
+      "title": "Debt Broker Compensation and Deal Flow"
+    },
     "due-diligence-for-commercial-leases-99886": {
       "category": "legal-document",
       "draft_quiz_path": "docs/CURRICULUM_DRAFTS/quiz-due-diligence-for-commercial-leases-99886.md",
@@ -102,6 +216,62 @@
       },
       "status": "refined",
       "title": "Due Diligence for Commercial Leases"
+    },
+    "entitlement-risk-and-the-land-basis-discount-999200": {
+      "category": "development-lifecycle",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-09-20T08:09:29Z",
+      "graded_at": "2026-09-20T08:09:29Z",
+      "id": "entitlement-risk-and-the-land-basis-discount-999200",
+      "key_numbers": [
+        "18-month entitlement timeline",
+        "35% raw-to-entitled discount",
+        "$2M land basis"
+      ],
+      "outline": "Walks through why raw, unentitled land trades at a steep discount to its as-entitled value, and how to size that discount from carry cost, approval timeline, and denial risk rather than gut feel.",
+      "reasoning": "Manually curated to close a gap: this category had zero queued/accepted ideas in the knowledge base prior to this batch. Scored against the existing rubric dims.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 17,
+      "scores": {
+        "foundational": 4,
+        "novelty": 5,
+        "reach": 3,
+        "walkthroughFit": 5
+      },
+      "status": "queued",
+      "title": "Entitlement Risk and the Land Basis Discount"
+    },
+    "mezzanine-debt-vs-preferred-equity-where-the-line-actually-i": {
+      "category": "capital-stack",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-09-20T08:09:29Z",
+      "graded_at": "2026-09-20T08:09:29Z",
+      "id": "mezzanine-debt-vs-preferred-equity-where-the-line-actually-i",
+      "key_numbers": [
+        "12% mezz coupon",
+        "11% pref rate",
+        "UCC foreclosure vs. capital call default"
+      ],
+      "outline": "Distinguishes mezz debt from preferred equity by intercreditor mechanics, cash-flow priority, and foreclosure/UCC remedies rather than pricing, since the two often price identically but behave very differently in a workout.",
+      "reasoning": "Manually curated to close a gap: this category had zero queued/accepted ideas in the knowledge base prior to this batch. Scored against the existing rubric dims.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 17,
+      "scores": {
+        "foundational": 5,
+        "novelty": 4,
+        "reach": 4,
+        "walkthroughFit": 4
+      },
+      "status": "queued",
+      "title": "Mezzanine Debt vs. Preferred Equity: Where the Line Actually Is"
     },
     "office-building-maintenance-reserves-99882": {
       "category": "asset-class-deepdive",
@@ -158,6 +328,34 @@
       "status": "refined",
       "title": "Property Valuation During Economic Downturns"
     },
+    "rescue-capital-pricing-a-down-round-preferred-slot-999205": {
+      "category": "capital-stack",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-09-20T08:09:29Z",
+      "graded_at": "2026-09-20T08:09:29Z",
+      "id": "rescue-capital-pricing-a-down-round-preferred-slot-999205",
+      "key_numbers": [
+        "15% pref coupon",
+        "1.5x liquidation preference",
+        "$3M rescue check"
+      ],
+      "outline": "How a distressed sponsor prices new preferred capital that must sit ahead of existing LPs in the waterfall, and what control rights (board seats, major-decision vetoes) typically get traded for the subordination existing investors accept.",
+      "reasoning": "Manually curated to close a gap: this category had zero queued/accepted ideas in the knowledge base prior to this batch. Scored against the existing rubric dims.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 15,
+      "scores": {
+        "foundational": 3,
+        "novelty": 5,
+        "reach": 3,
+        "walkthroughFit": 4
+      },
+      "status": "queued",
+      "title": "Rescue Capital: Pricing a Down-Round Preferred Slot"
+    },
     "retail-leasing-dynamics-99881": {
       "category": "asset-class-deepdive",
       "draft_quiz_path": null,
@@ -185,6 +383,90 @@
       },
       "status": "rejected",
       "title": "Retail Leasing Dynamics"
+    },
+    "self-storage-cap-rate-compression-the-operating-leverage-sto": {
+      "category": "asset-class-deepdive",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-09-20T08:09:29Z",
+      "graded_at": "2026-09-20T08:09:29Z",
+      "id": "self-storage-cap-rate-compression-the-operating-leverage-sto",
+      "key_numbers": [
+        "30% expense ratio",
+        "85% occupancy breakeven",
+        "6.5% cap"
+      ],
+      "outline": "Unpacks why self-storage cap rates compressed below multifamily in parts of the last decade \u2014 high operating leverage from a low fixed-expense ratio, month-to-month lease-up velocity, and how that changes NOI sensitivity to occupancy swings.",
+      "reasoning": "Manually curated to close a gap: this category had zero queued/accepted ideas in the knowledge base prior to this batch. Scored against the existing rubric dims.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 15,
+      "scores": {
+        "foundational": 3,
+        "novelty": 5,
+        "reach": 3,
+        "walkthroughFit": 4
+      },
+      "status": "queued",
+      "title": "Self-Storage Cap Rate Compression: The Operating Leverage Story"
+    },
+    "the-appraiser-s-three-approaches-and-why-lenders-still-order": {
+      "category": "role-profile",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-09-20T08:09:29Z",
+      "graded_at": "2026-09-20T08:09:29Z",
+      "id": "the-appraiser-s-three-approaches-and-why-lenders-still-order",
+      "key_numbers": [
+        "3 approaches reconciled",
+        "8% cap rate (income approach)",
+        "10% variance tolerance"
+      ],
+      "outline": "Walks through how an appraiser reconciles the sales comparison, income, and cost approaches into a single opinion of value, and why lenders require an independent appraisal even when their own underwriting already produced a value.",
+      "reasoning": "Manually curated to close a gap: this category had zero queued/accepted ideas in the knowledge base prior to this batch. Scored against the existing rubric dims.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 17,
+      "scores": {
+        "foundational": 4,
+        "novelty": 4,
+        "reach": 4,
+        "walkthroughFit": 5
+      },
+      "status": "queued",
+      "title": "The Appraiser's Three Approaches, and Why Lenders Still Order Them"
+    },
+    "the-development-recap-refinancing-out-initial-equity-without": {
+      "category": "development-lifecycle",
+      "draft_quiz_path": null,
+      "draft_walkthrough_path": null,
+      "drafted_at": null,
+      "generated_at": "2026-09-20T08:09:29Z",
+      "graded_at": "2026-09-20T08:09:29Z",
+      "id": "the-development-recap-refinancing-out-initial-equity-without",
+      "key_numbers": [
+        "75% stabilized LTV",
+        "$8M cash-out proceeds",
+        "18-month lease-up"
+      ],
+      "outline": "Covers how a sponsor pulls original equity out of a newly stabilized development via a cash-out perm loan or JV recap, and how the promote clock resets (or doesn't) after the swap.",
+      "reasoning": "Manually curated to close a gap: this category had zero queued/accepted ideas in the knowledge base prior to this batch. Scored against the existing rubric dims.",
+      "refined_at": null,
+      "refined_quiz_path": null,
+      "refined_walkthrough_path": null,
+      "score_total": 15,
+      "scores": {
+        "foundational": 3,
+        "novelty": 5,
+        "reach": 3,
+        "walkthroughFit": 4
+      },
+      "status": "queued",
+      "title": "The Development Recap: Refinancing Out Initial Equity Without Selling"
     },
     "the-role-of-a-cre-analyst-99883": {
       "category": "role-profile",
@@ -323,6 +605,10 @@
     {
       "at": "2026-06-05T23:08:29Z",
       "msg": "refine: understanding-reits-vs-direct-ownership-99889 -> refined"
+    },
+    {
+      "at": "2026-09-20T08:09:29Z",
+      "msg": "manual: added 10 curated ideas targeting zero-approved categories (development-lifecycle, tools-workflow, capital-stack, asset-class-deepdive, role-profile)"
     }
   ],
   "version": 1
