@@ -169,6 +169,76 @@ batch):
 
 ---
 
+## Situational case-bank depth gaps (category-balance pass, 2026-09-21)
+
+Audited `src/quiz/situational/*.ts` category distribution (71 cases across the
+10 `SituationalCategory` values in `src/types/situational.ts`):
+
+```
+deal-process        21
+document-literacy    13
+investment-thesis     9
+diagnostic            7
+pricing               7
+risk                  7
+comp-selection        2
+lease-econ            2
+sensitivity           2
+absorption            1
+```
+
+`absorption`, `comp-selection`, `lease-econ`, and `sensitivity` are badly
+under-built relative to `deal-process` — the pattern flagged in the
+"Question-base depth pass — Phase 1" entry in `ROADMAP.md`. Below are 10
+candidate phrasings (title + one-line hook) for a future drafting pass,
+weighted toward the thinnest categories. These are prompts to build out as
+full `SituationalCase` objects (scenario, data, 3–4 options with one
+`isBest`, takeaway, tips) — not yet implemented.
+
+**absorption** (currently 1 case):
+1. "Does pre-leasing velocity support breaking ground on Phase II?" —
+   a phased development where Phase I pre-leasing pace either clears or
+   misses the lender's release threshold for starting Phase II.
+2. "Is the new supply wave already priced into rent growth?" — a submarket
+   proforma assumes flat rent growth despite a large announced pipeline;
+   test whether the analyst should discount growth before deliveries hit.
+3. "How much of the 'vacancy' is really shadow space?" — a submarket's
+   headline vacancy rate masks large blocks of leased-but-dark sublease
+   space that will compete with new leasing before it shows up in stats.
+
+**comp-selection** (currently 2 cases):
+4. "Should a sale-leaseback trade count in your cap-rate comp set?" —
+   a recently closed sale-leaseback prints a rich cap rate driven by
+   credit/lease terms, not real estate fundamentals; decide whether to
+   include, exclude, or adjust it.
+5. "The off-market comp vs. the marketed comp — which do you trust?" — two
+   comps disagree materially: one sourced off-market from a broker
+   relationship, one from a fully marketed process; weigh price-discovery
+   quality against sample size.
+
+**lease-econ** (currently 2 cases):
+6. "Free rent or a lower face rent — which actually costs the landlord
+   more?" — two competing deal structures with equivalent headline NER;
+   test whether the analyst can see through the framing to the real PV
+   cost/timing difference.
+7. "What does a co-tenancy clause actually cost you in underwriting?" — an
+   anchor-dependent retail lease includes a co-tenancy kick-out; quantify
+   the embedded downside if the anchor vacates.
+8. "Is a blend-and-extend worth the NPV trade?" — a below-market tenant
+   offers an early renewal at a blended rate in exchange for extended
+   term; compare PV of the blended deal against re-leasing at market on
+   expiration.
+
+**sensitivity** (currently 2 cases):
+9. "Which input actually moves your IRR the most?" — a one-way
+   sensitivity table (exit cap, rent growth, hold period, leverage) where
+   the "obvious" driver isn't actually the largest swing factor.
+10. "How much rent growth do you need to offset 100 bps of cap-rate
+    expansion?" — a breakeven-style prompt pairing exit-cap widening
+    against the rent growth required to hold value flat.
+
+---
+
 ## What to NOT do
 
 - **Don't invent new file structures.** If situational cases live in
