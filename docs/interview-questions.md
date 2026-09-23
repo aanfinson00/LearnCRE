@@ -137,14 +137,14 @@ in a future PR.
 - **Why:** tax-deferral vs redeployment-opportunity tradeoff.
 - **Maps to:** `tax-vs-irr-tradeoff` situational + `refi-vs-sell` situational.
 
-### Q: GAP — How do you set a capex reserve on a stabilized asset, and what gets included vs excluded?
+### Q: How do you set a capex reserve on a stabilized asset, and what gets included vs excluded?
 - **Role:** assetManagement · **Difficulty:** intermediate
 - **Why:** capex discipline; common pitfall is using the OM number unchanged.
-- **Maps to:** **GAP — propose `capex-reserve-discipline` situational + `capexReserveSizing` quiz template**.
+- **Maps to:** `capex-reserve-discipline` situational + `capexReserveSizing` quiz template. *(Content shipped since this doc was last refreshed — was flagged GAP.)*
 
 ---
 
-## Mortgage Underwriting (10)
+## Mortgage Underwriting (14)
 
 ### Q: What's the formula for DSCR? What's a healthy threshold?
 - **Role:** mortgageUw · **Difficulty:** beginner
@@ -191,10 +191,30 @@ in a future PR.
 - **Why:** distinction-tested often as a filter for understanding leverage.
 - **Maps to:** `cashOnCash` quiz template + `CashOnCashViz`.
 
-### Q: GAP — How do you stress-test a permanent loan for refi at maturity? What's a reasonable stressed cap rate vs. today's?
+### Q: How do you stress-test a permanent loan for refi at maturity? What's a reasonable stressed cap rate vs. today's?
 - **Role:** mortgageUw · **Difficulty:** advanced
 - **Why:** refi-risk underwriting; common at life cos and debt funds.
-- **Maps to:** **GAP — propose `refiStressTest` quiz template + `refi-cap-stress` situational**.
+- **Maps to:** `refiStressTest` quiz template + `refi-cap-stress` situational. *(Content shipped since this doc was last refreshed — was flagged GAP.)*
+
+### Q: Your borrower fails the DSCR covenant this quarter and wants to cure with cash instead of taking a default. How much cash do they actually need to deposit, and does the amount they have on hand cover it?
+- **Role:** mortgageUw · **Difficulty:** advanced
+- **Why:** cure-right mechanics are buried in loan-doc boilerplate that most candidates have never actually worked through the math on — tests document literacy plus loan-constant math under pressure.
+- **Maps to:** `dscr-cure-rights` situational.
+
+### Q: Your sponsor client is underwater on a cash-trapped asset and is kicking around bankruptcy, a partial ownership transfer, and just stiffing a vendor to free up cash. Which of those actually flips their non-recourse loan into a personal-liability problem?
+- **Role:** mortgageUw · **Difficulty:** advanced
+- **Why:** springing-recourse carve-outs are one of the highest-stakes documents a sponsor will ever misread; tests whether a candidate can separate "bad performance" from "recourse-triggering misbehavior."
+- **Maps to:** `dscr-springing-recourse` situational.
+
+### Q: You're underwriting a hotel. How do you size the annual FF&E reserve off of total revenue, and why does a lender insist on it even when the sponsor says capex is already covered elsewhere?
+- **Role:** mortgageUw · **Difficulty:** beginner
+- **Why:** hotel underwriting has its own reserve conventions that don't map cleanly from multifamily/office — a quick filter for candidates who've actually touched hospitality debt.
+- **Maps to:** `ffeReserveDollars` quiz template.
+
+### Q: A retail tenant is paying rent plus CAM that works out to a high percentage of their in-store sales. How do you compute that occupancy-cost ratio, and what threshold starts to worry you as a lender?
+- **Role:** mortgageUw · **Difficulty:** intermediate
+- **Why:** occupancy cost ratio is the tenant-health signal retail lenders lean on before a tenant ever misses a payment; tests whether a candidate thinks about debt risk from the tenant's P&L, not just the landlord's.
+- **Maps to:** `occupancyCostRatio` quiz template.
 
 ---
 
@@ -213,7 +233,7 @@ in a future PR.
 ### Q: Fund-level IRR is 14%, deal-level is 16%. Why the gap?
 - **Role:** portfolioMgmt · **Difficulty:** intermediate
 - **Why:** fees, J-curve, undeployed capital — common gotcha.
-- **Maps to:** **GAP — propose `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz template**.
+- **Maps to:** `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz template. *(Content shipped since this doc was last refreshed — was flagged GAP.)*
 
 ### Q: Compute portfolio-weighted NOI per unit across 4 assets of different sizes.
 - **Role:** portfolioMgmt · **Difficulty:** beginner
@@ -223,17 +243,17 @@ in a future PR.
 ### Q: How do you allocate capital across 5 deals when only 3 will close? What weighting matters?
 - **Role:** portfolioMgmt · **Difficulty:** advanced
 - **Why:** capital-allocation reasoning; common at closed-end fund GPs.
-- **Maps to:** **GAP — propose `capital-allocation-priority` situational**.
+- **Maps to:** `capital-allocation-priority` situational. *(Content shipped since this doc was last refreshed — was flagged GAP.)*
 
 ### Q: When does a sponsor pay carry, and what's a typical 2-tier waterfall?
 - **Role:** portfolioMgmt · **Difficulty:** intermediate
 - **Why:** waterfall basics; explicitly out of scope per ROADMAP — flag for future.
 - **Maps to:** **GAP — propose `1-tier-promote-walk` walkthrough (deferred per ROADMAP)**.
 
-### Q: GAP — How do you measure risk-adjusted returns across a fund's holdings? What's a defensible Sharpe-equivalent for CRE?
+### Q: How do you measure risk-adjusted returns across a fund's holdings? What's a defensible Sharpe-equivalent for CRE?
 - **Role:** portfolioMgmt · **Difficulty:** advanced
 - **Why:** risk-quantification; underbuilt in our content.
-- **Maps to:** **GAP — propose `risk-adjusted-return-framework` situational**.
+- **Maps to:** `risk-adjusted-return-framework` situational. *(Content shipped since this doc was last refreshed — was flagged GAP.)*
 
 ### Q: Deal returned 1.4x EM in 5 years. Translate to IRR — and explain why EM and IRR can diverge.
 - **Role:** portfolioMgmt · **Difficulty:** beginner
@@ -242,7 +262,7 @@ in a future PR.
 
 ---
 
-## Development (7)
+## Development (13)
 
 ### Q: Land cost $8M, hard cost $38M, soft $7M, 5% contingency. What's TPC and what's the yield-on-cost on $4.5M stabilized NOI?
 - **Role:** development · **Difficulty:** intermediate
@@ -267,17 +287,47 @@ in a future PR.
 ### Q: Construction loan sizing on a $50M TPC dev with 65% LTC. What's the equity check?
 - **Role:** development · **Difficulty:** intermediate
 - **Why:** LTC-vs-LTV distinction; common at debt funds + GC-side.
-- **Maps to:** **GAP — propose `constructionLoanSizing` quiz template + `dev-ltc-vs-ltv` situational**.
+- **Maps to:** `constructionLoanSizing` quiz template + `dev-ltc-vs-ltv` situational. *(Content shipped since this doc was last refreshed — was flagged GAP.)*
 
-### Q: GAP — How do you size a lease-up reserve on a development that stabilizes year 2-3?
+### Q: How do you size a lease-up reserve on a development that stabilizes year 2-3?
 - **Role:** development · **Difficulty:** intermediate
 - **Why:** lease-up risk pricing; common in development-side underwriting.
-- **Maps to:** **GAP — propose `leaseUpReserve` quiz template**.
+- **Maps to:** `leaseUpReserve` quiz template. *(Content shipped since this doc was last refreshed — was flagged GAP.)*
 
 ### Q: Ground lease vs fee-simple on a development site — what changes in your underwriting?
 - **Role:** development · **Difficulty:** advanced
 - **Why:** ground-lease economics; common at urban infill developers.
-- **Maps to:** **GAP — propose `groundLeaseVsFee` situational**.
+- **Maps to:** `ground-lease-vs-fee` situational. *(Content shipped since this doc was last refreshed — was flagged GAP.)*
+
+### Q: A spec industrial building has 32' clear height; the comp set is built to 36'. How much of a rent haircut do you underwrite for the shorter building?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** clear-height is one of the biggest single value drivers in modern bulk industrial; candidates who can't quantify it read as green on industrial product.
+- **Maps to:** `clearHeightPremium` quiz template.
+
+### Q: You're 70% through a $50M TPC development ($35M incurred) and a change order just landed. Walk me through cost-to-complete and how the change order moves it.
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** cost-to-complete is the number every GC call and draw request turns on; pairing it with change-order pricing tests whether a candidate tracks budget risk, not just budget status.
+- **Maps to:** `costToComplete` quiz template + `constructionChangeOrderPricing` situational.
+
+### Q: One bulk-distribution building has 8 dock doors per 10k SF; another has 2. What does that density tell you about the use case and the rent it should command?
+- **Role:** development · **Difficulty:** beginner
+- **Why:** truck/dock density is a quick diagnostic for last-mile vs. big-box distribution positioning — a beginner-level industrial-literacy filter.
+- **Maps to:** `truckCountPerSf` quiz template.
+
+### Q: Stabilized NOI on your development is projected at $4.5M against a $65M total project cost. What's your yield on cost, and how do you use that number before you even have a market cap to compare it to?
+- **Role:** development · **Difficulty:** beginner
+- **Why:** the raw YoC computation, isolated from the spread-vs-market-cap framing already covered elsewhere in this doc — tests whether a candidate can compute it cold.
+- **Maps to:** `yieldOnCost` quiz template.
+
+### Q: Your construction loan agreement steps retainage down from 10% to 5% at 50% substantial completion. At Substantial Completion, how much retainage actually gets released to the GC, and what's still being held back?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** retainage release timing is a real GC-relationship and cash-flow issue that trips up candidates who assume "substantial completion" means "fully paid."
+- **Maps to:** `construction-retainage-release-trigger` situational.
+
+### Q: Lender wants equity-first funding on your construction loan (all $20M of sponsor equity in before the first loan dollar); you're pushing for pari-passu draws. Who wants which structure, and what's it actually worth to you?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** funding-order negotiation is a real term-sheet fight with a quantifiable IRR/cash impact — tests whether a candidate can go beyond "pari-passu is better for the sponsor" to say by how much and why.
+- **Maps to:** `construction-equity-first-vs-paripassu` situational.
 
 ---
 
@@ -306,28 +356,33 @@ regardless of position.
 - **Why:** sector-thesis prompt.
 - **Maps to:** **OUT OF SCOPE — explicitly time-sensitive**.
 
-### Q: GAP — Walk me through a distressed deal: half-vacant, basis below replacement, equity wiped — does it pencil?
+### Q: Walk me through a distressed deal: half-vacant, basis below replacement, equity wiped — does it pencil?
 - **Role:** all · **Difficulty:** advanced
 - **Why:** distressed underwriting; increasingly relevant 2024+.
-- **Maps to:** **GAP — propose `walk-distressed-1` walkthrough**.
+- **Maps to:** `walk-distressed-1` walkthrough. *(Content shipped since this doc was last refreshed — was flagged GAP.)*
 
 ---
 
 ## Summary statistics
 
-- **Total questions in this doc:** 52
-- **Mapped to existing content:** 41 (78%)
-- **Flagged as GAPs:** 8 (15%)
-- **Out of scope (time-sensitive / behavioral):** 4 (8%)
+- **Total questions in this doc:** 62
+- **Mapped to existing content:** 57 (92%)
+- **Flagged as GAPs:** 1 (2%)
+- **Out of scope (time-sensitive / behavioral):** 4 (6%)
 
-Top GAPs to address (ranked by interview frequency):
+Only remaining GAP:
 
-1. `capexReserveSizing` quiz + `capex-reserve-discipline` situational (asset mgmt)
-2. `refiStressTest` quiz + `refi-cap-stress` situational (mortgage UW)
-3. `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz (portfolio mgmt)
-4. `constructionLoanSizing` quiz + `dev-ltc-vs-ltv` situational (development)
-5. `walk-distressed-1` walkthrough (cross-cutting)
+1. `1-tier-promote-walk` walkthrough (portfolio mgmt) — explicitly deferred per ROADMAP.
 
-These five gaps would lift mapped-to-content coverage from 78% → ~93% with
-~½ day of content work each, and they all surface from real interview-question
-patterns rather than top-down design guesses.
+*(2026-09-23 refresh: added 10 new question phrasings targeting Development
+and Mortgage Underwriting — the two role categories with the fewest shipped
+situational cases + quiz templates (19 and 35 role-tagged items respectively,
+vs. 41–100 for the other three roles). Also corrected nine stale `GAP` labels
+— construction loan sizing, lease-up reserve, ground lease vs. fee, refi
+stress test, capex reserve, fund-vs-deal IRR gap, capital allocation
+priority, risk-adjusted return framework, and the distressed-deal walkthrough
+— whose proposed content had since shipped but whose `Maps to:` lines were
+never updated. Per-role coverage should be re-tallied periodically against
+`roles:` tags in `src/quiz/situational/` and `src/quiz/templates/` — that's
+ground truth for what's actually shipped; this doc drifts out of sync
+whenever content lands without a matching doc edit.)*
