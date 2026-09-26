@@ -169,6 +169,85 @@ batch):
 
 ---
 
+## Coverage gap check (2026-09-26)
+
+Tallied `category` / `assetClass` / `roles` tags across all 71 files in
+`src/quiz/situational/` to see which areas of the question bank are
+thinnest. Counts (a case can carry multiple roles, so role counts don't
+sum to 71):
+
+**By role:** acquisitions 40 · assetManagement 31 · portfolioMgmt 25 ·
+mortgageUw 19 · **development 9** ← clear outlier, less than a quarter of
+the acquisitions count.
+
+**By assetClass** (37 of 71 cases carry no tag and match every asset
+class; these are the explicitly-tagged ones): multifamily 11 · office 9 ·
+mixed 8 · industrial 3 · retail 2 · **hotel 1**.
+
+**By category:** deal-process 21 · document-literacy 13 ·
+investment-thesis 9 · risk 7 · pricing 7 · diagnostic 7 · sensitivity 2 ·
+lease-econ 2 · comp-selection 2 · **absorption 1**.
+
+The existing `development`-tagged cases (`constructionCostOverrun`,
+`constructionChangeOrderPricing`, `constructionLiquidatedDamages`,
+`constructionRetainageRelease`, `constructionEquityFirstVsParipassu`,
+`devLtcVsLtv`, `lenderDrawMechanics`, `lpaCostOverrunSharing`,
+`groundLeaseVsFee`, `riskAdjustedReturnFramework`) are almost entirely
+construction-financing mechanics. Pre-development (entitlement,
+environmental, land comps), GC contract structuring, and development in
+any asset class other than multifamily/office are all open. That overlap
+— thin `development` role **and** thin `industrial`/`retail`/`hotel`
+asset classes **and** thin `absorption`/`comp-selection`/`sensitivity`/
+`lease-econ` categories — is the single biggest gap in the bank.
+
+### 10 new question phrasings for that gap
+
+Titles only — each needs the full `SituationalCase` treatment (scenario,
+data grid, 3–4 options with one `isBest`, explanations, takeaway, tips)
+before it ships, per the spec above.
+
+1. **"Spec industrial vs. build-to-suit — how does the answer change your underwriting?"**
+   `investment-thesis` · intermediate · `industrial` · `[development, acquisitions]`
+   — no signed tenant vs. a pre-lease BTS deal; the return-hurdle and risk-premium gap between the two.
+
+2. **"Grocery-anchor walks mid-construction — does the shop space still lease?"**
+   `risk` · advanced · `retail` · `[development, acquisitions]`
+   — an anchor terminates during construction on a power center; co-tenancy clause fallout for the in-line shop space and the construction loan.
+
+3. **"PIP just came back at $38k/key — does the flag conversion still pencil?"**
+   `pricing` · advanced · `hotel` · `[development, assetManagement]`
+   — a brand's property-improvement-plan estimate lands on a conversion deal; recomputing yield-on-cost after the PIP capex.
+
+4. **"Phase I comes back with a REC — what happens to your closing timeline?"**
+   `document-literacy` · intermediate · `mixed` · `[development, acquisitions]`
+   — a Recognized Environmental Condition on the Phase I ESA; when it forces a Phase II and what that does to the diligence period.
+
+5. **"The variance hearing got continued 60 days — what does that do to your land takedown?"**
+   `risk` · intermediate · `mixed` · `[development]`
+   — an entitlement delay under an option/PSA; carrying-cost impact and how the takedown should be structured against entitlement risk.
+
+6. **"Which land comp actually supports your residual land value?"**
+   `comp-selection` · intermediate · `mixed` · `[development, acquisitions]`
+   — picking among land sale comps with different entitlement status and densities for a residual land value calc.
+
+7. **"Impact fees just went up 20% — where does that hit your yield-on-cost?"**
+   `sensitivity` · beginner · `mixed` · `[development]`
+   — a mid-underwriting fee-schedule increase; tracing a hard/soft cost bump through to yield-on-cost.
+
+8. **"Absorption is running behind pro forma on your new industrial park — refinance or extend the construction loan?"**
+   `absorption` · advanced · `industrial` · `[development, mortgageUw]`
+   — spec industrial leasing slower than pro forma; extend the construction loan vs. mini-perm refi against a debt-yield test.
+
+9. **"GMP vs. cost-plus-with-a-cap — which contract actually protects your budget?"**
+   `document-literacy` · intermediate · `mixed` · `[development]`
+   — guaranteed-maximum-price vs. cost-plus-with-a-GMP-cap GC contracts; who actually bears cost-overrun risk under each.
+
+10. **"The PILOT expires in year 11 — how does that change your exit underwriting?"**
+    `lease-econ` · advanced · `mixed` · `[development, portfolioMgmt]`
+    — a payment-in-lieu-of-taxes abatement stepping down mid-hold; the NOI cliff at expiration and its effect on exit cap / value.
+
+---
+
 ## What to NOT do
 
 - **Don't invent new file structures.** If situational cases live in
