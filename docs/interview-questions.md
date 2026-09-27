@@ -198,7 +198,7 @@ in a future PR.
 
 ---
 
-## Portfolio Management (8)
+## Portfolio Management (13)
 
 ### Q: Your fund is 40% office vs 25% target. Which assets do you sell first to rebalance?
 - **Role:** portfolioMgmt · **Difficulty:** advanced
@@ -240,9 +240,34 @@ in a future PR.
 - **Why:** EM↔IRR translation; common filter.
 - **Maps to:** `equityMultiple` quiz template + `irrSimple` quiz template + `EquityMultipleViz`.
 
+### Q: GAP — An LP wants to co-invest alongside the fund on one large deal at reduced fees. How does that change the deal-level promote math versus a fund-only structure?
+- **Role:** portfolioMgmt · **Difficulty:** advanced
+- **Why:** co-invest sleeves are increasingly standard on larger checks; candidates often forget the co-invest capital sits outside the fund's own waterfall.
+- **Maps to:** **GAP — propose `co-investment-waterfall-impact` situational**.
+
+### Q: GAP — Your fund has a recycling provision that lets early sale proceeds be reinvested rather than distributed. How does that change fund-level IRR versus a straight distribution?
+- **Role:** portfolioMgmt · **Difficulty:** advanced
+- **Why:** recycling provisions materially extend the J-curve and change LP cash-flow timing; a common point of confusion between deal IRR and investor-experienced IRR.
+- **Maps to:** **GAP — propose `recycling-provision-irr-impact` situational + `recyclingVsDistribution` quiz template**.
+
+### Q: GAP — Every deal in the portfolio looks fine on its own LTV, but two assets are cross-collateralized under one loan. How do you stress-test the portfolio's real leverage?
+- **Role:** portfolioMgmt · **Difficulty:** advanced
+- **Why:** cross-collateralization hides concentration risk that per-deal LTV doesn't show; a common blind spot moving from deal-level to portfolio-level thinking.
+- **Maps to:** **GAP — propose `cross-collateralization-risk` situational**.
+
+### Q: GAP — You're diligencing a GP relationship for a fund investment and the business plan leans heavily on two named principals. How do you underwrite key-person risk across the portfolio?
+- **Role:** portfolioMgmt · **Difficulty:** advanced
+- **Why:** key-person clauses and succession risk are standard LP-side diligence items that don't show up in deal-level underwriting at all.
+- **Maps to:** **GAP — propose `key-person-risk-diligence` situational**.
+
+### Q: GAP — Two of your funds are both still in their investment period. A new deal fits either mandate. How do you decide which vintage-year fund gets it?
+- **Role:** portfolioMgmt · **Difficulty:** advanced
+- **Why:** vintage-year allocation policy (pro-rata, first-in, LP-conflict rules) is a real GP-side governance question that's easy to hand-wave.
+- **Maps to:** **GAP — propose `vintage-year-allocation` situational**.
+
 ---
 
-## Development (7)
+## Development (12)
 
 ### Q: Land cost $8M, hard cost $38M, soft $7M, 5% contingency. What's TPC and what's the yield-on-cost on $4.5M stabilized NOI?
 - **Role:** development · **Difficulty:** intermediate
@@ -278,6 +303,31 @@ in a future PR.
 - **Role:** development · **Difficulty:** advanced
 - **Why:** ground-lease economics; common at urban infill developers.
 - **Maps to:** **GAP — propose `groundLeaseVsFee` situational**.
+
+### Q: GAP — Work backward from a target yield-on-cost and known hard/soft costs to the maximum land price you can pay. What's the residual land value?
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** residual land valuation is the core land-underwriting move; candidates often only know forward TPC math, not the backward-solve.
+- **Maps to:** **GAP — propose `residual-land-value` quiz template + `land-residual-walk` situational**.
+
+### Q: GAP — Mid-construction, the GC's guaranteed maximum price comes in 12% over your budgeted hard costs. Walk me through how you respond.
+- **Role:** development · **Difficulty:** advanced
+- **Why:** GMP overruns are one of the most common real construction-phase crises; tests contingency drawdown discipline and change-order scrutiny.
+- **Maps to:** **GAP — propose `gmp-overrun-response` situational**.
+
+### Q: GAP — The site is zoned for half the density your pro forma assumes, and entitlement approval is pending. How do you underwrite that risk?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** entitlement risk is a major driver of development-deal probability-weighting; often skipped in favor of pure feasibility math.
+- **Maps to:** **GAP — propose `entitlement-risk-discipline` situational**.
+
+### Q: GAP — Walk me through how a construction loan's interest reserve is sized, and what happens if the project runs six months long.
+- **Role:** development · **Difficulty:** intermediate
+- **Why:** interest-reserve sizing and reserve-depletion mid-construction is a common lender-side and sponsor-side question.
+- **Maps to:** **GAP — propose `interestReserveSizing` quiz template**.
+
+### Q: GAP — You're comparing building a project to stabilization versus buying a stabilized asset today at the same all-in basis. How do you frame the decision?
+- **Role:** development · **Difficulty:** advanced
+- **Why:** build-to-core vs buy-stabilized is a live capital-allocation question at many shops; tests development-risk-premium reasoning.
+- **Maps to:** **GAP — propose `build-to-core-vs-buy-stabilized` situational**.
 
 ---
 
@@ -315,10 +365,33 @@ regardless of position.
 
 ## Summary statistics
 
-- **Total questions in this doc:** 52
-- **Mapped to existing content:** 41 (78%)
-- **Flagged as GAPs:** 8 (15%)
-- **Out of scope (time-sensitive / behavioral):** 4 (8%)
+- **Total questions in this doc:** 62
+- **Mapped to existing content:** 38 (61%)
+- **Flagged as GAPs:** 20 (32%)
+- **Out of scope (time-sensitive / behavioral):** 4 (6%)
+
+Coverage by role (mapped-to-content questions ÷ total questions in that
+section) — this is the per-area "approval rate" this doc tracks:
+
+| Role | Total | Mapped | Coverage |
+| --- | --- | --- | --- |
+| Acquisitions | 12 | 12 | 100% |
+| Asset Management | 10 | 9 | 90% |
+| Mortgage Underwriting | 10 | 9 | 90% |
+| Portfolio Management | 13 | 4 | 31% |
+| Development | 12 | 4 | 33% |
+| Cross-cutting | 5 | 0 | 0% (4 of 5 explicitly out of scope) |
+
+**Portfolio Management and Development are the least-covered areas** —
+under a third of the questions in each section map to real, built content.
+2026-09-27: added 5 new candidate questions to each of those two sections
+(co-investment waterfalls, recycling provisions, cross-collateralization,
+key-person risk, and vintage-year allocation for portfolio mgmt; residual
+land value, GMP overruns, entitlement risk, interest-reserve sizing, and
+build-to-core-vs-buy-stabilized for development) to keep growing the backlog
+of phrasings for these two areas ahead of content builds. All ten are
+flagged `GAP` — they still need `Maps to:` content built before they count
+as covered.
 
 Top GAPs to address (ranked by interview frequency):
 
@@ -327,7 +400,9 @@ Top GAPs to address (ranked by interview frequency):
 3. `fund-vs-deal-irr-gap` situational + `feeDragOnIrr` quiz (portfolio mgmt)
 4. `constructionLoanSizing` quiz + `dev-ltc-vs-ltv` situational (development)
 5. `walk-distressed-1` walkthrough (cross-cutting)
+6. `residual-land-value` quiz + `land-residual-walk` situational (development)
+7. `co-investment-waterfall-impact` situational (portfolio mgmt)
 
-These five gaps would lift mapped-to-content coverage from 78% → ~93% with
-~½ day of content work each, and they all surface from real interview-question
-patterns rather than top-down design guesses.
+Closing the original five gaps would lift overall coverage from 61% → ~69%;
+Portfolio Management and Development need the most net-new content to reach
+parity with Acquisitions/Asset Management/Mortgage UW's 90%+ coverage.
