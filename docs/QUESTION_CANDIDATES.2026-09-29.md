@@ -89,7 +89,7 @@ All math below was checked by hand.
 - ✅ **$32.00/SF.** ($40 × 10 − $20 free − $60 TI) ÷ 10 = $32.00.
 - ◻️ $40.00/SF. Face rent ignores the concessions the landlord funds.
 - ◻️ $34.00/SF. Subtracts only the TI ($400 − $60 = $340 ÷ 10) and forgets free rent.
-- ◻️ $28.00/SF. Subtracts the TI twice ($400 − $20 − $60 − $60 = $260 ÷ 10 would be $26; this over-penalizes the lease either way).
+- ◻️ $28.00/SF. Also deducts an assumed $40/SF leasing commission that isn't in the data.
 
 **Takeaway:** Net effective rent spreads free rent and TI over the term; face rent overstates what the landlord earns.
 **Tips:** Add leasing commissions for a fuller picture. · Discount cash flows for a true PV-based NER.
