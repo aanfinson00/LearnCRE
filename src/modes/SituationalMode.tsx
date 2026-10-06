@@ -3,6 +3,7 @@ import { SituationalScreen } from '../components/SituationalScreen';
 import { SituationalResults } from '../components/SituationalResults';
 import { useSituational } from '../hooks/useSituational';
 import { navigateToMode, useLeaveGuard } from '../router';
+import { track } from '../analytics';
 
 export default function SituationalMode() {
   const sit = useSituational();
@@ -11,7 +12,10 @@ export default function SituationalMode() {
   if (sit.state === null) {
     return (
       <SituationalSetup
-        onStart={(config) => sit.start(config)}
+        onStart={(config) => {
+          track('session_started', { mode: 'situational', source: 'setup' });
+          sit.start(config);
+        }}
         onBack={() => navigateToMode('quiz')}
       />
     );
@@ -23,6 +27,7 @@ export default function SituationalMode() {
         onRestart={() => {
           const cfg = sit.state!.config;
           sit.reset();
+          track('session_started', { mode: 'situational', source: 'restart' });
           sit.start(cfg);
         }}
         onNewSetup={sit.reset}

@@ -3,6 +3,7 @@ import { VocabScreen } from '../components/VocabScreen';
 import { VocabResults } from '../components/VocabResults';
 import { useVocab } from '../hooks/useVocab';
 import { navigateToMode, useLeaveGuard } from '../router';
+import { track } from '../analytics';
 
 export default function VocabMode() {
   const vocab = useVocab();
@@ -11,7 +12,10 @@ export default function VocabMode() {
   if (vocab.state === null) {
     return (
       <VocabSetup
-        onStart={(config) => vocab.start(config)}
+        onStart={(config) => {
+          track('session_started', { mode: 'vocab', source: 'setup' });
+          vocab.start(config);
+        }}
         onBack={() => navigateToMode('quiz')}
       />
     );
@@ -23,6 +27,7 @@ export default function VocabMode() {
         onRestart={() => {
           const cfg = vocab.state!.config;
           vocab.reset();
+          track('session_started', { mode: 'vocab', source: 'restart' });
           vocab.start(cfg);
         }}
         onNewSetup={vocab.reset}

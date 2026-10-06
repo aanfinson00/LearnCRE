@@ -1,4 +1,5 @@
 import { useEffect, useSyncExternalStore } from 'react';
+import { track } from './analytics';
 
 /**
  * Minimal URL router for the app shell. Every top-level mode gets its own
@@ -138,7 +139,10 @@ export function useLeaveGuard(
 }
 
 function confirmLeave(): boolean {
-  return leaveGuard === null || window.confirm(leaveGuard);
+  if (leaveGuard === null) return true;
+  const leave = window.confirm(leaveGuard);
+  if (leave) track('session_abandoned', { path: lastPath });
+  return leave;
 }
 
 if (typeof window !== 'undefined') {

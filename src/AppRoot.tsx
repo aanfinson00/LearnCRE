@@ -10,8 +10,9 @@ import { ScratchSheet } from './components/ScratchSheet';
 import { FeedbackContextProvider } from './hooks/useFeedbackContext';
 import { ScratchSheetProvider } from './hooks/useScratchSheet';
 import { hasSeenWelcome, markEnteredApp } from './storage/onboarding';
-import { navigateToMode, useAppRoute, type Mode } from './router';
+import { currentAppPath, navigateToMode, useAppRoute, type Mode } from './router';
 import { RouteFallback } from './components/RouteFallback';
+import { trackPageview } from './analytics';
 
 // ---------------------------------------------------------------------------
 // Standalone (non-shell) routes: public profiles, invites, admin, unsubscribe.
@@ -143,9 +144,12 @@ function AppShell({ quickStart }: { quickStart: boolean }) {
     markEnteredApp();
   }, []);
 
+  // One pageview per distinct URL (cert list → detail → exam each count).
+  const path = currentAppPath();
   useEffect(() => {
     document.title = `${MODE_TITLES[route.mode]} · LearnCRE`;
-  }, [route.mode]);
+    trackPageview(path, { mode: route.mode });
+  }, [path, route.mode]);
 
   useEffect(() => {
     if (pendingQuickStart && route.mode !== 'quiz') setPendingQuickStart(false);

@@ -3,6 +3,7 @@ import { ModelingTestScreen } from '../components/ModelingTestScreen';
 import { ModelingTestResults } from '../components/ModelingTestResults';
 import { useModelingTest } from '../hooks/useModelingTest';
 import { navigateToMode } from '../router';
+import { track } from '../analytics';
 
 // No leave guard: modeling tests auto-save and resume.
 export default function ModelingTestMode() {
@@ -11,7 +12,10 @@ export default function ModelingTestMode() {
   if (modelingTest.state === null) {
     return (
       <ModelingTestSetup
-        onOpen={(t) => modelingTest.open(t)}
+        onOpen={(t) => {
+          track('session_started', { mode: 'modelingTest', source: 'setup' });
+          modelingTest.open(t);
+        }}
         onBack={() => navigateToMode('quiz')}
       />
     );
@@ -20,7 +24,10 @@ export default function ModelingTestMode() {
     return (
       <ModelingTestResults
         state={modelingTest.state}
-        onTryAgain={modelingTest.tryAgain}
+        onTryAgain={() => {
+          track('session_started', { mode: 'modelingTest', source: 'restart' });
+          modelingTest.tryAgain();
+        }}
         onPickAnother={modelingTest.reset}
       />
     );

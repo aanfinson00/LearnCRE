@@ -1,7 +1,8 @@
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { hasEnteredApp, markEnteredApp, markWelcomeSeen } from './storage/onboarding';
 import { currentAppPath, navigateToMode, useHashRouting } from './router';
 import { RouteFallback } from './components/RouteFallback';
+import { trackPageview } from './analytics';
 
 // The landing page and the app are separate chunks: a first-time visitor
 // never downloads the app shell (or Supabase) just to see the marketing page.
@@ -25,6 +26,10 @@ function shouldShowLanding(): boolean {
 export default function App() {
   const [landing, setLanding] = useState<boolean>(shouldShowLanding);
   const [quickStart, setQuickStart] = useState(false);
+
+  useEffect(() => {
+    if (landing) trackPageview(window.location.pathname, { page: 'landing' });
+  }, [landing]);
 
   return (
     <Suspense fallback={<RouteFallback />}>

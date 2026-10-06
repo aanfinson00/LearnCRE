@@ -3,6 +3,7 @@ import { WalkthroughScreen } from '../components/WalkthroughScreen';
 import { WalkthroughResults } from '../components/WalkthroughResults';
 import { useWalkthrough } from '../hooks/useWalkthrough';
 import { navigateToMode, useLeaveGuard } from '../router';
+import { track } from '../analytics';
 
 export default function WalkthroughMode() {
   const walk = useWalkthrough();
@@ -11,7 +12,10 @@ export default function WalkthroughMode() {
   if (walk.state === null) {
     return (
       <WalkthroughSetup
-        onStart={(def) => walk.start(def)}
+        onStart={(def) => {
+          track('session_started', { mode: 'walkthrough', source: 'setup' });
+          walk.start(def);
+        }}
         onBack={() => navigateToMode('quiz')}
       />
     );
@@ -23,6 +27,7 @@ export default function WalkthroughMode() {
         onRestart={() => {
           const cfg = walk.state!.def;
           walk.reset();
+          track('session_started', { mode: 'walkthrough', source: 'restart' });
           walk.start(cfg);
         }}
         onNewSetup={walk.reset}

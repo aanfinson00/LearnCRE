@@ -3,6 +3,7 @@ import { SpeedDrillScreen } from '../components/SpeedDrillScreen';
 import { SpeedDrillResults } from '../components/SpeedDrillResults';
 import { useSpeedDrill } from '../hooks/useSpeedDrill';
 import { navigateToMode, useLeaveGuard } from '../router';
+import { track } from '../analytics';
 
 export default function SpeedDrillMode() {
   const drill = useSpeedDrill();
@@ -11,7 +12,10 @@ export default function SpeedDrillMode() {
   if (drill.state.cells.length === 0) {
     return (
       <SpeedDrillSetup
-        onStart={drill.start}
+        onStart={(config) => {
+          track('session_started', { mode: 'speedDrill', source: 'setup' });
+          drill.start(config);
+        }}
         onBack={() => {
           drill.reset();
           navigateToMode('quiz');
@@ -26,6 +30,7 @@ export default function SpeedDrillMode() {
         onRestart={() => {
           const prior = drill.state.config;
           drill.reset();
+          track('session_started', { mode: 'speedDrill', source: 'restart' });
           drill.start(prior);
         }}
         onNewSetup={drill.reset}

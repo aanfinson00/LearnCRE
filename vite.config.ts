@@ -30,6 +30,8 @@ export default defineConfig(({ mode }) => {
               manualChunks(id: string) {
                 if (!id.includes('node_modules')) return undefined;
                 if (id.includes('@supabase')) return 'vendor-supabase';
+                // Loaded on demand by src/analytics.ts; keep it out of shared chunks.
+                if (id.includes('posthog-js')) return 'vendor-posthog';
                 if (/node_modules\/(react|react-dom|scheduler)\//.test(id)) return 'vendor-react';
                 return 'vendor';
               },

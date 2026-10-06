@@ -3,6 +3,7 @@ import { LongformScreen } from '../components/LongformScreen';
 import { LongformResults } from '../components/LongformResults';
 import { useLongform } from '../hooks/useLongform';
 import { navigateToMode, useLeaveGuard } from '../router';
+import { track } from '../analytics';
 
 export default function LongformMode() {
   const longform = useLongform();
@@ -11,7 +12,10 @@ export default function LongformMode() {
   if (longform.state === null) {
     return (
       <LongformSetup
-        onStart={(config) => longform.start(config)}
+        onStart={(config) => {
+          track('session_started', { mode: 'longform', source: 'setup' });
+          longform.start(config);
+        }}
         onBack={() => navigateToMode('quiz')}
       />
     );
@@ -23,6 +27,7 @@ export default function LongformMode() {
         onRestart={() => {
           const cfg = longform.state!.config;
           longform.reset();
+          track('session_started', { mode: 'longform', source: 'restart' });
           longform.start(cfg);
         }}
         onNewSetup={longform.reset}

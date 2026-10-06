@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '../cloud/auth';
 import { Button } from './ui/Button';
+import { track } from '../analytics';
 
 const DISMISS_KEY = 'learncre.saveNudgeDismissed.v1';
 
@@ -23,7 +24,12 @@ export function SaveProgressNudge({ accuracyPct }: { accuracyPct: number }) {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [error, setError] = useState<string | null>(null);
 
-  if (!cloudEnabled || user || dismissed) return null;
+  const visible = cloudEnabled && !user && !dismissed;
+  useEffect(() => {
+    if (visible) track('signup_prompt_viewed', { location: 'results_nudge' });
+  }, [visible]);
+
+  if (!visible) return null;
 
   const dismiss = () => {
     try {
@@ -39,8 +45,10 @@ export function SaveProgressNudge({ accuracyPct }: { accuracyPct: number }) {
     if (!email.trim()) return;
     setStatus('sending');
     setError(null);
+    track('signup_submitted', { location: 'results_nudge' });
     const err = await signInWithEmail(email.trim());
     if (err) {
+      track('signup_failed', { location: 'results_nudge' });
       setStatus('error');
       setError(err);
     } else {

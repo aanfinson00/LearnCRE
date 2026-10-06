@@ -3,6 +3,7 @@ import { useAuth } from '../cloud/auth';
 import { acceptMatchByToken } from '../cloud/matches';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
+import { track } from '../analytics';
 
 interface Props {
   matchId: string;
@@ -112,6 +113,7 @@ export function MatchInviteLanding({ matchId, token }: Props) {
               if (!email.trim()) return;
               setStage('sending');
               setError(null);
+              track('signup_submitted', { location: 'invite' });
               const err = await signInWithEmail(email.trim(), window.location.href);
               if (err) {
                 setStage('failed');

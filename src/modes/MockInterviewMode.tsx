@@ -3,6 +3,7 @@ import { MockScreen } from '../components/MockScreen';
 import { MockResults } from '../components/MockResults';
 import { useMockInterview } from '../hooks/useMockInterview';
 import { navigateToMode, useLeaveGuard } from '../router';
+import { track } from '../analytics';
 
 export default function MockInterviewMode() {
   const mock = useMockInterview();
@@ -11,7 +12,10 @@ export default function MockInterviewMode() {
   if (mock.state === null) {
     return (
       <MockSetup
-        onStart={(archetypeId) => mock.start(archetypeId)}
+        onStart={(archetypeId) => {
+          track('session_started', { mode: 'mockInterview', source: 'setup' });
+          mock.start(archetypeId);
+        }}
         onBack={() => navigateToMode('quiz')}
       />
     );
@@ -23,6 +27,7 @@ export default function MockInterviewMode() {
         onRestart={() => {
           const id = mock.state!.spec.id;
           mock.reset();
+          track('session_started', { mode: 'mockInterview', source: 'restart' });
           mock.start(id);
         }}
         onNewSetup={mock.reset}

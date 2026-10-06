@@ -15,8 +15,10 @@ import { loadConfig, loadLifetime, saveConfig } from '../storage/localStorage';
 import { loadPreferredRole } from '../storage/onboarding';
 import { ModePrimer } from './ModePrimer';
 
+export type QuizStartSource = 'setup' | 'quick_start' | 'review_mistakes';
+
 interface Props {
-  onStart: (config: SessionConfig) => void;
+  onStart: (config: SessionConfig, source: QuizStartSource) => void;
 }
 
 const LENGTHS: { label: string; value: number | null }[] = [
@@ -173,7 +175,7 @@ export function SetupScreen({ onStart }: Props) {
       spacedRepetition,
     };
     saveConfig(config);
-    onStart(config);
+    onStart(config, 'setup');
   };
 
   /** One-click session: 10 Foundations questions at Intermediate, skipping
@@ -190,7 +192,7 @@ export function SetupScreen({ onStart }: Props) {
       assetClass,
       role,
       spacedRepetition: false,
-    });
+    }, 'quick_start');
   };
 
   const startMisses = () => {
@@ -204,7 +206,7 @@ export function SetupScreen({ onStart }: Props) {
       assetClass,
       role,
       spacedRepetition: true,
-    });
+    }, 'review_mistakes');
   };
 
   return (

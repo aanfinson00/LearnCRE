@@ -3,6 +3,7 @@ import { ExcelScreen } from '../components/ExcelScreen';
 import { ExcelResults } from '../components/ExcelResults';
 import { useExcel } from '../hooks/useExcel';
 import { navigateToMode, useLeaveGuard } from '../router';
+import { track } from '../analytics';
 
 export default function ExcelMode() {
   const excel = useExcel();
@@ -11,7 +12,10 @@ export default function ExcelMode() {
   if (excel.state === null) {
     return (
       <ExcelSetup
-        onStart={(config) => excel.start(config)}
+        onStart={(config) => {
+          track('session_started', { mode: 'excel', source: 'setup' });
+          excel.start(config);
+        }}
         onBack={() => navigateToMode('quiz')}
       />
     );
@@ -23,6 +27,7 @@ export default function ExcelMode() {
         onRestart={() => {
           const cfg = excel.state!.config;
           excel.reset();
+          track('session_started', { mode: 'excel', source: 'restart' });
           excel.start(cfg);
         }}
         onNewSetup={excel.reset}

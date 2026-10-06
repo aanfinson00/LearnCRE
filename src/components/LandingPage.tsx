@@ -1,7 +1,8 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { Question, QuestionKind } from '../types/question';
 import { generateQuestion } from '../quiz/engine';
 import { CONTENT_STATS } from '../content/stats';
+import { track, type CtaLocation } from '../analytics';
 import { ChoiceList } from './ChoiceList';
 import { SolutionDetails } from './SolutionDetails';
 import { Button } from './ui/Button';
@@ -91,6 +92,24 @@ export function LandingPage({ onEnter }: Props) {
   const [pick, setPick] = useState<number | null>(null);
   const [tries, setTries] = useState(0);
 
+  useEffect(() => {
+    track('landing_viewed', {});
+  }, []);
+
+  const enter = (location: CtaLocation, quickStart: boolean) => {
+    track('landing_cta_clicked', { location, quick_start: quickStart });
+    onEnter({ quickStart });
+  };
+
+  const answer = (v: number) => {
+    if (pick !== null) return;
+    setPick(v);
+    track('landing_sample_answered', {
+      question_kind: question.kind,
+      correct: Math.abs(v - question.expected) < 1e-9,
+    });
+  };
+
   const answered = pick !== null;
   const correct = answered && Math.abs(pick - question.expected) < 1e-9;
 
@@ -106,6 +125,7 @@ export function LandingPage({ onEnter }: Props) {
   );
 
   const another = () => {
+    track('landing_sample_another', {});
     setQuestion(sampleQuestion());
     setPick(null);
     setTries((t) => t + 1);
@@ -133,10 +153,10 @@ export function LandingPage({ onEnter }: Props) {
             <a href="#faq" className="hidden rounded-md px-3 py-2 text-sm text-warm-stone hover:text-warm-black sm:inline">
               FAQ
             </a>
-            <Button variant="ghost" onClick={() => onEnter({ quickStart: false })}>
+            <Button variant="ghost" onClick={() => enter('open_app', false)}>
               Open app
             </Button>
-            <Button onClick={() => onEnter({ quickStart: true })} className="hidden sm:inline-flex">
+            <Button onClick={() => enter('nav', true)} className="hidden sm:inline-flex">
               Start free
             </Button>
           </nav>
@@ -159,7 +179,7 @@ export function LandingPage({ onEnter }: Props) {
             on what you miss.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Button onClick={() => onEnter({ quickStart: true })} className="px-6 py-3 text-base">
+            <Button onClick={() => enter('hero', true)} className="px-6 py-3 text-base">
               Start a free 10-question drill →
             </Button>
             <span className="text-sm text-warm-mute">No signup · no credit card · ~5 minutes</span>
@@ -186,7 +206,7 @@ export function LandingPage({ onEnter }: Props) {
           <ChoiceList
             question={question}
             selected={pick}
-            onSelect={(v) => !answered && setPick(v)}
+            onSelect={answer}
             disabled={answered}
             correctValue={answered ? question.expected : null}
           />
@@ -210,7 +230,7 @@ export function LandingPage({ onEnter }: Props) {
                 <span className="text-sm text-warm-stone">
                   {tries > 0 ? 'Getting the hang of it?' : 'That was one of thousands.'}
                 </span>
-                <Button onClick={() => onEnter({ quickStart: true })}>Keep going: 10 more →</Button>
+                <Button onClick={() => enter('sample', true)}>Keep going: 10 more →</Button>
               </div>
             </div>
           )}
@@ -354,7 +374,7 @@ export function LandingPage({ onEnter }: Props) {
             </h2>
             <p className="mt-2 text-warm-stone">See how fast your CRE math really is.</p>
           </div>
-          <Button onClick={() => onEnter({ quickStart: true })} className="px-6 py-3 text-base">
+          <Button onClick={() => enter('final', true)} className="px-6 py-3 text-base">
             Start drilling free →
           </Button>
         </div>

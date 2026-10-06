@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
 import type { Session, User } from '@supabase/supabase-js';
 import { getSupabase } from './client';
+import { identifyUser, resetUser, track } from '../analytics';
 
 interface AuthContextValue {
   /** Current Supabase user, or null when signed out / cloud disabled. */
@@ -43,15 +44,30 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!supabase) return;
     let active = true;
 
+    let hadSession = false;
+
     supabase.auth.getSession().then(({ data }) => {
       if (!active) return;
       setSession(data.session);
       setLoading(false);
+      if (data.session) {
+        hadSession = true;
+        identifyUser(data.session.user.id);
+      }
     });
 
-    const { data: sub } = supabase.auth.onAuthStateChange((_event, next) => {
+    const { data: sub } = supabase.auth.onAuthStateChange((event, next) => {
       if (!active) return;
       setSession(next);
+      if (next) {
+        identifyUser(next.user.id);
+        // SIGNED_IN also fires on token restore; only count a real transition.
+        if (event === 'SIGNED_IN' && !hadSession) track('signed_in', {});
+        hadSession = true;
+      } else if (event === 'SIGNED_OUT') {
+        hadSession = false;
+        resetUser();
+      }
     });
 
     return () => {
