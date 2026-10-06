@@ -27,3 +27,4 @@ docs/BRAINSTORM_RAW.md
 docs/IDEAS_TO_IMPLEMENT.md
 # Dated snapshots (IDEAS_TO_IMPLEMENT.YYYY-MM-DD.md) ARE committed — gives stable URLs for GH issue links
 docs/DIFF.md
+dist-standalone

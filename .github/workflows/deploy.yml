@@ -25,11 +25,13 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run test
-      - run: npm run build
+      # GitHub Pages serves under /LearnCRE/, so it gets the single-file
+      # build (relative base + hash routing). Vercel serves the split build.
+      - run: npm run build:standalone
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: dist-standalone
 
   deploy:
     needs: build

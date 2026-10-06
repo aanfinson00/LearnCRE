@@ -1,11 +1,7 @@
 import { useMemo, useState } from 'react';
 import type { Question, QuestionKind } from '../types/question';
 import { generateQuestion } from '../quiz/engine';
-import { allKinds } from '../quiz/templates';
-import { SITUATIONAL_CASES } from '../quiz/situational';
-import { VOCAB_TERMS } from '../quiz/vocab';
-import { MOCK_ARCHETYPES } from '../quiz/mockInterview';
-import { EXCEL_TEMPLATES } from '../excel/templates';
+import { CONTENT_STATS } from '../content/stats';
 import { ChoiceList } from './ChoiceList';
 import { SolutionDetails } from './SolutionDetails';
 import { Button } from './ui/Button';
@@ -100,11 +96,11 @@ export function LandingPage({ onEnter }: Props) {
 
   const stats = useMemo(
     () => [
-      { n: allKinds.length, label: 'question types' },
-      { n: SITUATIONAL_CASES.length, label: 'situational cases' },
-      { n: VOCAB_TERMS.length, label: 'vocab terms' },
-      { n: EXCEL_TEMPLATES.length, label: 'Excel drills' },
-      { n: MOCK_ARCHETYPES.length, label: 'mock interview firm types' },
+      { n: CONTENT_STATS.questionKinds, label: 'question types' },
+      { n: CONTENT_STATS.situationalCases, label: 'situational cases' },
+      { n: CONTENT_STATS.vocabTerms, label: 'vocab terms' },
+      { n: CONTENT_STATS.excelDrills, label: 'Excel drills' },
+      { n: CONTENT_STATS.mockArchetypes, label: 'mock interview firm types' },
     ],
     [],
   );

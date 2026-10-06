@@ -52,11 +52,18 @@ npm test           # vitest
 npm run build
 ```
 
-## Standalone HTML (no server needed)
+## Builds
 
-`npm run build` produces a single self-contained `dist/index.html` (~250 KB) with all JS and CSS inlined via `vite-plugin-singlefile`. Double-click it, email it, or host it anywhere — no Node, no npm, no server.
+```bash
+npm run build              # web build → dist/ (code-split, for Vercel)
+npm run build:standalone   # single self-contained file → dist-standalone/index.html
+```
 
-**Download the latest build:** [`standalone/LearnCRE.html`](./standalone/LearnCRE.html) — kept in sync by `.github/workflows/update-standalone.yml` on every push. On GitHub, click the file → **Download raw file** → open in any modern browser.
+The **web build** splits the app into lazily loaded chunks: a first-time visitor downloads only the landing page (~110 KB gzipped), and each mode (quiz, situational, modeling tests, …) loads when opened. Every mode has its own URL (`/quiz`, `/case-study`, `/certify/<id>/exam`, …) — see `src/router.ts`.
+
+The **standalone build** inlines everything into one HTML file that works from `file://` (double-click it, email it, host it anywhere). It uses hash routes (`index.html#/quiz`) since a local file can't change its path.
+
+**Download the latest standalone copy:** [`standalone/LearnCRE.html`](./standalone/LearnCRE.html) — rebuilt by `.github/workflows/update-standalone.yml` on every push. On GitHub, click the file → **Download raw file** → open in any modern browser.
 
 ## Keyboard
 
@@ -68,7 +75,7 @@ npm run build
 
 ## Deployment
 
-`.github/workflows/deploy.yml` builds and publishes to GitHub Pages on push to `main`. `vite-plugin-singlefile` + relative base (`./`) means the same artifact works via `file://` and under `/LearnCRE/` on Pages.
+Vercel serves the code-split web build (`vercel.json`: SPA fallback to `index.html`, long-lived caching for hashed `/assets/*`). `.github/workflows/deploy.yml` publishes the standalone build to GitHub Pages on push to `main`, since its relative base and hash routing work under the `/LearnCRE/` subpath.
 
 ## Planned
 

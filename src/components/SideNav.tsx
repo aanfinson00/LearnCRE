@@ -1,28 +1,8 @@
 import { useEffect, useState } from 'react';
 import { ProfilePicker } from './ProfilePicker';
 import { TierBadge } from './TierBadge';
+import { hrefFor, pathFor, type Mode } from '../router';
 
-type Mode =
-  | 'quiz'
-  | 'speedDrill'
-  | 'study'
-  | 'walkthrough'
-  | 'situational'
-  | 'excel'
-  | 'longform'
-  | 'vocab'
-  | 'mockInterview'
-  | 'modelingTest'
-  | 'certify'
-  | 'profile'
-  | 'daily'
-  | 'weekly'
-  | 'leaderboards'
-  | 'friends'
-  | 'cohorts'
-  | 'headToHead'
-  | 'submitQuestion'
-  | 'feedbackReview';
 
 interface Props {
   active: Mode;
@@ -209,9 +189,15 @@ function SidebarBody({
                 const on = active === item.id;
                 return (
                   <li key={item.id}>
-                    <button
-                      type="button"
-                      onClick={() => onSwitch(item.id)}
+                    <a
+                      href={hrefFor(pathFor(item.id))}
+                      aria-current={on ? 'page' : undefined}
+                      onClick={(e) => {
+                        // Let modified clicks (new tab / window) through.
+                        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+                        e.preventDefault();
+                        onSwitch(item.id);
+                      }}
                       title={item.hint}
                       className={`flex w-full items-center gap-2 rounded-md px-3 py-1.5 text-left text-sm transition-colors duration-aa ease-aa ${
                         on
@@ -226,7 +212,7 @@ function SidebarBody({
                         aria-hidden
                       />
                       <span className="font-medium">{item.label}</span>
-                    </button>
+                    </a>
                   </li>
                 );
               })}
