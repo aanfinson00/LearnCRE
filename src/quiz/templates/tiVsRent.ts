@@ -1,5 +1,5 @@
 import { effectiveRentCostPerSf, tiVsRentDelta } from '../../math/lease';
-import { formatUsdPerSf, formatUsdSigned, formatYears } from '../../math/rounding';
+import { formatUsdPerSf, formatUsdSigned, formatYearsAdj } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
 import { bands, pickBand } from '../bands';
 import { classBand } from '../assetClasses';
@@ -64,7 +64,7 @@ export const tiVsRentTemplate: QuestionTemplate<'tiVsRent'> = {
     return {
       id: nextId('tivr'),
       kind: 'tiVsRent',
-      prompt: `Option A: ${formatUsdPerSf(rentA)} face rent, no TI. Option B: ${formatUsdPerSf(rentB)} face rent with ${formatUsdPerSf(tiB)} TI. Both are ${formatYears(years)} leases. What's A − B on an effective $/SF/yr basis? (positive = A costs more)`,
+      prompt: `Option A: ${formatUsdPerSf(rentA)} face rent, no TI. Option B: ${formatUsdPerSf(rentB)} face rent with ${formatUsdPerSf(tiB)} TI. Both are ${formatYearsAdj(years)} leases. What's A − B on an effective $/SF/yr basis? (positive = A costs more)`,
       context: {
         altRentPerSf: rentA,
         altTiPerSf: tiA,

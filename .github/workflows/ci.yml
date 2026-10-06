@@ -1,0 +1,35 @@
+name: CI
+
+# Gates every PR and every push to main: typecheck, the full test suite
+# (including the content guardrails in src/test/content/), and both builds.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      - name: Typecheck
+        run: npx tsc -b
+      - name: Tests (incl. content guardrails)
+        run: npm test
+      - name: Web build
+        run: npx vite build
+      - name: Standalone build
+        run: npx vite build --mode standalone

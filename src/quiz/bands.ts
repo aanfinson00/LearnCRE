@@ -25,7 +25,9 @@ export function effectiveStep(band: Band, difficulty: Difficulty): number | unde
 export function pickBand(rng: Rng, band: Band, difficulty: Difficulty = 'intermediate'): number {
   const step = effectiveStep(band, difficulty);
   const opts = step !== undefined ? { step } : undefined;
-  return rng.pickRange(band.min, band.max, opts);
+  // Fractional steps (e.g. 0.2 at Advanced) accumulate float noise:
+  // 8.200000000000001 would leak into prompts as "8.200000000000001-yr".
+  return Number(rng.pickRange(band.min, band.max, opts).toFixed(10));
 }
 
 /**

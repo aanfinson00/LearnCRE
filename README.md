@@ -65,6 +65,22 @@ The **standalone build** inlines everything into one HTML file that works from `
 
 **Download the latest standalone copy:** [`standalone/LearnCRE.html`](./standalone/LearnCRE.html) — rebuilt by `.github/workflows/update-standalone.yml` on every push. On GitHub, click the file → **Download raw file** → open in any modern browser.
 
+## Content guardrails & CI
+
+`.github/workflows/ci.yml` runs the typecheck, the full test suite and both builds on every PR and every push to `main`. Two suites under `src/test/content/` guard question quality:
+
+- **`generators.test.ts`** sweeps every question template across all difficulties and asset classes. It fails on any of these:
+  - broken output: NaN, `undefined`, float noise like `8.200000000000001`
+  - "a 5 years hold" phrasing
+  - malformed multiple-choice sets
+  - answers outside a per-kind realism band, e.g. simple IRR ≤ 35% or 0.3–4 truck doors per 10k SF
+- **`text.test.ts`** lints every situational case, long-form case, mock prompt, vocab term, walkthrough, Excel drill, modeling test and certification. It fails on:
+  - drafting notes ("— wait, …", "let me re-state"), TODOs, broken interpolation, doubled words and unbalanced bold
+  - malformed cases: not exactly one best answer, empty explanations, weak rubrics
+  - duplicate ids or vocab terms
+
+When you add a template, add its kind to `BOUNDS` in `generators.test.ts`. If a deliberate change moves a range, widen the band in the same commit and say why.
+
 ## Keyboard
 
 - **Enter** — submit / next question

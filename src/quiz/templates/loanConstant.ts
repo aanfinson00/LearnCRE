@@ -1,5 +1,5 @@
 import { loanConstant } from '../../math/debt';
-import { formatBps, formatPct, formatYears } from '../../math/rounding';
+import { formatBps, formatPct, formatYearsAdj } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
 import { bands, pickBand } from '../bands';
 import { nextId } from '../random';
@@ -11,7 +11,7 @@ function buildSolution(rate: number, years: number): Solution {
     steps: [
       {
         label: 'Constant',
-        expression: `${formatYears(years)} amort @ ${formatPct(rate)}`,
+        expression: `${formatYearsAdj(years)} amort @ ${formatPct(rate)}`,
         result: `${formatPct(k, 2)}  (${formatBps(k)})`,
       },
     ],
@@ -44,7 +44,7 @@ export const loanConstantTemplate: QuestionTemplate<'loanConstant'> = {
     return {
       id: nextId('lc'),
       kind: 'loanConstant',
-      prompt: `What's the loan constant for a ${formatYears(years)} amortizing loan at ${formatPct(rate)} (in bps)?`,
+      prompt: `What's the loan constant for a ${formatYearsAdj(years)} amortizing loan at ${formatPct(rate)} (in bps)?`,
       context: { interestRate: rate, amortYears: years },
       expected: expectedBps,
       unit: 'bps',

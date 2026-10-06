@@ -1,5 +1,5 @@
 import { loanConstant, maxLoanByDscr } from '../../math/debt';
-import { formatPct, formatUsd, formatYears } from '../../math/rounding';
+import { formatPct, formatUsd, formatYearsAdj } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
 import { bands, pickBand } from '../bands';
 import { nextId } from '../random';
@@ -17,7 +17,7 @@ function buildSolution(noi: number, dscrTarget: number, rate: number, years: num
     steps: [
       {
         label: 'Loan constant',
-        expression: `${formatYears(years)} amort @ ${formatPct(rate)}`,
+        expression: `${formatYearsAdj(years)} amort @ ${formatPct(rate)}`,
         result: formatPct(constant, 2),
       },
       {
@@ -58,7 +58,7 @@ export const dscrLoanSizingTemplate: QuestionTemplate<'dscrLoanSizing'> = {
     return {
       id: nextId('dscr'),
       kind: 'dscrLoanSizing',
-      prompt: `NOI of ${formatUsd(noi)} needs to cover a ${formatMultiple2(dscrTarget)} DSCR on a ${formatYears(years)} amortizing loan at ${formatPct(rate)}. What's the max loan?`,
+      prompt: `NOI of ${formatUsd(noi)} needs to cover a ${formatMultiple2(dscrTarget)} DSCR on a ${formatYearsAdj(years)} amortizing loan at ${formatPct(rate)}. What's the max loan?`,
       context: { noi, dscrTarget, interestRate: rate, amortYears: years },
       expected,
       unit: 'usd',
