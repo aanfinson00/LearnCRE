@@ -9,6 +9,9 @@
 -- ============================================================
 -- profiles — 1:1 with auth.users
 -- ============================================================
+-- citext must exist before the profiles table below uses it for handles.
+create extension if not exists citext;
+
 create table if not exists public.profiles (
   id            uuid primary key references auth.users(id) on delete cascade,
   handle        citext not null unique,
@@ -20,8 +23,6 @@ create table if not exists public.profiles (
   created_at    timestamptz not null default now(),
   updated_at    timestamptz not null default now()
 );
-
-create extension if not exists citext;
 
 -- Length + char-set guard on handle
 alter table public.profiles
