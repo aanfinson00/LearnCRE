@@ -2,7 +2,7 @@ import { egi, noi as computeNoi, value as computeValue } from '../math/core';
 import { loanConstant, maxLoanByDscr } from '../math/debt';
 import { irrMulti } from '../math/returns';
 import { afterTaxSaleProceeds, depreciationStraightLine } from '../math/tax';
-import { formatPct, formatUsd, formatYears } from '../math/rounding';
+import { formatPct, formatUsd, formatYears, formatYearsAdj } from '../math/rounding';
 import type { WalkthroughDef } from '../types/walkthrough';
 
 function combinedScenarioWalk(): WalkthroughDef {
@@ -101,17 +101,17 @@ function dscrLoanSizingWalk(): WalkthroughDef {
       interestRate: rate,
       amortYears: years,
     },
-    setupNarrative: `Your stabilized NOI is ${formatUsd(noi)}. Your lender requires a ${dscr.toFixed(2)}× DSCR on a ${formatYears(years)} amortizing loan at ${formatPct(rate)}. Size the loan in three steps.`,
+    setupNarrative: `Your stabilized NOI is ${formatUsd(noi)}. Your lender requires a ${dscr.toFixed(2)}× DSCR on a ${formatYearsAdj(years)} amortizing loan at ${formatPct(rate)}. Size the loan in three steps.`,
     steps: [
       {
         id: 'constant',
         label: 'Step 1 — Loan constant',
-        prompt: `What's the loan constant for a ${formatYears(years)} amortizing loan at ${formatPct(rate)}? (answer in bps)`,
+        prompt: `What's the loan constant for a ${formatYearsAdj(years)} amortizing loan at ${formatPct(rate)}? (answer in bps)`,
         expected: Math.round(constant * 10_000),
         unit: 'bps',
         tolerance: { type: 'abs', band: 15 },
         hint: '30yr @ 6% ≈ 720 bps. Memorize a few — it\'s the bridge from rate to debt service.',
-        resultDescription: `${formatYears(years)} amort @ ${formatPct(rate)} → loan constant ≈ ${(constant * 10_000).toFixed(0)} bps.`,
+        resultDescription: `${formatYearsAdj(years)} amort @ ${formatPct(rate)} → loan constant ≈ ${(constant * 10_000).toFixed(0)} bps.`,
       },
       {
         id: 'allowance',
@@ -186,7 +186,7 @@ function mockAcquisitionWalk(): WalkthroughDef {
       exitCap,
       holdYears,
     },
-    setupNarrative: `Stabilized multifamily acquisition. GPR ${formatUsd(gpr)}, other income ${formatUsd(otherIncome)}, ${formatPct(vacancy)} vacancy, OpEx ${formatUsd(opex)}. Going-in cap ${formatPct(goingInCap)}; you're modeling a ${formatYears(holdYears)} hold with ${formatPct(noiGrowth)} annual NOI growth and a ${formatPct(exitCap)} exit cap (${((exitCap - goingInCap) * 10_000).toFixed(0)} bps spread). Sale costs ${formatPct(saleCostRate)}. All-cash analysis — unlevered IRR.`,
+    setupNarrative: `Stabilized multifamily acquisition. GPR ${formatUsd(gpr)}, other income ${formatUsd(otherIncome)}, ${formatPct(vacancy)} vacancy, OpEx ${formatUsd(opex)}. Going-in cap ${formatPct(goingInCap)}; you're modeling a ${formatYearsAdj(holdYears)} hold with ${formatPct(noiGrowth)} annual NOI growth and a ${formatPct(exitCap)} exit cap (${((exitCap - goingInCap) * 10_000).toFixed(0)} bps spread). Sale costs ${formatPct(saleCostRate)}. All-cash analysis — unlevered IRR.`,
     steps: [
       {
         id: 'gross',
@@ -281,7 +281,7 @@ function mockAcquisitionWalk(): WalkthroughDef {
       {
         id: 'irr-approx',
         label: 'Step 10 — Approximate unlevered IRR',
-        prompt: `EM^(1/n) − 1 over a ${formatYears(holdYears)} hold. What's the approximate IRR?`,
+        prompt: `EM^(1/n) − 1 over a ${formatYearsAdj(holdYears)} hold. What's the approximate IRR?`,
         expected: irrApprox,
         unit: 'pct',
         tolerance: { type: 'abs', band: 0.01 },

@@ -25,7 +25,7 @@ four (4) times in the aggregate during the term of the Loan, and
 no more than two (2) times in any rolling four-quarter period.`,
   },
   scenario:
-    'NOI is running $2.4M annualized; debt service is $2.2M ($25M loan @ 7%, 30-year amort). Required DSCR is 1.20×. The sponsor has $1M of cash available. The next Test Date is in 3 weeks.',
+    'NOI is running $2.4M annualized; debt service is $2.2M ($27.5M loan @ 7%, 30-year amort). Required DSCR is 1.20×. The sponsor has $1M of cash available. The next Test Date is in 3 weeks.',
   data: [
     { label: 'Annualized NOI', value: '$2.4M' },
     { label: 'Annual debt service', value: '$2.2M' },
@@ -39,10 +39,10 @@ no more than two (2) times in any rolling four-quarter period.`,
   options: [
     {
       label:
-        'They need ~$3.6M of cure cash. NOI of $2.4M ÷ 1.20 target = $2.0M of allowable debt service. They\'re running $2.2M, so they need to notionally cut DS by ~$0.2M. At a 7% / 30y constant of ~7.98%, that requires reducing principal by $0.2M / 0.0798 ≈ $2.5M. But the cure also needs to leave the DSCR *just at* the threshold, so practical cure includes a buffer (~$3.6M). The $1M is not enough; sponsor needs to find the rest or face EOD.',
+        'They need ~$2.5M of cure cash at the bare minimum, ~$2.9M with a sensible buffer. NOI of $2.4M ÷ 1.20 target = $2.0M of allowable debt service. They\'re running $2.2M, so they need to notionally cut DS by ~$0.2M. At a 7% / 30y constant of ~7.98%, that requires reducing principal by $0.2M / 0.0798 ≈ $2.45M. That only lands the DSCR exactly at 1.20×, so a practical cure adds a 15-20% buffer (~$2.8-2.9M). The $1M is not enough; sponsor needs to find the rest or face EOD.',
       isBest: true,
       explanation:
-        'Cure math step-by-step: (1) target debt service = NOI / DSCR target = $2.4M / 1.20 = $2.0M. (2) need to cut current DS of $2.2M by $0.2M. (3) reducing principal by X cuts DS by X × loan-constant. At 7% / 30y, constant ≈ 7.98%. So X = $0.2M / 0.0798 ≈ $2.5M of notional principal reduction = $2.5M of cure cash. In practice, lenders calculate to the *exact* DSCR threshold, and prudent sponsors over-collateralize by 15-20% to buffer next quarter — call it ~$3.0-3.6M. The $1M is well short. Sponsor either finds another $2-3M (capital call to LP, refi, equity raise) or accepts EOD with all its consequences (cross-default, accelerated maturity, control loss).',
+        'Cure math step-by-step: (1) target debt service = NOI / DSCR target = $2.4M / 1.20 = $2.0M. (2) need to cut current DS of $2.2M by $0.2M. (3) reducing principal by X cuts DS by X × loan-constant. At 7% / 30y, constant ≈ 7.98%. So X = $0.2M / 0.0798 ≈ $2.45M of notional principal reduction = ~$2.45M of cure cash. That gets the DSCR exactly to the threshold; prudent sponsors over-collateralize by 15-20% to buffer next quarter — call it ~$2.8-2.9M. The $1M is well short. Sponsor either finds another ~$1.5-2M (capital call to LP, refi, equity raise) or accepts EOD with all its consequences (cross-default, accelerated maturity, control loss).',
     },
     {
       label:

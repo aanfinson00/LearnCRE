@@ -81,7 +81,7 @@ export const bands = {
   tiPerSf: { min: 0, max: 100, step: 1 },
   rolloverPct: { min: 0.1, max: 0.6, step: 0.05 },
   equityIn: { min: 1_000_000, max: 100_000_000, step: 500_000 },
-  holdYears: { min: 2, max: 10 },
+  holdYears: { min: 2, max: 10, step: 1 },
   targetIrr: { min: 0.08, max: 0.25, step: 0.005 },
   irrExitMultiple: { min: 1.2, max: 3.5, step: 0.1 },
   otherIncomeDelta: { min: 25_000, max: 500_000, step: 25_000 },

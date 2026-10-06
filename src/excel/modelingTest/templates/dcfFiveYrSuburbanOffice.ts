@@ -18,11 +18,12 @@ const NOI_Y2 = NOI_Y1 * (1 + GROWTH);
 const NOI_Y3 = NOI_Y2 * (1 + GROWTH);
 const NOI_Y4 = NOI_Y3 * (1 + GROWTH);
 const NOI_Y5 = NOI_Y4 * (1 + GROWTH);
-const ANNUAL_DS = (LOAN * RATE) / (1 - Math.pow(1 + RATE, -AMORT));
+// Monthly payments, annualized — the market convention for permanent debt.
+const ANNUAL_DS = (12 * LOAN * (RATE / 12)) / (1 - Math.pow(1 + RATE / 12, -AMORT * 12));
 const EXIT_VALUE = NOI_Y5 / EXIT_CAP;
 const SALE_COSTS = EXIT_VALUE * SALE_COSTS_PCT;
-const POW5 = Math.pow(1 + RATE, 5);
-const LOAN_BALANCE_EOY5 = LOAN * POW5 - ANNUAL_DS * (POW5 - 1) / RATE;
+const POW60 = Math.pow(1 + RATE / 12, 60);
+const LOAN_BALANCE_EOY5 = LOAN * POW60 - (ANNUAL_DS / 12) * (POW60 - 1) / (RATE / 12);
 const NET_SALE_PROCEEDS = EXIT_VALUE - SALE_COSTS - LOAN_BALANCE_EOY5;
 const EQUITY_IN = PURCHASE - LOAN;
 const LEVERED_CF_Y1 = NOI_Y1 - ANNUAL_DS;
@@ -68,7 +69,7 @@ const cells: SheetCell[] = [
   { address: 'B8', role: 'computed', computed: LOAN, format: 'usd' },
   { address: 'A9', role: 'header', text: 'Loan rate' },
   { address: 'B9', role: 'assumption', value: RATE, format: 'pct' },
-  { address: 'A10', role: 'header', text: 'Amortization (years)' },
+  { address: 'A10', role: 'header', text: 'Amortization (years, monthly pmts)' },
   { address: 'B10', role: 'assumption', value: AMORT, format: 'number' },
   { address: 'A11', role: 'header', text: 'Hold (years)' },
   { address: 'B11', role: 'assumption', value: 5, format: 'number' },
@@ -136,7 +137,7 @@ export const dcfFiveYrSuburbanOffice: ModelingTestTemplate = {
   brief: {
     paragraphs: [
       'Subject is a stabilized Class-B office park in a stable secondary market — 95% leased, in-place rents at market, no major rollover in the hold.',
-      "Sponsor's pro forma: 3% flat NOI growth years 2-5, exit at end of year 5 at a 50 bps wider cap than going-in. Permanent loan at 65% LTV, 6.0% fixed rate, 30-year amortization.",
+      "Sponsor's pro forma: 3% flat NOI growth years 2-5, exit at end of year 5 at a 50 bps wider cap than going-in. Permanent loan at 65% LTV, 6.0% fixed rate, 30-year amortization, monthly payments.",
     ],
     bullets: [
       'Build the year-by-year NOI and debt service rows.',
@@ -202,7 +203,7 @@ export const dcfFiveYrSuburbanOffice: ModelingTestTemplate = {
       expected: ANNUAL_DS,
       tolerance: { rel: 0.005 },
       diagnostic:
-        'Annual DS should be constant for a fully-amortizing loan. Canonical: =-PMT(B9, B10, B8). If this is off, every year of levered CF and your IRR will drift.',
+        'Annual DS should be constant for a fully-amortizing loan. Canonical (monthly payments, annualized): =-PMT(B9/12, B10*12, B8)*12. If this is off, every year of levered CF and your IRR will drift.',
       explains: ['B29', 'B30', 'B22'],
     },
     {
@@ -212,10 +213,10 @@ export const dcfFiveYrSuburbanOffice: ModelingTestTemplate = {
       expected: LOAN_BALANCE_EOY5,
       tolerance: { rel: 0.005 },
       diagnostic:
-        'Use the amortization formula: =B8 * (1+B9)^5 + PMT(B9,B10,B8) * ((1+B9)^5 - 1) / B9 (PMT is negative, so this subtracts paid-down principal). A common error is loan − (PMT × 5), which double-counts interest.',
+        'Use the amortization formula with monthly periods: =B8 * (1+B9/12)^60 + PMT(B9/12,B10*12,B8) * ((1+B9/12)^60 - 1) / (B9/12) (PMT is negative, so this subtracts paid-down principal). A common error is loan − (PMT × 5), which double-counts interest.',
       explains: ['B22', 'B29'],
     },
   ],
   rubric:
-    'A clean DCF chains NOI as a multiplicative compound from year-1 NOI. Debt service is constant for a fully-amortizing loan — use =-PMT. Exit value is trailing Y5 NOI ÷ exit cap; sale costs come off the gross sale price. Loan balance at exit is NOT loan − cumulative PMT (those payments are mostly interest in early years); use the amortization formula or =-PV(rate, remainingTerm, PMT). Levered cash flows are NOI − DS each year; year 5 adds net sale proceeds. IRR runs over the Y0-Y5 series with Y0 = negative equity check. Equity multiple is total cash returned divided by equity invested.',
+    'A clean DCF chains NOI as a multiplicative compound from year-1 NOI. Debt service is constant for a fully-amortizing loan — use =-PMT(rate/12, years*12, loan)*12. Exit value is trailing Y5 NOI ÷ exit cap; sale costs come off the gross sale price. Loan balance at exit is NOT loan − cumulative PMT (those payments are mostly interest in early years); use the amortization formula or =-PV(rate, remainingTerm, PMT). Levered cash flows are NOI − DS each year; year 5 adds net sale proceeds. IRR runs over the Y0-Y5 series with Y0 = negative equity check. Equity multiple is total cash returned divided by equity invested.',
 };

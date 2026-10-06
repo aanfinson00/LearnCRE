@@ -2,6 +2,7 @@ import type { LifetimeStats, SessionConfig } from '../types/session';
 import type { QuestionKind } from '../types/question';
 import type { SessionRecord } from '../types/profile';
 import { profileKey } from './profiles';
+import { track } from '../analytics';
 
 const SESSIONS_LIMIT = 100;
 
@@ -107,6 +108,14 @@ export function saveSessions(records: SessionRecord[], profileId?: string): void
 }
 
 export function recordSession(record: SessionRecord, profileId?: string): SessionRecord[] {
+  track('session_completed', {
+    mode: record.kind,
+    attempts: record.attempts,
+    correct: record.correct,
+    accuracy_pct: Number.isFinite(record.accuracyPct) ? Math.round(record.accuracyPct * 1000) / 10 : 0,
+    duration_s: Math.round(record.durationMs / 1000),
+    xp_earned: record.xpEarned,
+  });
   const next = [...loadSessions(profileId), record].slice(-SESSIONS_LIMIT);
   saveSessions(next, profileId);
   return next;

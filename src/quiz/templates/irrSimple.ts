@@ -41,10 +41,15 @@ export const irrSimpleTemplate: QuestionTemplate<'irrSimple'> = {
   ],
   generate(rng, difficulty = 'intermediate', _assetClass = 'mixed') {
     const equityIn = pickBand(rng, bands.equityIn, difficulty);
-    const mult = pickBand(rng, bands.irrExitMultiple, difficulty);
-    const outRound = difficulty === 'beginner' ? 1_000_000 : difficulty === 'advanced' ? 100_000 : 500_000;
-    const equityOut = Math.round((equityIn * mult) / outRound) * outRound;
     const years = rng.pickInt(bands.holdYears.min, bands.holdYears.max);
+    // Keep IRRs in a believable CRE range: no 3.5x over a 2-year hold.
+    const maxMult = Math.max(1.2, Math.floor(Math.pow(1.28, years) * 10) / 10);
+    const mult = Math.min(pickBand(rng, bands.irrExitMultiple, difficulty), maxMult);
+    const outRound = difficulty === 'beginner' ? 1_000_000 : difficulty === 'advanced' ? 100_000 : 500_000;
+    const equityOut = Math.max(
+      equityIn + outRound,
+      Math.round((equityIn * mult) / outRound) * outRound,
+    );
     const expected = irrSingle(equityIn, equityOut, years);
 
     return {

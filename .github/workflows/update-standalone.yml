@@ -24,11 +24,11 @@ jobs:
           node-version: '20'
           cache: npm
       - run: npm ci
-      - run: npm run build
+      - run: npm run build:standalone
       - name: Copy built HTML
         run: |
           mkdir -p standalone
-          cp dist/index.html standalone/LearnCRE.html
+          cp dist-standalone/index.html standalone/LearnCRE.html
       - name: Commit if changed
         run: |
           git config user.name 'github-actions[bot]'

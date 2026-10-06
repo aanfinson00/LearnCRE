@@ -1,6 +1,6 @@
 import { loadLifetime, loadSessions } from '../storage/localStorage';
 import { loadMistakes } from '../storage/mistakeBank';
-import { caseById } from './situational';
+import { SITUATIONAL_CATEGORY_BY_ID } from '../content/catalogIndex';
 import type { SessionRecord } from '../types/profile';
 import type { LifetimeStats, SessionStats } from '../types/session';
 import type { AchievementContext } from './achievements';
@@ -175,10 +175,10 @@ function situationalCategoryAccuracy(
       : (cfg?.caseIds as string[] | undefined) ?? [];
     const correctSet = new Set<string>(cfg?.correctCaseIds as string[] | undefined);
     for (const id of attempted) {
-      const c = caseById(id);
-      if (!c) continue;
-      const cur = out[c.category] ?? { total: 0, correct: 0 };
-      out[c.category] = {
+      const category = SITUATIONAL_CATEGORY_BY_ID[id];
+      if (!category) continue;
+      const cur = out[category] ?? { total: 0, correct: 0 };
+      out[category] = {
         total: cur.total + 1,
         correct: cur.correct + (correctSet.has(id) ? 1 : 0),
       };

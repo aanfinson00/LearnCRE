@@ -12,7 +12,7 @@ function buildSolution(
     steps: [
       {
         label: 'Held to date',
-        expression: `${formatUsd(cumulativeDraws)} × ${formatPct(retainagePct, 0)}`,
+        expression: `${formatUsd(cumulativeDraws)} × ${formatPct(retainagePct, Number.isInteger(retainagePct * 100) ? 0 : 1)}`,
         result: formatUsd(expected),
       },
     ],

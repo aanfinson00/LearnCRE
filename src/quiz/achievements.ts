@@ -1,9 +1,7 @@
 import type { AchievementUnlock, SessionRecord } from '../types/profile';
 import type { LifetimeStats, SessionStats } from '../types/session';
 import { profileKey } from '../storage/profiles';
-import { allKinds } from './templates';
-import { walkthroughs } from './walkthroughs';
-import { MODELING_TEST_TEMPLATES } from '../excel/modelingTest/templates';
+import { MODELING_TEST_IDS, WALKTHROUGH_IDS } from '../content/catalogIndex';
 
 const KEY_SUFFIX = 'achievements.v1';
 
@@ -162,14 +160,14 @@ export const ACHIEVEMENTS: AchievementDef[] = [
     label: 'Walkthrough Apprentice',
     description: 'Complete every walkthrough.',
     icon: '🧗',
-    evaluate: (c) => walkthroughs.every((w) => c.walkthroughIdsCompleted.has(w.id)),
+    evaluate: (c) => WALKTHROUGH_IDS.every((id) => c.walkthroughIdsCompleted.has(id)),
   },
   {
     id: 'mistake-crusher',
     label: 'Mistake Crusher',
     description: 'Clear your mistake bank — answer every kind in it correctly.',
     icon: '⚒️',
-    evaluate: (c) => allKinds.length > 0 && c.outstandingMissKinds.size === 0 && c.lifetime.attempts >= 50,
+    evaluate: (c) => c.outstandingMissKinds.size === 0 && c.lifetime.attempts >= 50,
   },
   {
     id: 'reasoning-apprentice',
@@ -209,8 +207,8 @@ export const ACHIEVEMENTS: AchievementDef[] = [
     description: 'Pass every shipped modeling-test template.',
     icon: '🏗️',
     evaluate: (c) =>
-      MODELING_TEST_TEMPLATES.length > 0 &&
-      MODELING_TEST_TEMPLATES.every((t) => c.modelingTestPassedIds.has(t.id)),
+      MODELING_TEST_IDS.length > 0 &&
+      MODELING_TEST_IDS.every((id) => c.modelingTestPassedIds.has(id)),
   },
   {
     id: 'clean-sheet',

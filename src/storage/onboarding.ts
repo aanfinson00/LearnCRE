@@ -21,6 +21,26 @@ export function markWelcomeSeen(): void {
   }
 }
 
+const LANDING_KEY = 'learncre.landingSeen.v1';
+
+/** Device-wide (not per-profile): has this browser already gone past the
+ *  marketing landing page into the app? */
+export function hasEnteredApp(): boolean {
+  try {
+    return localStorage.getItem(LANDING_KEY) === '1' || hasSeenWelcome();
+  } catch {
+    return false;
+  }
+}
+
+export function markEnteredApp(): void {
+  try {
+    localStorage.setItem(LANDING_KEY, '1');
+  } catch {
+    /* ignore */
+  }
+}
+
 export function loadDismissedPrimers(): Set<string> {
   try {
     const raw = localStorage.getItem(profileKey(PRIMERS_KEY));

@@ -50,8 +50,8 @@ A multifamily submarket has 4,000 units in inventory and is currently 85% leased
 
 <details><summary>Answer & reasoning</summary>
 
-- ✅ **A.** About 16 months — you need to absorb the existing vacancy plus the new deliveries to hit 95% on a 4,300-unit base.
-  - New base: 4,300 units. Target leased at 95%: 4,085. Currently leased: 4,000 × 0.85 = 3,400. Net to absorb: 685 units ÷ 50/mo ≈ 13.7 months — but that assumes flat absorption. With 300 units delivering, the math is closer to 16 months once you account for the deliveries lengthening the lease-up tail. Reasonable analyst answer: 14–18 months.
+- ✅ **A.** About 14 months — you need to absorb the existing vacancy plus the new deliveries to hit 95% on a 4,300-unit base.
+  - New base: 4,300 units. Target leased at 95%: 4,085. Currently leased: 4,000 × 0.85 = 3,400. Net to absorb: 685 units ÷ 50/mo ≈ 13.7 months, so call it ~14. The 300 new units are already in the 4,300 base, so do not add them again. The real risk is the pace assumption: if new deliveries pull concessions and absorption slows to 40/mo, it stretches to ~17 months. Underwrite a range, not a point.
 - ◻️ **B.** About 12 months — current vacancy is 600 units and absorption is 50/mo.
   - Misses the deliveries. If you treat the base as 4,000 and ignore +300 new units, you'd say (4,000 − 3,400) ÷ 50 = 12 months. But the new deliveries change the denominator and add to the supply you must absorb. Underwriting at 12 months would systematically overestimate stabilization speed.
 - ◻️ **C.** About 6 months — 50 units/mo absorption easily clears the 300 new units.
@@ -614,12 +614,12 @@ You're lending on a $50M acquisition. The sponsor's pro forma shows 8% NOI growt
 ### 20. Same loan passes DSCR but fails debt yield — which wins?
 *Situational · risk · advanced · office · mortgageUw*
 
-You're sizing a permanent loan. NOI is $5.0M; the requested loan is $65M; 30-year amortization at 5.0%. The DSCR test (1.25x threshold) passes at 1.19x — wait, that fails. Let me re-state: the DSCR comes in at 1.31x (passes); the debt yield (NOI / loan = 7.7%) fails the 8.0% threshold. The sponsor argues "DSCR is what matters." How do you respond?
+You're sizing a permanent loan. NOI is $5.0M; the requested loan is $65M; 30-year amortization at 4.5% (≈$3.95M annual debt service). The DSCR comes in at 1.27x, passing the 1.25x threshold; the debt yield (NOI / loan = 7.7%) fails the 8.0% threshold. The sponsor argues "DSCR is what matters." How do you respond?
 
 - **NOI:** $5.0M
 - **Requested loan:** $65M
-- **Rate / amort:** 5.0% / 30 yr
-- **DSCR threshold:** 1.25x — actual 1.31x ✓
+- **Rate / amort:** 4.5% / 30 yr
+- **DSCR threshold:** 1.25x — actual 1.27x ✓
 - **Debt yield threshold:** 8.0% — actual 7.7% ✗
 
 **Q: Which test should govern, and why?**
@@ -1328,7 +1328,7 @@ You've just closed on a $30M MF acquisition. The CFO asks whether to spend $25k 
 
 <details><summary>Answer & reasoning</summary>
 
-- ✅ **A.** Cost seg reclassifies portions of the basis from 27.5-yr property into 5/7/15-yr property, accelerating depreciation into the early years of the hold. With 100% bonus depreciation phasing down (60% in 2024, 40% in 2025), the front-loaded depreciation creates a large Year-1 paper loss that offsets passive income for taxable LPs. ROI on the $25k is typically 10-50x for taxable LPs on a $24M basis. For tax-exempt LPs (pensions, endowments, sovereign), cost seg has zero value. Decision turns on the LP tax base.
+- ✅ **A.** Cost seg reclassifies portions of the basis from 27.5-yr property into 5/7/15-yr property, accelerating depreciation into the early years of the hold. With 100% bonus depreciation permanently restored for property acquired after Jan 19, 2025, the front-loaded depreciation creates a large Year-1 paper loss that offsets passive income for taxable LPs. ROI on the $25k is typically 10-50x for taxable LPs on a $24M basis. For tax-exempt LPs (pensions, endowments, sovereign), cost seg has zero value. Decision turns on the LP tax base.
   - Cost seg reclassifies items that ARE part of the building (carpet, appliances, parking lots, land improvements, specialty electrical for cooling) into shorter-life classes (5, 7, 15 years vs the 27.5-year base). With bonus depreciation, those reclassified items can be depreciated heavily or fully in Year 1. On a $24M basis, a typical MF cost seg surfaces ~20-30% as shorter-life property = ~$5-7M in accelerated depreciation. For taxable LPs, that's a $5-7M paper loss they can apply against passive income, which at a 37% federal + state marginal rate is worth ~$2M in tax deferral — vastly more than the $25k study fee. For tax-exempt LPs, no benefit. The LP base determines the answer.
 - ◻️ **B.** Cost seg reduces the property tax bill by reclassifying basis between land and improvements.
   - Confuses cost seg (federal income tax depreciation acceleration) with property tax assessment (state/local, separate process). Cost seg has nothing to do with property taxes; those are based on assessed value, not depreciation schedules.
@@ -1340,7 +1340,7 @@ You've just closed on a $30M MF acquisition. The CFO asks whether to spend $25k 
 **Takeaway:** Cost segregation is a depreciation ACCELERATION tool, not a basis-increase or tax-elimination tool. It reclassifies parts of the building into shorter-life classes (5/7/15-yr) so more depreciation hits early years — especially valuable when bonus depreciation lets you take it Year 1. Time value + 1031 step-up potential makes it pay for taxable LPs (typical ROI 10-50x on the study fee). For tax-exempt LPs, zero value. Always ask "what's the LP tax base?" before commissioning a study.
 
 - Typical cost-seg study reclassifies 20-30% of MF basis to shorter lives.
-- Bonus depreciation: 60% (2024) → 40% (2025) → 20% (2026) → 0% (2027+) under current law.
+- Bonus depreciation: phased down to 40% for early-2025 acquisitions, then permanently restored to 100% for property acquired after Jan 19, 2025 (July 2025 tax act).
 - Recapture on sale: shorter-life property recaptures at ordinary income rates (vs 25% for 1250). Plan exit accordingly.
 
 </details>
@@ -1439,31 +1439,32 @@ You're reviewing two fund LPAs side by side. Fund A uses a deal-by-deal (America
 ### 46. Full catch-up vs 50/50 catch-up — which is more sponsor-friendly?
 *Situational · deal-process · intermediate · portfolioMgmt/acquisitions*
 
-Two LPAs propose different catch-up structures, both targeting a 20% promote tier above 8% pref. Structure A: 100% catch-up to GP — every dollar above pref flows to GP until GP has 20% of (pref + cat-up). Structure B: 50/50 catch-up — every dollar above pref splits 50/50 (LP/GP) until GP has 20% of (pref + cat-up). Both then split 80/20 above the catch-up tier. The deal earns $4M of pref, $5M of cash above pref before hitting the catch-up target.
+Two LPAs propose different catch-up structures, both targeting a 20% promote above an 8% pref. Structure A: 100% catch-up — every dollar above the pref goes to GP until GP has 20% of all profit distributed so far. Structure B: 50/50 catch-up — every dollar above the pref splits 50/50 (LP/GP) until GP has 20% of all profit distributed so far. Both split 80/20 after the catch-up clears. Capital has been returned; the deal has paid $4M of pref to the LP and has $5M more to distribute.
 
-- **Pref earned:** $4M
-- **Cash above pref before split tier:** $5M
-- **Promote target:** 20% of (pref + cat-up)
-- **Above split:** 80/20 (LP/GP)
+- **Pref paid to LP:** $4M
+- **Cash left above pref:** $5M
+- **Promote target:** GP = 20% of total profit
+- **After catch-up:** 80/20 (LP/GP)
 
-**Q: Which catch-up structure pays GP more *during the catch-up tier itself*, and roughly by how much?**
+**Q: How much does GP receive in total from the $5M under each structure, and when does the choice of catch-up actually change GP's take?**
 
 <details><summary>Answer & reasoning</summary>
 
-- ✅ **A.** Full catch-up pays GP ~$1M during the tier; 50/50 pays GP ~$0.5M during the tier. Full catch-up is more sponsor-friendly because GP captures every catch-up dollar 1:1.
-  - Full catch-up: GP gets 100% of cash flowing through the catch-up tier until the 20% target is hit. With $4M pref earned, target catch-up = $4M × 0.20/0.80 = $1M; that $1M flows entirely to GP. 50/50 catch-up: GP only gets half of each dollar in the tier, so GP needs *twice* as much cash to flow through ($2M total) before the target is hit, and during that tier GP collects $1M while LP also collects $1M. Both eventually deliver GP the same target dollars *if* there's enough cash; the difference is **timing** — full catch-up gets GP to the promote target faster, meaning sooner exposure to above-tier upside. Full catch-up is more sponsor-friendly; 50/50 is more LP-friendly.
-- ◻️ **B.** They're identical because the target promote percentage is the same (20%) — the catch-up rate just changes the path, not the destination.
-  - True only in deals with infinite distributable cash. In a real deal where the cash above pref is finite, full catch-up gets GP to the 20% target with less cash needing to flow; 50/50 needs twice the cash to hit the same target. If the deal stops short of fully clearing the catch-up, the structures produce *different* total GP dollars.
-- ◻️ **C.** 50/50 pays GP more because both LP and GP collect during the tier.
-  - GP's share *per dollar in the tier* is half (50¢ vs $1), so GP collects less per dollar. Total GP dollars at full catch-up of the tier are equal; the difference is how quickly GP gets there.
-- ◻️ **D.** Full catch-up pays GP ~$0.5M; 50/50 pays GP ~$1M.
-  - Inverts the math. Full catch-up = 100% to GP at tier = $1M to GP. 50/50 = half to GP at tier × $2M-tier = $1M to GP, but with twice as much LP cash flow during the tier.
+- ✅ **A.** Both pay GP $1.8M (20% of the $9M total profit). Full catch-up clears after $1M; 50/50 needs ~$2.67M. The choice only changes GP dollars when the deal runs out of cash before the catch-up clears, and then full catch-up pays GP more.
+  - Full catch-up: GP needs C with C / ($4M + C) = 20% → C = $1M, all to GP. 50/50: GP needs G with G / ($4M + 2G) = 20% → G ≈ $1.33M, so ~$2.67M flows through the tier ($1.33M each). With $5M available both clear, and the remainder splits 80/20, so GP lands at exactly 20% × $9M = $1.8M either way (full: $1M + 20% × $4M; 50/50: $1.33M + 20% × $2.33M). If only $1M were left, full catch-up would pay GP $1M versus $0.5M under 50/50. That shortfall case is why full catch-up is the sponsor-friendly term.
+- ◻️ **B.** Full catch-up pays GP more in total: about $1M in the tier versus about $0.5M under 50/50.
+  - This stops the 50/50 tier at the same $1M of cash as the full catch-up. A 50/50 tier keeps running until GP actually reaches its 20% target (~$2.67M of cash, $1.33M to GP). With $5M available both structures clear, so total GP dollars are identical.
+- ◻️ **C.** 50/50 pays GP more overall, because GP collects ~$1.33M inside the tier versus $1M under full catch-up.
+  - GP does collect more *inside* the 50/50 tier, but the tier also consumes ~$2.67M of cash, leaving less to split 80/20 afterwards. Once both clear, GP ends at 20% of total profit ($1.8M) under either structure.
+- ◻️ **D.** They are identical in every scenario, because the target promote percentage is the same.
+  - Identical only when there is enough cash to clear both catch-ups. If the deal stops between $1M and ~$2.67M above the pref, full catch-up has already delivered GP its full 20% while 50/50 has not, so GP's take differs.
 
-**Takeaway:** Catch-up rate controls the *speed* at which GP reaches the promote target, not the long-run target itself. Full catch-up is sponsor-friendly: GP rapidly accelerates to promote-tier economics on every dollar above pref. 50/50 catch-up is LP-friendly: GP only gets half of each dollar in the tier, so the catch-up takes twice as long to crystallize. In deals that don't fully clear the catch-up, structure dictates the actual GP take.
+**Takeaway:** The catch-up rate controls how fast GP reaches its promote target, not where it ends up. When the deal clears the catch-up, GP gets the same share of profit either way. The structure only changes GP dollars in the band where cash runs out mid-tier, and there full catch-up favors the sponsor while 50/50 favors LPs.
 
-- 100% catch-up: GP gets every dollar in the tier. 50/50 catch-up: GP gets half.
-- Catch-up multiplier with X% target and full catch-up: pref × X / (1 − X). With 50/50: pref × 2X / (1 − X).
-- Many institutional LPAs have 50/50 catch-up + lower target (e.g. 50/50 to 15%) to soften GP economics.
+- 100% catch-up: GP gets every dollar in the tier. 50/50 catch-up: GP gets half of each dollar.
+- Full catch-up size with target X: pref × X / (1 − X). With 50/50, GP's catch-up is pref × X / (1 − 2X), and the tier is twice that.
+- Check: once cleared, GP total = X × (all profit distributed). If your numbers don't tie to that, re-check the tier.
+- Many institutional LPAs use 50/50 catch-up + a lower target (e.g. 50/50 to 15%) to soften GP economics.
 
 </details>
 
@@ -1534,32 +1535,33 @@ Mid-life check on a $400M PE real estate fund using an American (deal-by-deal) w
 ### 49. Compound vs simple pref — how much does the language actually move?
 *Situational · deal-process · intermediate · portfolioMgmt/acquisitions*
 
-You're reading two LPAs back-to-back. Both stipulate an 8% preferred return on $20M of LP capital over a 5-year hold. LPA #1 says "8% annual preferred return, *compounded*". LPA #2 says "8% annual preferred return, *simple*". The deal generates exactly enough cash above ROC to clear pref + a modest catch-up + about $3M of above-pref residual.
+You're reading two LPAs back-to-back. Both stipulate an 8% preferred return on $20M of LP capital over a 5-year hold, then a 100% GP catch-up to 20%, then an 80/20 split. LPA #1 says "8% annual preferred return, *compounded*". LPA #2 says "8% annual preferred return, *simple*". After returning capital, the base case has $13M of profit to distribute, enough to clear the pref and the catch-up under either LPA.
 
 - **LP capital:** $20M
 - **Pref rate:** 8% annual
 - **Hold:** 5 years
 - **Compound pref due:** ~$9.39M
 - **Simple pref due:** $8.00M
+- **Profit to distribute:** $13M
 
-**Q: How much does the compound vs simple language move LP's pref dollars, and what's the second-order impact?**
+**Q: How much does the compound vs simple language move the LP's total take in the base case, and when does it actually matter?**
 
 <details><summary>Answer & reasoning</summary>
 
-- ✅ **A.** Compound pref pays LP ~$1.39M more in pref ($9.39M vs $8.00M). Bigger second-order effect: the GP's catch-up is calculated against the *paid* pref, so GP's catch-up scales up too. With 100% catch-up to 20%, compound pref → ~$2.35M GP catch-up vs simple → $2.00M. Net to LP: ~$1.39M more in pref *plus* same dollars in above-split. So the language is worth ~$1.4M to LP.
-  - Compound pref math: $20M × ((1.08)^5 − 1) ≈ $9.39M. Simple: $20M × 0.08 × 5 = $8.00M. The compound advantage is real and grows with hold length: at 7 years it's ~$2.5M, at 10 years ~$5M. The second-order effect on GP catch-up is also real: GP's catch-up = pref × target/(1−target), so if pref is $1.39M higher, catch-up is also $1.39M × 0.25 = $0.35M higher. Net net: LP's gross pref gain ($1.39M) is partially offset by higher catch-up to GP (-$0.35M), so LP's net pickup ≈ $1.04M. The takeaway: this single word ("compounded" vs "simple") in the LPA is worth high-six- to low-seven-figures to LP on a $20M position.
-- ◻️ **B.** They're essentially identical — 8% is 8%. The compound vs simple language is convention.
-  - Compound and simple diverge by ~$1.4M on this $20M / 5-year deal. At larger LP positions or longer holds, the divergence is millions. This is one of the most commonly missed LPA terms.
-- ◻️ **C.** Simple pref pays LP more because pref doesn't accrue on prior unpaid pref.
-  - Inverts the math. Compound pays *more* because pref accrues on prior accrued pref (compound interest); simple just adds rate × years.
-- ◻️ **D.** Compound pref pays LP ~$1.4M more, but it doesn't affect GP's catch-up because catch-up is calculated against ROC, not pref.
-  - Catch-up is calculated against pref *paid*, not ROC. The compound language scales the catch-up too, which changes the second-order GP economics.
+- ✅ **A.** In the base case, not at all: the LP ends with 80% of the $13M ($10.4M) under either LPA. The pref gap (~$1.39M) is clawed back by a larger GP catch-up. The language matters in the downside, when profit falls short of clearing the catch-up, where compound protects up to ~$1.39M more for the LP.
+  - Compound pref: $20M × (1.08^5 − 1) ≈ $9.39M. Simple: $20M × 8% × 5 = $8.00M. With a 100% catch-up to 20%, the catch-up is pref × 0.20/0.80: ~$2.35M (compound) vs $2.00M (simple). Once the catch-up clears, GP holds exactly 20% of all profit, so the LP gets $9.39M + 80% × ($13M − $11.73M) = $10.4M, or $8.00M + 80% × ($13M − $10M) = $10.4M. Identical. Now suppose only $9M of profit exists. Simple: LP $8M pref, GP $1M of catch-up. Compound: the whole $9M is still pref, so LP $9M, GP $0. The pref language is downside protection, and it matters most on deals that disappoint.
+- ◻️ **B.** Compound is worth ~$1.4M more to the LP in the base case: $9.39M vs $8.00M of pref, partly offset by a ~$0.35M larger GP catch-up, so about $1.04M net.
+  - This counts the bigger pref but forgets that the bigger catch-up and the smaller residual pool offset it fully. With a 100% catch-up that clears, GP lands at exactly 20% of profit and the LP at 80%, whatever the pref wording.
+- ◻️ **C.** They're essentially identical in every scenario — 8% is 8%, and the compounding language is convention.
+  - Identical only when the catch-up fully clears. In a downside where profit runs out inside the pref or catch-up tiers, compound pref gives the LP up to ~$1.39M more priority dollars on this deal, and far more on longer holds.
+- ◻️ **D.** Simple pref pays the LP more because pref doesn't accrue on prior unpaid pref.
+  - Inverts the math. Compound pref is the larger claim because it accrues on prior accrued pref; simple pref just adds rate × years.
 
-**Takeaway:** Compound vs simple pref in an LPA is not boilerplate — it's a load-bearing term. On an 8% pref over 5 years, compound delivers ~$1.4M more on $20M of LP capital than simple. The second-order effect on GP catch-up partially offsets, but the LP's net pickup is still 5-6% of capital over the hold. Always read the pref language carefully and confirm whether the GP's catch-up is calculated against gross pref or after-tax pref.
+**Takeaway:** With a full catch-up, the pref is a priority claim, not extra economics: if the deal clears the catch-up, the LP gets the same 80% either way. "Compounded" vs "simple" is downside protection, and its value grows with hold length and with how likely the deal is to underperform. Without a catch-up (or with a partial one), the pref wording changes the LP's take even in the base case.
 
-- Compound at 8% for N years: ((1.08)^N − 1). Simple: 8% × N. Memorize both for 3 / 5 / 7 / 10 year holds.
-- On long holds (>7 years) the compound advantage exceeds 20% of capital — material for LP modeling.
-- GP catch-up scales with pref paid; compound pref + 100% catch-up to 20% means GP catches up to ~25% of compound pref dollars.
+- Compound at 8% for N years: ((1.08)^N − 1). Simple: 8% × N. Gap on $20M: ~$1.4M at 5 yrs, ~$3.1M at 7, ~$7.2M at 10.
+- Sanity check: after a 100% catch-up to X clears, GP total = X × all profit. If the LP's total moves with the pref wording, the catch-up hasn't cleared.
+- The pref wording matters most on long holds and in downside cases, which is exactly when LPs need protection.
 
 </details>
 
@@ -1711,7 +1713,7 @@ Your borrower's DSCR just printed at 1.08× on the most recent Test Date — bel
 > four (4) times in the aggregate during the term of the Loan, and
 > no more than two (2) times in any rolling four-quarter period.
 
-NOI is running $2.4M annualized; debt service is $2.2M ($25M loan @ 7%, 30-year amort). Required DSCR is 1.20×. The sponsor has $1M of cash available. The next Test Date is in 3 weeks.
+NOI is running $2.4M annualized; debt service is $2.2M ($27.5M loan @ 7%, 30-year amort). Required DSCR is 1.20×. The sponsor has $1M of cash available. The next Test Date is in 3 weeks.
 
 - **Annualized NOI:** $2.4M
 - **Annual debt service:** $2.2M
@@ -1724,8 +1726,8 @@ NOI is running $2.4M annualized; debt service is $2.2M ($25M loan @ 7%, 30-year 
 
 <details><summary>Answer & reasoning</summary>
 
-- ✅ **A.** They need ~$3.6M of cure cash. NOI of $2.4M ÷ 1.20 target = $2.0M of allowable debt service. They're running $2.2M, so they need to notionally cut DS by ~$0.2M. At a 7% / 30y constant of ~7.98%, that requires reducing principal by $0.2M / 0.0798 ≈ $2.5M. But the cure also needs to leave the DSCR *just at* the threshold, so practical cure includes a buffer (~$3.6M). The $1M is not enough; sponsor needs to find the rest or face EOD.
-  - Cure math step-by-step: (1) target debt service = NOI / DSCR target = $2.4M / 1.20 = $2.0M. (2) need to cut current DS of $2.2M by $0.2M. (3) reducing principal by X cuts DS by X × loan-constant. At 7% / 30y, constant ≈ 7.98%. So X = $0.2M / 0.0798 ≈ $2.5M of notional principal reduction = $2.5M of cure cash. In practice, lenders calculate to the *exact* DSCR threshold, and prudent sponsors over-collateralize by 15-20% to buffer next quarter — call it ~$3.0-3.6M. The $1M is well short. Sponsor either finds another $2-3M (capital call to LP, refi, equity raise) or accepts EOD with all its consequences (cross-default, accelerated maturity, control loss).
+- ✅ **A.** They need ~$2.5M of cure cash at the bare minimum, ~$2.9M with a sensible buffer. NOI of $2.4M ÷ 1.20 target = $2.0M of allowable debt service. They're running $2.2M, so they need to notionally cut DS by ~$0.2M. At a 7% / 30y constant of ~7.98%, that requires reducing principal by $0.2M / 0.0798 ≈ $2.45M. That only lands the DSCR exactly at 1.20×, so a practical cure adds a 15-20% buffer (~$2.8-2.9M). The $1M is not enough; sponsor needs to find the rest or face EOD.
+  - Cure math step-by-step: (1) target debt service = NOI / DSCR target = $2.4M / 1.20 = $2.0M. (2) need to cut current DS of $2.2M by $0.2M. (3) reducing principal by X cuts DS by X × loan-constant. At 7% / 30y, constant ≈ 7.98%. So X = $0.2M / 0.0798 ≈ $2.45M of notional principal reduction = ~$2.45M of cure cash. That gets the DSCR exactly to the threshold; prudent sponsors over-collateralize by 15-20% to buffer next quarter — call it ~$2.8-2.9M. The $1M is well short. Sponsor either finds another ~$1.5-2M (capital call to LP, refi, equity raise) or accepts EOD with all its consequences (cross-default, accelerated maturity, control loss).
 - ◻️ **B.** They need $200k of cure cash — exactly the NOI shortfall.
   - Confuses NOI shortfall with cure cash. Cure cash is *principal reduction* (loan-balance proxy), not NOI substitute. To cut $200k of DS via principal reduction at 7.98% loan constant, sponsor needs $200k / 7.98% ≈ $2.5M of cure cash, not $200k.
 - ◻️ **C.** Cure cash is a 1:1 substitution for debt service; sponsor needs the full $2.2M.
@@ -2100,8 +2102,8 @@ You're reviewing a 5-year lease in an office building you're acquiring. The buil
 
 <details><summary>Answer & reasoning</summary>
 
-- ✅ **A.** Base Year + gross-up = tenant pays growth in OpEx above the *grossed-up* 2024 baseline. Grossing the 2024 expenses up to 95% occupancy means the baseline is *higher* than actual 2024 expenses, which *reduces* the tenant's exposure to growth (because the bar is set higher). Expense Stop, by contrast, is a fixed dollar cap that doesn't adjust for occupancy. Practical impact here: at 80% actual occupancy, ~$5.50/SF actual OpEx grosses up to ~$5.85/SF baseline (variable expenses scale with occupancy). The tenant pays growth above $5.85/SF, not $5.50/SF. Better for tenant; worse for landlord acquisition math.
-  - Critical distinction: **Base Year** = the baseline against which growth is measured, recalculated each year for occupancy via the gross-up clause. **Expense Stop** = a fixed dollar amount per SF that the tenant pays nothing under, regardless of occupancy or year. Base Year is more common in modern Class A office; Expense Stop is older / more common in retail and some Class B office. The gross-up math here: 2024 OpEx had ~70% variable / 30% fixed (typical ratio). At 80% occupancy, variable expenses are ~80%/95% × what they would be at 95%. To gross up to a 95%-occupancy baseline: variable portion × 95%/80%, fixed portion unchanged. So $5.50/SF actual = ~$3.85 variable + $1.65 fixed → grossed-up = $3.85 × 95/80 + $1.65 = $4.57 + $1.65 = $6.22/SF baseline. (Wait — if variable expenses scale with occupancy, then at 80% the actual variable was lower than at 95%; grossing up makes it higher.) The point: gross-up *raises* the baseline, which *lowers* tenant's growth exposure compared to a non-grossed-up calc. Landlord-friendly buyers prefer Expense Stop (no occupancy adjustment); tenants prefer Base Year + gross-up.
+- ✅ **A.** Base Year + gross-up = tenant pays growth in OpEx above the *grossed-up* 2024 baseline. Grossing the 2024 expenses up to 95% occupancy means the baseline is *higher* than actual 2024 expenses, which *reduces* the tenant's exposure to growth (because the bar is set higher). Expense Stop, by contrast, is a fixed dollar cap that doesn't adjust for occupancy. Practical impact here: at 80% actual occupancy, $5.50/SF of actual OpEx (≈70% variable) grosses up to ~$6.22/SF baseline, because the variable portion is scaled to 95% occupancy. The tenant pays growth above ~$6.22/SF, not $5.50/SF. Better for tenant; worse for landlord acquisition math.
+  - Critical distinction: **Base Year** = the baseline against which growth is measured, recalculated each year for occupancy via the gross-up clause. **Expense Stop** = a fixed dollar amount per SF that the tenant pays nothing under, regardless of occupancy or year. Base Year is more common in modern Class A office; Expense Stop is older / more common in retail and some Class B office. The gross-up math here: 2024 OpEx had ~70% variable / 30% fixed (typical ratio). At 80% occupancy, variable expenses are ~80%/95% × what they would be at 95%. To gross up to a 95%-occupancy baseline: variable portion × 95%/80%, fixed portion unchanged. So $5.50/SF actual = ~$3.85 variable + $1.65 fixed → grossed-up = $3.85 × 95/80 + $1.65 = $4.57 + $1.65 = $6.22/SF baseline. Variable costs were lower at 80% occupancy than they would be at 95%, so grossing up raises them. The point: gross-up *raises* the baseline, which *lowers* tenant's growth exposure compared to a non-grossed-up calc. Landlords prefer an Expense Stop (no occupancy adjustment); tenants prefer Base Year + gross-up.
 - ◻️ **B.** Base Year and Expense Stop are functionally the same — both protect tenant from inflationary increases.
   - They're not equivalent. Base Year is a *moving* baseline that recalculates each year (for occupancy via gross-up); Expense Stop is a *fixed* dollar number that doesn't adjust. The gross-up alone is a multi-cents-per-SF differentiator.
 - ◻️ **C.** Tenant pays the full $5.50/SF, then $5.50/SF + 100% of growth — Base Year just means there's a starting point.
@@ -2109,12 +2111,12 @@ You're reviewing a 5-year lease in an office building you're acquiring. The buil
 - ◻️ **D.** The gross-up clause works against the tenant — it inflates expenses on the landlord side and increases tenant's share.
   - Inverts the math. Gross-up *of the Base Year* raises the baseline, which *reduces* the growth exposure for tenant. Gross-up of subsequent years raises those years too, but the *delta* between baseline and current year shrinks. Net effect is tenant-friendly.
 
-**Takeaway:** Base Year vs Expense Stop is one of the most-misread lease structural distinctions. **Base Year** = Year 1 actual expenses (often grossed up for occupancy); tenant pays growth above that. **Expense Stop** = fixed $/SF cap; tenant pays nothing below; landlord pays nothing above. Modified gross / Full-service gross leases use Base Year; older / triple-net leases sometimes use Expense Stop. The gross-up clause is sneaky — landlord-friendly text says "if occupancy is below 95%, gross up actual expenses to 95% to compute the Base Year"; this raises the baseline and reduces tenant exposure (good for tenant, bad for landlord).
+**Takeaway:** Base Year vs Expense Stop is one of the most-misread lease structural distinctions. **Base Year** = Year 1 actual expenses (often grossed up for occupancy); tenant pays growth above that. **Expense Stop** = fixed $/SF cap; tenant pays nothing below; landlord pays nothing above. Modified gross / full-service gross leases use Base Year; expense stops show up in older office leases and some modified-gross deals. True NNN leases pass through the tenant's full share of all expenses, so there is no stop at all. Read the gross-up clause closely: the typical text says "if occupancy is below 95%, gross up actual expenses to 95% to compute the Base Year"; this raises the baseline and reduces tenant exposure (good for tenant, bad for landlord).
 
 - Base Year ≠ Expense Stop. Read carefully — they look similar in passing but produce very different cash flows.
 - Gross-up to 95% (sometimes 100%) is standard in Base Year leases. It's a tenant protection.
 - When buying an asset with Base Year leases, model OpEx growth carefully — under-stated growth = inflated NOI projection.
-- "Modified Gross" + Base Year + gross-up is the most tenant-friendly mainstream structure. NNN + Expense Stop is the most landlord-friendly.
+- "Modified Gross" + Base Year + gross-up is the most tenant-friendly mainstream structure. A true NNN lease, where the tenant pays its full share of every expense, is the most landlord-friendly.
 - Always run the math: at 80% occupancy, gross-up moves the baseline by 5-10% of variable expenses — material to NOI growth modeling.
 
 </details>
@@ -2726,7 +2728,7 @@ You're three years into a five-year hold on a stabilized $80M MF asset. Realized
 
 **Model answer:**
 
-Recommend the **refi path** despite the near-identical after-tax IRRs (14.2% vs 13.9%). Three factors drive the call. First, the LP tax mix: at 60% taxable LPs, the refi defers ~$3-4M of recapture + cap-gains taxes that the sale would crystallize today; that deferral is real value to the taxable side and zero to the tax-exempt side, so the *weighted* benefit favors holding. Second, the fund has 3 years of remaining vehicle life — selling now under fund-life pressure would be a forced disposition; with 3 years of runway, the refi-and-hold gives optionality on selling later if pricing improves. Third, the alt deployment opportunity set is thin (10-12% IRR vs the deal's embedded 14%+); selling and redeploying at 11% destroys ~300 bps of LP return, while the refi extracts capital that LPs can deploy on their own or hold while better deals emerge. The risk on the refi path is cap-rate widening in the next 2 years; we model 75 bps of expansion in our base case and the path still clears 13%. Walk threshold: if cap rates widen materially in Q4, re-evaluate selling in Q1; otherwise, execute the refi.
+Recommend the **refi path** despite the near-identical after-tax IRRs (14.2% vs 13.9%). Three factors drive the call. First, the LP tax mix: at 60% taxable LPs, the refi defers ~$3-4M of recapture + cap-gains taxes that the sale would crystallize today; that deferral is real value to the taxable side and zero to the tax-exempt side, so the *weighted* benefit favors holding. Second, the fund has 3 years of remaining vehicle life — selling now under fund-life pressure would be a forced disposition; with 3 years of runway, the refi-and-hold gives optionality on selling later if pricing improves. Third, the alt deployment opportunity set is thin (10-12% IRRs). The right comparison is not the 14% realized to date (that is sunk) but the go-forward IRR on today's $85M of value if we keep it in the deal; as long as that forward return clears the 10-12% redeployment set, holding beats selling and redeploying, and the refi still returns ~$20M that LPs can deploy on their own. The risk on the refi path is cap-rate widening in the next 2 years; we model 75 bps of expansion in our base case and the path still clears 13%. Walk threshold: if cap rates widen materially in Q4, re-evaluate selling in Q1; otherwise, execute the refi.
 
 **Graded on:**
 - Takes a clear position (refi or sell) and defends it — no hedging
@@ -2744,12 +2746,12 @@ Recommend the **refi path** despite the near-identical after-tax IRRs (14.2% vs 
 
 </details>
 
-### 76. Walk me through a 3-tier American waterfall
+### 76. Walk me through a 3-tier deal-by-deal ("American") waterfall
 *Longform · intermediate · portfolioMgmt/acquisitions*
 
-You're in a final-round interview at a real-estate PE shop. The senior partner says: "I want to make sure you actually understand fund economics. Walk me through how a 3-tier American waterfall works for a single deal. Pick your own numbers — small enough to do mental math, real enough to ground the explanation. Tell me what each tier does, why it exists, and where the GP's economics come from."
+You're in a final-round interview at a real-estate PE shop. The senior partner says: "I want to make sure you actually understand fund economics. Walk me through how a 3-tier deal-by-deal ("American") waterfall works for a single deal. Pick your own numbers — small enough to do mental math, real enough to ground the explanation. Tell me what each tier does, why it exists, and where the GP's economics come from."
 
-**Q: In 4-6 sentences, walk through the three tiers of an American waterfall on a deal you make up. Address: (1) what each tier does; (2) the order they pay in; (3) why the catch-up tier exists and how it scales; (4) where the GP's economic incentive lives — i.e. what dollars are "promote" vs "pro-rata return".**
+**Q: In 4-6 sentences, walk through the three tiers of a deal-by-deal ("American") waterfall on a deal you make up. Address: (1) what each tier does; (2) the order they pay in; (3) why the catch-up tier exists and how it scales; (4) where the GP's economic incentive lives — i.e. what dollars are "promote" vs "pro-rata return".**
 
 <details><summary>Answer & reasoning</summary>
 
@@ -2869,7 +2871,7 @@ You're underwriting a $30M permanent loan on a $50M Class B office in a market t
 
 **Model answer:**
 
-The market concern is real but the asset-level credit is sound: 60% LTV gives us 40% of equity below us, the 1.30x DSCR holds even with a 75 bps rate stress at refi, and the largest tenant is in-place at +6% to market on 7 years of remaining term with options — that tenant is structurally sticky and the rent is below comp despite the soft market. Refi-risk view: at a stressed 7.5% exit cap and 75 bps higher rate, our 5-yr-out loan balance is ~$28.5M (10% paydown from amort) against a $42M stressed value, leaving 68% LTV at refi — workable, not pristine. The cash-trap should trigger at 1.15x DSCR or 75% LTV-stressed, locking excess cash flow until either ratio cures; that's earlier than the loan-default trip but late enough not to fight the borrower over normal volatility. The scenario that flips this lend is the largest tenant signaling non-renewal at year 5: 28% of NOI rolling at <50% renewal probability in this market with 12-18 months of downtime would push DSCR below 1.10x and force a workout — at that point we'd want either a tenant-improvement reserve carve-out or a partial paydown trigger. What would change my stance today: occupancy below 85% (concession overhang signal), or the largest tenant publicly listing space for sublease — both visible early warning signs we'd see before the loan is in real trouble. The lend is the right call because the sponsor's equity, the in-place tenant credit, and the early-trigger cash-trap together absorb the market stress without us getting cute on rate.
+The market concern is real but the asset-level credit is sound: 60% LTV gives us 40% of equity below us, the 1.30x DSCR holds even with a 75 bps rate stress at refi, and the largest tenant is in-place at +6% to market on 7 years of remaining term with options — that tenant is structurally sticky and the rent is below comp despite the soft market. Refi-risk view: at a stressed 7.5% exit cap and 75 bps higher rate, our 5-yr-out loan balance is ~$28.1M (~6% paydown from amort) against a ~$39.4M stressed value (in-place NOI of ~$2.96M at a 7.5% cap), leaving ~71% LTV at refi — workable but tight, which is exactly why the cash trap matters. The cash-trap should trigger at 1.15x DSCR or 75% LTV-stressed, locking excess cash flow until either ratio cures; that's earlier than the loan-default trip but late enough not to fight the borrower over normal volatility. The scenario that flips this lend is the largest tenant signaling non-renewal at year 5: 28% of NOI rolling at <50% renewal probability in this market with 12-18 months of downtime would push DSCR below 1.10x and force a workout — at that point we'd want either a tenant-improvement reserve carve-out or a partial paydown trigger. What would change my stance today: occupancy below 85% (concession overhang signal), or the largest tenant publicly listing space for sublease — both visible early warning signs we'd see before the loan is in real trouble. The lend is the right call because the sponsor's equity, the in-place tenant credit, and the early-trigger cash-trap together absorb the market stress without us getting cute on rate.
 
 **Graded on:**
 - Engages the chair's market framing without dismissing it
@@ -2906,7 +2908,7 @@ You're the asset manager on a 300-unit Class B multifamily acquisition. You're 1
 
 **Model answer:**
 
-Three root causes ranked by likely NOI impact: (1) The 400 bps gap between physical (94%) and economic occupancy (91%) is the largest single drag — that's concession overhang or bad debt, and at $1,800/unit/month average rent it's roughly $215k/year of NOI. (2) OpEx running at +5.3% vs underwriting of ~3% is the second-largest driver; on a $1.8M opex base that's ~$45k of NOI compression annually. (3) Rent growth shortfall (+2.1% vs +3%) is real but smallest — on a $6.5M GPR base that's ~$60k/year compounding. Combined they explain ~$320k of the $160k miss with overlap (physical-occ shortfall is *also* dragging GPR), which is consistent with the deteriorating trend.
+Three root causes ranked by likely NOI impact: (1) Economic occupancy is 400 bps below underwriting (91% vs 95%), and 300 bps of that is the gap between physical (94%) and economic occupancy — concession overhang or bad debt. On 300 units at $1,800/unit/month (~$6.5M GPR), the 400 bps shortfall is roughly $260k/year of revenue, the largest single drag. (2) OpEx running at +5.3% vs underwriting of ~3% is the second-largest driver; on a $1.8M opex base that's ~$45k of NOI compression annually. (3) Rent growth shortfall (+2.1% vs +3%) is real but smallest — on a $6.5M GPR base that's ~$60k/year compounding. Combined they explain ~$365k of the $160k miss with overlap (physical-occ shortfall is *also* dragging GPR), which is consistent with the deteriorating trend.
 
 To prove which is binding, I'd pull three things: (a) the rent roll's concession + bad-debt detail by unit and month — if concessions are spiking and bad debt is steady, leasing is over-promising to hit physical occupancy; if bad debt is rising, the resident-quality screen has loosened. (b) The OpEx variance report by line item — split insurance and property tax (likely market-driven, not controllable) from R&M, payroll, and utilities (controllable). (c) Comp set rent + concession data from CoStar / RealPage — if the comp set is also at +2% with concessions, our shortfall is market-wide and we can't fix it via leasing strategy.
 
@@ -3191,7 +3193,7 @@ I expect modest compression (25-50 bps) on Class-A institutional in primary mark
 
 **Model answer:**
 
-Over-weight Sun Belt MF, specifically Class-B garden product in 50k-200k MSAs that aren't the headline metros. Under-weight gateway-market office. The MF thesis: secondary-market Class-B is trading at 75-100 bps wider than primary because the bid pool is thinner, but rent-growth fundamentals are *better* than in primary (population growth + supply absorption). I'd look for value-add at 6.5-7.0% going-in cap, $400-800/door capex with ~12% mark-to-market, and exit caps modeled wider than going-in. Discipline trigger: stop buying once going-in cap compresses below 6.0%. The under-weight on office is structural — even at $200/SF on Class-A, hybrid work has reset demand permanently for ~30% of the previous market; and Class-B is functionally obsolete. Risk to MF thesis: rate-driven recession that hits jobs in the Sun Belt disproportionately. Risk to office under-weight: I miss the trade if rates fall fast enough that everything compresses. I'd hedge the second risk by holding 5-10% in cash to redeploy.
+Over-weight Sun Belt MF, specifically Class-B garden product in secondary MSAs (roughly 500k-2M people) that aren't the headline metros. Under-weight gateway-market office. The MF thesis: secondary-market Class-B is trading at 75-100 bps wider than primary because the bid pool is thinner, but rent-growth fundamentals are *better* than in primary (population growth + supply absorption). I'd look for value-add at 6.5-7.0% going-in cap, $8-15k/door of value-add capex earning ~12% return on cost through rent premiums, and exit caps modeled wider than going-in. Discipline trigger: stop buying once going-in cap compresses below 6.0%. The under-weight on office is structural — even at $200/SF on Class-A, hybrid work has reset demand permanently for ~30% of the previous market; and Class-B is functionally obsolete. Risk to MF thesis: rate-driven recession that hits jobs in the Sun Belt disproportionately. Risk to office under-weight: I miss the trade if rates fall fast enough that everything compresses. I'd hedge the second risk by holding 5-10% in cash to redeploy.
 
 **Graded on:**
 - Specific over/under-weight calls (not "diversify")
@@ -3275,12 +3277,12 @@ You're underwriting an apartment building. GPR is $4,500,000, other income is $2
 ### 96. DSCR Loan Sizing — chained
 *Walkthrough · dscrLoanSizingWalk · mortgageUw/acquisitions*
 
-Your stabilized NOI is $750,000. Your lender requires a 1.25× DSCR on a 30 years amortizing loan at 6.00%. Size the loan in three steps.
+Your stabilized NOI is $750,000. Your lender requires a 1.25× DSCR on a 30-year amortizing loan at 6.00%. Size the loan in three steps.
 
 <details><summary>Answer & reasoning</summary>
 
-1. **Step 1 — Loan constant** — What's the loan constant for a 30 years amortizing loan at 6.00%? (answer in bps)
-   - Expected: `719` (bps) — 30 years amort @ 6.00% → loan constant ≈ 719 bps.
+1. **Step 1 — Loan constant** — What's the loan constant for a 30-year amortizing loan at 6.00%? (answer in bps)
+   - Expected: `719` (bps) — 30-year amort @ 6.00% → loan constant ≈ 719 bps.
 2. **Step 2 — Max annual debt service** — At 1.25× DSCR, what's the max annual debt service NOI can cover?
    - Expected: `600000` (usd) — $750,000 / 1.25 = $600,000 max DS.
 3. **Step 3 — Max loan amount** — Convert that DS allowance into a loan amount. What's the max loan?
@@ -3293,7 +3295,7 @@ Your stabilized NOI is $750,000. Your lender requires a 1.25× DSCR on a 30 year
 ### 97. Mock Acquisition — full unlevered walkthrough
 *Walkthrough · mockAcquisitionWalk · acquisitions*
 
-Stabilized multifamily acquisition. GPR $4,000,000, other income $200,000, 5.00% vacancy, OpEx $1,600,000. Going-in cap 5.50%; you're modeling a 5 years hold with 3.00% annual NOI growth and a 6.00% exit cap (50 bps spread). Sale costs 1.50%. All-cash analysis — unlevered IRR.
+Stabilized multifamily acquisition. GPR $4,000,000, other income $200,000, 5.00% vacancy, OpEx $1,600,000. Going-in cap 5.50%; you're modeling a 5-year hold with 3.00% annual NOI growth and a 6.00% exit cap (50 bps spread). Sale costs 1.50%. All-cash analysis — unlevered IRR.
 
 <details><summary>Answer & reasoning</summary>
 
@@ -3315,7 +3317,7 @@ Stabilized multifamily acquisition. GPR $4,000,000, other income $200,000, 5.00%
    - Expected: `12688834.5859` (usd) — Σ NOI_y from y=1..5 ≈ $12,688,835 at 3.00% growth.
 9. **Step 9 — Equity multiple (unlevered)** — Total cash returned (NOI + net exit) / equity in. What's the EM?
    - Expected: `1.308243132579167` (multiple) — ($12,688,835 + $44,160,276) / $43,454,545 = 1.31x.
-10. **Step 10 — Approximate unlevered IRR** — EM^(1/n) − 1 over a 5 years hold. What's the approximate IRR?
+10. **Step 10 — Approximate unlevered IRR** — EM^(1/n) − 1 over a 5-year hold. What's the approximate IRR?
    - Expected: `0.055207070883675824` (pct) — 1.31^(1/5) − 1 ≈ 5.52%. Real IRR with periodic distributions is ~30–80 bps higher; the geometric approx is the right anchor for back-of-envelope.
 
 **Takeaway:** A full unlevered acquisition is just income → value → exit → return, broken into 10 steps. The two non-obvious links are walking NOI forward to the exit year and reducing exit value for sale costs. Skip either and your IRR is wrong by a meaningful margin.

@@ -40,9 +40,9 @@ export const renewalProbabilityWeightedRentTemplate: QuestionTemplate<'renewalPr
     roles: ['acquisitions', 'assetManagement'],
     pattern: 'P(renewal) × in-place + (1 − P) × market',
     tips: [
-      'Renewal-weighted rent reflects the *expected* economic outcome at lease expiration — accounts for both renew-at-current-rate and roll-to-market scenarios.',
+      'Renewal-weighted rent reflects the *expected* economic outcome at lease expiration. Blending in-place vs market only applies when the tenant holds a fixed-rate renewal option; most leases renew at fair market value, where the renewal-probability blend applies to downtime and leasing costs instead.',
       'Industry rule of thumb: 65-75% renewal probability for office; 50-60% in soft markets; higher for trophy buildings.',
-      'When in-place rent is below market, the renewal scenario is *worse* than the roll-to-market scenario for the landlord. Inverse when in-place is above market.',
+      'A below-market fixed-rate option is a valuable call for the tenant, so expect a high renewal probability; above market, expect the tenant to walk or renegotiate.',
       'Always pair with downtime + leasing-cost assumptions on the non-renewal path — those are the real drag.',
     ],
     generate(rng, difficulty = 'intermediate', _assetClass = 'mixed') {
@@ -57,7 +57,7 @@ export const renewalProbabilityWeightedRentTemplate: QuestionTemplate<'renewalPr
       return {
         id: nextId('renew'),
         kind: 'renewalProbabilityWeightedRent',
-        prompt: `Tenant lease is rolling. In-place rent is ${formatUsdPerSf(inPlace, 2)}; market rent is ${formatUsdPerSf(market, 2)}. Renewal probability is ${formatPct(prob, 0)}. What\'s the expected rent post-rollover?`,
+        prompt: `Tenant lease is rolling. The tenant holds a fixed-rate renewal option at its in-place rent of ${formatUsdPerSf(inPlace, 2)}; if it leaves, the space re-leases at market rent of ${formatUsdPerSf(market, 2)}. Renewal probability is ${formatPct(prob, 0)}. Ignoring downtime and leasing costs, what\'s the probability-weighted rent post-rollover?`,
         context: { inPlaceRent: inPlace, marketRent: market, renewalProbability: prob },
         expected,
         unit: 'usdPerSf',

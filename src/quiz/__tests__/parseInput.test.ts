@@ -23,6 +23,23 @@ describe('quiz/parseInput', () => {
     expect(parseInput('2.30', 'multiple')).toBe(2.3);
   });
 
+  it('usd accepts k / M / mm / B shorthand', () => {
+    expect(parseInput('250k', 'usd')).toBeCloseTo(250_000, 6);
+    expect(parseInput('$47.8M', 'usd')).toBeCloseTo(47_800_000, 6);
+    expect(parseInput('47.8mm', 'usd')).toBeCloseTo(47_800_000, 6);
+    expect(parseInput('1.2B', 'usd')).toBeCloseTo(1_200_000_000, 6);
+    expect(parseInput('-1.5m', 'usdChange')).toBeCloseTo(-1_500_000, 6);
+  });
+
+  it('bps accepts a bps suffix', () => {
+    expect(parseInput('550bps', 'bps')).toBe(550);
+    expect(parseInput('550 bp', 'bps')).toBe(550);
+  });
+
+  it('suffixes do not leak into non-dollar units', () => {
+    expect(parseInput('5m', 'pct')).toBe(null);
+  });
+
   it('returns null for empty or non-numeric', () => {
     expect(parseInput('', 'usd')).toBe(null);
     expect(parseInput('abc', 'usd')).toBe(null);

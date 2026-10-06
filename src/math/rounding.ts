@@ -50,6 +50,11 @@ export function formatYears(years: number): string {
   return `${years} ${years === 1 ? 'year' : 'years'}`;
 }
 
+/** Compound-adjective form: "a 5-year hold", "a 30-year amortizing loan". */
+export function formatYearsAdj(years: number): string {
+  return `${years}-year`;
+}
+
 export function formatUsdPerSf(value: number, decimals = 2): string {
   const sign = value < 0 ? '-' : '';
   return `${sign}$${Math.abs(value).toLocaleString('en-US', {

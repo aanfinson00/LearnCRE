@@ -46,7 +46,7 @@ const correctDcfFormulas: Record<string, string> = {
   E15: '=D15*(1+B4)',
   F15: '=E15*(1+B4)',
   // Debt service — constant for fully-amortizing loan
-  B16: '=-PMT(B9,B10,B8)',
+  B16: '=-PMT(B9/12,B10*12,B8)*12',
   C16: '=B16',
   D16: '=B16',
   E16: '=B16',
@@ -54,7 +54,7 @@ const correctDcfFormulas: Record<string, string> = {
   // Exit
   B19: '=F15/B5',
   B20: '=B19*B6',
-  B21: '=B8*(1+B9)^5+PMT(B9,B10,B8)*((1+B9)^5-1)/B9',
+  B21: '=B8*(1+B9/12)^60+PMT(B9/12,B10*12,B8)*((1+B9/12)^60-1)/(B9/12)',
   B22: '=B19-B20-B21',
   // Levered CF series Y0..Y5
   B26: '=-(B2-B8)',
@@ -101,7 +101,7 @@ describe('gradeSubmission — DCF 5-yr template, deliberately wrong loan balance
   // downstream Net sale proceeds + Levered IRR + Equity multiple outputs.
   const wrongFormulas: Record<string, string> = {
     ...correctDcfFormulas,
-    B21: '=B8-(-PMT(B9,B10,B8))*5',
+    B21: '=B8-(-PMT(B9/12,B10*12,B8))*60',
   };
   const result = gradeSubmission(dcfFiveYrSuburbanOffice, wrongFormulas);
 
@@ -130,7 +130,7 @@ describe('gradeSubmission — DCF 5-yr template, deliberately wrong loan balance
 
 // Canonical correct formulas for the loan-sizing template.
 const correctLoanSizingFormulas: Record<string, string> = {
-  B11: '=B7/(1-(1+B7)^-B8)',
+  B11: '=-PMT(B7/12,B8*12,1)*12',
   B14: '=B2/B4/B11',
   B15: '=B3*B5',
   B16: '=B2/B6',
@@ -234,14 +234,14 @@ const correctMfFormulas: Record<string, string> = {
   E27: '=D27*(1+B12)',
   F27: '=E27*(1+B12)',
   // Debt sizing
-  B30: '=B14/(1-(1+B14)^-B15)',
+  B30: '=-PMT(B14/12,B15*12,1)*12',
   B31: '=B26/B13',
   B32: '=B31/B30',
   B33: '=B32*B30',
   // Exit
   B36: '=F26/B16',
   B37: '=B36*B17',
-  B38: '=B32*(1+B14)^5+PMT(B14,B15,B32)*((1+B14)^5-1)/B14',
+  B38: '=B32*(1+B14/12)^60+PMT(B14/12,B15*12,B32)*((1+B14/12)^60-1)/(B14/12)',
   B39: '=B36-B37-B38',
   // Levered CF series
   B43: '=B32-B2',
@@ -340,7 +340,7 @@ const correctRefiSellFormulas: Record<string, string> = {
   E21: '=D21*(1+B8)',
   F21: '=E21*(1+B8)',
   // Original DS (constant)
-  B22: '=-PMT(B5,B6,B4)',
+  B22: '=-PMT(B5/12,B6*12,B4)*12',
   C22: '=B22',
   D22: '=B22',
   E22: '=B22',
@@ -354,7 +354,7 @@ const correctRefiSellFormulas: Record<string, string> = {
   // Y5 sale math
   B26: '=F21/B10',
   B27: '=B26*B11',
-  B28: '=B4*(1+B5)^5+PMT(B5,B6,B4)*((1+B5)^5-1)/B5',
+  B28: '=B4*(1+B5/12)^60+PMT(B5/12,B6*12,B4)*((1+B5/12)^60-1)/(B5/12)',
   // Path A
   B31: '=B26-B27-B28',
   // Path B refi
@@ -368,7 +368,7 @@ const correctRefiSellFormulas: Record<string, string> = {
   E40: '=D40*(1+B9)',
   F40: '=E40*(1+B9)',
   // New DS (constant)
-  B41: '=-PMT(B13,B14,B34)',
+  B41: '=-PMT(B13/12,B14*12,B34)*12',
   // Y6-Y10 levered CF
   B42: '=B40-B41',
   C42: '=C40-B41',
@@ -378,7 +378,7 @@ const correctRefiSellFormulas: Record<string, string> = {
   // Y10 exit
   B45: '=F40/B16',
   B46: '=B45*B17',
-  B47: '=B34*(1+B13)^5+PMT(B13,B14,B34)*((1+B13)^5-1)/B13',
+  B47: '=B34*(1+B13/12)^60+PMT(B13/12,B14*12,B34)*((1+B13/12)^60-1)/(B13/12)',
   B48: '=B45-B46-B47',
   // Incremental CF series
   B52: '=B36-B31',

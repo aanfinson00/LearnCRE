@@ -23,19 +23,20 @@ export const truckCountPerSfTemplate: QuestionTemplate<'truckCountPerSf'> = {
   roles: ['acquisitions', 'assetManagement', 'development'],
   pattern: '(Trucks / SF) × 10,000',
   tips: [
-    'Distribution centers: 1-2 truck doors per 10k SF (large dock-high counts).',
-    'Last-mile fulfillment: 4-8 truck doors per 10k SF — much higher density for fast delivery cycles.',
-    'Cross-dock: trucks come in one side, leave the other. Highest truck-density use; 8+ doors per 10k SF.',
-    'Higher truck density = higher rent premium. Last-mile rents trade at 25-50% premium to general distribution.',
+    'Bulk distribution: ~1-1.5 dock doors per 10k SF (roughly 1 door per 7-10k SF).',
+    'Cross-dock: doors on both long walls, ~2-2.5 per 10k SF (1 per 4-5k SF).',
+    'Below ~0.8 per 10k SF reads as storage / manufacturing; well above 3 is a truck terminal, a different asset type.',
+    'Higher door density supports faster throughput, which logistics tenants pay for. Check it against how the tenant uses the space.',
   ],
   generate(rng, difficulty = 'intermediate', _assetClass = 'mixed') {
     void difficulty;
-    // Pick SF and an independent truck count, so density takes on many values.
+    // Pick SF, then a realistic door density (storage-light through cross-dock).
     const sf = rng.pickFromSet([
       80_000, 100_000, 120_000, 160_000, 200_000, 250_000, 300_000, 400_000,
       500_000, 600_000, 750_000, 900_000, 1_100_000,
     ] as const);
-    const trucks = rng.pickInt(8, 480);
+    const density = rng.pickRange(0.6, 2.8, { step: 0.05 });
+    const trucks = Math.max(4, Math.round((density * sf) / 10_000));
     const expected = (trucks / sf) * 10_000;
 
     return {

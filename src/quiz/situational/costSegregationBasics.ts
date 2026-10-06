@@ -19,7 +19,7 @@ export const costSegregationBasics: SituationalCase = {
   options: [
     {
       label:
-        'Cost seg reclassifies portions of the basis from 27.5-yr property into 5/7/15-yr property, accelerating depreciation into the early years of the hold. With 100% bonus depreciation phasing down (60% in 2024, 40% in 2025), the front-loaded depreciation creates a large Year-1 paper loss that offsets passive income for taxable LPs. ROI on the $25k is typically 10-50x for taxable LPs on a $24M basis. For tax-exempt LPs (pensions, endowments, sovereign), cost seg has zero value. Decision turns on the LP tax base.',
+        'Cost seg reclassifies portions of the basis from 27.5-yr property into 5/7/15-yr property, accelerating depreciation into the early years of the hold. With 100% bonus depreciation permanently restored for property acquired after Jan 19, 2025, the front-loaded depreciation creates a large Year-1 paper loss that offsets passive income for taxable LPs. ROI on the $25k is typically 10-50x for taxable LPs on a $24M basis. For tax-exempt LPs (pensions, endowments, sovereign), cost seg has zero value. Decision turns on the LP tax base.',
       isBest: true,
       explanation:
         'Cost seg reclassifies items that ARE part of the building (carpet, appliances, parking lots, land improvements, specialty electrical for cooling) into shorter-life classes (5, 7, 15 years vs the 27.5-year base). With bonus depreciation, those reclassified items can be depreciated heavily or fully in Year 1. On a $24M basis, a typical MF cost seg surfaces ~20-30% as shorter-life property = ~$5-7M in accelerated depreciation. For taxable LPs, that\'s a $5-7M paper loss they can apply against passive income, which at a 37% federal + state marginal rate is worth ~$2M in tax deferral — vastly more than the $25k study fee. For tax-exempt LPs, no benefit. The LP base determines the answer.',
@@ -47,7 +47,7 @@ export const costSegregationBasics: SituationalCase = {
     'Cost segregation is a depreciation ACCELERATION tool, not a basis-increase or tax-elimination tool. It reclassifies parts of the building into shorter-life classes (5/7/15-yr) so more depreciation hits early years — especially valuable when bonus depreciation lets you take it Year 1. Time value + 1031 step-up potential makes it pay for taxable LPs (typical ROI 10-50x on the study fee). For tax-exempt LPs, zero value. Always ask "what\'s the LP tax base?" before commissioning a study.',
   tips: [
     'Typical cost-seg study reclassifies 20-30% of MF basis to shorter lives.',
-    'Bonus depreciation: 60% (2024) → 40% (2025) → 20% (2026) → 0% (2027+) under current law.',
+    'Bonus depreciation: phased down to 40% for early-2025 acquisitions, then permanently restored to 100% for property acquired after Jan 19, 2025 (July 2025 tax act).',
     'Recapture on sale: shorter-life property recaptures at ordinary income rates (vs 25% for 1250). Plan exit accordingly.',
   ],
 };

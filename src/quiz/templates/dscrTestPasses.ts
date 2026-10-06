@@ -58,10 +58,16 @@ export const dscrTestPassesTemplate: QuestionTemplate<'dscrTestPasses'> = {
   ],
   generate(rng, difficulty = 'intermediate', _assetClass = 'mixed') {
     const noi = pickBand(rng, bands.noi, difficulty);
-    const loan = pickBand(rng, bands.loanAmount, difficulty);
     const years = rng.pickFromSet([25, 30] as const); // only 2 standard amort conventions
     const rate = pickBand(rng, bands.interestRate, difficulty);
     const threshold = pickBand(rng, bands.dscrTarget, difficulty);
+    // Land the actual DSCR near the threshold (a few shortfalls, mostly
+    // cushions) instead of drawing loan size independently of NOI.
+    const targetDscr = threshold + rng.pickRange(-0.15, 0.35, { step: 0.05 });
+    const loan = Math.max(
+      500_000,
+      Math.round(noi / targetDscr / annualDebtService(1, rate, years) / 250_000) * 250_000,
+    );
 
     const ds = annualDebtService(loan, rate, years);
     const ratio = dscr(noi, ds);

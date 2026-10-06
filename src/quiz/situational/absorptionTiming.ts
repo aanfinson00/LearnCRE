@@ -19,10 +19,10 @@ export const absorptionTiming: SituationalCase = {
   question: 'Roughly how long until the submarket reaches 95% leased?',
   options: [
     {
-      label: 'About 16 months — you need to absorb the existing vacancy plus the new deliveries to hit 95% on a 4,300-unit base.',
+      label: 'About 14 months — you need to absorb the existing vacancy plus the new deliveries to hit 95% on a 4,300-unit base.',
       isBest: true,
       explanation:
-        'New base: 4,300 units. Target leased at 95%: 4,085. Currently leased: 4,000 × 0.85 = 3,400. Net to absorb: 685 units ÷ 50/mo ≈ 13.7 months — but that assumes flat absorption. With 300 units delivering, the math is closer to 16 months once you account for the deliveries lengthening the lease-up tail. Reasonable analyst answer: 14–18 months.',
+        'New base: 4,300 units. Target leased at 95%: 4,085. Currently leased: 4,000 × 0.85 = 3,400. Net to absorb: 685 units ÷ 50/mo ≈ 13.7 months, so call it ~14. The 300 new units are already in the 4,300 base, so do not add them again. The real risk is the pace assumption: if new deliveries pull concessions and absorption slows to 40/mo, it stretches to ~17 months. Underwrite a range, not a point.',
     },
     {
       label: 'About 12 months — current vacancy is 600 units and absorption is 50/mo.',

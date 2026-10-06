@@ -4,6 +4,7 @@ import { fetchCloudProfile, setProfilePublic } from '../cloud/profile';
 import type { CloudProfile } from '../cloud/types';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
+import { track } from '../analytics';
 
 interface Props {
   /** Optional: render compact (drawer/dropdown) vs full-card. */
@@ -43,8 +44,10 @@ export function SignIn({ compact = false }: Props) {
     if (!email.trim()) return;
     setStatus('sending');
     setError(null);
+    track('signup_submitted', { location: 'profile' });
     const errorMessage = await signInWithEmail(email.trim());
     if (errorMessage) {
+      track('signup_failed', { location: 'profile' });
       setStatus('error');
       setError(errorMessage);
     } else {

@@ -1,4 +1,4 @@
-import { formatUsd, formatUsdPerSf, formatYears } from '../../math/rounding';
+import { formatUsd, formatUsdPerSf, formatYearsAdj } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
 import { bands, pickBand } from '../bands';
 import { nextId } from '../random';
@@ -54,7 +54,7 @@ export const capexReserveSizingTemplate: QuestionTemplate<'capexReserveSizing'> 
     return {
       id: nextId('capex_reserve'),
       kind: 'capexReserveSizing',
-      prompt: `Building is ${buildingSf.toLocaleString()} SF. Underwriting assumes ${formatUsdPerSf(perSf)}/yr capex reserve over a ${formatYears(holdYears)} hold. Size the total reserve.`,
+      prompt: `Building is ${buildingSf.toLocaleString()} SF. Underwriting assumes ${formatUsdPerSf(perSf)}/yr capex reserve over a ${formatYearsAdj(holdYears)} hold. Size the total reserve.`,
       context: {
         buildingSf,
         capexReservePerSf: perSf,
