@@ -27,7 +27,7 @@ The request logic lives in `src/server/scoreChallengeHandler.ts` and is unit-tes
 Order matters: the database first, then the function, then the app.
 
 ```bash
-supabase db push                              # applies 0013_server_scoring.sql
+supabase db push                              # applies 0013_server_scoring.sql (and later)
 supabase functions deploy score-challenge     # uses SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY (set by the platform)
 ```
 
