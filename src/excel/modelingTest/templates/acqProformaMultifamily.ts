@@ -33,7 +33,8 @@ const NOI_Y1 = noi(1);
 const NOI_Y5 = noi(5);
 const EGI_Y1 = egi(1);
 
-const LOAN_CONSTANT = RATE / (1 - Math.pow(1 + RATE, -AMORT));
+// Monthly payments, annualized — the market convention for permanent debt.
+const LOAN_CONSTANT = (12 * (RATE / 12)) / (1 - Math.pow(1 + RATE / 12, -AMORT * 12));
 const MAX_DS = NOI_Y1 / REQ_DSCR;
 const LOAN_AMOUNT = MAX_DS / LOAN_CONSTANT;
 const ANNUAL_DS = LOAN_AMOUNT * LOAN_CONSTANT;
@@ -41,9 +42,9 @@ const EQUITY_IN = PURCHASE - LOAN_AMOUNT;
 const EXIT_VALUE = NOI_Y5 / EXIT_CAP;
 const SALE_COSTS = EXIT_VALUE * SALE_COSTS_PCT;
 
-const POW5 = Math.pow(1 + RATE, 5);
-const PMT = -ANNUAL_DS;
-const LOAN_BALANCE_EOY5 = LOAN_AMOUNT * POW5 + PMT * (POW5 - 1) / RATE;
+const POW60 = Math.pow(1 + RATE / 12, 60);
+const MONTHLY_PMT = -ANNUAL_DS / 12;
+const LOAN_BALANCE_EOY5 = LOAN_AMOUNT * POW60 + MONTHLY_PMT * (POW60 - 1) / (RATE / 12);
 const NET_SALE_PROCEEDS = EXIT_VALUE - SALE_COSTS - LOAN_BALANCE_EOY5;
 
 const leveredCf = (t: number) =>
@@ -100,7 +101,7 @@ const cells: SheetCell[] = [
   { address: 'B13', role: 'assumption', value: REQ_DSCR, format: 'multiple' },
   { address: 'A14', role: 'header', text: 'Loan rate' },
   { address: 'B14', role: 'assumption', value: RATE, format: 'pct' },
-  { address: 'A15', role: 'header', text: 'Amortization (years)' },
+  { address: 'A15', role: 'header', text: 'Amortization (years, monthly pmts)' },
   { address: 'B15', role: 'assumption', value: AMORT, format: 'number' },
   { address: 'A16', role: 'header', text: 'Exit cap' },
   { address: 'B16', role: 'assumption', value: EXIT_CAP, format: 'pct' },
@@ -222,7 +223,7 @@ export const acqProformaMultifamily: ModelingTestTemplate = {
   brief: {
     paragraphs: [
       'Subject is a 100-unit Class-B garden community in a stable Sun Belt submarket — value-add complete, in-place rents at market, no major rollover concentration.',
-      "Sponsor's pro forma: 4% rent growth, 2% other-income growth, 3% opex + capex growth, 5% vacancy throughout. Permanent loan sized at 1.25× DSCR on Y1 NOI, 6.0% / 30-year. Exit Y5 at a 5.75% cap, 2% sale costs.",
+      "Sponsor's pro forma: 4% rent growth, 2% other-income growth, 3% opex + capex growth, 5% vacancy throughout. Permanent loan sized at 1.25× DSCR on Y1 NOI, 6.0% / 30-year with monthly payments. Exit Y5 at a 5.75% cap, 2% sale costs.",
     ],
     bullets: [
       'Build the year-by-year operating roll: GPR → Vacancy → Other income → EGI → OpEx → NOI → Capex reserve.',
@@ -310,7 +311,7 @@ export const acqProformaMultifamily: ModelingTestTemplate = {
       expected: NET_SALE_PROCEEDS,
       tolerance: { rel: 0.005 },
       diagnostic:
-        'Net sale = Exit value − Sale costs − Loan balance at EoY5. Loan balance is NOT loan − cumulative DS — those payments are mostly interest. Use the amortization formula: =B32*(1+B14)^5 + PMT(B14,B15,B32)*((1+B14)^5-1)/B14.',
+        'Net sale = Exit value − Sale costs − Loan balance at EoY5. Loan balance is NOT loan − cumulative DS — those payments are mostly interest. Use the remaining-balance formula with monthly periods: =B32*(1+B14/12)^60 + PMT(B14/12,B15*12,B32)*((1+B14/12)^60-1)/(B14/12).',
       explains: ['B46', 'B47'],
     },
   ],

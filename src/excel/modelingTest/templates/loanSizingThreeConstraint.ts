@@ -9,7 +9,8 @@ const REQ_DEBT_YIELD = 0.08;
 const RATE = 0.06;
 const AMORT = 30;
 
-const LOAN_CONSTANT = RATE / (1 - Math.pow(1 + RATE, -AMORT));
+// Monthly payments, annualized — the market convention for permanent debt.
+const LOAN_CONSTANT = (12 * (RATE / 12)) / (1 - Math.pow(1 + RATE / 12, -AMORT * 12));
 const MAX_DS_DSCR = NOI / REQ_DSCR;
 const MAX_LOAN_DSCR = MAX_DS_DSCR / LOAN_CONSTANT;
 const MAX_LOAN_LTV = VALUE * REQ_LTV;
@@ -31,7 +32,7 @@ const cells: SheetCell[] = [
   { address: 'B6', role: 'assumption', value: REQ_DEBT_YIELD, format: 'pct' },
   { address: 'A7', role: 'header', text: 'Loan rate' },
   { address: 'B7', role: 'assumption', value: RATE, format: 'pct' },
-  { address: 'A8', role: 'header', text: 'Amortization (years)' },
+  { address: 'A8', role: 'header', text: 'Amortization (years, monthly pmts)' },
   { address: 'B8', role: 'assumption', value: AMORT, format: 'number' },
 
   { address: 'A10', role: 'header', text: 'Step 1 — Loan constant' },
@@ -64,7 +65,7 @@ export const loanSizingThreeConstraint: ModelingTestTemplate = {
     'Permanent loan on a stabilized industrial asset. Lender uses 1.25× DSCR, 75% LTV, and 8% debt yield. Solve the max loan that passes all three, then cross-check by computing the implied DSCR if you sized to LTV.',
   brief: {
     paragraphs: [
-      'Stabilized industrial in a tier-2 market. Year-1 NOI $5.0M, $80M asset value (6.25% going-in cap). Lender quotes 6.0% / 30-year permanent.',
+      'Stabilized industrial in a tier-2 market. Year-1 NOI $5.0M, $80M asset value (6.25% going-in cap). Lender quotes 6.0% / 30-year permanent with monthly payments.',
       "Three constraints govern loan sizing: (1) DSCR ≥ 1.25× (debt service can't exceed NOI / 1.25), (2) LTV ≤ 75% of value, (3) debt yield ≥ 8% (loan can't exceed NOI / 0.08). The binding constraint is the lowest of the three max-loans.",
     ],
     bullets: [
@@ -85,7 +86,7 @@ export const loanSizingThreeConstraint: ModelingTestTemplate = {
       expected: LOAN_CONSTANT,
       tolerance: { abs: 0.0001 },
       whenWrongTry:
-        '=B7 / (1 - (1 + B7)^-B8) — or equivalently =-PMT(B7, B8, 1). The loan constant times any loan amount gives that loan\'s annual debt service.',
+        '=-PMT(B7/12, B8*12, 1)*12 — the monthly payment per $1 of loan, times 12 (≈7.19% at 6% / 30 yrs). The loan constant times any loan amount gives that loan\'s annual debt service.',
     },
     {
       ref: 'B14',
@@ -140,7 +141,7 @@ export const loanSizingThreeConstraint: ModelingTestTemplate = {
       expected: IMPLIED_DSCR_AT_LTV,
       tolerance: { abs: 0.005 },
       diagnostic:
-        'If you sized at the LTV max ($60M), the actual DSCR = NOI / (LTV_loan × loan_constant) ≈ 1.15× — below the 1.25× threshold, which is why DSCR binds. Formula: =B2 / (B15 * B11).',
+        'If you sized at the LTV max ($60M), the actual DSCR = NOI / (LTV_loan × loan_constant) ≈ 1.16× — below the 1.25× threshold, which is why DSCR binds. Formula: =B2 / (B15 * B11).',
       explains: ['B19'],
     },
   ],

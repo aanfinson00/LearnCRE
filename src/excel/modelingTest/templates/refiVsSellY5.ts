@@ -21,20 +21,25 @@ const Y10_SALE_COSTS_PCT = 0.02;
 // --- canonical answer key ---
 const noi = (t: number) => NOI_Y1 * Math.pow(1 + NOI_GROWTH_Y15, t - 1);
 const NOI_Y5 = noi(5);
-const ORIG_CONSTANT = ORIG_RATE / (1 - Math.pow(1 + ORIG_RATE, -ORIG_AMORT));
+// Monthly payments, annualized — the market convention for permanent debt.
+const monthlyConstant = (rate: number, years: number) =>
+  (12 * (rate / 12)) / (1 - Math.pow(1 + rate / 12, -years * 12));
+const balanceAfter = (loan: number, rate: number, annualDs: number, months: number) => {
+  const g = Math.pow(1 + rate / 12, months);
+  return loan * g - (annualDs / 12) * (g - 1) / (rate / 12);
+};
+const ORIG_CONSTANT = monthlyConstant(ORIG_RATE, ORIG_AMORT);
 const ORIG_DS = ORIG_LOAN * ORIG_CONSTANT;
 
 const Y5_VALUE = NOI_Y5 / Y5_CAP;
 const Y5_SALE_COSTS = Y5_VALUE * Y5_SALE_COSTS_PCT;
-const POW5_ORIG = Math.pow(1 + ORIG_RATE, 5);
-const ORIG_LOAN_BALANCE_Y5 =
-  ORIG_LOAN * POW5_ORIG - ORIG_DS * (POW5_ORIG - 1) / ORIG_RATE;
+const ORIG_LOAN_BALANCE_Y5 = balanceAfter(ORIG_LOAN, ORIG_RATE, ORIG_DS, 60);
 const PATH_A_NET_SALE = Y5_VALUE - Y5_SALE_COSTS - ORIG_LOAN_BALANCE_Y5;
 
 const NEW_LOAN = Y5_VALUE * REFI_LTV;
 const REFI_CLOSING = NEW_LOAN * REFI_CLOSING_PCT;
 const REFI_CASH_OUT = NEW_LOAN - ORIG_LOAN_BALANCE_Y5 - REFI_CLOSING;
-const NEW_CONSTANT = REFI_RATE / (1 - Math.pow(1 + REFI_RATE, -REFI_AMORT));
+const NEW_CONSTANT = monthlyConstant(REFI_RATE, REFI_AMORT);
 const NEW_DS = NEW_LOAN * NEW_CONSTANT;
 
 const NOI_Y6 = NOI_Y5 * (1 + NOI_GROWTH_Y610);
@@ -45,9 +50,7 @@ const NOI_Y10 = NOI_Y9 * (1 + NOI_GROWTH_Y610);
 
 const Y10_VALUE = NOI_Y10 / Y10_CAP;
 const Y10_SALE_COSTS = Y10_VALUE * Y10_SALE_COSTS_PCT;
-const POW5_NEW = Math.pow(1 + REFI_RATE, 5);
-const NEW_LOAN_BALANCE_Y10 =
-  NEW_LOAN * POW5_NEW - NEW_DS * (POW5_NEW - 1) / REFI_RATE;
+const NEW_LOAN_BALANCE_Y10 = balanceAfter(NEW_LOAN, REFI_RATE, NEW_DS, 60);
 const PATH_B_Y10_NET_SALE = Y10_VALUE - Y10_SALE_COSTS - NEW_LOAN_BALANCE_Y10;
 
 const incrementalCF = [
@@ -99,7 +102,7 @@ const cells: SheetCell[] = [
   { address: 'B4', role: 'assumption', value: ORIG_LOAN, format: 'usd' },
   { address: 'A5', role: 'header', text: 'Original loan rate' },
   { address: 'B5', role: 'assumption', value: ORIG_RATE, format: 'pct' },
-  { address: 'A6', role: 'header', text: 'Original loan amort' },
+  { address: 'A6', role: 'header', text: 'Original loan amort (yrs, monthly pmts)' },
   { address: 'B6', role: 'assumption', value: ORIG_AMORT, format: 'number' },
   { address: 'A7', role: 'header', text: 'Year-1 NOI' },
   { address: 'B7', role: 'assumption', value: NOI_Y1, format: 'usd' },
@@ -115,7 +118,7 @@ const cells: SheetCell[] = [
   { address: 'B12', role: 'assumption', value: REFI_LTV, format: 'pct' },
   { address: 'A13', role: 'header', text: 'Refi rate' },
   { address: 'B13', role: 'assumption', value: REFI_RATE, format: 'pct' },
-  { address: 'A14', role: 'header', text: 'Refi amort' },
+  { address: 'A14', role: 'header', text: 'Refi amort (yrs, monthly pmts)' },
   { address: 'B14', role: 'assumption', value: REFI_AMORT, format: 'number' },
   { address: 'A15', role: 'header', text: 'Refi closing costs %' },
   { address: 'B15', role: 'assumption', value: REFI_CLOSING_PCT, format: 'pct' },
@@ -281,7 +284,7 @@ export const refiVsSellY5: ModelingTestTemplate = {
       expected: PATH_B_Y10_NET_SALE,
       tolerance: { rel: 0.005 },
       whenWrongTry:
-        'Y10 value − Y10 sale costs − new loan balance EoY10. The new loan balance amortizes for 5 years from refi, not 10. Use =B34*(1+B13)^5+PMT(B13,B14,B34)*((1+B13)^5-1)/B13.',
+        'Y10 value − Y10 sale costs − new loan balance EoY10. The new loan balance amortizes for 5 years from refi, not 10. Use monthly periods: =B34*(1+B13/12)^60+PMT(B13/12,B14*12,B34)*((1+B13/12)^60-1)/(B13/12).',
     },
     {
       ref: 'B55',
@@ -310,7 +313,7 @@ export const refiVsSellY5: ModelingTestTemplate = {
       expected: ORIG_LOAN_BALANCE_Y5,
       tolerance: { rel: 0.005 },
       diagnostic:
-        'Old loan balance at Y5 = =B4*(1+B5)^5+PMT(B5,B6,B4)*((1+B5)^5-1)/B5. This number feeds BOTH Path A (subtracted from Y5 value) and Path B (paid off at refi). If wrong, every downstream proceeds + IRR number is wrong.',
+        'Old loan balance at Y5 (monthly periods) = =B4*(1+B5/12)^60+PMT(B5/12,B6*12,B4)*((1+B5/12)^60-1)/(B5/12). This number feeds BOTH Path A (subtracted from Y5 value) and Path B (paid off at refi). If wrong, every downstream proceeds + IRR number is wrong.',
       explains: ['B31', 'B36', 'B55', 'B56'],
     },
     {
@@ -320,7 +323,7 @@ export const refiVsSellY5: ModelingTestTemplate = {
       expected: NEW_DS,
       tolerance: { rel: 0.005 },
       diagnostic:
-        '=-PMT(B13,B14,B34) — new DS uses the refi rate, refi amort, and new loan amount. It stays constant Y6-Y10. Wrong DS distorts every Y6-Y10 levered CF and the marginal IRR.',
+        '=-PMT(B13/12,B14*12,B34)*12 — new DS (monthly payments, annualized) uses the refi rate, refi amort, and new loan amount. It stays constant Y6-Y10. Wrong DS distorts every Y6-Y10 levered CF and the marginal IRR.',
       explains: ['B55', 'B56'],
     },
     {

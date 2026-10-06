@@ -59,9 +59,15 @@ export const dscrSensitivityRateTemplate: QuestionTemplate<'dscrSensitivityRate'
   ],
   generate(rng, difficulty = 'intermediate', _assetClass = 'mixed') {
     const noi = pickBand(rng, bands.noi, difficulty);
-    const loan = pickBand(rng, bands.loanAmount, difficulty);
     const amortYears = rng.pickFromSet([25, 30] as const);
     const oldRate = pickBand(rng, bands.interestRate, difficulty);
+    // Size the loan off NOI at a realistic origination DSCR so the starting
+    // point is a loan a lender would actually have made.
+    const originationDscr = rng.pickRange(1.2, 1.6, { step: 0.05 });
+    const loan = Math.max(
+      500_000,
+      Math.round(noi / originationDscr / annualDebtService(1, oldRate, amortYears) / 250_000) * 250_000,
+    );
     const direction = rng.pickFromSet([-1, 1] as const);
     const moveBps =
       difficulty === 'beginner'

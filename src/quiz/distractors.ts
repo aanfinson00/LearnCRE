@@ -46,12 +46,16 @@ export function buildChoices(q: Question, rng: Rng): number[] {
       break;
     case 'pct':
     case 'pctChange':
-      candidates.push(e * 1.25, e * 0.75, -e);
+      candidates.push(e * 1.25, e * 0.75);
+      // Getting the direction wrong is a real mistake on a *change*; a
+      // negative cap rate or IRR is just a giveaway.
+      candidates.push(q.unit === 'pctChange' ? -e : e * 1.5);
       candidates.push(e + 0.01, e - 0.01);
       break;
     case 'usd':
     case 'usdChange':
-      candidates.push(e * 1.2, e * 0.83, -e);
+      candidates.push(e * 1.2, e * 0.83);
+      candidates.push(q.unit === 'usdChange' ? -e : e * 1.1);
       candidates.push(e + abs * 0.15);
       break;
     case 'usdPerSf':
@@ -60,7 +64,12 @@ export function buildChoices(q: Question, rng: Rng): number[] {
       break;
   }
 
-  const unique = dedupeRound(candidates, q.unit).filter((v) => !Object.is(v, NaN));
+  // Levels (prices, loans, rates, multiples) can't flip sign: a negative
+  // option next to a positive answer is an instant tell.
+  const isChange = q.unit === 'usdChange' || q.unit === 'pctChange';
+  const unique = dedupeRound(candidates, q.unit).filter(
+    (v, i) => !Object.is(v, NaN) && (i === 0 || isChange || e <= 0 || v > 0),
+  );
   const pool = unique.slice(1);
   const picked: number[] = [];
   while (picked.length < 3 && pool.length > 0) {
@@ -69,7 +78,9 @@ export function buildChoices(q: Question, rng: Rng): number[] {
   }
   while (picked.length < 3) {
     const noise = (rng.next() - 0.5) * abs * 0.5;
-    picked.push(e + noise);
+    const v = e + noise;
+    if (!isChange && e > 0 && v <= 0) continue;
+    picked.push(v);
   }
 
   const all = [e, ...picked];
