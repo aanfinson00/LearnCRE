@@ -614,12 +614,12 @@ You're lending on a $50M acquisition. The sponsor's pro forma shows 8% NOI growt
 ### 20. Same loan passes DSCR but fails debt yield — which wins?
 *Situational · risk · advanced · office · mortgageUw*
 
-You're sizing a permanent loan. NOI is $5.0M; the requested loan is $65M; 30-year amortization at 5.0%. The DSCR test (1.25x threshold) passes at 1.19x — wait, that fails. Let me re-state: the DSCR comes in at 1.31x (passes); the debt yield (NOI / loan = 7.7%) fails the 8.0% threshold. The sponsor argues "DSCR is what matters." How do you respond?
+You're sizing a permanent loan. NOI is $5.0M; the requested loan is $65M; 30-year amortization at 4.5% (≈$3.95M annual debt service). The DSCR comes in at 1.27x, passing the 1.25x threshold; the debt yield (NOI / loan = 7.7%) fails the 8.0% threshold. The sponsor argues "DSCR is what matters." How do you respond?
 
 - **NOI:** $5.0M
 - **Requested loan:** $65M
-- **Rate / amort:** 5.0% / 30 yr
-- **DSCR threshold:** 1.25x — actual 1.31x ✓
+- **Rate / amort:** 4.5% / 30 yr
+- **DSCR threshold:** 1.25x — actual 1.27x ✓
 - **Debt yield threshold:** 8.0% — actual 7.7% ✗
 
 **Q: Which test should govern, and why?**
@@ -1328,7 +1328,7 @@ You've just closed on a $30M MF acquisition. The CFO asks whether to spend $25k 
 
 <details><summary>Answer & reasoning</summary>
 
-- ✅ **A.** Cost seg reclassifies portions of the basis from 27.5-yr property into 5/7/15-yr property, accelerating depreciation into the early years of the hold. With 100% bonus depreciation phasing down (60% in 2024, 40% in 2025), the front-loaded depreciation creates a large Year-1 paper loss that offsets passive income for taxable LPs. ROI on the $25k is typically 10-50x for taxable LPs on a $24M basis. For tax-exempt LPs (pensions, endowments, sovereign), cost seg has zero value. Decision turns on the LP tax base.
+- ✅ **A.** Cost seg reclassifies portions of the basis from 27.5-yr property into 5/7/15-yr property, accelerating depreciation into the early years of the hold. With 100% bonus depreciation permanently restored for property acquired after Jan 19, 2025, the front-loaded depreciation creates a large Year-1 paper loss that offsets passive income for taxable LPs. ROI on the $25k is typically 10-50x for taxable LPs on a $24M basis. For tax-exempt LPs (pensions, endowments, sovereign), cost seg has zero value. Decision turns on the LP tax base.
   - Cost seg reclassifies items that ARE part of the building (carpet, appliances, parking lots, land improvements, specialty electrical for cooling) into shorter-life classes (5, 7, 15 years vs the 27.5-year base). With bonus depreciation, those reclassified items can be depreciated heavily or fully in Year 1. On a $24M basis, a typical MF cost seg surfaces ~20-30% as shorter-life property = ~$5-7M in accelerated depreciation. For taxable LPs, that's a $5-7M paper loss they can apply against passive income, which at a 37% federal + state marginal rate is worth ~$2M in tax deferral — vastly more than the $25k study fee. For tax-exempt LPs, no benefit. The LP base determines the answer.
 - ◻️ **B.** Cost seg reduces the property tax bill by reclassifying basis between land and improvements.
   - Confuses cost seg (federal income tax depreciation acceleration) with property tax assessment (state/local, separate process). Cost seg has nothing to do with property taxes; those are based on assessed value, not depreciation schedules.
@@ -1340,7 +1340,7 @@ You've just closed on a $30M MF acquisition. The CFO asks whether to spend $25k 
 **Takeaway:** Cost segregation is a depreciation ACCELERATION tool, not a basis-increase or tax-elimination tool. It reclassifies parts of the building into shorter-life classes (5/7/15-yr) so more depreciation hits early years — especially valuable when bonus depreciation lets you take it Year 1. Time value + 1031 step-up potential makes it pay for taxable LPs (typical ROI 10-50x on the study fee). For tax-exempt LPs, zero value. Always ask "what's the LP tax base?" before commissioning a study.
 
 - Typical cost-seg study reclassifies 20-30% of MF basis to shorter lives.
-- Bonus depreciation: 60% (2024) → 40% (2025) → 20% (2026) → 0% (2027+) under current law.
+- Bonus depreciation: phased down to 40% for early-2025 acquisitions, then permanently restored to 100% for property acquired after Jan 19, 2025 (July 2025 tax act).
 - Recapture on sale: shorter-life property recaptures at ordinary income rates (vs 25% for 1250). Plan exit accordingly.
 
 </details>
@@ -3275,12 +3275,12 @@ You're underwriting an apartment building. GPR is $4,500,000, other income is $2
 ### 96. DSCR Loan Sizing — chained
 *Walkthrough · dscrLoanSizingWalk · mortgageUw/acquisitions*
 
-Your stabilized NOI is $750,000. Your lender requires a 1.25× DSCR on a 30 years amortizing loan at 6.00%. Size the loan in three steps.
+Your stabilized NOI is $750,000. Your lender requires a 1.25× DSCR on a 30-year amortizing loan at 6.00%. Size the loan in three steps.
 
 <details><summary>Answer & reasoning</summary>
 
-1. **Step 1 — Loan constant** — What's the loan constant for a 30 years amortizing loan at 6.00%? (answer in bps)
-   - Expected: `719` (bps) — 30 years amort @ 6.00% → loan constant ≈ 719 bps.
+1. **Step 1 — Loan constant** — What's the loan constant for a 30-year amortizing loan at 6.00%? (answer in bps)
+   - Expected: `719` (bps) — 30-year amort @ 6.00% → loan constant ≈ 719 bps.
 2. **Step 2 — Max annual debt service** — At 1.25× DSCR, what's the max annual debt service NOI can cover?
    - Expected: `600000` (usd) — $750,000 / 1.25 = $600,000 max DS.
 3. **Step 3 — Max loan amount** — Convert that DS allowance into a loan amount. What's the max loan?
@@ -3293,7 +3293,7 @@ Your stabilized NOI is $750,000. Your lender requires a 1.25× DSCR on a 30 year
 ### 97. Mock Acquisition — full unlevered walkthrough
 *Walkthrough · mockAcquisitionWalk · acquisitions*
 
-Stabilized multifamily acquisition. GPR $4,000,000, other income $200,000, 5.00% vacancy, OpEx $1,600,000. Going-in cap 5.50%; you're modeling a 5 years hold with 3.00% annual NOI growth and a 6.00% exit cap (50 bps spread). Sale costs 1.50%. All-cash analysis — unlevered IRR.
+Stabilized multifamily acquisition. GPR $4,000,000, other income $200,000, 5.00% vacancy, OpEx $1,600,000. Going-in cap 5.50%; you're modeling a 5-year hold with 3.00% annual NOI growth and a 6.00% exit cap (50 bps spread). Sale costs 1.50%. All-cash analysis — unlevered IRR.
 
 <details><summary>Answer & reasoning</summary>
 
@@ -3315,7 +3315,7 @@ Stabilized multifamily acquisition. GPR $4,000,000, other income $200,000, 5.00%
    - Expected: `12688834.5859` (usd) — Σ NOI_y from y=1..5 ≈ $12,688,835 at 3.00% growth.
 9. **Step 9 — Equity multiple (unlevered)** — Total cash returned (NOI + net exit) / equity in. What's the EM?
    - Expected: `1.308243132579167` (multiple) — ($12,688,835 + $44,160,276) / $43,454,545 = 1.31x.
-10. **Step 10 — Approximate unlevered IRR** — EM^(1/n) − 1 over a 5 years hold. What's the approximate IRR?
+10. **Step 10 — Approximate unlevered IRR** — EM^(1/n) − 1 over a 5-year hold. What's the approximate IRR?
    - Expected: `0.055207070883675824` (pct) — 1.31^(1/5) − 1 ≈ 5.52%. Real IRR with periodic distributions is ~30–80 bps higher; the geometric approx is the right anchor for back-of-envelope.
 
 **Takeaway:** A full unlevered acquisition is just income → value → exit → return, broken into 10 steps. The two non-obvious links are walking NOI forward to the exit year and reducing exit value for sale costs. Skip either and your IRR is wrong by a meaningful margin.

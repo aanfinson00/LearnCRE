@@ -8,12 +8,12 @@ export const debtYieldVsDscr: SituationalCase = {
   roles: ['mortgageUw'],
   assetClass: 'office',
   scenario:
-    'You\'re sizing a permanent loan. NOI is $5.0M; the requested loan is $65M; 30-year amortization at 5.0%. The DSCR test (1.25x threshold) passes at 1.19x — wait, that fails. Let me re-state: the DSCR comes in at 1.31x (passes); the debt yield (NOI / loan = 7.7%) fails the 8.0% threshold. The sponsor argues "DSCR is what matters." How do you respond?',
+    'You\'re sizing a permanent loan. NOI is $5.0M; the requested loan is $65M; 30-year amortization at 4.5% (≈$3.95M annual debt service). The DSCR comes in at 1.27x, passing the 1.25x threshold; the debt yield (NOI / loan = 7.7%) fails the 8.0% threshold. The sponsor argues "DSCR is what matters." How do you respond?',
   data: [
     { label: 'NOI', value: '$5.0M' },
     { label: 'Requested loan', value: '$65M' },
-    { label: 'Rate / amort', value: '5.0% / 30 yr' },
-    { label: 'DSCR threshold', value: '1.25x — actual 1.31x ✓' },
+    { label: 'Rate / amort', value: '4.5% / 30 yr' },
+    { label: 'DSCR threshold', value: '1.25x — actual 1.27x ✓' },
     { label: 'Debt yield threshold', value: '8.0% — actual 7.7% ✗' },
   ],
   question: 'Which test should govern, and why?',

@@ -33,6 +33,7 @@ interface Item {
   id: Mode;
   label: string;
   hint: string;
+  internal?: boolean;
 }
 
 interface Section {
@@ -78,20 +79,38 @@ const SECTIONS: Section[] = [
     ],
   },
   {
-    label: 'Contribute',
-    items: [
-      { id: 'submitQuestion', label: 'Submit a question', hint: 'Pitch a question for the catalog. Reviewer integrates the best ones.' },
-      { id: 'feedbackReview', label: 'Feedback studio', hint: 'Work through 100 questions and attach a voice memo on each.' },
-    ],
-  },
-  {
     label: 'Progress',
     items: [
       { id: 'certify', label: 'Certify', hint: 'Benchmark-gated certifications.' },
       { id: 'profile', label: 'Profile', hint: 'Your stats, tier, and achievements.' },
     ],
   },
+  {
+    label: 'Contribute',
+    items: [
+      { id: 'submitQuestion', label: 'Submit a question', hint: 'Pitch a question for the catalog. Reviewer integrates the best ones.' },
+      { id: 'feedbackReview', label: 'Feedback studio', hint: 'Work through 100 questions and attach a voice memo on each.', internal: true },
+    ],
+  },
 ];
+
+/** Internal tooling (e.g. the voice-memo Feedback studio) stays out of the
+ *  public nav. Visible in dev builds, or after visiting once with ?internal=1. */
+function showInternalTools(): boolean {
+  if (import.meta.env.DEV) return true;
+  try {
+    if (new URLSearchParams(window.location.search).get('internal') === '1') {
+      localStorage.setItem('learncre.internal', '1');
+    }
+    return localStorage.getItem('learncre.internal') === '1';
+  } catch {
+    return false;
+  }
+}
+
+const VISIBLE_SECTIONS: Section[] = showInternalTools()
+  ? SECTIONS
+  : SECTIONS.map((s) => ({ ...s, items: s.items.filter((i) => !i.internal) }));
 
 export function SideNav({ active, onSwitch }: Props) {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -111,7 +130,7 @@ export function SideNav({ active, onSwitch }: Props) {
   }, [drawerOpen]);
 
   const activeItem =
-    SECTIONS.flatMap((s) => s.items).find((i) => i.id === active) ?? null;
+    VISIBLE_SECTIONS.flatMap((s) => s.items).find((i) => i.id === active) ?? null;
 
   return (
     <>
@@ -180,7 +199,7 @@ function SidebarBody({
         </div>
       </div>
       <nav className="flex-1 overflow-y-auto px-2 py-4">
-        {SECTIONS.map((section) => (
+        {VISIBLE_SECTIONS.map((section) => (
           <div key={section.label} className="mb-4 last:mb-0">
             <div className="px-3 pb-1 font-mono text-[10px] uppercase tracking-[0.18em] text-warm-mute">
               {section.label}

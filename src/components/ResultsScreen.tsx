@@ -3,6 +3,7 @@ import type { QuestionKind } from '../types/question';
 import type { SessionConfig, SessionStats } from '../types/session';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
+import { SaveProgressNudge } from './SaveProgressNudge';
 
 interface Props {
   stats: SessionStats;
@@ -76,6 +77,8 @@ export function ResultsScreen({
           })}
         </div>
       </Card>
+
+      <SaveProgressNudge accuracyPct={stats.accuracyPct} />
 
       <div className="flex flex-wrap justify-center gap-3">
         <Button variant="secondary" onClick={onNewSetup}>

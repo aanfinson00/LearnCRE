@@ -81,6 +81,10 @@ export const AnswerInput = forwardRef<AnswerInputHandle, Props>(function AnswerI
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
             e.preventDefault();
+            // Keep this Enter from reaching the screen's window-level
+            // "Enter = next" handler, which re-binds as soon as the answer
+            // registers and would otherwise skip straight past the solution.
+            e.stopPropagation();
             onSubmit();
           }
         }}

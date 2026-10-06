@@ -25,7 +25,7 @@ const PRIMER_CONTENT: Record<PrimerMode, PrimerContent> = {
   quiz: {
     label: 'Quiz',
     blurb:
-      'Single-question reps across 35 kinds — cap rates, debt sizing, lease economics, returns. Tight feedback loop with a full step-by-step solution after every answer.',
+      'Single-question reps across 60+ kinds — cap rates, debt sizing, lease economics, returns. Tight feedback loop with a full step-by-step solution after every answer.',
     whenToUse:
       'Best for absorbing new concepts and pattern-matching how assumption changes move valuations. Filter by role, asset class, and category.',
     time: '5-15 min',

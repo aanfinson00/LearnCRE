@@ -1,5 +1,5 @@
 import { netEffectiveRent } from '../../math/lease';
-import { formatUsdPerSf, formatYears } from '../../math/rounding';
+import { formatUsdPerSf, formatYears, formatYearsAdj } from '../../math/rounding';
 import type { QuestionTemplate, Solution } from '../../types/question';
 import { bands, pickBand } from '../bands';
 import { classBand } from '../assetClasses';
@@ -74,7 +74,7 @@ export const netEffectiveRentTemplate: QuestionTemplate<'netEffectiveRent'> = {
     return {
       id: nextId('ner'),
       kind: 'netEffectiveRent',
-      prompt: `${formatYears(years)} lease at ${formatUsdPerSf(grossRent)} face rent, with ${concessionText}. What's the NER?`,
+      prompt: `${formatYearsAdj(years)} lease at ${formatUsdPerSf(grossRent)} face rent, with ${concessionText}. What's the NER?`,
       context: {
         rentPerSf: grossRent,
         leaseTermYears: years,

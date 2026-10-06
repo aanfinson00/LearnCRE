@@ -56,7 +56,7 @@ export const TAX_REGULATORY_TERMS: VocabTerm[] = [
     category: 'tax-regulatory',
     difficulty: 'advanced',
     shortDef:
-      'Immediate first-year deduction of qualifying capex — historically 100%, phasing down to 20% by 2026.',
+      'Immediate first-year deduction of qualifying short-life property. Phased down from 100% to 40% by early 2025, then permanently restored to 100% for property acquired after Jan 19, 2025 (July 2025 tax act).',
     longDef:
       'Under the 2017 TCJA, qualifying property (5/7/15-year MACRS items) was eligible for 100% first-year expensing. Phasing down: 80% in 2023, 60% 2024, 40% 2025, 20% 2026, 0% 2027 (subject to Congressional changes). Cost-seg + bonus dep was the most powerful CRE tax tool of the late 2010s / early 2020s.',
     distractors: [

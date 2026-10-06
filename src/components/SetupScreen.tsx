@@ -91,6 +91,7 @@ export function SetupScreen({ onStart }: Props) {
     stored?.role ?? loadPreferredRole() ?? 'all',
   );
   const [spacedRepetition, setSpacedRepetition] = useState<boolean>(stored?.spacedRepetition ?? false);
+  const [showCategories, setShowCategories] = useState(false);
   const [lifetime, setLifetime] = useState<LifetimeStats | null>(null);
   const [missKinds, setMissKinds] = useState<QuestionKind[]>([]);
   const [missByKind, setMissByKind] = useState<Record<string, number>>({});
@@ -175,8 +176,39 @@ export function SetupScreen({ onStart }: Props) {
     onStart(config);
   };
 
+  /** One-click session: 10 Foundations questions at Intermediate, skipping
+   *  every setup decision a first-timer can't make yet. */
+  const quickStart = () => {
+    const visibleSet = new Set(visibleKinds);
+    const kinds = FOUNDATIONS.filter((k) => visibleSet.has(k));
+    onStart({
+      mode,
+      categories: kinds.length > 0 ? kinds : [...visibleKinds],
+      plannedCount: 10,
+      tolerancePreset: 'normal',
+      difficulty: 'intermediate',
+      assetClass,
+      role,
+      spacedRepetition: false,
+    });
+  };
+
+  const startMisses = () => {
+    const visibleSet = new Set(visibleKinds);
+    onStart({
+      mode,
+      categories: missKinds.filter((k) => visibleSet.has(k)),
+      plannedCount: 10,
+      tolerancePreset: tolerance,
+      difficulty,
+      assetClass,
+      role,
+      spacedRepetition: true,
+    });
+  };
+
   return (
-    <div className="mx-auto max-w-3xl space-y-8 py-12 pb-32 sm:pb-12">
+    <div className="mx-auto max-w-3xl space-y-8 py-12 pb-32">
       <ModePrimer mode="quiz" />
       <header className="flex items-start justify-between gap-6">
         <div className="space-y-3">
@@ -191,7 +223,53 @@ export function SetupScreen({ onStart }: Props) {
         <ParcelMark />
       </header>
 
-      <Card className="space-y-6">
+      <section className="grid gap-3 sm:grid-cols-2">
+        <button
+          type="button"
+          onClick={quickStart}
+          className="group rounded-xl border border-warm-black bg-warm-black p-5 text-left text-warm-white shadow-sm transition-all duration-aa ease-aa hover:-translate-y-0.5 hover:shadow-md"
+        >
+          <div className="font-mono text-[11px] uppercase tracking-widest text-copper">
+            Quick start · ~5 min
+          </div>
+          <div className="mt-2 text-lg font-medium">10 foundations questions →</div>
+          <div className="mt-1 text-sm text-warm-paper/70">
+            Cap rates, NOI moves, multiples and IRR. Full worked solution after every answer.
+          </div>
+        </button>
+        {visibleMissCount > 0 ? (
+          <button
+            type="button"
+            onClick={startMisses}
+            className="rounded-xl border border-warm-line bg-warm-white/70 p-5 text-left transition-all duration-aa ease-aa hover:-translate-y-0.5 hover:border-copper"
+          >
+            <div className="font-mono text-[11px] uppercase tracking-widest text-signal-bad-ink">
+              Review mistakes
+            </div>
+            <div className="mt-2 text-lg font-medium text-warm-black">
+              Re-drill {visibleMissCount} weak {visibleMissCount === 1 ? 'kind' : 'kinds'} →
+            </div>
+            <div className="mt-1 text-sm text-warm-stone">
+              Spaced repetition weighted toward what you've missed recently.
+            </div>
+          </button>
+        ) : (
+          <a
+            href="#custom-session"
+            className="rounded-xl border border-warm-line bg-warm-white/70 p-5 text-left transition-all duration-aa ease-aa hover:-translate-y-0.5 hover:border-copper"
+          >
+            <div className="font-mono text-[11px] uppercase tracking-widest text-warm-stone">
+              Custom session
+            </div>
+            <div className="mt-2 text-lg font-medium text-warm-black">Build your own set ↓</div>
+            <div className="mt-1 text-sm text-warm-stone">
+              Filter by role, asset class, {allKinds.length} question kinds, difficulty and length.
+            </div>
+          </a>
+        )}
+      </section>
+
+      <Card className="scroll-mt-6 space-y-6" id="custom-session">
         <div>
           <h2 className="mb-3 text-sm font-medium uppercase tracking-widest text-warm-stone">
             Position focus
@@ -302,6 +380,19 @@ export function SetupScreen({ onStart }: Props) {
               )}
             </div>
           </div>
+          <button
+            type="button"
+            onClick={() => setShowCategories((v) => !v)}
+            aria-expanded={showCategories}
+            className="mb-3 flex w-full items-center justify-between rounded-lg border border-warm-line bg-warm-white/50 px-3 py-2.5 text-left text-sm transition-colors duration-aa ease-aa hover:border-copper"
+          >
+            <span className="text-warm-ink">
+              <span className="font-medium text-warm-black num">{categories.size}</span> of{' '}
+              <span className="num">{visibleKinds.length}</span> question kinds selected
+            </span>
+            <span className="text-copper-deep">{showCategories ? 'Hide list ▴' : 'Customize ▾'}</span>
+          </button>
+          {showCategories && (
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
             {visibleKinds.map((kind) => {
               const t = templates[kind];
@@ -346,6 +437,7 @@ export function SetupScreen({ onStart }: Props) {
               );
             })}
           </div>
+          )}
         </div>
 
         <div>
@@ -522,8 +614,8 @@ export function SetupScreen({ onStart }: Props) {
       </footer>
 
       {/* Sticky floating Start pill, visible on smaller viewports / once the user scrolls */}
-      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-warm-line bg-warm-white/90 backdrop-blur-md sm:hidden">
-        <div className="mx-auto flex max-w-3xl items-center justify-between gap-3 px-4 py-3">
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-warm-line bg-warm-white/90 backdrop-blur-md lg:left-56">
+        <div className="mx-auto flex max-w-3xl items-center justify-between gap-3 py-3 pl-4 pr-20 sm:pr-4">
           <div className="font-mono text-xs text-warm-mute num">
             {categories.size} cat · {plannedCount ?? '∞'} Q · {difficulty}
           </div>

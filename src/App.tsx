@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SetupScreen } from './components/SetupScreen';
 import { QuizScreen } from './components/QuizScreen';
 import { ResultsScreen } from './components/ResultsScreen';
@@ -77,7 +77,37 @@ function detectMatchInvite(): { matchId: string; token: string } | null {
   return { matchId: m[1].toLowerCase(), token: token.trim() };
 }
 import { WelcomeModal } from './components/WelcomeModal';
-import { hasSeenWelcome } from './storage/onboarding';
+import { hasEnteredApp, hasSeenWelcome, markEnteredApp, markWelcomeSeen } from './storage/onboarding';
+import { LandingPage } from './components/LandingPage';
+import { allKinds } from './quiz/templates';
+import type { QuestionKind } from './types/question';
+
+/** Same starter set the setup screen's Quick start uses. */
+const QUICK_START_KINDS: QuestionKind[] = [
+  'capCompression',
+  'goingInCap',
+  'vacancySensitivity',
+  'otherIncomeImpact',
+  'rentChange',
+  'combinedScenario',
+  'equityMultiple',
+  'irrSimple',
+].filter((k) => (allKinds as string[]).includes(k)) as QuestionKind[];
+
+function currentPath(): string {
+  if (typeof window === 'undefined') return '/';
+  return window.location.pathname.replace(/\/+$/, '') || '/';
+}
+
+/** `/welcome` always shows the landing page (shareable marketing link);
+ *  `/` shows it only to browsers that haven't entered the app yet. */
+function shouldShowLanding(): boolean {
+  const path = currentPath();
+  if (path === '/welcome') return true;
+  if (path !== '/') return false;
+  if (window.location.search || window.location.hash.includes('access_token')) return false;
+  return !hasEnteredApp();
+}
 import { AchievementToastHost } from './components/AchievementToast';
 import { FeedbackButton } from './components/FeedbackButton';
 import { FeedbackContextProvider } from './hooks/useFeedbackContext';
@@ -160,16 +190,56 @@ export default function App() {
   const matchInvite = detectMatchInvite();
   if (matchInvite) return <MatchInviteLanding {...matchInvite} />;
 
-  return <AppShell />;
+  return <Root />;
 }
 
-function AppShell() {
+function Root() {
+  const [landing, setLanding] = useState<boolean>(shouldShowLanding);
+  const [quickStart, setQuickStart] = useState(false);
+
+  if (landing) {
+    return (
+      <LandingPage
+        onEnter={({ quickStart: qs }) => {
+          markEnteredApp();
+          // The landing page already covers what the welcome slides explain.
+          markWelcomeSeen();
+          if (currentPath() === '/welcome') window.history.pushState({}, '', '/');
+          window.scrollTo(0, 0);
+          setQuickStart(qs);
+          setLanding(false);
+        }}
+      />
+    );
+  }
+  return <AppShell quickStart={quickStart} />;
+}
+
+function AppShell({ quickStart = false }: { quickStart?: boolean }) {
   useCloudSync();
   const [mode, setMode] = useState<Mode>('quiz');
   const [certView, setCertView] = useState<CertView>({ kind: 'list' });
   const [showWelcome, setShowWelcome] = useState<boolean>(() => !hasSeenWelcome());
   const { session, stats, start, submit, next, reset, endSession, enterReview, exitReview } =
     useQuizSession();
+
+  // Arriving from the landing page's "Start drilling" CTA: skip setup and
+  // drop straight into a 10-question Foundations session.
+  useEffect(() => {
+    markEnteredApp();
+    if (!quickStart) return;
+    start({
+      mode: 'free',
+      categories: QUICK_START_KINDS,
+      plannedCount: 10,
+      tolerancePreset: 'normal',
+      difficulty: 'intermediate',
+      assetClass: 'mixed',
+      role: 'all',
+      spacedRepetition: false,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const drill = useSpeedDrill();
   const walk = useWalkthrough();
   const sit = useSituational();
@@ -586,7 +656,9 @@ function AppShell() {
     <FeedbackContextProvider>
       <ScratchSheetProvider>
         <SideNav active={mode} onSwitch={handleSwitch} />
-        <main className="lg:pl-56">{innerContent}</main>
+        <main className="lg:pl-56">
+          <div className="px-4 sm:px-6">{innerContent}</div>
+        </main>
         {showWelcome && (
           <WelcomeModal
             onSkip={() => setShowWelcome(false)}
