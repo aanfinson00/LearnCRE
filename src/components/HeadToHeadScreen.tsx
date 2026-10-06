@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useAuth } from '../cloud/auth';
+import { startChallenge, submitChallenge } from '../cloud/challengeScoring';
 import {
   acceptMatchByToken,
   buildMatchInviteUrl,
@@ -11,7 +12,6 @@ import {
   type Match,
   type MatchWithProfiles,
   settleOutcome,
-  submitMatchResult,
 } from '../cloud/matches';
 import { generateFromSeed } from '../quiz/dailyChallenge';
 import {
@@ -437,18 +437,58 @@ interface PlayProps {
   onCancel: () => void;
 }
 
-function PlayMatch({ match, userId, onDone, onCancel }: PlayProps) {
+const START_ERRORS: Record<string, string> = {
+  already_played: "You've already played your side of this match.",
+  challenge_closed: 'This match has expired.',
+  not_a_participant: "You're not a player in this match.",
+};
+
+/**
+ * Records the server-side start before showing any question, so the match
+ * is graded and timed by the score-challenge function, not the browser.
+ */
+function PlayMatch(props: PlayProps) {
+  const { match, onCancel } = props;
+  const [start, setStart] = useState<'pending' | 'ok' | string>('pending');
+
+  useEffect(() => {
+    let active = true;
+    startChallenge('match', match.id).then((res) => {
+      if (active) setStart(res.ok ? 'ok' : res.error);
+    });
+    return () => {
+      active = false;
+    };
+  }, [match.id]);
+
+  if (start === 'ok') return <PlayMatchQuestions {...props} />;
+  return (
+    <Layout onBack={onCancel}>
+      <Card className="space-y-2">
+        {start === 'pending' ? (
+          <p className="font-mono text-[11px] text-warm-mute">Starting your side…</p>
+        ) : (
+          <p className="text-sm text-signal-bad-ink">
+            {START_ERRORS[start] ?? "Couldn't start the match. Check your connection and try again."}
+          </p>
+        )}
+      </Card>
+    </Layout>
+  );
+}
+
+function PlayMatchQuestions({ match, userId, onDone, onCancel }: PlayProps) {
+  // Same seeded set the server regenerates for grading.
   const questions = useMemo(() => generateFromSeed(match.seed), [match.seed]);
   const [submitState, setSubmitState] = useState<'idle' | 'pending' | 'error'>('idle');
   const [error, setError] = useState<string | null>(null);
 
-  async function handleComplete(attempts: ChallengeAttempt[], totalMs: number) {
-    const correctCount = attempts.filter((a) => a.correct).length;
+  async function handleComplete(attempts: ChallengeAttempt[]) {
     setSubmitState('pending');
-    const res = await submitMatchResult(match.id, correctCount, totalMs);
+    const res = await submitChallenge('match', match.id, attempts.map((a) => a.userInput));
     if (!res.ok) {
       setSubmitState('error');
-      setError(res.error ?? 'submit failed');
+      setError(res.error === 'already_played' ? 'Your side was already recorded.' : 'Could not submit your result.');
       return;
     }
     onDone();

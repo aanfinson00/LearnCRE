@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "build:standalone": "tsc -b && vite build --mode standalone"
+    "build:standalone": "tsc -b && vite build --mode standalone",
+    "build:edge": "node scripts/build-edge.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.105.3",

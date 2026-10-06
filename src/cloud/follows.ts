@@ -135,6 +135,7 @@ export async function fetchFriendsFeed(
       .from('daily_results')
       .select('user_id, date, correct, total, time_ms, completed_at')
       .in('user_id', followeeIds)
+      .eq('flagged', false)
       .order('completed_at', { ascending: false })
       .limit(limit),
   ]);

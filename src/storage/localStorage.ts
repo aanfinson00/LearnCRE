@@ -3,6 +3,7 @@ import type { QuestionKind } from '../types/question';
 import type { SessionRecord } from '../types/profile';
 import { profileKey } from './profiles';
 import { track } from '../analytics';
+import { takeSessionXp } from '../quiz/xp';
 
 const SESSIONS_LIMIT = 100;
 
@@ -107,7 +108,11 @@ export function saveSessions(records: SessionRecord[], profileId?: string): void
   }
 }
 
-export function recordSession(record: SessionRecord, profileId?: string): SessionRecord[] {
+export function recordSession(input: SessionRecord, profileId?: string): SessionRecord[] {
+  // Most modes grant XP per answer and leave xpEarned at 0 on the record;
+  // claim what was actually granted during the session. (Modes that pass an
+  // explicit total also granted it via applyXpDelta, so take the larger.)
+  const record: SessionRecord = { ...input, xpEarned: Math.max(input.xpEarned, takeSessionXp()) };
   track('session_completed', {
     mode: record.kind,
     attempts: record.attempts,

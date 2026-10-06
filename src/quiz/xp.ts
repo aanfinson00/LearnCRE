@@ -79,7 +79,23 @@ function emptyXp(): XpState {
   return { totalXp: 0, bestSessionXp: 0, currentStreak: 0, bestStreak: 0 };
 }
 
+/**
+ * XP granted since the last recorded session. Every mode grants XP through
+ * applyXpDelta, so this is the one place that sees all of it; recordSession
+ * claims it so each session record carries the XP actually earned in it
+ * (the weekly XP leaderboard sums those records).
+ */
+let unclaimedSessionXp = 0;
+
+/** Returns and resets the XP granted since the last call. */
+export function takeSessionXp(): number {
+  const xp = unclaimedSessionXp;
+  unclaimedSessionXp = 0;
+  return xp;
+}
+
 export function applyXpDelta(deltaXp: number, profileId?: string): XpState {
+  if (deltaXp > 0) unclaimedSessionXp += deltaXp;
   const cur = loadXp(profileId);
   const next: XpState = { ...cur, totalXp: cur.totalXp + deltaXp };
   saveXp(next, profileId);

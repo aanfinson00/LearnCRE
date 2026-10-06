@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useAuth } from '../cloud/auth';
+import { startChallenge, submitChallenge } from '../cloud/challengeScoring';
 import {
   fetchMyWeeklyResult,
   fetchWeeklyLeaderboard,
-  submitWeeklyResult,
   type WeeklyLeaderboardRow,
 } from '../cloud/weeklyChallenge';
 import {
@@ -107,6 +107,28 @@ function WeeklyRunner({ challenge, onBack, cloudEnabled, userId }: RunnerProps) 
     time_ms: number;
   } | null>(null);
   const [submitState, setSubmitState] = useState<'idle' | 'pending' | 'done' | 'error'>('idle');
+  // Ranked runs are graded and timed by the score-challenge Edge Function.
+  const [ranked, setRanked] = useState(false);
+  const [starting, setStarting] = useState(false);
+  const [flagged, setFlagged] = useState(false);
+  const [notice, setNotice] = useState<string | null>(null);
+
+  async function begin() {
+    if (cloudEnabled && userId) {
+      setStarting(true);
+      const res = await startChallenge('weekly', challenge.id);
+      setStarting(false);
+      if (!res.ok && res.error === 'already_played') {
+        markWeeklyPlayedLocally(challenge.id);
+        if (res.result) setMyCloudResult({ correct: res.result.correct, time_ms: res.result.timeMs });
+        setStage('finished');
+        return;
+      }
+      setRanked(res.ok);
+      if (!res.ok) setNotice("Couldn't reach the leaderboard server, so this run won't be ranked.");
+    }
+    setStage('playing');
+  }
 
   useEffect(() => {
     if (stage !== 'finished') return;
@@ -128,22 +150,21 @@ function WeeklyRunner({ challenge, onBack, cloudEnabled, userId }: RunnerProps) 
   }, [stage, challenge.id, cloudEnabled, userId]);
 
   async function handlePlayerComplete(attempts: ChallengeAttempt[], totalMs: number) {
-    const correctCount = attempts.filter((a) => a.correct).length;
     setFinalAttempts(attempts);
     setFinalTotalMs(totalMs);
     markWeeklyPlayedLocally(challenge.id);
     setStage('finished');
 
-    if (cloudEnabled && userId) {
+    if (ranked) {
       setSubmitState('pending');
-      const res = await submitWeeklyResult(
-        userId,
-        challenge.id,
-        correctCount,
-        questions.length,
-        totalMs,
-      );
-      setSubmitState(res.ok ? 'done' : 'error');
+      const res = await submitChallenge('weekly', challenge.id, attempts.map((a) => a.userInput));
+      if (res.ok) {
+        setMyCloudResult({ correct: res.correct, time_ms: res.timeMs });
+        setFlagged(res.flagged);
+        setSubmitState('done');
+      } else {
+        setSubmitState('error');
+      }
     }
   }
 
@@ -182,7 +203,9 @@ function WeeklyRunner({ challenge, onBack, cloudEnabled, userId }: RunnerProps) 
             {!cloudEnabled && ' Cloud sync is off, so you can play locally but the leaderboard is hidden.'}
           </p>
           <div className="flex justify-end pt-2">
-            <Button onClick={() => setStage('playing')}>Begin {challenge.theme}</Button>
+            <Button onClick={begin} disabled={starting}>
+              {starting ? 'Starting…' : `Begin ${challenge.theme}`}
+            </Button>
           </div>
         </Card>
       )}
@@ -201,7 +224,7 @@ function WeeklyRunner({ challenge, onBack, cloudEnabled, userId }: RunnerProps) 
               <div className="grid grid-cols-3 gap-3 font-mono text-sm num">
                 <Stat label="Correct" value={`${correctCount} / ${questions.length}`} />
                 <Stat label="Accuracy" value={`${Math.round((correctCount / questions.length) * 100)}%`} />
-                <Stat label="Time" value={fmtMs(totalMs)} />
+                <Stat label="Time" value={fmtMs(myCloudResult?.time_ms ?? totalMs)} />
               </div>
             ) : myCloudResult ? (
               <div className="grid grid-cols-3 gap-3 font-mono text-sm num">
@@ -225,9 +248,18 @@ function WeeklyRunner({ challenge, onBack, cloudEnabled, userId }: RunnerProps) 
             )}
             {submitState === 'error' && (
               <p className="font-mono text-[11px] text-signal-bad-ink">
-                Could not save to cloud. Result kept locally.
+                Could not record this run on the leaderboard.
               </p>
             )}
+            {submitState === 'done' && !flagged && (
+              <p className="font-mono text-[11px] text-warm-mute">Graded and timed on the server · ranked.</p>
+            )}
+            {flagged && (
+              <p className="font-mono text-[11px] text-signal-bad-ink">
+                Recorded, but finished too fast to rank publicly.
+              </p>
+            )}
+            {notice && <p className="font-mono text-[11px] text-warm-mute">{notice}</p>}
           </Card>
 
           {cloudEnabled ? (

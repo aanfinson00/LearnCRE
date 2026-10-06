@@ -29,6 +29,13 @@ jobs:
         run: npx tsc -b
       - name: Tests (incl. content guardrails)
         run: npm test
+      - name: Edge scoring bundle is up to date
+        # supabase/functions/_shared/scoring.bundle.js is generated from
+        # src/server/ (plus the question generators). If this fails, run
+        # `npm run build:edge` and commit the result.
+        run: |
+          npm run build:edge
+          git diff --exit-code -- supabase/functions/_shared/
       - name: Web build
         run: npx vite build
       - name: Standalone build

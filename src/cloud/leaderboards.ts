@@ -142,6 +142,7 @@ export async function fetchTodaysDaily(limit = 100): Promise<LeaderboardEntry[]>
     .from('daily_results')
     .select('user_id, correct, total, time_ms')
     .eq('date', today)
+    .eq('flagged', false)
     .order('correct', { ascending: false })
     .order('time_ms', { ascending: true })
     .limit(limit);

@@ -7,8 +7,9 @@ export interface Match {
   host_id: string;
   opponent_id: string | null;
   invite_token: string;
-  /** SQL bigint, but kept in JS-number range by generateSeed() (31-bit max).
-   *  Don't widen past Number.MAX_SAFE_INTEGER without a string round-trip. */
+  /** SQL bigint, drawn server-side in 31-bit range (matches_assign_seed
+   *  trigger). Don't widen past Number.MAX_SAFE_INTEGER without a string
+   *  round-trip. */
   seed: number;
   status: MatchStatus;
   host_correct: number | null;
@@ -35,20 +36,16 @@ export function buildMatchInviteUrl(matchId: string, token: string): string {
   return `${origin}/m/${matchId}?token=${encodeURIComponent(token)}`;
 }
 
-/** Random 32-bit unsigned int for the match seed. */
-function generateSeed(): number {
-  return Math.floor(Math.random() * 2 ** 31) >>> 0;
-}
 
 export async function createMatch(
   hostId: string,
 ): Promise<{ ok: true; match: Match } | { ok: false; error: string }> {
   const supabase = getSupabase();
   if (!supabase) return { ok: false, error: 'cloud disabled' };
-  const seed = generateSeed();
+  // The seed is drawn server-side (matches_assign_seed trigger).
   const { data, error } = await supabase
     .from('matches')
-    .insert({ host_id: hostId, seed })
+    .insert({ host_id: hostId })
     .select('*')
     .maybeSingle();
   if (error || !data) {
@@ -121,22 +118,6 @@ export async function acceptMatchByToken(
   const { error } = await supabase.rpc('accept_match_by_token', {
     p_match_id: matchId,
     p_token: token.trim(),
-  });
-  if (error) return { ok: false, error: error.message };
-  return { ok: true, error: null };
-}
-
-export async function submitMatchResult(
-  matchId: string,
-  correct: number,
-  timeMs: number,
-): Promise<{ ok: boolean; error: string | null }> {
-  const supabase = getSupabase();
-  if (!supabase) return { ok: false, error: 'cloud disabled' };
-  const { error } = await supabase.rpc('submit_match_result', {
-    p_match_id: matchId,
-    p_correct: correct,
-    p_time_ms: timeMs,
   });
   if (error) return { ok: false, error: error.message };
   return { ok: true, error: null };

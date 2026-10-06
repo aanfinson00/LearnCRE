@@ -15,31 +15,6 @@ export interface LeaderboardRow extends DailyResultRow {
   avatar_color: string | null;
 }
 
-/** Submit today's result. Idempotent on (date, user_id) — re-submits no-op. */
-export async function submitDailyResult(
-  userId: string,
-  date: string,
-  correct: number,
-  total: number,
-  timeMs: number,
-): Promise<{ ok: boolean; error: string | null }> {
-  const supabase = getSupabase();
-  if (!supabase) return { ok: false, error: 'cloud disabled' };
-  const { error } = await supabase.from('daily_results').insert({
-    date,
-    user_id: userId,
-    correct,
-    total,
-    time_ms: timeMs,
-  });
-  if (error) {
-    // PRIMARY KEY collision = already submitted today; treat as ok.
-    if (error.code === '23505') return { ok: true, error: null };
-    return { ok: false, error: error.message };
-  }
-  return { ok: true, error: null };
-}
-
 /** Returns the signed-in user's row for a given date, or null. */
 export async function fetchMyDailyResult(
   userId: string,
@@ -73,6 +48,7 @@ export async function fetchDailyLeaderboard(
     .from('daily_results')
     .select('*')
     .eq('date', date)
+    .eq('flagged', false)
     .order('correct', { ascending: false })
     .order('time_ms', { ascending: true })
     .limit(limit);

@@ -15,30 +15,6 @@ export interface WeeklyLeaderboardRow extends WeeklyResultRow {
   avatar_color: string | null;
 }
 
-/** Submit a weekly result. Idempotent on (challenge_id, user_id). */
-export async function submitWeeklyResult(
-  userId: string,
-  challengeId: string,
-  correct: number,
-  total: number,
-  timeMs: number,
-): Promise<{ ok: boolean; error: string | null }> {
-  const supabase = getSupabase();
-  if (!supabase) return { ok: false, error: 'cloud disabled' };
-  const { error } = await supabase.from('weekly_results').insert({
-    challenge_id: challengeId,
-    user_id: userId,
-    correct,
-    total,
-    time_ms: timeMs,
-  });
-  if (error) {
-    if (error.code === '23505') return { ok: true, error: null };
-    return { ok: false, error: error.message };
-  }
-  return { ok: true, error: null };
-}
-
 export async function fetchMyWeeklyResult(
   userId: string,
   challengeId: string,
@@ -65,6 +41,7 @@ export async function fetchWeeklyLeaderboard(
     .from('weekly_results')
     .select('*')
     .eq('challenge_id', challengeId)
+    .eq('flagged', false)
     .order('correct', { ascending: false })
     .order('time_ms', { ascending: true })
     .limit(limit);

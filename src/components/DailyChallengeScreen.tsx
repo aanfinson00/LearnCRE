@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useAuth } from '../cloud/auth';
+import { startChallenge, submitChallenge } from '../cloud/challengeScoring';
 import {
   fetchDailyLeaderboard,
   fetchMyDailyResult,
-  submitDailyResult,
   type LeaderboardRow,
 } from '../cloud/dailyChallenge';
 import {
@@ -52,6 +52,28 @@ export function DailyChallengeScreen({ onBack }: Props) {
     time_ms: number;
   } | null>(null);
   const [submitState, setSubmitState] = useState<'idle' | 'pending' | 'done' | 'error'>('idle');
+  // Ranked runs are graded and timed by the score-challenge Edge Function.
+  const [ranked, setRanked] = useState(false);
+  const [starting, setStarting] = useState(false);
+  const [flagged, setFlagged] = useState(false);
+  const [notice, setNotice] = useState<string | null>(null);
+
+  async function begin() {
+    if (cloudEnabled && user) {
+      setStarting(true);
+      const res = await startChallenge('daily', today);
+      setStarting(false);
+      if (!res.ok && res.error === 'already_played') {
+        markPlayedLocally(today);
+        if (res.result) setMyCloudResult({ correct: res.result.correct, time_ms: res.result.timeMs });
+        setStage('finished');
+        return;
+      }
+      setRanked(res.ok);
+      if (!res.ok) setNotice("Couldn't reach the leaderboard server, so this run won't be ranked.");
+    }
+    setStage('playing');
+  }
 
   // Load leaderboard + own cloud result whenever finished + signed in.
   useEffect(() => {
@@ -74,22 +96,21 @@ export function DailyChallengeScreen({ onBack }: Props) {
   }, [stage, today, cloudEnabled, user]);
 
   async function handlePlayerComplete(attempts: ChallengeAttempt[], totalMs: number) {
-    const correctCount = attempts.filter((a) => a.correct).length;
     setFinalAttempts(attempts);
     setFinalTotalMs(totalMs);
     markPlayedLocally(today);
     setStage('finished');
 
-    if (cloudEnabled && user) {
+    if (ranked) {
       setSubmitState('pending');
-      const res = await submitDailyResult(
-        user.id,
-        today,
-        correctCount,
-        questions.length,
-        totalMs,
-      );
-      setSubmitState(res.ok ? 'done' : 'error');
+      const res = await submitChallenge('daily', today, attempts.map((a) => a.userInput));
+      if (res.ok) {
+        setMyCloudResult({ correct: res.correct, time_ms: res.timeMs });
+        setFlagged(res.flagged);
+        setSubmitState('done');
+      } else {
+        setSubmitState('error');
+      }
     }
   }
 
@@ -123,7 +144,9 @@ export function DailyChallengeScreen({ onBack }: Props) {
             {!cloudEnabled && ' Cloud sync is off, so you can play locally but the leaderboard is hidden.'}
           </p>
           <div className="flex justify-end pt-2">
-            <Button onClick={() => setStage('playing')}>Begin daily</Button>
+            <Button onClick={begin} disabled={starting}>
+              {starting ? 'Starting…' : 'Begin daily'}
+            </Button>
           </div>
         </Card>
       )}
@@ -142,7 +165,7 @@ export function DailyChallengeScreen({ onBack }: Props) {
               <div className="grid grid-cols-3 gap-3 font-mono text-sm num">
                 <Stat label="Correct" value={`${correctCount} / ${questions.length}`} />
                 <Stat label="Accuracy" value={`${Math.round((correctCount / questions.length) * 100)}%`} />
-                <Stat label="Time" value={fmtMs(finalTotalMs)} />
+                <Stat label="Time" value={fmtMs(myCloudResult?.time_ms ?? finalTotalMs)} />
               </div>
             ) : myCloudResult ? (
               <div className="grid grid-cols-3 gap-3 font-mono text-sm num">
@@ -166,9 +189,18 @@ export function DailyChallengeScreen({ onBack }: Props) {
             )}
             {submitState === 'error' && (
               <p className="font-mono text-[11px] text-signal-bad-ink">
-                Could not save to cloud. Result kept locally.
+                Could not record this run on the leaderboard.
               </p>
             )}
+            {submitState === 'done' && !flagged && (
+              <p className="font-mono text-[11px] text-warm-mute">Graded and timed on the server · ranked.</p>
+            )}
+            {flagged && (
+              <p className="font-mono text-[11px] text-signal-bad-ink">
+                Recorded, but finished too fast to rank publicly.
+              </p>
+            )}
+            {notice && <p className="font-mono text-[11px] text-warm-mute">{notice}</p>}
           </Card>
 
           {cloudEnabled ? (
