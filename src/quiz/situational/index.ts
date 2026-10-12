@@ -7,6 +7,16 @@ import { matchesRole } from '../../types/role';
 import type { AssetClass } from '../assetClasses';
 import { capRateDivergence } from './capRateDivergence';
 import { absorptionTiming } from './absorptionTiming';
+import { absorptionPreleasedLeaseup } from './absorptionPreleasedLeaseup';
+import { absorptionSupplyPipeline } from './absorptionSupplyPipeline';
+import { absorptionGrossVsNet } from './absorptionGrossVsNet';
+import { compSaleTiming } from './compSaleTiming';
+import { compDistressedSale } from './compDistressedSale';
+import { compSizeMismatch } from './compSizeMismatch';
+import { leaseEffectiveRentComparison } from './leaseEffectiveRentComparison';
+import { leaseRenewalVsNewTenant } from './leaseRenewalVsNewTenant';
+import { sensitivityExitCapVsRentGrowth } from './sensitivityExitCapVsRentGrowth';
+import { sensitivityFloatingRateShock } from './sensitivityFloatingRateShock';
 import { markToMarketUpside } from './markToMarketUpside';
 import { noiGrowthSmellTest } from './noiGrowthSmellTest';
 import { compSetVetting } from './compSetVetting';
@@ -80,6 +90,16 @@ import { industrialTruckCourtBid } from './industrialTruckCourtBid';
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
   absorptionTiming,
+  absorptionPreleasedLeaseup,
+  absorptionSupplyPipeline,
+  absorptionGrossVsNet,
+  compSaleTiming,
+  compDistressedSale,
+  compSizeMismatch,
+  leaseEffectiveRentComparison,
+  leaseRenewalVsNewTenant,
+  sensitivityExitCapVsRentGrowth,
+  sensitivityFloatingRateShock,
   markToMarketUpside,
   noiGrowthSmellTest,
   compSetVetting,
