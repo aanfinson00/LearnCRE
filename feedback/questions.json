@@ -4087,6 +4087,732 @@
     },
     {
       "number": 59,
+      "id": "sit:industrial-spec-supply-absorption",
+      "type": "situational",
+      "title": "Industrial: is the spec pipeline a problem?",
+      "meta": "Situational · absorption · intermediate · industrial · acquisitions/development",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You're underwriting a 250,000 SF bulk distribution building in a 60M SF submarket. Vacancy is 5.5% and trailing 12-month net absorption was 2.4M SF. Another 3.6M SF is under construction and 40% of it is pre-leased. Your business plan assumes you can lease a rolling 60,000 SF vacancy in 12 months at today's rent."
+        },
+        {
+          "kind": "data",
+          "points": [
+            {
+              "label": "Submarket inventory",
+              "value": "60M SF"
+            },
+            {
+              "label": "Current vacancy",
+              "value": "5.5% (3.3M SF)"
+            },
+            {
+              "label": "Trailing net absorption",
+              "value": "2.4M SF / year"
+            },
+            {
+              "label": "Under construction",
+              "value": "3.6M SF"
+            },
+            {
+              "label": "Pre-leased share of pipeline",
+              "value": "40% (1.44M SF)"
+            },
+            {
+              "label": "Your assumed lease-up",
+              "value": "60,000 SF in 12 months"
+            }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "How should you size the supply risk to your lease-up assumption?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Net out the pre-leased space, then compare the unleased pipeline to demand: 2.16M SF of spec against 200,000 SF/month of absorption is about 11 months of supply at the current pace, and about 22 months if absorption halves. Underwrite the lease-up with that range and some rent give-up.",
+            "isBest": true,
+            "explanation": "Pre-leased space is already spoken for, so only the 2.16M SF of speculative space competes with your vacancy (3.6M × 60%). Dividing by monthly absorption (2.4M ÷ 12 = 200,000 SF) gives about 11 months of supply, which is digestible but not trivial. Halving absorption doubles it to about 22 months, which is longer than your 12-month plan. Stress-testing the denominator is the point: supply is only a risk relative to demand."
+          },
+          {
+            "label": "Treat the full 3.6M SF as new vacancy: 3.3M + 3.6M on a 63.6M SF base is about 10.8% vacancy, so the submarket is oversupplied and the plan fails.",
+            "isBest": false,
+            "explanation": "This ignores both pre-leasing and the demand that keeps absorbing space while the buildings are built. Deliveries are staggered over 12–24 months, and 2.4M SF a year of absorption removes a large share of that supply before the last building opens. Treating the pipeline as a one-day shock overstates the risk."
+          },
+          {
+            "label": "Ignore the pipeline because 5.5% vacancy is tight and absorption is strong. Underwrite the 12 months as planned.",
+            "isBest": false,
+            "explanation": "Backward-looking vacancy and absorption describe the market before the new supply arrives. A 3.6M SF pipeline is 6% of inventory and 1.5 years of absorption, so it is large enough to change leasing velocity and concessions. A tight market today does not protect a lease-up that finishes after the deliveries."
+          },
+          {
+            "label": "Assume the new buildings are higher quality and won't compete with your older 250,000 SF building, so supply is irrelevant to your tenants.",
+            "isBest": false,
+            "explanation": "Bulk distribution tenants shop across vintages on rent, clear height and location. New spec space at a similar size will compete directly, and older buildings usually respond with lower rent or more concession. Product differences can shift your pricing, but they rarely remove the competition."
+          }
+        ],
+        "takeaway": "Supply is only a risk relative to demand. Net out pre-leasing, divide the unleased pipeline by monthly absorption, and run it again with absorption cut in half.",
+        "tips": [
+          "Pre-leased pipeline is not spec risk; unleased pipeline is.",
+          "Months of supply = unleased pipeline ÷ monthly net absorption.",
+          "Stress absorption, not just supply; demand is the more volatile input."
+        ]
+      }
+    },
+    {
+      "number": 60,
+      "id": "sit:retail-cotenancy-go-dark",
+      "type": "situational",
+      "title": "Retail: what does the anchor going dark really cost?",
+      "meta": "Situational · lease-econ · advanced · retail · acquisitions/assetManagement",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You're buying a grocery-anchored center. The anchor lease has 3 years remaining, includes a go-dark right, and the anchor has said nothing about renewing. 22,000 SF of in-line shop space pays $28/SF NNN and carries a co-tenancy clause: if the anchor is dark for more than 6 months, those tenants pay 50% of base rent until an approved replacement opens. The broker says to ignore it because the anchor pays rent through expiry."
+        },
+        {
+          "kind": "data",
+          "points": [
+            {
+              "label": "Co-tenancy shop space",
+              "value": "22,000 SF"
+            },
+            {
+              "label": "Shop base rent",
+              "value": "$28/SF NNN ($616,000/yr)"
+            },
+            {
+              "label": "Co-tenancy remedy",
+              "value": "50% of base rent after 6 months dark"
+            },
+            {
+              "label": "Anchor lease",
+              "value": "3 years left, go-dark right"
+            },
+            {
+              "label": "Cap rate",
+              "value": "6.5%"
+            }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "How should you treat the co-tenancy exposure in underwriting?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Model it as a timed downside: anchor leaves at expiry, 6 months at full rent, then 50% rent until a backfill opens. A 12-month backfill costs about $154,000 and an 18-month backfill about $308,000, on top of the anchor's own downtime and TI. Check the cure and termination rights, and price the risk into your bid.",
+            "isBest": true,
+            "explanation": "The reduction is $616,000 × 50% = $308,000 a year, or $25,667 a month, but it only applies after the 6-month grace period and only until the replacement opens. A 12-month dark period costs 6 months of reduction (about $154,000), and an 18-month dark period costs 12 months (about $308,000). That is a real, bounded cost you can price, and it sits alongside the anchor's own lost rent, TI and leasing commissions."
+          },
+          {
+            "label": "Capitalize it as a permanent cut: $308,000 ÷ 6.5% is about $4.7M of value, so reduce the price by that amount today.",
+            "isBest": false,
+            "explanation": "The remedy ends when an approved replacement opens, so it is a temporary rent reduction, not a permanent loss of NOI. Capitalizing a temporary reduction overstates the hit by a wide margin. It also double-counts if the anchor renews, in which case the clause is never triggered."
+          },
+          {
+            "label": "Ignore it, because the anchor pays through expiry and a grocery box is easy to backfill.",
+            "isBest": false,
+            "explanation": "The clause costs money only after the anchor is dark, which can begin at any time because of the go-dark right, not just at expiry. The anchor can stop operating while still paying rent, which starts the 6-month clock. Easy to backfill is an assumption, not a lease term."
+          },
+          {
+            "label": "Ask the seller for a rep that the anchor will renew and rely on it.",
+            "isBest": false,
+            "explanation": "A seller cannot warrant a third party's future decision, and a rep survives for a limited period at a limited cap. Diligence should confirm the clause mechanics and the anchor's intentions, and the price should reflect the risk. A rep is not a substitute for either."
+          }
+        ],
+        "takeaway": "A co-tenancy clause is a bounded contingent liability. Model the trigger date, the grace period and the backfill time, and price that scenario instead of ignoring it or capitalizing it forever.",
+        "tips": [
+          "Read the trigger, the grace period and the end condition before putting a number on it.",
+          "A go-dark right can start the clock before the anchor lease expires.",
+          "Temporary rent reductions belong in the cash flow, not in a perpetual cap."
+        ]
+      }
+    },
+    {
+      "number": 61,
+      "id": "sit:development-yield-on-cost-sensitivity",
+      "type": "situational",
+      "title": "Development: does the spread survive a stress?",
+      "meta": "Situational · sensitivity · intermediate · multifamily · development/acquisitions",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "A garden-style development has a $50M all-in budget and a stabilized NOI of $3.5M on $5.38M of revenue. Operating expenses are mostly fixed. Your investment committee wants at least a 100 bps spread between yield on cost and the 5.5% exit cap. Your sponsor asks you to look at two downside cases: hard costs and soft costs rising 10%, and rents coming in 5% below plan."
+        },
+        {
+          "kind": "data",
+          "points": [
+            {
+              "label": "Total cost",
+              "value": "$50M"
+            },
+            {
+              "label": "Stabilized NOI",
+              "value": "$3.5M (7.0% yield on cost)"
+            },
+            {
+              "label": "Stabilized revenue",
+              "value": "$5.38M"
+            },
+            {
+              "label": "Exit cap",
+              "value": "5.5%"
+            },
+            {
+              "label": "Required spread",
+              "value": "100 bps minimum"
+            }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "What do the stress cases tell you?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Cost +10% takes yield on cost to 6.36% (down 64 bps) and rent −5% takes it to 6.46% (down 54 bps). Together they give 5.88%, only about 38 bps over the exit cap, so the deal misses the 100 bps test in either case and badly if both happen.",
+            "isBest": true,
+            "explanation": "Costs: $3.5M ÷ $55M = 6.36%. Rents: 5% of $5.38M is about $269,000, and with fixed expenses it falls straight to NOI, giving $3.23M ÷ $50M = 6.46%. Both: $3.23M ÷ $55M = 5.88%. Against a 5.5% exit cap that is a spread of roughly 38 bps. Each case alone already misses the 100 bps test (86 bps and 96 bps of spread), so the margin is thin on either variable."
+          },
+          {
+            "label": "Rent is the bigger risk because a 5% rent miss reduces NOI by 5%, while a 10% cost increase only affects the denominator.",
+            "isBest": false,
+            "explanation": "The rent miss reduces NOI by about 7.7% because expenses are fixed (the $269,000 loss is 7.7% of $3.5M), but cost overruns of 10% move the yield by a similar amount. In this deal they cost 54 and 64 bps, so cost overruns are slightly larger. The two risks are comparable, and the real danger is that they can occur together."
+          },
+          {
+            "label": "The deal is fine as long as yield on cost stays above the 5.5% exit cap, since the project still creates value.",
+            "isBest": false,
+            "explanation": "A spread of about 38 bps does not compensate for development risk, lease-up risk and the possibility that exit caps expand. The committee's 100 bps threshold exists because yield on cost is only a projection until the building stabilizes. Clearing the cap rate by a hair means the deal is earning a normal return for abnormal risk."
+          },
+          {
+            "label": "Run only the combined case, since single-variable sensitivities understate the downside.",
+            "isBest": false,
+            "explanation": "Single-variable cases are still useful because they show which assumption has the most leverage and which has cushion. The combined case answers how bad it can get, while the single-variable cases tell you what to monitor and where to negotiate (a GMP contract, pre-leasing). You want both views."
+          }
+        ],
+        "takeaway": "Yield on cost falls from both sides: costs enlarge the denominator and rents shrink the numerator. Test each alone and together against the required spread to the exit cap.",
+        "tips": [
+          "Yield on cost = stabilized NOI ÷ total cost; compare it to the exit cap, not to the going-in cap.",
+          "With fixed expenses, a rent miss falls entirely to NOI.",
+          "A GMP contract and pre-leasing cap the two risks that move the spread."
+        ]
+      }
+    },
+    {
+      "number": 62,
+      "id": "sit:exit-cap-equity-sensitivity",
+      "type": "situational",
+      "title": "How much does 50 bps of exit cap really cost the equity?",
+      "meta": "Situational · sensitivity · beginner · multifamily · acquisitions/portfolioMgmt",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You're buying a multifamily property for $40M with a $24M interest-only loan and $16M of equity. Your base case projects Year-5 NOI of $2.4M and a sale at a 5.0% cap rate. Your partner asks what happens to the equity if the exit cap comes in 50 bps wider at 5.5%. Ignore interim cash flow and sale costs for this exercise."
+        },
+        {
+          "kind": "data",
+          "points": [
+            {
+              "label": "Purchase price",
+              "value": "$40M"
+            },
+            {
+              "label": "Loan (interest-only)",
+              "value": "$24M (60% LTV)"
+            },
+            {
+              "label": "Equity",
+              "value": "$16M"
+            },
+            {
+              "label": "Year-5 NOI",
+              "value": "$2.4M"
+            },
+            {
+              "label": "Base exit cap",
+              "value": "5.0% ($48.0M sale)"
+            },
+            {
+              "label": "Stress exit cap",
+              "value": "5.5%"
+            }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "What does the 50 bps move do to sale proceeds to equity?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Value falls from $48.0M to about $43.6M (−9%), but because the $24M loan stays fixed, equity proceeds fall from $24.0M to about $19.6M (−18%). Leverage roughly doubles the percentage hit.",
+            "isBest": true,
+            "explanation": "$2.4M ÷ 5.5% = $43.64M versus $2.4M ÷ 5.0% = $48.0M, a drop of $4.36M or 9.1%. The loan is interest-only, so the full $24M is repaid at either exit. Equity proceeds go from $48.0M − $24.0M = $24.0M to $43.64M − $24.0M = $19.64M, a drop of 18.2%. The same dollar loss lands on a smaller equity base."
+          },
+          {
+            "label": "Equity falls by the same 9% as value, since the cap rate change applies to the whole property.",
+            "isBest": false,
+            "explanation": "The 9% value drop is a dollar loss ($4.36M) that comes entirely out of the equity, because the lender is still owed $24M. As a percentage of equity proceeds the loss is about 18%. Ignoring leverage understates the sensitivity of the equity."
+          },
+          {
+            "label": "Equity falls by about 10% because 50 bps is 10% of a 5.0% cap rate.",
+            "isBest": false,
+            "explanation": "The relative change in the cap rate (10%) is close to, but not the same as, the change in value, because value is 1 ÷ cap. A 10% rise in cap produces a 9.1% fall in value (1 ÷ 1.10 = 0.909). That still leaves the leverage effect unaccounted for."
+          },
+          {
+            "label": "It doesn't matter much because NOI growth over five years will make up the difference.",
+            "isBest": false,
+            "explanation": "NOI growth is already in the $2.4M Year-5 NOI. A wider cap rate is a separate risk and it applies to whatever NOI you achieve. Showing the sensitivity is exactly what lets you decide how much NOI cushion you need to offset it."
+          }
+        ],
+        "takeaway": "Value moves by 1 ÷ cap, and equity absorbs the whole dollar change because debt is fixed. At 60% LTV, a 9% value move becomes roughly an 18% move in sale equity.",
+        "tips": [
+          "Value = NOI ÷ cap; recompute rather than scaling by the cap change.",
+          "Debt is fixed at exit, so equity takes the full dollar loss.",
+          "Leverage multiplies sensitivity by roughly value ÷ equity at exit."
+        ]
+      }
+    },
+    {
+      "number": 63,
+      "id": "sit:industrial-net-effective-rent",
+      "type": "situational",
+      "title": "Industrial: which lease proposal is actually better?",
+      "meta": "Situational · lease-econ · intermediate · industrial · assetManagement/acquisitions",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You're leasing a 100,000 SF warehouse for 7 years. Two proposals are on the table. Tenant A offers a higher headline rent but wants more free rent and TI. Tenant B offers a lower headline rent with lighter concessions. Both are NNN with flat rent and similar credit. Ignore leasing commissions and discounting for the first pass."
+        },
+        {
+          "kind": "data",
+          "points": [
+            {
+              "label": "Proposal A",
+              "value": "$8.00/SF NNN, 4 months free, $3.00/SF TI"
+            },
+            {
+              "label": "Proposal B",
+              "value": "$7.60/SF NNN, 2 months free, $1.50/SF TI"
+            },
+            {
+              "label": "Term",
+              "value": "7 years, flat rent"
+            },
+            {
+              "label": "Credit",
+              "value": "Comparable"
+            }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "Which proposal is better, and why?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Proposal B. The net effective rents are nearly identical ($7.19 vs $7.21/SF), but B puts about $2.77/SF ($277,000) of rent and TI at risk up front, against about $5.67/SF ($567,000) for A. Same return, less capital out the door.",
+            "isBest": true,
+            "explanation": "A: $8.00 × 7 = $56.00, less 4 months of free rent ($2.67) and $3.00 TI = $50.33, or $7.19/SF/yr. B: $7.60 × 7 = $53.20, less 2 months free ($1.27) and $1.50 TI = $50.43, or $7.20/SF/yr. The undiscounted economics are a wash, and concessions are front-loaded, so A's extra $2.90/SF of upfront cost is the tiebreaker. Add a discount rate and a commission on gross rent and B's advantage widens."
+          },
+          {
+            "label": "Proposal A, because $8.00 is 5% higher than $7.60 and the headline rent will support a higher valuation.",
+            "isBest": false,
+            "explanation": "Headline rent is the number that gets marketed, but cash flow is what you collect. After concessions A's net effective rent is no better than B's. A buyer valuing the building on in-place rent may give credit for the higher face rate, but the owner funds the extra TI and free rent either way."
+          },
+          {
+            "label": "Proposal A, because a bigger TI allowance means the tenant is more invested and less likely to leave.",
+            "isBest": false,
+            "explanation": "Tenant stickiness comes from the tenant's own build-out spend, relocation cost and operational fit, not from the landlord's allowance. A larger allowance is simply landlord capital that is returned over a seven-year term. It does not buy retention by itself."
+          },
+          {
+            "label": "Neither can be compared until you know the tenants' exact start dates.",
+            "isBest": false,
+            "explanation": "Start dates would shift cash flow timing, but the proposals share a term and structure, so net effective rent and upfront capital already separate them. Waiting for more data defers a decision that the available terms support."
+          }
+        ],
+        "takeaway": "Compare leases on net effective rent and on how much capital goes out the door first. When net effective rents tie, the proposal with less front-loaded concession wins.",
+        "tips": [
+          "Net effective rent = (total rent − free rent − TI) ÷ term.",
+          "Concessions are paid up front, while higher rent arrives over time.",
+          "Rank proposals by net effective rent, then by capital at risk."
+        ]
+      }
+    },
+    {
+      "number": 64,
+      "id": "sit:hotel-occupancy-flow-through",
+      "type": "situational",
+      "title": "Hotel: what does a 5-point occupancy dip do to NOI?",
+      "meta": "Situational · sensitivity · intermediate · hotel · acquisitions/assetManagement",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You're underwriting a 150-key select-service hotel. Occupancy is 72% at a $180 ADR, total revenue is $10M, and NOI is $2.4M, so NOI margin is 24%. Your lender asks for a downside case where occupancy falls 5 points to 67% with ADR flat. Your analyst applies the 24% margin to the lost revenue."
+        },
+        {
+          "kind": "data",
+          "points": [
+            {
+              "label": "Keys",
+              "value": "150"
+            },
+            {
+              "label": "Occupancy / ADR",
+              "value": "72% / $180"
+            },
+            {
+              "label": "Total revenue",
+              "value": "$10.0M"
+            },
+            {
+              "label": "NOI / margin",
+              "value": "$2.4M / 24%"
+            },
+            {
+              "label": "Downside occupancy",
+              "value": "67% (ADR flat)"
+            },
+            {
+              "label": "Cap rate",
+              "value": "8.5%"
+            }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "How should the lost revenue flow to NOI?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Lost rooms revenue is about $493,000 (150 × 365 × $180 × 5%). Use a flow-through of roughly 55–65% because most hotel costs are fixed, which cuts NOI by about $270,000–320,000 (11–13%) and value by about $3.2–3.8M at an 8.5% cap.",
+            "isBest": true,
+            "explanation": "150 keys × 365 days × $180 × 5% = $492,750 of rooms revenue. Fewer occupied rooms save only variable costs such as housekeeping, laundry and amenities, so a high share of each lost dollar reaches NOI. At 55–65% flow-through NOI falls $271,000–320,000, or 11–13% of $2.4M, and at an 8.5% cap that is $3.2–3.8M of value. This is how revenue shocks hit hotels."
+          },
+          {
+            "label": "Apply the 24% margin: $493,000 × 24% is about $118,000, so NOI falls to about $2.28M.",
+            "isBest": false,
+            "explanation": "The average margin blends fixed and variable costs across all revenue. The incremental dollar of lost revenue avoids only variable costs, so the flow-through is much higher than the average margin. Using 24% understates the NOI drop by more than half."
+          },
+          {
+            "label": "Assume 100% flow-through because expenses are fixed: NOI falls by the full $493,000.",
+            "isBest": false,
+            "explanation": "Some costs do scale with occupied rooms (cleaning, laundry, supplies, credit-card fees, and some labor and management fees). Treating all costs as fixed overstates the drop. Flow-through for a select-service hotel is high but not 100%."
+          },
+          {
+            "label": "Ignore it, because ADR is flat and the hotel can raise rates to recover the lost occupancy.",
+            "isBest": false,
+            "explanation": "The scenario holds ADR flat on purpose so that you can isolate the occupancy effect. In a demand-driven occupancy decline, raising rates usually lowers occupancy further. RevPAR is the product of both, and a downside case should not assume the fix."
+          }
+        ],
+        "takeaway": "Hotel NOI moves with incremental flow-through, not with average margin. For select-service hotels, lost rooms revenue typically reaches NOI at 55–65%.",
+        "tips": [
+          "Rooms revenue = keys × 365 × occupancy × ADR.",
+          "Use incremental flow-through, not the blended margin, for revenue shocks.",
+          "Run the cap rate on the stressed NOI to see the value effect."
+        ]
+      }
+    },
+    {
+      "number": 65,
+      "id": "sit:multifamily-lease-up-carry",
+      "type": "situational",
+      "title": "Development: how long should the lease-up carry run?",
+      "meta": "Situational · absorption · intermediate · multifamily · development/assetManagement",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "A 240-unit garden community is delivering next year with a $42M construction loan at 7.5% interest-only. Your pro forma assumes leasing 18 units a month to a 93% stabilized occupancy. The last three comparable lease-ups in the submarket took 14, 15 and 17 months to stabilize. Your lender wants the interest reserve sized now."
+        },
+        {
+          "kind": "data",
+          "points": [
+            {
+              "label": "Units",
+              "value": "240"
+            },
+            {
+              "label": "Stabilized occupancy",
+              "value": "93% (about 223 units)"
+            },
+            {
+              "label": "Pro forma pace",
+              "value": "18 units/month"
+            },
+            {
+              "label": "Comparable lease-ups",
+              "value": "14, 15, 17 months"
+            },
+            {
+              "label": "Loan / rate",
+              "value": "$42M / 7.5% interest-only"
+            }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "What lease-up period should the carry assume?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Use the comps, not the pro forma: 223 units at 18 per month is 12.4 months, but the market took 14–17 months. Size the reserve for about 17 months or more. At about $262,500 of interest a month, the gap from 12.4 months to 17 months is roughly $1.2M.",
+            "isBest": true,
+            "explanation": "$42M × 7.5% ÷ 12 = $262,500 a month. 223 ÷ 18 is 12.4 months, or about $3.3M of interest, against about $4.5M at 17 months, a difference of roughly $1.2M before offsetting NOI. The pro forma pace is faster than any of the three recent lease-ups. Interest reserves are sized to the realistic downside, because running out mid-lease-up forces a costly equity call or loan extension."
+          },
+          {
+            "label": "Use the 12.4-month pro forma and the lender can top up later if it takes longer.",
+            "isBest": false,
+            "explanation": "The pro forma pace beat all three comps, so it is the optimistic case, not a base case. If the building runs long, the extra carry falls on you when equity is least available. Reserves should cover a reasonable downside, not the plan."
+          },
+          {
+            "label": "Use the 15-month comp average, since averages are the most defensible number.",
+            "isBest": false,
+            "explanation": "The average of 14, 15 and 17 is about 15.3 months, which is a reasonable base case but leaves no cushion for the slowest comp. A reserve sized to the average is exhausted half the time. The reserve should be sized to the slow end of the range, and the base case used for returns."
+          },
+          {
+            "label": "Skip the interest reserve and fund carry from operating cash flow as units come online.",
+            "isBest": false,
+            "explanation": "During lease-up, NOI is negative or thin because concessions are high and occupancy is low. Operating cash will not cover $262,500 a month of interest in the early months. That is the reason lenders require the reserve."
+          }
+        ],
+        "takeaway": "Size the carry to the slow end of local lease-up comps, not to the pro forma. The reserve covers the downside, while the base case drives returns.",
+        "tips": [
+          "Months to stabilize = stabilized units ÷ monthly absorption.",
+          "Monthly interest = loan × rate ÷ 12.",
+          "Check pro forma pace against recent comparable lease-ups."
+        ]
+      }
+    },
+    {
+      "number": 66,
+      "id": "sit:land-comp-buildable-sf",
+      "type": "situational",
+      "title": "Development: how do you value the land?",
+      "meta": "Situational · comp-selection · advanced · development/acquisitions",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You're pricing a 2.0-acre entitled site that allows a FAR of 3.0. You have two recent entitled land sales. Comp A was 1.5 acres with a FAR of 5.0 and sold for $9.8M. Comp B was 3.0 acres with a FAR of 2.0 and sold for $6.5M. The seller is pointing to the average price per land SF."
+        },
+        {
+          "kind": "data",
+          "points": [
+            {
+              "label": "Subject",
+              "value": "2.0 acres (87,120 SF), FAR 3.0 = 261,360 buildable SF"
+            },
+            {
+              "label": "Comp A",
+              "value": "65,340 SF land, FAR 5.0, $9.8M ($150/land SF)"
+            },
+            {
+              "label": "Comp B",
+              "value": "130,680 SF land, FAR 2.0, $6.5M ($50/land SF)"
+            },
+            {
+              "label": "Seller claim",
+              "value": "Average about $100/land SF = $8.7M"
+            }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "How should you compare the land sales to the subject?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Compare on price per buildable SF: Comp A is about $30/BSF and Comp B about $25/BSF. Applied to the subject's 261,360 buildable SF, that supports roughly $6.5–7.8M, below the seller's $8.7M.",
+            "isBest": true,
+            "explanation": "Developers pay for what they can build. Comp A has 65,340 × 5.0 = 326,700 buildable SF, so $9.8M ÷ 326,700 is about $30/BSF. Comp B has 130,680 × 2.0 = 261,360 buildable SF, so $6.5M ÷ 261,360 is about $25/BSF. At $25–30 per buildable SF the subject indicates $6.5–7.8M. Price per land SF reads very differently only because the comps have very different densities."
+          },
+          {
+            "label": "Average the price per land SF of the two comps ($100) and apply it to the subject's 87,120 SF.",
+            "isBest": false,
+            "explanation": "Land SF ignores density, which is the main driver of land value. Comp A's land SF price is three times Comp B's because it can hold 2.5 times as much building on each acre. Averaging two numbers that are not on the same basis gives a figure that is not tied to either."
+          },
+          {
+            "label": "Use only Comp B because its density is closest to the subject's FAR of 3.0.",
+            "isBest": false,
+            "explanation": "Comp B's FAR is 2.0 and Comp A's is 5.0, so the subject sits between them. Using one comp discards information, and the point of normalizing per buildable SF is that both comps become usable. Normalize, then adjust for location and timing."
+          },
+          {
+            "label": "Use a residual land value from your own pro forma and ignore the comps, since land is a plug.",
+            "isBest": false,
+            "explanation": "A residual value is a valuable check, but it depends on your rent, cost and return assumptions and moves a lot with each input. The comps show what other developers paid. The two methods should be reconciled, not substituted for each other."
+          }
+        ],
+        "takeaway": "Entitled land is priced per buildable SF, not per land SF. Normalize for density first, then adjust for location, timing and entitlement risk.",
+        "tips": [
+          "Buildable SF = land SF × FAR.",
+          "Price per land SF only compares sites with the same density.",
+          "Cross-check the comp range against a residual land value."
+        ]
+      }
+    },
+    {
+      "number": 67,
+      "id": "sit:hotel-comp-set-rebuild",
+      "type": "situational",
+      "title": "Hotel: is a 98 RevPAR index really upside?",
+      "meta": "Situational · comp-selection · intermediate · hotel · acquisitions/assetManagement",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "A broker markets a 140-key select-service hotel with a RevPAR index of 98 against its six-hotel STR comp set and argues you can reach 110 with new management and a renovation. Looking at the comp set, two hotels opened within the last 18 months and are still ramping, and one is a full-service hotel with 30,000 SF of meeting space. The other three are select-service hotels of similar age."
+        },
+        {
+          "kind": "data",
+          "points": [
+            {
+              "label": "Subject",
+              "value": "140-key select-service"
+            },
+            {
+              "label": "RevPAR index",
+              "value": "98 vs six-hotel comp set"
+            },
+            {
+              "label": "Broker target",
+              "value": "110 after renovation"
+            },
+            {
+              "label": "Comp set",
+              "value": "3 similar select-service, 2 ramping new builds, 1 full-service"
+            }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "How should you test the broker's claim?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Rebuild the comp set around true peers (the three similar select-service hotels), look at index trends with and without the ramping new builds, and ask what the renovation does for ADR and occupancy compared with the peers. Then test whether 110 is supported.",
+            "isBest": true,
+            "explanation": "An index is only as good as its comp set. A full-service hotel with large meeting space earns group and banquet revenue the subject never will, and new builds in ramp-up are still gaining share, so both distort the benchmark in different directions. Re-cutting to the three true peers and watching the index over time shows the subject's real position. Then the renovation case has to justify the 12-point gain with specific rate and occupancy drivers."
+          },
+          {
+            "label": "Accept the 98 index as reported. It is the official STR number and the broker's 110 target is a reasonable lift.",
+            "isBest": false,
+            "explanation": "STR reports the index for whichever comp set the owner submitted, so it is not an audited judgment on peer quality. A set that mixes segments and ramping properties can make the subject look better or worse than it is. A 12-point lift needs a plan based on the correct peers."
+          },
+          {
+            "label": "Drop the full-service hotel and keep the two new builds, because new product is the best indicator of where the market is heading.",
+            "isBest": false,
+            "explanation": "New builds still ramping have not reached stabilized occupancy, so their performance is not representative. Their share will change as they mature. Removing one distortion while keeping another does not produce a clean peer set."
+          },
+          {
+            "label": "Ignore the index and underwrite from the subject's own RevPAR growth over the last three years.",
+            "isBest": false,
+            "explanation": "Subject-only trends cannot separate market movement from share gain or loss. The index exists to show whether the hotel is outperforming its market. Own-history trends are useful alongside it, not in place of it."
+          }
+        ],
+        "takeaway": "A RevPAR index is a function of its comp set. Rebuild it around true peers, compare trends with and without ramping properties, and require a specific plan for any share gain.",
+        "tips": [
+          "Comp sets should match segment, age, size and location.",
+          "New builds in ramp-up and full-service hotels distort a select-service index.",
+          "A projected index gain needs named rate and occupancy drivers."
+        ]
+      }
+    },
+    {
+      "number": 68,
+      "id": "sit:retail-unanchored-cap-comps",
+      "type": "situational",
+      "title": "Retail: which cap rate comps apply to an unanchored strip?",
+      "meta": "Situational · comp-selection · beginner · retail · acquisitions/mortgageUw",
+      "blocks": [
+        {
+          "kind": "prose",
+          "text": "You're pricing a 40,000 SF unanchored strip center with local tenants and 4.5 years of weighted average lease term. Your broker's comp package has three grocery-anchored sales at 6.0%–6.25% and two unanchored strip sales at 7.25%–7.5%. The broker suggests pricing at 6.25% because there are more anchored comps."
+        },
+        {
+          "kind": "data",
+          "points": [
+            {
+              "label": "Subject",
+              "value": "40,000 SF unanchored strip, WALT 4.5 years"
+            },
+            {
+              "label": "Anchored comps",
+              "value": "3 sales, 6.00%–6.25%"
+            },
+            {
+              "label": "Unanchored comps",
+              "value": "2 sales, 7.25%–7.50%"
+            },
+            {
+              "label": "Broker suggestion",
+              "value": "6.25%"
+            }
+          ]
+        },
+        {
+          "kind": "ask",
+          "text": "How should you use these comps?"
+        }
+      ],
+      "answer": {
+        "kind": "choice",
+        "options": [
+          {
+            "label": "Anchor on the two unanchored sales (7.25%–7.50%) and adjust for specifics like WALT, tenant mix and location. Use the grocery-anchored deals only as a floor that the subject should trade wide of.",
+            "isBest": true,
+            "explanation": "Cap rates in retail are driven by traffic stability and tenant credit, and a grocery anchor changes both. The anchored sales reflect that durability, so they are a lower bound, not a peer. The unanchored sales are the same product type, so they set the range. Adjustments for WALT and location then move the subject within or slightly around 7.25%–7.50%."
+          },
+          {
+            "label": "Average all five comps (about 6.7%) since more data points produce a more reliable number.",
+            "isBest": false,
+            "explanation": "Averaging blends two different risk profiles into a number that matches neither. A larger sample helps only when the observations are from the same population. Five comps from two asset types give a precise-looking answer to the wrong question."
+          },
+          {
+            "label": "Use 6.25% as the broker suggests, since the majority of the comps are anchored.",
+            "isBest": false,
+            "explanation": "Comp selection is about similarity, not counting. At 6.25% versus 7.25% on, say, $1.6M of NOI, the difference is about $3.7M of value (1.6M ÷ 6.25% = $25.6M versus 1.6M ÷ 7.25% = $22.1M). That is a large amount to give up because of how the comp package was assembled."
+          },
+          {
+            "label": "Discard the unanchored comps because only two sales is too small a sample.",
+            "isBest": false,
+            "explanation": "Two relevant comps are more informative than three irrelevant ones. The right response to a thin sample is to widen the search for more unanchored sales or to add a risk premium over the anchored comps, not to switch to the wrong product type."
+          }
+        ],
+        "takeaway": "Choose comps on similarity of risk, not on count. Anchored retail is a floor for an unanchored strip, and the unanchored sales set the range.",
+        "tips": [
+          "A grocery anchor lowers cap rates by stabilizing traffic and rent.",
+          "Thin comps call for a wider search, not for a different asset type.",
+          "Show the value effect of the cap rate choice in dollars."
+        ]
+      }
+    },
+    {
+      "number": 69,
       "id": "sit:lease-billback-allowance",
       "type": "situational",
       "title": "Bill-back allowance — what can the landlord actually pass through?",
@@ -4142,7 +4868,7 @@
       }
     },
     {
-      "number": 60,
+      "number": 70,
       "id": "sit:lease-base-year-vs-stop",
       "type": "situational",
       "title": "Base year vs expense stop — which one are you actually reading?",
@@ -4198,7 +4924,7 @@
       }
     },
     {
-      "number": 61,
+      "number": 71,
       "id": "sit:lease-cam-reconciliation",
       "type": "situational",
       "title": "CAM reconciliation — what does the year-end true-up actually do?",
@@ -4254,7 +4980,7 @@
       }
     },
     {
-      "number": 62,
+      "number": 72,
       "id": "sit:construction-liquidated-damages",
       "type": "situational",
       "title": "Construction LDs — does this clause actually cover the owner's losses?",
@@ -4310,7 +5036,7 @@
       }
     },
     {
-      "number": 63,
+      "number": 73,
       "id": "sit:psa-earnest-money-default",
       "type": "situational",
       "title": "PSA earnest money — who keeps the deposit when the deal blows up?",
@@ -4366,7 +5092,7 @@
       }
     },
     {
-      "number": 64,
+      "number": 74,
       "id": "sit:construction-equity-first-vs-paripassu",
       "type": "situational",
       "title": "Equity-first vs pari-passu — which structure does the lender want?",
@@ -4436,7 +5162,7 @@
       }
     },
     {
-      "number": 65,
+      "number": 75,
       "id": "sit:construction-change-order-pricing",
       "type": "situational",
       "title": "Change order pricing — who pays for the variance?",
@@ -4491,7 +5217,7 @@
       }
     },
     {
-      "number": 66,
+      "number": 76,
       "id": "sit:construction-retainage-release-trigger",
       "type": "situational",
       "title": "Retainage release — when does the contractor get paid?",
@@ -4546,7 +5272,7 @@
       }
     },
     {
-      "number": 67,
+      "number": 77,
       "id": "sit:capital-allocation-priority",
       "type": "situational",
       "title": "Five deals, three slots — which framework picks?",
@@ -4628,7 +5354,7 @@
       }
     },
     {
-      "number": 68,
+      "number": 78,
       "id": "sit:risk-adjusted-return-framework",
       "type": "situational",
       "title": "Risk-adjusted return — what's the actual framework?",
@@ -4702,7 +5428,7 @@
       }
     },
     {
-      "number": 69,
+      "number": 79,
       "id": "sit:hotel-revpar-divergence",
       "type": "situational",
       "title": "Hotel: your RevPAR index is below 100 and falling — what now?",
@@ -4779,7 +5505,7 @@
       }
     },
     {
-      "number": 70,
+      "number": 80,
       "id": "sit:retail-percentage-rent-clause",
       "type": "situational",
       "title": "Retail: how do you underwrite percentage rent that's 8% of NOI?",
@@ -4864,7 +5590,7 @@
       }
     },
     {
-      "number": 71,
+      "number": 81,
       "id": "sit:industrial-truck-court-bid",
       "type": "situational",
       "title": "Industrial: defend a higher $/SF bid on a wider truck court",
@@ -4949,7 +5675,7 @@
       }
     },
     {
-      "number": 72,
+      "number": 82,
       "id": "lf:walk-me-through-bid",
       "type": "longform",
       "title": "Walk me through your bid",
@@ -5021,7 +5747,7 @@
       }
     },
     {
-      "number": 73,
+      "number": 83,
       "id": "lf:diagnose-noi-miss",
       "type": "longform",
       "title": "Diagnose the NOI miss for the LP IC memo",
@@ -5093,7 +5819,7 @@
       }
     },
     {
-      "number": 74,
+      "number": 84,
       "id": "lf:defend-deal-to-ic",
       "type": "longform",
       "title": "Defend this deal to a skeptical IC",
@@ -5165,7 +5891,7 @@
       }
     },
     {
-      "number": 75,
+      "number": 85,
       "id": "lf:refi-or-sell-memo",
       "type": "longform",
       "title": "Recommend: refi or sell — write the IC memo",
@@ -5233,7 +5959,7 @@
       }
     },
     {
-      "number": 76,
+      "number": 86,
       "id": "lf:walk-me-through-waterfall",
       "type": "longform",
       "title": "Walk me through a 3-tier deal-by-deal (\"American\") waterfall",
@@ -5268,7 +5994,7 @@
       }
     },
     {
-      "number": 77,
+      "number": 87,
       "id": "lf:defend-waterfall-terms",
       "type": "longform",
       "title": "Defend the waterfall terms to IC",
@@ -5329,7 +6055,7 @@
       }
     },
     {
-      "number": 78,
+      "number": 88,
       "id": "lf:dev-feasibility-memo",
       "type": "longform",
       "title": "IC memo: defend a ground-up MF dev pencil",
@@ -5408,7 +6134,7 @@
       }
     },
     {
-      "number": 79,
+      "number": 89,
       "id": "lf:loan-committee-memo",
       "type": "longform",
       "title": "Loan committee: defend a $30M permanent on a stressed-market office",
@@ -5483,7 +6209,7 @@
       }
     },
     {
-      "number": 80,
+      "number": 90,
       "id": "lf:am-noi-diagnosis",
       "type": "longform",
       "title": "Year 2 NOI miss: diagnose, prove it, fix it",
@@ -5555,7 +6281,7 @@
       }
     },
     {
-      "number": 81,
+      "number": 91,
       "id": "mock:fit-tell-me-about-yourself",
       "type": "mock",
       "title": "Tell me about yourself…",
@@ -5583,7 +6309,7 @@
       }
     },
     {
-      "number": 82,
+      "number": 92,
       "id": "mock:fit-why-cre",
       "type": "mock",
       "title": "Why commercial real estate, as opposed to corporate finance,…",
@@ -5611,7 +6337,7 @@
       }
     },
     {
-      "number": 83,
+      "number": 93,
       "id": "mock:fit-why-this-firm",
       "type": "mock",
       "title": "Why our firm specifically…",
@@ -5639,7 +6365,7 @@
       }
     },
     {
-      "number": 84,
+      "number": 94,
       "id": "mock:beh-disagree-with-vp",
       "type": "mock",
       "title": "Tell me about a time you disagreed with someone more senior…",
@@ -5669,7 +6395,7 @@
       }
     },
     {
-      "number": 85,
+      "number": 95,
       "id": "mock:beh-failed-deal",
       "type": "mock",
       "title": "Tell me about a deal that didn't work out the way you expect…",
@@ -5698,7 +6424,7 @@
       }
     },
     {
-      "number": 86,
+      "number": 96,
       "id": "mock:beh-data-vs-instinct",
       "type": "mock",
       "title": "Tell me about a time the data said one thing and your instin…",
@@ -5727,7 +6453,7 @@
       }
     },
     {
-      "number": 87,
+      "number": 97,
       "id": "mock:beh-mentor-feedback",
       "type": "mock",
       "title": "Tell me about a piece of critical feedback you received that…",
@@ -5756,7 +6482,7 @@
       }
     },
     {
-      "number": 88,
+      "number": 98,
       "id": "mock:beh-time-pressure",
       "type": "mock",
       "title": "Tell me about a time you had to deliver under serious time p…",
@@ -5785,7 +6511,7 @@
       }
     },
     {
-      "number": 89,
+      "number": 99,
       "id": "mock:beh-tenant-negotiation",
       "type": "mock",
       "title": "Tell me about a tenant negotiation you led where the stakes…",
@@ -5815,7 +6541,7 @@
       }
     },
     {
-      "number": 90,
+      "number": 100,
       "id": "mock:beh-credit-decision",
       "type": "mock",
       "title": "Tell me about a close credit-call you made on a deal — one w…",
@@ -5842,532 +6568,6 @@
           "Honest outcome reporting separates strong candidates. \"Worked out fine\" reads as luck; \"they outperformed underwriting on these specific lines\" reads as judgment."
         ],
         "expectedDurationSec": 100
-      }
-    },
-    {
-      "number": 91,
-      "id": "mock:mv-cap-rate-direction",
-      "type": "mock",
-      "title": "Where do you see institutional CRE cap rates over the next 1…",
-      "meta": "Mock · marketView · ~120s",
-      "blocks": [
-        {
-          "kind": "ask",
-          "text": "Where do you see institutional CRE cap rates over the next 12-18 months? Pick a position and defend it."
-        }
-      ],
-      "answer": {
-        "kind": "model",
-        "modelAnswer": "I expect modest compression (25-50 bps) on Class-A institutional in primary markets, but flat-to-widening on secondary / Class-B over the next 12-18 months. Three things support compression on the trophy end: 10-year Treasury settling 50 bps below current peak gives spread relief; transaction volumes are recovering off the 2023 trough, which historically precedes 1-2 quarters of cap-rate tightening; and capital-flow data shows institutional dry powder is $400B+, with allocators starting to deploy. The reason I think secondary markets stay wider: insurance-cost shocks haven't flushed through underwriting yet, and the bid pool for B+ assets is thinner — fewer buyers willing to compete for marginal yield. The strongest counter to my view is a re-acceleration in Treasury yields, which would gut the trophy compression. What would change my mind: a print of CPI above 3.5% sustained for two months — that pushes my baseline to range-bound with a wider downside.",
-        "rubric": [
-          "Takes a clear directional position (compress / widen / range-bound)",
-          "Cites concrete data — Treasury rates, transaction volumes, observed comps",
-          "Differentiates by sector — caps don't move in lockstep",
-          "Acknowledges the strongest case against your view",
-          "Names what would change your mind"
-        ],
-        "tips": [
-          "Take a position. \"It depends\" is the worst answer; weak directional view beats hedging.",
-          "Mix sector / geography nuance. Cap-rate views that treat all CRE as one trade signal shallow thinking.",
-          "Always include a falsification trigger (\"what would change my mind\"). Senior partners listen for it."
-        ],
-        "expectedDurationSec": 120
-      }
-    },
-    {
-      "number": 92,
-      "id": "mock:mv-sector-overweight",
-      "type": "mock",
-      "title": "If you had $100M of dry powder to deploy in CRE in the next…",
-      "meta": "Mock · marketView · ~120s",
-      "blocks": [
-        {
-          "kind": "ask",
-          "text": "If you had $100M of dry powder to deploy in CRE in the next year, which sector would you over-weight, and which would you under-weight? Why?"
-        }
-      ],
-      "answer": {
-        "kind": "model",
-        "modelAnswer": "Over-weight Sun Belt MF, specifically Class-B garden product in secondary MSAs (roughly 500k-2M people) that aren't the headline metros. Under-weight gateway-market office. The MF thesis: secondary-market Class-B is trading at 75-100 bps wider than primary because the bid pool is thinner, but rent-growth fundamentals are *better* than in primary (population growth + supply absorption). I'd look for value-add at 6.5-7.0% going-in cap, $8-15k/door of value-add capex earning ~12% return on cost through rent premiums, and exit caps modeled wider than going-in. Discipline trigger: stop buying once going-in cap compresses below 6.0%. The under-weight on office is structural — even at $200/SF on Class-A, hybrid work has reset demand permanently for ~30% of the previous market; and Class-B is functionally obsolete. Risk to MF thesis: rate-driven recession that hits jobs in the Sun Belt disproportionately. Risk to office under-weight: I miss the trade if rates fall fast enough that everything compresses. I'd hedge the second risk by holding 5-10% in cash to redeploy.",
-        "rubric": [
-          "Specific over/under-weight calls (not \"diversify\")",
-          "Clear underwriting thesis — what dynamic drives the call",
-          "Names the specific sub-sector / market where the trade actually works",
-          "Acknowledges what could break the thesis",
-          "Shows pricing discipline — at what cap / YoC does it stop being a buy?"
-        ],
-        "tips": [
-          "Concrete sub-sector + geography beats sector-level views. Specificity = credibility.",
-          "Always state the *price discipline* — at what cap rate does it stop being a buy?",
-          "Show you understand the trade can be wrong. Risk acknowledgment differentiates from sales pitch."
-        ],
-        "expectedDurationSec": 120
-      }
-    },
-    {
-      "number": 93,
-      "id": "mock:mv-lender-spread-direction",
-      "type": "mock",
-      "title": "Where do you see CRE debt spreads moving over the next 12 mo…",
-      "meta": "Mock · marketView · ~120s",
-      "blocks": [
-        {
-          "kind": "ask",
-          "text": "Where do you see CRE debt spreads moving over the next 12 months — for senior bank debt, agency, and CMBS? Pick a stance and defend it."
-        }
-      ],
-      "answer": {
-        "kind": "model",
-        "modelAnswer": "I expect senior bank spreads to tighten 25-50 bps over the next 12 months as deposit costs stabilize and bank balance sheets digest the 2023-24 CRE writedowns. Agency spreads should be roughly flat — Fannie/Freddie pricing is policy-driven and the rate-driven spread compression is mostly priced in. CMBS I'd expect to widen 10-25 bps, especially on office and lower-tier multifamily, as the maturity wall puts pressure on issuance and AAA tranche buyers stay defensive. The differentiation matters: bank debt is supply-constrained (banks pulled back); agency is regulated; CMBS is capital-markets-priced. The strongest counter to my bank-spread-tightening call is a Texas-bank-style stress test resurfacing — that resets risk premia. The signal I'd look for: 30-day deposit-flight-to-quality data in the regional bank tape — if that re-spikes, my bank-tightening view fails.",
-        "rubric": [
-          "Differentiated stance across the three lender categories",
-          "Anchors view in capital flows / underwriting trends / credit losses",
-          "Acknowledges spreads vary by asset class within each category",
-          "Names what would shift your view"
-        ],
-        "tips": [
-          "Senior bank / agency / CMBS each price differently — sophisticated lenders distinguish.",
-          "Anchor in capital-flow data: deposits, issuance volumes, AAA tranche bid.",
-          "Always include a falsification: \"what would change my mind on this trade?\""
-        ],
-        "expectedDurationSec": 120
-      }
-    },
-    {
-      "number": 94,
-      "id": "mock:mv-debt-equity-mix",
-      "type": "mock",
-      "title": "How are you thinking about the debt-vs-equity mix in CRE dep…",
-      "meta": "Mock · marketView · ~120s",
-      "blocks": [
-        {
-          "kind": "ask",
-          "text": "How are you thinking about the debt-vs-equity mix in CRE deployment today? Should investors lean more into preferred equity / mezz / debt funds, or stay in common equity?"
-        }
-      ],
-      "answer": {
-        "kind": "model",
-        "modelAnswer": "I lean credit-heavy in this environment but not exclusively. Mezz and pref equity are pricing 11-13% all-in for assets where common equity is barely clearing 8-10% IRR after adjusting for cap-rate widening risk. The risk-return trade-off favors credit: you get equity-like return with debt-like protection, and the asset has to drop 30%+ in value before you take a real loss. The case for common equity: distressed transactions where you can buy at 7-8% YoC on a 5%-cap stabilized basis. That's where common equity's upside is real. So my framework: 65-70% to credit (mezz / pref / agency-paper) for liquidity-of-yield + downside protection, 25-30% to common equity in *deeply* discounted situations only, 5-10% in cash for opportunistic redeployment. The counter to credit-heavy: if rates compress 100 bps over the next year, common equity captures the cap-rate compression while credit just keeps clipping coupons. So credit-heavy gives up the convex upside in a rates-down scenario.",
-        "rubric": [
-          "Takes a position on the trade-off",
-          "Anchors view in the current rate / spread environment",
-          "Articulates the risk-return trade-off explicitly",
-          "Names where common equity beats credit despite the rate environment"
-        ],
-        "tips": [
-          "Frame the trade as risk-return, not \"credit is better than equity.\" Both have a place.",
-          "Mention specific yields you're seeing in the market — generic numbers signal you don't actually price deals.",
-          "Acknowledge the convexity asymmetry: credit caps your upside."
-        ],
-        "expectedDurationSec": 120
-      }
-    },
-    {
-      "number": 95,
-      "id": "walk:walk-combined-1",
-      "type": "walkthrough",
-      "title": "Combined Proforma — chained",
-      "meta": "Walkthrough · combinedScenarioWalk · acquisitions",
-      "blocks": [
-        {
-          "kind": "prose",
-          "text": "You're underwriting an apartment building. GPR is $4,500,000, other income is $250,000, vacancy is 5.00%, OpEx is $1,900,000, and you're using a 6.00% cap rate. Walk it step by step."
-        }
-      ],
-      "answer": {
-        "kind": "steps",
-        "steps": [
-          {
-            "label": "Step 1 — Gross income",
-            "prompt": "What's the gross income (GPR + other income, before vacancy)?",
-            "expected": 4750000,
-            "unit": "usd",
-            "resultDescription": "$4,500,000 + $250,000 = $4,750,000."
-          },
-          {
-            "label": "Step 2 — Effective gross income",
-            "prompt": "Apply 5.00% vacancy. What's EGI?",
-            "expected": 4512500,
-            "unit": "usd",
-            "resultDescription": "$4,750,000 × (1 − 5.00%) = $4,512,500."
-          },
-          {
-            "label": "Step 3 — Net operating income",
-            "prompt": "Subtract OpEx. What's NOI?",
-            "expected": 2612500,
-            "unit": "usd",
-            "resultDescription": "$4,512,500 − $1,900,000 = $2,612,500."
-          },
-          {
-            "label": "Step 4 — Implied value",
-            "prompt": "At a 6.00% cap, what's the implied value?",
-            "expected": 43541666.66666667,
-            "unit": "usd",
-            "resultDescription": "$2,612,500 / 6.00% = $43,541,667."
-          }
-        ],
-        "takeaway": "Each line of a proforma is a single arithmetic step. Chaining them is the whole valuation. Master each step in isolation and the full proforma collapses to one expression: ((GPR + Other) × (1 − vac) − OpEx) / cap."
-      }
-    },
-    {
-      "number": 96,
-      "id": "walk:walk-dscr-1",
-      "type": "walkthrough",
-      "title": "DSCR Loan Sizing — chained",
-      "meta": "Walkthrough · dscrLoanSizingWalk · mortgageUw/acquisitions",
-      "blocks": [
-        {
-          "kind": "prose",
-          "text": "Your stabilized NOI is $750,000. Your lender requires a 1.25× DSCR on a 30-year amortizing loan at 6.00%. Size the loan in three steps."
-        }
-      ],
-      "answer": {
-        "kind": "steps",
-        "steps": [
-          {
-            "label": "Step 1 — Loan constant",
-            "prompt": "What's the loan constant for a 30-year amortizing loan at 6.00%? (answer in bps)",
-            "expected": 719,
-            "unit": "bps",
-            "resultDescription": "30-year amort @ 6.00% → loan constant ≈ 719 bps."
-          },
-          {
-            "label": "Step 2 — Max annual debt service",
-            "prompt": "At 1.25× DSCR, what's the max annual debt service NOI can cover?",
-            "expected": 600000,
-            "unit": "usd",
-            "resultDescription": "$750,000 / 1.25 = $600,000 max DS."
-          },
-          {
-            "label": "Step 3 — Max loan amount",
-            "prompt": "Convert that DS allowance into a loan amount. What's the max loan?",
-            "expected": 8339580.719616701,
-            "unit": "usd",
-            "resultDescription": "$600,000 / 7.19% ≈ $8,339,581."
-          }
-        ],
-        "takeaway": "DSCR sizing is just three divisions. NOI / DSCR gives you the DS allowance; DS / constant gives you the loan. Memorize the loan constants for 4–8% / 25–30y and you can size any deal in your head."
-      }
-    },
-    {
-      "number": 97,
-      "id": "walk:walk-acq-mock-1",
-      "type": "walkthrough",
-      "title": "Mock Acquisition — full unlevered walkthrough",
-      "meta": "Walkthrough · mockAcquisitionWalk · acquisitions",
-      "blocks": [
-        {
-          "kind": "prose",
-          "text": "Stabilized multifamily acquisition. GPR $4,000,000, other income $200,000, 5.00% vacancy, OpEx $1,600,000. Going-in cap 5.50%; you're modeling a 5-year hold with 3.00% annual NOI growth and a 6.00% exit cap (50 bps spread). Sale costs 1.50%. All-cash analysis — unlevered IRR."
-        }
-      ],
-      "answer": {
-        "kind": "steps",
-        "steps": [
-          {
-            "label": "Step 1 — Gross income",
-            "prompt": "GPR + other income, before vacancy. What's the gross?",
-            "expected": 4200000,
-            "unit": "usd",
-            "resultDescription": "$4,000,000 + $200,000 = $4,200,000."
-          },
-          {
-            "label": "Step 2 — Effective gross income",
-            "prompt": "Apply 5.00% vacancy. What's EGI?",
-            "expected": 3990000,
-            "unit": "usd",
-            "resultDescription": "$4,200,000 × (1 − 5.00%) = $3,990,000."
-          },
-          {
-            "label": "Step 3 — NOI Year 1",
-            "prompt": "Subtract OpEx. What's Year-1 NOI?",
-            "expected": 2390000,
-            "unit": "usd",
-            "resultDescription": "$3,990,000 − $1,600,000 = $2,390,000."
-          },
-          {
-            "label": "Step 4 — Going-in value",
-            "prompt": "At a 5.50% going-in cap, what's the implied value?",
-            "expected": 43454545.45454545,
-            "unit": "usd",
-            "resultDescription": "$2,390,000 / 5.50% = $43,454,545. This is your equity check (all-cash)."
-          },
-          {
-            "label": "Step 5 — NOI Year 5",
-            "prompt": "Apply 3.00% annual NOI growth over 4 compounding periods. What's Year-5 NOI?",
-            "expected": 2689966.0559000005,
-            "unit": "usd",
-            "resultDescription": "$2,390,000 × 1.1255 = $2,689,966."
-          },
-          {
-            "label": "Step 6 — Gross exit value",
-            "prompt": "At a 6.00% exit cap, what's the gross exit value?",
-            "expected": 44832767.598333344,
-            "unit": "usd",
-            "resultDescription": "$2,689,966 / 6.00% = $44,832,768."
-          },
-          {
-            "label": "Step 7 — Net exit proceeds",
-            "prompt": "Sale costs are 1.50%. What hits your bank account?",
-            "expected": 44160276.08435834,
-            "unit": "usd",
-            "resultDescription": "$44,832,768 × (1 − 1.50%) = $44,160,276."
-          },
-          {
-            "label": "Step 8 — Cumulative NOI distributed",
-            "prompt": "Sum the NOI distributed in years 1 through 5.",
-            "expected": 12688834.5859,
-            "unit": "usd",
-            "resultDescription": "Σ NOI_y from y=1..5 ≈ $12,688,835 at 3.00% growth."
-          },
-          {
-            "label": "Step 9 — Equity multiple (unlevered)",
-            "prompt": "Total cash returned (NOI + net exit) / equity in. What's the EM?",
-            "expected": 1.308243132579167,
-            "unit": "multiple",
-            "resultDescription": "($12,688,835 + $44,160,276) / $43,454,545 = 1.31x."
-          },
-          {
-            "label": "Step 10 — Approximate unlevered IRR",
-            "prompt": "EM^(1/n) − 1 over a 5-year hold. What's the approximate IRR?",
-            "expected": 0.055207070883675824,
-            "unit": "pct",
-            "resultDescription": "1.31^(1/5) − 1 ≈ 5.52%. Real IRR with periodic distributions is ~30–80 bps higher; the geometric approx is the right anchor for back-of-envelope."
-          }
-        ],
-        "takeaway": "A full unlevered acquisition is just income → value → exit → return, broken into 10 steps. The two non-obvious links are walking NOI forward to the exit year and reducing exit value for sale costs. Skip either and your IRR is wrong by a meaningful margin."
-      }
-    },
-    {
-      "number": 98,
-      "id": "walk:walk-am-valueadd-1",
-      "type": "walkthrough",
-      "title": "Value-Add Underwriting — chained",
-      "meta": "Walkthrough · valueAddWalk · assetManagement",
-      "blocks": [
-        {
-          "kind": "prose",
-          "text": "100-unit Class-B garden-style MF. Year-1 NOI $1,200,000. Renovation budget $12,000/unit ($1,200,000 total) drives 18.00% rent uplift. Acquire at 5.50%, exit at 5.25% (cap compression on improved asset). Walk the value-creation arc."
-        }
-      ],
-      "answer": {
-        "kind": "steps",
-        "steps": [
-          {
-            "label": "Step 1 — Going-in value",
-            "prompt": "At 5.50% going-in cap, what's the asset's purchase price?",
-            "expected": 21818181.818181816,
-            "unit": "usd",
-            "resultDescription": "$1,200,000 / 5.50% = $21,818,182."
-          },
-          {
-            "label": "Step 2 — Renovation budget",
-            "prompt": "100 units × $12,000/unit. What's the total renovation cost?",
-            "expected": 1200000,
-            "unit": "usd",
-            "resultDescription": "100 × $12,000 = $1,200,000."
-          },
-          {
-            "label": "Step 3 — All-in basis",
-            "prompt": "Going-in value + renovation cost. What's your basis after the renovation?",
-            "expected": 23018181.818181816,
-            "unit": "usd",
-            "resultDescription": "$21,818,182 + $1,200,000 = $23,018,182."
-          },
-          {
-            "label": "Step 4 — Post-reno NOI",
-            "prompt": "Apply 18.00% rent lift to the starting NOI (assume opex unchanged). What's the stabilized post-reno NOI?",
-            "expected": 1416000,
-            "unit": "usd",
-            "resultDescription": "$1,200,000 × (1 + 18.00%) = $1,416,000."
-          },
-          {
-            "label": "Step 5 — Yield on cost",
-            "prompt": "Post-reno NOI / all-in basis. What's your yield on cost?",
-            "expected": 0.061516587677725124,
-            "unit": "pct",
-            "resultDescription": "$1,416,000 / $23,018,182 = 6.15%. Compare this to the going-in cap to gauge the value-add lift."
-          },
-          {
-            "label": "Step 6 — Yield-on-cost spread",
-            "prompt": "Yield on cost vs the 5.25% exit cap. What's the spread (in bps)?",
-            "expected": 90,
-            "unit": "bps",
-            "resultDescription": "6.15% − 5.25% ≈ 90 bps. The spread is the value-add margin you're paid for the execution risk."
-          },
-          {
-            "label": "Step 7 — Stabilized value",
-            "prompt": "At a 5.25% exit cap, what's the stabilized asset value?",
-            "expected": 26971428.57142857,
-            "unit": "usd",
-            "resultDescription": "$1,416,000 / 5.25% = $26,971,429."
-          },
-          {
-            "label": "Step 8 — Value created",
-            "prompt": "Stabilized value − all-in basis. What's the value created (gross)?",
-            "expected": 3953246.7532467544,
-            "unit": "usdChange",
-            "resultDescription": "$26,971,429 − $23,018,182 ≈ $3,953,247. That's the gross profit before financing, sale costs, and taxes."
-          }
-        ],
-        "takeaway": "Value-add math is income lift × cap compression − capex. The two levers — pushing NOI and tightening the cap on a \"completed\" asset — multiply together. Yield-on-cost vs exit cap is the cleanest single metric: the spread is what you're being paid for taking the execution risk."
-      }
-    },
-    {
-      "number": 99,
-      "id": "walk:walk-dev-feasibility-1",
-      "type": "walkthrough",
-      "title": "Development Feasibility — chained",
-      "meta": "Walkthrough · developmentFeasibilityWalk · development/acquisitions",
-      "blocks": [
-        {
-          "kind": "prose",
-          "text": "Mid-rise multifamily development. Land $8,000,000; hard cost $38,000,000; soft cost $7,000,000; contingency 5.00% of (hard + soft). Stabilized NOI projected $4,500,000; market cap 5.00% on completed product. Walk the feasibility test."
-        }
-      ],
-      "answer": {
-        "kind": "steps",
-        "steps": [
-          {
-            "label": "Step 1 — Contingency",
-            "prompt": "5.00% of hard + soft cost. What's the contingency?",
-            "expected": 2250000,
-            "unit": "usd",
-            "resultDescription": "($38,000,000 + $7,000,000) × 5.00% = $2,250,000."
-          },
-          {
-            "label": "Step 2 — Total project cost",
-            "prompt": "Land + hard + soft + contingency. What's the TPC?",
-            "expected": 55250000,
-            "unit": "usd",
-            "resultDescription": "$8,000,000 + $38,000,000 + $7,000,000 + $2,250,000 = $55,250,000."
-          },
-          {
-            "label": "Step 3 — Land as % of TPC",
-            "prompt": "What % of the project cost is land?",
-            "expected": 0.14479638009049775,
-            "unit": "pct",
-            "resultDescription": "$8,000,000 / $55,250,000 = 14.48%. Healthy MF dev land is typically 15–25% of TPC; outside that range merits a closer look."
-          },
-          {
-            "label": "Step 4 — Hard cost as % of TPC",
-            "prompt": "What % of TPC is hard cost?",
-            "expected": 0.6877828054298643,
-            "unit": "pct",
-            "resultDescription": "$38,000,000 / $55,250,000 = 68.78%. Hard cost is typically 60–70% of TPC for mid-rise MF."
-          },
-          {
-            "label": "Step 5 — Yield on cost",
-            "prompt": "Stabilized NOI / TPC. What's YoC?",
-            "expected": 0.08144796380090498,
-            "unit": "pct",
-            "resultDescription": "$4,500,000 / $55,250,000 = 8.14%."
-          },
-          {
-            "label": "Step 6 — Development spread",
-            "prompt": "YoC vs 5.00% market cap. Spread in bps?",
-            "expected": 314,
-            "unit": "bps",
-            "resultDescription": "8.14% − 5.00% ≈ 314 bps. Industry rule: 100–150+ bps is typically required to justify development risk over buying stabilized."
-          },
-          {
-            "label": "Step 7 — Go / no-go threshold",
-            "prompt": "Industry threshold is 125 bps. By how many bps does this deal exceed (or miss) it?",
-            "expected": 189,
-            "unit": "bps",
-            "resultDescription": "314 − 125 = 189 bps. Positive = above threshold, deal pencils for development risk; negative = better to buy stabilized."
-          },
-          {
-            "label": "Step 8 — Stabilized value",
-            "prompt": "At 5.00% market cap, what's the stabilized exit value?",
-            "expected": 90000000,
-            "unit": "usd",
-            "resultDescription": "$4,500,000 / 5.00% = $90,000,000."
-          },
-          {
-            "label": "Step 9 — Gross development profit",
-            "prompt": "Stabilized value − TPC. What's the profit?",
-            "expected": 34750000,
-            "unit": "usdChange",
-            "resultDescription": "$90,000,000 − $55,250,000 = $34,750,000."
-          },
-          {
-            "label": "Step 10 — Profit margin on cost",
-            "prompt": "Profit / TPC. What's the profit margin?",
-            "expected": 0.6289592760180995,
-            "unit": "pct",
-            "resultDescription": "$34,750,000 / $55,250,000 = 62.90%. Industry rule: 20%+ margin on cost typically required for institutional development."
-          }
-        ],
-        "takeaway": "Development feasibility collapses to one ratio (yield on cost) and one comparison (vs market cap). Add a profit-margin sanity check (≥20% on cost). If both pencil, the deal is feasible; if either falls short, the development risk isn't paying off vs buying stabilized."
-      }
-    },
-    {
-      "number": 100,
-      "id": "walk:walk-am-holdsell-1",
-      "type": "walkthrough",
-      "title": "Hold or Sell — chained",
-      "meta": "Walkthrough · holdSellWalk · assetManagement/portfolioMgmt",
-      "blocks": [
-        {
-          "kind": "prose",
-          "text": "Year 3 of a 5-year hold. Bought for $40,000,000; current NOI $2,400,000; today's value $40,000,000 at a 6.00% cap. NOI growing 3.00%/yr. If you hold 2 more years, expect a 6.25% exit cap (25 bps drift). Walk the sell-now vs hold-through math."
-        }
-      ],
-      "answer": {
-        "kind": "steps",
-        "steps": [
-          {
-            "label": "Step 1 — Sell-now realized IRR",
-            "prompt": "Cash flows are: −$40,000,000 at Y0; $2,262,230, $2,330,097, $2,400,000 for Y1-Y3 NOI; plus $40,000,000 at Y3 sale. What's the IRR if you sell now?",
-            "expected": 0.05820448646550825,
-            "unit": "pct",
-            "resultDescription": "IRR(cash flows) ≈ 5.82%. This is your \"in the bag\" return if you stop here."
-          },
-          {
-            "label": "Step 2 — Year-5 NOI",
-            "prompt": "Apply 3.00%/yr growth for 2 years more. What's Year-5 NOI?",
-            "expected": 2546160,
-            "unit": "usd",
-            "resultDescription": "$2,400,000 × (1 + 3.00%)^2 = $2,546,160."
-          },
-          {
-            "label": "Step 3 — Future exit value",
-            "prompt": "At a 6.25% exit cap, what's the future exit value?",
-            "expected": 40738560,
-            "unit": "usd",
-            "resultDescription": "$2,546,160 / 6.25% = $40,738,560. Note: 6.25% is wider than today's 6.00% — the cap drift compounds against you."
-          },
-          {
-            "label": "Step 4 — Hold-through IRR",
-            "prompt": "IRR with the same Y0 entry, Y1-Y4 NOI, and Y5 NOI + future exit. What's the hold-through IRR?",
-            "expected": 0.0630911019541227,
-            "unit": "pct",
-            "resultDescription": "IRR(cash flows) ≈ 6.31%. Compare to sell-now IRR above."
-          },
-          {
-            "label": "Step 5 — Pre-tax IRR delta",
-            "prompt": "Hold IRR − sell-now IRR. Positive = holding wins on pre-tax.",
-            "expected": 0.0048866154886144444,
-            "unit": "pct",
-            "resultDescription": "6.31% − 5.82% = 0.49%. Holding pencils on pre-tax."
-          },
-          {
-            "label": "Step 6 — Accumulated depreciation",
-            "prompt": "3 years of depreciation at 80% depreciable basis (27.5-yr MF life). What's accumulated?",
-            "expected": 3490909.090909091,
-            "unit": "usd",
-            "resultDescription": "($32,000,000) / 27.5 × 3 = $3,490,909."
-          },
-          {
-            "label": "Step 7 — After-tax sell-now proceeds",
-            "prompt": "Sale costs 1.5%, recapture 25%, cap gains 20%. What's after-tax cash?",
-            "expected": 38677272.72727273,
-            "unit": "usd",
-            "resultDescription": "Net $39,400,000 − recap $722,727 − cap gains $0 = $38,677,273. Sell-now real cash ≈ -3.31% below the gross — and the hold path defers this entirely."
-          }
-        ],
-        "takeaway": "Hold-vs-sell decisions live in three layers: pre-tax IRR (Steps 1–5), after-tax cash (Steps 6–7), and the LP-tax-position lens (deferral matters more for tax-sensitive LPs). When pre-tax IRR is similar, deferral usually tips toward holding — but the cap-rate drift on the hold side often offsets the deferral benefit. Always run all three layers; never decide on pre-tax alone."
       }
     }
   ]
