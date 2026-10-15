@@ -8,6 +8,16 @@ import type { SituationalCategory } from '../types/situational';
 
 export const SITUATIONAL_CATEGORY_BY_ID: Record<string, SituationalCategory> = {
   'cap-rate-divergence': 'pricing',
+  'industrial-spec-supply-absorption': 'absorption',
+  'retail-cotenancy-go-dark': 'lease-econ',
+  'development-yield-on-cost-sensitivity': 'sensitivity',
+  'exit-cap-equity-sensitivity': 'sensitivity',
+  'industrial-net-effective-rent': 'lease-econ',
+  'hotel-occupancy-flow-through': 'sensitivity',
+  'multifamily-lease-up-carry': 'absorption',
+  'land-comp-buildable-sf': 'comp-selection',
+  'hotel-comp-set-rebuild': 'comp-selection',
+  'retail-unanchored-cap-comps': 'comp-selection',
   'absorption-timing': 'absorption',
   'mark-to-market-upside': 'pricing',
   'noi-growth-smell-test': 'diagnostic',

@@ -76,6 +76,16 @@ import { riskAdjustedReturnFramework } from './riskAdjustedReturnFramework';
 import { hotelRevparDivergence } from './hotelRevparDivergence';
 import { retailPercentageRentClause } from './retailPercentageRentClause';
 import { industrialTruckCourtBid } from './industrialTruckCourtBid';
+import { industrialSpecSupplyAbsorption } from './industrialSpecSupplyAbsorption';
+import { retailCoTenancyGoDark } from './retailCoTenancyGoDark';
+import { developmentYieldOnCostSensitivity } from './developmentYieldOnCostSensitivity';
+import { exitCapEquitySensitivity } from './exitCapEquitySensitivity';
+import { industrialNetEffectiveRent } from './industrialNetEffectiveRent';
+import { hotelOccupancyFlowThrough } from './hotelOccupancyFlowThrough';
+import { multifamilyLeaseUpCarry } from './multifamilyLeaseUpCarry';
+import { landCompBuildableSf } from './landCompBuildableSf';
+import { hotelCompSetRebuild } from './hotelCompSetRebuild';
+import { retailUnanchoredCapComps } from './retailUnanchoredCapComps';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -136,6 +146,16 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   lpaCapitalCallDefault,
   lpaCostOverrunSharing,
   lpaContributionRatios,
+  industrialSpecSupplyAbsorption,
+  retailCoTenancyGoDark,
+  developmentYieldOnCostSensitivity,
+  exitCapEquitySensitivity,
+  industrialNetEffectiveRent,
+  hotelOccupancyFlowThrough,
+  multifamilyLeaseUpCarry,
+  landCompBuildableSf,
+  hotelCompSetRebuild,
+  retailUnanchoredCapComps,
   leaseBillbackAllowance,
   leaseBaseYearVsStop,
   leaseCamReconciliation,
