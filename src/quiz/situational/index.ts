@@ -76,6 +76,16 @@ import { riskAdjustedReturnFramework } from './riskAdjustedReturnFramework';
 import { hotelRevparDivergence } from './hotelRevparDivergence';
 import { retailPercentageRentClause } from './retailPercentageRentClause';
 import { industrialTruckCourtBid } from './industrialTruckCourtBid';
+import { hotelReserveNoiBasis } from './hotelReserveNoiBasis';
+import { hotelPipEconomics } from './hotelPipEconomics';
+import { hotelMgmtPerformanceTest } from './hotelMgmtPerformanceTest';
+import { retailCoTenancyDarkAnchor } from './retailCoTenancyDarkAnchor';
+import { retailPercentageRentBreakpoint } from './retailPercentageRentBreakpoint';
+import { industrialClearHeightComps } from './industrialClearHeightComps';
+import { industrialSpecDelayVsCap } from './industrialSpecDelayVsCap';
+import { devEntitlementClosing } from './devEntitlementClosing';
+import { devGmpVsCostPlus } from './devGmpVsCostPlus';
+import { devInterestReserveSizing } from './devInterestReserveSizing';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -149,6 +159,16 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   hotelRevparDivergence,
   retailPercentageRentClause,
   industrialTruckCourtBid,
+  hotelReserveNoiBasis,
+  hotelPipEconomics,
+  hotelMgmtPerformanceTest,
+  retailCoTenancyDarkAnchor,
+  retailPercentageRentBreakpoint,
+  industrialClearHeightComps,
+  industrialSpecDelayVsCap,
+  devEntitlementClosing,
+  devGmpVsCostPlus,
+  devInterestReserveSizing,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {
