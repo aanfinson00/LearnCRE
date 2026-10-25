@@ -76,6 +76,16 @@ import { riskAdjustedReturnFramework } from './riskAdjustedReturnFramework';
 import { hotelRevparDivergence } from './hotelRevparDivergence';
 import { retailPercentageRentClause } from './retailPercentageRentClause';
 import { industrialTruckCourtBid } from './industrialTruckCourtBid';
+import { industrialSpecDeliveryBurnOff } from './industrialSpecDeliveryBurnOff';
+import { officeNetVsGrossAbsorption } from './officeNetVsGrossAbsorption';
+import { multifamilyLeaseUpStabilization } from './multifamilyLeaseUpStabilization';
+import { retailBigBoxBackfillDowntime } from './retailBigBoxBackfillDowntime';
+import { multifamilyConcessionBoughtAbsorption } from './multifamilyConcessionBoughtAbsorption';
+import { industrialCaptureRateLeaseUp } from './industrialCaptureRateLeaseUp';
+import { officeSubleaseShadowSupply } from './officeSubleaseShadowSupply';
+import { multifamilySeasonalAbsorption } from './multifamilySeasonalAbsorption';
+import { multifamilyPipelineVacancyImpact } from './multifamilyPipelineVacancyImpact';
+import { hotelNewSupplyDilution } from './hotelNewSupplyDilution';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -149,6 +159,16 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   hotelRevparDivergence,
   retailPercentageRentClause,
   industrialTruckCourtBid,
+  industrialSpecDeliveryBurnOff,
+  officeNetVsGrossAbsorption,
+  multifamilyLeaseUpStabilization,
+  retailBigBoxBackfillDowntime,
+  multifamilyConcessionBoughtAbsorption,
+  industrialCaptureRateLeaseUp,
+  officeSubleaseShadowSupply,
+  multifamilySeasonalAbsorption,
+  multifamilyPipelineVacancyImpact,
+  hotelNewSupplyDilution,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {

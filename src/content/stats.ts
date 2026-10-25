@@ -5,7 +5,7 @@
  */
 export const CONTENT_STATS = {
   questionKinds: 68,
-  situationalCases: 71,
+  situationalCases: 81,
   vocabTerms: 98,
   excelDrills: 13,
   mockArchetypes: 5,
