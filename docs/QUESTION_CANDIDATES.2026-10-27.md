@@ -16,7 +16,7 @@ Each candidate lists the target `SituationalCase` fields. Option **A** is the be
 
 ---
 
-### 1. Hotel: RevPAR up, profit down — `absorption`? no → `diagnostic` · hotel · intermediate · assetManagement
+### 1. Hotel: RevPAR up, profit down — `diagnostic` · hotel · intermediate · assetManagement
 **Scenario:** A 200-key select-service hotel grew RevPAR 6% YoY (ADR +9%, occupancy −2.5 pts). GOP margin fell from 38% to 34%.
 **Q:** What most likely explains revenue growth with margin compression?
 - **A (best):** Rate growth was bought with higher distribution/OTA commissions and wage/service costs; fixed costs didn't flex while occupancy dropped, so incremental revenue converted at a low flow-through.
@@ -82,12 +82,11 @@ Each candidate lists the target `SituationalCase` fields. Option **A** is the be
 ### 8. Lease-econ: net effective rent — `lease-econ` · office · intermediate · acquisitions
 **Scenario:** A 10-year lease at $40/SF flat with 12 months free rent and $60/SF TI.
 **Q:** Which figure is closest to the effective rent, ignoring discounting?
-- **A (best):** ~$33/SF per year = ($40 × 9 yrs − $60 TI) ÷ 10.
+- **A (best):** ~$30/SF per year = ($40 × 9 paying yrs − $60 TI) ÷ 10.
 - B: $40/SF.
-- C: $36/SF (only free rent).
-- D: $34/SF (only TI amortized over 10 yrs: $34).
+- C: $36/SF (free rent only).
+- D: $34/SF (TI only).
 **Takeaway:** Net effective = (total rent − concessions − TI) ÷ term; headline rent overstates economics.
-> Vet: A = (360 − 60) ÷ 10 = $30/SF, not $33. Correct before porting; option D would then also need revisiting.
 
 ### 9. Beginner: DSCR basics — `risk` · mixed · beginner · mortgageUw
 **Scenario:** NOI $1.2M; annual debt service $1.0M. Lender minimum DSCR is 1.25x.
@@ -108,4 +107,4 @@ Each candidate lists the target `SituationalCase` fields. Option **A** is the be
 **Takeaway:** Burn rate vs. percent complete is the early warning; escalate when contingency use runs ahead of progress.
 
 ---
-**Reviewer notes:** #1 has a mismatched heading ("`absorption`? no →") — tag it `diagnostic`. #8's arithmetic needs the fix flagged inline above before this is usable.
+**Reviewer notes:** Math re-checked: #2 breakpoint $500; #3 4M × 65% = 2.6M; #8 (360−60)/10 = $30. #7 yield spread 6.1−5.0 = 110 bps.
