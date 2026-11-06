@@ -2595,7 +2595,327 @@ You're in best-and-final on a 500,000 SF Class A logistics facility (32' clear, 
 
 </details>
 
-### 72. Walk me through your bid
+### 72. Is a 50 bps development spread enough?
+*Situational · pricing · advanced · multifamily · development/acquisitions*
+
+A sponsor wants to greenlight a 280-unit garden multifamily development. Untrended yield on cost is 5.75%. Recent stabilized trades in the submarket are pricing at 5.25% cap rates. The sponsor argues the project "creates value" because it will be worth more than it costs.
+
+- **Untrended yield on cost:** 5.75%
+- **Market cap rate (stabilized):** 5.25%
+- **Development spread:** 50 bps
+- **Construction + lease-up:** ~30 months
+- **Typical hurdle for ground-up:** 100–150 bps
+
+**Q: How should you react to the proposed spread?**
+
+<details><summary>Answer & reasoning</summary>
+
+- ✅ **A.** Pass or re-trade — 50 bps does not compensate for construction, lease-up, and exit-cap risk.
+  - Ground-up development carries entitlement, cost, lease-up, and timing risk that a stabilized purchase does not. Markets generally need 100–150+ bps of spread over the market cap rate to pay for it. At 50 bps, a 50 bps move in exit cap or a 5% cost overrun erases the entire profit margin.
+- ◻️ **B.** Proceed — any positive spread means the project creates value.
+  - A positive spread is necessary, not sufficient. The spread is the only cushion against cost overruns, rent shortfalls, and cap-rate expansion over a ~30-month build. Thin spreads turn small misses into value destruction.
+- ◻️ **C.** Proceed, but assume the exit cap compresses to 4.75% to justify the deal.
+  - Underwriting cap compression to make a deal pencil is the classic way to fool yourself. Exit assumptions should be flat-to-wider than today's cap rate, not tighter.
+- ◻️ **D.** Proceed because stabilized NOI will grow with rents during construction.
+  - Trending rents is how you get a "trended" yield, but the hurdle is usually measured on untrended yield precisely so rent growth is upside, not the thing paying for the risk.
+
+**Takeaway:** Development spread (yield on cost minus market cap) is the margin of safety for building rather than buying. Thin spreads leave no room for the ordinary misses every project has.
+
+- Judge the spread on untrended yield on cost.
+- Rule of thumb: 100–150+ bps over market cap for ground-up.
+- Stress cost +5–10% and exit cap +50 bps before you believe the spread.
+
+</details>
+
+### 73. Whose lease-up pace do you underwrite?
+*Situational · absorption · intermediate · multifamily · development/mortgageUw*
+
+A 300-unit multifamily project delivers next quarter. The sponsor underwrites 35 leases per month to reach 93% occupancy. The three most recent competing lease-ups in the submarket averaged 20 net leases per month. The $60M construction loan floats at 7.5%, and the interest reserve is sized for 9 months of lease-up.
+
+- **Units:** 300
+- **Stabilization target:** 93% (279 units)
+- **Sponsor pace:** 35 units/month
+- **Comp lease-up pace:** 20 units/month
+- **Loan balance / rate:** $60M / 7.5%
+- **Interest reserve:** 9 months
+
+**Q: What is the most defensible conclusion?**
+
+<details><summary>Answer & reasoning</summary>
+
+- ✅ **A.** Underwrite ~20/month: roughly 14 months to stabilize, so the 9-month reserve is about 5 months short.
+  - 279 ÷ 20 ≈ 14 months. Interest carry is about $60M × 7.5% ÷ 12 ≈ $375K per month, so five uncovered months is roughly $1.9M of extra equity or a covenant problem. Comp lease-ups are observed evidence; the sponsor's pace is a hope.
+- ◻️ **B.** Use the sponsor's 35/month: ~8 months fits comfortably inside the reserve.
+  - 279 ÷ 35 ≈ 8 months, which only works if the project outperforms every recent comp by 75%. A lender or LP should not size the reserve on best-case absorption.
+- ◻️ **C.** Average the two paces to ~27/month and call it 10 months.
+  - Averaging an observed number with an aspirational one just dilutes the evidence. Anchor on the comps and adjust for specific advantages (location, product, pricing) with proof.
+- ◻️ **D.** Pace does not matter because the loan has an extension option.
+  - An extension is a cost, not a cure: it usually requires a DSCR or debt-yield test that a slow lease-up will fail, plus fees and a rate step-up.
+
+**Takeaway:** Size the interest reserve to the observed lease-up pace of comparable projects, not the sponsor's pace. Every extra month of lease-up costs a month of full interest carry.
+
+- Months to stabilize = units to lease ÷ net monthly absorption.
+- Monthly carry = balance × rate ÷ 12.
+- Reserve for the slow case; treat the fast case as upside.
+
+</details>
+
+### 74. Which comps price a grocery-anchored center?
+*Situational · comp-selection · intermediate · retail · acquisitions/portfolioMgmt*
+
+You are pricing a 95,000 SF grocery-anchored neighborhood center with a 12-year remaining lease to a national grocer. Your analyst pulled three sales comps: a 400,000 SF power center anchored by big-box users, an unanchored strip center, and a 100,000 SF grocery-anchored center two miles away with a 9-year grocer lease.
+
+- **Subject:** 95,000 SF grocery-anchored
+- **Anchor lease remaining:** 12 years
+- **Comp A:** 400K SF power center
+- **Comp B:** Unanchored strip
+- **Comp C:** 100K SF grocery-anchored, 9-yr lease
+
+**Q: How should you use these comps?**
+
+<details><summary>Answer & reasoning</summary>
+
+- ✅ **A.** Lead with Comp C and adjust for lease term; use A and B only as outer bounds.
+  - Comp C matches the income driver that sets the cap rate — a grocer-anchored, necessity-based center in the same trade area. Adjust for the 3-year shorter anchor term (roughly a modest cap-rate give-up). A and B have different tenant mix, credit, and demand drivers and are only directional.
+- ◻️ **B.** Average all three to get a market cap rate.
+  - Averaging dissimilar products hides risk differences. Power centers and unanchored strips trade on different drivers than a grocer-anchored center.
+- ◻️ **C.** Use the power center, since it has the most NOI and the most data.
+  - Size and data volume do not make a comp relevant. Big-box power centers carry different credit and re-tenanting risk.
+- ◻️ **D.** Use the unanchored strip, since it is the most conservative.
+  - Conservatism by choosing a bad comp is just a mispricing. You would overstate the cap rate and lose the deal for the wrong reason.
+
+**Takeaway:** A comp should share the characteristic that drives value. In retail the anchor — its credit, category, and remaining term — usually matters more than size or location alone.
+
+- Match on the income driver first, then size and location.
+- Adjust for lease term and anchor credit explicitly.
+- Use dissimilar comps only as bounds.
+
+</details>
+
+### 75. Can small-bay comps price a big-box?
+*Situational · comp-selection · intermediate · industrial · acquisitions/assetManagement*
+
+You are valuing a 420,000 SF, 36' clear, single-tenant distribution building near a major port. The broker's comp set is mostly 40,000–80,000 SF multi-tenant flex and small-bay buildings that sold at $210–$250/SF and 4.9–5.3% caps.
+
+- **Subject size / clear height:** 420,000 SF / 36'
+- **Comp size range:** 40–80K SF
+- **Comp pricing:** $210–250/SF
+- **Comp caps:** 4.9–5.3%
+- **Subject tenancy:** Single tenant
+
+**Q: What is the best way to handle this comp set?**
+
+<details><summary>Answer & reasoning</summary>
+
+- ✅ **A.** Re-cut the set to big-box (250K+ SF), 32'+ clear buildings and treat small-bay comps as a separate market.
+  - Industrial pricing splits by size band and function. Small-bay product has deep buyer demand and many tenants; big-box is a thinner, more institutional pool priced on tenant credit and lease term. Per-SF values do not translate across bands.
+- ◻️ **B.** Apply the small-bay $/SF to the full 420,000 SF.
+  - Mechanically scaling per-SF value from a different size band ignores the buyer pool, tenant demand, and clear-height differences.
+- ◻️ **C.** Apply the small-bay cap rates but a lower $/SF.
+  - Mixing metrics from different products builds a number with no market support.
+- ◻️ **D.** Throw out comps and value on replacement cost alone.
+  - Replacement cost is a cross-check, not a substitute for market evidence.
+
+**Takeaway:** Industrial comps live in size and clear-height bands. Cross-band comps are context, not evidence.
+
+- Segment by size band, clear height, and tenancy.
+- Per-SF values rarely transfer across bands.
+- Cross-check with replacement cost, not instead of comps.
+
+</details>
+
+### 76. Which assumption moves IRR the most?
+*Situational · sensitivity · advanced · mixed · acquisitions/portfolioMgmt*
+
+A 5-year value-add deal is underwritten at a 5.5% going-in cap, 3% annual rent growth, and a 5.5% exit cap. Reversion proceeds make up about 70% of total levered cash returned. Your IC memo needs a one-slide answer on what to stress first.
+
+- **Going-in / exit cap:** 5.5% / 5.5%
+- **Rent growth:** 3.0%/yr
+- **Hold:** 5 years
+- **Reversion share of proceeds:** ~70%
+- **Candidate stresses:** Exit cap +50 bps; rent growth −100 bps
+
+**Q: Which stress should lead the sensitivity page?**
+
+<details><summary>Answer & reasoning</summary>
+
+- ✅ **A.** Exit cap +50 bps: it cuts sale value roughly 8%, and leverage magnifies that hit to equity.
+  - Value scales with 1 ÷ cap: 5.5% to 6.0% is a ~8.3% drop in sale price on the bulk of proceeds. A 100 bps haircut on rent growth lowers Year-5 revenue by roughly 5% and NOI a bit more. Both matter, but the exit cap is the larger, more direct hit — and equity bears the whole loss after debt.
+- ◻️ **B.** Rent growth −100 bps: operations drive everything.
+  - It matters, but the effect compounds slowly, and it hits Year-5 NOI by only mid-single digits.
+- ◻️ **C.** Neither — IRR is mostly driven by the going-in cap.
+  - The going-in cap is known at purchase. Uncertainty sits in future assumptions.
+- ◻️ **D.** Vary both together only; one-at-a-time tables are misleading.
+  - Joint scenarios are useful, but single-variable tables are how you rank which input matters most.
+
+**Takeaway:** Rank sensitivities by how much value each assumption moves. Exit cap usually dominates because it reprices the largest single cash flow.
+
+- Value ∝ 1 ÷ cap rate.
+- Show single-variable stresses first, then combined downside.
+- Equity absorbs leveraged losses first.
+
+</details>
+
+### 77. Does the loan survive +100 bps?
+*Situational · sensitivity · intermediate · mixed · mortgageUw/acquisitions*
+
+A $30M interest-only floating-rate loan is quoted at 5.5% with NOI of about $2.23M, a 1.35x DSCR. The lender's covenant is 1.25x. Rates have been volatile and the borrower has not bought a cap.
+
+- **Loan:** $30M, interest-only
+- **Rate:** 5.5% floating
+- **NOI:** ~$2.23M
+- **Current DSCR:** 1.35x
+- **Covenant:** 1.25x
+- **Rate cap:** None
+
+**Q: What should the underwriter flag?**
+
+<details><summary>Answer & reasoning</summary>
+
+- ✅ **A.** At +100 bps DSCR falls to ~1.14x, breaching the covenant — require a rate cap or lower leverage.
+  - Interest rises from $1.65M to $1.95M, so DSCR = $2.23M ÷ $1.95M ≈ 1.14x. Breach happens at roughly +45 bps (NOI ÷ 1.25 ÷ $30M ≈ 5.95%). A cap, a smaller loan, or a cash-sweep cushion fixes it.
+- ◻️ **B.** 1.35x is comfortably above 1.25x; no action needed.
+  - DSCR must be tested at the stressed rate, not today's. The cushion is only about 45 bps of rate.
+- ◻️ **C.** Add amortization to improve DSCR.
+  - Amortization increases debt service and lowers DSCR.
+- ◻️ **D.** Rate risk is the borrower's problem, not the lender's.
+  - A covenant breach is the lender's problem too — it forces a workout or cash trap.
+
+**Takeaway:** Floating-rate loans must be underwritten at stressed rates. Compute the rate at which the covenant breaks and compare it to the cap strike.
+
+- Breakeven rate = NOI ÷ covenant ÷ loan balance (IO loans).
+- Require a rate cap sized to the covenant.
+- Stress +100–200 bps.
+
+</details>
+
+### 78. Renew cheaper or re-let higher?
+*Situational · lease-econ · intermediate · office · assetManagement/acquisitions*
+
+An office tenant is rolling. Option 1: renew for 5 years at $30/SF gross, $10/SF TI, 1 month free. Option 2: let it go and re-let at $33/SF for 7 years with $55/SF TI, 6 months free, and about 9 months of downtime. Leasing commissions are similar.
+
+- **Renewal:** 5 yr, $30, $10 TI, 1 mo free
+- **Re-let:** 7 yr, $33, $55 TI, 6 mo free
+- **Downtime (re-let):** ~9 months
+- **Commissions:** Similar
+
+**Q: Which has the better net effective economics?**
+
+<details><summary>Answer & reasoning</summary>
+
+- ✅ **A.** Renewal: about $27.50/SF/yr versus about $20.60/SF/yr over the full cycle for the re-let.
+  - Renewal: ($30 × 4.92 yrs − $10) ÷ 5 ≈ $27.50. Re-let: ($33 × 6.5 yrs − $55) ÷ 7.75 yrs (including downtime) ≈ $20.60. The higher headline rent is eaten by TI, free rent, and vacancy.
+- ◻️ **B.** Re-let: the $33 headline rent is 10% higher.
+  - Headline rent ignores concessions and downtime, which together consume the premium.
+- ◻️ **C.** They are equivalent once commissions are included.
+  - Commissions are similar, so they do not close a ~$7/SF/yr gap.
+- ◻️ **D.** Cannot compare because terms differ.
+  - Different terms are exactly why you annualize net effective rent over the full cycle including downtime.
+
+**Takeaway:** Compare leases on net effective rent over the whole cycle: rent less TI, free rent, and downtime, divided by total time.
+
+- Include downtime in the denominator.
+- Spread TI and free rent over the term.
+- Renewals usually win on economics; re-lets win on mark-to-market only when spreads are large.
+
+</details>
+
+### 79. The anchor lease expires in 18 months
+*Situational · lease-econ · advanced · retail · acquisitions/assetManagement/mortgageUw*
+
+You are acquiring a shopping center. The anchor's lease expires in 18 months with no renewal option exercised. Inline tenants representing 35% of rent have co-tenancy clauses: if the anchor goes dark, they pay 50% of base rent until a replacement opens, and may terminate after 12 months.
+
+- **Anchor lease expiry:** 18 months
+- **Inline with co-tenancy:** 35% of rent
+- **Co-tenancy remedy:** 50% rent; termination after 12 months
+- **Anchor renewal status:** Not yet negotiated
+
+**Q: How should this change your deal?**
+
+<details><summary>Answer & reasoning</summary>
+
+- ✅ **A.** Make an executed anchor extension a closing condition, or price/escrow for the dark-anchor downside.
+  - One event cascades: anchor goes dark, 35% of rent drops 50% (about 17.5% of base rent), and those tenants can leave. The cap rate cannot absorb that. Resolve the anchor first, or hold back/escrow and discount for a downside case.
+- ◻️ **B.** Ignore it; anchors almost always renew.
+  - "Almost always" is not underwriting, and the downside is a chain of rent reductions and terminations.
+- ◻️ **C.** Underwrite the 50% rent reduction as the base case.
+  - That treats a contingent risk as certain and will lose you the deal if the anchor is likely to renew.
+- ◻️ **D.** Request lower inline rents instead.
+  - The problem is anchor continuity, not current inline rent levels.
+
+**Takeaway:** Co-tenancy clauses link tenants' fates. Anchor rollover is a deal-level risk to be resolved or priced, not a rent-roll detail.
+
+- Read every co-tenancy clause in the rent roll.
+- Quantify rent at risk if the anchor leaves.
+- Use closing conditions, escrows, or price to allocate the risk.
+
+</details>
+
+### 80. Pay $4M for unentitled land?
+*Situational · risk · advanced · mixed · development/acquisitions*
+
+A parcel is offered two ways: entitled at $7M, or unentitled at $4M. You estimate a 60% chance of approval, 18 months to get entitlements, a cost of capital of 8%, and about $150K of entitlement costs.
+
+- **Entitled price:** $7.0M
+- **Unentitled price:** $4.0M
+- **Probability of approval:** 60%
+- **Time to entitle:** 18 months
+- **Cost of capital:** 8%
+- **Entitlement costs:** ~$150K
+
+**Q: What is the best way to approach the unentitled parcel?**
+
+<details><summary>Answer & reasoning</summary>
+
+- ✅ **A.** Structure an option or entitlement-contingent PSA; at $4M outright the expected value does not clear.
+  - Expected entitled value: 0.6 × $7M = $4.2M. Carry on $4M for 18 months at 8% ≈ $0.48M, plus $0.15M costs, so expected cost ≈ $4.63M versus $4.2M of expected value. Outright, the bet is negative. A contingent PSA moves the denial risk to the seller.
+- ◻️ **B.** Buy at $4M because the discount is 43%.
+  - The discount is the market's price for risk, not free value. The probability and the time both reduce it.
+- ◻️ **C.** Buy the entitled parcel at $7M with no further analysis.
+  - Entitled land removes the approval risk but may be fully priced; still check the remaining margin.
+- ◻️ **D.** Pass because entitlement risk cannot be priced.
+  - It can be priced with probabilities and carry — that is how entitlement options are valued.
+
+**Takeaway:** Unentitled land is a probability-weighted option. Price it as expected value minus carry and costs, or shift the risk with contingencies.
+
+- Expected value = probability × entitled value.
+- Add carry and soft costs for the entitlement period.
+- Prefer option/contingent structures over outright risk.
+
+</details>
+
+### 81. GMP contract at 60% drawings?
+*Situational · risk · intermediate · mixed · development/assetManagement*
+
+A developer wants a Guaranteed Maximum Price contract signed now to lock cost for the lender. Construction drawings are about 60% complete, with several allowances and an unresolved structural scheme. The GC is pushing for a high contingency and broad exclusions to take the GMP.
+
+- **Drawings complete:** ~60%
+- **Allowances:** Several, large
+- **Structural scheme:** Unresolved
+- **GC posture:** High contingency, broad exclusions
+
+**Q: What is the most sensible path?**
+
+<details><summary>Answer & reasoning</summary>
+
+- ✅ **A.** Use preconstruction services with a cost-plus or NTE structure; convert to GMP once design is ~90% complete.
+  - A GMP is only as firm as the documents behind it. On immature drawings the GC prices the unknowns into the contingency and exclusions, and change orders follow anyway. Progressing design first yields a tighter, more honest GMP.
+- ◻️ **B.** Sign the GMP now; the lender will be satisfied.
+  - A GMP with big allowances and exclusions is a number with holes. It looks like certainty but leaves the owner exposed to change orders.
+- ◻️ **C.** Go lump-sum fixed price to eliminate all risk.
+  - Fixed price on incomplete drawings is priced at a heavy premium, and scope gaps still become change orders.
+- ◻️ **D.** Wait for 100% drawings before engaging a GC.
+  - Early GC involvement helps constructability and pricing; the issue is the timing of the price commitment, not engagement.
+
+**Takeaway:** Lock price when scope is defined. Engage the GC early, but convert to GMP once drawings are mature.
+
+- Check allowances and exclusions before trusting a GMP.
+- Target ~90% drawings before GMP.
+- Keep an owner contingency separate from the GC's.
+
+</details>
+
+### 82. Walk me through your bid
 *Longform · intermediate · multifamily · acquisitions*
 
 You're the lead analyst on a $42M acquisition of a 200-unit Class-B garden-style multifamily asset, built 1998, in a top-50 MSA. The OM presents: T-3 annualized NOI of $2.45M (5.83% going-in cap), 5% Year-1 NOI growth tapering to 3% by Year 5, a $300/unit/yr capex reserve, and a 6.0% exit cap (just 17 bps wider than going-in). Submarket vacancy is 6%; the asset is at 94%. Recent comps in the submarket trade 5.50–6.25%, including one trophy 2018-built asset at 5.50%. Your IRR target is 14% on a 5-year hold; the deal pencils to 13.8% at the OM's assumptions.
@@ -2633,7 +2953,7 @@ The OM stacks aggressive assumptions across multiple lines; each one needs to be
 
 </details>
 
-### 73. Diagnose the NOI miss for the LP IC memo
+### 83. Diagnose the NOI miss for the LP IC memo
 *Longform · intermediate · multifamily · assetManagement*
 
 You're the asset manager on a 250-unit MF asset purchased 18 months ago. Year-1 NOI underwriting was $3.0M; trailing-12 NOI just came in at $2.65M — an 11.7% miss. Revenue is $4.85M (vs UW $4.95M, 2% under). Rents are at market, occupancy is 93% (vs UW 94%). OpEx came in at $2.20M vs UW $1.95M — a $250k or 12.8% overage. Insurance jumped 28% YoY at renewal; property tax was reassessed and rose 18%; payroll inflation ran 6%; everything else was within 3% of plan. The LP IC asks for a 2-page memo explaining the variance and proposing actions. You need to draft the variance analysis section.
@@ -2671,7 +2991,7 @@ The $350k NOI miss is dominated by OpEx growth, not revenue weakness. Revenue ra
 
 </details>
 
-### 74. Defend this deal to a skeptical IC
+### 84. Defend this deal to a skeptical IC
 *Longform · advanced · industrial · acquisitions/portfolioMgmt*
 
 You've underwritten a $65M industrial acquisition. Going-in cap is 5.2% (modeled at $3.4M NOI), exit cap 6.0% (80 bps spread), levered IRR 16.5% on a 5-year hold at 60% LTV. The submarket is tight (3% vacancy), the building is a 2015-vintage Class-A distribution facility leased to a single investment-grade tenant on 9 years of remaining term with 2.5% annual escalations. The IC chairman opens by saying "industrial caps have compressed too far; we're late in the cycle. Why are we buying at 5.2% when the historical avg is 6.5%?"
@@ -2709,7 +3029,7 @@ The chairman's concern is fair on a market basis but misses three asset-specific
 
 </details>
 
-### 75. Recommend: refi or sell — write the IC memo
+### 85. Recommend: refi or sell — write the IC memo
 *Longform · advanced · mixed · portfolioMgmt/assetManagement*
 
 You're three years into a five-year hold on a stabilized $80M MF asset. Realized IRR through Y3 is 14% to LPs. Two paths to year-5 close-out: (a) hold + refi at year 3 to a 65% LTV loan ($52M new loan vs $30M existing), distribute ~$20M of refi proceeds, sell at year 5; (b) sell now at $85M (current market). After-tax IRR on path A is ~14.2%, path B is ~13.9%. The fund is in year 4 of a 7-year vehicle. The LP base is 60% taxable individuals + family offices, 40% pension funds. The fund's alternative deployment opportunity set today is thin (most viable deals priced at 10-12% IRR). Draft the recommendation memo to the IC.
@@ -2746,7 +3066,7 @@ Recommend the **refi path** despite the near-identical after-tax IRRs (14.2% vs 
 
 </details>
 
-### 76. Walk me through a 3-tier deal-by-deal ("American") waterfall
+### 86. Walk me through a 3-tier deal-by-deal ("American") waterfall
 *Longform · intermediate · portfolioMgmt/acquisitions*
 
 You're in a final-round interview at a real-estate PE shop. The senior partner says: "I want to make sure you actually understand fund economics. Walk me through how a 3-tier deal-by-deal ("American") waterfall works for a single deal. Pick your own numbers — small enough to do mental math, real enough to ground the explanation. Tell me what each tier does, why it exists, and where the GP's economics come from."
@@ -2775,7 +3095,7 @@ Take a deal where LP put in $9M and GP put in $1M alongside, 5-year hold, 8% com
 
 </details>
 
-### 77. Defend the waterfall terms to IC
+### 87. Defend the waterfall terms to IC
 *Longform · advanced · portfolioMgmt/acquisitions*
 
 You're the lead analyst on a $300M co-GP venture pitching the IC of a major institutional LP. Your sponsor is proposing: 6% pref, 50/50 catch-up to a 25% GP target, 70/30 above. The LP's IC counter-proposal: 9% pref, 100% catch-up to 20%, 80/20 above. Both structures clear under base-case modeling, but the dispersion across upside / downside cases is dramatically different. The relationship matters — this LP allocated $200M to the sponsor's last fund. The IC meeting is tomorrow.
@@ -2811,7 +3131,7 @@ Recommend landing at **8% pref / 100% catch-up to 22% / 75-25 above** — closer
 
 </details>
 
-### 78. IC memo: defend a ground-up MF dev pencil
+### 88. IC memo: defend a ground-up MF dev pencil
 *Longform · advanced · multifamily · development/acquisitions*
 
 You're presenting a 200-unit Class A ground-up multifamily dev to your firm's investment committee. TPC is $50M ($250k/unit). Stabilized NOI is $3.25M (6.5% yield-on-cost). The market cap on stabilized comps is 5.0%, giving a stabilized value of $65M and a 150 bps dev spread vs market cap. The deal is 65% LTC; equity check is $17.5M. Lease-up is 18 months from CO; you're modeling a $1.6M lease-up reserve and a 24-month construction window. Submarket vacancy is 4%; pipeline is +800 units delivering over the next 24 months in your trade area. Construction lender is asking the chairman why you're building when comps trade tighter than your YoC.
@@ -2850,7 +3170,7 @@ The 150 bps dev spread is the entire reason we're building rather than buying �
 
 </details>
 
-### 79. Loan committee: defend a $30M permanent on a stressed-market office
+### 89. Loan committee: defend a $30M permanent on a stressed-market office
 *Longform · advanced · office · mortgageUw/acquisitions*
 
 You're underwriting a $30M permanent loan on a $50M Class B office in a market that's been under stress: submarket vacancy is 18%, sublease availability +200 bps in the past year, and three Fortune-500 tenants downsized in the trade area in Q3. The loan is 60% LTV, 1.30x DSCR at a 6.5% rate / 30-yr amort. The asset is 90% leased on a WALT of 5.2 years; the largest tenant (28% of NOI) has 7 years remaining at +6% to market with two 5-year options. The borrower is a top-quartile sponsor with a 20-year track record; recourse is non-recourse with standard bad-boy carveouts. Your committee chair opens with: 'why are we lending in this market, and what's our view if the largest tenant doesn't renew?'
@@ -2888,7 +3208,7 @@ The market concern is real but the asset-level credit is sound: 60% LTV gives us
 
 </details>
 
-### 80. Year 2 NOI miss: diagnose, prove it, fix it
+### 90. Year 2 NOI miss: diagnose, prove it, fix it
 *Longform · intermediate · multifamily · assetManagement*
 
 You're the asset manager on a 300-unit Class B multifamily acquisition. You're 14 months into a 5-year hold. Year 2 NOI is tracking 4% below underwriting ($3.84M actual vs $4M projected) — not catastrophic, but the trend has been deteriorating quarter-over-quarter for the past three quarters. Underwriting assumed 95% economic occupancy, 3% rent growth, and OpEx in line with comps. T-12 financials show: physical occupancy 94%, economic occupancy 91%, rent growth +2.1%, OpEx +5.3% YoY. The investment committee asks for a diagnostic memo before next quarter's review.
@@ -2930,7 +3250,7 @@ Action depends on which dominates, but the most likely play is: tighten the rent
 
 </details>
 
-### 81. Tell me about yourself…
+### 91. Tell me about yourself…
 *Mock · fit · ~90s*
 
 **Q: Tell me about yourself. Walk me through your background and what brought you to commercial real estate.**
@@ -2952,7 +3272,7 @@ I grew up watching my dad run a small commercial property in our hometown — co
 
 </details>
 
-### 82. Why commercial real estate, as opposed to corporate finance,…
+### 92. Why commercial real estate, as opposed to corporate finance,…
 *Mock · fit · ~60s*
 
 **Q: Why commercial real estate, as opposed to corporate finance, private equity, or investment banking?**
@@ -2974,7 +3294,7 @@ A few things. First, CRE is *tangible* — every deal is a building you can walk
 
 </details>
 
-### 83. Why our firm specifically…
+### 93. Why our firm specifically…
 *Mock · fit · ~75s*
 
 **Q: Why our firm specifically? What do you see in our platform that draws you here over our peers?**
@@ -2996,7 +3316,7 @@ Three things drew me. First, your value-add MF focus in Sun Belt secondary marke
 
 </details>
 
-### 84. Tell me about a time you disagreed with someone more senior…
+### 94. Tell me about a time you disagreed with someone more senior…
 *Mock · behavioral · ~120s*
 
 **Q: Tell me about a time you disagreed with someone more senior on a deal. How did you handle it, and what was the outcome?**
@@ -3020,7 +3340,7 @@ Last summer at JLL, my VP and I were preparing a $42M MF acquisition memo for IC
 
 </details>
 
-### 85. Tell me about a deal that didn't work out the way you expect…
+### 95. Tell me about a deal that didn't work out the way you expect…
 *Mock · behavioral · ~120s*
 
 **Q: Tell me about a deal that didn't work out the way you expected. What happened, and what did you learn?**
@@ -3043,7 +3363,7 @@ Sophomore-year project — I co-modeled a $25M industrial flex deal in Phoenix a
 
 </details>
 
-### 86. Tell me about a time the data said one thing and your instin…
+### 96. Tell me about a time the data said one thing and your instin…
 *Mock · behavioral · ~100s*
 
 **Q: Tell me about a time the data said one thing and your instinct said another. What did you do?**
@@ -3066,7 +3386,7 @@ Spring of last year, I was screening MF deals in a Dallas submarket. The data sa
 
 </details>
 
-### 87. Tell me about a piece of critical feedback you received that…
+### 97. Tell me about a piece of critical feedback you received that…
 *Mock · behavioral · ~90s*
 
 **Q: Tell me about a piece of critical feedback you received that changed how you work. What was the feedback, and what did you do about it?**
@@ -3089,7 +3409,7 @@ Mid-internship at JLL, my MD pulled me aside and said: "Your models are right bu
 
 </details>
 
-### 88. Tell me about a time you had to deliver under serious time p…
+### 98. Tell me about a time you had to deliver under serious time p…
 *Mock · behavioral · ~100s*
 
 **Q: Tell me about a time you had to deliver under serious time pressure. How did you prioritize, and what got done vs left on the floor?**
@@ -3112,7 +3432,7 @@ IC packet for a $60M industrial portfolio bid was due Tuesday morning; my VP got
 
 </details>
 
-### 89. Tell me about a tenant negotiation you led where the stakes…
+### 99. Tell me about a tenant negotiation you led where the stakes…
 *Mock · behavioral · ~110s*
 
 **Q: Tell me about a tenant negotiation you led where the stakes were high. What did you ask for, what did you concede, and what was the outcome?**
@@ -3136,7 +3456,7 @@ Last winter I led a renewal negotiation on a 32k-SF anchor tenant rolling on a 2
 
 </details>
 
-### 90. Tell me about a close credit-call you made on a deal — one w…
+### 100. Tell me about a close credit-call you made on a deal — one w…
 *Mock · behavioral · ~100s*
 
 **Q: Tell me about a close credit-call you made on a deal — one where you had to weigh borrower strength against deal economics. What did you decide, and how did it play out?**
@@ -3157,256 +3477,6 @@ Last Q3 I was on the credit team for a $40M MF construction loan to a first-time
 - Frame the *tension*. Credit calls are interesting when there's a real trade-off, not when the answer is obvious.
 - Specify the structure you added (reserves, guaranties, covenants). That's the lever credit gets to use.
 - Honest outcome reporting separates strong candidates. "Worked out fine" reads as luck; "they outperformed underwriting on these specific lines" reads as judgment.
-
-</details>
-
-### 91. Where do you see institutional CRE cap rates over the next 1…
-*Mock · marketView · ~120s*
-
-**Q: Where do you see institutional CRE cap rates over the next 12-18 months? Pick a position and defend it.**
-
-<details><summary>Answer & reasoning</summary>
-
-**Model answer:**
-
-I expect modest compression (25-50 bps) on Class-A institutional in primary markets, but flat-to-widening on secondary / Class-B over the next 12-18 months. Three things support compression on the trophy end: 10-year Treasury settling 50 bps below current peak gives spread relief; transaction volumes are recovering off the 2023 trough, which historically precedes 1-2 quarters of cap-rate tightening; and capital-flow data shows institutional dry powder is $400B+, with allocators starting to deploy. The reason I think secondary markets stay wider: insurance-cost shocks haven't flushed through underwriting yet, and the bid pool for B+ assets is thinner — fewer buyers willing to compete for marginal yield. The strongest counter to my view is a re-acceleration in Treasury yields, which would gut the trophy compression. What would change my mind: a print of CPI above 3.5% sustained for two months — that pushes my baseline to range-bound with a wider downside.
-
-**Graded on:**
-- Takes a clear directional position (compress / widen / range-bound)
-- Cites concrete data — Treasury rates, transaction volumes, observed comps
-- Differentiates by sector — caps don't move in lockstep
-- Acknowledges the strongest case against your view
-- Names what would change your mind
-
-- Take a position. "It depends" is the worst answer; weak directional view beats hedging.
-- Mix sector / geography nuance. Cap-rate views that treat all CRE as one trade signal shallow thinking.
-- Always include a falsification trigger ("what would change my mind"). Senior partners listen for it.
-
-</details>
-
-### 92. If you had $100M of dry powder to deploy in CRE in the next…
-*Mock · marketView · ~120s*
-
-**Q: If you had $100M of dry powder to deploy in CRE in the next year, which sector would you over-weight, and which would you under-weight? Why?**
-
-<details><summary>Answer & reasoning</summary>
-
-**Model answer:**
-
-Over-weight Sun Belt MF, specifically Class-B garden product in secondary MSAs (roughly 500k-2M people) that aren't the headline metros. Under-weight gateway-market office. The MF thesis: secondary-market Class-B is trading at 75-100 bps wider than primary because the bid pool is thinner, but rent-growth fundamentals are *better* than in primary (population growth + supply absorption). I'd look for value-add at 6.5-7.0% going-in cap, $8-15k/door of value-add capex earning ~12% return on cost through rent premiums, and exit caps modeled wider than going-in. Discipline trigger: stop buying once going-in cap compresses below 6.0%. The under-weight on office is structural — even at $200/SF on Class-A, hybrid work has reset demand permanently for ~30% of the previous market; and Class-B is functionally obsolete. Risk to MF thesis: rate-driven recession that hits jobs in the Sun Belt disproportionately. Risk to office under-weight: I miss the trade if rates fall fast enough that everything compresses. I'd hedge the second risk by holding 5-10% in cash to redeploy.
-
-**Graded on:**
-- Specific over/under-weight calls (not "diversify")
-- Clear underwriting thesis — what dynamic drives the call
-- Names the specific sub-sector / market where the trade actually works
-- Acknowledges what could break the thesis
-- Shows pricing discipline — at what cap / YoC does it stop being a buy?
-
-- Concrete sub-sector + geography beats sector-level views. Specificity = credibility.
-- Always state the *price discipline* — at what cap rate does it stop being a buy?
-- Show you understand the trade can be wrong. Risk acknowledgment differentiates from sales pitch.
-
-</details>
-
-### 93. Where do you see CRE debt spreads moving over the next 12 mo…
-*Mock · marketView · ~120s*
-
-**Q: Where do you see CRE debt spreads moving over the next 12 months — for senior bank debt, agency, and CMBS? Pick a stance and defend it.**
-
-<details><summary>Answer & reasoning</summary>
-
-**Model answer:**
-
-I expect senior bank spreads to tighten 25-50 bps over the next 12 months as deposit costs stabilize and bank balance sheets digest the 2023-24 CRE writedowns. Agency spreads should be roughly flat — Fannie/Freddie pricing is policy-driven and the rate-driven spread compression is mostly priced in. CMBS I'd expect to widen 10-25 bps, especially on office and lower-tier multifamily, as the maturity wall puts pressure on issuance and AAA tranche buyers stay defensive. The differentiation matters: bank debt is supply-constrained (banks pulled back); agency is regulated; CMBS is capital-markets-priced. The strongest counter to my bank-spread-tightening call is a Texas-bank-style stress test resurfacing — that resets risk premia. The signal I'd look for: 30-day deposit-flight-to-quality data in the regional bank tape — if that re-spikes, my bank-tightening view fails.
-
-**Graded on:**
-- Differentiated stance across the three lender categories
-- Anchors view in capital flows / underwriting trends / credit losses
-- Acknowledges spreads vary by asset class within each category
-- Names what would shift your view
-
-- Senior bank / agency / CMBS each price differently — sophisticated lenders distinguish.
-- Anchor in capital-flow data: deposits, issuance volumes, AAA tranche bid.
-- Always include a falsification: "what would change my mind on this trade?"
-
-</details>
-
-### 94. How are you thinking about the debt-vs-equity mix in CRE dep…
-*Mock · marketView · ~120s*
-
-**Q: How are you thinking about the debt-vs-equity mix in CRE deployment today? Should investors lean more into preferred equity / mezz / debt funds, or stay in common equity?**
-
-<details><summary>Answer & reasoning</summary>
-
-**Model answer:**
-
-I lean credit-heavy in this environment but not exclusively. Mezz and pref equity are pricing 11-13% all-in for assets where common equity is barely clearing 8-10% IRR after adjusting for cap-rate widening risk. The risk-return trade-off favors credit: you get equity-like return with debt-like protection, and the asset has to drop 30%+ in value before you take a real loss. The case for common equity: distressed transactions where you can buy at 7-8% YoC on a 5%-cap stabilized basis. That's where common equity's upside is real. So my framework: 65-70% to credit (mezz / pref / agency-paper) for liquidity-of-yield + downside protection, 25-30% to common equity in *deeply* discounted situations only, 5-10% in cash for opportunistic redeployment. The counter to credit-heavy: if rates compress 100 bps over the next year, common equity captures the cap-rate compression while credit just keeps clipping coupons. So credit-heavy gives up the convex upside in a rates-down scenario.
-
-**Graded on:**
-- Takes a position on the trade-off
-- Anchors view in the current rate / spread environment
-- Articulates the risk-return trade-off explicitly
-- Names where common equity beats credit despite the rate environment
-
-- Frame the trade as risk-return, not "credit is better than equity." Both have a place.
-- Mention specific yields you're seeing in the market — generic numbers signal you don't actually price deals.
-- Acknowledge the convexity asymmetry: credit caps your upside.
-
-</details>
-
-### 95. Combined Proforma — chained
-*Walkthrough · combinedScenarioWalk · acquisitions*
-
-You're underwriting an apartment building. GPR is $4,500,000, other income is $250,000, vacancy is 5.00%, OpEx is $1,900,000, and you're using a 6.00% cap rate. Walk it step by step.
-
-<details><summary>Answer & reasoning</summary>
-
-1. **Step 1 — Gross income** — What's the gross income (GPR + other income, before vacancy)?
-   - Expected: `4750000` (usd) — $4,500,000 + $250,000 = $4,750,000.
-2. **Step 2 — Effective gross income** — Apply 5.00% vacancy. What's EGI?
-   - Expected: `4512500` (usd) — $4,750,000 × (1 − 5.00%) = $4,512,500.
-3. **Step 3 — Net operating income** — Subtract OpEx. What's NOI?
-   - Expected: `2612500` (usd) — $4,512,500 − $1,900,000 = $2,612,500.
-4. **Step 4 — Implied value** — At a 6.00% cap, what's the implied value?
-   - Expected: `43541666.66666667` (usd) — $2,612,500 / 6.00% = $43,541,667.
-
-**Takeaway:** Each line of a proforma is a single arithmetic step. Chaining them is the whole valuation. Master each step in isolation and the full proforma collapses to one expression: ((GPR + Other) × (1 − vac) − OpEx) / cap.
-
-</details>
-
-### 96. DSCR Loan Sizing — chained
-*Walkthrough · dscrLoanSizingWalk · mortgageUw/acquisitions*
-
-Your stabilized NOI is $750,000. Your lender requires a 1.25× DSCR on a 30-year amortizing loan at 6.00%. Size the loan in three steps.
-
-<details><summary>Answer & reasoning</summary>
-
-1. **Step 1 — Loan constant** — What's the loan constant for a 30-year amortizing loan at 6.00%? (answer in bps)
-   - Expected: `719` (bps) — 30-year amort @ 6.00% → loan constant ≈ 719 bps.
-2. **Step 2 — Max annual debt service** — At 1.25× DSCR, what's the max annual debt service NOI can cover?
-   - Expected: `600000` (usd) — $750,000 / 1.25 = $600,000 max DS.
-3. **Step 3 — Max loan amount** — Convert that DS allowance into a loan amount. What's the max loan?
-   - Expected: `8339580.719616701` (usd) — $600,000 / 7.19% ≈ $8,339,581.
-
-**Takeaway:** DSCR sizing is just three divisions. NOI / DSCR gives you the DS allowance; DS / constant gives you the loan. Memorize the loan constants for 4–8% / 25–30y and you can size any deal in your head.
-
-</details>
-
-### 97. Mock Acquisition — full unlevered walkthrough
-*Walkthrough · mockAcquisitionWalk · acquisitions*
-
-Stabilized multifamily acquisition. GPR $4,000,000, other income $200,000, 5.00% vacancy, OpEx $1,600,000. Going-in cap 5.50%; you're modeling a 5-year hold with 3.00% annual NOI growth and a 6.00% exit cap (50 bps spread). Sale costs 1.50%. All-cash analysis — unlevered IRR.
-
-<details><summary>Answer & reasoning</summary>
-
-1. **Step 1 — Gross income** — GPR + other income, before vacancy. What's the gross?
-   - Expected: `4200000` (usd) — $4,000,000 + $200,000 = $4,200,000.
-2. **Step 2 — Effective gross income** — Apply 5.00% vacancy. What's EGI?
-   - Expected: `3990000` (usd) — $4,200,000 × (1 − 5.00%) = $3,990,000.
-3. **Step 3 — NOI Year 1** — Subtract OpEx. What's Year-1 NOI?
-   - Expected: `2390000` (usd) — $3,990,000 − $1,600,000 = $2,390,000.
-4. **Step 4 — Going-in value** — At a 5.50% going-in cap, what's the implied value?
-   - Expected: `43454545.45454545` (usd) — $2,390,000 / 5.50% = $43,454,545. This is your equity check (all-cash).
-5. **Step 5 — NOI Year 5** — Apply 3.00% annual NOI growth over 4 compounding periods. What's Year-5 NOI?
-   - Expected: `2689966.0559000005` (usd) — $2,390,000 × 1.1255 = $2,689,966.
-6. **Step 6 — Gross exit value** — At a 6.00% exit cap, what's the gross exit value?
-   - Expected: `44832767.598333344` (usd) — $2,689,966 / 6.00% = $44,832,768.
-7. **Step 7 — Net exit proceeds** — Sale costs are 1.50%. What hits your bank account?
-   - Expected: `44160276.08435834` (usd) — $44,832,768 × (1 − 1.50%) = $44,160,276.
-8. **Step 8 — Cumulative NOI distributed** — Sum the NOI distributed in years 1 through 5.
-   - Expected: `12688834.5859` (usd) — Σ NOI_y from y=1..5 ≈ $12,688,835 at 3.00% growth.
-9. **Step 9 — Equity multiple (unlevered)** — Total cash returned (NOI + net exit) / equity in. What's the EM?
-   - Expected: `1.308243132579167` (multiple) — ($12,688,835 + $44,160,276) / $43,454,545 = 1.31x.
-10. **Step 10 — Approximate unlevered IRR** — EM^(1/n) − 1 over a 5-year hold. What's the approximate IRR?
-   - Expected: `0.055207070883675824` (pct) — 1.31^(1/5) − 1 ≈ 5.52%. Real IRR with periodic distributions is ~30–80 bps higher; the geometric approx is the right anchor for back-of-envelope.
-
-**Takeaway:** A full unlevered acquisition is just income → value → exit → return, broken into 10 steps. The two non-obvious links are walking NOI forward to the exit year and reducing exit value for sale costs. Skip either and your IRR is wrong by a meaningful margin.
-
-</details>
-
-### 98. Value-Add Underwriting — chained
-*Walkthrough · valueAddWalk · assetManagement*
-
-100-unit Class-B garden-style MF. Year-1 NOI $1,200,000. Renovation budget $12,000/unit ($1,200,000 total) drives 18.00% rent uplift. Acquire at 5.50%, exit at 5.25% (cap compression on improved asset). Walk the value-creation arc.
-
-<details><summary>Answer & reasoning</summary>
-
-1. **Step 1 — Going-in value** — At 5.50% going-in cap, what's the asset's purchase price?
-   - Expected: `21818181.818181816` (usd) — $1,200,000 / 5.50% = $21,818,182.
-2. **Step 2 — Renovation budget** — 100 units × $12,000/unit. What's the total renovation cost?
-   - Expected: `1200000` (usd) — 100 × $12,000 = $1,200,000.
-3. **Step 3 — All-in basis** — Going-in value + renovation cost. What's your basis after the renovation?
-   - Expected: `23018181.818181816` (usd) — $21,818,182 + $1,200,000 = $23,018,182.
-4. **Step 4 — Post-reno NOI** — Apply 18.00% rent lift to the starting NOI (assume opex unchanged). What's the stabilized post-reno NOI?
-   - Expected: `1416000` (usd) — $1,200,000 × (1 + 18.00%) = $1,416,000.
-5. **Step 5 — Yield on cost** — Post-reno NOI / all-in basis. What's your yield on cost?
-   - Expected: `0.061516587677725124` (pct) — $1,416,000 / $23,018,182 = 6.15%. Compare this to the going-in cap to gauge the value-add lift.
-6. **Step 6 — Yield-on-cost spread** — Yield on cost vs the 5.25% exit cap. What's the spread (in bps)?
-   - Expected: `90` (bps) — 6.15% − 5.25% ≈ 90 bps. The spread is the value-add margin you're paid for the execution risk.
-7. **Step 7 — Stabilized value** — At a 5.25% exit cap, what's the stabilized asset value?
-   - Expected: `26971428.57142857` (usd) — $1,416,000 / 5.25% = $26,971,429.
-8. **Step 8 — Value created** — Stabilized value − all-in basis. What's the value created (gross)?
-   - Expected: `3953246.7532467544` (usdChange) — $26,971,429 − $23,018,182 ≈ $3,953,247. That's the gross profit before financing, sale costs, and taxes.
-
-**Takeaway:** Value-add math is income lift × cap compression − capex. The two levers — pushing NOI and tightening the cap on a "completed" asset — multiply together. Yield-on-cost vs exit cap is the cleanest single metric: the spread is what you're being paid for taking the execution risk.
-
-</details>
-
-### 99. Development Feasibility — chained
-*Walkthrough · developmentFeasibilityWalk · development/acquisitions*
-
-Mid-rise multifamily development. Land $8,000,000; hard cost $38,000,000; soft cost $7,000,000; contingency 5.00% of (hard + soft). Stabilized NOI projected $4,500,000; market cap 5.00% on completed product. Walk the feasibility test.
-
-<details><summary>Answer & reasoning</summary>
-
-1. **Step 1 — Contingency** — 5.00% of hard + soft cost. What's the contingency?
-   - Expected: `2250000` (usd) — ($38,000,000 + $7,000,000) × 5.00% = $2,250,000.
-2. **Step 2 — Total project cost** — Land + hard + soft + contingency. What's the TPC?
-   - Expected: `55250000` (usd) — $8,000,000 + $38,000,000 + $7,000,000 + $2,250,000 = $55,250,000.
-3. **Step 3 — Land as % of TPC** — What % of the project cost is land?
-   - Expected: `0.14479638009049775` (pct) — $8,000,000 / $55,250,000 = 14.48%. Healthy MF dev land is typically 15–25% of TPC; outside that range merits a closer look.
-4. **Step 4 — Hard cost as % of TPC** — What % of TPC is hard cost?
-   - Expected: `0.6877828054298643` (pct) — $38,000,000 / $55,250,000 = 68.78%. Hard cost is typically 60–70% of TPC for mid-rise MF.
-5. **Step 5 — Yield on cost** — Stabilized NOI / TPC. What's YoC?
-   - Expected: `0.08144796380090498` (pct) — $4,500,000 / $55,250,000 = 8.14%.
-6. **Step 6 — Development spread** — YoC vs 5.00% market cap. Spread in bps?
-   - Expected: `314` (bps) — 8.14% − 5.00% ≈ 314 bps. Industry rule: 100–150+ bps is typically required to justify development risk over buying stabilized.
-7. **Step 7 — Go / no-go threshold** — Industry threshold is 125 bps. By how many bps does this deal exceed (or miss) it?
-   - Expected: `189` (bps) — 314 − 125 = 189 bps. Positive = above threshold, deal pencils for development risk; negative = better to buy stabilized.
-8. **Step 8 — Stabilized value** — At 5.00% market cap, what's the stabilized exit value?
-   - Expected: `90000000` (usd) — $4,500,000 / 5.00% = $90,000,000.
-9. **Step 9 — Gross development profit** — Stabilized value − TPC. What's the profit?
-   - Expected: `34750000` (usdChange) — $90,000,000 − $55,250,000 = $34,750,000.
-10. **Step 10 — Profit margin on cost** — Profit / TPC. What's the profit margin?
-   - Expected: `0.6289592760180995` (pct) — $34,750,000 / $55,250,000 = 62.90%. Industry rule: 20%+ margin on cost typically required for institutional development.
-
-**Takeaway:** Development feasibility collapses to one ratio (yield on cost) and one comparison (vs market cap). Add a profit-margin sanity check (≥20% on cost). If both pencil, the deal is feasible; if either falls short, the development risk isn't paying off vs buying stabilized.
-
-</details>
-
-### 100. Hold or Sell — chained
-*Walkthrough · holdSellWalk · assetManagement/portfolioMgmt*
-
-Year 3 of a 5-year hold. Bought for $40,000,000; current NOI $2,400,000; today's value $40,000,000 at a 6.00% cap. NOI growing 3.00%/yr. If you hold 2 more years, expect a 6.25% exit cap (25 bps drift). Walk the sell-now vs hold-through math.
-
-<details><summary>Answer & reasoning</summary>
-
-1. **Step 1 — Sell-now realized IRR** — Cash flows are: −$40,000,000 at Y0; $2,262,230, $2,330,097, $2,400,000 for Y1-Y3 NOI; plus $40,000,000 at Y3 sale. What's the IRR if you sell now?
-   - Expected: `0.05820448646550825` (pct) — IRR(cash flows) ≈ 5.82%. This is your "in the bag" return if you stop here.
-2. **Step 2 — Year-5 NOI** — Apply 3.00%/yr growth for 2 years more. What's Year-5 NOI?
-   - Expected: `2546160` (usd) — $2,400,000 × (1 + 3.00%)^2 = $2,546,160.
-3. **Step 3 — Future exit value** — At a 6.25% exit cap, what's the future exit value?
-   - Expected: `40738560` (usd) — $2,546,160 / 6.25% = $40,738,560. Note: 6.25% is wider than today's 6.00% — the cap drift compounds against you.
-4. **Step 4 — Hold-through IRR** — IRR with the same Y0 entry, Y1-Y4 NOI, and Y5 NOI + future exit. What's the hold-through IRR?
-   - Expected: `0.0630911019541227` (pct) — IRR(cash flows) ≈ 6.31%. Compare to sell-now IRR above.
-5. **Step 5 — Pre-tax IRR delta** — Hold IRR − sell-now IRR. Positive = holding wins on pre-tax.
-   - Expected: `0.0048866154886144444` (pct) — 6.31% − 5.82% = 0.49%. Holding pencils on pre-tax.
-6. **Step 6 — Accumulated depreciation** — 3 years of depreciation at 80% depreciable basis (27.5-yr MF life). What's accumulated?
-   - Expected: `3490909.090909091` (usd) — ($32,000,000) / 27.5 × 3 = $3,490,909.
-7. **Step 7 — After-tax sell-now proceeds** — Sale costs 1.5%, recapture 25%, cap gains 20%. What's after-tax cash?
-   - Expected: `38677272.72727273` (usd) — Net $39,400,000 − recap $722,727 − cap gains $0 = $38,677,273. Sell-now real cash ≈ -3.31% below the gross — and the hold path defers this entirely.
-
-**Takeaway:** Hold-vs-sell decisions live in three layers: pre-tax IRR (Steps 1–5), after-tax cash (Steps 6–7), and the LP-tax-position lens (deferral matters more for tax-sensitive LPs). When pre-tax IRR is similar, deferral usually tips toward holding — but the cap-rate drift on the hold side often offsets the deferral benefit. Always run all three layers; never decide on pre-tax alone.
 
 </details>
 

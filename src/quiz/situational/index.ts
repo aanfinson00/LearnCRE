@@ -76,6 +76,16 @@ import { riskAdjustedReturnFramework } from './riskAdjustedReturnFramework';
 import { hotelRevparDivergence } from './hotelRevparDivergence';
 import { retailPercentageRentClause } from './retailPercentageRentClause';
 import { industrialTruckCourtBid } from './industrialTruckCourtBid';
+import { devSpreadThinMargin } from './devSpreadThinMargin';
+import { devLeaseUpPaceCarry } from './devLeaseUpPaceCarry';
+import { retailAnchorCompSelection } from './retailAnchorCompSelection';
+import { industrialSizeBandComps } from './industrialSizeBandComps';
+import { exitCapVsRentGrowthSensitivity } from './exitCapVsRentGrowthSensitivity';
+import { floatingRateDscrStress } from './floatingRateDscrStress';
+import { renewVsRelet } from './renewVsRelet';
+import { cotenancyAnchorRollover } from './cotenancyAnchorRollover';
+import { entitlementRiskLandPrice } from './entitlementRiskLandPrice';
+import { gmpVsCostPlusDesign } from './gmpVsCostPlusDesign';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -149,6 +159,16 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   hotelRevparDivergence,
   retailPercentageRentClause,
   industrialTruckCourtBid,
+  devSpreadThinMargin,
+  devLeaseUpPaceCarry,
+  retailAnchorCompSelection,
+  industrialSizeBandComps,
+  exitCapVsRentGrowthSensitivity,
+  floatingRateDscrStress,
+  renewVsRelet,
+  cotenancyAnchorRollover,
+  entitlementRiskLandPrice,
+  gmpVsCostPlusDesign,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {
