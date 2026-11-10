@@ -78,6 +78,16 @@ export const SITUATIONAL_CATEGORY_BY_ID: Record<string, SituationalCategory> = {
   'hotel-revpar-divergence': 'diagnostic',
   'retail-percentage-rent-clause': 'investment-thesis',
   'industrial-truck-court-bid': 'pricing',
+  'retail-anchor-backfill-timing': 'absorption',
+  'industrial-spec-pipeline-vacancy': 'absorption',
+  'hotel-new-supply-occupancy': 'absorption',
+  'retail-comp-anchored-vs-unanchored': 'comp-selection',
+  'industrial-comp-clear-height': 'comp-selection',
+  'nnn-vs-gross-effective-rent': 'lease-econ',
+  'free-rent-versus-ti-concession': 'lease-econ',
+  'exit-cap-versus-rent-growth-sensitivity': 'sensitivity',
+  'floating-rate-cap-strike-stress': 'sensitivity',
+  'hotel-adr-versus-occupancy-flow-through': 'sensitivity',
 };
 
 export const WALKTHROUGH_IDS: readonly string[] = [

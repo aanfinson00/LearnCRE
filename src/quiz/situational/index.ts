@@ -76,6 +76,16 @@ import { riskAdjustedReturnFramework } from './riskAdjustedReturnFramework';
 import { hotelRevparDivergence } from './hotelRevparDivergence';
 import { retailPercentageRentClause } from './retailPercentageRentClause';
 import { industrialTruckCourtBid } from './industrialTruckCourtBid';
+import { retailAnchorBackfillTiming } from './retailAnchorBackfillTiming';
+import { industrialSpecPipelineVacancy } from './industrialSpecPipelineVacancy';
+import { hotelNewSupplyOccupancy } from './hotelNewSupplyOccupancy';
+import { retailCompAnchoredVsUnanchored } from './retailCompAnchoredVsUnanchored';
+import { industrialCompClearHeight } from './industrialCompClearHeight';
+import { nnnVsGrossEffectiveRent } from './nnnVsGrossEffectiveRent';
+import { freeRentVersusTiConcession } from './freeRentVersusTiConcession';
+import { exitCapVersusRentGrowthSensitivity } from './exitCapVersusRentGrowthSensitivity';
+import { floatingRateCapStrikeStress } from './floatingRateCapStrikeStress';
+import { hotelAdrVersusOccupancyFlowThrough } from './hotelAdrVersusOccupancyFlowThrough';
 
 export const SITUATIONAL_CASES: SituationalCase[] = [
   capRateDivergence,
@@ -149,6 +159,16 @@ export const SITUATIONAL_CASES: SituationalCase[] = [
   hotelRevparDivergence,
   retailPercentageRentClause,
   industrialTruckCourtBid,
+  retailAnchorBackfillTiming,
+  industrialSpecPipelineVacancy,
+  hotelNewSupplyOccupancy,
+  retailCompAnchoredVsUnanchored,
+  industrialCompClearHeight,
+  nnnVsGrossEffectiveRent,
+  freeRentVersusTiConcession,
+  exitCapVersusRentGrowthSensitivity,
+  floatingRateCapStrikeStress,
+  hotelAdrVersusOccupancyFlowThrough,
 ];
 
 export function caseById(id: string): SituationalCase | undefined {
