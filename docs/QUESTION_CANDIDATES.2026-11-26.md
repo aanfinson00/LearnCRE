@@ -320,7 +320,7 @@ A deal was underwritten to return $36M on $20M of equity at a year-5 sale, with 
 - ◻️ **B.** It improved. The multiple and the dollar profit are both higher.
   - Both are higher, and both ignore time. Investors waited two more years for an extra $2M.
 - ◻️ **C.** It is roughly unchanged, since the multiple grew along with the hold.
-  - The multiple grew about 6% while the hold grew 40%. For the IRR to hold at 12.5%, year-7 proceeds would need to be about $45.6M.
+  - The multiple grew about 6% while the hold grew 40%. For the IRR to hold at 12.5%, year-7 proceeds would need to be about $45.5M.
 - ◻️ **D.** The IRR rose to about 12.9%: a 90% gain over seven years.
   - Divides total profit by years, which ignores compounding. The same shortcut would have given 16% for the original plan.
 
